@@ -18,7 +18,7 @@
 #' if (has_qgis()) qgis_version()
 #' if (has_qgis()) qgis_algorithms()
 #'
-qgis_run <- function(..., env = qgis_env(), quiet = qgis_quiet(), path = qgis_path()) {
+qgis_run <- function(..., env = qgis_env(), path = qgis_path()) {
   result <- withr::with_envvar(
     env,
     processx::run(path, ...),
@@ -78,7 +78,7 @@ qgis_configure <- function(quiet = FALSE) {
 
 #' @rdname qgis_run
 #' @export
-qgis_version <- function(query = FALSE, quiet = qgis_quiet()) {
+qgis_version <- function(query = FALSE, quiet = TRUE) {
   if (query) {
     qgisprocess_cache$version <- qgis_query_version(quiet = quiet)
   }
@@ -88,7 +88,7 @@ qgis_version <- function(query = FALSE, quiet = qgis_quiet()) {
 
 #' @rdname qgis_run
 #' @export
-qgis_algorithms <- function(query = FALSE, quiet = qgis_quiet()) {
+qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
   if (query) {
     qgisprocess_cache$algorithms <- qgis_query_algorithms(quiet = quiet)
   }
@@ -98,7 +98,7 @@ qgis_algorithms <- function(query = FALSE, quiet = qgis_quiet()) {
 
 #' @rdname qgis_run
 #' @export
-qgis_path <- function(query = FALSE, quiet = qgis_quiet()) {
+qgis_path <- function(query = FALSE, quiet = TRUE) {
   if (query) {
     qgisprocess_cache$path <- qgis_query_path(quiet = quiet)
   }
@@ -111,20 +111,14 @@ qgis_path <- function(query = FALSE, quiet = qgis_quiet()) {
 qgis_query_path <- function(quiet = FALSE) {
   if (is.null(getOption("qgisprocess.path"))) {
     if (!quiet) message(glue::glue("Using 'qgis_process' on PATH"))
-    qgis_run(path = "qgis_process", quiet = quiet)
+    qgis_run(path = "qgis_process")
     "qgis_process"
   } else {
     path <- getOption("qgisprocess.path", "qgis_process")
     if (!quiet) message(glue::glue("Using getOption('qgisprocess.path'): '{ path }'"))
-    qgis_run(path = path, quiet = quiet)
+    qgis_run(path = path)
     path
   }
-}
-
-#' @rdname qgis_run
-#' @export
-qgis_quiet <- function() {
-  getOption("qgisprocess.quiet", TRUE)
 }
 
 #' @rdname qgis_run

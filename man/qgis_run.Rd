@@ -9,13 +9,12 @@
 \alias{qgis_algorithms}
 \alias{qgis_path}
 \alias{qgis_query_path}
-\alias{qgis_quiet}
 \alias{qgis_env}
 \alias{qgis_query_version}
 \alias{qgis_query_algorithms}
 \title{Configure and run 'qgis_process'}
 \usage{
-qgis_run(..., env = qgis_env(), quiet = qgis_quiet(), path = qgis_path())
+qgis_run(..., env = qgis_env(), path = qgis_path())
 
 has_qgis()
 
@@ -23,15 +22,13 @@ assert_qgis(action = stop)
 
 qgis_configure(quiet = FALSE)
 
-qgis_version(query = FALSE, quiet = qgis_quiet())
+qgis_version(query = FALSE, quiet = TRUE)
 
-qgis_algorithms(query = FALSE, quiet = qgis_quiet())
+qgis_algorithms(query = FALSE, quiet = TRUE)
 
-qgis_path(query = FALSE, quiet = qgis_quiet())
+qgis_path(query = FALSE, quiet = TRUE)
 
 qgis_query_path(quiet = FALSE)
-
-qgis_quiet()
 
 qgis_env()
 
@@ -44,13 +41,13 @@ qgis_query_algorithms(quiet = FALSE)
 
 \item{env}{A \code{\link[=list]{list()}} of environment variables. Defaults to \code{\link[=qgis_env]{qgis_env()}}.}
 
-\item{quiet}{Use \code{FALSE} to display more information about the command, possibly
-useful for debugging.}
-
 \item{path}{A path to the 'qgis_process' executable. Defaults to \code{\link[=qgis_path]{qgis_path()}}.}
 
 \item{action}{An action to take if the 'qgis_process' executable could not be
 found.}
+
+\item{quiet}{Use \code{FALSE} to display more information about the command, possibly
+useful for debugging.}
 
 \item{query}{Use \code{TRUE} to refresh the cached value.}
 }

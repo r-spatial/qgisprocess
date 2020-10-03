@@ -1,4 +1,22 @@
 
+test_that("qgis_run_algorithm() works", {
+  skip_if_not(has_qgis())
+  tmp_json <- tempfile()
+  expect_output(
+    qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = FALSE),
+    "Running qgis_process"
+  )
+  expect_true(file.exists(tmp_json))
+
+  unlink(tmp_json)
+  expect_silent(
+    qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = TRUE)
+  )
+  expect_true(file.exists(tmp_json))
+
+
+})
+
 test_that("qgis_has_algorithm() works", {
   skip_if_not(has_qgis())
   expect_true(qgis_has_algorithm("native:filedownloader"))

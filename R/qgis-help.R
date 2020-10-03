@@ -1,7 +1,7 @@
 
 #' Show algorithm help
 #'
-#' @inheritParams qgis_has_algorithm
+#' @inheritParams qgis_run_algorithm
 #'
 #' @export
 #'
@@ -41,8 +41,7 @@ qgis_help_text <- function(algorithm) {
   assert_qgis_algorithm_or_model_file(algorithm)
 
   result <- qgis_run(
-    args = c("help", algorithm),
-    quiet = TRUE
+    args = c("help", algorithm)
   )
 
   qgisprocess_cache$help_text[[algorithm]] <- result$stdout

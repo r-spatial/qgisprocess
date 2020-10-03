@@ -54,4 +54,19 @@ library(qgisprocess)
 qgis_path()
 qgis_version()
 qgis_algorithms()
+
+# get help
+qgis_show_help("native:filedownloader")
+
+# run the algorithm!
+qgis_run_algorithm(
+  "native:filedownloader", 
+  URL = "https://httpbin.org/get",
+  OUTPUT = "test-file.json"
+)
 ```
+
+```{r, echo=FALSE}
+unlink("test-file.json")
+```
+

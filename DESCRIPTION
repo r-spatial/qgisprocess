@@ -19,8 +19,11 @@ Imports:
     stringr,
     withr,
     glue,
-    tibble
+    tibble,
+    rlang
 URL: https://github.com/paleolimbot/qgisprocess
 BugReports: https://github.com/paleolimbot/qgisprocess/issues
 Suggests: 
-    testthat
+    testthat,
+    sf,
+    raster
