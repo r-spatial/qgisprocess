@@ -18,15 +18,11 @@
 #' if (has_qgis()) qgis_version()
 #' if (has_qgis()) qgis_algorithms()
 #'
-qgis_run <- function(..., env = qgis_env(), quiet = qgis_quiet(),  path = qgis_path()) {
+qgis_run <- function(..., env = qgis_env(), quiet = qgis_quiet(), path = qgis_path()) {
   result <- withr::with_envvar(
     env,
     processx::run(path, ...),
   )
-
-  if (result$timeout) {
-    stop(glue::glue("Command '{ path }' timed out."), call. = FALSE)
-  }
 
   result
 }
