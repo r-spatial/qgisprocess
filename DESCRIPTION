@@ -17,6 +17,8 @@ RoxygenNote: 7.1.1
 Imports: 
     processx,
     stringr,
-    withr
+    withr,
+    glue,
+    tibble
 URL: https://github.com/paleolimbot/qgisprocess
 BugReports: https://github.com/paleolimbot/qgisprocess/issues
