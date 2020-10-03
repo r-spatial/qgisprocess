@@ -36,7 +36,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@master
 
       - name: Install QGIS
-        if: runner.os == "Linux"
+        if: runner.os == 'Linux'
         run: |
           wget -qO - https://qgis.org/downloads/qgis-2020.gpg.key | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import || true
           chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
