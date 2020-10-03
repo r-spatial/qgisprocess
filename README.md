@@ -43,5 +43,10 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(qgisprocess)
-## basic example code
+
+# basic QGIS info
+if (has_qgis()) {
+  qgis_version()
+  qgis_algorithms()
+}
 ```
