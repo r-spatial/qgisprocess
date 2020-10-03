@@ -22,3 +22,5 @@ Imports:
     tibble
 URL: https://github.com/paleolimbot/qgisprocess
 BugReports: https://github.com/paleolimbot/qgisprocess/issues
+Suggests: 
+    testthat
