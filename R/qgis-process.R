@@ -58,6 +58,7 @@ qgis_configure <- function(quiet = FALSE) {
     qgisprocess_cache$path <- NULL
     qgisprocess_cache$version <- NULL
     qgisprocess_cache$algorithms <- NULL
+    qgisprocess_cache$help_text <- new.env(parent = emptyenv())
 
     qgis_path(query = TRUE, quiet = quiet)
     qgis_version(query = TRUE, quiet = quiet)
@@ -67,6 +68,7 @@ qgis_configure <- function(quiet = FALSE) {
     qgisprocess_cache$path <- NULL
     qgisprocess_cache$version <- NULL
     qgisprocess_cache$algorithms <- NULL
+    qgisprocess_cache$help_text <- new.env(parent = emptyenv())
 
     if (!quiet) message(e)
   })
@@ -185,3 +187,4 @@ qgisprocess_cache <- new.env(parent = emptyenv())
 qgisprocess_cache$path <- NULL
 qgisprocess_cache$version <- NULL
 qgisprocess_cache$algorithms <- NULL
+qgisprocess_cache$help_text <- NULL

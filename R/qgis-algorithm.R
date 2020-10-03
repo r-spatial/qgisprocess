@@ -1,7 +1,8 @@
 
 #' Run algorithms using 'qgis_process'
 #'
-#' @param algorithm A qualified algorithm name (e.g., "native:filedownloader").
+#' @param algorithm A qualified algorithm name (e.g., "native:filedownloader") or
+#'   a path to a QGIS model file.
 #' @param provider A provider identifier (e.g., "native")
 #'
 #' @export

@@ -19,7 +19,8 @@ is_qgis_model_file(algorithm)
 assert_qgis_algorithm_or_model_file(algorithm)
 }
 \arguments{
-\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader").}
+\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
+a path to a QGIS model file.}
 
 \item{provider}{A provider identifier (e.g., "native")}
 }
