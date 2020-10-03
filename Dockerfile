@@ -17,3 +17,6 @@ RUN Rscript -e "remotes::install_cran(c('processx', 'stringr', 'withr', 'glue', 
 
 RUN apt-get update && apt-get install -y libgdal-dev libproj-dev libgeos-dev libudunits2-dev
 RUN Rscript -e "remotes::install_cran(c('sf', 'sp', 'wk', 's2', 'raster', 'rgdal', 'stars', 'terra'))"
+
+# install pandoc!
+RUN apt-get update && apt-get install -y pandoc

@@ -45,8 +45,23 @@ This is a basic example which shows you how to solve a common problem:
 library(qgisprocess)
 
 # basic QGIS info
-if (has_qgis()) {
-  qgis_version()
-  qgis_algorithms()
-}
+qgis_path()
+#> [1] "qgis_process"
+qgis_version()
+#> [1] "3.15.0-Master"
+qgis_algorithms()
+#> # A tibble: 197 x 5
+#>    provider provider_title  algorithm       algorithm_id    algorithm_title     
+#>    <chr>    <chr>           <chr>           <chr>           <chr>               
+#>  1 3d       QGIS (3D)       3d:tessellate   tessellate      Tessellate          
+#>  2 native   QGIS (native c… native:addauto… addautoincreme… Add autoincremental…
+#>  3 native   QGIS (native c… native:addfiel… addfieldtoattr… Add field to attrib…
+#>  4 native   QGIS (native c… native:adduniq… adduniquevalue… Add unique value in…
+#>  5 native   QGIS (native c… native:addxyfi… addxyfields     Add X/Y fields to l…
+#>  6 native   QGIS (native c… native:affinet… affinetransform Affine transform    
+#>  7 native   QGIS (native c… native:aggrega… aggregate       Aggregate           
+#>  8 native   QGIS (native c… native:angleto… angletonearest  Align points to fea…
+#>  9 native   QGIS (native c… native:antimer… antimeridiansp… Geodesic line split…
+#> 10 native   QGIS (native c… native:arrayof… arrayoffsetlin… Array of offset (pa…
+#> # … with 187 more rows
 ```
