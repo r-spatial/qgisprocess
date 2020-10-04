@@ -32,6 +32,12 @@ qgis_arguments <- function(algorithm) {
   qgis_parsed_help(algorithm)$arguments
 }
 
+#' @rdname qgis_show_help
+#' @export
+qgis_outputs <- function(algorithm) {
+  qgis_parsed_help(algorithm)$outputs
+}
+
 qgis_help_text <- function(algorithm) {
   if (algorithm %in% names(qgisprocess_cache$help_text)) {
     return(qgisprocess_cache$help_text[[algorithm]])
@@ -78,12 +84,34 @@ qgis_parsed_help <- function(algorithm) {
     )
   )[[1]]
 
+  sec_outputs <- stringr::str_match(
+    help_text,
+    stringr::regex(
+      "-+\\s+Outputs\\s+-+\\s+(.*)",
+      dotall = TRUE, multiline = TRUE
+    )
+  )[, 2, drop = TRUE]
+
+  outputs <- stringr::str_match_all(
+    sec_outputs,
+    stringr::regex(
+      paste0(
+        "^([A-Za-z0-9_]+):\\s+<([A-Za-z0-9_ .-]+)>\n\\s([A-Za-z0-9_ .]+)\\s*"),
+      dotall = TRUE, multiline = TRUE
+    )
+  )[[1]]
+
   list(
     description = sec_description,
     arguments = tibble::tibble(
       name = args[, 2, drop = TRUE],
       description = args[, 3, drop = TRUE],
       qgis_type = args[, 4, drop = TRUE]
+    ),
+    outputs = tibble::tibble(
+      name = outputs[, 2, drop = TRUE],
+      description = outputs[, 4, drop = TRUE],
+      qgis_output_type = outputs[, 3, drop = TRUE]
     )
   )
 }

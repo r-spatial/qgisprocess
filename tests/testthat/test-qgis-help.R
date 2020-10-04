@@ -16,4 +16,8 @@ test_that("qgis_description() works for all algorithms", {
   for (algorithm in head(qgis_algorithms()$algorithm, 10)) {
     expect_is(qgis_arguments(!! algorithm), "data.frame")
   }
+
+  for (algorithm in head(qgis_algorithms()$algorithm, 10)) {
+    expect_is(qgis_outputs(!! algorithm), "data.frame")
+  }
 })
