@@ -42,11 +42,13 @@ elipsoid name for distance calculations.}
 \item{provider}{A provider identifier (e.g., "native")}
 }
 \description{
-Run algorithms using 'qgis_process'
+Run QGIS algorithms.
+See the \href{https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/index.html}{QGIS docs}
+for a detailed description of the algorithms provided
+'out of the box' on QGIS (versions >= 3.14).
 }
 \examples{
 if (has_qgis()) qgis_has_algorithm("native:filedownloader")
 if (has_qgis()) qgis_has_provider("native")
 if (has_qgis()) qgis_providers()
-
 }
