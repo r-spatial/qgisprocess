@@ -44,7 +44,7 @@ docker run --rm -it -v $(pwd):/qgisprocess -w /qgisprocess qgisprocess-devel R
 
 Once in the container, you can use `devtools::load_all()`, `devtools::test()`, and `devtools::check()` to develop the package.
 
-## Example
+## Examples
 
 This is a basic example which tests that the package can detect a working version of `qgis_process`:
 
@@ -70,6 +70,28 @@ qgis_run_algorithm(
 ```{r, echo=FALSE}
 unlink("test-file.json")
 ```
+
+The following examples demonstrates the [buffer](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer) algorithm in action.
+
+```{r buffer}
+input_file <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
+output_file <- file.path(tempdir(), "nc_buffered.gpkg")
+qgis_run_algorithm(
+  "native:buffer",
+  INPUT = input_file,
+  DISTANCE = 1,
+  SEGMENTS = 10,
+  DISSOLVE = 'True',
+  END_CAP_STYLE = 0,
+  JOIN_STYLE = 0,
+  MITER_LIMIT = 10,
+  OUTPUT = output_file
+)
+output_sf <- sf::read_sf(output_file)
+sf::st_crs(output_sf)
+plot(sf::st_geometry(output_sf))
+```
+
 
 ## Further reading
 
