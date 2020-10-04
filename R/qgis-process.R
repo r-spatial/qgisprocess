@@ -53,14 +53,17 @@ assert_qgis <- function(action = stop) {
 
 #' @rdname qgis_run
 #' @export
-qgis_configure <- function(quiet = FALSE) {
+qgis_configure <- function(quiet = FALSE, qgisprocess_path = NULL) {
   tryCatch({
-    qgisprocess_cache$path <- NULL
+    qgisprocess_cache$path <- qgisprocess_path
     qgisprocess_cache$version <- NULL
     qgisprocess_cache$algorithms <- NULL
     qgisprocess_cache$help_text <- new.env(parent = emptyenv())
 
-    qgis_path(query = TRUE, quiet = quiet)
+    if (is.null(qgisprocess_cache$path)) {
+      qgis_path(query = TRUE, quiet = quiet)
+    }
+
     qgis_version(query = TRUE, quiet = quiet)
     qgis_algorithms(query = TRUE, quiet = quiet)
   }, error = function(e) {
