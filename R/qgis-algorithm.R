@@ -1,5 +1,9 @@
-
 #' Run algorithms using 'qgis_process'
+#'
+#' Run QGIS algorithms.
+#' See the [QGIS docs](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/index.html)
+#' for a detailed description of the algorithms provided
+#' 'out of the box' on QGIS (versions >= 3.14).
 #'
 #' @param algorithm A qualified algorithm name (e.g., "native:filedownloader") or
 #'   a path to a QGIS model file.
@@ -16,7 +20,6 @@
 #' if (has_qgis()) qgis_has_algorithm("native:filedownloader")
 #' if (has_qgis()) qgis_has_provider("native")
 #' if (has_qgis()) qgis_providers()
-#'
 qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = rlang::zap(), ELIPSOID = rlang::zap(),
                                .quiet = FALSE) {
   assert_qgis()
