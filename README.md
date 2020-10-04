@@ -11,7 +11,13 @@ status](https://github.com/paleolimbot/qgisprocess/workflows/R-CMD-check/badge.s
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of qgisprocess is to …
+The goal of `qgisprocess` is to provide an R interface to the popular
+and open source desktop geographic information system (GIS) program
+[QGIS](https://qgis.org/en/site/). The package is a re-implementation of
+functionality provided by the archived
+[`RQGIS`](https://cran.r-project.org/package=RQGIS) package, which was
+partially revived in the [`RQGIS3`](https://github.com/r-spatial/RQGIS3)
+package.
 
 ## Installation
 
@@ -26,7 +32,7 @@ remotes::install_github("paleolimbot/qgisprocess")
 The `qgis_process` command-line utility will be available in the next
 release of QGIS; for now you will need a development version of QGIS
 installed. This is not trivial, but a Dockerfile is provided as a
-developmet environment.
+development environment.
 
     # do this once:
     # docker build . --tag qgisprocess-devel
@@ -39,7 +45,8 @@ Once in the container, you can use `devtools::load_all()`,
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which tests that the package can detect a
+working version of `qgis_process`:
 
 ``` r
 library(qgisprocess)
@@ -48,22 +55,22 @@ library(qgisprocess)
 qgis_path()
 #> [1] "qgis_process"
 qgis_version()
-#> [1] "3.15.0-Master"
+#> [1] "3.14.16-Pi"
 qgis_algorithms()
-#> # A tibble: 197 x 5
-#>    provider provider_title  algorithm       algorithm_id    algorithm_title     
-#>    <chr>    <chr>           <chr>           <chr>           <chr>               
-#>  1 3d       QGIS (3D)       3d:tessellate   tessellate      Tessellate          
-#>  2 native   QGIS (native c… native:addauto… addautoincreme… Add autoincremental…
-#>  3 native   QGIS (native c… native:addfiel… addfieldtoattr… Add field to attrib…
-#>  4 native   QGIS (native c… native:adduniq… adduniquevalue… Add unique value in…
-#>  5 native   QGIS (native c… native:addxyfi… addxyfields     Add X/Y fields to l…
-#>  6 native   QGIS (native c… native:affinet… affinetransform Affine transform    
-#>  7 native   QGIS (native c… native:aggrega… aggregate       Aggregate           
-#>  8 native   QGIS (native c… native:angleto… angletonearest  Align points to fea…
-#>  9 native   QGIS (native c… native:antimer… antimeridiansp… Geodesic line split…
-#> 10 native   QGIS (native c… native:arrayof… arrayoffsetlin… Array of offset (pa…
-#> # … with 187 more rows
+#> # A tibble: 624 x 5
+#>    provider provider_title algorithm         algorithm_id    algorithm_title    
+#>    <chr>    <chr>          <chr>             <chr>           <chr>              
+#>  1 3d       QGIS (3D)      3d:tessellate     tessellate      Tessellate         
+#>  2 gdal     GDAL           gdal:aspect       aspect          Aspect             
+#>  3 gdal     GDAL           gdal:assignproje… assignprojecti… Assign projection  
+#>  4 gdal     GDAL           gdal:buffervecto… buffervectors   Buffer vectors     
+#>  5 gdal     GDAL           gdal:buildvirtua… buildvirtualra… Build virtual rast…
+#>  6 gdal     GDAL           gdal:buildvirtua… buildvirtualve… Build virtual vect…
+#>  7 gdal     GDAL           gdal:cliprasterb… cliprasterbyex… Clip raster by ext…
+#>  8 gdal     GDAL           gdal:cliprasterb… cliprasterbyma… Clip raster by mas…
+#>  9 gdal     GDAL           gdal:clipvectorb… clipvectorbyex… Clip vector by ext…
+#> 10 gdal     GDAL           gdal:clipvectorb… clipvectorbypo… Clip vector by mas…
+#> # … with 614 more rows
 
 # get help
 qgis_show_help("native:filedownloader")
@@ -110,7 +117,6 @@ qgis_run_algorithm(
 #> OUTPUT:  test-file.json
 #> URL: https://httpbin.org/get
 #> 
-#> 
 #> 0...10...20...30...40...50...60...70...80...90...100 - done.
 #> 
 #> ----------------
@@ -122,11 +128,22 @@ qgis_run_algorithm(
 #> [1] 0
 #> 
 #> $stdout
-#> [1] "\n----------------\nInputs\n----------------\n\nOUTPUT:\ttest-file.json\nURL:\thttps://httpbin.org/get\n\n\n0...10...20...30...40...50...60...70...80...90...100 - done.\n\n----------------\nResults\n----------------\n\nOUTPUT:\ttest-file.json\n"
+#> [1] "\n----------------\nInputs\n----------------\n\nOUTPUT:\ttest-file.json\nURL:\thttps://httpbin.org/get\n\n0...10...20...30...40...50...60...70...80...90...100 - done.\n\n----------------\nResults\n----------------\n\nOUTPUT:\ttest-file.json\n"
 #> 
 #> $stderr
-#> [1] "QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-root'\n../../src/core/qgsproviderregistry.cpp:245 : (init) [178ms] Loaded 24 providers (DB2;OAPIF;WFS;arcgisfeatureserver;arcgismapserver;delimitedtext;gdal;geonode;gpx;grass;grassraster;mdal;memory;mesh_memory;mssql;ogr;ows;postgres;postgresraster;spatialite;vectortile;virtual;wcs;wms) \n../../src/providers/grass/qgsgrass.cpp:518 : (lock) [3ms] lock\n../../src/providers/grass/qgsgrass.cpp:317 : (init) [0ms] do init\n../../src/providers/grass/qgsgrass.cpp:2660 : (defaultGisbase) [0ms] gisbase from envar = \n../../src/providers/grass/qgsgrass.cpp:2686 : (defaultGisbase) [0ms] gisbase = /usr/lib/grass78\n../../src/providers/grass/qgsgrass.cpp:483 : (isValidGrassBaseDir) [0ms] isValidGrassBaseDir()\n../../src/providers/grass/qgsgrass.cpp:2660 : (defaultGisbase) [0ms] gisbase from envar = \n../../src/providers/grass/qgsgrass.cpp:2686 : (defaultGisbase) [0ms] gisbase = /usr/lib/grass78\n../../src/providers/grass/qgsgrass.cpp:383 : (init) [0ms] Valid GRASS gisbase is: /usr/lib/grass78\n../../src/providers/grass/qgsgrass.cpp:2660 : (defaultGisbase) [0ms] gisbase from envar = \n../../src/providers/grass/qgsgrass.cpp:2686 : (defaultGisbase) [0ms] gisbase = /usr/lib/grass78\n../../src/providers/grass/qgsgrass.cpp:2660 : (defaultGisbase) [0ms] gisbase from envar = /usr/lib/grass78\n../../src/providers/grass/qgsgrass.cpp:2660 : (defaultGisbase) [0ms] gisbase from envar = /usr/lib/grass78\n../../src/providers/grass/qgsgrass.cpp:419 : (init) [0ms] sGrassModulesPaths = /usr/lib/grass78/bin,/usr/lib/grass78/scripts,/usr/share/qgis/grass/scripts,/usr/lib/qgis/grass/modules\n../../src/providers/grass/qgsgrass.cpp:524 : (unlock) [3ms] unlock\n../../src/process/qgsprocess.cpp:116 : (loadPythonSupport) [75ms] load library /usr/lib/qgispython (3.15.0)\n"
+#> [1] "Traceback (most recent call last):\n  File \"/usr/lib/python3/dist-packages/qgis/utils.py\", line 334, in _startPlugin\n    plugins[packageName] = package.classFactory(iface)\n  File \"/home/robin/.local/share/QGIS/QGIS3/profiles/default/python/plugins/shapetools/__init__.py\", line 8, in classFactory\n    return ShapeTools(iface)\n  File \"/home/robin/.local/share/QGIS/QGIS3/profiles/default/python/plugins/shapetools/shapeTools.py\", line 23, in __init__\n    self.canvas = iface.mapCanvas()\nAttributeError: 'NoneType' object has no attribute 'mapCanvas'\n\nerror starting plugin: shapetools\n\nTraceback (most recent call last):\n  File \"/usr/lib/python3/dist-packages/qgis/utils.py\", line 334, in _startPlugin\n    plugins[packageName] = package.classFactory(iface)\n  File \"/home/robin/.local/share/QGIS/QGIS3/profiles/default/python/plugins/QuickOSM/__init__.py\", line 12, in classFactory\n    return QuickOSMPlugin(iface)\n  File \"/home/robin/.local/share/QGIS/QGIS3/profiles/default/python/plugins/QuickOSM/quick_osm.py\", line 57, in __init__\n    self.toolbar = self.iface.addToolBar('QuickOSM')\nAttributeError: 'NoneType' object has no attribute 'addToolBar'\n\nerror starting plugin: QuickOSM\n\nProblem with SAGA installation: SAGA was not found or is not correctly installed\n"
 #> 
 #> $timeout
 #> [1] FALSE
 ```
+
+## Further reading
+
+  - A
+    [paper](https://journal.r-project.org/archive/2017/RJ-2017-067/index.html)
+    on the original RQGIS package published in the R Journal
+  - A [discussion](https://github.com/r-spatial/discuss/issues/41)
+    options for running QGIS from R that led to this package
+  - The [pull request](https://github.com/qgis/QGIS/pull/34617) in the
+    QGIS repo that led to the development of the `qgis_process`
+    command-line utility
