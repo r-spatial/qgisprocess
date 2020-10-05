@@ -29,10 +29,32 @@ You can install the development version from
 remotes::install_github("paleolimbot/qgisprocess")
 ```
 
-The `qgis_process` command-line utility will be available in the next
-release of QGIS; for now you will need a development version of QGIS
-installed. This is not trivial, but a Dockerfile is provided as a
-development environment.
+## Installing QGIS on your computer
+
+The `qgis_process` command-line utility is available in QGIS \>=
+[3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16),
+[released](https://qgis.org/en/site/getinvolved/development/roadmap.html)
+in September 2020. You can install this version of QGIS on Linux, Mac
+and (via the OSGeo4W package) Windows, as described at
+[qgis.org](https://qgis.org/en/site/forusers/download.html).
+
+## qgisprocessing in Docker
+
+You can also use Docker images containing the necessary dependencies to
+run this package in a container. The
+[`geocompr/geocompr:qgis`](https://github.com/geocompr/docker) image,
+for example, has QGIS and RStudio preinstalled for interactive use and
+can be downloaded from Dockerhub and run as follows:
+
+    docker run -d -p 8788:8787 -e USERID=$UID -e PASSWORD=ps -v ${pwd}:/home/rstudio/ geocompr/geocompr:qgis
+
+After running this command (having set a more secure password as
+appropriate) you should be able to access RStudio Server from
+<http://localhost:8788/>. Once inside you can install `qgisprocess` as
+documented here.
+
+You can run also `qgisprocessing` in a Dockerfile provided in this repo
+as follows:
 
     # do this once:
     # docker build . --tag qgisprocess-devel
@@ -57,20 +79,20 @@ qgis_path()
 qgis_version()
 #> [1] "3.14.16-Pi"
 qgis_algorithms()
-#> # A tibble: 988 x 5
-#>    provider provider_title algorithm         algorithm_id    algorithm_title    
-#>    <chr>    <chr>          <chr>             <chr>           <chr>              
-#>  1 3d       QGIS (3D)      3d:tessellate     tessellate      Tessellate         
-#>  2 gdal     GDAL           gdal:aspect       aspect          Aspect             
-#>  3 gdal     GDAL           gdal:assignproje… assignprojecti… Assign projection  
-#>  4 gdal     GDAL           gdal:buffervecto… buffervectors   Buffer vectors     
-#>  5 gdal     GDAL           gdal:buildvirtua… buildvirtualra… Build virtual rast…
-#>  6 gdal     GDAL           gdal:buildvirtua… buildvirtualve… Build virtual vect…
-#>  7 gdal     GDAL           gdal:cliprasterb… cliprasterbyex… Clip raster by ext…
-#>  8 gdal     GDAL           gdal:cliprasterb… cliprasterbyma… Clip raster by mas…
-#>  9 gdal     GDAL           gdal:clipvectorb… clipvectorbyex… Clip vector by ext…
-#> 10 gdal     GDAL           gdal:clipvectorb… clipvectorbypo… Clip vector by mas…
-#> # … with 978 more rows
+#> # A tibble: 191 x 5
+#>    provider provider_title  algorithm       algorithm_id    algorithm_title     
+#>    <chr>    <chr>           <chr>           <chr>           <chr>               
+#>  1 3d       QGIS (3D)       3d:tessellate   tessellate      Tessellate          
+#>  2 native   QGIS (native c… native:addauto… addautoincreme… Add autoincremental…
+#>  3 native   QGIS (native c… native:addfiel… addfieldtoattr… Add field to attrib…
+#>  4 native   QGIS (native c… native:adduniq… adduniquevalue… Add unique value in…
+#>  5 native   QGIS (native c… native:addxyfi… addxyfields     Add X/Y fields to l…
+#>  6 native   QGIS (native c… native:affinet… affinetransform Affine transform    
+#>  7 native   QGIS (native c… native:aggrega… aggregate       Aggregate           
+#>  8 native   QGIS (native c… native:antimer… antimeridiansp… Geodesic line split…
+#>  9 native   QGIS (native c… native:arrayof… arrayoffsetlin… Array of offset (pa…
+#> 10 native   QGIS (native c… native:arraytr… arraytranslate… Array of translated…
+#> # … with 181 more rows
 
 # get help
 qgis_show_help("native:filedownloader")
@@ -131,7 +153,7 @@ qgis_run_algorithm(
 #> [1] "\n----------------\nInputs\n----------------\n\nOUTPUT:\ttest-file.json\nURL:\thttps://httpbin.org/get\n\n0...10...20...30...40...50...60...70...80...90...100 - done.\n\n----------------\nResults\n----------------\n\nOUTPUT:\ttest-file.json\n"
 #> 
 #> $stderr
-#> [1] "Traceback (most recent call last):\n  File \"/usr/lib/python3/dist-packages/qgis/utils.py\", line 334, in _startPlugin\n    plugins[packageName] = package.classFactory(iface)\n  File \"/home/robin/.local/share/QGIS/QGIS3/profiles/default/python/plugins/shapetools/__init__.py\", line 8, in classFactory\n    return ShapeTools(iface)\n  File \"/home/robin/.local/share/QGIS/QGIS3/profiles/default/python/plugins/shapetools/shapeTools.py\", line 23, in __init__\n    self.canvas = iface.mapCanvas()\nAttributeError: 'NoneType' object has no attribute 'mapCanvas'\n\nerror starting plugin: shapetools\n\nTraceback (most recent call last):\n  File \"/usr/lib/python3/dist-packages/qgis/utils.py\", line 334, in _startPlugin\n    plugins[packageName] = package.classFactory(iface)\n  File \"/home/robin/.local/share/QGIS/QGIS3/profiles/default/python/plugins/QuickOSM/__init__.py\", line 12, in classFactory\n    return QuickOSMPlugin(iface)\n  File \"/home/robin/.local/share/QGIS/QGIS3/profiles/default/python/plugins/QuickOSM/quick_osm.py\", line 57, in __init__\n    self.toolbar = self.iface.addToolBar('QuickOSM')\nAttributeError: 'NoneType' object has no attribute 'addToolBar'\n\nerror starting plugin: QuickOSM\n\n"
+#> [1] "QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-rstudio'\n"
 #> 
 #> $timeout
 #> [1] FALSE
@@ -156,9 +178,9 @@ qgis_run_algorithm(
   OUTPUT = output_file
 )
 #> Running qgis_process run 'native:buffer' \
-#>   '--INPUT=/tmp/RtmpGnKZjL/file7e816ddecb6.shp' '--DISTANCE=1' \
-#>   '--SEGMENTS=10' '--DISSOLVE=True' '--END_CAP_STYLE=0' '--JOIN_STYLE=0' \
-#>   '--MITER_LIMIT=10' '--OUTPUT=/tmp/RtmpGnKZjL/nc_buffered.gpkg'
+#>   '--INPUT=/tmp/RtmpKdpNHj/file3ef81f2da9.shp' '--DISTANCE=1' '--SEGMENTS=10' \
+#>   '--DISSOLVE=True' '--END_CAP_STYLE=0' '--JOIN_STYLE=0' '--MITER_LIMIT=10' \
+#>   '--OUTPUT=/tmp/RtmpKdpNHj/nc_buffered.gpkg'
 #> 
 #> ----------------
 #> Inputs
@@ -167,10 +189,10 @@ qgis_run_algorithm(
 #> DISSOLVE:    True
 #> DISTANCE:    1
 #> END_CAP_STYLE:   0
-#> INPUT:   /tmp/RtmpGnKZjL/file7e816ddecb6.shp
+#> INPUT:   /tmp/RtmpKdpNHj/file3ef81f2da9.shp
 #> JOIN_STYLE:  0
 #> MITER_LIMIT: 10
-#> OUTPUT:  /tmp/RtmpGnKZjL/nc_buffered.gpkg
+#> OUTPUT:  /tmp/RtmpKdpNHj/nc_buffered.gpkg
 #> SEGMENTS:    10
 #> 
 #> 0...10...20...30...40...50...60...70...80...90...
@@ -178,15 +200,15 @@ qgis_run_algorithm(
 #> Results
 #> ----------------
 #> 
-#> OUTPUT:  /tmp/RtmpGnKZjL/nc_buffered.gpkg
+#> OUTPUT:  /tmp/RtmpKdpNHj/nc_buffered.gpkg
 #> $status
 #> [1] 0
 #> 
 #> $stdout
-#> [1] "\n----------------\nInputs\n----------------\n\nDISSOLVE:\tTrue\nDISTANCE:\t1\nEND_CAP_STYLE:\t0\nINPUT:\t/tmp/RtmpGnKZjL/file7e816ddecb6.shp\nJOIN_STYLE:\t0\nMITER_LIMIT:\t10\nOUTPUT:\t/tmp/RtmpGnKZjL/nc_buffered.gpkg\nSEGMENTS:\t10\n\n0...10...20...30...40...50...60...70...80...90...\n----------------\nResults\n----------------\n\nOUTPUT:\t/tmp/RtmpGnKZjL/nc_buffered.gpkg\n"
+#> [1] "\n----------------\nInputs\n----------------\n\nDISSOLVE:\tTrue\nDISTANCE:\t1\nEND_CAP_STYLE:\t0\nINPUT:\t/tmp/RtmpKdpNHj/file3ef81f2da9.shp\nJOIN_STYLE:\t0\nMITER_LIMIT:\t10\nOUTPUT:\t/tmp/RtmpKdpNHj/nc_buffered.gpkg\nSEGMENTS:\t10\n\n0...10...20...30...40...50...60...70...80...90...\n----------------\nResults\n----------------\n\nOUTPUT:\t/tmp/RtmpKdpNHj/nc_buffered.gpkg\n"
 #> 
 #> $stderr
-#> [1] "Traceback (most recent call last):\n  File \"/usr/lib/python3/dist-packages/qgis/utils.py\", line 334, in _startPlugin\n    plugins[packageName] = package.classFactory(iface)\n  File \"/home/robin/.local/share/QGIS/QGIS3/profiles/default/python/plugins/shapetools/__init__.py\", line 8, in classFactory\n    return ShapeTools(iface)\n  File \"/home/robin/.local/share/QGIS/QGIS3/profiles/default/python/plugins/shapetools/shapeTools.py\", line 23, in __init__\n    self.canvas = iface.mapCanvas()\nAttributeError: 'NoneType' object has no attribute 'mapCanvas'\n\nerror starting plugin: shapetools\n\nTraceback (most recent call last):\n  File \"/usr/lib/python3/dist-packages/qgis/utils.py\", line 334, in _startPlugin\n    plugins[packageName] = package.classFactory(iface)\n  File \"/home/robin/.local/share/QGIS/QGIS3/profiles/default/python/plugins/QuickOSM/__init__.py\", line 12, in classFactory\n    return QuickOSMPlugin(iface)\n  File \"/home/robin/.local/share/QGIS/QGIS3/profiles/default/python/plugins/QuickOSM/quick_osm.py\", line 57, in __init__\n    self.toolbar = self.iface.addToolBar('QuickOSM')\nAttributeError: 'NoneType' object has no attribute 'addToolBar'\n\nerror starting plugin: QuickOSM\n\n"
+#> [1] "QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-rstudio'\n"
 #> 
 #> $timeout
 #> [1] FALSE

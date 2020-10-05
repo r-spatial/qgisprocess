@@ -32,7 +32,24 @@ You can install the development version from [GitHub](https://github.com/) with:
 remotes::install_github("paleolimbot/qgisprocess")
 ```
 
-The `qgis_process` command-line utility will be available in the next release of QGIS; for now you will need a development version of QGIS installed. This is not trivial, but a Dockerfile is provided as a development environment.
+## Installing QGIS on your computer
+
+The `qgis_process` command-line utility is available in QGIS >= [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16), [released](https://qgis.org/en/site/getinvolved/development/roadmap.html) in September 2020.
+You can install this version of QGIS on Linux, Mac and (via the OSGeo4W package) Windows, as described at [qgis.org](https://qgis.org/en/site/forusers/download.html).
+
+## qgisprocessing in Docker
+
+You can also use Docker images containing the necessary dependencies to run this package in a container.
+The [`geocompr/geocompr:qgis`](https://github.com/geocompr/docker) image, for example, has QGIS and RStudio preinstalled for interactive use and can be downloaded from Dockerhub and run as follows:
+
+```
+docker run -d -p 8788:8787 -e USERID=$UID -e PASSWORD=ps -v ${pwd}:/home/rstudio/ geocompr/geocompr:qgis
+```
+
+After running this command (having set a more secure password as appropriate) you should be able to access RStudio Server from http://localhost:8788/.
+Once inside you can install `qgisprocess` as documented here.
+
+You can run also `qgisprocessing` in a Dockerfile provided in this repo as follows:
 
 ```
 # do this once:
@@ -43,6 +60,7 @@ docker run --rm -it -v $(pwd):/qgisprocess -w /qgisprocess qgisprocess-devel R
 ```
 
 Once in the container, you can use `devtools::load_all()`, `devtools::test()`, and `devtools::check()` to develop the package.
+
 
 ## Examples
 
