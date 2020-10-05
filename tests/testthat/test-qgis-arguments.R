@@ -11,7 +11,7 @@ test_that("sf argument coercers work", {
   sf_obj <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
   expect_error(as_qgis_argument(sf_obj, "integer"), "Can't use 'sf' objects")
 
-  tmp_file <- expect_match(as_qgis_argument(sf_obj, "source"), "\\.shp$")
+  tmp_file <- expect_match(as_qgis_argument(sf_obj, "source"), "\\.gpkg$")
   expect_is(tmp_file, "qgis_tempfile")
   unlink(tmp_file)
 })
