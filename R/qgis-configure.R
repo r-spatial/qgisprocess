@@ -121,6 +121,16 @@ qgis_query_path <- function(quiet = FALSE) {
     }, error = function(e) {})
   }
 
+  if (Sys.getenv("R_QGISPROCESS_PATH", "") != "") {
+    path <- Sys.getenv("R_QGISPROCESS_PATH")
+    if (!quiet) message(glue::glue("Trying Sys.getenv('R_QGISPROCESS_PATH'): '{ path }'"))
+    tryCatch({
+      qgis_run(path = path)
+      if (!quiet) message("Success!")
+      return(path)
+    }, error = function(e) {})
+  }
+
   if (!quiet) message(glue::glue("Trying 'qgis_process' on PATH"))
   tryCatch({
     qgis_run(path = "qgis_process")

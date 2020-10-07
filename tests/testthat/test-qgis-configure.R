@@ -22,6 +22,12 @@ test_that("qgis_configure() returns FALSE with no QGIS", {
       qgis_configure(quiet = TRUE)
     )
   )
+  expect_false(
+    withr::with_envvar(
+      list(R_QGISPROCESS_PATH = "notacommandatall"),
+      qgis_configure(quiet = TRUE)
+    )
+  )
 })
 
 test_that("qgis_configure() works", {
