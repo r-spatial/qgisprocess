@@ -56,8 +56,8 @@ jobs:
         if: matrix.config.qgis == 'macos-nightly'
         run: |
           curl https://qgis.org/downloads/macos/qgis-macos-nightly.dmg --output qgis-macos-nightly.dmg
-          yes | hdiutil attach -nobrowse -noverify -mountpoint qgis qgis-macos-nightly.dmg > /dev/null
-          sudo cp -r qgis/QGIS.app /Applications
+          yes | hdiutil attach -nobrowse -noverify -mountpoint qgis qgis-macos-nightly.dmg
+          sudo cp -R qgis/QGIS.app /Applications
 
       - name: Query dependencies
         run: |
