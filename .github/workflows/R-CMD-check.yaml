@@ -19,7 +19,7 @@ jobs:
       matrix:
         config:
           - {os: macOS-latest, qgis: 'none', r: 'release'}
-          - {os: macOS-latest, qgis: 'macos-nightly', r: 'release'}
+          - {os: macOS-latest, qgis: 'macos-brew', r: 'release'}
           - {os: ubuntu-20.04, qgis: 'ubuntu-nightly', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04, qgis: 'ubuntu', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
@@ -52,12 +52,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass
 
-      - name: Install QGIS (MacOS Nightly)
-        if: matrix.config.qgis == 'macos-nightly'
+      - name: Install QGIS (MacOS homebrew)
+        if: matrix.config.qgis == 'macos-brew'
         run: |
-          curl https://qgis.org/downloads/macos/qgis-macos-nightly.dmg --output qgis-macos-nightly.dmg
-          yes | hdiutil attach -nobrowse -noverify -mountpoint qgis qgis-macos-nightly.dmg
-          sudo cp -R qgis/QGIS.app /Applications
+          brew cask install qgis
 
       - name: Query dependencies
         run: |
