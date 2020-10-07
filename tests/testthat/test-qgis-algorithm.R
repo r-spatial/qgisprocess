@@ -4,7 +4,7 @@ test_that("qgis_run_algorithm() works", {
   tmp_json <- tempfile()
   expect_output(
     qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = FALSE),
-    "Running qgis_process"
+    "^Running\\s+"
   )
   expect_true(file.exists(tmp_json))
 

@@ -14,13 +14,13 @@ jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }}, ${{ matrix.config.qgis }})
 
     strategy:
       fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-20.04, qgis: 'ubuntu-nightly', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -35,8 +35,8 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@master
 
-      - name: Install QGIS
-        if: runner.os == 'Linux'
+      - name: Install QGIS (Ubuntu Nightly)
+        if: matrix.config.qgis == 'qgis-nightly'
         run: |
           wget -qO - https://qgis.org/downloads/qgis-2020.gpg.key | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import || true
           sudo chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
@@ -83,5 +83,5 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@main
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-${{ matrix.config.qgis }}-results
           path: check

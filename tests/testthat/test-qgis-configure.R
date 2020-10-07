@@ -14,24 +14,17 @@ test_that("qgis_algorithms() works", {
   expect_true(all(vapply(algs, function(x) all(!is.na(x)), logical(1))))
 })
 
-test_that("qgis_configure() works", {
-  skip_if_not(has_qgis())
-
-  expect_true(qgis_configure(quiet = TRUE))
+test_that("qgis_configure() returns FALSE with no QGIS", {
+  skip_if(has_qgis())
   expect_false(
     withr::with_options(
       list(qgisprocess.path = "notacommandatall"),
       qgis_configure(quiet = TRUE)
     )
   )
+})
 
-  expect_false(
-    withr::with_options(
-      list(qgisprocess.path = "printf"),
-      qgis_configure(quiet = TRUE)
-    )
-  )
-
-  # reset config!
-  qgis_configure()
+test_that("qgis_configure() works", {
+  skip_if_not(has_qgis())
+  expect_true(qgis_configure(quiet = TRUE))
 })

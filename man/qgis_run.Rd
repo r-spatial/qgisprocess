@@ -5,6 +5,7 @@
 \alias{has_qgis}
 \alias{assert_qgis}
 \alias{qgis_configure}
+\alias{qgis_unconfigure}
 \alias{qgis_version}
 \alias{qgis_algorithms}
 \alias{qgis_path}
@@ -21,6 +22,8 @@ has_qgis()
 assert_qgis(action = stop)
 
 qgis_configure(quiet = FALSE)
+
+qgis_unconfigure()
 
 qgis_version(query = FALSE, quiet = TRUE)
 

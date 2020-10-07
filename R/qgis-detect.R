@@ -49,7 +49,7 @@ qgis_detect_macos <- function() {
 #' @export
 is_macos <- function() {
   (.Platform$OS.type == "unix") &&
-    identical(Sys.info()["sysname"], "Darwin")
+    identical(unname(Sys.info()["sysname"]), "Darwin")
 }
 
 #' @rdname qgis_detect_windows

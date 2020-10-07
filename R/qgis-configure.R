@@ -55,25 +55,27 @@ assert_qgis <- function(action = stop) {
 #' @export
 qgis_configure <- function(quiet = FALSE) {
   tryCatch({
-    qgisprocess_cache$path <- NULL
-    qgisprocess_cache$version <- NULL
-    qgisprocess_cache$algorithms <- NULL
-    qgisprocess_cache$help_text <- new.env(parent = emptyenv())
+    qgis_unconfigure()
 
     qgis_path(query = TRUE, quiet = quiet)
     qgis_version(query = TRUE, quiet = quiet)
     qgis_algorithms(query = TRUE, quiet = quiet)
   }, error = function(e) {
-    # failed config!
-    qgisprocess_cache$path <- NULL
-    qgisprocess_cache$version <- NULL
-    qgisprocess_cache$algorithms <- NULL
-    qgisprocess_cache$help_text <- new.env(parent = emptyenv())
-
+    qgis_unconfigure()
     if (!quiet) message(e)
   })
 
   invisible(has_qgis())
+}
+
+#' @rdname qgis_run
+#' @export
+qgis_unconfigure <- function() {
+  qgisprocess_cache$path <- NULL
+  qgisprocess_cache$version <- NULL
+  qgisprocess_cache$algorithms <- NULL
+  qgisprocess_cache$help_text <- new.env(parent = emptyenv())
+  invisible(NULL)
 }
 
 #' @rdname qgis_run
@@ -114,6 +116,7 @@ qgis_query_path <- function(quiet = FALSE) {
     if (!quiet) message(glue::glue("Trying getOption('qgisprocess.path'): '{ path }'"))
     tryCatch({
       qgis_run(path = path)
+      if (!quiet) message("Success!")
       return(path)
     }, error = function(e) {})
   }
@@ -121,6 +124,7 @@ qgis_query_path <- function(quiet = FALSE) {
   if (!quiet) message(glue::glue("Trying 'qgis_process' on PATH"))
   tryCatch({
     qgis_run(path = "qgis_process")
+    if (!quiet) message("Success!")
     return("qgis_process")
   }, error = function(e) {})
 
@@ -139,7 +143,7 @@ qgis_query_path <- function(quiet = FALSE) {
       sprintf(
         "Found %s QGIS installation%s containing 'qgis_process':\n %s",
         length(possible_locs),
-        if (length(posssible_locs) == 1) "" else "s",
+        if (length(possible_locs) == 1) "" else "s",
         paste(possible_locs, collapse = "\n")
       )
     )
@@ -149,6 +153,7 @@ qgis_query_path <- function(quiet = FALSE) {
     if (!quiet) message(glue::glue("Trying command '{ path }'"))
     tryCatch({
       qgis_run(path = path)
+      if (!quiet) message("Success!")
       return(path)
     }, error = function(e) {})
   }
@@ -202,13 +207,16 @@ qgis_query_algorithms <- function(quiet = FALSE) {
   provider <- vapply(alg_id_split, "[", 1, FUN.VALUE = character(1))
   alg_id <- vapply(alg_id_split, "[", 2, FUN.VALUE = character(1))
 
-  tibble::tibble(
+  algorithms <- tibble::tibble(
     provider = do.call("[", list(provider, alg_indices)),
     provider_title = unlist(Map(rep, provider_title, each = vapply(alg_indices_lst, length, integer(1)))),
     algorithm = do.call("[", list(alg_full_id, alg_indices)),
     algorithm_id = do.call("[", list(alg_id, alg_indices)),
     algorithm_title = do.call("[", list(alg_title, alg_indices))
   )
+
+  # sometimes items such as 'Models' don't have algorithm IDs listed
+  algorithms[!is.na(algorithms$algorithm_id), ]
 }
 
 # environment for cache
