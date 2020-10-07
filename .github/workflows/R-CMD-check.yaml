@@ -19,7 +19,6 @@ jobs:
       matrix:
         config:
           - {os: macOS-latest, qgis: 'none', r: 'release'}
-          - {os: macOS-latest, qgis: 'macos-brew', r: 'release'}
           - {os: ubuntu-20.04, qgis: 'ubuntu-nightly', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04, qgis: 'ubuntu', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
@@ -52,10 +51,21 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass
 
+# installs homebrew QGIS
+# currently 3.14 with no 'qgis_process'
       - name: Install QGIS (MacOS homebrew)
         if: matrix.config.qgis == 'macos-brew'
         run: |
           brew cask install qgis
+
+# installs last nightly build of QGIS
+# works locally, hangs on GHA after download
+      - name: Install QGIS (MacOS nightly)
+        if: matrix.config.qgis == 'macos-nightly'
+        run: |
+          curl https://qgis.org/downloads/macos/qgis-macos-nightly.dmg --output qgis-macos-nightly.dmg
+          yes | hdiutil attach -nobrowse -noverify -mountpoint qgis qgis-macos-nightly.dmg > /dev/null
+          sudo cp -R qgis/QGIS.app /Applications
 
       - name: Query dependencies
         run: |
