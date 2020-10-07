@@ -109,16 +109,51 @@ qgis_path <- function(query = FALSE, quiet = TRUE) {
 #' @rdname qgis_run
 #' @export
 qgis_query_path <- function(quiet = FALSE) {
-  if (is.null(getOption("qgisprocess.path"))) {
-    if (!quiet) message(glue::glue("Using 'qgis_process' on PATH"))
-    qgis_run(path = "qgis_process")
-    "qgis_process"
-  } else {
+  if (!is.null(getOption("qgisprocess.path"))) {
     path <- getOption("qgisprocess.path", "qgis_process")
-    if (!quiet) message(glue::glue("Using getOption('qgisprocess.path'): '{ path }'"))
-    qgis_run(path = path)
-    path
+    if (!quiet) message(glue::glue("Trying getOption('qgisprocess.path'): '{ path }'"))
+    tryCatch({
+      qgis_run(path = path)
+      return(path)
+    }, error = function(e) {})
   }
+
+  if (!quiet) message(glue::glue("Trying 'qgis_process' on PATH"))
+  tryCatch({
+    qgis_run(path = "qgis_process")
+    return("qgis_process")
+  }, error = function(e) {})
+
+  possible_locs <- if (is_macos()) {
+    qgis_detect_macos()
+  } else if (is_windows()) {
+    qgis_detect_windows()
+  }
+
+  if (length(possible_locs) == 0) {
+    stop("No QGIS installation containing 'qgis_process' found!", call. = FALSE)
+  }
+
+  if (!quiet) {
+    message(
+      sprintf(
+        "Found %s QGIS installation%s containing 'qgis_process':\n %s",
+        length(possible_locs),
+        if (length(posssible_locs) == 1) "" else "s",
+        paste(possible_locs, collapse = "\n")
+      )
+    )
+  }
+
+  for (path in possible_locs) {
+    if (!quiet) message(glue::glue("Trying command '{ path }'"))
+    tryCatch({
+      qgis_run(path = path)
+      return(path)
+    }, error = function(e) {})
+  }
+
+  stop("QGIS installation found, but all candidate paths failed to execute.", call. = FALSE)
 }
 
 #' @rdname qgis_run
