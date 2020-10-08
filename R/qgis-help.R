@@ -84,6 +84,9 @@ qgis_parsed_help <- function(algorithm) {
     )
   )[[1]]
 
+  # if there are no arguments, there won't be a match here
+  args <- args[!is.na(args[, 1, drop = TRUE]), , drop = FALSE]
+
   sec_outputs <- stringr::str_match(
     help_text,
     stringr::regex(
@@ -100,6 +103,9 @@ qgis_parsed_help <- function(algorithm) {
       dotall = TRUE, multiline = TRUE
     )
   )[[1]]
+
+  # if there are no outputs, there won't be a match here
+  outputs <- outputs[!is.na(outputs[, 1, drop = TRUE]), , drop = FALSE]
 
   list(
     description = sec_description,

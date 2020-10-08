@@ -3,6 +3,7 @@ test_that("tempfile generators work", {
   expect_true(dir.exists(qgis_tmp_base()))
   expect_false(is_qgis_tmp_file(qgis_tmp_base()))
   expect_true(is_qgis_tmp_file(qgis_tmp_file("")))
+  expect_true(is_qgis_tmp_file(qgis_tmp_folder()))
   expect_match(qgis_tmp_file(ext = "extension"), "extension$")
   expect_match(qgis_tmp_vector(ext = "extension"), "extension$")
   expect_match(qgis_tmp_raster(ext = "extension"), "extension$")

@@ -3,6 +3,7 @@
 \name{qgis_tmp_file}
 \alias{qgis_tmp_file}
 \alias{is_qgis_tmp_file}
+\alias{qgis_tmp_folder}
 \alias{qgis_tmp_vector}
 \alias{qgis_tmp_raster}
 \alias{qgis_tmp_base}
@@ -12,6 +13,8 @@
 qgis_tmp_file(ext)
 
 is_qgis_tmp_file(x)
+
+qgis_tmp_folder()
 
 qgis_tmp_vector(ext = getOption("qgisprocess.tmp_vector_ext", ".gpkg"))
 

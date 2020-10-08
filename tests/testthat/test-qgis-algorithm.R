@@ -9,14 +9,12 @@ test_that("qgis_run_algorithm() works", {
     "^Running\\s+"
   )
   expect_true(file.exists(tmp_json))
-  qgis_result_clean(result)
 
   unlink(tmp_json)
   result <- expect_silent(
     qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = TRUE)
   )
   expect_true(file.exists(tmp_json))
-  qgis_result_clean(result)
 })
 
 test_that("qgis_has_algorithm() works", {

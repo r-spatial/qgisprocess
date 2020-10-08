@@ -75,7 +75,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = rlang::zap(), ELIP
   structure(
     rlang::list2(
       # ... eventually, this will contain the parsed output values
-      !!! qgis_parse_results(result$stdout),
+      !!! qgis_parse_results(algorithm, result$stdout),
       .algorithm = algorithm,
       .args = args,
       .processx_result = result
@@ -120,22 +120,4 @@ assert_qgis_algorithm <- function(algorithm) {
   }
 
   invisible(algorithm)
-}
-
-# I wish this were less of a hack - this is probably subject to
-# many bugs related to encodings and special characters in output strings
-qgis_parse_results <- function(output) {
-  sec_results <- stringr::str_match(
-    output,
-    stringr::regex(
-      "-+\\s+Results\\s+-+\\s+(.*)",
-      dotall = TRUE, multiline = TRUE
-    )
-  )[, 2, drop = TRUE]
-
-  output_lines <- readLines(textConnection(trimws(sec_results)))
-  outputs <- stringr::str_split(output_lines, "\\s*:\\s+", n = 2)
-  outputs_list <- lapply(outputs, "[", 2)
-  names(outputs_list) <- vapply(outputs, "[", 1, FUN.VALUE = character(1))
-  outputs_list
 }

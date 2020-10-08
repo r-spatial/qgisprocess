@@ -35,6 +35,12 @@ is_qgis_tmp_file <- function(x) {
 
 #' @rdname qgis_tmp_file
 #' @export
+qgis_tmp_folder <- function() {
+  qgis_tmp_file("")
+}
+
+#' @rdname qgis_tmp_file
+#' @export
 qgis_tmp_vector <- function(ext = getOption("qgisprocess.tmp_vector_ext", ".gpkg")) {
   qgis_tmp_file(ext)
 }

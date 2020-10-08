@@ -18,21 +18,21 @@
 
 \method{as_qgis_argument}{sf}(x, qgis_type)
 
-as_qgis_argument(x, qgis_type)
+as_qgis_argument(x, qgis_type = NA)
 
-\method{as_qgis_argument}{default}(x, qgis_type)
+\method{as_qgis_argument}{default}(x, qgis_type = NA)
 
-\method{as_qgis_argument}{character}(x, qgis_type)
+\method{as_qgis_argument}{character}(x, qgis_type = NA)
 
-\method{as_qgis_argument}{logical}(x, qgis_type)
+\method{as_qgis_argument}{logical}(x, qgis_type = NA)
 
-\method{as_qgis_argument}{numeric}(x, qgis_type)
+\method{as_qgis_argument}{numeric}(x, qgis_type = NA)
 
-qgis_clean_argument(value, qgis_type)
+qgis_clean_argument(value, qgis_type = NA)
 
-\method{qgis_clean_argument}{default}(value, qgis_type)
+\method{qgis_clean_argument}{default}(value, qgis_type = NA)
 
-\method{qgis_clean_argument}{qgis_tempfile_arg}(value, qgis_type)
+\method{qgis_clean_argument}{qgis_tempfile_arg}(value, qgis_type = NA)
 }
 \arguments{
 \item{x}{An object passed to a QGIS processing algorithm}

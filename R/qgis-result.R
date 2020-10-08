@@ -15,7 +15,7 @@ is_qgis_result <- function(x) {
 #' @export
 qgis_result_clean <- function(x) {
   args_chr <- as.character(x$.args[vapply(x$.args, is.character, logical(1))])
-  unlink(args_chr, is_qgis_tmp_file(args_chr))
+  unlink(args_chr[is_qgis_tmp_file(args_chr)], recursive = TRUE)
   invisible(x)
 }
 
@@ -63,8 +63,6 @@ qgis_result_args <- function(x) {
 #' @export
 print.qgis_result <- function(x, ...) {
   cat(glue("<Result of `qgis_run_algorithm(\"{ x$.algorithm }\", ...)`>\n\n"))
-  cat("See `qgis_result_stout(x)`, `qgis_result_stderr(x)`, and/or `qgis_result_args()`.\n")
-  cat("Output:\n")
-  print(x[!(names(x) %in% c(".algorithm", ".args", ".processx_result"))], ...)
+  utils::str(x[!(names(x) %in% c(".algorithm", ".args", ".processx_result"))], ...)
   invisible(x)
 }
