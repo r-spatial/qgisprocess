@@ -19,6 +19,7 @@ jobs:
       matrix:
         config:
           - {os: macOS-latest, qgis: 'none', r: 'release'}
+          - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release'}
           - {os: ubuntu-20.04, qgis: 'ubuntu-nightly', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04, qgis: 'ubuntu', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
@@ -53,6 +54,7 @@ jobs:
 
 # installs homebrew QGIS
 # currently 3.14 with no 'qgis_process'
+# leaving this out until 3.16
       - name: Install QGIS (MacOS homebrew)
         if: matrix.config.qgis == 'macos-brew'
         run: |
@@ -60,12 +62,19 @@ jobs:
 
 # installs last nightly build of QGIS
 # works locally, hangs on GHA after download
+# leaving this out until can figure out how to run reliably
       - name: Install QGIS (MacOS nightly)
         if: matrix.config.qgis == 'macos-nightly'
         run: |
           curl https://qgis.org/downloads/macos/qgis-macos-nightly.dmg --output qgis-macos-nightly.dmg
           yes | hdiutil attach -nobrowse -noverify -mountpoint qgis qgis-macos-nightly.dmg > /dev/null
           sudo cp -R qgis/QGIS.app /Applications
+
+      - name: Install QGIS (Windows chocolatey)
+        if: matrix.config.qgis == 'windows-chocolatey'
+        uses: crazy-max/ghaction-chocolatey@v1
+        with:
+          args: install qgis
 
       - name: Query dependencies
         run: |
