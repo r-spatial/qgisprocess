@@ -1,6 +1,8 @@
 
 library(qgisprocess)
 
+qgis_configure()
+
 has_qgis()
 if (is_macos()) qgis_detect_macos()
 

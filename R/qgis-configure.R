@@ -118,7 +118,11 @@ qgis_query_path <- function(quiet = FALSE) {
       qgis_run(path = path)
       if (!quiet) message("Success!")
       return(path)
-    }, error = function(e) {})
+    }, error = function(e) {
+      if (!quiet) message(as.character(e))
+    })
+  } else {
+    if (!quiet) message("getOption('qgisprocess.path') was not found.")
   }
 
   if (Sys.getenv("R_QGISPROCESS_PATH", "") != "") {
@@ -128,7 +132,11 @@ qgis_query_path <- function(quiet = FALSE) {
       qgis_run(path = path)
       if (!quiet) message("Success!")
       return(path)
-    }, error = function(e) {})
+    }, error = function(e) {
+      if (!quiet) message(as.character(e))
+    })
+  } else {
+    if (!quiet) message("Sys.getenv('R_QGISPROCESS_PATH') was not found.")
   }
 
   if (!quiet) message(glue::glue("Trying 'qgis_process' on PATH"))
@@ -136,7 +144,9 @@ qgis_query_path <- function(quiet = FALSE) {
     qgis_run(path = "qgis_process")
     if (!quiet) message("Success!")
     return("qgis_process")
-  }, error = function(e) {})
+  }, error = function(e) {
+    if (!quiet) message(as.character(e))
+  })
 
   possible_locs <- if (is_macos()) {
     qgis_detect_macos()
