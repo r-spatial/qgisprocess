@@ -64,7 +64,8 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = rlang::zap(), ELIP
     result <- qgis_run(
       args = c("run", algorithm, args_str),
       echo_cmd = TRUE,
-      stdout_callback = function(x, ...) cat(x)
+      stdout_callback = function(x, ...) cat(x),
+      stderr_callback = function(x, ...) message(x, appendLF = FALSE)
     )
     cat("\n")
   }
@@ -117,4 +118,9 @@ assert_qgis_algorithm <- function(algorithm) {
   }
 
   invisible(algorithm)
+}
+
+
+qgis_parse_output <- function(output) {
+
 }

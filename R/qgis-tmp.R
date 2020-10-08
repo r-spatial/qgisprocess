@@ -11,6 +11,7 @@
 #' `options(qgisprocess.tmp_raster_ext = "...")`, respectively.
 #'
 #' @param ext The file extension to be used.
+#' @param x A character vector of file names.
 #'
 #' @return A character vector indicating the location of a
 #'   (not yet created) temporary file.
@@ -22,8 +23,14 @@
 #' qgis_tmp_vector()
 #' qgis_tmp_raster()
 #'
-qgis_tmp_file <- function(ext = "") {
+qgis_tmp_file <- function(ext) {
   tempfile(tmpdir = qgis_tmp_base(), fileext = ext)
+}
+
+#' @rdname qgis_tmp_file
+#' @export
+is_qgis_tmp_file <- function(x) {
+  startsWith(x, qgis_tmp_base()) & (x != qgis_tmp_base())
 }
 
 #' @rdname qgis_tmp_file

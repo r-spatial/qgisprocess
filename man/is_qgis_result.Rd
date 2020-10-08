@@ -2,6 +2,7 @@
 % Please edit documentation in R/qgis-result.R
 \name{is_qgis_result}
 \alias{is_qgis_result}
+\alias{qgis_result_clean}
 \alias{qgis_output}
 \alias{qgis_error_output_does_not_exist}
 \alias{qgis_result_stdout}
@@ -10,6 +11,8 @@
 \title{Access algorithm results}
 \usage{
 is_qgis_result(x)
+
+qgis_result_clean(x)
 
 qgis_output(x, which, default = qgis_error_output_does_not_exist(x, which))
 

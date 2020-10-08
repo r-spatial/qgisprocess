@@ -2,13 +2,16 @@
 % Please edit documentation in R/qgis-tmp.R
 \name{qgis_tmp_file}
 \alias{qgis_tmp_file}
+\alias{is_qgis_tmp_file}
 \alias{qgis_tmp_vector}
 \alias{qgis_tmp_raster}
 \alias{qgis_tmp_base}
 \alias{qgis_tmp_clean}
 \title{Manage temporary files}
 \usage{
-qgis_tmp_file(ext = "")
+qgis_tmp_file(ext)
+
+is_qgis_tmp_file(x)
 
 qgis_tmp_vector(ext = getOption("qgisprocess.tmp_vector_ext", ".gpkg"))
 
@@ -20,6 +23,8 @@ qgis_tmp_clean()
 }
 \arguments{
 \item{ext}{The file extension to be used.}
+
+\item{x}{A character vector of file names.}
 }
 \value{
 A character vector indicating the location of a

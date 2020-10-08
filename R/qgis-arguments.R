@@ -52,6 +52,6 @@ qgis_clean_argument.default <- function(value, qgis_type) {
 
 #' @rdname as_qgis_argument
 #' @export
-qgis_clean_argument.qgis_tempfile <- function(value, qgis_type) {
+qgis_clean_argument.qgis_tempfile_arg <- function(value, qgis_type) {
   unlink(value)
 }

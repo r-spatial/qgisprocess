@@ -14,7 +14,7 @@ as_qgis_argument.RasterLayer <- function(x, qgis_type) {
     }
   }
 
-  path <- tempfile(fileext = ".tif")
+  path <- qgis_tmp_raster()
   raster::writeRaster(x, path)
-  structure(path, class = "qgis_tempfile")
+  structure(path, class = "qgis_tempfile_arg")
 }

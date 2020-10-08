@@ -10,7 +10,7 @@
 \alias{as_qgis_argument.numeric}
 \alias{qgis_clean_argument}
 \alias{qgis_clean_argument.default}
-\alias{qgis_clean_argument.qgis_tempfile}
+\alias{qgis_clean_argument.qgis_tempfile_arg}
 \title{Type coercion for arguments to QGIS processing algorithms}
 \usage{
 \method{as_qgis_argument}{RasterLayer}(x, qgis_type)
@@ -29,7 +29,7 @@ qgis_clean_argument(value, qgis_type)
 
 \method{qgis_clean_argument}{default}(value, qgis_type)
 
-\method{qgis_clean_argument}{qgis_tempfile}(value, qgis_type)
+\method{qgis_clean_argument}{qgis_tempfile_arg}(value, qgis_type)
 }
 \arguments{
 \item{x}{An object passed to a QGIS processing algorithm}

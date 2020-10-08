@@ -9,7 +9,7 @@ test_that("argument coercers work", {
 test_that("argument cleaners work", {
   expect_null(qgis_clean_argument("some valule", "some type"))
 
-  tmp <- structure(tempfile(), class = "qgis_tempfile")
+  tmp <- structure(tempfile(), class = "qgis_tempfile_arg")
   file.create(tmp)
   expect_true(file.exists(tmp))
   qgis_clean_argument(tmp)

@@ -3,25 +3,20 @@ test_that("qgis_run_algorithm() works", {
   skip_if_not(has_qgis())
   skip_if_offline()
 
-  tmp_json <- tempfile()
-  expect_output(
+  tmp_json <- qgis_tmp_file(".json")
+  result <- expect_output(
     qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = FALSE),
     "^Running\\s+"
   )
   expect_true(file.exists(tmp_json))
+  qgis_result_clean(result)
 
   unlink(tmp_json)
   result <- expect_silent(
     qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = TRUE)
   )
   expect_true(file.exists(tmp_json))
-
-  expect_is(result, "qgis_result")
-  expect_true(is_qgis_result(result))
-  expect_output(print(result), "^<Result")
-  expect_named(qgis_result_args(result), c("URL", "OUTPUT"))
-  expect_is(qgis_result_stderr(result), "character")
-  expect_is(qgis_result_stdout(result), "character")
+  qgis_result_clean(result)
 })
 
 test_that("qgis_has_algorithm() works", {

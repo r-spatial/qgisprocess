@@ -13,6 +13,14 @@ is_qgis_result <- function(x) {
 
 #' @rdname is_qgis_result
 #' @export
+qgis_result_clean <- function(x) {
+  args_chr <- as.character(x$.args[vapply(x$.args, is.character, logical(1))])
+  unlink(args_chr, is_qgis_tmp_file(args_chr))
+  invisible(x)
+}
+
+#' @rdname is_qgis_result
+#' @export
 qgis_output <- function(x, which, default = qgis_error_output_does_not_exist(x, which)) {
   if (is.numeric(which) && (which %in% seq_along(x))) {
     x[[which]]

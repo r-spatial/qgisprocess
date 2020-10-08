@@ -1,6 +1,8 @@
 
 test_that("tempfile generators work", {
   expect_true(dir.exists(qgis_tmp_base()))
+  expect_false(is_qgis_tmp_file(qgis_tmp_base()))
+  expect_true(is_qgis_tmp_file(qgis_tmp_file("")))
   expect_match(qgis_tmp_file(ext = "extension"), "extension$")
   expect_match(qgis_tmp_vector(ext = "extension"), "extension$")
   expect_match(qgis_tmp_raster(ext = "extension"), "extension$")
@@ -24,7 +26,7 @@ test_that("tempfile generators work", {
 
 test_that("tempfiles can be cleaned up", {
   expect_true(dir.exists(qgis_tmp_base()))
-  file <- qgis_tmp_file()
+  file <- qgis_tmp_file("")
   file.create(file)
   expect_true(file.exists(file))
   qgis_tmp_clean()

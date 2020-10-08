@@ -7,7 +7,7 @@ test_that("raster argument coercers work", {
   expect_error(as_qgis_argument(obj, "integer"), "Can't use 'RasterLayer' objects")
 
   tmp_file <- expect_match(suppressWarnings(as_qgis_argument(obj, "raster")), "\\.tif$")
-  expect_is(tmp_file, "qgis_tempfile")
+  expect_is(tmp_file, "qgis_tempfile_arg")
   unlink(tmp_file)
 
   # also check rasters with embedded files
