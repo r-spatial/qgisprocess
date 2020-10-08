@@ -7,6 +7,7 @@
 \alias{as_qgis_argument}
 \alias{as_qgis_argument.default}
 \alias{as_qgis_argument.character}
+\alias{as_qgis_argument.logical}
 \alias{as_qgis_argument.numeric}
 \alias{qgis_clean_argument}
 \alias{qgis_clean_argument.default}
@@ -22,6 +23,8 @@ as_qgis_argument(x, qgis_type)
 \method{as_qgis_argument}{default}(x, qgis_type)
 
 \method{as_qgis_argument}{character}(x, qgis_type)
+
+\method{as_qgis_argument}{logical}(x, qgis_type)
 
 \method{as_qgis_argument}{numeric}(x, qgis_type)
 

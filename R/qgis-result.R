@@ -35,7 +35,7 @@ qgis_output <- function(x, which, default = qgis_error_output_does_not_exist(x, 
 #' @export
 qgis_error_output_does_not_exist <- function(x, which) {
   available_outputs <- glue::glue_collapse(
-    paste0("'", setdiff(names(x), c(".args", ".processx_result")), "'"),
+    paste0("'", setdiff(names(x), c(".algorithm", ".args", ".processx_result")), "'"),
     sep = ", ", last = " and "
   )
 
@@ -62,9 +62,9 @@ qgis_result_args <- function(x) {
 
 #' @export
 print.qgis_result <- function(x, ...) {
-  cat("<Result of `qgis_run_algorithm()`>\n")
+  cat(glue("<Result of `qgis_run_algorithm(\"{ x$.algorithm }\", ...)`>\n\n"))
   cat("See `qgis_result_stout(x)`, `qgis_result_stderr(x)`, and/or `qgis_result_args()`.\n")
   cat("Output:\n")
-  print(x[!(names(x) %in% c(".args", ".processx_result"))], ...)
+  print(x[!(names(x) %in% c(".algorithm", ".args", ".processx_result"))], ...)
   invisible(x)
 }

@@ -54,37 +54,36 @@ library(qgisprocess)
 #> Using 'qgis_process' at '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'.
 #> Run `qgis_configure()` for details.
 input <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
-output_file <- file.path(tempdir(), "nc_buffered.gpkg")
 
-qgis_run_algorithm(
+result <- qgis_run_algorithm(
   "native:buffer",
   INPUT = input,
   DISTANCE = 1,
   SEGMENTS = 10,
-  DISSOLVE = 'True',
+  DISSOLVE = TRUE,
   END_CAP_STYLE = 0,
   JOIN_STYLE = 0,
   MITER_LIMIT = 10,
-  OUTPUT = output_file
+  OUTPUT = qgis_tmp_vector("=\"s.gpkg")
 )
 #> Running /Applications/QGIS.app/Contents/MacOS/bin/qgis_process run \
 #>   'native:buffer' \
-#>   '--INPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpgKuOoa/filec8834902094f.gpkg' \
-#>   '--DISTANCE=1' '--SEGMENTS=10' '--DISSOLVE=True' '--END_CAP_STYLE=0' \
+#>   '--INPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpL3hiCw/filedfc352312aac/filedfc37a8bd94d.gpkg' \
+#>   '--DISTANCE=1' '--SEGMENTS=10' '--DISSOLVE=TRUE' '--END_CAP_STYLE=0' \
 #>   '--JOIN_STYLE=0' '--MITER_LIMIT=10' \
-#>   '--OUTPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpgKuOoa/nc_buffered.gpkg'
+#>   '--OUTPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpL3hiCw/filedfc352312aac/filedfc319e8ac5c="s.gpkg'
 #> 
 #> ----------------
 #> Inputs
 #> ----------------
 #> 
-#> DISSOLVE:    True
+#> DISSOLVE:    TRUE
 #> DISTANCE:    1
 #> END_CAP_STYLE:   0
-#> INPUT:   /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpgKuOoa/filec8834902094f.gpkg
+#> INPUT:   /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpL3hiCw/filedfc352312aac/filedfc37a8bd94d.gpkg
 #> JOIN_STYLE:  0
 #> MITER_LIMIT: 10
-#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpgKuOoa/nc_buffered.gpkg
+#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpL3hiCw/filedfc352312aac/filedfc319e8ac5c="s.gpkg
 #> SEGMENTS:    10
 #> 
 #> 
@@ -93,14 +92,16 @@ qgis_run_algorithm(
 #> Results
 #> ----------------
 #> 
-#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpgKuOoa/nc_buffered.gpkg
-#> <Result of `qgis_run_algorithm()`>
+#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpL3hiCw/filedfc352312aac/filedfc319e8ac5c="s.gpkg
+
+result
+#> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> See `qgis_result_stout(x)`, `qgis_result_stderr(x)`, and/or `qgis_result_args()`.
 #> Output:
-#> named list()
-output_sf <- sf::read_sf(output_file)
-unlink(output_file)
+#> $OUTPUT
+#> [1] "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpL3hiCw/filedfc352312aac/filedfc319e8ac5c=\"s.gpkg"
 
+output_sf <- sf::read_sf(qgis_output(result, "OUTPUT"))
 plot(sf::st_geometry(output_sf))
 ```
 

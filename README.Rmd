@@ -40,22 +40,22 @@ The following example demonstrates the [buffer](https://docs.qgis.org/testing/en
 ```{r buffer}
 library(qgisprocess)
 input <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
-output_file <- file.path(tempdir(), "nc_buffered.gpkg")
 
-qgis_run_algorithm(
+result <- qgis_run_algorithm(
   "native:buffer",
   INPUT = input,
   DISTANCE = 1,
   SEGMENTS = 10,
-  DISSOLVE = 'True',
+  DISSOLVE = TRUE,
   END_CAP_STYLE = 0,
   JOIN_STYLE = 0,
   MITER_LIMIT = 10,
-  OUTPUT = output_file
+  OUTPUT = qgis_tmp_vector("=\"s.gpkg")
 )
-output_sf <- sf::read_sf(output_file)
-unlink(output_file)
 
+result
+
+output_sf <- sf::read_sf(qgis_output(result, "OUTPUT"))
 plot(sf::st_geometry(output_sf))
 ```
 

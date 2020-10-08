@@ -3,6 +3,7 @@
 S3method(as_qgis_argument,RasterLayer)
 S3method(as_qgis_argument,character)
 S3method(as_qgis_argument,default)
+S3method(as_qgis_argument,logical)
 S3method(as_qgis_argument,numeric)
 S3method(as_qgis_argument,sf)
 S3method(print,qgis_result)

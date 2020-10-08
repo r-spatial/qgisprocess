@@ -34,6 +34,12 @@ as_qgis_argument.character <- function(x, qgis_type) {
 
 #' @rdname as_qgis_argument
 #' @export
+as_qgis_argument.logical <- function(x, qgis_type) {
+  paste0(x, collapse = " ")
+}
+
+#' @rdname as_qgis_argument
+#' @export
 as_qgis_argument.numeric <- function(x, qgis_type) {
   paste0(x, collapse = " ")
 }
