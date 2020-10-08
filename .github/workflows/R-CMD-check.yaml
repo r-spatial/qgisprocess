@@ -13,14 +13,15 @@ name: R-CMD-check
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
-
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
-
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }}, ${{ matrix.config.qgis }})
     strategy:
       fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: macOS-latest, qgis: 'none', r: 'release'}
+          - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release'}
+          - {os: ubuntu-20.04, qgis: 'ubuntu-nightly', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-20.04, qgis: 'ubuntu', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -28,21 +29,52 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
       - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
-
       - uses: r-lib/actions/setup-pandoc@master
 
-      - name: Install QGIS
-        if: runner.os == 'Linux'
+      - name: Install QGIS (Ubuntu Nightly)
+        if: matrix.config.qgis == 'ubuntu-nightly'
         run: |
           wget -qO - https://qgis.org/downloads/qgis-2020.gpg.key | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import || true
           sudo chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
           sudo add-apt-repository "deb https://qgis.org/ubuntu-nightly `lsb_release -c -s` main"
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass
+
+      - name: Install QGIS (Ubuntu)
+        if: matrix.config.qgis == 'ubuntu'
+        run: |
+          wget -qO - https://qgis.org/downloads/qgis-2020.gpg.key | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import || true
+          sudo chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
+          sudo add-apt-repository "deb https://qgis.org/ubuntu `lsb_release -c -s` main"
+          sudo apt-get update
+          sudo apt-get install -y qgis qgis-plugin-grass
+
+# installs homebrew QGIS
+# currently 3.14 with no 'qgis_process'
+# leaving this out until 3.16
+      - name: Install QGIS (MacOS homebrew)
+        if: matrix.config.qgis == 'macos-brew'
+        run: |
+          brew cask install qgis
+
+# installs last nightly build of QGIS
+# works locally, hangs on GHA after download
+# leaving this out until can figure out how to run reliably
+      - name: Install QGIS (MacOS nightly)
+        if: matrix.config.qgis == 'macos-nightly'
+        run: |
+          curl https://qgis.org/downloads/macos/qgis-macos-nightly.dmg --output qgis-macos-nightly.dmg
+          yes | hdiutil attach -nobrowse -noverify -mountpoint qgis qgis-macos-nightly.dmg > /dev/null
+          sudo cp -R qgis/QGIS.app /Applications
+
+      - name: Install QGIS (Windows chocolatey)
+        if: matrix.config.qgis == 'windows-chocolatey'
+        uses: crazy-max/ghaction-chocolatey@v1
+        with:
+          args: install qgis
 
       - name: Query dependencies
         run: |
@@ -79,9 +111,19 @@ jobs:
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
+      - name: Show testthat output
+        if: always()
+        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash
+
+      - name: Show platform-info output
+        if: always()
+        run: find check -name 'platform-info.Rout*' -exec cat '{}' \; || true
+        shell: bash
+
       - name: Upload check results
         if: failure()
         uses: actions/upload-artifact@main
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-${{ matrix.config.qgis }}-results
           path: check

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 The goal of `qgisprocess` is to provide an R interface to the popular and open source desktop geographic information system (GIS) program [QGIS](https://qgis.org/en/site/).
-The package is a re-implementation of functionality provided by the archived [`RQGIS`](https://cran.r-project.org/package=RQGIS) package, which was partially revived in the [`RQGIS3`](https://github.com/r-spatial/RQGIS3) package.
+The package is a re-implementation of functionality provided by the archived [RQGIS](https://cran.r-project.org/package=RQGIS) package, which was partially revived in the [RQGIS3](https://github.com/r-spatial/RQGIS3) package.
 
 ## Installation
 
@@ -32,71 +32,20 @@ You can install the development version from [GitHub](https://github.com/) with:
 remotes::install_github("paleolimbot/qgisprocess")
 ```
 
-## Installing QGIS on your computer
+The qgisprocess package wraps the `qgis_process` command-line utility, which is available in QGIS >= [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16), [released](https://qgis.org/en/site/getinvolved/development/roadmap.html) in September 2020. MacOS users will have to install the a recent nightly build until QGIS 3.16 has been released. Download instructions for all platforms are available at <https://download.qgis.org/>. If a recent version of QGIS isn't available for your OS, you can use one of the [Geocomputation with R Docker images](https://github.com/geocompr/docker) with QGIS installed.
 
-The `qgis_process` command-line utility is available in QGIS >= [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16), [released](https://qgis.org/en/site/getinvolved/development/roadmap.html) in September 2020.
-You can install this version of QGIS on Linux, Mac and (via the OSGeo4W package) Windows, as described at [qgis.org](https://qgis.org/en/site/forusers/download.html).
+## Example
 
-## qgisprocessing in Docker
-
-You can also use Docker images containing the necessary dependencies to run this package in a container.
-The [`geocompr/geocompr:qgis`](https://github.com/geocompr/docker) image, for example, has QGIS and RStudio preinstalled for interactive use and can be downloaded from Dockerhub and run as follows:
-
-```
-docker run -d -p 8788:8787 -e USERID=$UID -e PASSWORD=ps -v ${pwd}:/home/rstudio/ geocompr/geocompr:qgis
-```
-
-After running this command (having set a more secure password as appropriate) you should be able to access RStudio Server from http://localhost:8788/.
-Once inside you can install `qgisprocess` as documented here.
-
-You can run also `qgisprocessing` in a Dockerfile provided in this repo as follows:
-
-```
-# do this once:
-# docker build . --tag qgisprocess-devel
-
-# do this to run an interactive R session in the docker image
-docker run --rm -it -v $(pwd):/qgisprocess -w /qgisprocess qgisprocess-devel R
-```
-
-Once in the container, you can use `devtools::load_all()`, `devtools::test()`, and `devtools::check()` to develop the package.
-
-
-## Examples
-
-This is a basic example which tests that the package can detect a working version of `qgis_process`:
-
-```{r example}
-library(qgisprocess)
-
-# basic QGIS info
-qgis_path()
-qgis_version()
-qgis_algorithms()
-
-# get help
-qgis_show_help("native:filedownloader")
-
-# run the algorithm!
-qgis_run_algorithm(
-  "native:filedownloader", 
-  URL = "https://httpbin.org/get",
-  OUTPUT = "test-file.json"
-)
-```
-
-```{r, echo=FALSE}
-unlink("test-file.json")
-```
-
-The following examples demonstrates the [buffer](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer) algorithm in action.
+The following example demonstrates the [buffer](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer) algorithm in action. The passing of [sf](https://r-spatial.github.io/sf) and [raster](https://cran.r-project.org/package=raster) objects is experimentally supported (and will be well-supported in the future!).
 
 ```{r buffer}
-input_file <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
+library(qgisprocess)
+input <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
 output_file <- file.path(tempdir(), "nc_buffered.gpkg")
+
 qgis_run_algorithm(
   "native:buffer",
-  INPUT = input_file,
+  INPUT = input,
   DISTANCE = 1,
   SEGMENTS = 10,
   DISSOLVE = 'True',
@@ -106,14 +55,19 @@ qgis_run_algorithm(
   OUTPUT = output_file
 )
 output_sf <- sf::read_sf(output_file)
-sf::st_crs(output_sf)
+unlink(output_file)
+
 plot(sf::st_geometry(output_sf))
 ```
 
+You can read the help associated with an algorithm using `qgis_show_help()`. It may also be useful to run an algorithm in the QGIS GUI and examine the console output to determine how the various input values are translated to processing arguments.
+
+```{r}
+qgis_show_help("native:buffer")
+```
 
 ## Further reading
 
 - A [paper](https://journal.r-project.org/archive/2017/RJ-2017-067/index.html) on the original RQGIS package published in the R Journal
 - A [discussion](https://github.com/r-spatial/discuss/issues/41) options for running QGIS from R that led to this package
 - The [pull request](https://github.com/qgis/QGIS/pull/34617) in the QGIS repo that led to the development of the `qgis_process` command-line utility 
-

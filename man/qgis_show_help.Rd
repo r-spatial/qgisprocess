@@ -4,6 +4,7 @@
 \alias{qgis_show_help}
 \alias{qgis_description}
 \alias{qgis_arguments}
+\alias{qgis_outputs}
 \title{Show algorithm help}
 \usage{
 qgis_show_help(algorithm)
@@ -11,6 +12,8 @@ qgis_show_help(algorithm)
 qgis_description(algorithm)
 
 qgis_arguments(algorithm)
+
+qgis_outputs(algorithm)
 }
 \arguments{
 \item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or

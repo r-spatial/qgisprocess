@@ -1,12 +1,20 @@
 Package: qgisprocess
 Title: Use 'QGIS' Processing Algorithms
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "Dewey",
-           family = "Dunnington",
-           role = c("aut", "cre"),
-           email = "dewey@fishandwhistle.net",
-           comment = c(ORCID = "0000-0002-9415-4582"))
+Authors@R: c(
+      person(given = "Dewey",
+             family = "Dunnington",
+             role = c("aut", "cre"),
+             email = "dewey@fishandwhistle.net",
+             comment = c(ORCID = "0000-0002-9415-4582")),
+      person(given = "Robin",
+             family = "Lovelace",
+             role = c("ctb"),
+             comment = c(ORCID = "0000-0001-5679-6536")),
+      person(given = "Jan",
+             family = "Caha",
+             role = c("ctb"))
+    )
 Description: Provides seamless access to the 'QGIS' <https://qgis.org/>
   processing toolbox using the 'qgis_process' command-line utility.
 License: GPL-3

@@ -15,8 +15,8 @@ The goal of `qgisprocess` is to provide an R interface to the popular
 and open source desktop geographic information system (GIS) program
 [QGIS](https://qgis.org/en/site/). The package is a re-implementation of
 functionality provided by the archived
-[`RQGIS`](https://cran.r-project.org/package=RQGIS) package, which was
-partially revived in the [`RQGIS3`](https://github.com/r-spatial/RQGIS3)
+[RQGIS](https://cran.r-project.org/package=RQGIS) package, which was
+partially revived in the [RQGIS3](https://github.com/r-spatial/RQGIS3)
 package.
 
 ## Installation
@@ -29,146 +29,35 @@ You can install the development version from
 remotes::install_github("paleolimbot/qgisprocess")
 ```
 
-## Installing QGIS on your computer
-
-The `qgis_process` command-line utility is available in QGIS \>=
+The qgisprocess package wraps the `qgis_process` command-line utility,
+which is available in QGIS \>=
 [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16),
 [released](https://qgis.org/en/site/getinvolved/development/roadmap.html)
-in September 2020. You can install this version of QGIS on Linux, Mac
-and (via the OSGeo4W package) Windows, as described at
-[qgis.org](https://qgis.org/en/site/forusers/download.html).
+in September 2020. MacOS users will have to install the a recent nightly
+build until QGIS 3.16 has been released. Download instructions for all
+platforms are available at <https://download.qgis.org/>. If a recent
+version of QGIS isn’t available for your OS, you can use one of the
+[Geocomputation with R Docker
+images](https://github.com/geocompr/docker) with QGIS installed.
 
-## qgisprocessing in Docker
+## Example
 
-You can also use Docker images containing the necessary dependencies to
-run this package in a container. The
-[`geocompr/geocompr:qgis`](https://github.com/geocompr/docker) image,
-for example, has QGIS and RStudio preinstalled for interactive use and
-can be downloaded from Dockerhub and run as follows:
-
-    docker run -d -p 8788:8787 -e USERID=$UID -e PASSWORD=ps -v ${pwd}:/home/rstudio/ geocompr/geocompr:qgis
-
-After running this command (having set a more secure password as
-appropriate) you should be able to access RStudio Server from
-<http://localhost:8788/>. Once inside you can install `qgisprocess` as
-documented here.
-
-You can run also `qgisprocessing` in a Dockerfile provided in this repo
-as follows:
-
-    # do this once:
-    # docker build . --tag qgisprocess-devel
-    
-    # do this to run an interactive R session in the docker image
-    docker run --rm -it -v $(pwd):/qgisprocess -w /qgisprocess qgisprocess-devel R
-
-Once in the container, you can use `devtools::load_all()`,
-`devtools::test()`, and `devtools::check()` to develop the package.
-
-## Examples
-
-This is a basic example which tests that the package can detect a
-working version of `qgis_process`:
+The following example demonstrates the
+[buffer](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer)
+algorithm in action. The passing of [sf](https://r-spatial.github.io/sf)
+and [raster](https://cran.r-project.org/package=raster) objects is
+experimentally supported (and will be well-supported in the future\!).
 
 ``` r
 library(qgisprocess)
-
-# basic QGIS info
-qgis_path()
-#> [1] "qgis_process"
-qgis_version()
-#> [1] "3.14.16-Pi"
-qgis_algorithms()
-#> # A tibble: 191 x 5
-#>    provider provider_title  algorithm       algorithm_id    algorithm_title     
-#>    <chr>    <chr>           <chr>           <chr>           <chr>               
-#>  1 3d       QGIS (3D)       3d:tessellate   tessellate      Tessellate          
-#>  2 native   QGIS (native c… native:addauto… addautoincreme… Add autoincremental…
-#>  3 native   QGIS (native c… native:addfiel… addfieldtoattr… Add field to attrib…
-#>  4 native   QGIS (native c… native:adduniq… adduniquevalue… Add unique value in…
-#>  5 native   QGIS (native c… native:addxyfi… addxyfields     Add X/Y fields to l…
-#>  6 native   QGIS (native c… native:affinet… affinetransform Affine transform    
-#>  7 native   QGIS (native c… native:aggrega… aggregate       Aggregate           
-#>  8 native   QGIS (native c… native:antimer… antimeridiansp… Geodesic line split…
-#>  9 native   QGIS (native c… native:arrayof… arrayoffsetlin… Array of offset (pa…
-#> 10 native   QGIS (native c… native:arraytr… arraytranslate… Array of translated…
-#> # … with 181 more rows
-
-# get help
-qgis_show_help("native:filedownloader")
-#> Download file (native:filedownloader)
-#> 
-#> ----------------
-#> Description
-#> ----------------
-#> This algorithm downloads a URL on the file system.
-#> 
-#> ----------------
-#> Arguments
-#> ----------------
-#> 
-#> URL: URL
-#>  Argument type:  string
-#>  Acceptable values:
-#>      - String value
-#> OUTPUT: File destination
-#>  Argument type:  fileDestination
-#>  Acceptable values:
-#>      - Path for new file
-#> 
-#> ----------------
-#> Outputs
-#> ----------------
-#> 
-#> OUTPUT: <outputFile>
-#>  File destination
-
-# run the algorithm!
-qgis_run_algorithm(
-  "native:filedownloader", 
-  URL = "https://httpbin.org/get",
-  OUTPUT = "test-file.json"
-)
-#> Running qgis_process run 'native:filedownloader' \
-#>   '--URL=https://httpbin.org/get' '--OUTPUT=test-file.json'
-#> 
-#> ----------------
-#> Inputs
-#> ----------------
-#> 
-#> OUTPUT:  test-file.json
-#> URL: https://httpbin.org/get
-#> 
-#> 0...10...20...30...40...50...60...70...80...90...100 - done.
-#> 
-#> ----------------
-#> Results
-#> ----------------
-#> 
-#> OUTPUT:  test-file.json
-#> $status
-#> [1] 0
-#> 
-#> $stdout
-#> [1] "\n----------------\nInputs\n----------------\n\nOUTPUT:\ttest-file.json\nURL:\thttps://httpbin.org/get\n\n0...10...20...30...40...50...60...70...80...90...100 - done.\n\n----------------\nResults\n----------------\n\nOUTPUT:\ttest-file.json\n"
-#> 
-#> $stderr
-#> [1] "QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-rstudio'\n"
-#> 
-#> $timeout
-#> [1] FALSE
-```
-
-The following examples demonstrates the
-[buffer](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer)
-algorithm in action.
-
-``` r
-input_file <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
+#> Using 'qgis_process' at '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'.
+#> Run `qgis_configure()` for details.
+input <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
 output_file <- file.path(tempdir(), "nc_buffered.gpkg")
+
 qgis_run_algorithm(
   "native:buffer",
-  INPUT = input_file,
+  INPUT = input,
   DISTANCE = 1,
   SEGMENTS = 10,
   DISSOLVE = 'True',
@@ -177,10 +66,12 @@ qgis_run_algorithm(
   MITER_LIMIT = 10,
   OUTPUT = output_file
 )
-#> Running qgis_process run 'native:buffer' \
-#>   '--INPUT=/tmp/RtmpKdpNHj/file3ef81f2da9.shp' '--DISTANCE=1' '--SEGMENTS=10' \
-#>   '--DISSOLVE=True' '--END_CAP_STYLE=0' '--JOIN_STYLE=0' '--MITER_LIMIT=10' \
-#>   '--OUTPUT=/tmp/RtmpKdpNHj/nc_buffered.gpkg'
+#> Running /Applications/QGIS.app/Contents/MacOS/bin/qgis_process run \
+#>   'native:buffer' \
+#>   '--INPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/filebb976563eff4.gpkg' \
+#>   '--DISTANCE=1' '--SEGMENTS=10' '--DISSOLVE=True' '--END_CAP_STYLE=0' \
+#>   '--JOIN_STYLE=0' '--MITER_LIMIT=10' \
+#>   '--OUTPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg'
 #> 
 #> ----------------
 #> Inputs
@@ -189,56 +80,116 @@ qgis_run_algorithm(
 #> DISSOLVE:    True
 #> DISTANCE:    1
 #> END_CAP_STYLE:   0
-#> INPUT:   /tmp/RtmpKdpNHj/file3ef81f2da9.shp
+#> INPUT:   /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/filebb976563eff4.gpkg
 #> JOIN_STYLE:  0
 #> MITER_LIMIT: 10
-#> OUTPUT:  /tmp/RtmpKdpNHj/nc_buffered.gpkg
+#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg
 #> SEGMENTS:    10
+#> 
 #> 
 #> 0...10...20...30...40...50...60...70...80...90...
 #> ----------------
 #> Results
 #> ----------------
 #> 
-#> OUTPUT:  /tmp/RtmpKdpNHj/nc_buffered.gpkg
+#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg
 #> $status
 #> [1] 0
 #> 
 #> $stdout
-#> [1] "\n----------------\nInputs\n----------------\n\nDISSOLVE:\tTrue\nDISTANCE:\t1\nEND_CAP_STYLE:\t0\nINPUT:\t/tmp/RtmpKdpNHj/file3ef81f2da9.shp\nJOIN_STYLE:\t0\nMITER_LIMIT:\t10\nOUTPUT:\t/tmp/RtmpKdpNHj/nc_buffered.gpkg\nSEGMENTS:\t10\n\n0...10...20...30...40...50...60...70...80...90...\n----------------\nResults\n----------------\n\nOUTPUT:\t/tmp/RtmpKdpNHj/nc_buffered.gpkg\n"
+#> [1] "\n----------------\nInputs\n----------------\n\nDISSOLVE:\tTrue\nDISTANCE:\t1\nEND_CAP_STYLE:\t0\nINPUT:\t/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/filebb976563eff4.gpkg\nJOIN_STYLE:\t0\nMITER_LIMIT:\t10\nOUTPUT:\t/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg\nSEGMENTS:\t10\n\n\n0...10...20...30...40...50...60...70...80...90...\n----------------\nResults\n----------------\n\nOUTPUT:\t/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg\n"
 #> 
 #> $stderr
-#> [1] "QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-rstudio'\n"
+#> [1] "\"<font color=\\\"red\\\">Couldn't load PyQGIS.<br>Python support will be disabled.</font><br><pre><br>Traceback (most recent call last):<br>&nbsp; File \\\"<string>\\\", line 1, in <module><br>&nbsp; File \\\"/Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/qgis/core/__init__.py\\\", line 25, in <module><br>&nbsp; &nbsp; from qgis._core import *<br>ImportError: dlopen(/Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/qgis/_core.so, 2): Symbol not found: __ZN25QgsPalettedRasterRenderer8setLabelEiRK7QString<br>&nbsp; Referenced from: /Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/qgis/_core.so<br>&nbsp; Expected in: /Applications/QGIS.app/Contents/MacOS/qgis_process.app/Contents/MacOS/../../../../Frameworks/qgis_core.framework/Versions/3.15/qgis_core<br> in /Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/qgis/_core.so<br><br></pre>Python version:<br>3.7.7 (default, Sep 22 2020, 10:25:18) <br>[Clang 12.0.0 (clang-1200.0.32.2)]<br><br>QGIS version:<br>3.15.0-Master 'Master', cfba539e0c<br><br>Python path:<br>['/Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python', '/Users/dewey/Library/Application Support/QGIS/QGIS3/profiles/default/python', '/Users/dewey/Library/Application Support/QGIS/QGIS3/profiles/default/python/plugins', '/Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/plugins', '/Applications/QGIS.app/Contents/MacOS/lib/python37.zip', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/lib-dynload', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/numpy-1.19.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/pyproj-2.6.0-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/Rtree-0.9.4-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/GDAL-3.1.2-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/netCDF4-1.5.3-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/cftime-1.2.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/pandas-1.1.0-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/patsy-0.5.1-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/Pillow-7.2.0-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/Fiona-1.8.13.post1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/click_plugins-1.1.1-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/matplotlib-3.3.0-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/rasterio-1.1.5-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/snuggs-1.4.7-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/affine-2.3.0-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/scipy-1.5.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/numba-0.50.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/opencv_contrib_python-4.3.0.36-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/statsmodels-0.11.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/geopandas-0.8.1-py3.7.egg']\"\n\"<font color=\\\"red\\\">An error occurred during execution of following code:<br><tt>qgis.utils.updateAvailablePlugins()</tt></font><br><pre><br>SystemError: PyEval_EvalCodeEx: NULL globals<br><br></pre>Python version:<br><br><br>QGIS version:<br>3.15.0-Master 'Master', cfba539e0c<br><br>Python path:<br>\"\n"
 #> 
 #> $timeout
 #> [1] FALSE
 output_sf <- sf::read_sf(output_file)
-sf::st_crs(output_sf)
-#> Coordinate Reference System:
-#>   User input: NAD27 
-#>   wkt:
-#> GEOGCRS["NAD27",
-#>     DATUM["North American Datum 1927",
-#>         ELLIPSOID["Clarke 1866",6378206.4,294.978698213898,
-#>             LENGTHUNIT["metre",1]]],
-#>     PRIMEM["Greenwich",0,
-#>         ANGLEUNIT["degree",0.0174532925199433]],
-#>     CS[ellipsoidal,2],
-#>         AXIS["geodetic latitude (Lat)",north,
-#>             ORDER[1],
-#>             ANGLEUNIT["degree",0.0174532925199433]],
-#>         AXIS["geodetic longitude (Lon)",east,
-#>             ORDER[2],
-#>             ANGLEUNIT["degree",0.0174532925199433]],
-#>     USAGE[
-#>         SCOPE["unknown"],
-#>         AREA["North America - NAD27"],
-#>         BBOX[7.15,167.65,83.17,-47.74]],
-#>     ID["EPSG",4267]]
+unlink(output_file)
+
 plot(sf::st_geometry(output_sf))
 ```
 
 <img src="man/figures/README-buffer-1.png" width="100%" />
+
+You can read the help associated with an algorithm using
+`qgis_show_help()`. It may also be useful to run an algorithm in the
+QGIS GUI and examine the console output to determine how the various
+input values are translated to processing arguments.
+
+``` r
+qgis_show_help("native:buffer")
+#> Buffer (native:buffer)
+#> 
+#> ----------------
+#> Description
+#> ----------------
+#> This algorithm computes a buffer area for all the features in an input layer, using a fixed or dynamic distance.
+#> 
+#> The segments parameter controls the number of line segments to use to approximate a quarter circle when creating rounded offsets.
+#> 
+#> The end cap style parameter controls how line endings are handled in the buffer.
+#> 
+#> The join style parameter specifies whether round, miter or beveled joins should be used when offsetting corners in a line.
+#> 
+#> The miter limit parameter is only applicable for miter join styles, and controls the maximum distance from the offset curve to use when creating a mitered join.
+#> 
+#> ----------------
+#> Arguments
+#> ----------------
+#> 
+#> INPUT: Input layer
+#>  Argument type:  source
+#>  Acceptable values:
+#>      - Path to a vector layer
+#> DISTANCE: Distance
+#>  Argument type:  distance
+#>  Acceptable values:
+#>      - A numeric value
+#> SEGMENTS: Segments
+#>  The segments parameter controls the number of line segments to use to approximate a quarter circle when creating rounded offsets.
+#>  Argument type:  number
+#>  Acceptable values:
+#>      - A numeric value
+#> END_CAP_STYLE: End cap style
+#>  Argument type:  enum
+#>  Available values:
+#>      - 0: Round
+#>      - 1: Flat
+#>      - 2: Square
+#>  Acceptable values:
+#>      - Number of selected option, e.g. '1'
+#>      - Comma separated list of options, e.g. '1,3'
+#> JOIN_STYLE: Join style
+#>  Argument type:  enum
+#>  Available values:
+#>      - 0: Round
+#>      - 1: Miter
+#>      - 2: Bevel
+#>  Acceptable values:
+#>      - Number of selected option, e.g. '1'
+#>      - Comma separated list of options, e.g. '1,3'
+#> MITER_LIMIT: Miter limit
+#>  Argument type:  number
+#>  Acceptable values:
+#>      - A numeric value
+#> DISSOLVE: Dissolve result
+#>  Argument type:  boolean
+#>  Acceptable values:
+#>      - 1 for true/yes
+#>      - 0 for false/no
+#> OUTPUT: Buffered
+#>  Argument type:  sink
+#>  Acceptable values:
+#>      - Path for new vector layer
+#> 
+#> ----------------
+#> Outputs
+#> ----------------
+#> 
+#> OUTPUT: <outputVector>
+#>  Buffered
+```
 
 ## Further reading
 
