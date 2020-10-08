@@ -1,0 +1,1641 @@
+algorithm,name,description,qgis_output_type
+3d:tessellate,OUTPUT,Tessellated,outputVector
+gdal:aspect,OUTPUT,Aspect,outputRaster
+gdal:assignprojection,OUTPUT,Layer with projection,outputRaster
+gdal:buffervectors,OUTPUT,Buffer,outputVector
+gdal:buildvirtualraster,OUTPUT,Virtual,outputRaster
+gdal:buildvirtualvector,OUTPUT,Virtual vector,outputVector
+gdal:buildvirtualvector,VRT_STRING,Virtual string,outputString
+gdal:cliprasterbyextent,OUTPUT,Clipped ,outputRaster
+gdal:cliprasterbymasklayer,OUTPUT,Clipped ,outputRaster
+gdal:clipvectorbyextent,OUTPUT,Clipped ,outputVector
+gdal:clipvectorbypolygon,OUTPUT,Clipped ,outputVector
+gdal:colorrelief,OUTPUT,Color relief,outputRaster
+gdal:contour,OUTPUT,Contours,outputVector
+gdal:contour_polygon,OUTPUT,Contours,outputVector
+gdal:convertformat,OUTPUT,Converted,outputVector
+gdal:dissolve,OUTPUT,Dissolved,outputVector
+gdal:executesql,OUTPUT,SQL result,outputVector
+gdal:extractprojection,WORLD_FILE,World file,outputFile
+gdal:extractprojection,PRJ_FILE,ESRI Shapefile prj file,outputFile
+gdal:fillnodata,OUTPUT,Filled,outputRaster
+gdal:gdal2tiles,OUTPUT,Output directory,outputFolder
+gdal:gdal2xyz,OUTPUT,XYZ ASCII file,outputFile
+gdal:gdalinfo,OUTPUT,Layer information,outputHtml
+gdal:gridaverage,OUTPUT,Interpolated ,outputRaster
+gdal:griddatametrics,OUTPUT,Interpolated ,outputRaster
+gdal:gridinversedistance,OUTPUT,Interpolated ,outputRaster
+gdal:gridinversedistancenearestneighbor,OUTPUT,Interpolated ,outputRaster
+gdal:gridlinear,OUTPUT,Interpolated ,outputRaster
+gdal:gridnearestneighbor,OUTPUT,Interpolated ,outputRaster
+gdal:hillshade,OUTPUT,Hillshade,outputRaster
+gdal:importvectorintopostgisdatabaseavailableconnections,NA,NA,NA
+gdal:importvectorintopostgisdatabasenewconnection,NA,NA,NA
+gdal:merge,OUTPUT,Merged,outputRaster
+gdal:nearblack,OUTPUT,Nearblack,outputRaster
+gdal:offsetcurve,OUTPUT,Offset curve,outputVector
+gdal:ogrinfo,OUTPUT,Layer information,outputHtml
+gdal:onesidebuffer,OUTPUT,One,outputVector
+gdal:overviews,OUTPUT,Pyramidized,outputRaster
+gdal:pansharp,OUTPUT,Output,outputRaster
+gdal:pcttorgb,OUTPUT,PCT to RGB,outputRaster
+gdal:pointsalonglines,OUTPUT,Points along lines,outputVector
+gdal:polygonize,OUTPUT,Vectorized,outputVector
+gdal:proximity,OUTPUT,Proximity map,outputRaster
+gdal:rastercalculator,OUTPUT,Calculated,outputRaster
+gdal:rasterize,OUTPUT,Rasterized,outputRaster
+gdal:rasterize_over,OUTPUT,Rasterized,outputRaster
+gdal:rasterize_over_fixed_value,OUTPUT,Rasterized,outputRaster
+gdal:rearrange_bands,OUTPUT,Converted,outputRaster
+gdal:retile,OUTPUT,Output directory,outputFolder
+gdal:retile,OUTPUT_CSV,CSV file containing the tile,outputFile
+gdal:rgbtopct,OUTPUT,RGB to PCT,outputRaster
+gdal:roughness,OUTPUT,Roughness,outputRaster
+gdal:sieve,OUTPUT,Sieved,outputRaster
+gdal:slope,OUTPUT,Slope,outputRaster
+gdal:tileindex,OUTPUT,Tile index,outputVector
+gdal:tpitopographicpositionindex,OUTPUT,Topographic Position Index,outputRaster
+gdal:translate,OUTPUT,Converted,outputRaster
+gdal:triterrainruggednessindex,OUTPUT,Terrain Ruggedness Index,outputRaster
+gdal:viewshed,OUTPUT,Output,outputRaster
+gdal:warpreproject,OUTPUT,Reprojected,outputRaster
+grass7:i.albedo,output,Albedo,outputRaster
+grass7:i.aster.toar,output,Output Directory,outputFolder
+grass7:i.atcorr,output,Atmospheric correction,outputRaster
+grass7:i.biomass,output,Biomass,outputRaster
+grass7:i.cca,output,Output Directory,outputFolder
+grass7:i.cluster,signaturefile,Signature File,outputFile
+grass7:i.cluster,reportfile,Final Report File,outputFile
+grass7:i.colors.enhance,redoutput,Enhanced Red,outputRaster
+grass7:i.colors.enhance,greenoutput,Enhanced Green,outputRaster
+grass7:i.colors.enhance,blueoutput,Enhanced Blue,outputRaster
+grass7:i.eb.eta,output,Evapotranspiration,outputRaster
+grass7:i.eb.evapfr,evaporativefraction,Evaporative Fraction,outputRaster
+grass7:i.eb.evapfr,soilmoisture,Root Zone Soil Moisture,outputRaster
+grass7:i.eb.hsebal01.coords,output,Sensible Heat Flux,outputRaster
+grass7:i.eb.netrad,output,Net Radiation,outputRaster
+grass7:i.eb.soilheatflux,output,Soil Heat Flux,outputRaster
+grass7:i.emissivity,output,Emissivity,outputRaster
+grass7:i.evapo.mh,output,Evapotranspiration,outputRaster
+grass7:i.evapo.pm,output,Evapotranspiration,outputRaster
+grass7:i.evapo.pt,output,Evapotranspiration,outputRaster
+grass7:i.evapo.time,output,Temporal integration,outputRaster
+grass7:i.fft,real,Real part arrays,outputRaster
+grass7:i.fft,imaginary,Imaginary part arrays,outputRaster
+grass7:i.gensig,signaturefile,Signature File,outputFile
+grass7:i.gensigset,signaturefile,Signature File,outputFile
+grass7:i.group,group,Multiband raster,outputRaster
+grass7:i.his.rgb,red,Red,outputRaster
+grass7:i.his.rgb,green,Green,outputRaster
+grass7:i.his.rgb,blue,Blue,outputRaster
+grass7:i.ifft,output,Inverse Fast Fourier Transform,outputRaster
+grass7:i.image.mosaic,output,Mosaic Raster,outputRaster
+grass7:i.in.spotvgt,output,SPOT NDVI Raster,outputRaster
+grass7:i.landsat.acca,output,ACCA Raster,outputRaster
+grass7:i.landsat.toar,output,Output Directory,outputFolder
+grass7:i.maxlik,output,Classification,outputRaster
+grass7:i.maxlik,reject,Reject Threshold,outputRaster
+grass7:i.modis.qc,output,QC Classification,outputRaster
+grass7:i.oif,output,OIF File,outputFile
+grass7:i.pansharpen,redoutput,Enhanced Red,outputRaster
+grass7:i.pansharpen,greenoutput,Enhanced Green,outputRaster
+grass7:i.pansharpen,blueoutput,Enhanced Blue,outputRaster
+grass7:i.pca,output,Output Directory,outputFolder
+grass7:i.rgb.his,hue,Hue,outputRaster
+grass7:i.rgb.his,intensity,Intensity,outputRaster
+grass7:i.rgb.his,saturation,Saturation,outputRaster
+grass7:i.segment,output,Segmented Raster,outputRaster
+grass7:i.segment,goodness,Goodness Raster,outputRaster
+grass7:i.smap,output,Classification,outputRaster
+grass7:i.smap,goodness,Goodness_of_fit,outputRaster
+grass7:i.tasscap,output,Output Directory,outputFolder
+grass7:i.topo.coor.ill,output,Illumination Model,outputRaster
+grass7:i.topo.corr,output,Output Directory,outputFolder
+grass7:i.vi,output,Vegetation Index,outputRaster
+grass7:i.zc,output,Zero crossing,outputRaster
+grass7:m.cogo,output,Output text file,outputFile
+grass7:nviz,NA,NA,NA
+grass7:r.basins.fill,output,Watersheds,outputRaster
+grass7:r.blend.combine,output,Blended,outputRaster
+grass7:r.blend.rgb,output_red,Blended Red,outputRaster
+grass7:r.blend.rgb,output_green,Blended Green,outputRaster
+grass7:r.blend.rgb,output_blue,Blended Blue,outputRaster
+grass7:r.buffer,output,Buffer,outputRaster
+grass7:r.buffer.lowmem,output,Buffer,outputRaster
+grass7:r.carve,output,Modified elevation,outputRaster
+grass7:r.carve,points,Adjusted stream points,outputVector
+grass7:r.category,output,Category,outputRaster
+grass7:r.category.out,html,Category,outputHtml
+grass7:r.circle,output,Circles,outputRaster
+grass7:r.clump,output,Clumps,outputRaster
+grass7:r.coin,html,Coincidence report,outputHtml
+grass7:r.colors,output_dir,Output Directory,outputFolder
+grass7:r.colors.out,rules,Color Table,outputFile
+grass7:r.colors.stddev,output,Stddev Colors,outputRaster
+grass7:r.composite,output,Composite,outputRaster
+grass7:r.contour,output,Contours,outputVector
+grass7:r.cost,output,Cumulative cost,outputRaster
+grass7:r.cost,nearest,Cost allocation map,outputRaster
+grass7:r.cost,outdir,Movement directions,outputRaster
+grass7:r.covar,html,Covariance report,outputHtml
+grass7:r.cross,output,Cross product,outputRaster
+grass7:r.describe,html,Categories,outputHtml
+grass7:r.distance,html,Distance,outputHtml
+grass7:r.drain,output,Least cost path,outputRaster
+grass7:r.drain,drain,Drain,outputVector
+grass7:r.fill.dir,output,Depressionless DEM,outputRaster
+grass7:r.fill.dir,direction,Flow direction,outputRaster
+grass7:r.fill.dir,areas,Problem areas,outputRaster
+grass7:r.fill.stats,output,Output Map,outputRaster
+grass7:r.fill.stats,uncertainty,Uncertainty Map,outputRaster
+grass7:r.fillnulls,output,Filled,outputRaster
+grass7:r.flow,flowline,Flow line,outputVector
+grass7:r.flow,flowlength,Flow path length,outputRaster
+grass7:r.flow,flowaccumulation,Flow accumulation,outputRaster
+grass7:r.geomorphon,forms,Most common geomorphic forms,outputRaster
+grass7:r.grow,output,Expanded,outputRaster
+grass7:r.grow.distance,distance,Distance,outputRaster
+grass7:r.grow.distance,value,Value of nearest cell,outputRaster
+grass7:r.gwflow,output,Groundwater flow,outputRaster
+grass7:r.gwflow,vx,Groundwater filter velocity vector part in x direction ,outputRaster
+grass7:r.gwflow,vy,Groundwater filter velocity vector part in y direction ,outputRaster
+grass7:r.gwflow,budget,Groundwater budget for each cell ,outputRaster
+grass7:r.his,red,Red,outputRaster
+grass7:r.his,green,Green,outputRaster
+grass7:r.his,blue,Blue,outputRaster
+grass7:r.horizon,output,Folder to get horizon rasters,outputFolder
+grass7:r.horizon.height,html,Horizon,outputHtml
+grass7:r.in.lidar,output,Lidar Raster,outputRaster
+grass7:r.in.lidar.info,html,LAS information,outputHtml
+grass7:r.info,html,Basic information,outputHtml
+grass7:r.kappa,output,Error matrix and kappa,outputFile
+grass7:r.lake,lake,Lake,outputRaster
+grass7:r.latlong,output,LatLong,outputRaster
+grass7:r.li.cwed,output,CWED,outputRaster
+grass7:r.li.cwed.ascii,output_txt,CWED,outputFile
+grass7:r.li.dominance,output,Dominance,outputRaster
+grass7:r.li.dominance.ascii,output_txt,Dominance,outputFile
+grass7:r.li.edgedensity,output,Edge Density,outputRaster
+grass7:r.li.edgedensity.ascii,output_txt,Edge Density,outputFile
+grass7:r.li.mpa,output,Mean Pixel Attribute,outputRaster
+grass7:r.li.mpa.ascii,output_txt,Mean Pixel Attribute,outputFile
+grass7:r.li.mps,output,Mean Patch Size,outputRaster
+grass7:r.li.mps.ascii,output_txt,Mean Patch Size,outputFile
+grass7:r.li.padcv,output,PADCV,outputRaster
+grass7:r.li.padcv.ascii,output_txt,PADCV,outputFile
+grass7:r.li.padrange,output,Pad Range,outputRaster
+grass7:r.li.padrange.ascii,output_txt,Pad Range,outputFile
+grass7:r.li.padsd,output,Patch Area SD,outputRaster
+grass7:r.li.padsd.ascii,output_txt,Patch Area SD,outputFile
+grass7:r.li.patchdensity,output,Patch Density,outputRaster
+grass7:r.li.patchdensity.ascii,output_txt,Patch Density,outputFile
+grass7:r.li.patchnum,output,Patch Number,outputRaster
+grass7:r.li.patchnum.ascii,output_txt,Patch Number,outputFile
+grass7:r.li.pielou,output,Pielou,outputRaster
+grass7:r.li.pielou.ascii,output_txt,Pielou,outputFile
+grass7:r.li.renyi,output,Renyi,outputRaster
+grass7:r.li.renyi.ascii,output_txt,Renyi,outputFile
+grass7:r.li.richness,output,Richness,outputRaster
+grass7:r.li.richness.ascii,output_txt,Richness,outputFile
+grass7:r.li.shannon,output,Shannon,outputRaster
+grass7:r.li.shannon.ascii,output_txt,Shannon,outputFile
+grass7:r.li.shape,output,Shape,outputRaster
+grass7:r.li.shape.ascii,output_txt,Shape,outputFile
+grass7:r.li.simpson,output,Simpson,outputRaster
+grass7:r.li.simpson.ascii,output_txt,Simpson,outputFile
+grass7:r.mapcalc.simple,output,Calculated,outputRaster
+grass7:r.mask.rast,output,Masked,outputRaster
+grass7:r.mask.vect,output,Masked,outputRaster
+grass7:r.mfilter,output,Filtered,outputRaster
+grass7:r.mode,output,Mode,outputRaster
+grass7:r.neighbors,output,Neighbors,outputRaster
+grass7:r.null,output,NullRaster,outputRaster
+grass7:r.out.ascii,output,GRASS Ascii,outputFile
+grass7:r.out.gridatb,output,GRIDATB,outputFile
+grass7:r.out.mat,output,MAT File,outputFile
+grass7:r.out.mpeg,output,MPEG file,outputFile
+grass7:r.out.png,output,PNG File,outputFile
+grass7:r.out.pov,output,Name of output povray file ,outputFile
+grass7:r.out.ppm,output,PPM,outputFile
+grass7:r.out.ppm3,output,Name for new PPM file,outputFile
+grass7:r.out.vrml,output,VRML,outputFile
+grass7:r.out.vtk,output,VTK File,outputFile
+grass7:r.out.xyz,output,XYZ File,outputFile
+grass7:r.param.scale,output,Morphometric parameter,outputRaster
+grass7:r.patch,output,Patched,outputRaster
+grass7:r.plane,output,Plane,outputRaster
+grass7:r.profile,output,Profile,outputFile
+grass7:r.proj,output,Reprojected raster,outputRaster
+grass7:r.quant,output,Quantized raster,outputFolder
+grass7:r.quantile,file,Quantiles,outputHtml
+grass7:r.random,raster,Random raster,outputRaster
+grass7:r.random,vector,Random vector,outputVector
+grass7:r.random.cells,output,Random,outputRaster
+grass7:r.random.surface,output,Random_Surface,outputRaster
+grass7:r.reclass,output,Reclassified,outputRaster
+grass7:r.reclass.area,output,Reclassified,outputRaster
+grass7:r.recode,output,Recoded,outputRaster
+grass7:r.regression.line,html,Regression coefficients,outputHtml
+grass7:r.regression.multi,residuals,Residual Map,outputRaster
+grass7:r.regression.multi,estimates,Estimates Map,outputRaster
+grass7:r.regression.multi,html,Regression coefficients,outputHtml
+grass7:r.relief,output,Output shaded relief layer,outputRaster
+grass7:r.relief.scaling,output,Output shaded relief layer,outputRaster
+grass7:r.report,output,Name for output file to hold the report,outputFile
+grass7:r.resamp.bspline,output,Resampled BSpline,outputRaster
+grass7:r.resamp.bspline,grid,Interpolation Grid,outputVector
+grass7:r.resamp.filter,output,Resampled Filter,outputRaster
+grass7:r.resamp.interp,output,Resampled interpolated,outputRaster
+grass7:r.resamp.rst,elevation,Resampled RST,outputRaster
+grass7:r.resamp.rst,slope,Slope raster,outputRaster
+grass7:r.resamp.rst,aspect,Aspect raster,outputRaster
+grass7:r.resamp.rst,pcurvature,Profile curvature raster,outputRaster
+grass7:r.resamp.rst,tcurvature,Tangential curvature raster,outputRaster
+grass7:r.resamp.rst,mcurvature,Mean curvature raster,outputRaster
+grass7:r.resamp.stats,output,Resampled aggregated,outputRaster
+grass7:r.resample,output,Resampled NN,outputRaster
+grass7:r.rescale,output,Rescaled,outputRaster
+grass7:r.rescale.eq,output,Rescaled equalized,outputRaster
+grass7:r.rgb,red,Red,outputRaster
+grass7:r.rgb,green,Green,outputRaster
+grass7:r.rgb,blue,Blue,outputRaster
+grass7:r.ros,base_ros,Base ROS,outputRaster
+grass7:r.ros,max_ros,Max ROS,outputRaster
+grass7:r.ros,direction_ros,Direction ROS,outputRaster
+grass7:r.ros,spotting_distance,Spotting Distance,outputRaster
+grass7:r.series,output,Aggregated,outputRaster
+grass7:r.series.accumulate,output,Accumulated,outputRaster
+grass7:r.series.interp,output_dir,Interpolated rasters,outputFolder
+grass7:r.shade,output,Shaded,outputRaster
+grass7:r.sim.sediment,transport_capacity,Transport capacity ,outputRaster
+grass7:r.sim.sediment,tlimit_erosion_deposition,Transport limited erosion,outputRaster
+grass7:r.sim.sediment,sediment_concentration,Sediment concentration ,outputRaster
+grass7:r.sim.sediment,sediment_flux,Sediment flux ,outputRaster
+grass7:r.sim.sediment,erosion_deposition,Erosion,outputRaster
+grass7:r.sim.sediment,walkers_output,Name of the output walkers vector points layer,outputVector
+grass7:r.sim.sediment,logfile,Name for sampling points output text file.,outputFile
+grass7:r.sim.water,depth,Water depth ,outputRaster
+grass7:r.sim.water,discharge,Water discharge ,outputRaster
+grass7:r.sim.water,error,Simulation error ,outputRaster
+grass7:r.sim.water,walkers_output,Name of the output walkers vector points layer,outputVector
+grass7:r.sim.water,logfile,Name for sampling points output text file.,outputFile
+grass7:r.slope.aspect,slope,Slope,outputRaster
+grass7:r.slope.aspect,aspect,Aspect,outputRaster
+grass7:r.slope.aspect,pcurvature,Profile curvature,outputRaster
+grass7:r.slope.aspect,tcurvature,Tangential curvature,outputRaster
+grass7:r.slope.aspect,dx,First order partial derivative dx ,outputRaster
+grass7:r.slope.aspect,dy,First order partial derivative dy ,outputRaster
+grass7:r.slope.aspect,dxx,Second order partial derivative dxx,outputRaster
+grass7:r.slope.aspect,dyy,Second order partial derivative dyy,outputRaster
+grass7:r.slope.aspect,dxy,Second order partial derivative dxy,outputRaster
+grass7:r.solute.transport,output,Solute Transport,outputRaster
+grass7:r.solute.transport,vx,Calculate and store the groundwater filter velocity vector part in x direction ,outputRaster
+grass7:r.solute.transport,vy,Calculate and store the groundwater filter velocity vector part in y direction ,outputRaster
+grass7:r.spread,output,Spread Time,outputRaster
+grass7:r.spread,x_output,X Back Coordinates,outputRaster
+grass7:r.spread,y_output,Y Back Coordinates,outputRaster
+grass7:r.spreadpath,output,Backward least cost,outputRaster
+grass7:r.statistics,routput,Statistics,outputRaster
+grass7:r.stats,html,Statistics,outputHtml
+grass7:r.stats.quantile.out,file,Statistics File,outputFile
+grass7:r.stats.quantile.rast,output,Output Directory,outputFolder
+grass7:r.stats.zonal,output,Resultant raster,outputRaster
+grass7:r.stream.extract,stream_raster,Unique stream ids ,outputRaster
+grass7:r.stream.extract,stream_vector,Unique stream ids ,outputVector
+grass7:r.stream.extract,direction,Flow direction,outputRaster
+grass7:r.sun.incidout,incidout,incidence angle raster map,outputRaster
+grass7:r.sun.incidout,beam_rad,Beam irradiance ,outputRaster
+grass7:r.sun.incidout,diff_rad,Diffuse irradiance ,outputRaster
+grass7:r.sun.incidout,refl_rad,Ground reflected irradiance ,outputRaster
+grass7:r.sun.incidout,glob_rad,Global ,outputRaster
+grass7:r.sun.insoltime,insol_time,Insolation time ,outputRaster
+grass7:r.sun.insoltime,beam_rad,Irradiation raster map ,outputRaster
+grass7:r.sun.insoltime,diff_rad,Irradiation raster map ,outputRaster
+grass7:r.sun.insoltime,refl_rad,Irradiation raster map ,outputRaster
+grass7:r.sun.insoltime,glob_rad,Irradiance,outputRaster
+grass7:r.sunhours,elevation,Solar Elevation Angle,outputRaster
+grass7:r.sunhours,azimuth,Solar Azimuth Angle,outputRaster
+grass7:r.sunhours,sunhour,Sunshine Hours,outputRaster
+grass7:r.sunmask.datetime,output,Shadows,outputRaster
+grass7:r.sunmask.position,output,Shadows,outputRaster
+grass7:r.surf.area,html,Area,outputHtml
+grass7:r.surf.contour,output,DTM from contours,outputRaster
+grass7:r.surf.fractal,output,Fractal Surface,outputRaster
+grass7:r.surf.gauss,output,Gaussian deviates,outputRaster
+grass7:r.surf.idw,output,Interpolated IDW,outputRaster
+grass7:r.surf.random,output,Random,outputRaster
+grass7:r.terraflow,filled,Filled ,outputRaster
+grass7:r.terraflow,direction,Flow direction,outputRaster
+grass7:r.terraflow,swatershed,Sink,outputRaster
+grass7:r.terraflow,accumulation,Flow accumulation,outputRaster
+grass7:r.terraflow,tci,Topographic convergence index ,outputRaster
+grass7:r.terraflow,stats,Runtime statistics,outputFile
+grass7:r.texture,output,Texture files directory,outputFolder
+grass7:r.thin,output,Thinned,outputRaster
+grass7:r.tile,output,Tiles Directory,outputFolder
+grass7:r.tileset,html,Tileset,outputHtml
+grass7:r.to.vect,output,Vectorized,outputVector
+grass7:r.topidx,output,Topographic index,outputRaster
+grass7:r.topmodel,output,TOPMODEL output,outputFile
+grass7:r.topmodel.topidxstats,outtopidxstats,TOPMODEL topographic index statistics file,outputFile
+grass7:r.transect,html,Transect file,outputHtml
+grass7:r.univar,output,Univariate results,outputFile
+grass7:r.uslek,output,USLE R Raster,outputRaster
+grass7:r.usler,output,USLE R Raster,outputRaster
+grass7:r.viewshed,output,Intervisibility,outputRaster
+grass7:r.volume,centroids,Centroids,outputVector
+grass7:r.walk.coords,output,Cumulative cost,outputRaster
+grass7:r.walk.coords,outdir,Movement Directions,outputRaster
+grass7:r.walk.points,output,Cumulative cost,outputRaster
+grass7:r.walk.points,outdir,Movement Directions,outputRaster
+grass7:r.walk.rast,output,Cumulative cost,outputRaster
+grass7:r.walk.rast,outdir,Movement Directions,outputRaster
+grass7:r.water.outlet,output,Basin,outputRaster
+grass7:r.watershed,accumulation,Number of cells that drain through each cell,outputRaster
+grass7:r.watershed,drainage,Drainage direction,outputRaster
+grass7:r.watershed,basin,Unique label for each watershed basin,outputRaster
+grass7:r.watershed,stream,Stream segments,outputRaster
+grass7:r.watershed,half_basin,Half,outputRaster
+grass7:r.watershed,length_slope,Slope length and steepness ,outputRaster
+grass7:r.watershed,slope_steepness,Slope steepness ,outputRaster
+grass7:r.watershed,tci,Topographic index ln,outputRaster
+grass7:r.watershed,spi,Stream power index a ,outputRaster
+grass7:r.what.color,html,Colors file,outputHtml
+grass7:r.what.coords,output,Raster Value File,outputFile
+grass7:r.what.points,output,Raster Values File,outputFile
+grass7:v.buffer,output,Buffer,outputVector
+grass7:v.build.check,error,Topological errors,outputVector
+grass7:v.build.polylines,output,Polylines,outputVector
+grass7:v.class,html,Classification,outputHtml
+grass7:v.clean,output,Cleaned,outputVector
+grass7:v.clean,error,Errors,outputVector
+grass7:v.cluster,output,Clustered,outputVector
+grass7:v.db.select,file,Attributes,outputFile
+grass7:v.decimate,output,Output vector map,outputVector
+grass7:v.delaunay,output,Delaunay triangulation,outputVector
+grass7:v.dissolve,output,Dissolved,outputVector
+grass7:v.distance,from_output,Nearest,outputVector
+grass7:v.distance,output,Distance,outputVector
+grass7:v.drape,output,3D vector,outputVector
+grass7:v.edit,output,Edited,outputVector
+grass7:v.extract,output,Selected,outputVector
+grass7:v.extrude,output,3D Vector,outputVector
+grass7:v.generalize,output,Generalized,outputVector
+grass7:v.generalize,error,Errors,outputVector
+grass7:v.hull,output,Convex hull,outputVector
+grass7:v.in.ascii,output,ASCII,outputVector
+grass7:v.in.dxf,output,Converted,outputVector
+grass7:v.in.e00,output,Name of output vector,outputVector
+grass7:v.in.geonames,output,Geonames,outputVector
+grass7:v.in.lidar,output,Lidar,outputVector
+grass7:v.in.lines,output,Lines,outputVector
+grass7:v.in.mapgen,output,Mapgen,outputVector
+grass7:v.in.wfs,output,Converted,outputVector
+grass7:v.info,html,Information report,outputHtml
+grass7:v.kcv,output,Partition,outputVector
+grass7:v.kernel.rast,output,Kernel,outputRaster
+grass7:v.kernel.vector,output,Kernel,outputVector
+grass7:v.lidar.correction,output,Classified,outputVector
+grass7:v.lidar.correction,terrain,Only ,outputVector
+grass7:v.lidar.edgedetection,output,Edges,outputVector
+grass7:v.lidar.growing,output,Buildings,outputVector
+grass7:v.mkgrid,map,Grid,outputVector
+grass7:v.neighbors,output,Neighborhood,outputRaster
+grass7:v.net,output,Network,outputVector
+grass7:v.net.alloc,output,Network Alloction,outputVector
+grass7:v.net.allpairs,output,Network_Allpairs,outputVector
+grass7:v.net.bridge,output,Bridge,outputVector
+grass7:v.net.centrality,output,Network Centrality,outputVector
+grass7:v.net.components,output,Network_Components_Line,outputVector
+grass7:v.net.components,output_point,Network_Components_Point,outputVector
+grass7:v.net.connectivity,output,Network_Connectivity,outputVector
+grass7:v.net.distance,output,Network_Distance,outputVector
+grass7:v.net.flow,output,Network_Flow,outputVector
+grass7:v.net.flow,cut,Network_Cut,outputVector
+grass7:v.net.iso,output,Network_Iso,outputVector
+grass7:v.net.nreport,output,NReport,outputHtml
+grass7:v.net.path,output,Network_Path,outputVector
+grass7:v.net.report,html,Report,outputHtml
+grass7:v.net.salesman,output,Network_Salesman,outputVector
+grass7:v.net.salesman,sequence,Output file holding node sequence,outputFile
+grass7:v.net.spanningtree,output,SpanningTree,outputVector
+grass7:v.net.steiner,output,Network Steiner,outputVector
+grass7:v.net.timetable,output,Network Timetable,outputVector
+grass7:v.net.visibility,output,Network Visibility,outputVector
+grass7:v.normal,html,Normality,outputHtml
+grass7:v.out.ascii,output,Name for output ASCII file or ASCII vector name if ,outputFile
+grass7:v.out.dxf,output,DXF vector,outputFile
+grass7:v.out.postgis,NA,NA,NA
+grass7:v.out.pov,output,POV vector,outputFile
+grass7:v.out.svg,output,SVG File,outputFile
+grass7:v.out.vtk,output,VTK File,outputFile
+grass7:v.outlier,output,Layer without outliers,outputVector
+grass7:v.outlier,outlier,Outliers,outputVector
+grass7:v.overlay,output,Overlay,outputVector
+grass7:v.pack,output,Packed archive,outputFile
+grass7:v.parallel,output,Parallel lines,outputVector
+grass7:v.patch,output,Combined,outputVector
+grass7:v.patch,bbox,Bounding boxes,outputVector
+grass7:v.perturb,output,Perturbed,outputVector
+grass7:v.proj,output,Output vector map,outputVector
+grass7:v.qcount,output,Quadrats,outputVector
+grass7:v.random,output,Random,outputVector
+grass7:v.rast.stats,output,Rast stats,outputVector
+grass7:v.reclass,output,Reclassified,outputVector
+grass7:v.rectify,output,Rectified,outputVector
+grass7:v.rectify,rmsfile,Root Mean Square errors file,outputFile
+grass7:v.report,html,Report,outputHtml
+grass7:v.sample,output,Sampled,outputVector
+grass7:v.segment,output,Segments,outputVector
+grass7:v.select,output,Selected,outputVector
+grass7:v.split,output,Split by length,outputVector
+grass7:v.surf.bspline,output,Output vector,outputVector
+grass7:v.surf.bspline,raster_output,Interpolated spline,outputRaster
+grass7:v.surf.idw,output,Interpolated IDW,outputRaster
+grass7:v.surf.rst,elevation,Interpolated RST,outputRaster
+grass7:v.surf.rst,slope,Slope,outputRaster
+grass7:v.surf.rst,aspect,Aspect,outputRaster
+grass7:v.surf.rst,pcurvature,Profile curvature,outputRaster
+grass7:v.surf.rst,tcurvature,Tangential curvature,outputRaster
+grass7:v.surf.rst,mcurvature,Mean curvature,outputRaster
+grass7:v.surf.rst,deviations,Deviations,outputVector
+grass7:v.surf.rst,treeseg,Quadtree Segmentation,outputVector
+grass7:v.surf.rst,overwin,Overlapping Windows,outputVector
+grass7:v.surf.rst.cvdev,cvdev,Cross Validation Errors,outputVector
+grass7:v.to.3d,output,3D,outputVector
+grass7:v.to.lines,output,Lines,outputVector
+grass7:v.to.points,output,Points along lines,outputVector
+grass7:v.to.rast,output,Rasterized,outputRaster
+grass7:v.transform,output,Transformed,outputVector
+grass7:v.type,output,Typed,outputVector
+grass7:v.univar,html,Statistics,outputHtml
+grass7:v.vect.stats,output,Updated,outputVector
+grass7:v.voronoi,output,Voronoi,outputVector
+grass7:v.voronoi.skeleton,output,Voronoi,outputVector
+grass7:v.what.rast,output,Sampled,outputVector
+grass7:v.what.vect,output,Updated,outputVector
+native:addautoincrementalfield,OUTPUT,Incremented,outputVector
+native:addfieldtoattributestable,OUTPUT,Added,outputVector
+native:adduniquevalueindexfield,OUTPUT,Layer with index field,outputVector
+native:adduniquevalueindexfield,SUMMARY_OUTPUT,Class summary,outputVector
+native:addxyfields,OUTPUT,Added fields,outputVector
+native:affinetransform,OUTPUT,Transformed,outputVector
+native:aggregate,OUTPUT,Aggregated,outputVector
+native:angletonearest,OUTPUT,Aligned layer,outputVector
+native:antimeridiansplit,OUTPUT,Split,outputVector
+native:arrayoffsetlines,OUTPUT,Offset lines,outputVector
+native:arraytranslatedfeatures,OUTPUT,Translated,outputVector
+native:aspect,OUTPUT,Aspect,outputRaster
+native:assignprojection,OUTPUT,Assigned CRS,outputVector
+native:atlaslayouttoimage,NA,NA,NA
+native:atlaslayouttopdf,OUTPUT,PDF file,outputFile
+native:bookmarkstolayer,OUTPUT,Output,outputVector
+native:boundary,OUTPUT,Boundary,outputVector
+native:boundingboxes,OUTPUT,Bounds,outputVector
+native:buffer,OUTPUT,Buffered,outputVector
+native:bufferbym,OUTPUT,Buffered,outputVector
+native:calculatevectoroverlaps,OUTPUT,Overlap,outputVector
+native:cellstatistics,OUTPUT,Output layer,outputRaster
+native:cellstatistics,EXTENT,Extent,outputString
+native:cellstatistics,CRS_AUTHID,CRS authority identifier,outputString
+native:cellstatistics,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:cellstatistics,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:cellstatistics,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:centroids,OUTPUT,Centroids,outputVector
+native:clip,OUTPUT,Clipped,outputVector
+native:collect,OUTPUT,Collected,outputVector
+native:combinestyles,OUTPUT,Output style database,outputFile
+native:combinestyles,SYMBOLS,Symbol count,outputNumber
+native:combinestyles,COLORRAMPS,Color ramp count,outputNumber
+native:combinestyles,TEXTFORMATS,Text format count,outputNumber
+native:combinestyles,LABELSETTINGS,Label settings count,outputNumber
+native:converttocurves,OUTPUT,Curves,outputVector
+native:convexhull,OUTPUT,Convex hulls,outputVector
+native:countpointsinpolygon,OUTPUT,Count,outputVector
+native:createattributeindex,OUTPUT,Indexed layer,outputVector
+native:createconstantrasterlayer,OUTPUT,Constant,outputRaster
+native:creategrid,OUTPUT,Grid,outputVector
+native:createpointslayerfromtable,OUTPUT,Points from table,outputVector
+native:createrandombinomialrasterlayer,OUTPUT,Output raster,outputRaster
+native:createrandomexponentialrasterlayer,OUTPUT,Output raster,outputRaster
+native:createrandomgammarasterlayer,OUTPUT,Output raster,outputRaster
+native:createrandomgeometricrasterlayer,OUTPUT,Output raster,outputRaster
+native:createrandomnegativebinomialrasterlayer,OUTPUT,Output raster,outputRaster
+native:createrandomnormalrasterlayer,OUTPUT,Output raster,outputRaster
+native:createrandompoissonrasterlayer,OUTPUT,Output raster,outputRaster
+native:createrandomuniformrasterlayer,OUTPUT,Output raster,outputRaster
+native:createspatialindex,OUTPUT,Indexed layer,outputVector
+native:dbscanclustering,OUTPUT,Clusters,outputVector
+native:dbscanclustering,NUM_CLUSTERS,Number of clusters,outputNumber
+native:deleteduplicategeometries,OUTPUT,Cleaned,outputVector
+native:deleteduplicategeometries,RETAINED_COUNT,Count of retained records,outputNumber
+native:deleteduplicategeometries,DUPLICATE_COUNT,Count of discarded duplicate records,outputNumber
+native:deleteholes,OUTPUT,Cleaned,outputVector
+native:densifygeometries,OUTPUT,Densified,outputVector
+native:densifygeometriesgivenaninterval,OUTPUT,Densified,outputVector
+native:detectvectorchanges,UNCHANGED,Unchanged features,outputVector
+native:detectvectorchanges,ADDED,Added features,outputVector
+native:detectvectorchanges,DELETED,Deleted features,outputVector
+native:detectvectorchanges,UNCHANGED_COUNT,Count of unchanged features,outputNumber
+native:detectvectorchanges,ADDED_COUNT,Count of features added in revised layer,outputNumber
+native:detectvectorchanges,DELETED_COUNT,Count of features deleted from original layer,outputNumber
+native:difference,OUTPUT,Difference,outputVector
+native:dissolve,OUTPUT,Dissolved,outputVector
+native:dropgeometries,OUTPUT,Dropped geometries,outputVector
+native:dropmzvalues,OUTPUT,Z,outputVector
+native:equaltofrequency,OUTPUT,Output layer,outputRaster
+native:equaltofrequency,OCCURRENCE_COUNT,Count of value occurrences,outputNumber
+native:equaltofrequency,FOUND_LOCATIONS_COUNT,Count of cells with equal value occurrences,outputNumber
+native:equaltofrequency,MEAN_FREQUENCY_PER_LOCATION,Mean frequency at valid cell locations,outputNumber
+native:equaltofrequency,EXTENT,Extent,outputString
+native:equaltofrequency,CRS_AUTHID,CRS authority identifier,outputString
+native:equaltofrequency,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:equaltofrequency,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:equaltofrequency,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:explodehstorefield,OUTPUT,Exploded,outputVector
+native:explodelines,OUTPUT,Exploded,outputVector
+native:extendlines,OUTPUT,Extended,outputVector
+native:extenttolayer,OUTPUT,Extent,outputVector
+native:extractbinary,FOLDER,Destination folder,outputFolder
+native:extractbyattribute,OUTPUT,Extracted ,outputVector
+native:extractbyattribute,FAIL_OUTPUT,Extracted ,outputVector
+native:extractbyexpression,OUTPUT,Matching features,outputVector
+native:extractbyexpression,FAIL_OUTPUT,Non,outputVector
+native:extractbyextent,OUTPUT,Extracted,outputVector
+native:extractbylocation,OUTPUT,Extracted ,outputVector
+native:extractmvalues,OUTPUT,Extracted,outputVector
+native:extractspecificvertices,OUTPUT,Vertices,outputVector
+native:extractvertices,OUTPUT,Vertices,outputVector
+native:extractzvalues,OUTPUT,Extracted,outputVector
+native:fieldcalculator,OUTPUT,Calculated,outputVector
+native:filedownloader,OUTPUT,File destination,outputFile
+native:fillnodata,OUTPUT,Output raster,outputRaster
+native:filterverticesbym,OUTPUT,Filtered,outputVector
+native:filterverticesbyz,OUTPUT,Filtered,outputVector
+native:fixgeometries,OUTPUT,Fixed geometries,outputVector
+native:flattenrelationships,OUTPUT,Flattened layer,outputVector
+native:forcerhr,OUTPUT,Reoriented,outputVector
+native:fuzzifyrastergaussianmembership,EXTENT,Extent,outputString
+native:fuzzifyrastergaussianmembership,CRS_AUTHID,CRS authority identifier,outputString
+native:fuzzifyrastergaussianmembership,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:fuzzifyrastergaussianmembership,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:fuzzifyrastergaussianmembership,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:fuzzifyrastergaussianmembership,OUTPUT,Fuzzified raster,outputRaster
+native:fuzzifyrasterlargemembership,EXTENT,Extent,outputString
+native:fuzzifyrasterlargemembership,CRS_AUTHID,CRS authority identifier,outputString
+native:fuzzifyrasterlargemembership,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:fuzzifyrasterlargemembership,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:fuzzifyrasterlargemembership,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:fuzzifyrasterlargemembership,OUTPUT,Fuzzified raster,outputRaster
+native:fuzzifyrasterlinearmembership,EXTENT,Extent,outputString
+native:fuzzifyrasterlinearmembership,CRS_AUTHID,CRS authority identifier,outputString
+native:fuzzifyrasterlinearmembership,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:fuzzifyrasterlinearmembership,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:fuzzifyrasterlinearmembership,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:fuzzifyrasterlinearmembership,OUTPUT,Fuzzified raster,outputRaster
+native:fuzzifyrasternearmembership,EXTENT,Extent,outputString
+native:fuzzifyrasternearmembership,CRS_AUTHID,CRS authority identifier,outputString
+native:fuzzifyrasternearmembership,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:fuzzifyrasternearmembership,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:fuzzifyrasternearmembership,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:fuzzifyrasternearmembership,OUTPUT,Fuzzified raster,outputRaster
+native:fuzzifyrasterpowermembership,EXTENT,Extent,outputString
+native:fuzzifyrasterpowermembership,CRS_AUTHID,CRS authority identifier,outputString
+native:fuzzifyrasterpowermembership,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:fuzzifyrasterpowermembership,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:fuzzifyrasterpowermembership,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:fuzzifyrasterpowermembership,OUTPUT,Fuzzified raster,outputRaster
+native:fuzzifyrastersmallmembership,EXTENT,Extent,outputString
+native:fuzzifyrastersmallmembership,CRS_AUTHID,CRS authority identifier,outputString
+native:fuzzifyrastersmallmembership,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:fuzzifyrastersmallmembership,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:fuzzifyrastersmallmembership,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:fuzzifyrastersmallmembership,OUTPUT,Fuzzified raster,outputRaster
+native:generatepointspixelcentroidsinsidepolygons,OUTPUT,Pixel centroids,outputVector
+native:geometrybyexpression,OUTPUT,Modified geometry,outputVector
+native:greaterthanfrequency,OUTPUT,Output layer,outputRaster
+native:greaterthanfrequency,OCCURRENCE_COUNT,Count of value occurrences,outputNumber
+native:greaterthanfrequency,FOUND_LOCATIONS_COUNT,Count of cells with equal value occurrences,outputNumber
+native:greaterthanfrequency,MEAN_FREQUENCY_PER_LOCATION,Mean frequency at valid cell locations,outputNumber
+native:greaterthanfrequency,EXTENT,Extent,outputString
+native:greaterthanfrequency,CRS_AUTHID,CRS authority identifier,outputString
+native:greaterthanfrequency,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:greaterthanfrequency,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:greaterthanfrequency,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:highestpositioninrasterstack,OUTPUT,Output layer,outputRaster
+native:highestpositioninrasterstack,EXTENT,Extent,outputString
+native:highestpositioninrasterstack,CRS_AUTHID,CRS authority identifier,outputString
+native:highestpositioninrasterstack,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:highestpositioninrasterstack,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:highestpositioninrasterstack,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:hillshade,OUTPUT,Hillshade,outputRaster
+native:hublines,OUTPUT,Hub lines,outputVector
+native:importphotos,OUTPUT,Photos,outputVector
+native:importphotos,INVALID,Invalid photos table,outputVector
+native:interpolatepoint,OUTPUT,Interpolated points,outputVector
+native:intersection,OUTPUT,Intersection,outputVector
+native:joinattributesbylocation,OUTPUT,Joined layer,outputVector
+native:joinattributesbylocation,NON_MATCHING,Unjoinable features from first layer,outputVector
+native:joinattributesbylocation,JOINED_COUNT,Number of joined features from input table,outputNumber
+native:joinattributestable,OUTPUT,Joined layer,outputVector
+native:joinattributestable,NON_MATCHING,Unjoinable features from first layer,outputVector
+native:joinattributestable,JOINED_COUNT,Number of joined features from input table,outputNumber
+native:joinattributestable,UNJOINABLE_COUNT,Number of unjoinable features from input table,outputNumber
+native:joinbynearest,OUTPUT,Joined layer,outputVector
+native:joinbynearest,NON_MATCHING,Unjoinable features from first layer,outputVector
+native:joinbynearest,JOINED_COUNT,Number of joined features from input table,outputNumber
+native:joinbynearest,UNJOINABLE_COUNT,Number of unjoinable features from input table,outputNumber
+native:kmeansclustering,OUTPUT,Clusters,outputVector
+native:layertobookmarks,COUNT,Count of bookmarks added,outputNumber
+native:lessthanfrequency,OUTPUT,Output layer,outputRaster
+native:lessthanfrequency,OCCURRENCE_COUNT,Count of value occurrences,outputNumber
+native:lessthanfrequency,FOUND_LOCATIONS_COUNT,Count of cells with equal value occurrences,outputNumber
+native:lessthanfrequency,MEAN_FREQUENCY_PER_LOCATION,Mean frequency at valid cell locations,outputNumber
+native:lessthanfrequency,EXTENT,Extent,outputString
+native:lessthanfrequency,CRS_AUTHID,CRS authority identifier,outputString
+native:lessthanfrequency,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:lessthanfrequency,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:lessthanfrequency,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:linedensity,OUTPUT,Line density raster,outputRaster
+native:lineintersections,OUTPUT,Intersections,outputVector
+native:linesubstring,OUTPUT,Substring,outputVector
+native:lowestpositioninrasterstack,OUTPUT,Output layer,outputRaster
+native:lowestpositioninrasterstack,EXTENT,Extent,outputString
+native:lowestpositioninrasterstack,CRS_AUTHID,CRS authority identifier,outputString
+native:lowestpositioninrasterstack,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:lowestpositioninrasterstack,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:lowestpositioninrasterstack,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:meancoordinates,OUTPUT,Mean coordinates,outputVector
+native:mergelines,OUTPUT,Merged,outputVector
+native:mergevectorlayers,OUTPUT,Merged,outputVector
+native:minimumenclosingcircle,OUTPUT,Minimum enclosing circles,outputVector
+native:multiparttosingleparts,OUTPUT,Single parts,outputVector
+native:multiringconstantbuffer,OUTPUT,Multi,outputVector
+native:nearestneighbouranalysis,OUTPUT_HTML_FILE,Nearest neighbour,outputHtml
+native:nearestneighbouranalysis,OBSERVED_MD,Observed mean distance,outputNumber
+native:nearestneighbouranalysis,EXPECTED_MD,Expected mean distance,outputNumber
+native:nearestneighbouranalysis,NN_INDEX,Nearest neighbour index,outputNumber
+native:nearestneighbouranalysis,POINT_COUNT,Number of points,outputNumber
+native:nearestneighbouranalysis,Z_SCORE,Z,outputNumber
+native:offsetline,OUTPUT,Offset,outputVector
+native:orderbyexpression,OUTPUT,Ordered,outputVector
+native:orientedminimumboundingbox,OUTPUT,Bounding boxes,outputVector
+native:orthogonalize,OUTPUT,Orthogonalized,outputVector
+native:package,OUTPUT,Destination GeoPackage,outputFile
+native:package,OUTPUT_LAYERS,Layers within new package,outputMultilayer
+native:pixelstopoints,OUTPUT,Vector points,outputVector
+native:pixelstopolygons,OUTPUT,Vector polygons,outputVector
+native:pointonsurface,OUTPUT,Point,outputVector
+native:pointsalonglines,OUTPUT,Interpolated points,outputVector
+native:pointtolayer,OUTPUT,Point,outputVector
+native:poleofinaccessibility,OUTPUT,Point,outputVector
+native:polygonfromlayerextent,OUTPUT,Extent,outputVector
+native:polygonize,OUTPUT,Polygons,outputVector
+native:polygonize,NUM_POLYGONS,Number of polygons,outputNumber
+native:polygonstolines,OUTPUT,Lines,outputVector
+native:postgisexecutesql,NA,NA,NA
+native:printlayoutmapextenttolayer,OUTPUT,Extent,outputVector
+native:printlayoutmapextenttolayer,WIDTH,Map width,outputNumber
+native:printlayoutmapextenttolayer,HEIGHT,Map height,outputNumber
+native:printlayoutmapextenttolayer,SCALE,Map scale,outputNumber
+native:printlayoutmapextenttolayer,ROTATION,Map rotation,outputNumber
+native:printlayouttoimage,OUTPUT,Image file,outputFile
+native:printlayouttopdf,OUTPUT,PDF file,outputFile
+native:projectpointcartesian,OUTPUT,Projected,outputVector
+native:promotetomulti,OUTPUT,Multiparts,outputVector
+native:randomextract,OUTPUT,Extracted ,outputVector
+native:randompointsinextent,OUTPUT,Random points,outputVector
+native:randompointsinpolygons,OUTPUT,Random points in polygons,outputVector
+native:randompointsinpolygons,OUTPUT_POINTS,Total number of points generated,outputNumber
+native:randompointsinpolygons,POINTS_MISSED,Number of missed points,outputNumber
+native:randompointsinpolygons,POLYGONS_WITH_MISSED_POINTS,Number of polygons with missed points,outputNumber
+native:randompointsinpolygons,FEATURES_WITH_EMPTY_OR_NO_GEOMETRY,Number of features with empty or no geometry,outputNumber
+native:randompointsonlines,OUTPUT,Random points on lines,outputVector
+native:randompointsonlines,OUTPUT_POINTS,Total number of points generated,outputNumber
+native:randompointsonlines,POINTS_MISSED,Number of missed points,outputNumber
+native:randompointsonlines,LINES_WITH_MISSED_POINTS,Number of features with missed points,outputNumber
+native:randompointsonlines,FEATURES_WITH_EMPTY_OR_NO_GEOMETRY,Number of features with empty or no geometry,outputNumber
+native:rasterbooleanand,OUTPUT,Output layer,outputRaster
+native:rasterbooleanand,EXTENT,Extent,outputString
+native:rasterbooleanand,CRS_AUTHID,CRS authority identifier,outputString
+native:rasterbooleanand,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:rasterbooleanand,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:rasterbooleanand,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:rasterbooleanand,NODATA_PIXEL_COUNT,NODATA pixel count,outputNumber
+native:rasterbooleanand,TRUE_PIXEL_COUNT,True pixel count,outputNumber
+native:rasterbooleanand,FALSE_PIXEL_COUNT,False pixel count,outputNumber
+native:rasterize,OUTPUT,Output layer,outputRaster
+native:rasterlayerstatistics,OUTPUT_HTML_FILE,Statistics,outputHtml
+native:rasterlayerstatistics,MIN,Minimum value,outputNumber
+native:rasterlayerstatistics,MAX,Maximum value,outputNumber
+native:rasterlayerstatistics,RANGE,Range,outputNumber
+native:rasterlayerstatistics,SUM,Sum,outputNumber
+native:rasterlayerstatistics,MEAN,Mean value,outputNumber
+native:rasterlayerstatistics,STD_DEV,Standard deviation,outputNumber
+native:rasterlayerstatistics,SUM_OF_SQUARES,Sum of the squares,outputNumber
+native:rasterlayeruniquevaluesreport,OUTPUT_HTML_FILE,Unique values report,outputHtml
+native:rasterlayeruniquevaluesreport,OUTPUT_TABLE,Unique values table,outputVector
+native:rasterlayeruniquevaluesreport,EXTENT,Extent,outputString
+native:rasterlayeruniquevaluesreport,CRS_AUTHID,CRS authority identifier,outputString
+native:rasterlayeruniquevaluesreport,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:rasterlayeruniquevaluesreport,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:rasterlayeruniquevaluesreport,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:rasterlayeruniquevaluesreport,NODATA_PIXEL_COUNT,NODATA pixel count,outputNumber
+native:rasterlayerzonalstats,OUTPUT_TABLE,Statistics,outputVector
+native:rasterlayerzonalstats,EXTENT,Extent,outputString
+native:rasterlayerzonalstats,CRS_AUTHID,CRS authority identifier,outputString
+native:rasterlayerzonalstats,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:rasterlayerzonalstats,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:rasterlayerzonalstats,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:rasterlayerzonalstats,NODATA_PIXEL_COUNT,NODATA pixel count,outputNumber
+native:rasterlogicalor,OUTPUT,Output layer,outputRaster
+native:rasterlogicalor,EXTENT,Extent,outputString
+native:rasterlogicalor,CRS_AUTHID,CRS authority identifier,outputString
+native:rasterlogicalor,WIDTH_IN_PIXELS,Width in pixels,outputNumber
+native:rasterlogicalor,HEIGHT_IN_PIXELS,Height in pixels,outputNumber
+native:rasterlogicalor,TOTAL_PIXEL_COUNT,Total pixel count,outputNumber
+native:rasterlogicalor,NODATA_PIXEL_COUNT,NODATA pixel count,outputNumber
+native:rasterlogicalor,TRUE_PIXEL_COUNT,True pixel count,outputNumber
+native:rasterlogicalor,FALSE_PIXEL_COUNT,False pixel count,outputNumber
+native:rastersampling,OUTPUT,Sampled,outputVector
+native:rastersurfacevolume,OUTPUT_HTML_FILE,Surface volume report,outputHtml
+native:rastersurfacevolume,OUTPUT_TABLE,Surface volume table,outputVector
+native:rastersurfacevolume,VOLUME,Volume,outputNumber
+native:rastersurfacevolume,PIXEL_COUNT,Pixel count,outputNumber
+native:rastersurfacevolume,AREA,Area,outputNumber
+native:reclassifybylayer,OUTPUT,Reclassified raster,outputRaster
+native:reclassifybytable,OUTPUT,Reclassified raster,outputRaster
+native:rectanglesovalsdiamonds,OUTPUT,Polygon,outputVector
+native:refactorfields,OUTPUT,Refactored,outputVector
+native:removeduplicatesbyattribute,OUTPUT,Filtered ,outputVector
+native:removeduplicatesbyattribute,DUPLICATES,Filtered ,outputVector
+native:removeduplicatesbyattribute,RETAINED_COUNT,Count of retained records,outputNumber
+native:removeduplicatesbyattribute,DUPLICATE_COUNT,Count of discarded duplicate records,outputNumber
+native:removeduplicatevertices,OUTPUT,Cleaned,outputVector
+native:removenullgeometries,OUTPUT,Non null geometries,outputVector
+native:removenullgeometries,NULL_OUTPUT,Null geometries,outputVector
+native:renametablefield,OUTPUT,Renamed,outputVector
+native:repairshapefile,OUTPUT,Repaired layer,outputVector
+native:reprojectlayer,OUTPUT,Reprojected,outputVector
+native:rescaleraster,OUTPUT,Rescaled,outputRaster
+native:reverselinedirection,OUTPUT,Reversed,outputVector
+native:rotatefeatures,OUTPUT,Rotated,outputVector
+native:roundrastervalues,OUTPUT,Output raster,outputRaster
+native:ruggednessindex,OUTPUT,Ruggedness,outputRaster
+native:savefeatures,OUTPUT,Saved features,outputFile
+native:savefeatures,FILE_PATH,File name and path,outputString
+native:savefeatures,LAYER_NAME,Layer name,outputString
+native:saveselectedfeatures,OUTPUT,Selected features,outputVector
+native:segmentizebymaxangle,OUTPUT,Segmentized,outputVector
+native:segmentizebymaxdistance,OUTPUT,Segmentized,outputVector
+native:serviceareafromlayer,OUTPUT_LINES,Service area ,outputVector
+native:serviceareafromlayer,OUTPUT,Service area ,outputVector
+native:serviceareafrompoint,OUTPUT_LINES,Service area ,outputVector
+native:serviceareafrompoint,OUTPUT,Service area ,outputVector
+native:setlayerencoding,OUTPUT,Output layer,outputVector
+native:setlayerstyle,OUTPUT,Styled,outputLayer
+native:setmfromraster,OUTPUT,Draped,outputVector
+native:setmvalue,OUTPUT,M Added,outputVector
+native:setzfromraster,OUTPUT,Draped,outputVector
+native:setzvalue,OUTPUT,Z Added,outputVector
+native:shortestpathlayertopoint,OUTPUT,Shortest path,outputVector
+native:shortestpathpointtolayer,OUTPUT,Shortest path,outputVector
+native:shortestpathpointtopoint,OUTPUT,Shortest path,outputVector
+native:shortestpathpointtopoint,TRAVEL_COST,Travel cost,outputNumber
+native:shpencodinginfo,ENCODING,Shapefile Encoding,outputString
+native:shpencodinginfo,CPG_ENCODING,CPG Encoding,outputString
+native:shpencodinginfo,LDID_ENCODING,LDID Encoding,outputString
+native:simplifygeometries,OUTPUT,Simplified,outputVector
+native:singlesidedbuffer,OUTPUT,Buffered,outputVector
+native:slope,OUTPUT,Slope,outputRaster
+native:smoothgeometry,OUTPUT,Smoothed,outputVector
+native:snapgeometries,OUTPUT,Snapped geometry,outputVector
+native:snappointstogrid,OUTPUT,Snapped,outputVector
+native:spatialiteexecutesql,NA,NA,NA
+native:spatialiteexecutesqlregistered,NA,NA,NA
+native:splitfeaturesbycharacter,OUTPUT,Split,outputVector
+native:splitlinesbylength,OUTPUT,Split,outputVector
+native:splitvectorlayer,OUTPUT,Output directory,outputFolder
+native:splitvectorlayer,OUTPUT_LAYERS,Output layers,outputMultilayer
+native:splitwithlines,OUTPUT,Split,outputVector
+native:stylefromproject,OUTPUT,Output style database,outputFile
+native:stylefromproject,SYMBOLS,Symbol count,outputNumber
+native:stylefromproject,COLORRAMPS,Color ramp count,outputNumber
+native:stylefromproject,TEXTFORMATS,Text format count,outputNumber
+native:stylefromproject,LABELSETTINGS,Label settings count,outputNumber
+native:subdivide,OUTPUT,Subdivided,outputVector
+native:sumlinelengths,OUTPUT,Line length,outputVector
+native:swapxy,OUTPUT,Swapped,outputVector
+native:symmetricaldifference,OUTPUT,Symmetrical difference,outputVector
+native:taperedbuffer,OUTPUT,Buffered,outputVector
+native:tinmeshcreation,OUTPUT_MESH,Output File,outputFile
+native:transect,OUTPUT,Transect,outputVector
+native:translategeometry,OUTPUT,Translated,outputVector
+native:truncatetable,OUTPUT,Truncated layer,outputVector
+native:union,OUTPUT,Union,outputVector
+native:wedgebuffers,OUTPUT,Buffers,outputVector
+native:writevectortiles_mbtiles,OUTPUT,Destination MBTiles,outputFile
+native:writevectortiles_xyz,OUTPUT_DIRECTORY,Output directory,outputFolder
+native:zonalhistogram,OUTPUT,Output zones,outputVector
+native:zonalstatisticsfb,OUTPUT,Zonal Statistics,outputVector
+qgis:advancedpythonfieldcalculator,OUTPUT,Calculated,outputVector
+qgis:barplot,OUTPUT,Bar plot,outputHtml
+qgis:basicstatisticsforfields,OUTPUT_HTML_FILE,Statistics,outputHtml
+qgis:basicstatisticsforfields,COUNT,Count,outputNumber
+qgis:basicstatisticsforfields,UNIQUE,Number of unique values,outputNumber
+qgis:basicstatisticsforfields,EMPTY,Number of empty ,outputNumber
+qgis:basicstatisticsforfields,FILLED,Number of non,outputNumber
+qgis:basicstatisticsforfields,MIN,Minimum value,outputNumber
+qgis:basicstatisticsforfields,MAX,Maximum value,outputNumber
+qgis:basicstatisticsforfields,MIN_LENGTH,Minimum length,outputNumber
+qgis:basicstatisticsforfields,MAX_LENGTH,Maximum length,outputNumber
+qgis:basicstatisticsforfields,MEAN_LENGTH,Mean length,outputNumber
+qgis:basicstatisticsforfields,CV,Coefficient of Variation,outputNumber
+qgis:basicstatisticsforfields,SUM,Sum,outputNumber
+qgis:basicstatisticsforfields,MEAN,Mean value,outputNumber
+qgis:basicstatisticsforfields,STD_DEV,Standard deviation,outputNumber
+qgis:basicstatisticsforfields,RANGE,Range,outputNumber
+qgis:basicstatisticsforfields,MEDIAN,Median,outputNumber
+qgis:basicstatisticsforfields,MINORITY,Minority ,outputNumber
+qgis:basicstatisticsforfields,MAJORITY,Majority ,outputNumber
+qgis:basicstatisticsforfields,FIRSTQUARTILE,First quartile,outputNumber
+qgis:basicstatisticsforfields,THIRDQUARTILE,Third quartile,outputNumber
+qgis:basicstatisticsforfields,IQR,Interquartile Range ,outputNumber
+qgis:boxplot,OUTPUT,Box plot,outputHtml
+qgis:checkvalidity,VALID_OUTPUT,Valid output,outputVector
+qgis:checkvalidity,VALID_COUNT,Count of valid features,outputNumber
+qgis:checkvalidity,INVALID_OUTPUT,Invalid output,outputVector
+qgis:checkvalidity,INVALID_COUNT,Count of invalid features,outputNumber
+qgis:checkvalidity,ERROR_OUTPUT,Error output,outputVector
+qgis:checkvalidity,ERROR_COUNT,Count of errors,outputNumber
+qgis:climbalongline,OUTPUT,Climb layer,outputVector
+qgis:climbalongline,TOTALCLIMB,Total climb,outputNumber
+qgis:climbalongline,TOTALDESCENT,Total descent,outputNumber
+qgis:climbalongline,MINELEVATION,Minimum elevation,outputNumber
+qgis:climbalongline,MAXELEVATION,Maximum elevation,outputNumber
+qgis:concavehull,OUTPUT,Concave hull,outputVector
+qgis:convertgeometrytype,OUTPUT,Converted,outputVector
+qgis:definecurrentprojection,INPUT,Layer with projection,outputVector
+qgis:delaunaytriangulation,OUTPUT,Delaunay triangulation,outputVector
+qgis:deletecolumn,OUTPUT,Remaining fields,outputVector
+qgis:distancematrix,OUTPUT,Distance matrix,outputVector
+qgis:distancetonearesthublinetohub,OUTPUT,Hub distance,outputVector
+qgis:distancetonearesthubpoints,OUTPUT,Hub distance,outputVector
+qgis:executesql,OUTPUT,SQL Output,outputVector
+qgis:exportaddgeometrycolumns,OUTPUT,Added geom info,outputVector
+qgis:findprojection,OUTPUT,CRS candidates,outputVector
+qgis:generatepointspixelcentroidsalongline,OUTPUT,Points along lines,outputVector
+qgis:heatmapkerneldensityestimation,OUTPUT,Heatmap,outputRaster
+qgis:hypsometriccurves,OUTPUT_DIRECTORY,Hypsometric curves,outputFolder
+qgis:idwinterpolation,OUTPUT,Interpolated,outputRaster
+qgis:importintopostgis,NA,NA,NA
+qgis:importintospatialite,NA,NA,NA
+qgis:joinbylocationsummary,OUTPUT,Joined layer,outputVector
+qgis:keepnbiggestparts,OUTPUT,Parts,outputVector
+qgis:knearestconcavehull,OUTPUT,Concave hull,outputVector
+qgis:linestopolygons,OUTPUT,Polygons,outputVector
+qgis:listuniquevalues,OUTPUT,Unique values,outputVector
+qgis:listuniquevalues,OUTPUT_HTML_FILE,HTML report,outputHtml
+qgis:listuniquevalues,TOTAL_VALUES,Total unique values,outputNumber
+qgis:listuniquevalues,UNIQUE_VALUES,Unique values,outputString
+qgis:meanandstandarddeviationplot,OUTPUT,Plot,outputHtml
+qgis:minimumboundinggeometry,OUTPUT,Bounding geometry,outputVector
+qgis:pointsdisplacement,OUTPUT,Displaced,outputVector
+qgis:pointstopath,OUTPUT,Paths,outputVector
+qgis:pointstopath,OUTPUT_TEXT_DIR,Directory for text output,outputFolder
+qgis:polarplot,OUTPUT,Polar plot,outputHtml
+qgis:randomextractwithinsubsets,OUTPUT,Extracted ,outputVector
+qgis:randompointsalongline,OUTPUT,Random points,outputVector
+qgis:randompointsinlayerbounds,OUTPUT,Random points,outputVector
+qgis:randompointsinsidepolygons,OUTPUT,Random points,outputVector
+qgis:rastercalculator,OUTPUT,Output,outputRaster
+qgis:rasterlayerhistogram,OUTPUT,Histogram,outputHtml
+qgis:regularpoints,OUTPUT,Regular points,outputVector
+qgis:relief,OUTPUT,Relief,outputRaster
+qgis:relief,FREQUENCY_DISTRIBUTION,Frequency distribution,outputFile
+qgis:scatter3dplot,OUTPUT,Histogram,outputHtml
+qgis:statisticsbycategories,OUTPUT,Statistics by category,outputVector
+qgis:texttofloat,OUTPUT,Float from text,outputVector
+qgis:tilesxyzdirectory,OUTPUT_DIRECTORY,Output directory,outputFolder
+qgis:tilesxyzdirectory,OUTPUT_HTML,Output html ,outputHtml
+qgis:tilesxyzmbtiles,OUTPUT_FILE,Output file ,outputFile
+qgis:tininterpolation,OUTPUT,Interpolated,outputRaster
+qgis:tininterpolation,TRIANGULATION,Triangulation,outputVector
+qgis:topologicalcoloring,OUTPUT,Colored,outputVector
+qgis:vectorlayerhistogram,OUTPUT,Histogram,outputHtml
+qgis:vectorlayerscatterplot,OUTPUT,Scatterplot,outputHtml
+qgis:voronoipolygons,OUTPUT,Voronoi polygons,outputVector
+saga:accumulatedcost,ACCUMULATED,Accumulated Cost,outputRaster
+saga:accumulatedcost,ALLOCATION,Allocation,outputRaster
+saga:accumulatedcostanisotropic,ACCCOST,Accumulated Cost,outputRaster
+saga:accumulatedcostisotropic,ACCCOST,Accumulated Cost,outputRaster
+saga:accumulatedcostisotropic,CLOSESTPT,Closest Point,outputRaster
+saga:accumulationfunctions,FLUX,Flux,outputRaster
+saga:accumulationfunctions,STATE_OUT,State t ,outputRaster
+saga:addcoordinatestopoints,OUTPUT,Points with coordinates,outputVector
+saga:addindicatorfieldsforcategories,OUT_SHAPES,Output shapes with field,outputVector
+saga:addpointattributestopolygons,OUTPUT,Result,outputVector
+saga:addpolygonattributestopoints,OUTPUT,Result,outputVector
+saga:addrastervaluestofeatures,RESULT,Result,outputVector
+saga:addrastervaluestopoints,RESULT,Result,outputVector
+saga:aggregate,NA,NA,NA
+saga:aggregatepointobservations,AGGREGATED,Aggregated,outputVector
+saga:aggregationindex,RESULT,Result,outputVector
+saga:analyticalhierarchyprocess,OUTPUT,Output Grid,outputRaster
+saga:analyticalhillshading,SHADE,Analytical Hillshading,outputRaster
+saga:angmap,E,Angle,outputRaster
+saga:angmap,F,CL dipdir,outputRaster
+saga:angmap,G,CL dip,outputRaster
+saga:angulardistanceweighted,TARGET_OUT_GRID,Target Grid,outputRaster
+saga:artificialneuralnetworkclassificationopencv,CLASSES,Classification,outputRaster
+saga:aspectslopegrid,ASPECT_SLOPE,Aspect,outputRaster
+saga:automatedcloudcoverassessment,CLOUD,Cloud Cover,outputRaster
+saga:averagewithmask1,RESULT,AWM1 Grid,outputRaster
+saga:averagewithmask2,RESULT,AWM2 Grid,outputRaster
+saga:averagewiththereshold1,RESULT,AWT Grid,outputRaster
+saga:averagewiththereshold2,RESULT,AWT Grid,outputRaster
+saga:averagewiththereshold3,RESULT,AWT Grid,outputRaster
+saga:basicterrainanalysis,SHADE,Analytical Hillshading,outputRaster
+saga:basicterrainanalysis,SLOPE,Slope,outputRaster
+saga:basicterrainanalysis,ASPECT,Aspect,outputRaster
+saga:basicterrainanalysis,HCURV,Plan Curvature,outputRaster
+saga:basicterrainanalysis,VCURV,Profile Curvature,outputRaster
+saga:basicterrainanalysis,CONVERGENCE,Convergence Index,outputRaster
+saga:basicterrainanalysis,SINKS,Closed Depressions,outputRaster
+saga:basicterrainanalysis,FLOW,Total Catchment Area,outputRaster
+saga:basicterrainanalysis,WETNESS,Topographic Wetness Index,outputRaster
+saga:basicterrainanalysis,LSFACTOR,LS,outputRaster
+saga:basicterrainanalysis,CHANNELS,Channel Network,outputVector
+saga:basicterrainanalysis,BASINS,Drainage Basins,outputVector
+saga:basicterrainanalysis,CHNL_BASE,Channel Network Base Level,outputRaster
+saga:basicterrainanalysis,CHNL_DIST,Channel Network Distance,outputRaster
+saga:basicterrainanalysis,VALL_DEPTH,Valley Depth,outputRaster
+saga:basicterrainanalysis,RSP,Relative Slope Position,outputRaster
+saga:binaryerosionreconstruction,OUTPUT_GRID,Output Grid,outputRaster
+saga:bioclimaticvariables,BIO_01,Annual Mean Temperature,outputRaster
+saga:bioclimaticvariables,BIO_02,Mean Diurnal Range,outputRaster
+saga:bioclimaticvariables,BIO_03,Isothermality,outputRaster
+saga:bioclimaticvariables,BIO_04,Temperature Seasonality,outputRaster
+saga:bioclimaticvariables,BIO_05,Maximum Temperature of Warmest Month,outputRaster
+saga:bioclimaticvariables,BIO_06,Minimum Temperature of Coldest Month,outputRaster
+saga:bioclimaticvariables,BIO_07,Temperature Annual Range,outputRaster
+saga:bioclimaticvariables,BIO_08,Mean Temperature of Wettest Quarter,outputRaster
+saga:bioclimaticvariables,BIO_09,Mean Temperature of Driest Quarter,outputRaster
+saga:bioclimaticvariables,BIO_10,Mean Temperature of Warmest Quarter,outputRaster
+saga:bioclimaticvariables,BIO_11,Mean Temperature of Coldest Quarter,outputRaster
+saga:bioclimaticvariables,BIO_12,Annual Precipitation,outputRaster
+saga:bioclimaticvariables,BIO_13,Precipitation of Wettest Month,outputRaster
+saga:bioclimaticvariables,BIO_14,Precipitation of Driest Month,outputRaster
+saga:bioclimaticvariables,BIO_15,Precipitation Seasonality,outputRaster
+saga:bioclimaticvariables,BIO_16,Precipitation of Wettest Quarter,outputRaster
+saga:bioclimaticvariables,BIO_17,Precipitation of Driest Quarter,outputRaster
+saga:bioclimaticvariables,BIO_18,Precipitation of Warmest Quarter,outputRaster
+saga:bioclimaticvariables,BIO_19,Precipitation of Coldest Quarter,outputRaster
+saga:boostingclassificationopencv,CLASSES,Classification,outputRaster
+saga:bsplineapproximation,TARGET_OUT_GRID,Grid,outputRaster
+saga:burnstreamnetworkintodem,BURN,Processed DEM,outputRaster
+saga:catchmentarea,FLOW,Catchment Area,outputRaster
+saga:catchmentareaflowtracing,FLOW,Flow Accumulation,outputRaster
+saga:catchmentareaflowtracing,VAL_MEAN,Mean over Catchment,outputRaster
+saga:catchmentareaflowtracing,ACCU_TOTAL,Accumulated Material,outputRaster
+saga:catchmentareaflowtracing,ACCU_LEFT,Accumulated Material from left side,outputRaster
+saga:catchmentareaflowtracing,ACCU_RIGHT,Accumulated Material from right side,outputRaster
+saga:catchmentarearecursive,FLOW,Catchment Area,outputRaster
+saga:catchmentarearecursive,VAL_MEAN,Mean over Catchment,outputRaster
+saga:catchmentarearecursive,ACCU_TOTAL,Accumulated Material,outputRaster
+saga:catchmentarearecursive,ACCU_LEFT,Accumulated Material from left side,outputRaster
+saga:catchmentarearecursive,ACCU_RIGHT,Accumulated Material from right side,outputRaster
+saga:catchmentarearecursive,FLOW_LENGTH,Flow Path Length,outputRaster
+saga:catchmentarearecursive,WEIGHT_LOSS,Loss through Negative Weights,outputRaster
+saga:categoricalcoincidence,CATEGORIES,Number of Categories,outputRaster
+saga:categoricalcoincidence,COINCIDENCE,Coincidence,outputRaster
+saga:categoricalcoincidence,MAJ_COUNT,Dominance of Majority,outputRaster
+saga:categoricalcoincidence,MAJ_VALUE,Value of Majority,outputRaster
+saga:cellbalance,BALANCE,Cell Balance,outputRaster
+saga:changedatastorage,OUTPUT,Converted Grid,outputRaster
+saga:changedateformat,OUTPUT,Output,outputVector
+saga:changedetection,CHANGE,Changes,outputRaster
+saga:changedetection,CHANGES,Changes,outputVector
+saga:changetimeformat,OUTPUT,Output,outputVector
+saga:channelnetwork,CHNLNTWRK,Channel Network,outputRaster
+saga:channelnetwork,CHNLROUTE,Channel Direction,outputRaster
+saga:channelnetwork,SHAPES,Channel Network,outputVector
+saga:channelnetworkanddrainagebasins,DIRECTION,Flow Direction,outputRaster
+saga:channelnetworkanddrainagebasins,CONNECTION,Flow Connectivity,outputRaster
+saga:channelnetworkanddrainagebasins,ORDER,Strahler Order,outputRaster
+saga:channelnetworkanddrainagebasins,BASIN,Drainage Basins,outputRaster
+saga:channelnetworkanddrainagebasins,SEGMENTS,Channels,outputVector
+saga:channelnetworkanddrainagebasins,BASINS,Drainage Basins,outputVector
+saga:channelnetworkanddrainagebasins,NODES,Junctions,outputVector
+saga:clippointswithpolygons,CLIPS,Clipped Points,outputVector
+saga:cliprasterwithpolygon,OUTPUT,Clipped,outputRaster
+saga:closegaps,RESULT,Changed Grid,outputRaster
+saga:closegapswithspline,CLOSED,Closed Gaps Grid,outputRaster
+saga:closegapswithstepwiseresampling,RESULT,Result,outputRaster
+saga:closeonecellgaps,RESULT,Changed Grid,outputRaster
+saga:clusteranalysis,RESULT,Result,outputVector
+saga:clusteranalysis,STATISTICS,Statistics,outputVector
+saga:clusteranalysisshapes,RESULT,Result,outputVector
+saga:clusteranalysisshapes,STATISTICS,Result,outputVector
+saga:concentration,CONC,Concentration,outputRaster
+saga:confusionmatrixpolygonsgrid,CONFUSION,Confusion Matrix,outputVector
+saga:confusionmatrixpolygonsgrid,CLASSES,Class Values,outputVector
+saga:confusionmatrixpolygonsgrid,SUMMARY,Summary,outputVector
+saga:confusionmatrixtwogrids,COMBINED,Combined Classes,outputRaster
+saga:confusionmatrixtwogrids,CONFUSION,Confusion Matrix,outputVector
+saga:confusionmatrixtwogrids,CLASSES,Class Values,outputVector
+saga:confusionmatrixtwogrids,SUMMARY,Summary,outputVector
+saga:connectivityanalysis,FILTERED_MASK,Filtered Image,outputRaster
+saga:connectivityanalysis,SYMBOLIC_IMAGE,Symbolic Image,outputRaster
+saga:connectivityanalysis,OUTLINES,Outlines,outputVector
+saga:constantgrid,OUT_GRID,Target Grid,outputRaster
+saga:contourlines,CONTOUR,Contour Lines,outputVector
+saga:convergenceindex,RESULT,Convergence Index,outputRaster
+saga:convergenceindexsearchradius,CONVERGENCE,Convergence Index,outputRaster
+saga:convertdatastoragetype,OUTPUT,Converted Grid,outputRaster
+saga:convertlinestopoints,POINTS,Points,outputVector
+saga:convertlinestopolygons,POLYGONS,Polygons,outputVector
+saga:convertmultipointstopoints,POINTS,Points,outputVector
+saga:convertpointstolines,LINES,Lines,outputVector
+saga:convertpolygonlineverticestopoints,POINTS,Points,outputVector
+saga:convertpolygonstolines,LINES,Lines,outputVector
+saga:convexhull,HULLS,Convex Hull,outputVector
+saga:convexhull,BOXES,Minimum Bounding Box,outputVector
+saga:covereddistance,RESULT,Covered Distance,outputRaster
+saga:createlinesgraticule,GRATICULE_LINE,Lines Graticule,outputVector
+saga:createpointgrid,POINTS,Point Grid,outputVector
+saga:createpolygonsgraticule,GRATICULE_RECT,Rectangle Graticule,outputVector
+saga:croptodata,OUTPUT,Cropped,outputRaster
+saga:crossclassificationandtabulation,RESULTGRID,Cross,outputRaster
+saga:crossclassificationandtabulation,RESULTTABLE,Cross,outputVector
+saga:crossprofiles,PROFILES,Cross Profiles,outputVector
+saga:curvatureclassification,CLASS,Curvature Classification,outputRaster
+saga:cutvectorlayer,CUT,Result,outputVector
+saga:decisiontreeclassificationopencv,CLASSES,Classification,outputRaster
+saga:destriping,RESULT3,Destriped Grid,outputRaster
+saga:destriping,RESULT1,Low,outputRaster
+saga:destriping,RESULT2,Low,outputRaster
+saga:destripingwithmask,RESULT3,Destriped Grid,outputRaster
+saga:destripingwithmask,RESULT1,Low,outputRaster
+saga:destripingwithmask,RESULT2,Low,outputRaster
+saga:difference,RESULT,Difference,outputVector
+saga:diffusepollutionrisk,DELIVERY,Delivery Index,outputRaster
+saga:diffusepollutionrisk,RISK_POINT,Locational Risk,outputRaster
+saga:diffusepollutionrisk,RISK_DIFFUSE,Diffuse Pollution Risk,outputRaster
+saga:diffusivehillslopeevolutionadi,MODEL,Modelled Elevation,outputRaster
+saga:diffusivehillslopeevolutionadi,DIFF,Elevation Difference,outputRaster
+saga:diffusivehillslopeevolutionftcs,MODEL,Modelled Elevation,outputRaster
+saga:diffusivehillslopeevolutionftcs,DIFF,Elevation Difference,outputRaster
+saga:directionalaverage,RESULT,Output Grid,outputRaster
+saga:directionalstatisticsforrasterlayer,MEAN,Arithmetic Mean,outputRaster
+saga:directionalstatisticsforrasterlayer,DIFMEAN,Difference from Arithmetic Mean,outputRaster
+saga:directionalstatisticsforrasterlayer,MIN,Minimum,outputRaster
+saga:directionalstatisticsforrasterlayer,MAX,Maximum,outputRaster
+saga:directionalstatisticsforrasterlayer,RANGE,Range,outputRaster
+saga:directionalstatisticsforrasterlayer,VAR,Variance,outputRaster
+saga:directionalstatisticsforrasterlayer,STDDEV,Standard Deviation,outputRaster
+saga:directionalstatisticsforrasterlayer,STDDEVLO,Mean less Standard Deviation,outputRaster
+saga:directionalstatisticsforrasterlayer,STDDEVHI,Mean plus Standard Deviation,outputRaster
+saga:directionalstatisticsforrasterlayer,DEVMEAN,Deviation from Arithmetic Mean,outputRaster
+saga:directionalstatisticsforrasterlayer,PERCENT,Percentile,outputRaster
+saga:directionalstatisticsforrasterlayer,POINTS_OUT,Directional Statistics for Points,outputVector
+saga:distancevigra,OUTPUT,Distance,outputRaster
+saga:diurnalanisotropicheating,DAH,Diurnal Anisotropic Heating,outputRaster
+saga:diversityofcategories,COUNT,Number of Categories,outputRaster
+saga:diversityofcategories,DIVERSITY,Diversity,outputRaster
+saga:diversityofcategories,SIZE_MEAN,Average Size,outputRaster
+saga:diversityofcategories,SIZE_SKEW,Skewness,outputRaster
+saga:diversityofcategories,CONNECTIVITY,Connectivity,outputRaster
+saga:downslopedistancegradient,GRADIENT,Gradient,outputRaster
+saga:downslopedistancegradient,DIFFERENCE,Gradient Difference,outputRaster
+saga:dtmfilterslopebased,GROUND,Bare Earth,outputRaster
+saga:dtmfilterslopebased,NONGROUND,Removed Objects,outputRaster
+saga:earthsorbitalparameters,NA,NA,NA
+saga:edgecontamination,CONTAMINATION,Edge Contamination,outputRaster
+saga:edgedetectionvigra,OUTPUT,Edges,outputRaster
+saga:effectiveairflowheights,AFH,Effective Air Flow Heights,outputRaster
+saga:enhancedvegetationindex,EVI,Enhanced Vegetation Index,outputRaster
+saga:enumeratetablefield,OUTPUT,Output,outputVector
+saga:fastregiongrowingalgorithm,RESULT,Segmente,outputRaster
+saga:fastregiongrowingalgorithm,MEAN,Mean,outputRaster
+saga:fastrepresentativeness,RESULT,Output,outputRaster
+saga:fastrepresentativeness,RESULT_LOD,Output Lod,outputRaster
+saga:fastrepresentativeness,SEEDS,Output Seeds,outputRaster
+saga:featureextents,EXTENTS,Extents,outputVector
+saga:fieldstatistics,STATISTICS,Statistics,outputVector
+saga:fillgapsinrecords,NOGAPS,Table without Gaps,outputVector
+saga:fillsinks,RESULT,Filled DEM,outputRaster
+saga:fillsinksqmofesp,FILLED,DEM Without Sinks,outputRaster
+saga:fillsinksqmofesp,SINKS,Sinks,outputRaster
+saga:fillsinkswangliu,FILLED,Filled DEM,outputRaster
+saga:fillsinkswangliu,FDIR,Flow Directions,outputRaster
+saga:fillsinkswangliu,WSHED,Watershed Basins,outputRaster
+saga:fillsinksxxlwangliu,FILLED,Filled DEM,outputRaster
+saga:findfieldofextremevalue,OUTPUT,Output,outputVector
+saga:fireriskanalysis,DANGER,Danger,outputRaster
+saga:fireriskanalysis,COMPPROB,Compound Probability,outputRaster
+saga:fireriskanalysis,PRIORITY,Priority Index,outputRaster
+saga:fitnpointsinpolygon,POINTS,Points,outputVector
+saga:fixeddistancebuffer,BUFFER,Buffer,outputVector
+saga:flatdetection,NOFLATS,No Flats,outputRaster
+saga:flatdetection,FLATS,Flat Areas,outputRaster
+saga:flattenpolygonlayer,OUTPUT,Output,outputVector
+saga:flowaccumulationqmofesp,FLOW,Contributing Area,outputRaster
+saga:flowpathlength,LENGTH,Flow Path Length,outputRaster
+saga:flowwidthandspecificcatchmentarea,WIDTH,Flow Width,outputRaster
+saga:flowwidthandspecificcatchmentarea,SCA,Specific Catchment Area ,outputRaster
+saga:fourierfiltervigra,OUTPUT,Output,outputRaster
+saga:fouriertransformationopencv,REAL,Fourier Transformation ,outputRaster
+saga:fouriertransformationopencv,IMAG,Fourier Transformation ,outputRaster
+saga:fouriertransforminversevigra,OUTPUT,Output,outputRaster
+saga:fouriertransformrealvigra,OUTPUT,Output,outputRaster
+saga:fouriertransformvigra,REAL,Real,outputRaster
+saga:fouriertransformvigra,IMAG,Imaginary,outputRaster
+saga:fragmentationalternative,DENSITY,Density ,outputRaster
+saga:fragmentationalternative,CONNECTIVITY,Connectivity ,outputRaster
+saga:fragmentationalternative,FRAGMENTATION,Fragmentation,outputRaster
+saga:fragmentationalternative,FRAGSTATS,Summary,outputVector
+saga:fragmentationclassesfromdensityandconnectivity,FRAGMENTATION,Fragmentation,outputRaster
+saga:fragmentationstandard,DENSITY,Density ,outputRaster
+saga:fragmentationstandard,CONNECTIVITY,Connectivity ,outputRaster
+saga:fragmentationstandard,FRAGMENTATION,Fragmentation,outputRaster
+saga:fragmentationstandard,FRAGSTATS,Summary,outputVector
+saga:function,RESULT,Function,outputRaster
+saga:functionfit,NA,NA,NA
+saga:fuzzify,OUTPUT,Fuzzified Grid,outputRaster
+saga:fuzzyintersectionand,AND,Intersection,outputRaster
+saga:fuzzylandformelementclassification,PLAIN,Plain,outputRaster
+saga:fuzzylandformelementclassification,PIT,Pit,outputRaster
+saga:fuzzylandformelementclassification,PEAK,Peak,outputRaster
+saga:fuzzylandformelementclassification,RIDGE,Ridge,outputRaster
+saga:fuzzylandformelementclassification,CHANNEL,Channel,outputRaster
+saga:fuzzylandformelementclassification,SADDLE,Saddle,outputRaster
+saga:fuzzylandformelementclassification,BSLOPE,Back Slope,outputRaster
+saga:fuzzylandformelementclassification,FSLOPE,Foot Slope,outputRaster
+saga:fuzzylandformelementclassification,SSLOPE,Shoulder Slope,outputRaster
+saga:fuzzylandformelementclassification,HOLLOW,Hollow,outputRaster
+saga:fuzzylandformelementclassification,FHOLLOW,Foot Hollow,outputRaster
+saga:fuzzylandformelementclassification,SHOLLOW,Shoulder Hollow,outputRaster
+saga:fuzzylandformelementclassification,SPUR,Spur,outputRaster
+saga:fuzzylandformelementclassification,FSPUR,Foot Spur,outputRaster
+saga:fuzzylandformelementclassification,SSPUR,Shoulder Spur,outputRaster
+saga:fuzzylandformelementclassification,FORM,Landform,outputRaster
+saga:fuzzylandformelementclassification,MEM,Maximum Membership,outputRaster
+saga:fuzzylandformelementclassification,ENTROPY,Entropy,outputRaster
+saga:fuzzylandformelementclassification,CI,Confusion Index,outputRaster
+saga:fuzzyunionor,OR,Union,outputRaster
+saga:gaussianfilter,RESULT,Filtered Grid,outputRaster
+saga:generateshapes,OUTPUT,Output,outputVector
+saga:geodesicmorphologicalreconstruction,OBJECT_GRID,Object Grid,outputRaster
+saga:geodesicmorphologicalreconstruction,DIFFERENCE_GRID,Difference Input ,outputRaster
+saga:geographiccoordinategrids,LON,Longitude,outputRaster
+saga:geographiccoordinategrids,LAT,Latitude,outputRaster
+saga:geometricfigures,RESULT,Result,outputRaster
+saga:globalmoransiforrasterlayer,RESULT,Result,outputVector
+saga:gradientvectorfromcartesiantopolarcoordinates,DIR,Direction,outputRaster
+saga:gradientvectorfromcartesiantopolarcoordinates,LEN,Length,outputRaster
+saga:gradientvectorfrompolartocartesiancoordinates,DX,X Component,outputRaster
+saga:gradientvectorfrompolartocartesiancoordinates,DY,Y Component,outputRaster
+saga:gradientvectorsfromdirectionalcomponents,VECTORS,Gradient Vectors,outputVector
+saga:gradientvectorsfromdirectionandlength,VECTORS,Gradient Vectors,outputVector
+saga:gradientvectorsfromsurface,VECTORS,Gradient Vectors,outputVector
+saga:gridcombination,NA,NA,NA
+saga:gridstatisticsforpoints,RESULT,Statistics,outputVector
+saga:gwrformultiplepredictorlayers,REGRESSION,Regression,outputRaster
+saga:gwrformultiplepredictorlayers,QUALITY,Coefficient of Determination,outputRaster
+saga:gwrformultiplepredictorlayers,RESIDUALS,Residuals,outputVector
+saga:gwrformultiplepredictors,REGRESSION,Regression,outputVector
+saga:gwrformultiplepredictorsgriddedmodeloutput,REGRESSION,Regression,outputVector
+saga:gwrformultiplepredictorsgriddedmodeloutput,SLOPES,Slopes,outputRaster
+saga:gwrformultiplepredictorsgriddedmodeloutput,TARGET_INTERCEPT,Intercept,outputRaster
+saga:gwrformultiplepredictorsgriddedmodeloutput,TARGET_QUALITY,Quality,outputRaster
+saga:gwrforsinglepredictorgriddedmodeloutput,TARGET_OUT_GRID,Target Grid,outputRaster
+saga:gwrforsinglepredictorgriddedmodeloutput,INTERCEPT,Intercept,outputRaster
+saga:gwrforsinglepredictorgriddedmodeloutput,SLOPE,Slope,outputRaster
+saga:gwrforsinglepredictorgriddedmodeloutput,QUALITY,Quality,outputRaster
+saga:gwrforsinglepredictorlayer,RESIDUALS,Residuals,outputVector
+saga:gwrforsinglepredictorlayer,REGRESSION,Regression,outputRaster
+saga:gwrforsinglepredictorlayer,QUALITY,Coefficient of Determination,outputRaster
+saga:gwrforsinglepredictorlayer,INTERCEPT,Intercept,outputRaster
+saga:gwrforsinglepredictorlayer,SLOPE,Slope,outputRaster
+saga:histogramsurface,HIST,Histogram,outputRaster
+saga:hypsometry,TABLE,Hypsometry,outputVector
+saga:imcorrfeaturetracking,CORRPOINTS,Correlated Points,outputVector
+saga:imcorrfeaturetracking,CORRLINES,Displacement Vector,outputVector
+saga:interpolatecubicspline,TARGET_OUT_GRID,Grid,outputRaster
+saga:intersect,RESULT,Intersect,outputVector
+saga:inversedistanceweightedinterpolation,TARGET_OUT_GRID,Grid,outputRaster
+saga:invertdatanodata,OUTPUT,Result,outputRaster
+saga:invertgrid,INVERSE,Inverse Grid,outputRaster
+saga:isodataclusteringforgrids,CLUSTER,Clusters,outputRaster
+saga:kerneldensityestimation,TARGET_OUT_GRID,Kernel,outputRaster
+saga:kmeansclusteringforgrids,CLUSTER,Clusters,outputRaster
+saga:kmeansclusteringforgrids,STATISTICS,Statistics,outputVector
+saga:knearestneighboursclassificationopencv,CLASSES,Classification,outputRaster
+saga:lakeflood,OUTDEPTH,Lake,outputRaster
+saga:lakeflood,OUTLEVEL,Surface,outputRaster
+saga:landsurfacetemperature,LST,Land Surface Temperature ,outputRaster
+saga:landusescenariogenerator,SCENARIO,Land Use Scenario,outputVector
+saga:laplacianfilter,RESULT,Filtered Grid,outputRaster
+saga:layerofextremevalue,RESULT,Result,outputRaster
+saga:leastcostpaths,POINTS,Profile ,outputVector
+saga:leastcostpaths,LINE,Profile ,outputVector
+saga:linedissolve,DISSOLVED,Dissolved Lines,outputVector
+saga:linepolygonintersection,INTERSECT,Intersection,outputVector
+saga:lineproperties,OUTPUT,Lines with Property Attributes,outputVector
+saga:linesimplification,OUTPUT,Simplified Lines,outputVector
+saga:linesmoothing,LINES_OUT,Smoothed Lines,outputVector
+saga:localminimaandmaxima,MINIMA,Minima,outputVector
+saga:localminimaandmaxima,MAXIMA,Maxima,outputVector
+saga:lsfactor,LS,LS Factor,outputRaster
+saga:lsfactorfieldbased,STATISTICS,Field Statistics,outputVector
+saga:lsfactorfieldbased,UPSLOPE_AREA,Upslope Length Factor,outputRaster
+saga:lsfactorfieldbased,UPSLOPE_LENGTH,Effective Flow Length,outputRaster
+saga:lsfactorfieldbased,UPSLOPE_SLOPE,Upslope Slope,outputRaster
+saga:lsfactorfieldbased,LS_FACTOR,LS Factor,outputRaster
+saga:lsfactorfieldbased,BALANCE,Sediment Balance,outputRaster
+saga:majorityfilter,RESULT,Filtered Grid,outputRaster
+saga:massbalanceindex,MBI,Mass Balance Index,outputRaster
+saga:maximumentropypresenceprediction,PREDICTION,Presence Prediction,outputRaster
+saga:maximumentropypresenceprediction,PROBABILITY,Presence Probability,outputRaster
+saga:maximumflowpathlength,DISTANCE,Flow Path Length,outputRaster
+saga:mergevectorlayers,MERGED,Merged Layer,outputVector
+saga:meshdenoise,OUTPUT,Denoised Grid,outputRaster
+saga:metricconversions,CONV,Converted Grid,outputRaster
+saga:minimumdistanceanalysis,TABLE,Minimum Distance Analysis,outputVector
+saga:mirrorgrid,MIRROR,Mirror Grid,outputRaster
+saga:modifiedquadraticshepardinterpolation,TARGET_OUT_GRID,Grid,outputRaster
+saga:monthlyglobalbylatitude,SOLARRAD,Solar Radiation,outputVector
+saga:morphologicalfilter,RESULT,Filtered Grid,outputRaster
+saga:morphologicalfilteropencv,OUTPUT,Output,outputRaster
+saga:morphologicalfiltervigra,OUTPUT,Output,outputRaster
+saga:morphometricfeatures,FEATURES,Morphometric Features,outputRaster
+saga:morphometricfeatures,ELEVATION,Generalized Surface,outputRaster
+saga:morphometricfeatures,SLOPE,Slope,outputRaster
+saga:morphometricfeatures,ASPECT,Aspect,outputRaster
+saga:morphometricfeatures,PROFC,Profile Curvature,outputRaster
+saga:morphometricfeatures,PLANC,Plan Curvature,outputRaster
+saga:morphometricfeatures,LONGC,Longitudinal Curvature,outputRaster
+saga:morphometricfeatures,CROSC,Cross,outputRaster
+saga:morphometricfeatures,MAXIC,Maximum Curvature,outputRaster
+saga:morphometricfeatures,MINIC,Minimum Curvature,outputRaster
+saga:morphometricprotectionindex,PROTECTION,Protection Index,outputRaster
+saga:mosaicrasterlayers,TARGET_OUT_GRID,Grid,outputRaster
+saga:multibandvariation,MEAN,Mean Distance,outputRaster
+saga:multibandvariation,STDDEV,Standard Deviation,outputRaster
+saga:multibandvariation,DIFF,Distance,outputRaster
+saga:multidirectionleefilter,RESULT,Filtered Grid,outputRaster
+saga:multidirectionleefilter,STDDEV,Minimum Standard Deviation,outputRaster
+saga:multidirectionleefilter,DIR,Direction of Minimum Standard Deviation,outputRaster
+saga:multilevelbsplineinterpolation,TARGET_OUT_GRID,Grid,outputRaster
+saga:multilevelbsplineinterpolationforcategories,TARGET_CATEGORIES,Categories,outputRaster
+saga:multilevelbsplineinterpolationforcategories,TARGET_PROPABILITY,Probability,outputRaster
+saga:multilevelbsplineinterpolationfromraster,TARGET_OUT_GRID,Grid,outputRaster
+saga:multiplelinearregressionanalysis,NA,NA,NA
+saga:multiplelinearregressionanalysisshapes,RESULTS,Results,outputVector
+saga:multipleregressionanalysisgridandpredictorgrids,REGRESSION,Regression,outputRaster
+saga:multipleregressionanalysisgridandpredictorgrids,RESIDUALS,Residuals,outputRaster
+saga:multipleregressionanalysispointsandpredictorgrids,INFO_COEFF,Details,outputVector
+saga:multipleregressionanalysispointsandpredictorgrids,INFO_MODEL,Details,outputVector
+saga:multipleregressionanalysispointsandpredictorgrids,INFO_STEPS,Details,outputVector
+saga:multipleregressionanalysispointsandpredictorgrids,RESIDUALS,Residuals,outputVector
+saga:multipleregressionanalysispointsandpredictorgrids,REGRESSION,Regression,outputRaster
+saga:multipleregressionanalysispointsandpredictorgrids,REGRESCORR,Regression with Residual Correction,outputRaster
+saga:multipleregressionanalysispointsraster,INFO_COEFF,Details,outputVector
+saga:multipleregressionanalysispointsraster,INFO_MODEL,Details,outputVector
+saga:multipleregressionanalysispointsraster,INFO_STEPS,Details,outputVector
+saga:multipleregressionanalysispointsraster,RESIDUALS,Residuals,outputVector
+saga:multipleregressionanalysispointsraster,REGRESSION,Regression,outputRaster
+saga:multipleregressionanalysisrasterraster,REGRESSION,Regression,outputRaster
+saga:multipleregressionanalysisrasterraster,RESIDUALS,Residuals,outputRaster
+saga:multipleregressionanalysisrasterraster,INFO_COEFF,Details,outputVector
+saga:multipleregressionanalysisrasterraster,INFO_MODEL,Details,outputVector
+saga:multipleregressionanalysisrasterraster,INFO_STEPS,Details,outputVector
+saga:multiresolutionindexofvalleybottomflatnessmrvbf,MRVBF,MRVBF,outputRaster
+saga:multiresolutionindexofvalleybottomflatnessmrvbf,MRRTF,MRRTF,outputRaster
+saga:naturalneighbour,TARGET_OUT_GRID,Grid,outputRaster
+saga:nearestneighbour,TARGET_OUT_GRID,Grid,outputRaster
+saga:normalbayesclassificationopencv,PROBABILITY,Probability,outputRaster
+saga:normalbayesclassificationopencv,CLASSES,Classification,outputRaster
+saga:orderedweightedaveraging,OUTPUT,Output Grid,outputRaster
+saga:ordinarykriging,PREDICTION,Prediction,outputRaster
+saga:ordinarykriging,VARIANCE,Quality Measure,outputRaster
+saga:overlandflowdistancetochannelnetwork,DISTANCE,Overland Flow Distance,outputRaster
+saga:overlandflowdistancetochannelnetwork,DISTVERT,Vertical Overland Flow Distance,outputRaster
+saga:overlandflowdistancetochannelnetwork,DISTHORZ,Horizontal Overland Flow Distance,outputRaster
+saga:overlandflowkinematicwaved8,FLOW,Runoff,outputRaster
+saga:overlandflowkinematicwaved8,GAUGES_FLOW,Flow at Gauges,outputVector
+saga:paramemeltonruggednessnumber,AREA,Catchment Area,outputRaster
+saga:paramemeltonruggednessnumber,ZMAX,Maximum Height,outputRaster
+saga:paramemeltonruggednessnumber,MRN,Melton Ruggedness Number,outputRaster
+saga:patching,COMPLETED,Completed Grid,outputRaster
+saga:patternanalysis,RELATIVE,Relative Richness,outputRaster
+saga:patternanalysis,DIVERSITY,Diversity,outputRaster
+saga:patternanalysis,DOMINANCE,Dominance,outputRaster
+saga:patternanalysis,FRAGMENTATION,Fragmentation,outputRaster
+saga:patternanalysis,NDC,Number of Different Classes,outputRaster
+saga:patternanalysis,CVN,Center Versus Neighbours,outputRaster
+saga:petafterhargreavesgrid,PET,Potential Evapotranspiration,outputRaster
+saga:petafterhargreavestable,NA,NA,NA
+saga:pointdistances,DISTANCES,Distances,outputVector
+saga:pointsfilter,FILTER,Filtered Points,outputVector
+saga:pointstatisticsforpolygons,STATISTICS,Statistics,outputVector
+saga:pointsthinning,THINNED,Thinned Points,outputVector
+saga:polartocartesiancoordinates,CARTES,Cartesian Coordinates,outputVector
+saga:polygoncentroids,CENTROIDS,Centroids,outputVector
+saga:polygonclipping,S_OUTPUT,Output features,outputVector
+saga:polygondissolveallpolygons,DISSOLVED,Dissolved,outputVector
+saga:polygondissolvebyattribute,DISSOLVED,Dissolved,outputVector
+saga:polygonidentity,RESULT,Identity,outputVector
+saga:polygonlineintersection,INTERSECT,Intersection,outputVector
+saga:polygonpartstoseparatepolygons,PARTS,Polygon Parts,outputVector
+saga:polygonproperties,OUTPUT,Polygons with Property Attributes,outputVector
+saga:polygonselfintersection,INTERSECT,Intersection,outputVector
+saga:polygonshapeindices,INDEX,Shape Index,outputVector
+saga:polygonstoedgesandnodes,EDGES,Edges,outputVector
+saga:polygonstoedgesandnodes,NODES,Nodes,outputVector
+saga:polygonunion,RESULT,Union,outputVector
+saga:polygonupdate,RESULT,Updated polygons,outputVector
+saga:polynomialregression,TARGET_OUT_GRID,Grid,outputRaster
+saga:polynomialregression,RESIDUALS,Residuals,outputVector
+saga:principlecomponentsanalysis,PCA,Principle Components,outputVector
+saga:profilefrompointstable,RESULT,Result,outputVector
+saga:profilesfromlines,PROFILE,Profiles,outputVector
+saga:profilesfromlines,PROFILES,Profiles,outputVector
+saga:proximityraster,DISTANCE,Distance,outputRaster
+saga:proximityraster,DIRECTION,Direction,outputRaster
+saga:proximityraster,ALLOCATION,Allocation,outputRaster
+saga:quadtreestructuretopolygons,POLYGONS,Polygons,outputVector
+saga:quadtreestructuretopolygons,LINES,Lines,outputVector
+saga:quadtreestructuretopolygons,POINTS,Duplicated Points,outputVector
+saga:radiusofvarianceraster,RESULT,Variance Radius,outputRaster
+saga:randomfield,OUT_GRID,Random Field,outputRaster
+saga:randomforestclassificationopencv,CLASSES,Classification,outputRaster
+saga:randomforestpresencepredictionvigra,PREDICTION,Presence Prediction,outputRaster
+saga:randomforestpresencepredictionvigra,PROBABILITY,Presence Probability,outputRaster
+saga:randomterraingeneration,TARGET_GRID,Grid,outputRaster
+saga:rankfilter,RESULT,Filtered Grid,outputRaster
+saga:rasterbuffer,BUFFER,Buffer Grid,outputRaster
+saga:rastercalculator,RESULT,Calculated,outputRaster
+saga:rastercellindex,INDEX,Sorted Grid,outputRaster
+saga:rasterdifference,C,Difference ,outputRaster
+saga:rasterdivision,C,Quotient,outputRaster
+saga:rasterize,GRID,Rasterized,outputRaster
+saga:rastermasking,MASKED,Masked Grid,outputRaster
+saga:rasternormalisation,OUTPUT,Normalised Grid,outputRaster
+saga:rasterorientation,RESULT,Changed Grid,outputRaster
+saga:rasterproduct,RESULT,Product,outputRaster
+saga:rasterproximitybuffer,DISTANCE,Distance Grid,outputRaster
+saga:rasterproximitybuffer,ALLOC,Allocation Grid,outputRaster
+saga:rasterproximitybuffer,BUFFER,Buffer Grid,outputRaster
+saga:rasterskeletonization,RESULT,Skeleton,outputRaster
+saga:rasterskeletonization,VECTOR,Skeleton,outputVector
+saga:rasterssum,RESULT,Sum,outputRaster
+saga:rasterstandardisation,OUTPUT,Standardised Grid,outputRaster
+saga:rasterstatisticsforpolygons,RESULT,Statistics,outputVector
+saga:rastervaluestopoints,SHAPES,Shapes,outputVector
+saga:rastervaluestopointsrandomly,POINTS,Points,outputVector
+saga:rastervolume,NA,NA,NA
+saga:realsurfacearea,AREA,Surface Area,outputRaster
+saga:reclassifyvalues,RESULT,Reclassified Grid,outputRaster
+saga:reclassifyvaluesrange,RESULT,Reclassified Grid,outputRaster
+saga:reclassifyvaluessimple,GRID_OUT,Changed Grid,outputRaster
+saga:reclassifyvaluessingle,RESULT,Reclassified Grid,outputRaster
+saga:reclassifyvaluestable,RESULT,Reclassified Grid,outputRaster
+saga:regressionanalysis,REGRESSION,Regression,outputRaster
+saga:regressionanalysis,RESIDUAL,Residuals,outputVector
+saga:regressionanalysispointsandpredictorgrid,REGRESSION,Regression,outputRaster
+saga:regressionanalysispointsandpredictorgrid,RESIDUAL,Residuals,outputVector
+saga:regressionkriging,REGRESSION,Regression,outputRaster
+saga:regressionkriging,PREDICTION,Prediction,outputRaster
+saga:regressionkriging,RESIDUALS,Residuals,outputRaster
+saga:regressionkriging,VARIANCE,Quality Measure,outputRaster
+saga:regressionkriging,INFO_COEFF,Regression,outputVector
+saga:regressionkriging,INFO_MODEL,Regression,outputVector
+saga:regressionkriging,INFO_STEPS,Regression,outputVector
+saga:relativeheightsandslopepositions,HO,Slope Height,outputRaster
+saga:relativeheightsandslopepositions,HU,Valley Depth,outputRaster
+saga:relativeheightsandslopepositions,NH,Normalized Height,outputRaster
+saga:relativeheightsandslopepositions,SH,Standardized Height,outputRaster
+saga:relativeheightsandslopepositions,MS,Mid,outputRaster
+saga:removeduplicatepoints,RESULT,Result,outputVector
+saga:removesmallpixelclumpstonodata,OUTPUT,Filtered Grid,outputRaster
+saga:representativeness,RESULT,Representativeness,outputRaster
+saga:resampling,OUTPUT,Grid,outputRaster
+saga:resamplingfilter,LOPASS,Low Pass Filter,outputRaster
+saga:resamplingfilter,HIPASS,High Pass Filter,outputRaster
+saga:residualanalysis,MEAN,Mean Value,outputRaster
+saga:residualanalysis,DIFF,Difference from Mean Value,outputRaster
+saga:residualanalysis,STDDEV,Standard Deviation,outputRaster
+saga:residualanalysis,RANGE,Value Range,outputRaster
+saga:residualanalysis,MIN,Minimum Value,outputRaster
+saga:residualanalysis,MAX,Maximum Value,outputRaster
+saga:residualanalysis,DEVMEAN,Deviation from Mean Value,outputRaster
+saga:residualanalysis,PERCENT,Percentile,outputRaster
+saga:rgbcomposite,RGB,Output RGB,outputRaster
+saga:riverbasin,OUTPUT2,Grad,outputRaster
+saga:riverbasin,OUTPUT3,Direc,outputRaster
+saga:riverbasin,OUTPUT4,HGGrad,outputRaster
+saga:riverbasin,OUTPUT5,RivSpeed,outputRaster
+saga:riverbasin,OUTPUT6,Coordinates,outputRaster
+saga:riverbasin,OUTPUT7,BasinShare,outputRaster
+saga:riverbasin,OUTPUT8,statWUse,outputRaster
+saga:riverbasin,OUTPUT9,NumInFlowCells,outputRaster
+saga:rivergridgeneration,OUTPUT,HG Raster,outputRaster
+saga:runningaverage,OUTPUT,Output,outputVector
+saga:sagawetnessindex,AREA,Catchment area,outputRaster
+saga:sagawetnessindex,SLOPE,Catchment slope,outputRaster
+saga:sagawetnessindex,AREA_MOD,Modified catchment area,outputRaster
+saga:sagawetnessindex,TWI,Topographic Wetness Index,outputRaster
+saga:seededregiongrowing,SEGMENTS,Segments,outputRaster
+saga:seededregiongrowing,SIMILARITY,Similarity,outputRaster
+saga:seedgeneration,SEED_GRID,Seeds Grid,outputRaster
+saga:seedgeneration,VARIANCE,Variance,outputRaster
+saga:seedgeneration,SEED_POINTS,Seeds Points,outputVector
+saga:separatepointsbydirection,OUTPUT,Point direction,outputVector
+saga:sharedpolygonedges,EDGES,Edges,outputVector
+saga:shrinkandexpand,RESULT,Result Grid,outputRaster
+saga:sievingclasses,OUTPUT,Sieved Classes,outputRaster
+saga:simplefilter,RESULT,Filtered Grid,outputRaster
+saga:simplefilterwithinshapes,RESULT,Filtered Grid,outputRaster
+saga:simplekriging,PREDICTION,Prediction,outputRaster
+saga:simplekriging,VARIANCE,Quality Measure,outputRaster
+saga:simpleregiongrowing,SEGMENTS,Segments,outputRaster
+saga:simpleregiongrowing,SIMILARITY,Similarity,outputRaster
+saga:simpleregiongrowing,TABLE,Seeds,outputVector
+saga:simulation,TIME,Time,outputRaster
+saga:simulation,FLAME,Flame Length,outputRaster
+saga:simulation,INTENSITY,Intensity,outputRaster
+saga:singlevaluedecompositionopencv,OUTPUT,Output,outputRaster
+saga:sinkdrainageroutedetection,SINKROUTE,Sink Route,outputRaster
+saga:sinkremoval,DEM_PREPROC,Preprocessed DEM,outputRaster
+saga:skyviewfactor,VISIBLE,Visible Sky,outputRaster
+saga:skyviewfactor,SVF,Sky View Factor,outputRaster
+saga:skyviewfactor,SIMPLE,Sky View Factor ,outputRaster
+saga:skyviewfactor,TERRAIN,Terrain View Factor,outputRaster
+saga:skyviewfactor,DISTANCE,Terrain View Factor,outputRaster
+saga:slopeaspectcurvature,SLOPE,Slope,outputRaster
+saga:slopeaspectcurvature,ASPECT,Aspect,outputRaster
+saga:slopeaspectcurvature,C_GENE,General Curvature,outputRaster
+saga:slopeaspectcurvature,C_PLAN,Plan Curvature,outputRaster
+saga:slopeaspectcurvature,C_PROF,Profile Curvature,outputRaster
+saga:slopeaspectcurvature,C_TANG,Tangential Curvature,outputRaster
+saga:slopeaspectcurvature,C_LONG,Longitudinal Curvature,outputRaster
+saga:slopeaspectcurvature,C_CROS,Cross,outputRaster
+saga:slopeaspectcurvature,C_MINI,Minimal Curvature,outputRaster
+saga:slopeaspectcurvature,C_MAXI,Maximal Curvature,outputRaster
+saga:slopeaspectcurvature,C_TOTA,Total Curvature,outputRaster
+saga:slopeaspectcurvature,C_ROTO,Flow,outputRaster
+saga:slopelength,LENGTH,Slope Length,outputRaster
+saga:slopelimitedflowaccumulation,FLOW,Flow Accumulation,outputRaster
+saga:smoothingvigra,OUTPUT,Output,outputRaster
+saga:snappointstogrid,OUTPUT,Result,outputVector
+saga:snappointstogrid,MOVES,Moves,outputVector
+saga:snappointstolines,OUTPUT,Result,outputVector
+saga:snappointstolines,MOVES,Moves,outputVector
+saga:snappointstopoints,OUTPUT,Result,outputVector
+saga:snappointstopoints,MOVES,Moves,outputVector
+saga:soiltextureclassification,TEXTURE,Soil Texture,outputRaster
+saga:soiltextureclassification,SUM,Sum,outputRaster
+saga:spatialpointpatternanalysis,CENTRE,Mean Centre,outputVector
+saga:spatialpointpatternanalysis,STDDIST,Standard Distance,outputVector
+saga:spatialpointpatternanalysis,BBOX,Bounding Box,outputVector
+saga:splitlinesatpoints,INTERSECT,Intersection,outputVector
+saga:splitlineswithlines,INTERSECT,Intersection,outputVector
+saga:splitrgbbands,R,Output R band layer,outputRaster
+saga:splitrgbbands,G,Output G band layer,outputRaster
+saga:splitrgbbands,B,Output B band layer,outputRaster
+saga:splitshapeslayerrandomly,A,Group A,outputVector
+saga:splitshapeslayerrandomly,B,Group B,outputVector
+saga:statisticsforrasters,MEAN,Arithmetic Mean,outputRaster
+saga:statisticsforrasters,MIN,Minimum,outputRaster
+saga:statisticsforrasters,MAX,Maximum,outputRaster
+saga:statisticsforrasters,VAR,Variance,outputRaster
+saga:statisticsforrasters,SUM,Sum,outputRaster
+saga:statisticsforrasters,RANGE,Range,outputRaster
+saga:statisticsforrasters,PCTL,Percentile,outputRaster
+saga:statisticsforrasters,STDDEV,Standard Deviation,outputRaster
+saga:statisticsforrasters,STDDEVLO,Mean less Standard Deviation,outputRaster
+saga:statisticsforrasters,STDDEVHI,Mean plus Standard Deviation,outputRaster
+saga:strahlerorder,STRAHLER,Strahler Order,outputRaster
+saga:streampowerindex,SPI,Stream Power Index,outputRaster
+saga:successiveflowrouting,FLOW,Flow,outputRaster
+saga:supervisedclassification,CLASS_INFO,Class Information,outputVector
+saga:supervisedclassification,CLASSES,Classification,outputRaster
+saga:supervisedclassification,QUALITY,Quality,outputRaster
+saga:supervisedclassificationforgrids,CLASSES,Classification,outputRaster
+saga:supervisedclassificationforgrids,QUALITY,Quality,outputRaster
+saga:supervisedclassificationforshapes,CLASSES,Classification,outputVector
+saga:supportvectormachineclassificationopencv,CLASSES,Classification,outputRaster
+saga:surfaceandgradient,SURF,Surface,outputRaster
+saga:surfaceandgradient,GRAD,Gradient,outputRaster
+saga:surfacegradientandconcentration,SURF,Surface,outputRaster
+saga:surfacegradientandconcentration,GRAD,Gradient,outputRaster
+saga:surfacegradientandconcentration,CONC,Concentration,outputRaster
+saga:surfacespecificpoints,RESULT,Result,outputRaster
+saga:svmclassification,CLASSES,Classification,outputRaster
+saga:symmetricaldifference,RESULT,Symmetrical Difference,outputVector
+saga:tasseledcaptransformation,BRIGHTNESS,Brightness,outputRaster
+saga:tasseledcaptransformation,GREENNESS,Greenness,outputRaster
+saga:tasseledcaptransformation,WETNESS,Wetness,outputRaster
+saga:tcilow,TCILOW,TCI Low,outputRaster
+saga:terrainmapview,SHADE,Shade,outputRaster
+saga:terrainmapview,OPENNESS,Openness,outputRaster
+saga:terrainmapview,SLOPE,Slope,outputRaster
+saga:terrainmapview,CONTOURS,Contours,outputVector
+saga:terrainruggednessindextri,TRI,Terrain Ruggedness Index ,outputRaster
+saga:terrainsurfaceclassificationiwahashiandpike,LANDFORMS,Landforms,outputRaster
+saga:terrainsurfaceconvexity,CONVEXITY,Convexity,outputRaster
+saga:terrainsurfacetexture,TEXTURE,Texture,outputRaster
+saga:thiessenpolygons,POLYGONS,Polygons,outputVector
+saga:thinplatespline,TARGET_OUT_GRID,Grid,outputRaster
+saga:thinplatesplinetin,TARGET_OUT_GRID,Grid,outputRaster
+saga:thresholdrasterbuffer,BUFFER,Buffer Grid,outputRaster
+saga:topofatmospherereflectance,RF_MSS01,Reflectance Band 1,outputRaster
+saga:topofatmospherereflectance,RF_MSS02,Reflectance Band 2,outputRaster
+saga:topofatmospherereflectance,RF_MSS03,Reflectance Band 3,outputRaster
+saga:topofatmospherereflectance,RF_MSS04,Reflectance Band 4,outputRaster
+saga:topofatmospherereflectance,RF_ETM01,Reflectance Band 1,outputRaster
+saga:topofatmospherereflectance,RF_ETM02,Reflectance Band 2,outputRaster
+saga:topofatmospherereflectance,RF_ETM03,Reflectance Band 3,outputRaster
+saga:topofatmospherereflectance,RF_ETM04,Reflectance Band 4,outputRaster
+saga:topofatmospherereflectance,RF_ETM05,Reflectance Band 5,outputRaster
+saga:topofatmospherereflectance,RF_ETM07,Reflectance Band 7,outputRaster
+saga:topofatmospherereflectance,RF_OLI01,Reflectance Band 1,outputRaster
+saga:topofatmospherereflectance,RF_OLI02,Reflectance Band 2,outputRaster
+saga:topofatmospherereflectance,RF_OLI03,Reflectance Band 3,outputRaster
+saga:topofatmospherereflectance,RF_OLI04,Reflectance Band 4,outputRaster
+saga:topofatmospherereflectance,RF_OLI05,Reflectance Band 5,outputRaster
+saga:topofatmospherereflectance,RF_OLI06,Reflectance Band 6,outputRaster
+saga:topofatmospherereflectance,RF_OLI07,Reflectance Band 7,outputRaster
+saga:topofatmospherereflectance,RF_OLI09,Reflectance Band 9,outputRaster
+saga:topofatmospherereflectance,RF__TM06,Reflectance Band 6,outputRaster
+saga:topofatmospherereflectance,RF_ETM61,Reflectance Band 61,outputRaster
+saga:topofatmospherereflectance,RF_ETM62,Reflectance Band 62,outputRaster
+saga:topofatmospherereflectance,RF_OLI10,Reflectance Band 10,outputRaster
+saga:topofatmospherereflectance,RF_OLI11,Reflectance Band 11,outputRaster
+saga:topofatmospherereflectance,RF_PAN08,Reflectance Band 8,outputRaster
+saga:topographiccorrection,CORRECTED,Corrected Image,outputRaster
+saga:topographicopenness,POS,Positive Openness,outputRaster
+saga:topographicopenness,NEG,Negative Openness,outputRaster
+saga:topographicpositionindextpi,TPI,Topographic Position Index,outputRaster
+saga:topographicwetnessindextwi,TWI,Topographic Wetness Index,outputRaster
+saga:tpibasedlandformclassification,LANDFORMS,Landforms,outputRaster
+saga:transectthroughpolygonshapefile,TRANSECT_RESULT,Result table,outputVector
+saga:transformvectorlayer,OUT,Transformed,outputVector
+saga:transposerasterlayers,TRANSPOSED,Transposed Grid,outputRaster
+saga:triangulation,TARGET_OUT_GRID,Grid,outputRaster
+saga:universalkriging,PREDICTION,Prediction,outputRaster
+saga:universalkriging,VARIANCE,Quality Measure,outputRaster
+saga:upslopeanddownslopecurvature,C_LOCAL,Local Curvature,outputRaster
+saga:upslopeanddownslopecurvature,C_UP,Upslope Curvature,outputRaster
+saga:upslopeanddownslopecurvature,C_UP_LOCAL,Local Upslope Curvature,outputRaster
+saga:upslopeanddownslopecurvature,C_DOWN,Downslope Curvature,outputRaster
+saga:upslopeanddownslopecurvature,C_DOWN_LOCAL,Local Downslope Curvature,outputRaster
+saga:upslopearea,AREA,Upslope Area,outputRaster
+saga:userdefinedfilter,RESULT,Filtered Grid,outputRaster
+saga:valleyandridgedetectiontophatapproach,VALLEY,Valley Depth,outputRaster
+saga:valleyandridgedetectiontophatapproach,HILL,Hill Height,outputRaster
+saga:valleyandridgedetectiontophatapproach,VALLEY_IDX,Valley Index,outputRaster
+saga:valleyandridgedetectiontophatapproach,HILL_IDX,Hill Index,outputRaster
+saga:valleyandridgedetectiontophatapproach,SLOPE_IDX,Hillslope Index,outputRaster
+saga:valleydepth,VALLEY_DEPTH,Valley Depth,outputRaster
+saga:valleydepth,RIDGE_LEVEL,Ridge Level,outputRaster
+saga:variabledistancebuffer,BUFFER,Buffer,outputVector
+saga:variogramcloud,RESULT,Variogram Cloud,outputVector
+saga:variogramsurface,COUNT,Number of Pairs,outputRaster
+saga:variogramsurface,VARIANCE,Variogram Surface,outputRaster
+saga:variogramsurface,COVARIANCE,Covariance Surface,outputRaster
+saga:vectorisinggridclasses,POLYGONS,Vectorized,outputVector
+saga:vectorruggednessmeasurevrm,VRM,Vector Terrain Ruggedness ,outputRaster
+saga:vegetationindexdistancebased,PVI0,Perpendicular Vegetation Index ,outputRaster
+saga:vegetationindexdistancebased,PVI1,Perpendicular Vegetation Index ,outputRaster
+saga:vegetationindexdistancebased,PVI2,Perpendicular Vegetation Index ,outputRaster
+saga:vegetationindexdistancebased,PVI3,Perpendicular Vegetation Index ,outputRaster
+saga:vegetationindexdistancebased,TSAVI,Transformed Soil Adjusted Vegetation Index ,outputRaster
+saga:vegetationindexdistancebased,ATSAVI,Transformed Soil Adjusted Vegetation Index ,outputRaster
+saga:vegetationindexslopebased,DVI,Difference Vegetation Index,outputRaster
+saga:vegetationindexslopebased,NDVI,Normalized Difference Vegetation Index,outputRaster
+saga:vegetationindexslopebased,RVI,Ratio Vegetation Index,outputRaster
+saga:vegetationindexslopebased,NRVI,Normalized Ratio Vegetation Index,outputRaster
+saga:vegetationindexslopebased,TVI,Transformed Vegetation Index,outputRaster
+saga:vegetationindexslopebased,CTVI,Corrected Transformed Vegetation Index,outputRaster
+saga:vegetationindexslopebased,TTVI,Thiam,outputRaster
+saga:vegetationindexslopebased,SAVI,Soil Adjusted Vegetation Index,outputRaster
+saga:verticaldistancetochannelnetwork,DISTANCE,Vertical Distance to Channel Network,outputRaster
+saga:verticaldistancetochannelnetwork,BASELEVEL,Channel Network Base Level,outputRaster
+saga:warpingshapes,OUTPUT,Output,outputVector
+saga:waterretentioncapacity,OUTPUT,Final Parameters,outputVector
+saga:waterretentioncapacity,RETENTION,Water Retention Capacity,outputRaster
+saga:watershedbasins,BASINS,Watershed Basins,outputRaster
+saga:watershedsegmentation,SEGMENTS,Segments,outputRaster
+saga:watershedsegmentation,SEEDS,Seed Points,outputVector
+saga:watershedsegmentation,BORDERS,Borders,outputRaster
+saga:watershedsegmentationvigra,OUTPUT,Segmentation,outputRaster
+saga:windeffect,EFFECT,Wind Effect,outputRaster
+saga:windeffect,LUV,Windward Effect,outputRaster
+saga:windeffect,LEE,Leeward Effect,outputRaster
+saga:windexpositionindex,EXPOSITION,Wind Exposition,outputRaster
+saga:zonalmultipleregressionanalysispointsandpredictorgrids,RESIDUALS,Residuals,outputVector
+saga:zonalmultipleregressionanalysispointsandpredictorgrids,REGRESSION,Regression,outputRaster
+saga:zonalrasterstatistics,OUTTAB,Zonal Statistics,outputVector
