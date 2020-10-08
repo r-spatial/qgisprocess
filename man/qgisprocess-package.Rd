@@ -20,5 +20,11 @@ Useful links:
 \author{
 \strong{Maintainer}: Dewey Dunnington \email{dewey@fishandwhistle.net} (\href{https://orcid.org/0000-0002-9415-4582}{ORCID})
 
+Other contributors:
+\itemize{
+  \item Robin Lovelace (\href{https://orcid.org/0000-0001-5679-6536}{ORCID}) [contributor]
+  \item Jan Caha [contributor]
+}
+
 }
 \keyword{internal}
