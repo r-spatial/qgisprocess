@@ -5,19 +5,24 @@ test_that("qgis_help_text()/show works", {
   expect_output(qgis_show_help("native:filedownloader"), "native:filedownloader")
 })
 
-test_that("qgis_description() works for all algorithms", {
+test_that("qgis_description() works for algorithms", {
   skip_if_not(has_qgis())
 
-  for (algorithm in head(qgis_algorithms()$algorithm, 10)) {
+  for (algorithm in head(qgis_algorithms()$algorithm, 3)) {
     expect_length(qgis_description(!! algorithm), 1)
     expect_type(qgis_description(!! algorithm), "character")
   }
 
-  for (algorithm in head(qgis_algorithms()$algorithm, 10)) {
+  for (algorithm in head(qgis_algorithms()$algorithm, 3)) {
     expect_is(qgis_arguments(!! algorithm), "data.frame")
   }
 
-  for (algorithm in head(qgis_algorithms()$algorithm, 10)) {
+  for (algorithm in head(qgis_algorithms()$algorithm, 3)) {
     expect_is(qgis_outputs(!! algorithm), "data.frame")
   }
+})
+
+test_that("algorithms with no outputs have zero-row qgis_outputs()", {
+  skip_if_not(has_qgis())
+  expect_identical(nrow(qgis_outputs("native:spatialiteexecutesql")), 0L)
 })

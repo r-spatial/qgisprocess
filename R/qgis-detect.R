@@ -13,7 +13,7 @@
 #'
 qgis_detect_windows <- function(drive_letter = strsplit(R.home(), ":")[[1]][1]) {
   if (!is_windows()) {
-    stop("Can't use `qgis_detect_windows()` on a non-windows platform.", call. = FALSE)
+    abort("Can't use `qgis_detect_windows()` on a non-windows platform.")
   }
 
   bat_files <- c("qgis_process-qgis.bat", "qgis_process-qgis-dev.bat")
@@ -34,7 +34,7 @@ qgis_detect_windows <- function(drive_letter = strsplit(R.home(), ":")[[1]][1]) 
 #' @export
 qgis_detect_macos <- function() {
   if (!is_macos()) {
-    stop("Can't use `qgis_detect_macos()` on a non-MacOS platform.", call. = FALSE)
+    abort("Can't use `qgis_detect_macos()` on a non-MacOS platform.")
   }
 
   possible_locs_mac <- file.path(

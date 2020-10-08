@@ -1,0 +1,972 @@
+provider,provider_title,algorithm,algorithm_id,algorithm_title
+3d,QGIS (3D),3d:tessellate,tessellate,Tessellate
+gdal,GDAL,gdal:aspect,aspect,Aspect
+gdal,GDAL,gdal:assignprojection,assignprojection,Assign projection
+gdal,GDAL,gdal:buffervectors,buffervectors,Buffer vectors
+gdal,GDAL,gdal:buildvirtualraster,buildvirtualraster,Build virtual raster
+gdal,GDAL,gdal:buildvirtualvector,buildvirtualvector,Build virtual vector
+gdal,GDAL,gdal:cliprasterbyextent,cliprasterbyextent,Clip raster by extent
+gdal,GDAL,gdal:cliprasterbymasklayer,cliprasterbymasklayer,Clip raster by mask layer
+gdal,GDAL,gdal:clipvectorbyextent,clipvectorbyextent,Clip vector by extent
+gdal,GDAL,gdal:clipvectorbypolygon,clipvectorbypolygon,Clip vector by mask layer
+gdal,GDAL,gdal:colorrelief,colorrelief,Color relief
+gdal,GDAL,gdal:contour,contour,Contour
+gdal,GDAL,gdal:contour_polygon,contour_polygon,Contour Polygons
+gdal,GDAL,gdal:convertformat,convertformat,Convert format
+gdal,GDAL,gdal:dissolve,dissolve,Dissolve
+gdal,GDAL,gdal:executesql,executesql,Execute SQL
+gdal,GDAL,gdal:extractprojection,extractprojection,Extract projection
+gdal,GDAL,gdal:fillnodata,fillnodata,Fill nodata
+gdal,GDAL,gdal:gdal2tiles,gdal2tiles,gdal2tiles
+gdal,GDAL,gdal:gdal2xyz,gdal2xyz,gdal2xyz
+gdal,GDAL,gdal:gdalinfo,gdalinfo,Raster information
+gdal,GDAL,gdal:gridaverage,gridaverage,Grid (Moving average)
+gdal,GDAL,gdal:griddatametrics,griddatametrics,Grid (Data metrics)
+gdal,GDAL,gdal:gridinversedistance,gridinversedistance,Grid (Inverse distance to a power)
+gdal,GDAL,gdal:gridinversedistancenearestneighbor,gridinversedistancenearestneighbor,Grid (IDW with nearest neighbor searching)
+gdal,GDAL,gdal:gridlinear,gridlinear,Grid (Linear)
+gdal,GDAL,gdal:gridnearestneighbor,gridnearestneighbor,Grid (Nearest neighbor)
+gdal,GDAL,gdal:hillshade,hillshade,Hillshade
+gdal,GDAL,gdal:importvectorintopostgisdatabaseavailableconnections,importvectorintopostgisdatabaseavailableconnections,Export to PostgreSQL (available connections)
+gdal,GDAL,gdal:importvectorintopostgisdatabasenewconnection,importvectorintopostgisdatabasenewconnection,Export to PostgreSQL (new connection)
+gdal,GDAL,gdal:merge,merge,Merge
+gdal,GDAL,gdal:nearblack,nearblack,Near black
+gdal,GDAL,gdal:offsetcurve,offsetcurve,Offset curve
+gdal,GDAL,gdal:ogrinfo,ogrinfo,Vector information
+gdal,GDAL,gdal:onesidebuffer,onesidebuffer,One side buffer
+gdal,GDAL,gdal:overviews,overviews,Build overviews (pyramids)
+gdal,GDAL,gdal:pansharp,pansharp,Pansharpening
+gdal,GDAL,gdal:pcttorgb,pcttorgb,PCT to RGB
+gdal,GDAL,gdal:pointsalonglines,pointsalonglines,Points along lines
+gdal,GDAL,gdal:polygonize,polygonize,Polygonize (raster to vector)
+gdal,GDAL,gdal:proximity,proximity,Proximity (raster distance)
+gdal,GDAL,gdal:rastercalculator,rastercalculator,Raster calculator
+gdal,GDAL,gdal:rasterize,rasterize,Rasterize (vector to raster)
+gdal,GDAL,gdal:rasterize_over,rasterize_over,Rasterize (overwrite with attribute)
+gdal,GDAL,gdal:rasterize_over_fixed_value,rasterize_over_fixed_value,Rasterize (overwrite with fixed value)
+gdal,GDAL,gdal:rearrange_bands,rearrange_bands,Rearrange bands
+gdal,GDAL,gdal:retile,retile,Retile
+gdal,GDAL,gdal:rgbtopct,rgbtopct,RGB to PCT
+gdal,GDAL,gdal:roughness,roughness,Roughness
+gdal,GDAL,gdal:sieve,sieve,Sieve
+gdal,GDAL,gdal:slope,slope,Slope
+gdal,GDAL,gdal:tileindex,tileindex,Tile index
+gdal,GDAL,gdal:tpitopographicpositionindex,tpitopographicpositionindex,Topographic Position Index (TPI)
+gdal,GDAL,gdal:translate,translate,Translate (convert format)
+gdal,GDAL,gdal:triterrainruggednessindex,triterrainruggednessindex,Terrain Ruggedness Index (TRI)
+gdal,GDAL,gdal:viewshed,viewshed,Viewshed
+gdal,GDAL,gdal:warpreproject,warpreproject,Warp (reproject)
+grass7,GRASS,grass7:i.albedo,i.albedo,i.albedo
+grass7,GRASS,grass7:i.aster.toar,i.aster.toar,i.aster.toar
+grass7,GRASS,grass7:i.atcorr,i.atcorr,i.atcorr
+grass7,GRASS,grass7:i.biomass,i.biomass,i.biomass
+grass7,GRASS,grass7:i.cca,i.cca,i.cca
+grass7,GRASS,grass7:i.cluster,i.cluster,i.cluster
+grass7,GRASS,grass7:i.colors.enhance,i.colors.enhance,i.colors.enhance
+grass7,GRASS,grass7:i.eb.eta,i.eb.eta,i.eb.eta
+grass7,GRASS,grass7:i.eb.evapfr,i.eb.evapfr,i.eb.evapfr
+grass7,GRASS,grass7:i.eb.hsebal01.coords,i.eb.hsebal01.coords,i.eb.hsebal01.coords
+grass7,GRASS,grass7:i.eb.netrad,i.eb.netrad,i.eb.netrad
+grass7,GRASS,grass7:i.eb.soilheatflux,i.eb.soilheatflux,i.eb.soilheatflux
+grass7,GRASS,grass7:i.emissivity,i.emissivity,i.emissivity
+grass7,GRASS,grass7:i.evapo.mh,i.evapo.mh,i.evapo.mh
+grass7,GRASS,grass7:i.evapo.pm,i.evapo.pm,i.evapo.pm
+grass7,GRASS,grass7:i.evapo.pt,i.evapo.pt,i.evapo.pt
+grass7,GRASS,grass7:i.evapo.time,i.evapo.time,i.evapo.time
+grass7,GRASS,grass7:i.fft,i.fft,i.fft
+grass7,GRASS,grass7:i.gensig,i.gensig,i.gensig
+grass7,GRASS,grass7:i.gensigset,i.gensigset,i.gensigset
+grass7,GRASS,grass7:i.group,i.group,i.group
+grass7,GRASS,grass7:i.his.rgb,i.his.rgb,i.his.rgb
+grass7,GRASS,grass7:i.ifft,i.ifft,i.ifft
+grass7,GRASS,grass7:i.image.mosaic,i.image.mosaic,i.image.mosaic
+grass7,GRASS,grass7:i.in.spotvgt,i.in.spotvgt,i.in.spotvgt
+grass7,GRASS,grass7:i.landsat.acca,i.landsat.acca,i.landsat.acca
+grass7,GRASS,grass7:i.landsat.toar,i.landsat.toar,i.landsat.toar
+grass7,GRASS,grass7:i.maxlik,i.maxlik,i.maxlik
+grass7,GRASS,grass7:i.modis.qc,i.modis.qc,i.modis.qc
+grass7,GRASS,grass7:i.oif,i.oif,i.oif
+grass7,GRASS,grass7:i.pansharpen,i.pansharpen,i.pansharpen
+grass7,GRASS,grass7:i.pca,i.pca,i.pca
+grass7,GRASS,grass7:i.rgb.his,i.rgb.his,i.rgb.his
+grass7,GRASS,grass7:i.segment,i.segment,i.segment
+grass7,GRASS,grass7:i.smap,i.smap,i.smap
+grass7,GRASS,grass7:i.tasscap,i.tasscap,i.tasscap
+grass7,GRASS,grass7:i.topo.coor.ill,i.topo.coor.ill,i.topo.coor.ill
+grass7,GRASS,grass7:i.topo.corr,i.topo.corr,i.topo.corr
+grass7,GRASS,grass7:i.vi,i.vi,i.vi
+grass7,GRASS,grass7:i.zc,i.zc,i.zc
+grass7,GRASS,grass7:m.cogo,m.cogo,m.cogo
+grass7,GRASS,grass7:nviz,nviz,nviz
+grass7,GRASS,grass7:r.basins.fill,r.basins.fill,r.basins.fill
+grass7,GRASS,grass7:r.blend.combine,r.blend.combine,r.blend.combine
+grass7,GRASS,grass7:r.blend.rgb,r.blend.rgb,r.blend.rgb
+grass7,GRASS,grass7:r.buffer,r.buffer,r.buffer
+grass7,GRASS,grass7:r.buffer.lowmem,r.buffer.lowmem,r.buffer.lowmem
+grass7,GRASS,grass7:r.carve,r.carve,r.carve
+grass7,GRASS,grass7:r.category,r.category,r.category
+grass7,GRASS,grass7:r.category.out,r.category.out,r.category.out
+grass7,GRASS,grass7:r.circle,r.circle,r.circle
+grass7,GRASS,grass7:r.clump,r.clump,r.clump
+grass7,GRASS,grass7:r.coin,r.coin,r.coin
+grass7,GRASS,grass7:r.colors,r.colors,r.colors
+grass7,GRASS,grass7:r.colors.out,r.colors.out,r.colors.out
+grass7,GRASS,grass7:r.colors.stddev,r.colors.stddev,r.colors.stddev
+grass7,GRASS,grass7:r.composite,r.composite,r.composite
+grass7,GRASS,grass7:r.contour,r.contour,r.contour
+grass7,GRASS,grass7:r.cost,r.cost,r.cost
+grass7,GRASS,grass7:r.covar,r.covar,r.covar
+grass7,GRASS,grass7:r.cross,r.cross,r.cross
+grass7,GRASS,grass7:r.describe,r.describe,r.describe
+grass7,GRASS,grass7:r.distance,r.distance,r.distance
+grass7,GRASS,grass7:r.drain,r.drain,r.drain
+grass7,GRASS,grass7:r.fill.dir,r.fill.dir,r.fill.dir
+grass7,GRASS,grass7:r.fill.stats,r.fill.stats,r.fill.stats
+grass7,GRASS,grass7:r.fillnulls,r.fillnulls,r.fillnulls
+grass7,GRASS,grass7:r.flow,r.flow,r.flow
+grass7,GRASS,grass7:r.geomorphon,r.geomorphon,r.geomorphon
+grass7,GRASS,grass7:r.grow,r.grow,r.grow
+grass7,GRASS,grass7:r.grow.distance,r.grow.distance,r.grow.distance
+grass7,GRASS,grass7:r.gwflow,r.gwflow,r.gwflow
+grass7,GRASS,grass7:r.his,r.his,r.his
+grass7,GRASS,grass7:r.horizon,r.horizon,r.horizon
+grass7,GRASS,grass7:r.horizon.height,r.horizon.height,r.horizon.height
+grass7,GRASS,grass7:r.in.lidar,r.in.lidar,r.in.lidar
+grass7,GRASS,grass7:r.in.lidar.info,r.in.lidar.info,r.in.lidar.info
+grass7,GRASS,grass7:r.info,r.info,r.info
+grass7,GRASS,grass7:r.kappa,r.kappa,r.kappa
+grass7,GRASS,grass7:r.lake,r.lake,r.lake
+grass7,GRASS,grass7:r.latlong,r.latlong,r.latlong
+grass7,GRASS,grass7:r.li.cwed,r.li.cwed,r.li.cwed
+grass7,GRASS,grass7:r.li.cwed.ascii,r.li.cwed.ascii,r.li.cwed.ascii
+grass7,GRASS,grass7:r.li.dominance,r.li.dominance,r.li.dominance
+grass7,GRASS,grass7:r.li.dominance.ascii,r.li.dominance.ascii,r.li.dominance.ascii
+grass7,GRASS,grass7:r.li.edgedensity,r.li.edgedensity,r.li.edgedensity
+grass7,GRASS,grass7:r.li.edgedensity.ascii,r.li.edgedensity.ascii,r.li.edgedensity.ascii
+grass7,GRASS,grass7:r.li.mpa,r.li.mpa,r.li.mpa
+grass7,GRASS,grass7:r.li.mpa.ascii,r.li.mpa.ascii,r.li.mpa.ascii
+grass7,GRASS,grass7:r.li.mps,r.li.mps,r.li.mps
+grass7,GRASS,grass7:r.li.mps.ascii,r.li.mps.ascii,r.li.mps.ascii
+grass7,GRASS,grass7:r.li.padcv,r.li.padcv,r.li.padcv
+grass7,GRASS,grass7:r.li.padcv.ascii,r.li.padcv.ascii,r.li.padcv.ascii
+grass7,GRASS,grass7:r.li.padrange,r.li.padrange,r.li.padrange
+grass7,GRASS,grass7:r.li.padrange.ascii,r.li.padrange.ascii,r.li.padrange.ascii
+grass7,GRASS,grass7:r.li.padsd,r.li.padsd,r.li.padsd
+grass7,GRASS,grass7:r.li.padsd.ascii,r.li.padsd.ascii,r.li.padsd.ascii
+grass7,GRASS,grass7:r.li.patchdensity,r.li.patchdensity,r.li.patchdensity
+grass7,GRASS,grass7:r.li.patchdensity.ascii,r.li.patchdensity.ascii,r.li.patchdensity.ascii
+grass7,GRASS,grass7:r.li.patchnum,r.li.patchnum,r.li.patchnum
+grass7,GRASS,grass7:r.li.patchnum.ascii,r.li.patchnum.ascii,r.li.patchnum.ascii
+grass7,GRASS,grass7:r.li.pielou,r.li.pielou,r.li.pielou
+grass7,GRASS,grass7:r.li.pielou.ascii,r.li.pielou.ascii,r.li.pielou.ascii
+grass7,GRASS,grass7:r.li.renyi,r.li.renyi,r.li.renyi
+grass7,GRASS,grass7:r.li.renyi.ascii,r.li.renyi.ascii,r.li.renyi.ascii
+grass7,GRASS,grass7:r.li.richness,r.li.richness,r.li.richness
+grass7,GRASS,grass7:r.li.richness.ascii,r.li.richness.ascii,r.li.richness.ascii
+grass7,GRASS,grass7:r.li.shannon,r.li.shannon,r.li.shannon
+grass7,GRASS,grass7:r.li.shannon.ascii,r.li.shannon.ascii,r.li.shannon.ascii
+grass7,GRASS,grass7:r.li.shape,r.li.shape,r.li.shape
+grass7,GRASS,grass7:r.li.shape.ascii,r.li.shape.ascii,r.li.shape.ascii
+grass7,GRASS,grass7:r.li.simpson,r.li.simpson,r.li.simpson
+grass7,GRASS,grass7:r.li.simpson.ascii,r.li.simpson.ascii,r.li.simpson.ascii
+grass7,GRASS,grass7:r.mapcalc.simple,r.mapcalc.simple,r.mapcalc.simple
+grass7,GRASS,grass7:r.mask.rast,r.mask.rast,r.mask.rast
+grass7,GRASS,grass7:r.mask.vect,r.mask.vect,r.mask.vect
+grass7,GRASS,grass7:r.mfilter,r.mfilter,r.mfilter
+grass7,GRASS,grass7:r.mode,r.mode,r.mode
+grass7,GRASS,grass7:r.neighbors,r.neighbors,r.neighbors
+grass7,GRASS,grass7:r.null,r.null,r.null
+grass7,GRASS,grass7:r.out.ascii,r.out.ascii,r.out.ascii
+grass7,GRASS,grass7:r.out.gridatb,r.out.gridatb,r.out.gridatb
+grass7,GRASS,grass7:r.out.mat,r.out.mat,r.out.mat
+grass7,GRASS,grass7:r.out.mpeg,r.out.mpeg,r.out.mpeg
+grass7,GRASS,grass7:r.out.png,r.out.png,r.out.png
+grass7,GRASS,grass7:r.out.pov,r.out.pov,r.out.pov
+grass7,GRASS,grass7:r.out.ppm,r.out.ppm,r.out.ppm
+grass7,GRASS,grass7:r.out.ppm3,r.out.ppm3,r.out.ppm3
+grass7,GRASS,grass7:r.out.vrml,r.out.vrml,r.out.vrml
+grass7,GRASS,grass7:r.out.vtk,r.out.vtk,r.out.vtk
+grass7,GRASS,grass7:r.out.xyz,r.out.xyz,r.out.xyz
+grass7,GRASS,grass7:r.param.scale,r.param.scale,r.param.scale
+grass7,GRASS,grass7:r.patch,r.patch,r.patch
+grass7,GRASS,grass7:r.plane,r.plane,r.plane
+grass7,GRASS,grass7:r.profile,r.profile,r.profile
+grass7,GRASS,grass7:r.proj,r.proj,r.proj
+grass7,GRASS,grass7:r.quant,r.quant,r.quant
+grass7,GRASS,grass7:r.quantile,r.quantile,r.quantile
+grass7,GRASS,grass7:r.random,r.random,r.random
+grass7,GRASS,grass7:r.random.cells,r.random.cells,r.random.cells
+grass7,GRASS,grass7:r.random.surface,r.random.surface,r.random.surface
+grass7,GRASS,grass7:r.reclass,r.reclass,r.reclass
+grass7,GRASS,grass7:r.reclass.area,r.reclass.area,r.reclass.area
+grass7,GRASS,grass7:r.recode,r.recode,r.recode
+grass7,GRASS,grass7:r.regression.line,r.regression.line,r.regression.line
+grass7,GRASS,grass7:r.regression.multi,r.regression.multi,r.regression.multi
+grass7,GRASS,grass7:r.relief,r.relief,r.relief
+grass7,GRASS,grass7:r.relief.scaling,r.relief.scaling,r.relief.scaling
+grass7,GRASS,grass7:r.report,r.report,r.report
+grass7,GRASS,grass7:r.resamp.bspline,r.resamp.bspline,r.resamp.bspline
+grass7,GRASS,grass7:r.resamp.filter,r.resamp.filter,r.resamp.filter
+grass7,GRASS,grass7:r.resamp.interp,r.resamp.interp,r.resamp.interp
+grass7,GRASS,grass7:r.resamp.rst,r.resamp.rst,r.resamp.rst
+grass7,GRASS,grass7:r.resamp.stats,r.resamp.stats,r.resamp.stats
+grass7,GRASS,grass7:r.resample,r.resample,r.resample
+grass7,GRASS,grass7:r.rescale,r.rescale,r.rescale
+grass7,GRASS,grass7:r.rescale.eq,r.rescale.eq,r.rescale.eq
+grass7,GRASS,grass7:r.rgb,r.rgb,r.rgb
+grass7,GRASS,grass7:r.ros,r.ros,r.ros
+grass7,GRASS,grass7:r.series,r.series,r.series
+grass7,GRASS,grass7:r.series.accumulate,r.series.accumulate,r.series.accumulate
+grass7,GRASS,grass7:r.series.interp,r.series.interp,r.series.interp
+grass7,GRASS,grass7:r.shade,r.shade,r.shade
+grass7,GRASS,grass7:r.sim.sediment,r.sim.sediment,r.sim.sediment
+grass7,GRASS,grass7:r.sim.water,r.sim.water,r.sim.water
+grass7,GRASS,grass7:r.slope.aspect,r.slope.aspect,r.slope.aspect
+grass7,GRASS,grass7:r.solute.transport,r.solute.transport,r.solute.transport
+grass7,GRASS,grass7:r.spread,r.spread,r.spread
+grass7,GRASS,grass7:r.spreadpath,r.spreadpath,r.spreadpath
+grass7,GRASS,grass7:r.statistics,r.statistics,r.statistics
+grass7,GRASS,grass7:r.stats,r.stats,r.stats
+grass7,GRASS,grass7:r.stats.quantile.out,r.stats.quantile.out,r.stats.quantile.out
+grass7,GRASS,grass7:r.stats.quantile.rast,r.stats.quantile.rast,r.stats.quantile.rast
+grass7,GRASS,grass7:r.stats.zonal,r.stats.zonal,r.stats.zonal
+grass7,GRASS,grass7:r.stream.extract,r.stream.extract,r.stream.extract
+grass7,GRASS,grass7:r.sun.incidout,r.sun.incidout,r.sun.incidout
+grass7,GRASS,grass7:r.sun.insoltime,r.sun.insoltime,r.sun.insoltime
+grass7,GRASS,grass7:r.sunhours,r.sunhours,r.sunhours
+grass7,GRASS,grass7:r.sunmask.datetime,r.sunmask.datetime,r.sunmask.datetime
+grass7,GRASS,grass7:r.sunmask.position,r.sunmask.position,r.sunmask.position
+grass7,GRASS,grass7:r.surf.area,r.surf.area,r.surf.area
+grass7,GRASS,grass7:r.surf.contour,r.surf.contour,r.surf.contour
+grass7,GRASS,grass7:r.surf.fractal,r.surf.fractal,r.surf.fractal
+grass7,GRASS,grass7:r.surf.gauss,r.surf.gauss,r.surf.gauss
+grass7,GRASS,grass7:r.surf.idw,r.surf.idw,r.surf.idw
+grass7,GRASS,grass7:r.surf.random,r.surf.random,r.surf.random
+grass7,GRASS,grass7:r.terraflow,r.terraflow,r.terraflow
+grass7,GRASS,grass7:r.texture,r.texture,r.texture
+grass7,GRASS,grass7:r.thin,r.thin,r.thin
+grass7,GRASS,grass7:r.tile,r.tile,r.tile
+grass7,GRASS,grass7:r.tileset,r.tileset,r.tileset
+grass7,GRASS,grass7:r.to.vect,r.to.vect,r.to.vect
+grass7,GRASS,grass7:r.topidx,r.topidx,r.topidx
+grass7,GRASS,grass7:r.topmodel,r.topmodel,r.topmodel
+grass7,GRASS,grass7:r.topmodel.topidxstats,r.topmodel.topidxstats,r.topmodel.topidxstats
+grass7,GRASS,grass7:r.transect,r.transect,r.transect
+grass7,GRASS,grass7:r.univar,r.univar,r.univar
+grass7,GRASS,grass7:r.uslek,r.uslek,r.uslek
+grass7,GRASS,grass7:r.usler,r.usler,r.usler
+grass7,GRASS,grass7:r.viewshed,r.viewshed,r.viewshed
+grass7,GRASS,grass7:r.volume,r.volume,r.volume
+grass7,GRASS,grass7:r.walk.coords,r.walk.coords,r.walk.coords
+grass7,GRASS,grass7:r.walk.points,r.walk.points,r.walk.points
+grass7,GRASS,grass7:r.walk.rast,r.walk.rast,r.walk.rast
+grass7,GRASS,grass7:r.water.outlet,r.water.outlet,r.water.outlet
+grass7,GRASS,grass7:r.watershed,r.watershed,r.watershed
+grass7,GRASS,grass7:r.what.color,r.what.color,r.what.color
+grass7,GRASS,grass7:r.what.coords,r.what.coords,r.what.coords
+grass7,GRASS,grass7:r.what.points,r.what.points,r.what.points
+grass7,GRASS,grass7:v.buffer,v.buffer,v.buffer
+grass7,GRASS,grass7:v.build.check,v.build.check,v.build.check
+grass7,GRASS,grass7:v.build.polylines,v.build.polylines,v.build.polylines
+grass7,GRASS,grass7:v.class,v.class,v.class
+grass7,GRASS,grass7:v.clean,v.clean,v.clean
+grass7,GRASS,grass7:v.cluster,v.cluster,v.cluster
+grass7,GRASS,grass7:v.db.select,v.db.select,v.db.select
+grass7,GRASS,grass7:v.decimate,v.decimate,v.decimate
+grass7,GRASS,grass7:v.delaunay,v.delaunay,v.delaunay
+grass7,GRASS,grass7:v.dissolve,v.dissolve,v.dissolve
+grass7,GRASS,grass7:v.distance,v.distance,v.distance
+grass7,GRASS,grass7:v.drape,v.drape,v.drape
+grass7,GRASS,grass7:v.edit,v.edit,v.edit
+grass7,GRASS,grass7:v.extract,v.extract,v.extract
+grass7,GRASS,grass7:v.extrude,v.extrude,v.extrude
+grass7,GRASS,grass7:v.generalize,v.generalize,v.generalize
+grass7,GRASS,grass7:v.hull,v.hull,v.hull
+grass7,GRASS,grass7:v.in.ascii,v.in.ascii,v.in.ascii
+grass7,GRASS,grass7:v.in.dxf,v.in.dxf,v.in.dxf
+grass7,GRASS,grass7:v.in.e00,v.in.e00,v.in.e00
+grass7,GRASS,grass7:v.in.geonames,v.in.geonames,v.in.geonames
+grass7,GRASS,grass7:v.in.lidar,v.in.lidar,v.in.lidar
+grass7,GRASS,grass7:v.in.lines,v.in.lines,v.in.lines
+grass7,GRASS,grass7:v.in.mapgen,v.in.mapgen,v.in.mapgen
+grass7,GRASS,grass7:v.in.wfs,v.in.wfs,v.in.wfs
+grass7,GRASS,grass7:v.info,v.info,v.info
+grass7,GRASS,grass7:v.kcv,v.kcv,v.kcv
+grass7,GRASS,grass7:v.kernel.rast,v.kernel.rast,v.kernel.rast
+grass7,GRASS,grass7:v.kernel.vector,v.kernel.vector,v.kernel.vector
+grass7,GRASS,grass7:v.lidar.correction,v.lidar.correction,v.lidar.correction
+grass7,GRASS,grass7:v.lidar.edgedetection,v.lidar.edgedetection,v.lidar.edgedetection
+grass7,GRASS,grass7:v.lidar.growing,v.lidar.growing,v.lidar.growing
+grass7,GRASS,grass7:v.mkgrid,v.mkgrid,v.mkgrid
+grass7,GRASS,grass7:v.neighbors,v.neighbors,v.neighbors
+grass7,GRASS,grass7:v.net,v.net,v.net
+grass7,GRASS,grass7:v.net.alloc,v.net.alloc,v.net.alloc
+grass7,GRASS,grass7:v.net.allpairs,v.net.allpairs,v.net.allpairs
+grass7,GRASS,grass7:v.net.bridge,v.net.bridge,v.net.bridge
+grass7,GRASS,grass7:v.net.centrality,v.net.centrality,v.net.centrality
+grass7,GRASS,grass7:v.net.components,v.net.components,v.net.components
+grass7,GRASS,grass7:v.net.connectivity,v.net.connectivity,v.net.connectivity
+grass7,GRASS,grass7:v.net.distance,v.net.distance,v.net.distance
+grass7,GRASS,grass7:v.net.flow,v.net.flow,v.net.flow
+grass7,GRASS,grass7:v.net.iso,v.net.iso,v.net.iso
+grass7,GRASS,grass7:v.net.nreport,v.net.nreport,v.net.nreport
+grass7,GRASS,grass7:v.net.path,v.net.path,v.net.path
+grass7,GRASS,grass7:v.net.report,v.net.report,v.net.report
+grass7,GRASS,grass7:v.net.salesman,v.net.salesman,v.net.salesman
+grass7,GRASS,grass7:v.net.spanningtree,v.net.spanningtree,v.net.spanningtree
+grass7,GRASS,grass7:v.net.steiner,v.net.steiner,v.net.steiner
+grass7,GRASS,grass7:v.net.timetable,v.net.timetable,v.net.timetable
+grass7,GRASS,grass7:v.net.visibility,v.net.visibility,v.net.visibility
+grass7,GRASS,grass7:v.normal,v.normal,v.normal
+grass7,GRASS,grass7:v.out.ascii,v.out.ascii,v.out.ascii
+grass7,GRASS,grass7:v.out.dxf,v.out.dxf,v.out.dxf
+grass7,GRASS,grass7:v.out.postgis,v.out.postgis,v.out.postgis
+grass7,GRASS,grass7:v.out.pov,v.out.pov,v.out.pov
+grass7,GRASS,grass7:v.out.svg,v.out.svg,v.out.svg
+grass7,GRASS,grass7:v.out.vtk,v.out.vtk,v.out.vtk
+grass7,GRASS,grass7:v.outlier,v.outlier,v.outlier
+grass7,GRASS,grass7:v.overlay,v.overlay,v.overlay
+grass7,GRASS,grass7:v.pack,v.pack,v.pack
+grass7,GRASS,grass7:v.parallel,v.parallel,v.parallel
+grass7,GRASS,grass7:v.patch,v.patch,v.patch
+grass7,GRASS,grass7:v.perturb,v.perturb,v.perturb
+grass7,GRASS,grass7:v.proj,v.proj,v.proj
+grass7,GRASS,grass7:v.qcount,v.qcount,v.qcount
+grass7,GRASS,grass7:v.random,v.random,v.random
+grass7,GRASS,grass7:v.rast.stats,v.rast.stats,v.rast.stats
+grass7,GRASS,grass7:v.reclass,v.reclass,v.reclass
+grass7,GRASS,grass7:v.rectify,v.rectify,v.rectify
+grass7,GRASS,grass7:v.report,v.report,v.report
+grass7,GRASS,grass7:v.sample,v.sample,v.sample
+grass7,GRASS,grass7:v.segment,v.segment,v.segment
+grass7,GRASS,grass7:v.select,v.select,v.select
+grass7,GRASS,grass7:v.split,v.split,v.split
+grass7,GRASS,grass7:v.surf.bspline,v.surf.bspline,v.surf.bspline
+grass7,GRASS,grass7:v.surf.idw,v.surf.idw,v.surf.idw
+grass7,GRASS,grass7:v.surf.rst,v.surf.rst,v.surf.rst
+grass7,GRASS,grass7:v.surf.rst.cvdev,v.surf.rst.cvdev,v.surf.rst.cvdev
+grass7,GRASS,grass7:v.to.3d,v.to.3d,v.to.3d
+grass7,GRASS,grass7:v.to.lines,v.to.lines,v.to.lines
+grass7,GRASS,grass7:v.to.points,v.to.points,v.to.points
+grass7,GRASS,grass7:v.to.rast,v.to.rast,v.to.rast
+grass7,GRASS,grass7:v.transform,v.transform,v.transform
+grass7,GRASS,grass7:v.type,v.type,v.type
+grass7,GRASS,grass7:v.univar,v.univar,v.univar
+grass7,GRASS,grass7:v.vect.stats,v.vect.stats,v.vect.stats
+grass7,GRASS,grass7:v.voronoi,v.voronoi,v.voronoi
+grass7,GRASS,grass7:v.voronoi.skeleton,v.voronoi.skeleton,v.voronoi.skeleton
+grass7,GRASS,grass7:v.what.rast,v.what.rast,v.what.rast
+grass7,GRASS,grass7:v.what.vect,v.what.vect,v.what.vect
+native,QGIS (native c++),native:addautoincrementalfield,addautoincrementalfield,Add autoincremental field
+native,QGIS (native c++),native:addfieldtoattributestable,addfieldtoattributestable,Add field to attributes table
+native,QGIS (native c++),native:adduniquevalueindexfield,adduniquevalueindexfield,Add unique value index field
+native,QGIS (native c++),native:addxyfields,addxyfields,Add X/Y fields to layer
+native,QGIS (native c++),native:affinetransform,affinetransform,Affine transform
+native,QGIS (native c++),native:aggregate,aggregate,Aggregate
+native,QGIS (native c++),native:angletonearest,angletonearest,Align points to features
+native,QGIS (native c++),native:antimeridiansplit,antimeridiansplit,Geodesic line split at antimeridian
+native,QGIS (native c++),native:arrayoffsetlines,arrayoffsetlines,Array of offset (parallel) lines
+native,QGIS (native c++),native:arraytranslatedfeatures,arraytranslatedfeatures,Array of translated features
+native,QGIS (native c++),native:aspect,aspect,Aspect
+native,QGIS (native c++),native:assignprojection,assignprojection,Assign projection
+native,QGIS (native c++),native:atlaslayouttoimage,atlaslayouttoimage,Export atlas layout as image
+native,QGIS (native c++),native:atlaslayouttopdf,atlaslayouttopdf,Export atlas layout as PDF
+native,QGIS (native c++),native:bookmarkstolayer,bookmarkstolayer,Convert spatial bookmarks to layer
+native,QGIS (native c++),native:boundary,boundary,Boundary
+native,QGIS (native c++),native:boundingboxes,boundingboxes,Bounding boxes
+native,QGIS (native c++),native:buffer,buffer,Buffer
+native,QGIS (native c++),native:bufferbym,bufferbym,Variable width buffer (by M value)
+native,QGIS (native c++),native:calculatevectoroverlaps,calculatevectoroverlaps,Overlap analysis
+native,QGIS (native c++),native:cellstatistics,cellstatistics,Cell statistics
+native,QGIS (native c++),native:centroids,centroids,Centroids
+native,QGIS (native c++),native:clip,clip,Clip
+native,QGIS (native c++),native:collect,collect,Collect geometries
+native,QGIS (native c++),native:combinestyles,combinestyles,Combine style databases
+native,QGIS (native c++),native:converttocurves,converttocurves,Convert to curved geometries
+native,QGIS (native c++),native:convexhull,convexhull,Convex hull
+native,QGIS (native c++),native:countpointsinpolygon,countpointsinpolygon,Count points in polygon
+native,QGIS (native c++),native:createattributeindex,createattributeindex,Create attribute index
+native,QGIS (native c++),native:createconstantrasterlayer,createconstantrasterlayer,Create constant raster layer
+native,QGIS (native c++),native:creategrid,creategrid,Create grid
+native,QGIS (native c++),native:createpointslayerfromtable,createpointslayerfromtable,Create points layer from table
+native,QGIS (native c++),native:createrandombinomialrasterlayer,createrandombinomialrasterlayer,Create random raster layer (binomial distribution)
+native,QGIS (native c++),native:createrandomexponentialrasterlayer,createrandomexponentialrasterlayer,Create random raster layer (exponential distribution)
+native,QGIS (native c++),native:createrandomgammarasterlayer,createrandomgammarasterlayer,Create random raster layer (gamma distribution)
+native,QGIS (native c++),native:createrandomgeometricrasterlayer,createrandomgeometricrasterlayer,Create random raster layer (geometric distribution)
+native,QGIS (native c++),native:createrandomnegativebinomialrasterlayer,createrandomnegativebinomialrasterlayer,Create random raster layer (negative binomial distribution)
+native,QGIS (native c++),native:createrandomnormalrasterlayer,createrandomnormalrasterlayer,Create random raster layer (normal distribution)
+native,QGIS (native c++),native:createrandompoissonrasterlayer,createrandompoissonrasterlayer,Create random raster layer (poisson distribution)
+native,QGIS (native c++),native:createrandomuniformrasterlayer,createrandomuniformrasterlayer,Create random raster layer (uniform distribution)
+native,QGIS (native c++),native:createspatialindex,createspatialindex,Create spatial index
+native,QGIS (native c++),native:dbscanclustering,dbscanclustering,DBSCAN clustering
+native,QGIS (native c++),native:deleteduplicategeometries,deleteduplicategeometries,Delete duplicate geometries
+native,QGIS (native c++),native:deleteholes,deleteholes,Delete holes
+native,QGIS (native c++),native:densifygeometries,densifygeometries,Densify by count
+native,QGIS (native c++),native:densifygeometriesgivenaninterval,densifygeometriesgivenaninterval,Densify by interval
+native,QGIS (native c++),native:detectvectorchanges,detectvectorchanges,Detect dataset changes
+native,QGIS (native c++),native:difference,difference,Difference
+native,QGIS (native c++),native:dissolve,dissolve,Dissolve
+native,QGIS (native c++),native:dropgeometries,dropgeometries,Drop geometries
+native,QGIS (native c++),native:dropmzvalues,dropmzvalues,Drop M/Z values
+native,QGIS (native c++),native:equaltofrequency,equaltofrequency,Equal to frequency
+native,QGIS (native c++),native:explodehstorefield,explodehstorefield,Explode HStore Field
+native,QGIS (native c++),native:explodelines,explodelines,Explode lines
+native,QGIS (native c++),native:extendlines,extendlines,Extend lines
+native,QGIS (native c++),native:extenttolayer,extenttolayer,Create layer from extent
+native,QGIS (native c++),native:extractbinary,extractbinary,Extract binary field
+native,QGIS (native c++),native:extractbyattribute,extractbyattribute,Extract by attribute
+native,QGIS (native c++),native:extractbyexpression,extractbyexpression,Extract by expression
+native,QGIS (native c++),native:extractbyextent,extractbyextent,Extract/clip by extent
+native,QGIS (native c++),native:extractbylocation,extractbylocation,Extract by location
+native,QGIS (native c++),native:extractmvalues,extractmvalues,Extract M values
+native,QGIS (native c++),native:extractspecificvertices,extractspecificvertices,Extract specific vertices
+native,QGIS (native c++),native:extractvertices,extractvertices,Extract vertices
+native,QGIS (native c++),native:extractzvalues,extractzvalues,Extract Z values
+native,QGIS (native c++),native:fieldcalculator,fieldcalculator,Field calculator
+native,QGIS (native c++),native:filedownloader,filedownloader,Download file
+native,QGIS (native c++),native:fillnodata,fillnodata,Fill NoData cells
+native,QGIS (native c++),native:filterverticesbym,filterverticesbym,Filter vertices by M value
+native,QGIS (native c++),native:filterverticesbyz,filterverticesbyz,Filter vertices by Z value
+native,QGIS (native c++),native:fixgeometries,fixgeometries,Fix geometries
+native,QGIS (native c++),native:flattenrelationships,flattenrelationships,Flatten relationship
+native,QGIS (native c++),native:forcerhr,forcerhr,Force right-hand-rule
+native,QGIS (native c++),native:fuzzifyrastergaussianmembership,fuzzifyrastergaussianmembership,Fuzzify raster (gaussian membership)
+native,QGIS (native c++),native:fuzzifyrasterlargemembership,fuzzifyrasterlargemembership,Fuzzify raster (large membership)
+native,QGIS (native c++),native:fuzzifyrasterlinearmembership,fuzzifyrasterlinearmembership,Fuzzify raster (linear membership)
+native,QGIS (native c++),native:fuzzifyrasternearmembership,fuzzifyrasternearmembership,Fuzzify raster (near membership)
+native,QGIS (native c++),native:fuzzifyrasterpowermembership,fuzzifyrasterpowermembership,Fuzzify raster (power membership)
+native,QGIS (native c++),native:fuzzifyrastersmallmembership,fuzzifyrastersmallmembership,Fuzzify raster (small membership)
+native,QGIS (native c++),native:generatepointspixelcentroidsinsidepolygons,generatepointspixelcentroidsinsidepolygons,Generate points (pixel centroids) inside polygons
+native,QGIS (native c++),native:geometrybyexpression,geometrybyexpression,Geometry by expression
+native,QGIS (native c++),native:greaterthanfrequency,greaterthanfrequency,Greater than frequency
+native,QGIS (native c++),native:highestpositioninrasterstack,highestpositioninrasterstack,Highest position in raster stack
+native,QGIS (native c++),native:hillshade,hillshade,Hillshade
+native,QGIS (native c++),native:hublines,hublines,Join by lines (hub lines)
+native,QGIS (native c++),native:importphotos,importphotos,Import geotagged photos
+native,QGIS (native c++),native:interpolatepoint,interpolatepoint,Interpolate point on line
+native,QGIS (native c++),native:intersection,intersection,Intersection
+native,QGIS (native c++),native:joinattributesbylocation,joinattributesbylocation,Join attributes by location
+native,QGIS (native c++),native:joinattributestable,joinattributestable,Join attributes by field value
+native,QGIS (native c++),native:joinbynearest,joinbynearest,Join attributes by nearest
+native,QGIS (native c++),native:kmeansclustering,kmeansclustering,K-means clustering
+native,QGIS (native c++),native:layertobookmarks,layertobookmarks,Convert layer to spatial bookmarks
+native,QGIS (native c++),native:lessthanfrequency,lessthanfrequency,Less than frequency
+native,QGIS (native c++),native:linedensity,linedensity,Line density
+native,QGIS (native c++),native:lineintersections,lineintersections,Line intersections
+native,QGIS (native c++),native:linesubstring,linesubstring,Line substring
+native,QGIS (native c++),native:lowestpositioninrasterstack,lowestpositioninrasterstack,Lowest position in raster stack
+native,QGIS (native c++),native:meancoordinates,meancoordinates,Mean coordinate(s)
+native,QGIS (native c++),native:mergelines,mergelines,Merge lines
+native,QGIS (native c++),native:mergevectorlayers,mergevectorlayers,Merge vector layers
+native,QGIS (native c++),native:minimumenclosingcircle,minimumenclosingcircle,Minimum enclosing circles
+native,QGIS (native c++),native:multiparttosingleparts,multiparttosingleparts,Multipart to singleparts
+native,QGIS (native c++),native:multiringconstantbuffer,multiringconstantbuffer,Multi-ring buffer (constant distance)
+native,QGIS (native c++),native:nearestneighbouranalysis,nearestneighbouranalysis,Nearest neighbour analysis
+native,QGIS (native c++),native:offsetline,offsetline,Offset lines
+native,QGIS (native c++),native:orderbyexpression,orderbyexpression,Order by expression
+native,QGIS (native c++),native:orientedminimumboundingbox,orientedminimumboundingbox,Oriented minimum bounding box
+native,QGIS (native c++),native:orthogonalize,orthogonalize,Orthogonalize
+native,QGIS (native c++),native:package,package,Package layers
+native,QGIS (native c++),native:pixelstopoints,pixelstopoints,Raster pixels to points
+native,QGIS (native c++),native:pixelstopolygons,pixelstopolygons,Raster pixels to polygons
+native,QGIS (native c++),native:pointonsurface,pointonsurface,Point on surface
+native,QGIS (native c++),native:pointsalonglines,pointsalonglines,Points along geometry
+native,QGIS (native c++),native:pointtolayer,pointtolayer,Create layer from point
+native,QGIS (native c++),native:poleofinaccessibility,poleofinaccessibility,Pole of inaccessibility
+native,QGIS (native c++),native:polygonfromlayerextent,polygonfromlayerextent,Extract layer extent
+native,QGIS (native c++),native:polygonize,polygonize,Polygonize
+native,QGIS (native c++),native:polygonstolines,polygonstolines,Polygons to lines
+native,QGIS (native c++),native:postgisexecutesql,postgisexecutesql,PostgreSQL execute SQL
+native,QGIS (native c++),native:printlayoutmapextenttolayer,printlayoutmapextenttolayer,Print layout map extent to layer
+native,QGIS (native c++),native:printlayouttoimage,printlayouttoimage,Export print layout as image
+native,QGIS (native c++),native:printlayouttopdf,printlayouttopdf,Export print layout as PDF
+native,QGIS (native c++),native:projectpointcartesian,projectpointcartesian,Project points (Cartesian)
+native,QGIS (native c++),native:promotetomulti,promotetomulti,Promote to multipart
+native,QGIS (native c++),native:randomextract,randomextract,Random extract
+native,QGIS (native c++),native:randompointsinextent,randompointsinextent,Random points in extent
+native,QGIS (native c++),native:randompointsinpolygons,randompointsinpolygons,Random points in polygons
+native,QGIS (native c++),native:randompointsonlines,randompointsonlines,Random points on lines
+native,QGIS (native c++),native:rasterbooleanand,rasterbooleanand,Raster boolean AND
+native,QGIS (native c++),native:rasterize,rasterize,Convert map to raster
+native,QGIS (native c++),native:rasterlayerstatistics,rasterlayerstatistics,Raster layer statistics
+native,QGIS (native c++),native:rasterlayeruniquevaluesreport,rasterlayeruniquevaluesreport,Raster layer unique values report
+native,QGIS (native c++),native:rasterlayerzonalstats,rasterlayerzonalstats,Raster layer zonal statistics
+native,QGIS (native c++),native:rasterlogicalor,rasterlogicalor,Raster boolean OR
+native,QGIS (native c++),native:rastersampling,rastersampling,Sample raster values
+native,QGIS (native c++),native:rastersurfacevolume,rastersurfacevolume,Raster surface volume
+native,QGIS (native c++),native:reclassifybylayer,reclassifybylayer,Reclassify by layer
+native,QGIS (native c++),native:reclassifybytable,reclassifybytable,Reclassify by table
+native,QGIS (native c++),native:rectanglesovalsdiamonds,rectanglesovalsdiamonds,"Rectangles, ovals, diamonds"
+native,QGIS (native c++),native:refactorfields,refactorfields,Refactor fields
+native,QGIS (native c++),native:removeduplicatesbyattribute,removeduplicatesbyattribute,Delete duplicates by attribute
+native,QGIS (native c++),native:removeduplicatevertices,removeduplicatevertices,Remove duplicate vertices
+native,QGIS (native c++),native:removenullgeometries,removenullgeometries,Remove null geometries
+native,QGIS (native c++),native:renametablefield,renametablefield,Rename field
+native,QGIS (native c++),native:repairshapefile,repairshapefile,Repair Shapefile
+native,QGIS (native c++),native:reprojectlayer,reprojectlayer,Reproject layer
+native,QGIS (native c++),native:rescaleraster,rescaleraster,Rescale raster
+native,QGIS (native c++),native:reverselinedirection,reverselinedirection,Reverse line direction
+native,QGIS (native c++),native:rotatefeatures,rotatefeatures,Rotate
+native,QGIS (native c++),native:roundrastervalues,roundrastervalues,Round raster
+native,QGIS (native c++),native:ruggednessindex,ruggednessindex,Ruggedness index
+native,QGIS (native c++),native:savefeatures,savefeatures,Save vector features to file
+native,QGIS (native c++),native:saveselectedfeatures,saveselectedfeatures,Extract selected features
+native,QGIS (native c++),native:segmentizebymaxangle,segmentizebymaxangle,Segmentize by maximum angle
+native,QGIS (native c++),native:segmentizebymaxdistance,segmentizebymaxdistance,Segmentize by maximum distance
+native,QGIS (native c++),native:serviceareafromlayer,serviceareafromlayer,Service area (from layer)
+native,QGIS (native c++),native:serviceareafrompoint,serviceareafrompoint,Service area (from point)
+native,QGIS (native c++),native:setlayerencoding,setlayerencoding,Set layer encoding
+native,QGIS (native c++),native:setlayerstyle,setlayerstyle,Set layer style
+native,QGIS (native c++),native:setmfromraster,setmfromraster,Set M value from raster
+native,QGIS (native c++),native:setmvalue,setmvalue,Set M value
+native,QGIS (native c++),native:setzfromraster,setzfromraster,Drape (set Z value from raster)
+native,QGIS (native c++),native:setzvalue,setzvalue,Set Z value
+native,QGIS (native c++),native:shortestpathlayertopoint,shortestpathlayertopoint,Shortest path (layer to point)
+native,QGIS (native c++),native:shortestpathpointtolayer,shortestpathpointtolayer,Shortest path (point to layer)
+native,QGIS (native c++),native:shortestpathpointtopoint,shortestpathpointtopoint,Shortest path (point to point)
+native,QGIS (native c++),native:shpencodinginfo,shpencodinginfo,Extract Shapefile encoding
+native,QGIS (native c++),native:simplifygeometries,simplifygeometries,Simplify
+native,QGIS (native c++),native:singlesidedbuffer,singlesidedbuffer,Single sided buffer
+native,QGIS (native c++),native:slope,slope,Slope
+native,QGIS (native c++),native:smoothgeometry,smoothgeometry,Smooth
+native,QGIS (native c++),native:snapgeometries,snapgeometries,Snap geometries to layer
+native,QGIS (native c++),native:snappointstogrid,snappointstogrid,Snap points to grid
+native,QGIS (native c++),native:spatialiteexecutesql,spatialiteexecutesql,SpatiaLite execute SQL
+native,QGIS (native c++),native:spatialiteexecutesqlregistered,spatialiteexecutesqlregistered,SpatiaLite execute SQL (registered DB)
+native,QGIS (native c++),native:splitfeaturesbycharacter,splitfeaturesbycharacter,Split features by character
+native,QGIS (native c++),native:splitlinesbylength,splitlinesbylength,Split lines by maximum length
+native,QGIS (native c++),native:splitvectorlayer,splitvectorlayer,Split vector layer
+native,QGIS (native c++),native:splitwithlines,splitwithlines,Split with lines
+native,QGIS (native c++),native:stylefromproject,stylefromproject,Create style database from project
+native,QGIS (native c++),native:subdivide,subdivide,Subdivide
+native,QGIS (native c++),native:sumlinelengths,sumlinelengths,Sum line lengths
+native,QGIS (native c++),native:swapxy,swapxy,Swap X and Y coordinates
+native,QGIS (native c++),native:symmetricaldifference,symmetricaldifference,Symmetrical difference
+native,QGIS (native c++),native:taperedbuffer,taperedbuffer,Tapered buffers
+native,QGIS (native c++),native:tinmeshcreation,tinmeshcreation,TIN Mesh Creation
+native,QGIS (native c++),native:transect,transect,Transect
+native,QGIS (native c++),native:translategeometry,translategeometry,Translate
+native,QGIS (native c++),native:truncatetable,truncatetable,Truncate table
+native,QGIS (native c++),native:union,union,Union
+native,QGIS (native c++),native:wedgebuffers,wedgebuffers,Create wedge buffers
+native,QGIS (native c++),native:writevectortiles_mbtiles,writevectortiles_mbtiles,Write Vector Tiles (MBTiles)
+native,QGIS (native c++),native:writevectortiles_xyz,writevectortiles_xyz,Write Vector Tiles (XYZ)
+native,QGIS (native c++),native:zonalhistogram,zonalhistogram,Zonal histogram
+native,QGIS (native c++),native:zonalstatisticsfb,zonalstatisticsfb,Zonal statistics
+qgis,QGIS,qgis:advancedpythonfieldcalculator,advancedpythonfieldcalculator,Advanced Python field calculator
+qgis,QGIS,qgis:barplot,barplot,Bar plot
+qgis,QGIS,qgis:basicstatisticsforfields,basicstatisticsforfields,Basic statistics for fields
+qgis,QGIS,qgis:boxplot,boxplot,Box plot
+qgis,QGIS,qgis:checkvalidity,checkvalidity,Check validity
+qgis,QGIS,qgis:climbalongline,climbalongline,Climb along line
+qgis,QGIS,qgis:concavehull,concavehull,Concave hull (alpha shapes)
+qgis,QGIS,qgis:convertgeometrytype,convertgeometrytype,Convert geometry type
+qgis,QGIS,qgis:definecurrentprojection,definecurrentprojection,Define Shapefile projection
+qgis,QGIS,qgis:delaunaytriangulation,delaunaytriangulation,Delaunay triangulation
+qgis,QGIS,qgis:deletecolumn,deletecolumn,Drop field(s)
+qgis,QGIS,qgis:distancematrix,distancematrix,Distance matrix
+qgis,QGIS,qgis:distancetonearesthublinetohub,distancetonearesthublinetohub,Distance to nearest hub (line to hub)
+qgis,QGIS,qgis:distancetonearesthubpoints,distancetonearesthubpoints,Distance to nearest hub (points)
+qgis,QGIS,qgis:executesql,executesql,Execute SQL
+qgis,QGIS,qgis:exportaddgeometrycolumns,exportaddgeometrycolumns,Add geometry attributes
+qgis,QGIS,qgis:findprojection,findprojection,Find projection
+qgis,QGIS,qgis:generatepointspixelcentroidsalongline,generatepointspixelcentroidsalongline,Generate points (pixel centroids) along line
+qgis,QGIS,qgis:heatmapkerneldensityestimation,heatmapkerneldensityestimation,Heatmap (Kernel Density Estimation)
+qgis,QGIS,qgis:hypsometriccurves,hypsometriccurves,Hypsometric curves
+qgis,QGIS,qgis:idwinterpolation,idwinterpolation,IDW interpolation
+qgis,QGIS,qgis:importintopostgis,importintopostgis,Export to PostgreSQL
+qgis,QGIS,qgis:importintospatialite,importintospatialite,Export to SpatiaLite
+qgis,QGIS,qgis:joinbylocationsummary,joinbylocationsummary,Join attributes by location (summary)
+qgis,QGIS,qgis:keepnbiggestparts,keepnbiggestparts,Keep N biggest parts
+qgis,QGIS,qgis:knearestconcavehull,knearestconcavehull,Concave hull (k-nearest neighbor)
+qgis,QGIS,qgis:linestopolygons,linestopolygons,Lines to polygons
+qgis,QGIS,qgis:listuniquevalues,listuniquevalues,List unique values
+qgis,QGIS,qgis:meanandstandarddeviationplot,meanandstandarddeviationplot,Mean and standard deviation plot
+qgis,QGIS,qgis:minimumboundinggeometry,minimumboundinggeometry,Minimum bounding geometry
+qgis,QGIS,qgis:pointsdisplacement,pointsdisplacement,Points displacement
+qgis,QGIS,qgis:pointstopath,pointstopath,Points to path
+qgis,QGIS,qgis:polarplot,polarplot,Polar plot
+qgis,QGIS,qgis:randomextractwithinsubsets,randomextractwithinsubsets,Random extract within subsets
+qgis,QGIS,qgis:randompointsalongline,randompointsalongline,Random points along line
+qgis,QGIS,qgis:randompointsinlayerbounds,randompointsinlayerbounds,Random points in layer bounds
+qgis,QGIS,qgis:randompointsinsidepolygons,randompointsinsidepolygons,Random points inside polygons
+qgis,QGIS,qgis:rastercalculator,rastercalculator,Raster calculator
+qgis,QGIS,qgis:rasterlayerhistogram,rasterlayerhistogram,Raster layer histogram
+qgis,QGIS,qgis:regularpoints,regularpoints,Regular points
+qgis,QGIS,qgis:relief,relief,Relief
+qgis,QGIS,qgis:scatter3dplot,scatter3dplot,Vector layer scatterplot 3D
+qgis,QGIS,qgis:statisticsbycategories,statisticsbycategories,Statistics by categories
+qgis,QGIS,qgis:texttofloat,texttofloat,Text to float
+qgis,QGIS,qgis:tilesxyzdirectory,tilesxyzdirectory,Generate XYZ tiles (Directory)
+qgis,QGIS,qgis:tilesxyzmbtiles,tilesxyzmbtiles,Generate XYZ tiles (MBTiles)
+qgis,QGIS,qgis:tininterpolation,tininterpolation,TIN interpolation
+qgis,QGIS,qgis:topologicalcoloring,topologicalcoloring,Topological coloring
+qgis,QGIS,qgis:vectorlayerhistogram,vectorlayerhistogram,Vector layer histogram
+qgis,QGIS,qgis:vectorlayerscatterplot,vectorlayerscatterplot,Vector layer scatterplot
+qgis,QGIS,qgis:voronoipolygons,voronoipolygons,Voronoi polygons
+saga,SAGA,saga:accumulatedcost,accumulatedcost,Accumulated cost
+saga,SAGA,saga:accumulatedcostanisotropic,accumulatedcostanisotropic,Accumulated cost (anisotropic)
+saga,SAGA,saga:accumulatedcostisotropic,accumulatedcostisotropic,Accumulated cost (isotropic)
+saga,SAGA,saga:accumulationfunctions,accumulationfunctions,Accumulation functions
+saga,SAGA,saga:addcoordinatestopoints,addcoordinatestopoints,Add coordinates to points
+saga,SAGA,saga:addindicatorfieldsforcategories,addindicatorfieldsforcategories,Add indicator fields for categories
+saga,SAGA,saga:addpointattributestopolygons,addpointattributestopolygons,Add point attributes to polygons
+saga,SAGA,saga:addpolygonattributestopoints,addpolygonattributestopoints,Add polygon attributes to points
+saga,SAGA,saga:addrastervaluestofeatures,addrastervaluestofeatures,Add raster values to features
+saga,SAGA,saga:addrastervaluestopoints,addrastervaluestopoints,Add raster values to points
+saga,SAGA,saga:aggregate,aggregate,Aggregate
+saga,SAGA,saga:aggregatepointobservations,aggregatepointobservations,Aggregate point observations
+saga,SAGA,saga:aggregationindex,aggregationindex,Aggregation index
+saga,SAGA,saga:analyticalhierarchyprocess,analyticalhierarchyprocess,Analytical hierarchy process
+saga,SAGA,saga:analyticalhillshading,analyticalhillshading,Analytical hillshading
+saga,SAGA,saga:angmap,angmap,Angmap
+saga,SAGA,saga:angulardistanceweighted,angulardistanceweighted,Angular distance weighted
+saga,SAGA,saga:artificialneuralnetworkclassificationopencv,artificialneuralnetworkclassificationopencv,Artificial neural network classification (opencv)
+saga,SAGA,saga:aspectslopegrid,aspectslopegrid,Aspect-slope grid
+saga,SAGA,saga:automatedcloudcoverassessment,automatedcloudcoverassessment,Automated cloud cover assessment
+saga,SAGA,saga:averagewithmask1,averagewithmask1,Average with mask 1
+saga,SAGA,saga:averagewithmask2,averagewithmask2,Average with mask 2
+saga,SAGA,saga:averagewiththereshold1,averagewiththereshold1,Average with thereshold 1
+saga,SAGA,saga:averagewiththereshold2,averagewiththereshold2,Average with thereshold 2
+saga,SAGA,saga:averagewiththereshold3,averagewiththereshold3,Average with thereshold 3
+saga,SAGA,saga:basicterrainanalysis,basicterrainanalysis,Basic terrain analysis
+saga,SAGA,saga:binaryerosionreconstruction,binaryerosionreconstruction,Binary erosion-reconstruction
+saga,SAGA,saga:bioclimaticvariables,bioclimaticvariables,Bioclimatic variables
+saga,SAGA,saga:boostingclassificationopencv,boostingclassificationopencv,Boosting classification (opencv)
+saga,SAGA,saga:bsplineapproximation,bsplineapproximation,B-spline approximation
+saga,SAGA,saga:burnstreamnetworkintodem,burnstreamnetworkintodem,Burn stream network into dem
+saga,SAGA,saga:catchmentarea,catchmentarea,Catchment area
+saga,SAGA,saga:catchmentareaflowtracing,catchmentareaflowtracing,Catchment area (flow tracing)
+saga,SAGA,saga:catchmentarearecursive,catchmentarearecursive,Catchment area (recursive)
+saga,SAGA,saga:categoricalcoincidence,categoricalcoincidence,Categorical coincidence
+saga,SAGA,saga:cellbalance,cellbalance,Cell balance
+saga,SAGA,saga:changedatastorage,changedatastorage,Change data storage
+saga,SAGA,saga:changedateformat,changedateformat,Change date format
+saga,SAGA,saga:changedetection,changedetection,Change detection
+saga,SAGA,saga:changetimeformat,changetimeformat,Change time format
+saga,SAGA,saga:channelnetwork,channelnetwork,Channel network
+saga,SAGA,saga:channelnetworkanddrainagebasins,channelnetworkanddrainagebasins,Channel network and drainage basins
+saga,SAGA,saga:clippointswithpolygons,clippointswithpolygons,Clip points with polygons
+saga,SAGA,saga:cliprasterwithpolygon,cliprasterwithpolygon,Clip raster with polygon
+saga,SAGA,saga:closegaps,closegaps,Close gaps
+saga,SAGA,saga:closegapswithspline,closegapswithspline,Close gaps with spline
+saga,SAGA,saga:closegapswithstepwiseresampling,closegapswithstepwiseresampling,Close gaps with stepwise resampling
+saga,SAGA,saga:closeonecellgaps,closeonecellgaps,Close one cell gaps
+saga,SAGA,saga:clusteranalysis,clusteranalysis,Cluster analysis
+saga,SAGA,saga:clusteranalysisshapes,clusteranalysisshapes,Cluster analysis (shapes)
+saga,SAGA,saga:concentration,concentration,Concentration
+saga,SAGA,saga:confusionmatrixpolygonsgrid,confusionmatrixpolygonsgrid,Confusion matrix (polygons / grid)
+saga,SAGA,saga:confusionmatrixtwogrids,confusionmatrixtwogrids,Confusion matrix (two grids)
+saga,SAGA,saga:connectivityanalysis,connectivityanalysis,Connectivity analysis
+saga,SAGA,saga:constantgrid,constantgrid,Constant grid
+saga,SAGA,saga:contourlines,contourlines,Contour lines
+saga,SAGA,saga:convergenceindex,convergenceindex,Convergence index
+saga,SAGA,saga:convergenceindexsearchradius,convergenceindexsearchradius,Convergence index (search radius)
+saga,SAGA,saga:convertdatastoragetype,convertdatastoragetype,Convert data storage type
+saga,SAGA,saga:convertlinestopoints,convertlinestopoints,Convert lines to points
+saga,SAGA,saga:convertlinestopolygons,convertlinestopolygons,Convert lines to polygons
+saga,SAGA,saga:convertmultipointstopoints,convertmultipointstopoints,Convert multipoints to points
+saga,SAGA,saga:convertpointstolines,convertpointstolines,Convert points to line(s)
+saga,SAGA,saga:convertpolygonlineverticestopoints,convertpolygonlineverticestopoints,Convert polygon/line vertices to points
+saga,SAGA,saga:convertpolygonstolines,convertpolygonstolines,Convert polygons to lines
+saga,SAGA,saga:convexhull,convexhull,Convex hull
+saga,SAGA,saga:covereddistance,covereddistance,Covered distance
+saga,SAGA,saga:createlinesgraticule,createlinesgraticule,Create lines graticule
+saga,SAGA,saga:createpointgrid,createpointgrid,Create point grid
+saga,SAGA,saga:createpolygonsgraticule,createpolygonsgraticule,Create polygons graticule
+saga,SAGA,saga:croptodata,croptodata,Crop to data
+saga,SAGA,saga:crossclassificationandtabulation,crossclassificationandtabulation,Cross-classification and tabulation
+saga,SAGA,saga:crossprofiles,crossprofiles,Cross profiles
+saga,SAGA,saga:curvatureclassification,curvatureclassification,Curvature classification
+saga,SAGA,saga:cutvectorlayer,cutvectorlayer,Cut vector layer
+saga,SAGA,saga:decisiontreeclassificationopencv,decisiontreeclassificationopencv,Decision tree classification (opencv)
+saga,SAGA,saga:destriping,destriping,Destriping
+saga,SAGA,saga:destripingwithmask,destripingwithmask,Destriping with mask
+saga,SAGA,saga:difference,difference,Difference
+saga,SAGA,saga:diffusepollutionrisk,diffusepollutionrisk,Diffuse pollution risk
+saga,SAGA,saga:diffusivehillslopeevolutionadi,diffusivehillslopeevolutionadi,Diffusive hillslope evolution (adi)
+saga,SAGA,saga:diffusivehillslopeevolutionftcs,diffusivehillslopeevolutionftcs,Diffusive hillslope evolution (ftcs)
+saga,SAGA,saga:directionalaverage,directionalaverage,Directional average
+saga,SAGA,saga:directionalstatisticsforrasterlayer,directionalstatisticsforrasterlayer,Directional statistics for raster layer
+saga,SAGA,saga:distancevigra,distancevigra,Distance (vigra)
+saga,SAGA,saga:diurnalanisotropicheating,diurnalanisotropicheating,Diurnal anisotropic heating
+saga,SAGA,saga:diversityofcategories,diversityofcategories,Diversity of categories
+saga,SAGA,saga:downslopedistancegradient,downslopedistancegradient,Downslope distance gradient
+saga,SAGA,saga:dtmfilterslopebased,dtmfilterslopebased,Dtm filter (slope-based)
+saga,SAGA,saga:earthsorbitalparameters,earthsorbitalparameters,Earth's orbital parameters
+saga,SAGA,saga:edgecontamination,edgecontamination,Edge contamination
+saga,SAGA,saga:edgedetectionvigra,edgedetectionvigra,Edge detection (vigra)
+saga,SAGA,saga:effectiveairflowheights,effectiveairflowheights,Effective air flow heights
+saga,SAGA,saga:enhancedvegetationindex,enhancedvegetationindex,Enhanced vegetation index
+saga,SAGA,saga:enumeratetablefield,enumeratetablefield,Enumerate table field
+saga,SAGA,saga:fastregiongrowingalgorithm,fastregiongrowingalgorithm,Fast region growing algorithm
+saga,SAGA,saga:fastrepresentativeness,fastrepresentativeness,Fast representativeness
+saga,SAGA,saga:featureextents,featureextents,Feature extents
+saga,SAGA,saga:fieldstatistics,fieldstatistics,Field statistics
+saga,SAGA,saga:fillgapsinrecords,fillgapsinrecords,Fill gaps in records
+saga,SAGA,saga:fillsinks,fillsinks,Fill sinks
+saga,SAGA,saga:fillsinksqmofesp,fillsinksqmofesp,Fill sinks (qm of esp)
+saga,SAGA,saga:fillsinkswangliu,fillsinkswangliu,Fill sinks (wang & liu)
+saga,SAGA,saga:fillsinksxxlwangliu,fillsinksxxlwangliu,Fill sinks xxl (wang & liu)
+saga,SAGA,saga:findfieldofextremevalue,findfieldofextremevalue,Find field of extreme value
+saga,SAGA,saga:fireriskanalysis,fireriskanalysis,Fire risk analysis
+saga,SAGA,saga:fitnpointsinpolygon,fitnpointsinpolygon,Fit n points in polygon
+saga,SAGA,saga:fixeddistancebuffer,fixeddistancebuffer,Fixed distance buffer
+saga,SAGA,saga:flatdetection,flatdetection,Flat detection
+saga,SAGA,saga:flattenpolygonlayer,flattenpolygonlayer,Flatten polygon layer
+saga,SAGA,saga:flowaccumulationqmofesp,flowaccumulationqmofesp,Flow accumulation (qm of esp)
+saga,SAGA,saga:flowpathlength,flowpathlength,Flow path length
+saga,SAGA,saga:flowwidthandspecificcatchmentarea,flowwidthandspecificcatchmentarea,Flow width and specific catchment area
+saga,SAGA,saga:fourierfiltervigra,fourierfiltervigra,Fourier filter (vigra)
+saga,SAGA,saga:fouriertransformationopencv,fouriertransformationopencv,Fourier transformation (opencv)
+saga,SAGA,saga:fouriertransforminversevigra,fouriertransforminversevigra,Fourier transform inverse (vigra)
+saga,SAGA,saga:fouriertransformrealvigra,fouriertransformrealvigra,"Fourier transform (real, vigra)"
+saga,SAGA,saga:fouriertransformvigra,fouriertransformvigra,Fourier transform (vigra)
+saga,SAGA,saga:fragmentationalternative,fragmentationalternative,Fragmentation (alternative)
+saga,SAGA,saga:fragmentationclassesfromdensityandconnectivity,fragmentationclassesfromdensityandconnectivity,Fragmentation classes from density and connectivity
+saga,SAGA,saga:fragmentationstandard,fragmentationstandard,Fragmentation (standard)
+saga,SAGA,saga:function,function,Function
+saga,SAGA,saga:functionfit,functionfit,Function fit
+saga,SAGA,saga:fuzzify,fuzzify,Fuzzify
+saga,SAGA,saga:fuzzyintersectionand,fuzzyintersectionand,Fuzzy intersection (and)
+saga,SAGA,saga:fuzzylandformelementclassification,fuzzylandformelementclassification,Fuzzy landform element classification
+saga,SAGA,saga:fuzzyunionor,fuzzyunionor,Fuzzy union (or)
+saga,SAGA,saga:gaussianfilter,gaussianfilter,Gaussian filter
+saga,SAGA,saga:generateshapes,generateshapes,Generate shapes
+saga,SAGA,saga:geodesicmorphologicalreconstruction,geodesicmorphologicalreconstruction,Geodesic morphological reconstruction
+saga,SAGA,saga:geographiccoordinategrids,geographiccoordinategrids,Geographic coordinate grids
+saga,SAGA,saga:geometricfigures,geometricfigures,Geometric figures
+saga,SAGA,saga:globalmoransiforrasterlayer,globalmoransiforrasterlayer,Global moran's i for raster layer
+saga,SAGA,saga:gradientvectorfromcartesiantopolarcoordinates,gradientvectorfromcartesiantopolarcoordinates,Gradient vector from cartesian to polar coordinates
+saga,SAGA,saga:gradientvectorfrompolartocartesiancoordinates,gradientvectorfrompolartocartesiancoordinates,Gradient vector from polar to cartesian coordinates
+saga,SAGA,saga:gradientvectorsfromdirectionalcomponents,gradientvectorsfromdirectionalcomponents,Gradient vectors from directional components
+saga,SAGA,saga:gradientvectorsfromdirectionandlength,gradientvectorsfromdirectionandlength,Gradient vectors from direction and length
+saga,SAGA,saga:gradientvectorsfromsurface,gradientvectorsfromsurface,Gradient vectors from surface
+saga,SAGA,saga:gridcombination,gridcombination,Gridcombination
+saga,SAGA,saga:gridstatisticsforpoints,gridstatisticsforpoints,Grid statistics for points
+saga,SAGA,saga:gwrformultiplepredictorlayers,gwrformultiplepredictorlayers,Gwr for multiple predictor layers
+saga,SAGA,saga:gwrformultiplepredictors,gwrformultiplepredictors,Gwr for multiple predictors
+saga,SAGA,saga:gwrformultiplepredictorsgriddedmodeloutput,gwrformultiplepredictorsgriddedmodeloutput,Gwr for multiple predictors (gridded model output)
+saga,SAGA,saga:gwrforsinglepredictorgriddedmodeloutput,gwrforsinglepredictorgriddedmodeloutput,Gwr for single predictor (gridded model output)
+saga,SAGA,saga:gwrforsinglepredictorlayer,gwrforsinglepredictorlayer,Gwr for single predictor layer
+saga,SAGA,saga:histogramsurface,histogramsurface,Histogram surface
+saga,SAGA,saga:hypsometry,hypsometry,Hypsometry
+saga,SAGA,saga:imcorrfeaturetracking,imcorrfeaturetracking,Imcorr - feature tracking
+saga,SAGA,saga:interpolatecubicspline,interpolatecubicspline,Interpolate (cubic spline)
+saga,SAGA,saga:intersect,intersect,Intersect
+saga,SAGA,saga:inversedistanceweightedinterpolation,inversedistanceweightedinterpolation,Inverse distance weighted interpolation
+saga,SAGA,saga:invertdatanodata,invertdatanodata,Invert data/no-data
+saga,SAGA,saga:invertgrid,invertgrid,Invert grid
+saga,SAGA,saga:isodataclusteringforgrids,isodataclusteringforgrids,Isodata clustering for grids
+saga,SAGA,saga:kerneldensityestimation,kerneldensityestimation,Kernel density estimation
+saga,SAGA,saga:kmeansclusteringforgrids,kmeansclusteringforgrids,K-means clustering for grids
+saga,SAGA,saga:knearestneighboursclassificationopencv,knearestneighboursclassificationopencv,K-nearest neighbours classification (opencv)
+saga,SAGA,saga:lakeflood,lakeflood,Lake flood
+saga,SAGA,saga:landsurfacetemperature,landsurfacetemperature,Land surface temperature
+saga,SAGA,saga:landusescenariogenerator,landusescenariogenerator,Land use scenario generator
+saga,SAGA,saga:laplacianfilter,laplacianfilter,Laplacian filter
+saga,SAGA,saga:layerofextremevalue,layerofextremevalue,Layer of extreme value
+saga,SAGA,saga:leastcostpaths,leastcostpaths,Least cost paths
+saga,SAGA,saga:linedissolve,linedissolve,Line dissolve
+saga,SAGA,saga:linepolygonintersection,linepolygonintersection,Line-polygon intersection
+saga,SAGA,saga:lineproperties,lineproperties,Line properties
+saga,SAGA,saga:linesimplification,linesimplification,Line simplification
+saga,SAGA,saga:linesmoothing,linesmoothing,Line smoothing
+saga,SAGA,saga:localminimaandmaxima,localminimaandmaxima,Local minima and maxima
+saga,SAGA,saga:lsfactor,lsfactor,Ls factor
+saga,SAGA,saga:lsfactorfieldbased,lsfactorfieldbased,"Ls-factor, field based"
+saga,SAGA,saga:majorityfilter,majorityfilter,Majority filter
+saga,SAGA,saga:massbalanceindex,massbalanceindex,Mass balance index
+saga,SAGA,saga:maximumentropypresenceprediction,maximumentropypresenceprediction,Maximum entropy presence prediction
+saga,SAGA,saga:maximumflowpathlength,maximumflowpathlength,Maximum flow path length
+saga,SAGA,saga:mergevectorlayers,mergevectorlayers,Merge vector layers
+saga,SAGA,saga:meshdenoise,meshdenoise,Mesh denoise
+saga,SAGA,saga:metricconversions,metricconversions,Metric conversions
+saga,SAGA,saga:minimumdistanceanalysis,minimumdistanceanalysis,Minimum distance analysis
+saga,SAGA,saga:mirrorgrid,mirrorgrid,Mirror grid
+saga,SAGA,saga:modifiedquadraticshepardinterpolation,modifiedquadraticshepardinterpolation,Modified quadratic shepard interpolation
+saga,SAGA,saga:monthlyglobalbylatitude,monthlyglobalbylatitude,Monthly global by latitude
+saga,SAGA,saga:morphologicalfilter,morphologicalfilter,Morphological filter
+saga,SAGA,saga:morphologicalfilteropencv,morphologicalfilteropencv,Morphological filter (opencv)
+saga,SAGA,saga:morphologicalfiltervigra,morphologicalfiltervigra,Morphological filter (vigra)
+saga,SAGA,saga:morphometricfeatures,morphometricfeatures,Morphometric features
+saga,SAGA,saga:morphometricprotectionindex,morphometricprotectionindex,Morphometric protection index
+saga,SAGA,saga:mosaicrasterlayers,mosaicrasterlayers,Mosaic raster layers
+saga,SAGA,saga:multibandvariation,multibandvariation,Multi-band variation
+saga,SAGA,saga:multidirectionleefilter,multidirectionleefilter,Multi direction lee filter
+saga,SAGA,saga:multilevelbsplineinterpolation,multilevelbsplineinterpolation,Multilevel b-spline interpolation
+saga,SAGA,saga:multilevelbsplineinterpolationforcategories,multilevelbsplineinterpolationforcategories,Multilevel b-spline interpolation for categories
+saga,SAGA,saga:multilevelbsplineinterpolationfromraster,multilevelbsplineinterpolationfromraster,Multilevel b-spline interpolation (from raster)
+saga,SAGA,saga:multiplelinearregressionanalysis,multiplelinearregressionanalysis,Multiple linear regression analysis
+saga,SAGA,saga:multiplelinearregressionanalysisshapes,multiplelinearregressionanalysisshapes,Multiple linear regression analysis (shapes)
+saga,SAGA,saga:multipleregressionanalysisgridandpredictorgrids,multipleregressionanalysisgridandpredictorgrids,Multiple regression analysis (grid and predictor grids)
+saga,SAGA,saga:multipleregressionanalysispointsandpredictorgrids,multipleregressionanalysispointsandpredictorgrids,Multiple regression analysis (points and predictor grids)
+saga,SAGA,saga:multipleregressionanalysispointsraster,multipleregressionanalysispointsraster,Multiple regression analysis (points/raster)
+saga,SAGA,saga:multipleregressionanalysisrasterraster,multipleregressionanalysisrasterraster,Multiple regression analysis (raster/raster)
+saga,SAGA,saga:multiresolutionindexofvalleybottomflatnessmrvbf,multiresolutionindexofvalleybottomflatnessmrvbf,Multiresolution index of valley bottom flatness (mrvbf)
+saga,SAGA,saga:naturalneighbour,naturalneighbour,Natural neighbour
+saga,SAGA,saga:nearestneighbour,nearestneighbour,Nearest neighbour
+saga,SAGA,saga:normalbayesclassificationopencv,normalbayesclassificationopencv,Normal bayes classification (opencv)
+saga,SAGA,saga:orderedweightedaveraging,orderedweightedaveraging,Ordered weighted averaging
+saga,SAGA,saga:ordinarykriging,ordinarykriging,Ordinary kriging
+saga,SAGA,saga:overlandflowdistancetochannelnetwork,overlandflowdistancetochannelnetwork,Overland flow distance to channel network
+saga,SAGA,saga:overlandflowkinematicwaved8,overlandflowkinematicwaved8,Overland flow - kinematic wave d8
+saga,SAGA,saga:paramemeltonruggednessnumber,paramemeltonruggednessnumber,Paramemelton ruggedness number
+saga,SAGA,saga:patching,patching,Patching
+saga,SAGA,saga:patternanalysis,patternanalysis,Pattern analysis
+saga,SAGA,saga:petafterhargreavesgrid,petafterhargreavesgrid,"Pet (after hargreaves, grid)"
+saga,SAGA,saga:petafterhargreavestable,petafterhargreavestable,"Pet (after hargreaves, table)"
+saga,SAGA,saga:pointdistances,pointdistances,Point distances
+saga,SAGA,saga:pointsfilter,pointsfilter,Points filter
+saga,SAGA,saga:pointstatisticsforpolygons,pointstatisticsforpolygons,Point statistics for polygons
+saga,SAGA,saga:pointsthinning,pointsthinning,Points thinning
+saga,SAGA,saga:polartocartesiancoordinates,polartocartesiancoordinates,Polar to cartesian coordinates
+saga,SAGA,saga:polygoncentroids,polygoncentroids,Polygon centroids
+saga,SAGA,saga:polygonclipping,polygonclipping,Polygon clipping
+saga,SAGA,saga:polygondissolveallpolygons,polygondissolveallpolygons,Polygon dissolve (all polygons)
+saga,SAGA,saga:polygondissolvebyattribute,polygondissolvebyattribute,Polygon dissolve (by attribute)
+saga,SAGA,saga:polygonidentity,polygonidentity,Polygon identity
+saga,SAGA,saga:polygonlineintersection,polygonlineintersection,Polygon-line intersection
+saga,SAGA,saga:polygonpartstoseparatepolygons,polygonpartstoseparatepolygons,Polygon parts to separate polygons
+saga,SAGA,saga:polygonproperties,polygonproperties,Polygon properties
+saga,SAGA,saga:polygonselfintersection,polygonselfintersection,Polygon self-intersection
+saga,SAGA,saga:polygonshapeindices,polygonshapeindices,Polygon shape indices
+saga,SAGA,saga:polygonstoedgesandnodes,polygonstoedgesandnodes,Polygons to edges and nodes
+saga,SAGA,saga:polygonunion,polygonunion,Polygon union
+saga,SAGA,saga:polygonupdate,polygonupdate,Polygon update
+saga,SAGA,saga:polynomialregression,polynomialregression,Polynomial regression
+saga,SAGA,saga:principlecomponentsanalysis,principlecomponentsanalysis,Principle components analysis
+saga,SAGA,saga:profilefrompointstable,profilefrompointstable,Profile from points table
+saga,SAGA,saga:profilesfromlines,profilesfromlines,Profiles from lines
+saga,SAGA,saga:proximityraster,proximityraster,Proximity raster
+saga,SAGA,saga:quadtreestructuretopolygons,quadtreestructuretopolygons,Quadtree structure to polygons
+saga,SAGA,saga:radiusofvarianceraster,radiusofvarianceraster,Radius of variance (raster)
+saga,SAGA,saga:randomfield,randomfield,Random field
+saga,SAGA,saga:randomforestclassificationopencv,randomforestclassificationopencv,Random forest classification (opencv)
+saga,SAGA,saga:randomforestpresencepredictionvigra,randomforestpresencepredictionvigra,Random forest presence prediction (vigra)
+saga,SAGA,saga:randomterraingeneration,randomterraingeneration,Random terrain generation
+saga,SAGA,saga:rankfilter,rankfilter,Rank filter
+saga,SAGA,saga:rasterbuffer,rasterbuffer,Raster buffer
+saga,SAGA,saga:rastercalculator,rastercalculator,Raster calculator
+saga,SAGA,saga:rastercellindex,rastercellindex,Raster cell index
+saga,SAGA,saga:rasterdifference,rasterdifference,Raster difference
+saga,SAGA,saga:rasterdivision,rasterdivision,Raster division
+saga,SAGA,saga:rasterize,rasterize,Rasterize
+saga,SAGA,saga:rastermasking,rastermasking,Raster masking
+saga,SAGA,saga:rasternormalisation,rasternormalisation,Raster normalisation
+saga,SAGA,saga:rasterorientation,rasterorientation,Raster orientation
+saga,SAGA,saga:rasterproduct,rasterproduct,Raster product
+saga,SAGA,saga:rasterproximitybuffer,rasterproximitybuffer,Raster proximity buffer
+saga,SAGA,saga:rasterskeletonization,rasterskeletonization,Raster skeletonization
+saga,SAGA,saga:rasterssum,rasterssum,Rasters sum
+saga,SAGA,saga:rasterstandardisation,rasterstandardisation,Raster standardisation
+saga,SAGA,saga:rasterstatisticsforpolygons,rasterstatisticsforpolygons,Raster statistics for polygons
+saga,SAGA,saga:rastervaluestopoints,rastervaluestopoints,Raster values to points
+saga,SAGA,saga:rastervaluestopointsrandomly,rastervaluestopointsrandomly,Raster values to points (randomly)
+saga,SAGA,saga:rastervolume,rastervolume,Raster volume
+saga,SAGA,saga:realsurfacearea,realsurfacearea,Real surface area
+saga,SAGA,saga:reclassifyvalues,reclassifyvalues,Reclassify values
+saga,SAGA,saga:reclassifyvaluesrange,reclassifyvaluesrange,Reclassify values (range)
+saga,SAGA,saga:reclassifyvaluessimple,reclassifyvaluessimple,Reclassify values (simple)
+saga,SAGA,saga:reclassifyvaluessingle,reclassifyvaluessingle,Reclassify values (single)
+saga,SAGA,saga:reclassifyvaluestable,reclassifyvaluestable,Reclassify values (table)
+saga,SAGA,saga:regressionanalysis,regressionanalysis,Regression analysis
+saga,SAGA,saga:regressionanalysispointsandpredictorgrid,regressionanalysispointsandpredictorgrid,Regression analysis (points and predictor grid)
+saga,SAGA,saga:regressionkriging,regressionkriging,Regression kriging
+saga,SAGA,saga:relativeheightsandslopepositions,relativeheightsandslopepositions,Relative heights and slope positions
+saga,SAGA,saga:removeduplicatepoints,removeduplicatepoints,Remove duplicate points
+saga,SAGA,saga:removesmallpixelclumpstonodata,removesmallpixelclumpstonodata,Remove small pixel clumps (to no-data)
+saga,SAGA,saga:representativeness,representativeness,Representativeness
+saga,SAGA,saga:resampling,resampling,Resampling
+saga,SAGA,saga:resamplingfilter,resamplingfilter,Resampling filter
+saga,SAGA,saga:residualanalysis,residualanalysis,Residual analysis
+saga,SAGA,saga:rgbcomposite,rgbcomposite,Rgb composite
+saga,SAGA,saga:riverbasin,riverbasin,Riverbasin
+saga,SAGA,saga:rivergridgeneration,rivergridgeneration,Rivergridgeneration
+saga,SAGA,saga:runningaverage,runningaverage,Running average
+saga,SAGA,saga:sagawetnessindex,sagawetnessindex,Saga wetness index
+saga,SAGA,saga:seededregiongrowing,seededregiongrowing,Seeded region growing
+saga,SAGA,saga:seedgeneration,seedgeneration,Seed generation
+saga,SAGA,saga:separatepointsbydirection,separatepointsbydirection,Separate points by direction
+saga,SAGA,saga:sharedpolygonedges,sharedpolygonedges,Shared polygon edges
+saga,SAGA,saga:shrinkandexpand,shrinkandexpand,Shrink and expand
+saga,SAGA,saga:sievingclasses,sievingclasses,Sieving classes
+saga,SAGA,saga:simplefilter,simplefilter,Simple filter
+saga,SAGA,saga:simplefilterwithinshapes,simplefilterwithinshapes,Simple filter within shapes
+saga,SAGA,saga:simplekriging,simplekriging,Simple kriging
+saga,SAGA,saga:simpleregiongrowing,simpleregiongrowing,Simple region growing
+saga,SAGA,saga:simulation,simulation,Simulation
+saga,SAGA,saga:singlevaluedecompositionopencv,singlevaluedecompositionopencv,Single value decomposition (opencv)
+saga,SAGA,saga:sinkdrainageroutedetection,sinkdrainageroutedetection,Sink drainage route detection
+saga,SAGA,saga:sinkremoval,sinkremoval,Sink removal
+saga,SAGA,saga:skyviewfactor,skyviewfactor,Sky view factor
+saga,SAGA,saga:slopeaspectcurvature,slopeaspectcurvature,"Slope, aspect, curvature"
+saga,SAGA,saga:slopelength,slopelength,Slope length
+saga,SAGA,saga:slopelimitedflowaccumulation,slopelimitedflowaccumulation,Slope limited flow accumulation
+saga,SAGA,saga:smoothingvigra,smoothingvigra,Smoothing (vigra)
+saga,SAGA,saga:snappointstogrid,snappointstogrid,Snap points to grid
+saga,SAGA,saga:snappointstolines,snappointstolines,Snap points to lines
+saga,SAGA,saga:snappointstopoints,snappointstopoints,Snap points to points
+saga,SAGA,saga:soiltextureclassification,soiltextureclassification,Soil texture classification
+saga,SAGA,saga:spatialpointpatternanalysis,spatialpointpatternanalysis,Spatial point pattern analysis
+saga,SAGA,saga:splitlinesatpoints,splitlinesatpoints,Split lines at points
+saga,SAGA,saga:splitlineswithlines,splitlineswithlines,Split lines with lines
+saga,SAGA,saga:splitrgbbands,splitrgbbands,Split RGB bands
+saga,SAGA,saga:splitshapeslayerrandomly,splitshapeslayerrandomly,Split shapes layer randomly
+saga,SAGA,saga:statisticsforrasters,statisticsforrasters,Statistics for rasters
+saga,SAGA,saga:strahlerorder,strahlerorder,Strahler order
+saga,SAGA,saga:streampowerindex,streampowerindex,Stream power index
+saga,SAGA,saga:successiveflowrouting,successiveflowrouting,Successive flow routing
+saga,SAGA,saga:supervisedclassification,supervisedclassification,Supervised classification
+saga,SAGA,saga:supervisedclassificationforgrids,supervisedclassificationforgrids,Supervised classification for grids
+saga,SAGA,saga:supervisedclassificationforshapes,supervisedclassificationforshapes,Supervised classification for shapes
+saga,SAGA,saga:supportvectormachineclassificationopencv,supportvectormachineclassificationopencv,Support vector machine classification (opencv)
+saga,SAGA,saga:surfaceandgradient,surfaceandgradient,Surface and gradient
+saga,SAGA,saga:surfacegradientandconcentration,surfacegradientandconcentration,"Surface, gradient and concentration"
+saga,SAGA,saga:surfacespecificpoints,surfacespecificpoints,Surface specific points
+saga,SAGA,saga:svmclassification,svmclassification,Svm classification
+saga,SAGA,saga:symmetricaldifference,symmetricaldifference,Symmetrical difference
+saga,SAGA,saga:tasseledcaptransformation,tasseledcaptransformation,Tasseled cap transformation
+saga,SAGA,saga:tcilow,tcilow,Tci low
+saga,SAGA,saga:terrainmapview,terrainmapview,Terrain map view
+saga,SAGA,saga:terrainruggednessindextri,terrainruggednessindextri,Terrain ruggedness index (tri)
+saga,SAGA,saga:terrainsurfaceclassificationiwahashiandpike,terrainsurfaceclassificationiwahashiandpike,Terrain surface classification (iwahashi and pike)
+saga,SAGA,saga:terrainsurfaceconvexity,terrainsurfaceconvexity,Terrain surface convexity
+saga,SAGA,saga:terrainsurfacetexture,terrainsurfacetexture,Terrain surface texture
+saga,SAGA,saga:thiessenpolygons,thiessenpolygons,Thiessen polygons
+saga,SAGA,saga:thinplatespline,thinplatespline,Thin plate spline
+saga,SAGA,saga:thinplatesplinetin,thinplatesplinetin,Thin plate spline (tin)
+saga,SAGA,saga:thresholdrasterbuffer,thresholdrasterbuffer,Threshold raster buffer
+saga,SAGA,saga:topofatmospherereflectance,topofatmospherereflectance,Top of atmosphere reflectance
+saga,SAGA,saga:topographiccorrection,topographiccorrection,Topographic correction
+saga,SAGA,saga:topographicopenness,topographicopenness,Topographic openness
+saga,SAGA,saga:topographicpositionindextpi,topographicpositionindextpi,Topographic position index (tpi)
+saga,SAGA,saga:topographicwetnessindextwi,topographicwetnessindextwi,Topographic wetness index (twi)
+saga,SAGA,saga:tpibasedlandformclassification,tpibasedlandformclassification,Tpi based landform classification
+saga,SAGA,saga:transectthroughpolygonshapefile,transectthroughpolygonshapefile,Transect through polygon shapefile
+saga,SAGA,saga:transformvectorlayer,transformvectorlayer,Transform vector layer
+saga,SAGA,saga:transposerasterlayers,transposerasterlayers,Transpose raster layers
+saga,SAGA,saga:triangulation,triangulation,Triangulation
+saga,SAGA,saga:universalkriging,universalkriging,Universal kriging
+saga,SAGA,saga:upslopeanddownslopecurvature,upslopeanddownslopecurvature,Upslope and downslope curvature
+saga,SAGA,saga:upslopearea,upslopearea,Upslope area
+saga,SAGA,saga:userdefinedfilter,userdefinedfilter,User defined filter
+saga,SAGA,saga:valleyandridgedetectiontophatapproach,valleyandridgedetectiontophatapproach,Valley and ridge detection (top hat approach)
+saga,SAGA,saga:valleydepth,valleydepth,Valley depth
+saga,SAGA,saga:variabledistancebuffer,variabledistancebuffer,Variable distance buffer
+saga,SAGA,saga:variogramcloud,variogramcloud,Variogram cloud
+saga,SAGA,saga:variogramsurface,variogramsurface,Variogram surface
+saga,SAGA,saga:vectorisinggridclasses,vectorisinggridclasses,Vectorising grid classes
+saga,SAGA,saga:vectorruggednessmeasurevrm,vectorruggednessmeasurevrm,Vector ruggedness measure (vrm)
+saga,SAGA,saga:vegetationindexdistancebased,vegetationindexdistancebased,Vegetation index (distance based)
+saga,SAGA,saga:vegetationindexslopebased,vegetationindexslopebased,Vegetation index (slope based)
+saga,SAGA,saga:verticaldistancetochannelnetwork,verticaldistancetochannelnetwork,Vertical distance to channel network
+saga,SAGA,saga:warpingshapes,warpingshapes,Warping shapes
+saga,SAGA,saga:waterretentioncapacity,waterretentioncapacity,Water retention capacity
+saga,SAGA,saga:watershedbasins,watershedbasins,Watershed basins
+saga,SAGA,saga:watershedsegmentation,watershedsegmentation,Watershed segmentation
+saga,SAGA,saga:watershedsegmentationvigra,watershedsegmentationvigra,Watershed segmentation (vigra)
+saga,SAGA,saga:windeffect,windeffect,Wind effect
+saga,SAGA,saga:windexpositionindex,windexpositionindex,Wind exposition index
+saga,SAGA,saga:zonalmultipleregressionanalysispointsandpredictorgrids,zonalmultipleregressionanalysispointsandpredictorgrids,Zonal multiple regression analysis (points and predictor grids)
+saga,SAGA,saga:zonalrasterstatistics,zonalrasterstatistics,Zonal raster statistics

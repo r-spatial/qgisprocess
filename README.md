@@ -33,8 +33,9 @@ The qgisprocess package wraps the `qgis_process` command-line utility,
 which is available in QGIS \>=
 [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16),
 [released](https://qgis.org/en/site/getinvolved/development/roadmap.html)
-in September 2020. MacOS users will have to install the a recent nightly
-build until QGIS 3.16 has been released. Download instructions for all
+in September 2020. MacOS users will have to install a [recent nightly
+build](https://qgis.org/en/site/forusers/alldownloads.html#qgis-nightly-release)
+until QGIS 3.16 has been released; download instructions for all
 platforms are available at <https://download.qgis.org/>. If a recent
 version of QGIS isn’t available for your OS, you can use one of the
 [Geocomputation with R Docker
@@ -53,37 +54,36 @@ library(qgisprocess)
 #> Using 'qgis_process' at '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'.
 #> Run `qgis_configure()` for details.
 input <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
-output_file <- file.path(tempdir(), "nc_buffered.gpkg")
 
-qgis_run_algorithm(
+result <- qgis_run_algorithm(
   "native:buffer",
   INPUT = input,
   DISTANCE = 1,
   SEGMENTS = 10,
-  DISSOLVE = 'True',
+  DISSOLVE = TRUE,
   END_CAP_STYLE = 0,
   JOIN_STYLE = 0,
   MITER_LIMIT = 10,
-  OUTPUT = output_file
+  OUTPUT = qgis_tmp_vector()
 )
 #> Running /Applications/QGIS.app/Contents/MacOS/bin/qgis_process run \
 #>   'native:buffer' \
-#>   '--INPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/filebb976563eff4.gpkg' \
-#>   '--DISTANCE=1' '--SEGMENTS=10' '--DISSOLVE=True' '--END_CAP_STYLE=0' \
+#>   '--INPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpoHMXmE/file11d1d488773d7/file11d1d470715bd.gpkg' \
+#>   '--DISTANCE=1' '--SEGMENTS=10' '--DISSOLVE=TRUE' '--END_CAP_STYLE=0' \
 #>   '--JOIN_STYLE=0' '--MITER_LIMIT=10' \
-#>   '--OUTPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg'
+#>   '--OUTPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpoHMXmE/file11d1d488773d7/file11d1d34c64d74.gpkg'
 #> 
 #> ----------------
 #> Inputs
 #> ----------------
 #> 
-#> DISSOLVE:    True
+#> DISSOLVE:    TRUE
 #> DISTANCE:    1
 #> END_CAP_STYLE:   0
-#> INPUT:   /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/filebb976563eff4.gpkg
+#> INPUT:   /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpoHMXmE/file11d1d488773d7/file11d1d470715bd.gpkg
 #> JOIN_STYLE:  0
 #> MITER_LIMIT: 10
-#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg
+#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpoHMXmE/file11d1d488773d7/file11d1d34c64d74.gpkg
 #> SEGMENTS:    10
 #> 
 #> 
@@ -92,30 +92,23 @@ qgis_run_algorithm(
 #> Results
 #> ----------------
 #> 
-#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg
-#> $status
-#> [1] 0
-#> 
-#> $stdout
-#> [1] "\n----------------\nInputs\n----------------\n\nDISSOLVE:\tTrue\nDISTANCE:\t1\nEND_CAP_STYLE:\t0\nINPUT:\t/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/filebb976563eff4.gpkg\nJOIN_STYLE:\t0\nMITER_LIMIT:\t10\nOUTPUT:\t/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg\nSEGMENTS:\t10\n\n\n0...10...20...30...40...50...60...70...80...90...\n----------------\nResults\n----------------\n\nOUTPUT:\t/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg\n"
-#> 
-#> $stderr
-#> [1] "\"<font color=\\\"red\\\">Couldn't load PyQGIS.<br>Python support will be disabled.</font><br><pre><br>Traceback (most recent call last):<br>&nbsp; File \\\"<string>\\\", line 1, in <module><br>&nbsp; File \\\"/Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/qgis/core/__init__.py\\\", line 25, in <module><br>&nbsp; &nbsp; from qgis._core import *<br>ImportError: dlopen(/Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/qgis/_core.so, 2): Symbol not found: __ZN25QgsPalettedRasterRenderer8setLabelEiRK7QString<br>&nbsp; Referenced from: /Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/qgis/_core.so<br>&nbsp; Expected in: /Applications/QGIS.app/Contents/MacOS/qgis_process.app/Contents/MacOS/../../../../Frameworks/qgis_core.framework/Versions/3.15/qgis_core<br> in /Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/qgis/_core.so<br><br></pre>Python version:<br>3.7.7 (default, Sep 22 2020, 10:25:18) <br>[Clang 12.0.0 (clang-1200.0.32.2)]<br><br>QGIS version:<br>3.15.0-Master 'Master', cfba539e0c<br><br>Python path:<br>['/Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python', '/Users/dewey/Library/Application Support/QGIS/QGIS3/profiles/default/python', '/Users/dewey/Library/Application Support/QGIS/QGIS3/profiles/default/python/plugins', '/Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/plugins', '/Applications/QGIS.app/Contents/MacOS/lib/python37.zip', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/lib-dynload', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/numpy-1.19.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/pyproj-2.6.0-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/Rtree-0.9.4-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/GDAL-3.1.2-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/netCDF4-1.5.3-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/cftime-1.2.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/pandas-1.1.0-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/patsy-0.5.1-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/Pillow-7.2.0-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/Fiona-1.8.13.post1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/click_plugins-1.1.1-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/matplotlib-3.3.0-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/rasterio-1.1.5-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/snuggs-1.4.7-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/affine-2.3.0-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/scipy-1.5.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/numba-0.50.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/opencv_contrib_python-4.3.0.36-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/statsmodels-0.11.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/geopandas-0.8.1-py3.7.egg']\"\n\"<font color=\\\"red\\\">An error occurred during execution of following code:<br><tt>qgis.utils.updateAvailablePlugins()</tt></font><br><pre><br>SystemError: PyEval_EvalCodeEx: NULL globals<br><br></pre>Python version:<br><br><br>QGIS version:<br>3.15.0-Master 'Master', cfba539e0c<br><br>Python path:<br>\"\n"
-#> 
-#> $timeout
-#> [1] FALSE
-output_sf <- sf::read_sf(output_file)
-unlink(output_file)
+#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpoHMXmE/file11d1d488773d7/file11d1d34c64d74.gpkg
 
+result
+#> <Result of `qgis_run_algorithm("native:buffer", ...)`>
+#> See `qgis_result_stout(x)`, `qgis_result_stderr(x)`, and/or `qgis_result_args()`.
+#> Output:
+#> $OUTPUT
+#> [1] "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpoHMXmE/file11d1d488773d7/file11d1d34c64d74.gpkg"
+
+output_sf <- sf::read_sf(qgis_output(result, "OUTPUT"))
 plot(sf::st_geometry(output_sf))
 ```
 
 <img src="man/figures/README-buffer-1.png" width="100%" />
 
 You can read the help associated with an algorithm using
-`qgis_show_help()`. It may also be useful to run an algorithm in the
-QGIS GUI and examine the console output to determine how the various
-input values are translated to processing arguments.
+`qgis_show_help()`:
 
 ``` r
 qgis_show_help("native:buffer")
@@ -189,6 +182,34 @@ qgis_show_help("native:buffer")
 #> 
 #> OUTPUT: <outputVector>
 #>  Buffered
+```
+
+It may also be useful to run an algorithm in the QGIS GUI and examine
+the console ‘Input parameters’ to determine how the various input values
+are translated to string processing arguments:
+
+![](man/figures/qgis-buffer.png)
+
+A list of available algorithms can be found using `qgis_algorithms()`.
+When using R interactively, it may be useful to use
+`View(qgis_algorithms())` to search.
+
+``` r
+qgis_algorithms()
+#> # A tibble: 971 x 5
+#>    provider provider_title algorithm         algorithm_id    algorithm_title    
+#>    <chr>    <chr>          <chr>             <chr>           <chr>              
+#>  1 3d       QGIS (3D)      3d:tessellate     tessellate      Tessellate         
+#>  2 gdal     GDAL           gdal:aspect       aspect          Aspect             
+#>  3 gdal     GDAL           gdal:assignproje… assignprojecti… Assign projection  
+#>  4 gdal     GDAL           gdal:buffervecto… buffervectors   Buffer vectors     
+#>  5 gdal     GDAL           gdal:buildvirtua… buildvirtualra… Build virtual rast…
+#>  6 gdal     GDAL           gdal:buildvirtua… buildvirtualve… Build virtual vect…
+#>  7 gdal     GDAL           gdal:cliprasterb… cliprasterbyex… Clip raster by ext…
+#>  8 gdal     GDAL           gdal:cliprasterb… cliprasterbyma… Clip raster by mas…
+#>  9 gdal     GDAL           gdal:clipvectorb… clipvectorbyex… Clip vector by ext…
+#> 10 gdal     GDAL           gdal:clipvectorb… clipvectorbypo… Clip vector by mas…
+#> # … with 961 more rows
 ```
 
 ## Further reading

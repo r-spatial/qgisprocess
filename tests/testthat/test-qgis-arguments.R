@@ -4,12 +4,13 @@ test_that("argument coercers work", {
   expect_identical(as_qgis_argument("chr value"), "chr value")
   expect_identical(as_qgis_argument(1), "1")
   expect_identical(as_qgis_argument(1L), "1")
+  expect_identical(as_qgis_argument(TRUE), "TRUE")
 })
 
 test_that("argument cleaners work", {
   expect_null(qgis_clean_argument("some valule", "some type"))
 
-  tmp <- structure(tempfile(), class = "qgis_tempfile")
+  tmp <- structure(tempfile(), class = "qgis_tempfile_arg")
   file.create(tmp)
   expect_true(file.exists(tmp))
   qgis_clean_argument(tmp)

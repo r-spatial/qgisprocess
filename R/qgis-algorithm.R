@@ -20,10 +20,11 @@
 #' if (has_qgis()) qgis_has_algorithm("native:filedownloader")
 #' if (has_qgis()) qgis_has_provider("native")
 #' if (has_qgis()) qgis_providers()
+#'
 qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = rlang::zap(), ELIPSOID = rlang::zap(),
                                .quiet = FALSE) {
   assert_qgis()
-  assert_qgis_algorithm_or_model_file(algorithm)
+  assert_qgis_algorithm(algorithm)
 
   # use list2 so that users can !!! argument lists
   # zap() means don't include (NULL may have meaning for some types)
@@ -32,7 +33,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = rlang::zap(), ELIP
 
   if (length(args) > 0) {
     if (!rlang::is_named(args)) {
-      stop("All arguments to `qgis_run_algorithm()` must be named.", call. = FALSE)
+      abort("All arguments to `qgis_run_algorithm()` must be named.")
     }
 
     # get argument info for supplied args and run sanitizers
@@ -51,24 +52,36 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = rlang::zap(), ELIP
     # look for sanitizer errors and stop() for them
     arg_errors <- vapply(args, inherits, "try-error", FUN.VALUE = logical(1))
     if (any(arg_errors)) {
-      stop(args[arg_errors][[1]], call. = FALSE)
+      abort(args[arg_errors][[1]])
     }
   }
 
-  args <- paste0("--", names(args), "=", vapply(args, as.character, character(1)))
+  args_str <- paste0("--", names(args), "=", vapply(args, as.character, character(1)))
 
   if (.quiet) {
-    result <- qgis_run(args = c("run", algorithm, args))
+    result <- qgis_run(args = c("run", algorithm, args_str))
   } else {
     result <- qgis_run(
-      args = c("run", algorithm, args),
+      args = c("run", algorithm, args_str),
       echo_cmd = TRUE,
-      stdout_callback = function(x, ...) cat(x)
+      stdout_callback = function(x, ...) cat(x),
+      stderr_callback = function(x, ...) message(x, appendLF = FALSE)
     )
     cat("\n")
   }
 
-  result
+  # return a custom object to keep as much information as possible
+  # about the output
+  structure(
+    rlang::list2(
+      # ... eventually, this will contain the parsed output values
+      !!! qgis_parse_results(algorithm, result$stdout),
+      .algorithm = algorithm,
+      .args = args,
+      .processx_result = result
+    ),
+    class = "qgis_result"
+  )
 }
 
 #' @rdname qgis_run_algorithm
@@ -95,17 +108,15 @@ qgis_providers <- function(provider) {
 
 #' @rdname qgis_run_algorithm
 #' @export
-is_qgis_model_file <- function(algorithm) {
-  file.exists(algorithm) && !dir.exists(algorithm)
-}
-
-#' @rdname qgis_run_algorithm
-#' @export
-assert_qgis_algorithm_or_model_file <- function(algorithm) {
+assert_qgis_algorithm <- function(algorithm) {
   if (!is.character(algorithm) || length(algorithm) != 1) {
-    stop("`algorithm` must be a character vector of length 1", call. = FALSE)
-  } else if (!is_qgis_model_file(algorithm) && !qgis_has_algorithm(algorithm)) {
-    stop(glue::glue("'{ algorithm }' is not a QGIS algorithm or path to model file."), call. = FALSE)
+    abort("`algorithm` must be a character vector of length 1")
+  } else if (!qgis_has_algorithm(algorithm)) {
+    abort(
+      glue(
+        "Can't find QGIS algorithm '{ algorithm }'.\nRun `qgis_algorithms()` for a list of available algorithms."
+      )
+    )
   }
 
   invisible(algorithm)

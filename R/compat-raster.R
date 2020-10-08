@@ -3,10 +3,7 @@
 #' @export
 as_qgis_argument.RasterLayer <- function(x, qgis_type) {
   if (qgis_type != "raster") {
-    stop(
-      glue::glue("Can't use 'RasterLayer' objects for QGIS arguments with type '{ qgis_type }'"),
-      call. = FALSE
-    )
+    abort(glue("Can't use 'RasterLayer' objects for QGIS arguments with type '{ qgis_type }'"))
   }
 
   # try to use a filename if present
@@ -17,7 +14,7 @@ as_qgis_argument.RasterLayer <- function(x, qgis_type) {
     }
   }
 
-  path <- tempfile(fileext = ".tif")
+  path <- qgis_tmp_raster()
   raster::writeRaster(x, path)
-  structure(path, class = "qgis_tempfile")
+  structure(path, class = "qgis_tempfile_arg")
 }
