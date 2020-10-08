@@ -6,6 +6,9 @@ test_that("qgis_output() works", {
 })
 
 test_that("qgis_result_*() functions work", {
+  skip_if_not(has_qgis())
+  skip_if_offline()
+
   tmp_json <- qgis_tmp_file(".json")
   result <- qgis_run_algorithm(
     "native:filedownloader",
