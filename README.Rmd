@@ -50,7 +50,7 @@ result <- qgis_run_algorithm(
   END_CAP_STYLE = 0,
   JOIN_STYLE = 0,
   MITER_LIMIT = 10,
-  OUTPUT = qgis_tmp_vector("=\"s.gpkg")
+  OUTPUT = qgis_tmp_vector()
 )
 
 result
