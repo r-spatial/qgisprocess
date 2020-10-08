@@ -19,7 +19,7 @@ qgis_run(..., env = qgis_env(), path = qgis_path())
 
 has_qgis()
 
-assert_qgis(action = stop)
+assert_qgis(action = abort)
 
 qgis_configure(quiet = FALSE)
 
