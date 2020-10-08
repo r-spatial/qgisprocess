@@ -44,7 +44,7 @@ qgis_help_text <- function(algorithm) {
   }
 
   assert_qgis()
-  assert_qgis_algorithm_or_model_file(algorithm)
+  assert_qgis_algorithm(algorithm)
 
   result <- qgis_run(
     args = c("help", algorithm)

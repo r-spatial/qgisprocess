@@ -1,6 +1,8 @@
 
 test_that("qgis_run_algorithm() works", {
   skip_if_not(has_qgis())
+  skip_if_offline()
+
   tmp_json <- tempfile()
   expect_output(
     qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = FALSE),
@@ -9,12 +11,17 @@ test_that("qgis_run_algorithm() works", {
   expect_true(file.exists(tmp_json))
 
   unlink(tmp_json)
-  expect_silent(
+  result <- expect_silent(
     qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = TRUE)
   )
   expect_true(file.exists(tmp_json))
 
-
+  expect_is(result, "qgis_result")
+  expect_true(is_qgis_result(result))
+  expect_output(print(result), "^<Result")
+  expect_named(qgis_result_args(result), c("URL", "OUTPUT"))
+  expect_is(qgis_result_stderr(result), "character")
+  expect_is(qgis_result_stdout(result), "character")
 })
 
 test_that("qgis_has_algorithm() works", {
@@ -35,24 +42,8 @@ test_that("qgis_providers() works", {
   expect_false("notaprovider" %in% qgis_providers()$provider)
 })
 
-test_that("is_qgis_model_file() works", {
-  file <- tempfile()
-  expect_false(is_qgis_model_file(file))
-  dir.create(file)
-  expect_false(is_qgis_model_file(file))
-  unlink(file, recursive = TRUE)
-  file.create(file)
-  expect_true(is_qgis_model_file(file))
-  unlink(file)
-})
-
-test_that("assert_algorithm_or_model_file() works", {
-  file <- tempfile()
-  file.create(file)
-  expect_identical(assert_qgis_algorithm_or_model_file(file), file)
-  expect_error(assert_qgis_algorithm_or_model_file(NULL), "`algorithm` must be")
-
+test_that("assert_qgis_algorithm() works", {
   skip_if_not(has_qgis())
-  expect_error(assert_qgis_algorithm_or_model_file("notanalgorithm"))
-  expect_identical(assert_qgis_algorithm_or_model_file("native:filedownloader"), "native:filedownloader")
+  expect_error(assert_qgis_algorithm("notanalgorithm"))
+  expect_identical(assert_qgis_algorithm("native:filedownloader"), "native:filedownloader")
 })

@@ -20,8 +20,7 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of `qgisprocess` is to provide an R interface to the popular and open source desktop geographic information system (GIS) program [QGIS](https://qgis.org/en/site/).
-The package is a re-implementation of functionality provided by the archived [RQGIS](https://cran.r-project.org/package=RQGIS) package, which was partially revived in the [RQGIS3](https://github.com/r-spatial/RQGIS3) package.
+The goal of `qgisprocess` is to provide an R interface to the popular and open source desktop geographic information system (GIS) program [QGIS](https://qgis.org/en/site/). The package is a re-implementation of functionality provided by the archived [RQGIS](https://cran.r-project.org/package=RQGIS) package, which was partially revived in the [RQGIS3](https://github.com/r-spatial/RQGIS3) package.
 
 ## Installation
 
@@ -32,7 +31,7 @@ You can install the development version from [GitHub](https://github.com/) with:
 remotes::install_github("paleolimbot/qgisprocess")
 ```
 
-The qgisprocess package wraps the `qgis_process` command-line utility, which is available in QGIS >= [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16), [released](https://qgis.org/en/site/getinvolved/development/roadmap.html) in September 2020. MacOS users will have to install the a recent nightly build until QGIS 3.16 has been released. Download instructions for all platforms are available at <https://download.qgis.org/>. If a recent version of QGIS isn't available for your OS, you can use one of the [Geocomputation with R Docker images](https://github.com/geocompr/docker) with QGIS installed.
+The qgisprocess package wraps the `qgis_process` command-line utility, which is available in QGIS >= [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16), [released](https://qgis.org/en/site/getinvolved/development/roadmap.html) in September 2020. MacOS users will have to install a [recent nightly build](https://qgis.org/en/site/forusers/alldownloads.html#qgis-nightly-release) until QGIS 3.16 has been released; download instructions for all platforms are available at <https://download.qgis.org/>. If a recent version of QGIS isn't available for your OS, you can use one of the [Geocomputation with R Docker images](https://github.com/geocompr/docker) with QGIS installed.
 
 ## Example
 
@@ -60,11 +59,22 @@ unlink(output_file)
 plot(sf::st_geometry(output_sf))
 ```
 
-You can read the help associated with an algorithm using `qgis_show_help()`. It may also be useful to run an algorithm in the QGIS GUI and examine the console output to determine how the various input values are translated to processing arguments.
+You can read the help associated with an algorithm using `qgis_show_help()`:
 
 ```{r}
 qgis_show_help("native:buffer")
 ```
+
+It may also be useful to run an algorithm in the QGIS GUI and examine the console 'Input parameters' to determine how the various input values are translated to string processing arguments:
+
+![](man/figures/qgis-buffer.png)
+
+A list of available algorithms can be found using `qgis_algorithms()`. When using R interactively, it may be useful to use `View(qgis_algorithms())` to search.
+
+```{r}
+qgis_algorithms()
+```
+
 
 ## Further reading
 

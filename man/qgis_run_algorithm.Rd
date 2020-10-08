@@ -5,8 +5,7 @@
 \alias{qgis_has_algorithm}
 \alias{qgis_has_provider}
 \alias{qgis_providers}
-\alias{is_qgis_model_file}
-\alias{assert_qgis_algorithm_or_model_file}
+\alias{assert_qgis_algorithm}
 \title{Run algorithms using 'qgis_process'}
 \usage{
 qgis_run_algorithm(
@@ -23,9 +22,7 @@ qgis_has_provider(provider)
 
 qgis_providers(provider)
 
-is_qgis_model_file(algorithm)
-
-assert_qgis_algorithm_or_model_file(algorithm)
+assert_qgis_algorithm(algorithm)
 }
 \arguments{
 \item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
@@ -51,4 +48,5 @@ for a detailed description of the algorithms provided
 if (has_qgis()) qgis_has_algorithm("native:filedownloader")
 if (has_qgis()) qgis_has_provider("native")
 if (has_qgis()) qgis_providers()
+
 }
