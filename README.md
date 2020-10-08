@@ -35,7 +35,10 @@ which is available in QGIS \>=
 [released](https://qgis.org/en/site/getinvolved/development/roadmap.html)
 in September 2020. MacOS users will have to install the a recent nightly
 build until QGIS 3.16 has been released. Download instructions for all
-platforms are available at <https://download.qgis.org/>.
+platforms are available at <https://download.qgis.org/>. If a recent
+version of QGIS isn’t available for your OS, you can use one of the
+[Geocomputation with R Docker
+images](https://github.com/geocompr/docker) with QGIS installed.
 
 ## Example
 
@@ -47,6 +50,8 @@ experimentally supported (and will be well-supported in the future\!).
 
 ``` r
 library(qgisprocess)
+#> Using 'qgis_process' at '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'.
+#> Run `qgis_configure()` for details.
 input <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
 output_file <- file.path(tempdir(), "nc_buffered.gpkg")
 
@@ -63,10 +68,10 @@ qgis_run_algorithm(
 )
 #> Running /Applications/QGIS.app/Contents/MacOS/bin/qgis_process run \
 #>   'native:buffer' \
-#>   '--INPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmphJ7uFh/fileb3d9103db921.gpkg' \
+#>   '--INPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/filebb976563eff4.gpkg' \
 #>   '--DISTANCE=1' '--SEGMENTS=10' '--DISSOLVE=True' '--END_CAP_STYLE=0' \
 #>   '--JOIN_STYLE=0' '--MITER_LIMIT=10' \
-#>   '--OUTPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmphJ7uFh/nc_buffered.gpkg'
+#>   '--OUTPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg'
 #> 
 #> ----------------
 #> Inputs
@@ -75,10 +80,10 @@ qgis_run_algorithm(
 #> DISSOLVE:    True
 #> DISTANCE:    1
 #> END_CAP_STYLE:   0
-#> INPUT:   /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmphJ7uFh/fileb3d9103db921.gpkg
+#> INPUT:   /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/filebb976563eff4.gpkg
 #> JOIN_STYLE:  0
 #> MITER_LIMIT: 10
-#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmphJ7uFh/nc_buffered.gpkg
+#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg
 #> SEGMENTS:    10
 #> 
 #> 
@@ -87,12 +92,12 @@ qgis_run_algorithm(
 #> Results
 #> ----------------
 #> 
-#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmphJ7uFh/nc_buffered.gpkg
+#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg
 #> $status
 #> [1] 0
 #> 
 #> $stdout
-#> [1] "\n----------------\nInputs\n----------------\n\nDISSOLVE:\tTrue\nDISTANCE:\t1\nEND_CAP_STYLE:\t0\nINPUT:\t/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmphJ7uFh/fileb3d9103db921.gpkg\nJOIN_STYLE:\t0\nMITER_LIMIT:\t10\nOUTPUT:\t/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmphJ7uFh/nc_buffered.gpkg\nSEGMENTS:\t10\n\n\n0...10...20...30...40...50...60...70...80...90...\n----------------\nResults\n----------------\n\nOUTPUT:\t/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmphJ7uFh/nc_buffered.gpkg\n"
+#> [1] "\n----------------\nInputs\n----------------\n\nDISSOLVE:\tTrue\nDISTANCE:\t1\nEND_CAP_STYLE:\t0\nINPUT:\t/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/filebb976563eff4.gpkg\nJOIN_STYLE:\t0\nMITER_LIMIT:\t10\nOUTPUT:\t/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg\nSEGMENTS:\t10\n\n\n0...10...20...30...40...50...60...70...80...90...\n----------------\nResults\n----------------\n\nOUTPUT:\t/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpSh4lGW/nc_buffered.gpkg\n"
 #> 
 #> $stderr
 #> [1] "\"<font color=\\\"red\\\">Couldn't load PyQGIS.<br>Python support will be disabled.</font><br><pre><br>Traceback (most recent call last):<br>&nbsp; File \\\"<string>\\\", line 1, in <module><br>&nbsp; File \\\"/Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/qgis/core/__init__.py\\\", line 25, in <module><br>&nbsp; &nbsp; from qgis._core import *<br>ImportError: dlopen(/Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/qgis/_core.so, 2): Symbol not found: __ZN25QgsPalettedRasterRenderer8setLabelEiRK7QString<br>&nbsp; Referenced from: /Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/qgis/_core.so<br>&nbsp; Expected in: /Applications/QGIS.app/Contents/MacOS/qgis_process.app/Contents/MacOS/../../../../Frameworks/qgis_core.framework/Versions/3.15/qgis_core<br> in /Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/qgis/_core.so<br><br></pre>Python version:<br>3.7.7 (default, Sep 22 2020, 10:25:18) <br>[Clang 12.0.0 (clang-1200.0.32.2)]<br><br>QGIS version:<br>3.15.0-Master 'Master', cfba539e0c<br><br>Python path:<br>['/Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python', '/Users/dewey/Library/Application Support/QGIS/QGIS3/profiles/default/python', '/Users/dewey/Library/Application Support/QGIS/QGIS3/profiles/default/python/plugins', '/Applications/QGIS.app/Contents/MacOS/bin/../../Resources/python/plugins', '/Applications/QGIS.app/Contents/MacOS/lib/python37.zip', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/lib-dynload', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/numpy-1.19.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/pyproj-2.6.0-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/Rtree-0.9.4-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/GDAL-3.1.2-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/netCDF4-1.5.3-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/cftime-1.2.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/pandas-1.1.0-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/patsy-0.5.1-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/Pillow-7.2.0-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/Fiona-1.8.13.post1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/click_plugins-1.1.1-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/matplotlib-3.3.0-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/rasterio-1.1.5-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/snuggs-1.4.7-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/affine-2.3.0-py3.7.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/scipy-1.5.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/numba-0.50.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/opencv_contrib_python-4.3.0.36-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/statsmodels-0.11.1-py3.7-macosx-10.13.0-x86_64.egg', '/Applications/QGIS.app/Contents/MacOS/lib/python3.7/site-packages/geopandas-0.8.1-py3.7.egg']\"\n\"<font color=\\\"red\\\">An error occurred during execution of following code:<br><tt>qgis.utils.updateAvailablePlugins()</tt></font><br><pre><br>SystemError: PyEval_EvalCodeEx: NULL globals<br><br></pre>Python version:<br><br><br>QGIS version:<br>3.15.0-Master 'Master', cfba539e0c<br><br>Python path:<br>\"\n"

@@ -32,7 +32,7 @@ You can install the development version from [GitHub](https://github.com/) with:
 remotes::install_github("paleolimbot/qgisprocess")
 ```
 
-The qgisprocess package wraps the `qgis_process` command-line utility, which is available in QGIS >= [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16), [released](https://qgis.org/en/site/getinvolved/development/roadmap.html) in September 2020. MacOS users will have to install the a recent nightly build until QGIS 3.16 has been released. Download instructions for all platforms are available at <https://download.qgis.org/>.
+The qgisprocess package wraps the `qgis_process` command-line utility, which is available in QGIS >= [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16), [released](https://qgis.org/en/site/getinvolved/development/roadmap.html) in September 2020. MacOS users will have to install the a recent nightly build until QGIS 3.16 has been released. Download instructions for all platforms are available at <https://download.qgis.org/>. If a recent version of QGIS isn't available for your OS, you can use one of the [Geocomputation with R Docker images](https://github.com/geocompr/docker) with QGIS installed.
 
 ## Example
 
