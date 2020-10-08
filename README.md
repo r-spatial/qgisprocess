@@ -68,10 +68,10 @@ result <- qgis_run_algorithm(
 )
 #> Running /Applications/QGIS.app/Contents/MacOS/bin/qgis_process run \
 #>   'native:buffer' \
-#>   '--INPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpoHMXmE/file11d1d488773d7/file11d1d470715bd.gpkg' \
+#>   '--INPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpZfnsJA/file11f8e53c6f6ae/file11f8e12aabbdc.gpkg' \
 #>   '--DISTANCE=1' '--SEGMENTS=10' '--DISSOLVE=TRUE' '--END_CAP_STYLE=0' \
 #>   '--JOIN_STYLE=0' '--MITER_LIMIT=10' \
-#>   '--OUTPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpoHMXmE/file11d1d488773d7/file11d1d34c64d74.gpkg'
+#>   '--OUTPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpZfnsJA/file11f8e53c6f6ae/file11f8e2b6d447a.gpkg'
 #> 
 #> ----------------
 #> Inputs
@@ -80,10 +80,10 @@ result <- qgis_run_algorithm(
 #> DISSOLVE:    TRUE
 #> DISTANCE:    1
 #> END_CAP_STYLE:   0
-#> INPUT:   /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpoHMXmE/file11d1d488773d7/file11d1d470715bd.gpkg
+#> INPUT:   /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpZfnsJA/file11f8e53c6f6ae/file11f8e12aabbdc.gpkg
 #> JOIN_STYLE:  0
 #> MITER_LIMIT: 10
-#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpoHMXmE/file11d1d488773d7/file11d1d34c64d74.gpkg
+#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpZfnsJA/file11f8e53c6f6ae/file11f8e2b6d447a.gpkg
 #> SEGMENTS:    10
 #> 
 #> 
@@ -92,14 +92,12 @@ result <- qgis_run_algorithm(
 #> Results
 #> ----------------
 #> 
-#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpoHMXmE/file11d1d488773d7/file11d1d34c64d74.gpkg
+#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpZfnsJA/file11f8e53c6f6ae/file11f8e2b6d447a.gpkg
 
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
-#> See `qgis_result_stout(x)`, `qgis_result_stderr(x)`, and/or `qgis_result_args()`.
-#> Output:
-#> $OUTPUT
-#> [1] "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpoHMXmE/file11d1d488773d7/file11d1d34c64d74.gpkg"
+#> List of 1
+#>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpZfnsJA/file11f8e53c6f6ae/file11f8e2b6d447a.gpkg"
 
 output_sf <- sf::read_sf(qgis_output(result, "OUTPUT"))
 plot(sf::st_geometry(output_sf))
