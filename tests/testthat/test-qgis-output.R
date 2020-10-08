@@ -1,5 +1,7 @@
 
 test_that("characters are not incorrectly re-encoded from output", {
+  skip_if_not(has_qgis())
+
   result <- qgis_run_algorithm(
     "native:simplifygeometries",
     INPUT = system.file("longlake/longlake.gpkg", package = "qgisprocess"),
@@ -44,7 +46,9 @@ test_that("output parsing for string, numeric, and classed types works", {
   result$OUTPUT_TABLE
 })
 
-test_that("output parsing or multilayer outputs works", {
+test_that("output parsing for multilayer outputs works", {
+  skip_if_not(has_qgis())
+
   result_empty <- qgis_run_algorithm(
     "native:splitvectorlayer",
     INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
