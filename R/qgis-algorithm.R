@@ -33,7 +33,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = rlang::zap(), ELIP
 
   if (length(args) > 0) {
     if (!rlang::is_named(args)) {
-      stop("All arguments to `qgis_run_algorithm()` must be named.", call. = FALSE)
+      abort("All arguments to `qgis_run_algorithm()` must be named.")
     }
 
     # get argument info for supplied args and run sanitizers
@@ -52,7 +52,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = rlang::zap(), ELIP
     # look for sanitizer errors and stop() for them
     arg_errors <- vapply(args, inherits, "try-error", FUN.VALUE = logical(1))
     if (any(arg_errors)) {
-      stop(args[arg_errors][[1]], call. = FALSE)
+      abort(args[arg_errors][[1]])
     }
   }
 
@@ -107,13 +107,12 @@ qgis_providers <- function(provider) {
 #' @export
 assert_qgis_algorithm <- function(algorithm) {
   if (!is.character(algorithm) || length(algorithm) != 1) {
-    stop("`algorithm` must be a character vector of length 1", call. = FALSE)
+    abort("`algorithm` must be a character vector of length 1")
   } else if (!qgis_has_algorithm(algorithm)) {
-    stop(
-      glue::glue(
+    abort(
+      glue(
         "Can't find QGIS algorithm '{ algorithm }'.\nRun `qgis_algorithms()` for a list of available algorithms."
-      ),
-      call. = FALSE
+      )
     )
   }
 

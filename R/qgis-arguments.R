@@ -15,15 +15,14 @@ as_qgis_argument <- function(x, qgis_type) {
 #' @rdname as_qgis_argument
 #' @export
 as_qgis_argument.default <- function(x, qgis_type) {
-  stop(
-    glue::glue(
+  abort(
+    glue(
       paste0(
         "Don't know how to convert object of type ",
         "'{ paste(class(x), collapse = \" / \") }' ",
         "to QGIS type '{ qgis_type }'"
       )
-    ),
-    call. = FALSE
+    )
   )
 }
 

@@ -3,10 +3,7 @@
 #' @export
 as_qgis_argument.RasterLayer <- function(x, qgis_type) {
   if (qgis_type != "raster") {
-    stop(
-      glue::glue("Can't use 'RasterLayer' objects for QGIS arguments with type '{ qgis_type }'"),
-      call. = FALSE
-    )
+    abort(glue("Can't use 'RasterLayer' objects for QGIS arguments with type '{ qgis_type }'"))
   }
 
   # try to use a filename if present

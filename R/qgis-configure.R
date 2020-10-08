@@ -37,7 +37,7 @@ has_qgis <- function() {
 
 #' @rdname qgis_run
 #' @export
-assert_qgis <- function(action = stop) {
+assert_qgis <- function(action = abort) {
   if (!has_qgis()) {
     action(
       paste0(
@@ -45,8 +45,7 @@ assert_qgis <- function(action = stop) {
         "Run `qgis_configure()` to configure this location.\n",
         "If 'qgis_process' is installed, set `options(qgisprocess.path = '/path/to/qgis_process')`\n",
         "and re-run `qgis_configure()`."
-      ),
-      call. = FALSE
+      )
     )
   }
 }
@@ -155,7 +154,7 @@ qgis_query_path <- function(quiet = FALSE) {
   }
 
   if (length(possible_locs) == 0) {
-    stop("No QGIS installation containing 'qgis_process' found!", call. = FALSE)
+    abort("No QGIS installation containing 'qgis_process' found!")
   }
 
   if (!quiet) {
@@ -178,7 +177,7 @@ qgis_query_path <- function(quiet = FALSE) {
     }, error = function(e) {})
   }
 
-  stop("QGIS installation found, but all candidate paths failed to execute.", call. = FALSE)
+  abort("QGIS installation found, but all candidate paths failed to execute.")
 }
 
 #' @rdname qgis_run
@@ -194,12 +193,11 @@ qgis_query_version <- function(quiet = FALSE) {
   lines <- readLines(textConnection(result$stdout))
   match <- stringr::str_match(lines[1], "\\(([0-9.]+[A-Za-z0-9.-]*)\\)")[, 2, drop = TRUE]
   if (identical(match, NA_character_)) {
-    stop(
+    abort(
       paste0(
         "First line of output did not contain expected version information.\n",
         glue::glue("First line of output was '{ lines[1] }'")
-      ),
-      call. = FALSE
+      )
     )
   }
 
