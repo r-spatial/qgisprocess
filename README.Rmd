@@ -45,12 +45,7 @@ result <- qgis_run_algorithm(
   "native:buffer",
   INPUT = input,
   DISTANCE = 1,
-  SEGMENTS = 10,
-  DISSOLVE = TRUE,
-  END_CAP_STYLE = 0,
-  JOIN_STYLE = 0,
-  MITER_LIMIT = 10,
-  OUTPUT = qgis_tmp_vector()
+  .quiet = TRUE
 )
 
 result

@@ -35,11 +35,11 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
   # generate an argument template and fill in provided arguments
   arg_meta <- qgis_arguments(algorithm)
   args <- lapply(
-    rlang::set_names(arg_meta$name),
+    rlang::set_names(c(arg_meta$name, "PROJECT_PATH", "ELIPSOID")),
     function(x) if (x %in% names(dots)) dots[[x]] else qgis_default_value()
   )
-  args$PROJECT_PATH <- PROJECT_PATH
-  args$ELIPSOID <- ELIPSOID
+  args["PROJECT_PATH"] <- list(PROJECT_PATH)
+  args["ELIPSOID"] <- list(ELIPSOID)
 
   # get argument info for supplied args and run sanitizers
   arg_spec <- Map(qgis_argument_spec_by_name, list(algorithm), names(args), list(arg_meta))
@@ -55,7 +55,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
   args <- args[!vapply(args, is_qgis_default_value, logical(1))]
 
   # make sure cleanup is run on any temporary files created
-  on.exit(Map(qgis_clean_argument, args, arg_meta$qgis_type))
+  on.exit(Map(qgis_clean_argument, args, arg_spec))
 
   # look for sanitizer errors and stop() for them
   arg_errors <- vapply(args, inherits, "try-error", FUN.VALUE = logical(1))

@@ -53,10 +53,32 @@ as_qgis_argument.default <- function(x, spec = qgis_argument_spec()) {
 #' @rdname as_qgis_argument
 #' @export
 as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec()) {
-  # this is an opportunity to fill in a missing value based on the
-  # information provided in `spec` (or `qgis_default_value()` to keep
-  # missingness)
-  x
+  # This is an opportunity to fill in a missing value based on the
+  # information provided in `spec` (or `qgis_default_value()` to keep missingness).
+
+  if (isTRUE(spec$qgis_type %in% c("sink", "vectorDestination"))) {
+    message(glue("Using `{ spec$name } = qgis_tmp_vector()`"))
+    qgis_tmp_vector()
+  } else if (isTRUE(spec$qgis_type == "rasterDestination")) {
+    message(glue("Using `{ spec$name } = qgis_tmp_raster()`"))
+    qgis_tmp_raster()
+  } else if (isTRUE(spec$qgis_type == "folderDestination")) {
+    message(glue("Using `{ spec$name } = qgis_tmp_folder()`"))
+    qgis_tmp_folder()
+  } else if (isTRUE(spec$qgis_type == "fileDestination")) {
+    # these are various types of files (pdf, raster stats, etc.)
+    message(glue("Using `{ spec$name } = qgis_tmp_file(\"\")`"))
+    qgis_tmp_file("")
+  } else if (isTRUE(spec$qgis_type) == "enum") {
+    # TODO: this should really use a string when `spec` contains
+    # the vector of acceptable values
+    message(glue("Using `{ spec$name } = 0"))
+    "0"
+  } else {
+    # We don't know the actual default values here as far as I can tell
+    message(glue("Argument `{ spec$name }` is unspecified (using QGIS default value)."))
+    qgis_default_value()
+  }
 }
 
 #' @rdname as_qgis_argument

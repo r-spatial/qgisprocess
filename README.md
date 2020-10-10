@@ -59,45 +59,18 @@ result <- qgis_run_algorithm(
   "native:buffer",
   INPUT = input,
   DISTANCE = 1,
-  SEGMENTS = 10,
-  DISSOLVE = TRUE,
-  END_CAP_STYLE = 0,
-  JOIN_STYLE = 0,
-  MITER_LIMIT = 10,
-  OUTPUT = qgis_tmp_vector()
+  .quiet = TRUE
 )
-#> Running /Applications/QGIS.app/Contents/MacOS/bin/qgis_process run \
-#>   'native:buffer' \
-#>   '--INPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpZfnsJA/file11f8e53c6f6ae/file11f8e12aabbdc.gpkg' \
-#>   '--DISTANCE=1' '--SEGMENTS=10' '--DISSOLVE=TRUE' '--END_CAP_STYLE=0' \
-#>   '--JOIN_STYLE=0' '--MITER_LIMIT=10' \
-#>   '--OUTPUT=/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpZfnsJA/file11f8e53c6f6ae/file11f8e2b6d447a.gpkg'
-#> 
-#> ----------------
-#> Inputs
-#> ----------------
-#> 
-#> DISSOLVE:    TRUE
-#> DISTANCE:    1
-#> END_CAP_STYLE:   0
-#> INPUT:   /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpZfnsJA/file11f8e53c6f6ae/file11f8e12aabbdc.gpkg
-#> JOIN_STYLE:  0
-#> MITER_LIMIT: 10
-#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpZfnsJA/file11f8e53c6f6ae/file11f8e2b6d447a.gpkg
-#> SEGMENTS:    10
-#> 
-#> 
-#> 0...10...20...30...40...50...60...70...80...90...
-#> ----------------
-#> Results
-#> ----------------
-#> 
-#> OUTPUT:  /var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpZfnsJA/file11f8e53c6f6ae/file11f8e2b6d447a.gpkg
+#> Argument `END_CAP_STYLE` is unspecified (using QGIS default value).
+#> Argument `JOIN_STYLE` is unspecified (using QGIS default value).
+#> Argument `MITER_LIMIT` is unspecified (using QGIS default value).
+#> Argument `DISSOLVE` is unspecified (using QGIS default value).
+#> Using `OUTPUT = qgis_tmp_vector()`
 
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpZfnsJA/file11f8e53c6f6ae/file11f8e2b6d447a.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpMYi0Xp/file163e81a949b13/file163e86695af6.gpkg"
 
 output_sf <- sf::read_sf(qgis_output(result, "OUTPUT"))
 plot(sf::st_geometry(output_sf))
