@@ -6,7 +6,10 @@
 \alias{as_qgis_argument.RasterBrick}
 \alias{as_qgis_argument.sf}
 \alias{as_qgis_argument}
+\alias{qgis_default_value}
+\alias{is_qgis_default_value}
 \alias{as_qgis_argument.default}
+\alias{as_qgis_argument.qgis_default_value}
 \alias{as_qgis_argument.character}
 \alias{as_qgis_argument.logical}
 \alias{as_qgis_argument.numeric}
@@ -23,9 +26,15 @@
 
 \method{as_qgis_argument}{sf}(x, spec = qgis_argument_spec())
 
-as_qgis_argument(x, qgis_type = NA)
+as_qgis_argument(x, spec = qgis_argument_spec())
+
+qgis_default_value()
+
+is_qgis_default_value(x)
 
 \method{as_qgis_argument}{default}(x, spec = qgis_argument_spec())
+
+\method{as_qgis_argument}{qgis_default_value}(x, spec = qgis_argument_spec())
 
 \method{as_qgis_argument}{character}(x, spec = qgis_argument_spec())
 
@@ -54,8 +63,6 @@ qgis_argument_spec_by_name(
 }
 \arguments{
 \item{x}{An object passed to a QGIS processing algorithm}
-
-\item{qgis_type}{A character vector of length 1 (e.g., "source").}
 
 \item{value}{The result of \code{\link[=as_qgis_argument]{as_qgis_argument()}} after the QGIS processing
 algorithm has been run.}

@@ -2,18 +2,28 @@
 #' Type coercion for arguments to QGIS processing algorithms
 #'
 #' @param x An object passed to a QGIS processing algorithm
-#' @param qgis_type A character vector of length 1 (e.g., "source").
 #' @param value The result of [as_qgis_argument()] after the QGIS processing
 #'   algorithm has been run.
 #' @param name The argument name (i.e., [qgis_arguments()]`$name`)
 #' @param argument The result of [qgis_arguments()].
 #' @inheritParams qgis_run_algorithm
 #'
-#'
 #' @export
 #'
-as_qgis_argument <- function(x, qgis_type = NA) {
+as_qgis_argument <- function(x, spec = qgis_argument_spec()) {
   UseMethod("as_qgis_argument")
+}
+
+#' @rdname as_qgis_argument
+#' @export
+qgis_default_value <- function() {
+  structure(list(), class = "qgis_default_value")
+}
+
+#' @rdname as_qgis_argument
+#' @export
+is_qgis_default_value <- function(x) {
+  inherits(x, "qgis_default_value")
 }
 
 # All `qgis_type` values:
@@ -38,6 +48,15 @@ as_qgis_argument.default <- function(x, spec = qgis_argument_spec()) {
       )
     )
   )
+}
+
+#' @rdname as_qgis_argument
+#' @export
+as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec()) {
+  # this is an opportunity to fill in a missing value based on the
+  # information provided in `spec` (or `qgis_default_value()` to keep
+  # missingness)
+  x
 }
 
 #' @rdname as_qgis_argument
@@ -84,7 +103,7 @@ qgis_clean_argument.qgis_tempfile_arg <- function(value, spec = qgis_argument_sp
 #' @export
 qgis_argument_spec <- function(algorithm = NA_character_, name = NA_character_,
                                description = NA_character_, qgis_type = NA_character_) {
-  list(algorithm = algorithm, name = name, qgis_type = qgis_type)
+  list(algorithm = algorithm, name = name, description = description, qgis_type = qgis_type)
 }
 
 #' @rdname as_qgis_argument
