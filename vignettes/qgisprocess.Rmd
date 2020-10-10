@@ -1,0 +1,202 @@
+---
+title: "Using qgisprocess"
+author: "Jannes Muenchow"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+library(qgisprocess)
+```
+
+First, let's check which QGIS version our system is running:
+
+```{r vers}
+qgis_version()
+```
+
+Next, let's list all available providers including available 3rd party applications: 
+
+```{r providers}
+qgis_providers()
+```
+
+List all geoalgorithms at your disposal:
+
+```{r algs}
+qgis_algorithms()
+```
+
+Find out what a specific geoalgorithm is doing, e.g., `native:buffer`.
+
+```{r desc}
+cat(qgis_description("native:buffer"))
+# cat(qgis_help_text("native:buffer"))
+```
+
+Find out the arguments of a specific geoalgorithm:
+
+```{r args}
+qgis_arguments("native:buffer")
+```
+
+```{r}
+qgis_arguments("grass7:r.slope.aspect")
+```
+## ------------------------------------------------------------------------
+head(params)
+
+```{r slopeaspect}
+data("dem", package = "spDataLarge")
+
+info = run_qgis(alg = "grass7:r.slope.aspect",
+                elevation = dem, 
+                pcurvature = file.path(tempdir(), "pcurv.tif"),
+                tcurvature = file.path(tempdir(), "tcurv.tif"),
+                show_output_paths = FALSE,
+                load_output = TRUE)
+
+```
+
+## ----slope_aspect, eval = TRUE, messages = FALSE, cache = FALSE----------
+params$elevation <- dem
+params$pcurvature <- file.path(tempdir(), "pcurv.tif")
+params$tcurvature <- file.path(tempdir(), "tcurv.tif")
+out <- run_qgis(alg = "grass7:r.slope.aspect",
+                params = params,
+                load_output = TRUE,
+                show_output_paths = FALSE)
+class(out)
+names(out)
+
+## ----eval = FALSE--------------------------------------------------------
+library("raster")
+plot(stack(out))
+
+## ------------------------------------------------------------------------
+get_usage("saga:sinkremoval")
+run_qgis(alg = "saga:sinkremoval",
+         DEM = dem, 
+         METHOD = "[1] Fill Sinks", 
+         DEM_PREPROC = file.path(tempdir(), "sdem.sdat"),
+         show_output_paths = FALSE)
+
+## ------------------------------------------------------------------------
+get_usage("saga:sagawetnessindex")
+run_qgis(alg = "saga:sagawetnessindex",
+         DEM = file.path(tempdir(), "sdem.sdat"),
+         SLOPE_TYPE = 1, 
+         SLOPE = file.path(tempdir(), "cslope.sdat"),
+         AREA = file.path(tempdir(), "carea.sdat"),
+         show_output_paths = FALSE)
+
+## ----eval = FALSE--------------------------------------------------------
+library("dplyr")
+library("raster")
+file.path(tempdir(), c("cslope.sdat", "carea.sdat")) %>%
+  raster::stack(.) %>%
+  plot
+
+## ----message = FALSE, error = FALSE, warning = FALSE---------------------
+library("raster")
+cslope <- raster(file.path(tempdir(), "cslope.sdat"))
+cslope <- cslope * 180 /pi
+
+## ------------------------------------------------------------------------
+carea <- raster(file.path(tempdir(), "carea.sdat"))
+log_carea <- log(carea / 1e+06)
+
+## ------------------------------------------------------------------------
+data("ndvi", package = "RQGIS")
+
+## ----eval = TRUE, cache = FALSE, message = FALSE, error = FALSE, warning = FALSE----
+data("dem", package = "RQGIS")
+dem <- dem / 1000
+my_poly <- poly(values(dem), degree = 2)
+dem1 <- dem2 <- dem
+values(dem1) <- my_poly[, 1]
+values(dem2) <- my_poly[, 2]
+for (i in c("dem1", "dem2", "log_carea", "cslope", "ndvi")) {
+  tmp <- crop(get(i), dem) 
+  writeRaster(x = tmp, 
+              filename = file.path(tempdir(), paste0(i, ".asc")), 
+              format = "ascii",
+              prj = TRUE,
+              overwrite = TRUE)  
+}
+
+## ----eval = TRUE, cache = FALSE, message = FALSE-------------------------
+library("dplyr")
+data("random_points", package = "RQGIS")
+random_points[, c("x", "y")] <- sf::st_coordinates(random_points)
+raster_names <- c("dem1", "dem2", "log_carea", "cslope", "ndvi")
+vals <- RSAGA::pick.from.ascii.grids(data = as.data.frame(random_points),
+                                     X.name = "x", 
+                                     Y.name = "y", 
+                                     file = file.path(tempdir(), raster_names),
+                                     varname = raster_names)
+dplyr::select(vals, -geometry) %>%
+  head(., 3)
+
+## ------------------------------------------------------------------------
+fit <- glm(formula = spri ~ dem1 + dem2 + cslope + ndvi + log_carea,
+           data = vals,
+           family = "poisson")
+
+## ----pred, eval = FALSE--------------------------------------------------
+library("sf")
+library("raster")
+raster_names <- c("dem1.asc", "dem2.asc", "log_carea.asc", "cslope.asc",
+                  "ndvi.asc")
+s <- stack(x = file.path(tempdir(), raster_names))
+pred <- predict(object = s,
+                model = fit,
+                fun = predict,
+                type = "response")
+pred <- crop(x = pred,
+             y = as(random_points, "Spatial"))
+# plot the output (shown in Figure 5)
+plot(pred)
+plot(st_geometry(random_points), add = TRUE)
+
+## ------------------------------------------------------------------------
+library("reticulate")
+py_config()
+
+## ------------------------------------------------------------------------
+py_run_string("methods = dir(RQGIS)")$methods
+
+## ------------------------------------------------------------------------
+py_cmd <- "opts = RQGIS.get_options('qgis:randompointsinsidepolygonsvariable')"
+py_run_string(py_cmd)$opts
+
+## ------------------------------------------------------------------------
+py_cmd <- "processing.alghelp('qgis:randompointsinsidepolygonsvariable')"
+py_capture_output(py_run_string(py_cmd)) %>%
+  substring(., 1, 40)
+
+## ----eval = FALSE--------------------------------------------------------
+data("random_points", package = "RQGIS")
+file <- normalizePath(file.path(tempdir(), "points.shp"), winslash = "/",
+                      mustWork = FALSE)
+sf::st_write(random_points, dsn = file)
+
+## ----eval = FALSE--------------------------------------------------------
+# create the map canvas
+py_run_string("canvas = QgsMapCanvas()")
+# import point shapefile
+py_run_string(sprintf("layer = QgsVectorLayer('%s', 'points', 'ogr')", file))
+# add imported point layer to the map canvas
+py_run_string("QgsMapLayerRegistry.instance().addMapLayer(layer)")
+# set the extent of the map canvas to the extent of the imported shapefile
+py_run_string("canvas.setExtent(layer.extent())")
+# set the map canvas layer
+py_run_string("canvas.setLayerSet([QgsMapCanvasLayer(layer)])")
+# open a standalone window
+py_run_string("canvas.show()")
+# if a standalone window has not already opened, run the next line
+# py_run_string("app.exec_()")
