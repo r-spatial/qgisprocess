@@ -38,12 +38,13 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = rlang::zap(), ELIP
 
     # get argument info for supplied args and run sanitizers
     arg_meta <- qgis_arguments(algorithm)
-    arg_meta <- arg_meta[match(names(args), arg_meta$name), ]
+    arg_spec <- Map(qgis_argument_spec_by_name, list(algorithm), arg_meta$name, list(arg_meta))
     args <- Map(
       # have to do this omitting errors so that qgis_clean_argument()
       # is called on anything that succeeded regardless of other arg failures
       function(x, qgis_type) try(as_qgis_argument(x, qgis_type), silent = TRUE),
-      args, arg_meta$qgis_type
+      args,
+      arg_spec
     )
 
     # make sure cleanup is run on any temporary files created

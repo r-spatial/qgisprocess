@@ -1,9 +1,9 @@
 
 #' @rdname as_qgis_argument
 #' @export
-as_qgis_argument.sf <- function(x, qgis_type) {
-  if (qgis_type != "source") {
-    abort(glue("Can't use 'sf' objects for QGIS arguments with type '{ qgis_type }'"))
+as_qgis_argument.sf <- function(x, spec = qgis_argument_spec()) {
+  if (!isTRUE(spec$qgis_type %in% c("source", "layer", "vector"))) {
+    abort(glue("Can't convert 'sf' object to QGIS type '{ spec$qgis_type }'"))
   }
 
   path <- qgis_tmp_vector()

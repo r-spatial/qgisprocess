@@ -3,6 +3,7 @@
 %   R/qgis-arguments.R
 \name{as_qgis_argument.RasterLayer}
 \alias{as_qgis_argument.RasterLayer}
+\alias{as_qgis_argument.RasterBrick}
 \alias{as_qgis_argument.sf}
 \alias{as_qgis_argument}
 \alias{as_qgis_argument.default}
@@ -12,27 +13,44 @@
 \alias{qgis_clean_argument}
 \alias{qgis_clean_argument.default}
 \alias{qgis_clean_argument.qgis_tempfile_arg}
+\alias{qgis_argument_spec}
+\alias{qgis_argument_spec_by_name}
 \title{Type coercion for arguments to QGIS processing algorithms}
 \usage{
-\method{as_qgis_argument}{RasterLayer}(x, qgis_type)
+\method{as_qgis_argument}{RasterLayer}(x, spec = qgis_argument_spec())
 
-\method{as_qgis_argument}{sf}(x, qgis_type)
+\method{as_qgis_argument}{RasterBrick}(x, spec = qgis_argument_spec())
+
+\method{as_qgis_argument}{sf}(x, spec = qgis_argument_spec())
 
 as_qgis_argument(x, qgis_type = NA)
 
-\method{as_qgis_argument}{default}(x, qgis_type = NA)
+\method{as_qgis_argument}{default}(x, spec = qgis_argument_spec())
 
-\method{as_qgis_argument}{character}(x, qgis_type = NA)
+\method{as_qgis_argument}{character}(x, spec = qgis_argument_spec())
 
-\method{as_qgis_argument}{logical}(x, qgis_type = NA)
+\method{as_qgis_argument}{logical}(x, spec = qgis_argument_spec())
 
-\method{as_qgis_argument}{numeric}(x, qgis_type = NA)
+\method{as_qgis_argument}{numeric}(x, spec = qgis_argument_spec())
 
-qgis_clean_argument(value, qgis_type = NA)
+qgis_clean_argument(value, spec = qgis_argument_spec())
 
-\method{qgis_clean_argument}{default}(value, qgis_type = NA)
+\method{qgis_clean_argument}{default}(value, spec = qgis_argument_spec())
 
-\method{qgis_clean_argument}{qgis_tempfile_arg}(value, qgis_type = NA)
+\method{qgis_clean_argument}{qgis_tempfile_arg}(value, spec = qgis_argument_spec())
+
+qgis_argument_spec(
+  algorithm = NA_character_,
+  name = NA_character_,
+  description = NA_character_,
+  qgis_type = NA_character_
+)
+
+qgis_argument_spec_by_name(
+  algorithm,
+  name,
+  arguments = qgis_arguments(algorithm)
+)
 }
 \arguments{
 \item{x}{An object passed to a QGIS processing algorithm}
@@ -41,6 +59,13 @@ qgis_clean_argument(value, qgis_type = NA)
 
 \item{value}{The result of \code{\link[=as_qgis_argument]{as_qgis_argument()}} after the QGIS processing
 algorithm has been run.}
+
+\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
+a path to a QGIS model file.}
+
+\item{name}{The argument name (i.e., \code{\link[=qgis_arguments]{qgis_arguments()}}\verb{$name})}
+
+\item{argument}{The result of \code{\link[=qgis_arguments]{qgis_arguments()}}.}
 }
 \description{
 Type coercion for arguments to QGIS processing algorithms
