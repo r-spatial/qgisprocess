@@ -50,4 +50,12 @@ if (has_qgis()) qgis_has_algorithm("native:filedownloader")
 if (has_qgis()) qgis_has_provider("native")
 if (has_qgis()) qgis_providers()
 
+if (has_qgis()) {
+  qgis_run_algorithm(
+    "native:buffer",
+    INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+    DISTANCE = 10
+  )
+}
+
 }
