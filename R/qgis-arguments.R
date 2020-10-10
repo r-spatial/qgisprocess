@@ -1,11 +1,21 @@
 
 #' Type coercion for arguments to QGIS processing algorithms
 #'
+#' Calls to [qgis_run_algorithm()] can and should contain R objects that
+#' need to be serialized before they are passed to the command line. In
+#' some cases (e.g., sf objects), temporary files need to be written and
+#' cleaned up. The [as_qgis_argument()] and [qgis_clean_argument()] S3
+#' generics provide hooks for argument values to be serialized correctly.
+#'
 #' @param x An object passed to a QGIS processing algorithm
 #' @param value The result of [as_qgis_argument()] after the QGIS processing
 #'   algorithm has been run.
-#' @param name The argument name (i.e., [qgis_arguments()]`$name`)
-#' @param argument The result of [qgis_arguments()].
+#' @param spec A `list()` with values for `algorithm`, `name`,
+#'   `description`, and `qgis_type`. See [qgis_argument_spec()] to
+#'   create a blank `spec` for testing.
+#' @param name,description,qgis_type Column values of `arguments` denoting
+#'   the argument name, its description, and its QGIS type name.
+#' @param arguments The result of [qgis_arguments()].
 #' @inheritParams qgis_run_algorithm
 #'
 #' @export

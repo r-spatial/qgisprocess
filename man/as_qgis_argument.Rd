@@ -67,16 +67,25 @@ qgis_argument_spec_by_name(
 \arguments{
 \item{x}{An object passed to a QGIS processing algorithm}
 
+\item{spec}{A \code{list()} with values for \code{algorithm}, \code{name},
+\code{description}, and \code{qgis_type}. See \code{\link[=qgis_argument_spec]{qgis_argument_spec()}} to
+create a blank \code{spec} for testing.}
+
 \item{value}{The result of \code{\link[=as_qgis_argument]{as_qgis_argument()}} after the QGIS processing
 algorithm has been run.}
 
 \item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
 a path to a QGIS model file.}
 
-\item{name}{The argument name (i.e., \code{\link[=qgis_arguments]{qgis_arguments()}}\verb{$name})}
+\item{name, description, qgis_type}{Column values of \code{arguments} denoting
+the argument name, its description, and its QGIS type name.}
 
-\item{argument}{The result of \code{\link[=qgis_arguments]{qgis_arguments()}}.}
+\item{arguments}{The result of \code{\link[=qgis_arguments]{qgis_arguments()}}.}
 }
 \description{
-Type coercion for arguments to QGIS processing algorithms
+Calls to \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} can and should contain R objects that
+need to be serialized before they are passed to the command line. In
+some cases (e.g., sf objects), temporary files need to be written and
+cleaned up. The \code{\link[=as_qgis_argument]{as_qgis_argument()}} and \code{\link[=qgis_clean_argument]{qgis_clean_argument()}} S3
+generics provide hooks for argument values to be serialized correctly.
 }
