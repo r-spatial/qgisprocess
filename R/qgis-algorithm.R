@@ -11,8 +11,7 @@
 #' @param PROJECT_PATH,ELIPSOID Global values for QGIS project file and
 #'   elipsoid name for distance calculations.
 #' @param ... Named key-value pairs as arguments for each algorithm. Features of
-#'   [rlang::list2()] are supported. Use [qgis_default_value()] to explicitly
-#'   not include an argument in the call to `qgis_process`. These arguments
+#'   [rlang::list2()] are supported. These arguments
 #'   are converted to strings using [as_qgis_argument()].
 #' @param .quiet Use `TRUE` to suppress output from processing algorithms.
 #'
@@ -23,9 +22,7 @@
 #' if (has_qgis()) qgis_has_provider("native")
 #' if (has_qgis()) qgis_providers()
 #'
-qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = qgis_default_value(),
-                               ELIPSOID = qgis_default_value(),
-                               .quiet = FALSE) {
+qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = NULL, .quiet = FALSE) {
   assert_qgis()
   assert_qgis_algorithm(algorithm)
 

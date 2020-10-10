@@ -10,6 +10,7 @@
 \alias{is_qgis_default_value}
 \alias{as_qgis_argument.default}
 \alias{as_qgis_argument.qgis_default_value}
+\alias{as_qgis_argument.NULL}
 \alias{as_qgis_argument.character}
 \alias{as_qgis_argument.logical}
 \alias{as_qgis_argument.numeric}
@@ -35,6 +36,8 @@ is_qgis_default_value(x)
 \method{as_qgis_argument}{default}(x, spec = qgis_argument_spec())
 
 \method{as_qgis_argument}{qgis_default_value}(x, spec = qgis_argument_spec())
+
+\method{as_qgis_argument}{`NULL`}(x, spec = qgis_argument_spec())
 
 \method{as_qgis_argument}{character}(x, spec = qgis_argument_spec())
 

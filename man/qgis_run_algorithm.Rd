@@ -11,8 +11,8 @@
 qgis_run_algorithm(
   algorithm,
   ...,
-  PROJECT_PATH = qgis_default_value(),
-  ELIPSOID = qgis_default_value(),
+  PROJECT_PATH = NULL,
+  ELIPSOID = NULL,
   .quiet = FALSE
 )
 
@@ -29,8 +29,7 @@ assert_qgis_algorithm(algorithm)
 a path to a QGIS model file.}
 
 \item{...}{Named key-value pairs as arguments for each algorithm. Features of
-\code{\link[rlang:list2]{rlang::list2()}} are supported. Use \code{\link[=qgis_default_value]{qgis_default_value()}} to explicitly
-not include an argument in the call to \code{qgis_process}. These arguments
+\code{\link[rlang:list2]{rlang::list2()}} are supported. These arguments
 are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()}}.}
 
 \item{PROJECT_PATH, ELIPSOID}{Global values for QGIS project file and

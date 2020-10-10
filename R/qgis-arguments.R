@@ -61,6 +61,16 @@ as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec()) 
 
 #' @rdname as_qgis_argument
 #' @export
+as_qgis_argument.NULL <- function(x, spec = qgis_argument_spec()) {
+  # NULL is similar to qgis_default_value() except it (1) never fills in
+  # a default value at the R level and (2) never generates any messages.
+  # It returns qgis_default_value() because this is the sentinel for removing
+  # an item from the system call to `qgis_process`
+  qgis_default_value()
+}
+
+#' @rdname as_qgis_argument
+#' @export
 as_qgis_argument.character <- function(x, spec = qgis_argument_spec()) {
   switch(
     as.character(spec$qgis_type),
