@@ -36,7 +36,7 @@ test_that("raster result coercers work", {
   skip_if_not_installed("rgdal")
 
   expect_is(
-    as_qgis_raster(
+    qgis_as_raster(
       structure(
         system.file("longlake/longlake.tif", package = "qgisprocess"),
         class = "qgis_outputRaster"
@@ -46,7 +46,7 @@ test_that("raster result coercers work", {
   )
 
   expect_is(
-    as_qgis_brick(
+    qgis_as_brick(
       structure(
         system.file("longlake/longlake.tif", package = "qgisprocess"),
         class = "qgis_outputRaster"
@@ -56,7 +56,7 @@ test_that("raster result coercers work", {
   )
 
   expect_is(
-    as_qgis_raster(
+    qgis_as_raster(
       structure(
         system.file("longlake/longlake.tif", package = "qgisprocess"),
         class = "qgis_outputLayer"
@@ -66,7 +66,7 @@ test_that("raster result coercers work", {
   )
 
   expect_is(
-    as_qgis_brick(
+    qgis_as_brick(
       structure(
         system.file("longlake/longlake.tif", package = "qgisprocess"),
         class = "qgis_outputLayer"
@@ -76,7 +76,7 @@ test_that("raster result coercers work", {
   )
 
   expect_is(
-    as_qgis_raster(
+    qgis_as_raster(
       structure(
         list(
           OUTPUT = structure(
@@ -91,7 +91,7 @@ test_that("raster result coercers work", {
   )
 
   expect_is(
-    as_qgis_brick(
+    qgis_as_brick(
       structure(
         list(
           OUTPUT = structure(

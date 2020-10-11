@@ -38,43 +38,43 @@ as_qgis_argument_raster <- function(x, spec = qgis_argument_spec()) {
 
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
-as_qgis_raster <- function(output, ...) {
-  UseMethod("as_qgis_raster")
+qgis_as_raster <- function(output, ...) {
+  UseMethod("qgis_as_raster")
 }
 
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
-as_qgis_brick <- function(output, ...) {
-  UseMethod("as_qgis_brick")
+qgis_as_brick <- function(output, ...) {
+  UseMethod("qgis_as_brick")
 }
 
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
-as_qgis_raster.qgis_outputRaster <- function(output, ...) {
+qgis_as_raster.qgis_outputRaster <- function(output, ...) {
   raster::raster(unclass(output), ...)
 }
 
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
-as_qgis_brick.qgis_outputRaster <- function(output, ...) {
+qgis_as_brick.qgis_outputRaster <- function(output, ...) {
   raster::brick(unclass(output), ...)
 }
 
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
-as_qgis_raster.qgis_outputLayer <- function(output, ...) {
+qgis_as_raster.qgis_outputLayer <- function(output, ...) {
   raster::raster(unclass(output), ...)
 }
 
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
-as_qgis_brick.qgis_outputLayer <- function(output, ...) {
+qgis_as_brick.qgis_outputLayer <- function(output, ...) {
   raster::brick(unclass(output), ...)
 }
 
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
-as_qgis_raster.qgis_result <- function(output, ...) {
+qgis_as_raster.qgis_result <- function(output, ...) {
   # find the first raster output and read it
   for (result in output) {
     if (inherits(result, "qgis_outputRaster") || inherits(result, "qgis_outputLayer")) {
@@ -87,7 +87,7 @@ as_qgis_raster.qgis_result <- function(output, ...) {
 
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
-as_qgis_brick.qgis_result <- function(output, ...) {
+qgis_as_brick.qgis_result <- function(output, ...) {
   # find the first rqster output and read it
   for (result in output) {
     if (inherits(result, "qgis_outputRaster") || inherits(result, "qgis_outputLayer")) {

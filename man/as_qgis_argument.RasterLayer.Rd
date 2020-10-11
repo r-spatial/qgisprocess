@@ -3,35 +3,35 @@
 \name{as_qgis_argument.RasterLayer}
 \alias{as_qgis_argument.RasterLayer}
 \alias{as_qgis_argument.RasterBrick}
-\alias{as_qgis_raster}
-\alias{as_qgis_brick}
-\alias{as_qgis_raster.qgis_outputRaster}
-\alias{as_qgis_brick.qgis_outputRaster}
-\alias{as_qgis_raster.qgis_outputLayer}
-\alias{as_qgis_brick.qgis_outputLayer}
-\alias{as_qgis_raster.qgis_result}
-\alias{as_qgis_brick.qgis_result}
+\alias{qgis_as_raster}
+\alias{qgis_as_brick}
+\alias{qgis_as_raster.qgis_outputRaster}
+\alias{qgis_as_brick.qgis_outputRaster}
+\alias{qgis_as_raster.qgis_outputLayer}
+\alias{qgis_as_brick.qgis_outputLayer}
+\alias{qgis_as_raster.qgis_result}
+\alias{qgis_as_brick.qgis_result}
 \title{Convert raster objects to/from QGIS inputs/outputs}
 \usage{
 \method{as_qgis_argument}{RasterLayer}(x, spec = qgis_argument_spec())
 
 \method{as_qgis_argument}{RasterBrick}(x, spec = qgis_argument_spec())
 
-as_qgis_raster(output, ...)
+qgis_as_raster(output, ...)
 
-as_qgis_brick(output, ...)
+qgis_as_brick(output, ...)
 
-\method{as_qgis_raster}{qgis_outputRaster}(output, ...)
+\method{qgis_as_raster}{qgis_outputRaster}(output, ...)
 
-\method{as_qgis_brick}{qgis_outputRaster}(output, ...)
+\method{qgis_as_brick}{qgis_outputRaster}(output, ...)
 
-\method{as_qgis_raster}{qgis_outputLayer}(output, ...)
+\method{qgis_as_raster}{qgis_outputLayer}(output, ...)
 
-\method{as_qgis_brick}{qgis_outputLayer}(output, ...)
+\method{qgis_as_brick}{qgis_outputLayer}(output, ...)
 
-\method{as_qgis_raster}{qgis_result}(output, ...)
+\method{qgis_as_raster}{qgis_result}(output, ...)
 
-\method{as_qgis_brick}{qgis_result}(output, ...)
+\method{qgis_as_brick}{qgis_result}(output, ...)
 }
 \arguments{
 \item{x}{A \code{\link[raster:raster]{raster::raster()}} or \code{\link[raster:brick]{raster::brick()}}.}
