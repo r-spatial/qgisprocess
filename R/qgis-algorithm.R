@@ -49,6 +49,15 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
   args["PROJECT_PATH"] <- list(PROJECT_PATH)
   args["ELIPSOID"] <- list(ELIPSOID)
 
+  # warn about unspecified arguments (don't error so that users can
+  # write code for more than one QGIS install if args are added)
+  unknown_args <- setdiff(names(dots), names(args))
+  if (length(unknown_args) > 0){
+    for (arg_name in unknown_args) {
+      message(glue("Ignoring unknown input '{ arg_name }'"))
+    }
+  }
+
   # get argument info for supplied args and run sanitizers
   arg_spec <- Map(qgis_argument_spec_by_name, list(algorithm), names(args), list(arg_meta))
   args <- Map(
