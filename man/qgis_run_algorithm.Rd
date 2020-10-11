@@ -11,8 +11,8 @@
 qgis_run_algorithm(
   algorithm,
   ...,
-  PROJECT_PATH = rlang::zap(),
-  ELIPSOID = rlang::zap(),
+  PROJECT_PATH = NULL,
+  ELIPSOID = NULL,
   .quiet = FALSE
 )
 
@@ -29,7 +29,8 @@ assert_qgis_algorithm(algorithm)
 a path to a QGIS model file.}
 
 \item{...}{Named key-value pairs as arguments for each algorithm. Features of
-\code{\link[rlang:list2]{rlang::list2()}} are supported.}
+\code{\link[rlang:list2]{rlang::list2()}} are supported. These arguments
+are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()}}.}
 
 \item{PROJECT_PATH, ELIPSOID}{Global values for QGIS project file and
 elipsoid name for distance calculations.}
@@ -48,5 +49,13 @@ for a detailed description of the algorithms provided
 if (has_qgis()) qgis_has_algorithm("native:filedownloader")
 if (has_qgis()) qgis_has_provider("native")
 if (has_qgis()) qgis_providers()
+
+if (has_qgis()) {
+  qgis_run_algorithm(
+    "native:buffer",
+    INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+    DISTANCE = 10
+  )
+}
 
 }

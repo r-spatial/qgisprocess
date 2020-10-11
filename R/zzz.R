@@ -2,6 +2,8 @@
 .onLoad <- function(...) {
   qgis_configure(quiet = TRUE)
 
+  vctrs::s3_register("sf::st_as_sf", "qgis_result")
+
   # create package temporary directory
   qgis_tmp_dir_location <<- tempfile()
   dir.create(qgis_tmp_dir_location)
