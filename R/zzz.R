@@ -1,4 +1,6 @@
 
+# nocov start
+
 .onLoad <- function(...) {
   qgis_configure(quiet = TRUE)
 
@@ -25,3 +27,5 @@
     )
   }
 }
+
+# nocov end
