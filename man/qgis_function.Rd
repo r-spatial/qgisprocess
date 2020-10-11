@@ -2,15 +2,24 @@
 % Please edit documentation in R/qgis-function.R
 \name{qgis_function}
 \alias{qgis_function}
+\alias{qgis_pipe}
 \title{Create functions from QGIS algorithms}
 \usage{
 qgis_function(algorithm, .quiet = TRUE)
+
+qgis_pipe(.data, algorithm, ..., .quiet = TRUE)
 }
 \arguments{
 \item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
 a path to a QGIS model file.}
 
 \item{.quiet}{Use \code{TRUE} to suppress output from processing algorithms.}
+
+\item{.data}{Passed to the first input of \code{algorithm}.}
+
+\item{...}{Named key-value pairs as arguments for each algorithm. Features of
+\code{\link[rlang:list2]{rlang::list2()}} are supported. These arguments
+are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()}}.}
 }
 \value{
 A function wrapping \code{qgis_run_algorithm(algorithm, ...)}.
@@ -20,13 +29,22 @@ As opposed to \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, \code{\li
 function based on the argument metadata provided by \code{\link[=qgis_arguments]{qgis_arguments()}}.
 Unlike \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, \code{\link[=qgis_function]{qgis_function()}} sets the default value
 of \code{.quiet} to \code{TRUE} to make the function more usable within other
-R code.
+R code. Similarly, \code{\link[=qgis_pipe]{qgis_pipe()}} wraps \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, passing
+its first argument to the first input to \code{algorithm}.
 }
 \examples{
 if (has_qgis()) {
   qgis_buffer <- qgis_function("native:buffer")
   qgis_buffer(
     system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+    DISTANCE = 10
+  )
+}
+
+if (has_qgis()) {
+  qgis_pipe(
+    system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+    "native:buffer",
     DISTANCE = 10
   )
 }

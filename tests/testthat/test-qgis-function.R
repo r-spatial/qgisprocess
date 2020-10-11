@@ -15,8 +15,30 @@ test_that("qgis_function() works", {
 
   result <- qgis_buffer(
     system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
-    DISTANCE = 10
+    DISTANCE = 100,
+    DISSOLVE = TRUE,
+    MITER_LIMIT = 2,
+    OUTPUT = qgis_tmp_vector(),
+    END_CAP_STYLE = 0,
+    JOIN_STYLE = 0
   )
+
+  expect_is(result, "qgis_result")
+})
+
+test_that("qgis_pipe() works", {
+  skip_if_not(has_qgis())
+
+  result <- system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") %>%
+    qgis_pipe(
+      "native:buffer",
+      DISTANCE = 100,
+      DISSOLVE = TRUE,
+      MITER_LIMIT = 2,
+      OUTPUT = qgis_tmp_vector(),
+      END_CAP_STYLE = 0,
+      JOIN_STYLE = 0
+    )
 
   expect_is(result, "qgis_result")
 })

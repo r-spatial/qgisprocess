@@ -5,9 +5,11 @@
 #' function based on the argument metadata provided by [qgis_arguments()].
 #' Unlike [qgis_run_algorithm()], [qgis_function()] sets the default value
 #' of `.quiet` to `TRUE` to make the function more usable within other
-#' R code.
+#' R code. Similarly, [qgis_pipe()] wraps [qgis_run_algorithm()], passing
+#' its first argument to the first input to `algorithm`.
 #'
 #' @inheritParams qgis_run_algorithm
+#' @param .data Passed to the first input of `algorithm`.
 #'
 #' @return A function wrapping `qgis_run_algorithm(algorithm, ...)`.
 #' @export
@@ -17,6 +19,14 @@
 #'   qgis_buffer <- qgis_function("native:buffer")
 #'   qgis_buffer(
 #'     system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'     DISTANCE = 10
+#'   )
+#' }
+#'
+#' if (has_qgis()) {
+#'   qgis_pipe(
+#'     system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'     "native:buffer",
 #'     DISTANCE = 10
 #'   )
 #' }
@@ -49,4 +59,11 @@ qgis_function <- function(algorithm, .quiet = TRUE) {
   environment(fun) <- baseenv()
 
   fun
+}
+
+#' @rdname qgis_function
+#' @export
+qgis_pipe <- function(.data, algorithm, ..., .quiet = TRUE) {
+  fun <- qgis_function(algorithm)
+  fun(.data, ..., .quiet = .quiet)
 }
