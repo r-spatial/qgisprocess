@@ -2,9 +2,10 @@
 title: "Use case: predicting plant species richness on Mt. Mongón"
 author: "Jannes Muenchow"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: rmarkdown::html_vignette:
+  fig_caption: yes
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{"Use case: predicting plant species richness on Mt. Mongón"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -21,11 +22,35 @@ library("raster")
 data(dem, package = "spDataLarge")
 projection(dem) = sf::st_crs(32717)$proj4string
 qgis_arguments("saga:sinkremoval")
-out = qgis_run_algorithm("saga:sinkremoval",
-         DEM = dem, 
-         METHOD = 1, 
-         DEM_PREPROC = file.path(tempdir(), "sdem.tif"))
-res = raster(qgis_output(out, "DEM_PREPROC")[1])
+out = qgis_run_algorithm(
+  algorithm = "saga:sinkremoval",
+  DEM = dem, 
+  METHOD = 1, 
+  DEM_PREPROC = file.path(tempdir(), "sdem.sdat")
+  )
+
+sdem = raster(qgis_output(out, "DEM_PREPROC")[1])
+
+out = qgis_run_algorithm(
+  algorithm = "saga:sagawetnessindex",
+  DEM = file.path(tempdir(), "sdem.sdat"),
+  SLOPE_TYPE = 1, 
+  SLOPE = file.path(tempdir(), "cslope.sdat"),
+  AREA = file.path(tempdir(), "carea.sdat"),
+  )
+cslope = raster(qgis_output(out, "SLOPE")[1])
+carea = raster(qgis_output(out, "AREA")[1])
+plot(stack(cslope, carea))
+cslope = cslope * 180 /pi
+log_carea = log(carea / 1e+06)
+
+## ------------------------------------------------------------------------
+data("ndvi", package = "spDataLarge")
+projection(ndvi) = projection(carea)
+
+
+filter(algs, grepl("value", algorithm_title)) %>% as.data.frame
+qgisprocess::qgis_show_help("saga:addrastervaluestopoints")
 ```
 <!--
 ## ------------------------------------------------------------------------
