@@ -1,0 +1,95 @@
+---
+title: "Using qgisprocess"
+author: "Jannes Muenchow"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+library(qgisprocess)
+# qgis_configure()
+# specify path to QGIS installation on Windows 
+# options('qgisprocess.path' = "C:/Program Files/QGIS 3.14/bin/qgis_process-qgis.bat")
+```
+
+First, let's check which QGIS version our system is running:
+
+```{r vers}
+qgis_version()
+```
+
+Next, let's list all available providers including available 3rd party applications: 
+
+```{r providers}
+qgis_providers()
+```
+
+List all geoalgorithms at your disposal:
+
+```{r algs}
+qgis_algorithms()
+```
+
+Find out what a specific geoalgorithm is doing, e.g., `native:buffer`.
+
+```{r desc}
+cat(qgis_description("native:buffer"))
+# cat(qgis_help_text("native:buffer"))
+```
+
+Find out the arguments of a specific geoalgorithm:
+
+```{r args}
+qgis_arguments("native:buffer")
+```
+
+
+Vector example
+
+If you would like to have an R-like experience running QGIS, create R functions first.
+
+```{r function-creation}
+qgis_buffer = qgis_function("native:buffer")
+```
+
+
+Raster example (GRASS7)
+
+```{r}
+qgis_arguments("grass7:r.slope.aspect")
+```
+
+```{r slopeaspect}
+data("dem", package = "spDataLarge")
+
+info = run_qgis(alg = "grass7:r.slope.aspect",
+                elevation = dem, 
+                pcurvature = file.path(tempdir(), "pcurv.tif"),
+                tcurvature = file.path(tempdir(), "tcurv.tif"),
+                show_output_paths = FALSE,
+                load_output = TRUE)
+
+```
+
+<!--
+# raster example
+## ----slope_aspect, eval = TRUE, messages = FALSE, cache = FALSE----------
+params$elevation <- dem
+params$pcurvature <- file.path(tempdir(), "pcurv.tif")
+params$tcurvature <- file.path(tempdir(), "tcurv.tif")
+out <- run_qgis(alg = "grass7:r.slope.aspect",
+                params = params,
+                load_output = TRUE,
+                show_output_paths = FALSE)
+class(out)
+names(out)
+
+## ----eval = FALSE--------------------------------------------------------
+library("raster")
+plot(stack(out))
+
+-->
