@@ -34,6 +34,7 @@ test_that("qgis_description() works for algorithms", {
 test_that("qgis_arguments() and qgis_outputs() works for all algorithms", {
   skip("Test takes ~1 hr to run")
   for (algorithm in qgis_algorithms()$algorithm) {
+    if (interactive()) message(algorithm)
     expect_is(qgis_arguments(!! algorithm), "data.frame")
     expect_false(any(is.na(qgis_arguments(!! algorithm)$name)))
     expect_false(any(is.na(qgis_arguments(!! algorithm)$qgis_type)))

@@ -13,8 +13,9 @@
 #' @param spec A `list()` with values for `algorithm`, `name`,
 #'   `description`, and `qgis_type`. See [qgis_argument_spec()] to
 #'   create a blank `spec` for testing.
-#' @param name,description,qgis_type Column values of `arguments` denoting
-#'   the argument name, its description, and its QGIS type name.
+#' @param name,description,qgis_type,available_values,acceptable_values
+#'   Column values of `arguments` denoting
+#'   the argument name, description, and acceptable values.
 #' @param arguments The result of [qgis_arguments()].
 #' @inheritParams qgis_run_algorithm
 #'
