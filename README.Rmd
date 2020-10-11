@@ -9,7 +9,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  dpi = 300
 )
 ```
 
@@ -33,18 +34,25 @@ remotes::install_github("paleolimbot/qgisprocess")
 
 The qgisprocess package wraps the `qgis_process` command-line utility, which is available in QGIS >= [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16), [released](https://qgis.org/en/site/getinvolved/development/roadmap.html) in September 2020. MacOS users will have to install a [recent nightly build](https://qgis.org/en/site/forusers/alldownloads.html#qgis-nightly-release) until QGIS 3.16 has been released; download instructions for all platforms are available at <https://download.qgis.org/>. If a recent version of QGIS isn't available for your OS, you can use one of the [Geocomputation with R Docker images](https://github.com/geocompr/docker) with QGIS installed.
 
+If the automatic configuration fails (or if you have more than one installation and would like to choose which one is used by qgisprocess), you can set `options(qgisprocess.path = "path/to/qgis_process")`, possibly in your `.Rprofile` to persist between sessions. You can run `qgis_configure()` to print the gritty details!
+
+```{r}
+library(qgisprocess)
+qgis_configure()
+```
+
 ## Example
 
 The following example demonstrates the [buffer](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer) algorithm in action. The passing of [sf](https://r-spatial.github.io/sf) and [raster](https://cran.r-project.org/package=raster) objects is experimentally supported (and will be well-supported in the future!).
 
 ```{r buffer}
-library(qgisprocess)
 input <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
 
 result <- qgis_run_algorithm(
   "native:buffer",
   INPUT = input,
   DISTANCE = 1,
+  DISSOLVE = TRUE,
   .quiet = TRUE
 )
 
