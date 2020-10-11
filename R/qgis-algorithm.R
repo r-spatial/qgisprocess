@@ -60,7 +60,9 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
   )
 
   # remove instances of qgis_default_value()
-  args <- args[!vapply(args, is_qgis_default_value, logical(1))]
+  is_default_value <- vapply(args, is_qgis_default_value, logical(1))
+  args <- args[!is_default_value]
+  arg_spec <- arg_spec[!is_default_value]
 
   # make sure cleanup is run on any temporary files created
   on.exit(Map(qgis_clean_argument, args, arg_spec))
