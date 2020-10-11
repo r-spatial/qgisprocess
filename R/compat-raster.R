@@ -1,9 +1,19 @@
 
 #' @rdname as_qgis_argument
 #' @export
-as_qgis_argument.RasterLayer <- function(x, qgis_type) {
-  if (qgis_type != "raster") {
-    abort(glue("Can't use 'RasterLayer' objects for QGIS arguments with type '{ qgis_type }'"))
+as_qgis_argument.RasterLayer <- function(x, spec = qgis_argument_spec()) {
+  as_qgis_argument_raster(x, spec)
+}
+
+#' @rdname as_qgis_argument
+#' @export
+as_qgis_argument.RasterBrick <- function(x, spec = qgis_argument_spec()) {
+  as_qgis_argument_raster(x, spec)
+}
+
+as_qgis_argument_raster <- function(x, spec = qgis_argument_spec()) {
+  if (!isTRUE(spec$qgis_type %in% c("raster", "layer"))) {
+    abort(glue("Can't convert '{ class(x)[1] }' object to QGIS type '{ spec$qgis_type }'"))
   }
 
   # try to use a filename if present

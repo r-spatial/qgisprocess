@@ -41,7 +41,7 @@ jobs:
           sudo chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
           sudo add-apt-repository "deb https://qgis.org/ubuntu-nightly `lsb_release -c -s` main"
           sudo apt-get update
-          sudo apt-get install -y qgis qgis-plugin-grass
+          sudo apt-get install -y qgis qgis-plugin-grass saga
 
       - name: Install QGIS (Ubuntu)
         if: matrix.config.qgis == 'ubuntu'
@@ -50,7 +50,7 @@ jobs:
           sudo chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
           sudo add-apt-repository "deb https://qgis.org/ubuntu `lsb_release -c -s` main"
           sudo apt-get update
-          sudo apt-get install -y qgis qgis-plugin-grass
+          sudo apt-get install -y qgis qgis-plugin-grass saga
 
 # installs homebrew QGIS
 # currently 3.14 with no 'qgis_process'
