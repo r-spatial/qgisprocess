@@ -1,10 +1,11 @@
 ---
-title: "Using qgisprocess"
+title: "Intro: Basic usage of qgisprocess"
 author: "Jannes Muenchow"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: rmarkdown::html_vignette:
+  fig_caption: yes
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{"Intro: Basic usage of qgisprocess"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
