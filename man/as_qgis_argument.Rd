@@ -51,7 +51,9 @@ qgis_argument_spec(
   algorithm = NA_character_,
   name = NA_character_,
   description = NA_character_,
-  qgis_type = NA_character_
+  qgis_type = NA_character_,
+  available_values = character(0),
+  acceptable_values = character(0)
 )
 
 qgis_argument_spec_by_name(
