@@ -81,15 +81,15 @@ result <- qgis_run_algorithm(
   .quiet = TRUE
 )
 #> Argument `SEGMENTS` is unspecified (using QGIS default value).
-#> Using `END_CAP_STYLE = 0
-#> Using `JOIN_STYLE = 0
+#> Using `END_CAP_STYLE = "Round"`
+#> Using `JOIN_STYLE = "Round"`
 #> Argument `MITER_LIMIT` is unspecified (using QGIS default value).
 #> Using `OUTPUT = qgis_tmp_vector()`
 
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpW2AMks/file1807e7827e866/file1807e65ace012.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpJR8WLt/file17e46b7ff54d/file17e4238be45a.gpkg"
 
 output_sf <- sf::read_sf(qgis_output(result, "OUTPUT"))
 plot(sf::st_geometry(output_sf))
