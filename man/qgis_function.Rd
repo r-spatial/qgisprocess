@@ -5,7 +5,7 @@
 \alias{qgis_pipe}
 \title{Create functions from QGIS algorithms}
 \usage{
-qgis_function(algorithm, .quiet = TRUE)
+qgis_function(algorithm, ...)
 
 qgis_pipe(.data, algorithm, ..., .quiet = TRUE)
 }
@@ -13,16 +13,13 @@ qgis_pipe(.data, algorithm, ..., .quiet = TRUE)
 \item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
 a path to a QGIS model file.}
 
-\item{.quiet}{Use \code{TRUE} to suppress output from processing algorithms.}
+\item{...}{Default values to set when using \code{\link[=qgis_function]{qgis_function()}}.
+These values are evaluated once and immediately, so you shouldn't
+call \code{\link[=qgis_tmp_file]{qgis_tmp_file()}} here.}
 
 \item{.data}{Passed to the first input of \code{algorithm}.}
 
-\item{...}{Named key-value pairs as arguments for each algorithm. Features of
-\code{\link[rlang:list2]{rlang::list2()}} are supported. These arguments
-are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()}}.}
-}
-\value{
-A function wrapping \code{qgis_run_algorithm(algorithm, ...)}.
+\item{.quiet}{Use \code{TRUE} to suppress output from processing algorithms.}
 }
 \description{
 As opposed to \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, \code{\link[=qgis_function]{qgis_function()}} creates a callable
@@ -36,14 +33,20 @@ its first argument to the first input to \code{algorithm}.
 if (has_qgis()) {
   qgis_buffer <- qgis_function("native:buffer")
   qgis_buffer(
-    system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+    system.file(
+      "longlake/longlake_depth.gpkg",
+      package = "qgisprocess"
+    ),
     DISTANCE = 10
   )
 }
 
 if (has_qgis()) {
   qgis_pipe(
-    system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+    system.file(
+      "longlake/longlake_depth.gpkg",
+      package = "qgisprocess"
+    ),
     "native:buffer",
     DISTANCE = 10
   )
