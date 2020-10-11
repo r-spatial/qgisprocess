@@ -30,3 +30,78 @@ test_that("raster argument coercers work", {
     obj@file@name
   )
 })
+
+test_that("raster result coercers work", {
+  skip_if_not_installed("raster")
+  skip_if_not_installed("rgdal")
+
+  expect_is(
+    as_qgis_raster(
+      structure(
+        system.file("longlake/longlake.tif", package = "qgisprocess"),
+        class = "qgis_outputRaster"
+      )
+    ),
+    "RasterLayer"
+  )
+
+  expect_is(
+    as_qgis_brick(
+      structure(
+        system.file("longlake/longlake.tif", package = "qgisprocess"),
+        class = "qgis_outputRaster"
+      )
+    ),
+    "RasterBrick"
+  )
+
+  expect_is(
+    as_qgis_raster(
+      structure(
+        system.file("longlake/longlake.tif", package = "qgisprocess"),
+        class = "qgis_outputLayer"
+      )
+    ),
+    "RasterLayer"
+  )
+
+  expect_is(
+    as_qgis_brick(
+      structure(
+        system.file("longlake/longlake.tif", package = "qgisprocess"),
+        class = "qgis_outputLayer"
+      )
+    ),
+    "RasterBrick"
+  )
+
+  expect_is(
+    as_qgis_raster(
+      structure(
+        list(
+          OUTPUT = structure(
+            system.file("longlake/longlake.tif", package = "qgisprocess"),
+            class = "qgis_outputRaster"
+          )
+        ),
+        class = "qgis_result"
+      )
+    ),
+    "RasterLayer"
+  )
+
+  expect_is(
+    as_qgis_brick(
+      structure(
+        list(
+          OUTPUT = structure(
+            system.file("longlake/longlake.tif", package = "qgisprocess"),
+            class = "qgis_outputRaster"
+          )
+        ),
+        class = "qgis_result"
+      )
+    ),
+    "RasterBrick"
+  )
+})
