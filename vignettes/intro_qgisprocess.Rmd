@@ -37,7 +37,8 @@ qgis_algorithms()
 Find out what a specific geoalgorithm is doing, e.g., `native:buffer`.
 
 ```{r desc}
-cat(qgis_description("native:buffer"))
+qgis_show_help("native:buffer")
+# cat(qgis_description("native:buffer"))
 # cat(qgis_help_text("native:buffer"))
 ```
 
@@ -66,7 +67,7 @@ qgis_arguments("grass7:r.slope.aspect")
 ```{r slopeaspect}
 data("dem", package = "spDataLarge")
 
-info = run_qgis(alg = "grass7:r.slope.aspect",
+info = qgis_run_algorithm(alg = "grass7:r.slope.aspect",
                 elevation = dem, 
                 pcurvature = file.path(tempdir(), "pcurv.tif"),
                 tcurvature = file.path(tempdir(), "tcurv.tif"),
