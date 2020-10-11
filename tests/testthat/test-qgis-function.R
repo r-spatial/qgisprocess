@@ -22,16 +22,14 @@ test_that("qgis_function() works", {
     c(buffer_args$name, setdiff(names(formals(qgis_run_algorithm)), c("algorithm", "...")))
   )
 
-  result <- expect_silent(
-    qgis_buffer(
-      system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
-      DISTANCE = 100,
-      DISSOLVE = TRUE,
-      MITER_LIMIT = 2,
-      OUTPUT = qgis_tmp_vector(),
-      END_CAP_STYLE = 0,
-      JOIN_STYLE = 0
-    )
+  result <- qgis_buffer(
+    system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+    DISTANCE = 100,
+    DISSOLVE = TRUE,
+    MITER_LIMIT = 2,
+    OUTPUT = qgis_tmp_vector(),
+    END_CAP_STYLE = 0,
+    JOIN_STYLE = 0
   )
 
   expect_is(result, "qgis_result")
