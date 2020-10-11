@@ -43,9 +43,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
 
-          # enables providers when the QGIS GUI hasn't been run
-          QT_QPA_PLATFORM='offscreen' qgis_process and echo -e "[PythonPlugins]\nprocessing=true" >> ~/.local/share/QGIS/QGIS3/profiles/default/QGIS/QGIS3.ini
-
       - name: Install QGIS (Ubuntu)
         if: matrix.config.qgis == 'ubuntu'
         run: |
@@ -54,9 +51,6 @@ jobs:
           sudo add-apt-repository "deb https://qgis.org/ubuntu `lsb_release -c -s` main"
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
-
-          # enables providers when the QGIS GUI hasn't been run
-          QT_QPA_PLATFORM='offscreen' qgis_process and echo -e "[PythonPlugins]\nprocessing=true" >> ~/.local/share/QGIS/QGIS3/profiles/default/QGIS/QGIS3.ini
 
 # installs homebrew QGIS
 # currently 3.14 with no 'qgis_process'
