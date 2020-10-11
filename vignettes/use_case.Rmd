@@ -16,6 +16,17 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r sinkremoval}
+library("raster")
+data(dem, package = "spDataLarge")
+projection(dem) = sf::st_crs(32717)$proj4string
+qgis_arguments("saga:sinkremoval")
+out = qgis_run_algorithm("saga:sinkremoval",
+         DEM = dem, 
+         METHOD = 1, 
+         DEM_PREPROC = file.path(tempdir(), "sdem.tif"))
+res = raster(qgis_output(out, "DEM_PREPROC")[1])
+```
 <!--
 ## ------------------------------------------------------------------------
 get_usage("saga:sinkremoval")
