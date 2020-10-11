@@ -17,6 +17,21 @@ test_that("qgis_run_algorithm() works", {
   expect_true(file.exists(tmp_json))
 })
 
+test_that("qgis_run_algorithm() ignores unknown inputs", {
+  skip_if_not(has_qgis())
+
+  expect_message(
+    qgis_run_algorithm(
+      "native:buffer",
+      NOT_AN_INPUT = "some value",
+      INPUT = system.file("longlake/longlake.gpkg", package = "qgisprocess"),
+      DISTANCE = 100,
+      .quiet = TRUE
+    ),
+    "Ignoring unknown input"
+  )
+})
+
 test_that("qgis_has_algorithm() works", {
   skip_if_not(has_qgis())
   expect_true(qgis_has_algorithm("native:filedownloader"))

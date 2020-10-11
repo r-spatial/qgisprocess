@@ -73,19 +73,35 @@ qgis_parsed_help <- function(algorithm) {
     )
   )[, 2, drop = TRUE]
 
-  args <- stringr::str_match_all(
-    sec_args,
-    stringr::regex(
-      paste0(
-        "^([A-Za-z0-9_]+):\\s+([A-Za-z0-9_ .-]+)\n\\s*",
-        "Argument type:\\s+([A-Za-z0-9_]+)"
-      ),
-      dotall = TRUE, multiline = TRUE
+  sec_args_lines <- stringr::str_trim(readLines(textConnection(sec_args)), side = "right")
+  arg_start <- stringr::str_which(sec_args_lines, "^[^\\s]")
+  arg_end <- if (length(arg_start) == 0) character(0) else c(arg_start[-1] - 1, length(sec_args_lines))
+  arg_text <- unlist(
+    Map(
+      function(a, b) paste(sec_args_lines[a:b], collapse = "\n"),
+      arg_start + 1,
+      arg_end
     )
-  )[[1]]
+  )
 
-  # if there are no arguments, there won't be a match here
-  args <- args[!is.na(args[, 1, drop = TRUE]), , drop = FALSE]
+  arg_info <- stringr::str_split(sec_args_lines[arg_start], "\\s*:\\s*", n = 2)
+  arg_type <- stringr::str_match(arg_text, "Argument type:\\s*(.+)")[, 2, drop = TRUE]
+  arg_sec_available <- stringr::str_match(
+    arg_text,
+    stringr::regex(
+      "Available values:\\s*\\n\\s*-\\s*[0-9]+\\s*:\\s*(.+?)\\s*Acceptable values",
+      multiline = TRUE, dotall = TRUE
+    )
+  )[, 2, drop = TRUE]
+  arg_available <- stringr::str_split(arg_sec_available, "\\n\\s*-\\s*[0-9]+\\s*:\\s*")
+  arg_available[is.na(arg_sec_available)] <- list(character(0))
+
+  arg_sec_acceptable <- stringr::str_match(
+    arg_text,
+    stringr::regex("Acceptable values:\\s*\\n\\s*-\\s*(.+)", multiline = TRUE, dotall = TRUE)
+  )[, 2, drop = TRUE]
+  arg_acceptable <- stringr::str_split(arg_sec_acceptable, "\\n\\s*-\\s*")
+  arg_acceptable[is.na(arg_sec_acceptable)] <- list(character(0))
 
   sec_outputs <- stringr::str_match(
     help_text,
@@ -110,9 +126,11 @@ qgis_parsed_help <- function(algorithm) {
   list(
     description = sec_description,
     arguments = tibble::tibble(
-      name = args[, 2, drop = TRUE],
-      description = args[, 3, drop = TRUE],
-      qgis_type = args[, 4, drop = TRUE]
+      name = vapply(arg_info, "[[", 1, FUN.VALUE = character(1)),
+      description =  vapply(arg_info, "[[", 2, FUN.VALUE = character(1)),
+      qgis_type = arg_type,
+      available_values = arg_available,
+      acceptable_values = arg_acceptable
     ),
     outputs = tibble::tibble(
       name = outputs[, 2, drop = TRUE],

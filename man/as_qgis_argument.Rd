@@ -51,7 +51,9 @@ qgis_argument_spec(
   algorithm = NA_character_,
   name = NA_character_,
   description = NA_character_,
-  qgis_type = NA_character_
+  qgis_type = NA_character_,
+  available_values = character(0),
+  acceptable_values = character(0)
 )
 
 qgis_argument_spec_by_name(
@@ -73,8 +75,8 @@ algorithm has been run.}
 \item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
 a path to a QGIS model file.}
 
-\item{name, description, qgis_type}{Column values of \code{arguments} denoting
-the argument name, its description, and its QGIS type name.}
+\item{name, description, qgis_type, available_values, acceptable_values}{Column values of \code{arguments} denoting
+the argument name, description, and acceptable values.}
 
 \item{arguments}{The result of \code{\link[=qgis_arguments]{qgis_arguments()}}.}
 }
