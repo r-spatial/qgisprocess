@@ -7,6 +7,44 @@ test_that("argument coercers work", {
   expect_identical(as_qgis_argument(TRUE), "TRUE")
 })
 
+test_that("character -> enum works", {
+  expect_error(
+    as_qgis_argument(
+      "bad value",
+      spec = qgis_argument_spec(
+        name = "argname",
+        qgis_type = "enum",
+        available_values = c("good val1", "good val2")
+      )
+    ),
+    "All values.*?must be one of the following"
+  )
+
+  expect_identical(
+    as_qgis_argument(
+      "good val2",
+      spec = qgis_argument_spec(
+        name = "argname",
+        qgis_type = "enum",
+        available_values = c("good val1", "good val2")
+      )
+    ),
+    "1"
+  )
+
+  expect_identical(
+    as_qgis_argument(
+      c("good val2", "good val1"),
+      spec = qgis_argument_spec(
+        name = "argname",
+        qgis_type = "enum",
+        available_values = c("good val1", "good val2")
+      )
+    ),
+    "1,0"
+  )
+})
+
 test_that("default arguments are handled correctly", {
   expect_silent(as_qgis_argument(NULL))
   expect_message(
@@ -43,6 +81,20 @@ test_that("default arguments are handled correctly", {
       qgis_argument_spec(name = "argname", qgis_type = "folderDestination")
     ),
     "Using `argname = qgis_tmp_folder"
+  )
+  expect_message(
+    as_qgis_argument(
+      qgis_default_value(),
+      qgis_argument_spec(name = "argname", qgis_type = "enum", available_values = character(0))
+    ),
+    "is unspecified"
+  )
+  expect_message(
+    as_qgis_argument(
+      qgis_default_value(),
+      qgis_argument_spec(name = "argname", qgis_type = "enum", available_values = "def_value")
+    ),
+    'Using.*?argname.*?"def_value"',
   )
   expect_message(
     as_qgis_argument(
