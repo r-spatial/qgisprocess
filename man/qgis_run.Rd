@@ -58,11 +58,22 @@ useful for debugging.}
 The result of \code{\link[processx:run]{processx::run()}}.
 }
 \description{
-Configure and run 'qgis_process'
+The qgisprocess package is a wapper around the 'qgis_process' command line
+tool distributed with QGIS (>=3.14). These functions use heuristics to
+detect the location of the 'qgis_process' executable. If the configuration
+fails or you have more than one QGIS installation, you can set
+\code{options(qgisprocess.path = "path/to/qgis_process")} or the
+\code{R_QGISPROCESS_PATH} environment variable (useful on CI). On Linux the
+'qgis_process' executable is generally available on the user's PATH,
+on MacOS the executable is within the QGIS*.app/Contents/MacOS/bin folder,
+and on Windows the executable is named qgis_process-qgis.bat or
+qgis_process-qgis-dev.bat and is located in Program Files/QGIS*/bin or
+OSGeo4W(64)/bin.
 }
 \examples{
 if (has_qgis()) qgis_path()
 if (has_qgis()) qgis_version()
 if (has_qgis()) qgis_algorithms()
+qgis_configure()
 
 }

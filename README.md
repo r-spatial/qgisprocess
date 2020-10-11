@@ -41,6 +41,27 @@ version of QGIS isn’t available for your OS, you can use one of the
 [Geocomputation with R Docker
 images](https://github.com/geocompr/docker) with QGIS installed.
 
+If the automatic configuration fails (or if you have more than one
+installation and would like to choose which one is used by qgisprocess),
+you can set `options(qgisprocess.path = "path/to/qgis_process")`,
+possibly in your `.Rprofile` to persist between sessions. You can run
+`qgis_configure()` to print the gritty details\!
+
+``` r
+library(qgisprocess)
+#> Using 'qgis_process' at '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'.
+#> Run `qgis_configure()` for details.
+qgis_configure()
+#> getOption('qgisprocess.path') was not found.
+#> Sys.getenv('R_QGISPROCESS_PATH') was not found.
+#> Trying 'qgis_process' on PATH
+#> Error in rethrow_call(c_processx_exec, command, c(command, args), stdin, : cannot start processx process 'qgis_process' (system error 2, No such file or directory) @unix/processx.c:592 (processx_exec)
+#> Found 1 QGIS installation containing 'qgis_process':
+#>  /Applications/QGIS.app/Contents/MacOS/bin/qgis_process
+#> Trying command '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'
+#> Success!
+```
+
 ## Example
 
 The following example demonstrates the
@@ -50,27 +71,25 @@ and [raster](https://cran.r-project.org/package=raster) objects is
 experimentally supported (and will be well-supported in the future\!).
 
 ``` r
-library(qgisprocess)
-#> Using 'qgis_process' at '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'.
-#> Run `qgis_configure()` for details.
 input <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
 
 result <- qgis_run_algorithm(
   "native:buffer",
   INPUT = input,
   DISTANCE = 1,
+  DISSOLVE = TRUE,
   .quiet = TRUE
 )
-#> Argument `END_CAP_STYLE` is unspecified (using QGIS default value).
-#> Argument `JOIN_STYLE` is unspecified (using QGIS default value).
+#> Argument `SEGMENTS` is unspecified (using QGIS default value).
+#> Using `END_CAP_STYLE = "Round"`
+#> Using `JOIN_STYLE = "Round"`
 #> Argument `MITER_LIMIT` is unspecified (using QGIS default value).
-#> Argument `DISSOLVE` is unspecified (using QGIS default value).
 #> Using `OUTPUT = qgis_tmp_vector()`
 
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpMYi0Xp/file163e81a949b13/file163e86695af6.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpJR8WLt/file17e46b7ff54d/file17e4238be45a.gpkg"
 
 output_sf <- sf::read_sf(qgis_output(result, "OUTPUT"))
 plot(sf::st_geometry(output_sf))

@@ -6,7 +6,7 @@
 #' @export
 #'
 as_qgis_argument.sf <- function(x, spec = qgis_argument_spec()) {
-  if (!isTRUE(spec$qgis_type %in% c("source", "layer", "vector"))) {
+  if (!isTRUE(spec$qgis_type %in% c("source", "layer", "vector", "multilayer"))) {
     abort(glue("Can't convert 'sf' object to QGIS type '{ spec$qgis_type }'"))
   }
 
