@@ -12,7 +12,7 @@ as_qgis_argument.RasterBrick <- function(x, spec = qgis_argument_spec()) {
 }
 
 as_qgis_argument_raster <- function(x, spec = qgis_argument_spec()) {
-  if (!isTRUE(spec$qgis_type %in% c("raster", "layer"))) {
+  if (!isTRUE(spec$qgis_type %in% c("raster", "layer", "multilayer"))) {
     abort(glue("Can't convert '{ class(x)[1] }' object to QGIS type '{ spec$qgis_type }'"))
   }
 
