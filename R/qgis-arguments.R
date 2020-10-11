@@ -79,7 +79,7 @@ as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec()) 
     # these are various types of files (pdf, raster stats, etc.)
     message(glue("Using `{ spec$name } = qgis_tmp_file(\"\")`"))
     qgis_tmp_file("")
-  } else if (isTRUE(spec$qgis_type) == "enum") {
+  } else if (isTRUE(spec$qgis_type == "enum")) {
     # TODO: this should really use a string when `spec` contains
     # the vector of acceptable values
     message(glue("Using `{ spec$name } = 0"))
