@@ -2,20 +2,38 @@
 title: "Intro: Basic usage of qgisprocess"
 author: "Jannes Muenchow"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette:
-  fig_caption: yes
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{"Intro: Basic usage of qgisprocess"}
+  %\VignetteIndexEntry{Intro: Basic usage of qgisprocess}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
+**qgisprocess** is basically a wrapper around the standalone command line tool [`qgis_process`](https://github.com/qgis/QGIS-Documentation/issues/5803).
+Therefore, it already tries to detect where `qgis_process` is installed on your system when it is being attached.
+
 ```{r}
-library(qgisprocess)
-# qgis_configure()
-# specify path to QGIS installation on Windows 
-# options('qgisprocess.path' = "C:/Program Files/QGIS 3.14/bin/qgis_process-qgis.bat")
+library("qgisprocess")
 ```
+
+If you want to find out, how **qgisprocess**  detected `qgis_process`, run `qgis_configure()`.
+
+```{r config}
+qgis_configure()
+```
+
+Here, `qgis_process` was detected in the PATH variable.
+However, `qgis_configure()` first tries if the R option `qgisprocess.path` or the the global environment variable `R_QGISPROCESS_PATH` has been set.
+This already indicates that you can specify one of these variables in case `qgis_process` has not been installed in one of the most common locations which might sometimes happen under Windows.
+If `qgis_process` is installed, you can set `options(qgisprocess.path = '/path/to/qgis_process')` and re-run `qgis_configure()`.
+In the case of Windows, make sure to indicate the path to the `qgis_process-qgis.bat` file, e.g.,
+
+```{r win-config, eval=FALSE}
+# specify path to QGIS installation on Windows 
+options("qgisprocess.path" = "C:/Program Files/QGIS 3.14/bin/qgis_process-qgis.bat")
+qgis_configure()
+```
+
 
 First, let's check which QGIS version our system is running:
 
@@ -66,15 +84,16 @@ qgis_arguments("grass7:r.slope.aspect")
 ```
 
 ```{r slopeaspect}
+library("raster")
 data("dem", package = "spDataLarge")
+projection(dem) = sf::st_crs(32717)$proj4string
 
 info = qgis_run_algorithm(alg = "grass7:r.slope.aspect",
                 elevation = dem, 
-                pcurvature = file.path(tempdir(), "pcurv.tif"),
-                tcurvature = file.path(tempdir(), "tcurv.tif"),
-                show_output_paths = FALSE,
-                load_output = TRUE)
-
+                #pcurvature = file.path(tempdir(), "pcurv.tif"),
+                #tcurvature = file.path(tempdir(), "tcurv.tif"),
+                .quiet = TRUE)
+raster(qgis_output(info, "pcurvature")[1])
 ```
 
 <!--
