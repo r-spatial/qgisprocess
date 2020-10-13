@@ -19,6 +19,8 @@ knitr::opts_chunk$set(
 
 ```{r sinkremoval}
 library("raster")
+library("dplyr")
+library("qgisprocess")
 data(dem, package = "spDataLarge")
 projection(dem) = sf::st_crs(32717)$proj4string
 qgis_arguments("saga:sinkremoval")
@@ -30,13 +32,16 @@ out = qgis_run_algorithm(
   )
 
 sdem = raster(qgis_output(out, "DEM_PREPROC")[1])
-
+qgis_show_help("saga:sagawetnessindex")
 out = qgis_run_algorithm(
   algorithm = "saga:sagawetnessindex",
   DEM = file.path(tempdir(), "sdem.sdat"),
   SLOPE_TYPE = 1, 
+  AREA_TYPE = 0,
   SLOPE = file.path(tempdir(), "cslope.sdat"),
   AREA = file.path(tempdir(), "carea.sdat"),
+  AREA_MOD = file.path(tempdir(), "area_mod.sdat"),
+  TWI = file.path(tempdir(), "twi.sdat")
   )
 cslope = raster(qgis_output(out, "SLOPE")[1])
 carea = raster(qgis_output(out, "AREA")[1])
@@ -48,9 +53,23 @@ log_carea = log(carea / 1e+06)
 data("ndvi", package = "spDataLarge")
 projection(ndvi) = projection(carea)
 
-
+algs = qgis_algorithms()
 filter(algs, grepl("value", algorithm_title)) %>% as.data.frame
 qgisprocess::qgis_show_help("saga:addrastervaluestopoints")
+qgis_arguments("saga:addrastervaluestopoints")
+
+data(random_points, package = "spDataLarge")
+# qgis_run_algorithm("saga:addrastervaluestopoints",
+#                    SHAPES = random_points,
+#                    RESAMPLING = 0,
+#                    GRIDS = sdem,
+#                    RESULT = file.path(tempdir(), "vals.gpkg"))
+# qgis_run_algorithm("saga:addrastervaluestopoints",
+#                    SHAPES = random_points,
+#                    GRIDS = file.path(tempdir(), "cslope.sdat"),
+#                    GRIDS = file.path(tempdir(), "carea.sdat"),
+#                    RESAMPLING = 0,
+#                    RESULT = file.path(tempdir(), "vals.gpkg"))
 ```
 <!--
 ## ------------------------------------------------------------------------
