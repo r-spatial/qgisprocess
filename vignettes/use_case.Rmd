@@ -1,11 +1,16 @@
 ---
-title: "Use case: predicting plant species richness on Mt. Mongón"
+title: "2. Use case: predicting plant species richness on Mt. Mongón"
 author: "Jannes Muenchow"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette:
-  fig_caption: yes
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 2
 vignette: >
-  %\VignetteIndexEntry{"Use case: predicting plant species richness on Mt. Mongón"}
+  %\VignetteIndexEntry{"2. Use case: predicting plant species richness on Mt. Mongón"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
