@@ -1,10 +1,16 @@
 ---
-title: "Intro: Basic usage of qgisprocess"
+title: "1. Basic usage of qgisprocess"
 author: "Jannes Muenchow"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 2
 vignette: >
-  %\VignetteIndexEntry{Intro: Basic usage of qgisprocess}
+  %\VignetteIndexEntry{1. Basic usage of qgisprocess}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -23,10 +29,10 @@ qgis_configure()
 ```
 
 Here, `qgis_process` was detected in the PATH variable.
-However, `qgis_configure()` first tries if the R option `qgisprocess.path` or the the global environment variable `R_QGISPROCESS_PATH` has been set.
+However, `qgis_configure()` first tries if the R option `qgisprocess.path` or the global environment variable `R_QGISPROCESS_PATH` has been set.
 This already indicates that you can specify one of these variables in case `qgis_process` has not been installed in one of the most common locations which might sometimes happen under Windows.
-If `qgis_process` is installed, you can set `options(qgisprocess.path = '/path/to/qgis_process')` and re-run `qgis_configure()`.
-In the case of Windows, make sure to indicate the path to the `qgis_process-qgis.bat` file, e.g.,
+If this is th case, set `options(qgisprocess.path = '/path/to/qgis_process')` and re-run `qgis_configure()`.
+Under Windows make sure to indicate the path to the `qgis_process-qgis.bat` file, e.g.,
 
 ```{r win-config, eval=FALSE}
 # specify path to QGIS installation on Windows 
@@ -34,8 +40,7 @@ options("qgisprocess.path" = "C:/Program Files/QGIS 3.14/bin/qgis_process-qgis.b
 qgis_configure()
 ```
 
-
-First, let's check which QGIS version our system is running:
+Assuming that `qgis_configure()` ran successfully, we can check which QGIS version our system is running:
 
 ```{r vers}
 qgis_version()
