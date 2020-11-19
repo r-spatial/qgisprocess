@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<a href=""><img src="https://raw.githubusercontent.com/barja8/CS_qgisprocess/main/img/qgisprocess_icon.png" align="right" hspace="10" vspace="0" width="15%"></a>
+<a href=""><img src="man/figures/qgisprocess_icon.png" align="right" hspace="10" vspace="0" width="15%"></a>
 
 # **qgisprocess**
 <!-- badges: start -->
