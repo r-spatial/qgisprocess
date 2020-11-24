@@ -1,8 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# qgisprocess
+<a href=""><img src="man/figures/qgisprocess_icon.png" align="right" hspace="10" vspace="0" width="15%"></a>
 
+# **qgisprocess**
 <!-- badges: start -->
 
 [![R build
