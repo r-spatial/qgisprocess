@@ -204,17 +204,15 @@ qgis_env <- function() {
 qgis_query_version <- function(quiet = FALSE) {
   result <- qgis_run(args = character(0))
   lines <- readLines(textConnection(result$stdout))
-  match <- stringr::str_match(lines[1], "\\(([0-9.]+[A-Za-z0-9.-]*)\\)")[, 2, drop = TRUE]
-  if (identical(match, NA_character_)) {
+  match <- stringr::str_match(lines, "\\(([0-9.]+[A-Za-z0-9.-]*)\\)")[, 2, drop = TRUE]
+  if (all(is.na(match))) {
     abort(
-      paste0(
-        "First line of output did not contain expected version information.\n",
-        glue::glue("First line of output was '{ lines[1] }'")
-      )
+      message(
+        "Output did not contain expected version information and was:\n\n",
+        paste(lines, collapse = "\n"))
     )
   }
-
-  match
+  match[!is.na(match)]
 }
 
 #' @rdname qgis_run
