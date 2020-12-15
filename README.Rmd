@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 
 # qgisprocess
 
+<img src="man/figures/qgisprocess_icon.png" align="right" hspace="10" vspace="0" width="20%">
+
 <!-- badges: start -->
 [![R build status](https://github.com/paleolimbot/qgisprocess/workflows/R-CMD-check/badge.svg)](https://github.com/paleolimbot/qgisprocess/actions)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)

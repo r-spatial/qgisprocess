@@ -3,6 +3,8 @@
 
 # qgisprocess
 
+<img src="man/figures/qgisprocess_icon.png" align="right" hspace="10" vspace="0" width="20%">
+
 <!-- badges: start -->
 
 [![R build
@@ -89,7 +91,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpJR8WLt/file17e46b7ff54d/file17e4238be45a.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpVgzxbF/file72c13eef96a0/file72c12e382e1e.gpkg"
 
 output_sf <- sf::read_sf(qgis_output(result, "OUTPUT"))
 plot(sf::st_geometry(output_sf))
