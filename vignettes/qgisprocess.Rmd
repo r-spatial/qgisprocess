@@ -30,13 +30,14 @@ qgis_configure()
 
 Here, `qgis_process` was detected in the PATH variable.
 However, `qgis_configure()` first tries if the R option `qgisprocess.path` or the global environment variable `R_QGISPROCESS_PATH` has been set.
-This already indicates that you can specify one of these variables in case `qgis_process` has not been installed in one of the most common locations which might sometimes happen under Windows.
+This already indicates that you can specify one of these variables in case `qgis_process` has not been installed in one of the most common locations or if there are multiple QGIS versions available both of which might sometimes happen under Windows.
 If this is th case, set `options(qgisprocess.path = '/path/to/qgis_process')` and re-run `qgis_configure()`.
 Under Windows make sure to indicate the path to the `qgis_process-qgis.bat` file, e.g.,
 
 ```{r win-config, eval=FALSE}
 # specify path to QGIS installation on Windows 
-options("qgisprocess.path" = "C:/Program Files/QGIS 3.14/bin/qgis_process-qgis.bat")
+options("qgisprocess.path" = "C:/Program Files/QGIS 3.16/bin/qgis_process-qgis.bat")
+options(qgisprocess.path = "C:/OSGeo4W64/bin/qgis_process-qgis-dev.bat")
 qgis_configure()
 ```
 
@@ -93,11 +94,12 @@ library("raster")
 data("dem", package = "spDataLarge")
 projection(dem) = sf::st_crs(32717)$proj4string
 
+# works under QGIS 3.16.1 but not under 3.17 (nightly version)
 info = qgis_run_algorithm(alg = "grass7:r.slope.aspect",
                 elevation = dem, 
-                #pcurvature = file.path(tempdir(), "pcurv.tif"),
-                #tcurvature = file.path(tempdir(), "tcurv.tif"),
-                .quiet = TRUE)
+                # pcurvature = file.path(tempdir(), "pcurv.tif"),
+                # tcurvature = file.path(tempdir(), "tcurv.tif"),
+                .quiet = FALSE)
 raster(qgis_output(info, "pcurvature")[1])
 ```
 
