@@ -64,17 +64,13 @@ qgisprocess::qgis_show_help("saga:addrastervaluestopoints")
 qgis_arguments("saga:addrastervaluestopoints")
 
 data(random_points, package = "spDataLarge")
-# qgis_run_algorithm("saga:addrastervaluestopoints",
-#                    SHAPES = random_points,
-#                    RESAMPLING = 0,
-#                    GRIDS = sdem,
-#                    RESULT = file.path(tempdir(), "vals.gpkg"))
-# qgis_run_algorithm("saga:addrastervaluestopoints",
-#                    SHAPES = random_points,
-#                    GRIDS = file.path(tempdir(), "cslope.sdat"),
-#                    GRIDS = file.path(tempdir(), "carea.sdat"),
-#                    RESAMPLING = 0,
-#                    RESULT = file.path(tempdir(), "vals.gpkg"))
+out = qgis_run_algorithm("saga:addrastervaluestopoints",
+                         SHAPES = random_points,
+                         GRIDS = file.path(tempdir(), "cslope.sdat"),
+                         GRIDS = file.path(tempdir(), "carea.sdat"),
+                         RESAMPLING = 0,
+                         RESULT = file.path(tempdir(), "vals.shp"))
+vals = read_sf(qgis_output(out, "RESULT"))
 ```
 <!--
 ## ------------------------------------------------------------------------
