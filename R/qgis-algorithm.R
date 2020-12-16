@@ -33,7 +33,6 @@
 qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = NULL, .quiet = FALSE) {
   assert_qgis()
   assert_qgis_algorithm(algorithm)
-
   # use list2 so that users can !!! argument lists
   dots <- rlang::list2(...)
   if (length(dots) > 0 && !rlang::is_named(dots)) {
@@ -42,10 +41,22 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
 
   # generate an argument template and fill in provided arguments
   arg_meta <- qgis_arguments(algorithm)
-  args <- lapply(
-    rlang::set_names(c(arg_meta$name, "PROJECT_PATH", "ELIPSOID")),
-    function(x) if (x %in% names(dots)) dots[[x]] else qgis_default_value()
-  )
+  # take care of multiple input arguments
+  # so far this works only if only one argument is duplicated (but I can't
+  # remember that a QGIS algorithm has more than 1 argument of type multiple
+  # input)
+  dups <- dots[duplicated(names(dots)) |
+                 duplicated(names(dots), fromLast = TRUE)]
+  ind = `if`(length(dups) > 0, arg_meta$name == names(dups[1]), NA)
+  ro <- 1:nrow(arg_meta)  # row order
+  r <- rep(1, nrow(arg_meta))  # number of times to be repeated
+  r[ind] <- length(dups)
+  arg_meta <- arg_meta[rep(ro, times = r), ]
+  args = rlang::set_names(c(arg_meta$name, "PROJECT_PATH", "ELIPSOID"))
+  # we need to write it like this due to duplicated names
+  args[names(args) %in% names(dots)] <- dots
+  args[!names(args) %in% names(dots)] <-
+    lapply(args[!names(args) %in% names(dots)], function(x) qgis_default_value())
   args["PROJECT_PATH"] <- list(PROJECT_PATH)
   args["ELIPSOID"] <- list(ELIPSOID)
 
