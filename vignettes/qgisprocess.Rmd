@@ -11,7 +11,7 @@ output:
     toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{1. Basic usage of qgisprocess}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 
