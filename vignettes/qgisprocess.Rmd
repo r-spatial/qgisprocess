@@ -57,7 +57,12 @@ List all geoalgorithms at your disposal:
 
 ```{r algs}
 qgis_algorithms()
+# or use the cached algorithms which have been collected while
+# calling library(qgisprocess)
+algs = qgisprocess_cache$algorithms
 ```
+
+
 
 Find out what a specific geoalgorithm is doing, e.g., `native:buffer`.
 
