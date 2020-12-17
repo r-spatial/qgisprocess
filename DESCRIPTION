@@ -39,5 +39,6 @@ Suggests:
     rgdal,
     sf,
     spDataLarge
-VignetteBuilder:
-    knitr
+Remotes:
+    nowosad/spDataLarge
+VignetteBuilder: knitr
