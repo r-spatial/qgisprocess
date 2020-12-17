@@ -11,7 +11,7 @@ output:
     toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{1. Basic usage of qgisprocess}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -61,8 +61,6 @@ qgis_algorithms()
 # calling library(qgisprocess) under Windows
 # algs = qgisprocess_cache$algorithms
 ```
-
-
 
 Find out what a specific geoalgorithm is doing, e.g., `native:buffer`.
 

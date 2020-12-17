@@ -11,7 +11,7 @@ output:
     toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{"2. Use case: predicting plant species richness on Mt. Mongón"}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 

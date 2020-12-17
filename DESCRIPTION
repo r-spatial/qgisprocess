@@ -36,4 +36,5 @@ Suggests:
     testthat,
     sf,
     raster
-VignetteBuilder: knitr 
+VignetteBuilder:
+    knitr
