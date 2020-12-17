@@ -11,7 +11,7 @@ output:
     toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{1. Basic usage of qgisprocess}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -58,8 +58,8 @@ List all geoalgorithms at your disposal:
 ```{r algs}
 qgis_algorithms()
 # or use the cached algorithms which have been collected while
-# calling library(qgisprocess)
-algs = qgisprocess_cache$algorithms
+# calling library(qgisprocess) under Windows
+# algs = qgisprocess_cache$algorithms
 ```
 
 
