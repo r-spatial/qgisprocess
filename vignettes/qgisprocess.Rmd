@@ -15,8 +15,22 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+# Setting up the system
+
 **qgisprocess** is basically a wrapper around the standalone command line tool [`qgis_process`](https://github.com/qgis/QGIS-Documentation/issues/5803).
-Therefore, it already tries to detect where `qgis_process` is installed on your system when it is being attached.
+Therefore, you need to have installed QGIS on your system as well as 3rd party providers such as GRASS and SAGA to access and run all geoalgorithms provided through `qgis_process` from within R.
+To facilitate using **qgisprocess**, we have created a docker image that already comes with the needed software packages.
+You can pull it from dockerhub by running:
+
+```{sh, eval=FALSE}
+docker pull geocompr/geocompr:qgis-ext
+```
+
+For a more detailed introduction on how to use docker with **qgisprocess** have a look a the corresponding vignette.
+
+# How to use qgisprocess
+
+Since **qgisprocess** depends on the command line tool `qgis_process`, it already tries to detect `qgis_process` on your system when it is being attached, and complains if it cannot find it.
 
 ```{r}
 library("qgisprocess")
@@ -30,14 +44,15 @@ qgis_configure()
 
 Here, `qgis_process` was detected in the PATH variable.
 However, `qgis_configure()` first tries if the R option `qgisprocess.path` or the global environment variable `R_QGISPROCESS_PATH` has been set.
-This already indicates that you can specify one of these variables in case `qgis_process` has not been installed in one of the most common locations or if there are multiple QGIS versions available both of which might sometimes happen under Windows.
-If this is th case, set `options(qgisprocess.path = '/path/to/qgis_process')` and re-run `qgis_configure()`.
+This already indicates that you can specify one of these variables in case `qgis_process` has not been installed in one of the most common locations or if there are multiple QGIS versions available (both of which might sometimes happen under Windows).
+If this is the case, set `options(qgisprocess.path = '/path/to/qgis_process')` and re-run `qgis_configure()`.
 Under Windows make sure to indicate the path to the `qgis_process-qgis.bat` file, e.g.,
 
 ```{r win-config, eval=FALSE}
 # specify path to QGIS installation on Windows 
 options("qgisprocess.path" = "C:/Program Files/QGIS 3.16/bin/qgis_process-qgis.bat")
-options(qgisprocess.path = "C:/OSGeo4W64/bin/qgis_process-qgis-dev.bat")
+# or use the QGIS nightly version
+# options("qgisprocess.path" = "C:/OSGeo4W64/bin/qgis_process-qgis-dev.bat")
 qgis_configure()
 ```
 
@@ -53,7 +68,8 @@ Next, let's list all available providers including available 3rd party applicati
 qgis_providers()
 ```
 
-List all geoalgorithms at your disposal:
+This tells us that we can also use the third-party providers GDAL, SAGA and GRASS trough the QGIS interface.
+To find out about the available geoalgorithms, run:
 
 ```{r algs}
 qgis_algorithms()
@@ -62,7 +78,8 @@ qgis_algorithms()
 # algs = qgisprocess_cache$algorithms
 ```
 
-Find out what a specific geoalgorithm is doing, e.g., `native:buffer`.
+Since we have also installed GRASS and SAGA, nearly 1000 geoalgorithms are at our disposal.
+To find out about a specific geoalgorithm and a description of its arguments, use `qgis_show_help()`, e.g.:
 
 ```{r desc}
 qgis_show_help("native:buffer")
