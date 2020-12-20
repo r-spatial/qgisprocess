@@ -51,7 +51,7 @@ Under Windows make sure to indicate the path to the `qgis_process-qgis.bat` file
 ```{r win-config, eval=FALSE}
 # specify path to QGIS installation on Windows 
 options("qgisprocess.path" = "C:/Program Files/QGIS 3.16/bin/qgis_process-qgis.bat")
-# or use the QGIS nightly version
+# or use the QGIS nightly version (if installed via OSGeo4W)
 # options("qgisprocess.path" = "C:/OSGeo4W64/bin/qgis_process-qgis-dev.bat")
 qgis_configure()
 ```
@@ -72,7 +72,8 @@ This tells us that we can also use the third-party providers GDAL, SAGA and GRAS
 To find out about the available geoalgorithms, run:
 
 ```{r algs}
-qgis_algorithms()
+algs = qgis_algorithms()
+algs
 # or use the cached algorithms which have been collected while
 # calling library(qgisprocess) under Windows
 # algs = qgisprocess_cache$algorithms
@@ -111,16 +112,20 @@ qgis_arguments("grass7:r.slope.aspect")
 
 ```{r slopeaspect}
 library("raster")
+# attach digital elevation model from Mt. Mongón (Peru)
 data("dem", package = "spDataLarge")
 projection(dem) = sf::st_crs(32717)$proj4string
 
-# works under QGIS 3.16.1 but not under 3.17 (nightly version)
 info = qgis_run_algorithm(alg = "grass7:r.slope.aspect",
-                elevation = dem, 
-                # pcurvature = file.path(tempdir(), "pcurv.tif"),
-                # tcurvature = file.path(tempdir(), "tcurv.tif"),
-                .quiet = FALSE)
-raster(qgis_output(info, "pcurvature")[1])
+                          elevation = dem, 
+                          .quiet = TRUE)
+# just keep the names of output rasters
+nms = grep("^\\.", names(info), invert = TRUE, value = TRUE)
+# read in the output rasters as a raster stack
+s = stack(lapply(info[nms], unclass))
+# plot the output
+plot(s)
+
 ```
 
 <!--
