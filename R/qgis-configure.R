@@ -204,7 +204,7 @@ qgis_env <- function() {
 qgis_query_version <- function(quiet = FALSE) {
   result <- qgis_run(args = character(0))
   lines <- readLines(textConnection(result$stdout))
-  match <- stringr::str_match(lines, "\\(([0-9.]+[A-Za-z0-9.-]*)\\)")[, 2, drop = TRUE]
+  match <- stringr::str_match(lines, "\\(([0-9.]+[[:cntrl:][:alnum:].-]*)\\)")[, 2, drop = TRUE]
   if (all(is.na(match))) {
     abort(
       message(
