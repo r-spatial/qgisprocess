@@ -36,3 +36,4 @@ Suggests:
     testthat,
     sf,
     raster
+SystemRequirements: SAGA-GIS (>= 2.3.1)
