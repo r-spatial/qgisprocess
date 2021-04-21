@@ -36,4 +36,4 @@ Suggests:
     testthat,
     sf,
     raster
-SystemRequirements: SAGA-GIS (>= 2.3.1)
+SystemRequirements: QGIS (>= 3.14.16) and (all platforms) installed via OSGeo4W (Windows) 
