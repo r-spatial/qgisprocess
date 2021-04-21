@@ -105,3 +105,33 @@ test_that("raster result coercers work", {
     "RasterBrick"
   )
 })
+
+test_that("raster crs work", {
+  skip_if_not_installed("raster")
+  skip_if_not_installed("rgdal")
+
+  obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
+
+
+  crs_representation <- expect_match(
+    as_qgis_argument(raster::crs(obj), qgis_argument_spec(qgis_type = "crs")),
+    "North American Datum 1983"
+  )
+
+  expect_is(crs_representation, "character")
+})
+
+test_that("raster bbox work", {
+  skip_if_not_installed("raster")
+  skip_if_not_installed("rgdal")
+
+  obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
+
+
+  bbox_representation <- expect_match(
+    as_qgis_argument(raster::extent(obj), qgis_argument_spec(qgis_type = "extent")),
+    "409891\\.446955431,411732\\.936955431,5083288\\.89932423,5084852\\.61932423"
+  )
+
+  expect_is(bbox_representation, "character")
+})

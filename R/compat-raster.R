@@ -97,3 +97,21 @@ qgis_as_brick.qgis_result <- function(output, ...) {
 
   abort("Can't extract brick from result: zero outputs of type 'outputRaster' or 'outputLayer'.")
 }
+
+#' @export
+as_qgis_argument.CRS <- function(x, spec = qgis_argument_spec()) {
+  if (!isTRUE(spec$qgis_type %in% c("crs"))) {
+    abort(glue("Can't convert 'crs' object to QGIS type '{ spec$qgis_type }'"))
+  }
+
+  raster::wkt(x)
+}
+
+#' @export
+as_qgis_argument.Extent <- function(x, spec = qgis_argument_spec()) {
+  if (!isTRUE(spec$qgis_type %in% c("extent"))) {
+    abort(glue("Can't convert 'Extent' object to QGIS type '{ spec$qgis_type }'"))
+  }
+
+  glue("{x@xmin},{x@xmax},{x@ymin},{x@ymax}")
+}
