@@ -121,7 +121,7 @@ test_that("raster crs work", {
   expect_is(crs_representation, "character")
 })
 
-test_that("raster bbox work", {
+test_that("raster extent work", {
   skip_if_not_installed("raster")
   skip_if_not_installed("rgdal")
 
@@ -134,4 +134,18 @@ test_that("raster bbox work", {
   )
 
   expect_is(bbox_representation, "character")
+})
+
+test_that("raster crs and extent work", {
+  skip_if_not_installed("raster")
+  skip_if_not_installed("rgdal")
+
+  obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
+
+
+  result <- qgis_run_algorithm("native:createconstantrasterlayer",
+                               EXTENT = raster::extent(obj),
+                               TARGET_CRS = raster::crs(obj),
+                               PIXEL_SIZE = 1000,
+                               NUMBER=5)
 })
