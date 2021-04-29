@@ -68,13 +68,21 @@ test_that("sf bbox work", {
 
 test_that("sf crs and bbox work", {
   skip_if_not_installed("sf")
+  skip_if_not(has_qgis())
 
   sf_obj <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
 
-  result <- qgis_run_algorithm("native:createconstantrasterlayer",
-                               EXTENT = sf::st_bbox(sf_obj),
-                               TARGET_CRS = sf::st_crs(5514),
-                               PIXEL_SIZE = 1000,
-                               NUMBER=5,
-                               .quiet = TRUE)
+  result <- qgis_run_algorithm(
+    "native:createconstantrasterlayer",
+    EXTENT = sf::st_bbox(sf_obj),
+    TARGET_CRS = sf::st_crs(5514),
+    PIXEL_SIZE = 1000,
+    OUTPUT_TYPE = "Byte",
+    OUTPUT = qgis_tmp_raster(),
+    NUMBER = 5,
+    .quiet = TRUE
+  )
+
+  expect_true(file.exists(result$OUTPUT))
+  qgis_result_clean(result)
 })
