@@ -139,13 +139,21 @@ test_that("raster extent work", {
 test_that("raster crs and extent work", {
   skip_if_not_installed("raster")
   skip_if_not_installed("rgdal")
+  skip_if_not(has_qgis())
 
   obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
 
+  result <- qgis_run_algorithm(
+    "native:createconstantrasterlayer",
+    EXTENT = raster::extent(obj),
+    TARGET_CRS = raster::crs(obj),
+    PIXEL_SIZE = 1000,
+    OUTPUT_TYPE = "Byte",
+    OUTPUT = qgis_tmp_raster(),
+    NUMBER = 5,
+    .quiet = TRUE
+  )
 
-  result <- qgis_run_algorithm("native:createconstantrasterlayer",
-                               EXTENT = raster::extent(obj),
-                               TARGET_CRS = raster::crs(obj),
-                               PIXEL_SIZE = 1000,
-                               NUMBER=5)
+  expect_true(file.exists(result$OUTPUT))
+  qgis_result_clean(result)
 })
