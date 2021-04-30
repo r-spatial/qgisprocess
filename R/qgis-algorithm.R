@@ -100,13 +100,27 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
     args_str <- character(0)
   }
 
+  # To get around a bug in processx (#302), we need to use a stdout callback
+  # to buffer stdout manually. For large outputs this would be slow, but
+  # the size of the buffer seems to be large enough that this doesn't
+  # matter.
+  stdout_output <- ""
+
   if (.quiet) {
-    result <- qgis_run(args = c("run", algorithm, args_str))
+    result <- qgis_run(
+      args = c("run", algorithm, args_str),
+      stdout_callback = function(x, ...) {
+        stdout_output <<- paste0(stdout_output, x)
+      }
+    )
   } else {
     result <- qgis_run(
       args = c("run", algorithm, args_str),
       echo_cmd = TRUE,
-      stdout_callback = function(x, ...) cat(x),
+      stdout_callback = function(x, ...) {
+        stdout_output <<- paste0(stdout_output, x)
+        cat(x)
+      },
       stderr_callback = function(x, ...) message(x, appendLF = FALSE)
     )
     cat("\n")
