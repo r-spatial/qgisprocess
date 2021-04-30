@@ -131,7 +131,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
   structure(
     rlang::list2(
       # ... eventually, this will contain the parsed output values
-      !!! qgis_parse_results(algorithm, result$stdout),
+      !!! qgis_parse_results(algorithm, stdout_output),
       .algorithm = algorithm,
       .args = args,
       .processx_result = result
