@@ -59,7 +59,7 @@ jobs:
       - name: Install QGIS (MacOS homebrew)
         if: matrix.config.qgis == 'macos-brew'
         run: |
-          brew cask install qgis
+          brew install --cask qgis
 
 # installs last nightly build of QGIS
 # works locally, hangs on GHA after download
