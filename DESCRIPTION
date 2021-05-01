@@ -35,4 +35,5 @@ BugReports: https://github.com/paleolimbot/qgisprocess/issues
 Suggests: 
     testthat,
     sf,
-    raster
+    raster,
+    covr

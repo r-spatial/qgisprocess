@@ -11,6 +11,8 @@
 status](https://github.com/paleolimbot/qgisprocess/workflows/R-CMD-check/badge.svg)](https://github.com/paleolimbot/qgisprocess/actions)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Codecov test
+coverage](https://codecov.io/gh/paleolimbot/qgisprocess/branch/master/graph/badge.svg)](https://codecov.io/gh/paleolimbot/qgisprocess?branch=master)
 <!-- badges: end -->
 
 The goal of `qgisprocess` is to provide an R interface to the popular
@@ -89,7 +91,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpNeANgz/file79c510c7f26e/file79c529ae7196.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmptXCayy/file9b2b462efaa9/file9b2b5212f730.gpkg"
 
 output_sf <- sf::read_sf(qgis_output(result, "OUTPUT"))
 plot(sf::st_geometry(output_sf))
@@ -186,7 +188,7 @@ When using R interactively, it may be useful to use
 
 ``` r
 qgis_algorithms()
-#> # A tibble: 971 x 5
+#> # A tibble: 986 x 5
 #>    provider provider_title algorithm         algorithm_id    algorithm_title    
 #>    <chr>    <chr>          <chr>             <chr>           <chr>              
 #>  1 3d       QGIS (3D)      3d:tessellate     tessellate      Tessellate         
@@ -199,7 +201,7 @@ qgis_algorithms()
 #>  8 gdal     GDAL           gdal:cliprasterb… cliprasterbyma… Clip raster by mas…
 #>  9 gdal     GDAL           gdal:clipvectorb… clipvectorbyex… Clip vector by ext…
 #> 10 gdal     GDAL           gdal:clipvectorb… clipvectorbypo… Clip vector by mas…
-#> # … with 961 more rows
+#> # … with 976 more rows
 ```
 
 ## Further reading
