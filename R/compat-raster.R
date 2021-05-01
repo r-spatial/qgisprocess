@@ -24,7 +24,7 @@ as_qgis_argument_raster <- function(x, spec = qgis_argument_spec()) {
   }
 
   # try to use a filename if present
-  if (x@file@name != ""){
+  if (x@file@name != "") {
     file_ext <- stringr::str_to_lower(tools::file_ext(x@file@name))
     if (file_ext %in% c("grd", "asc", "sdat", "rst", "nc", "tif", "tiff", "gtiff", "envi", "bil", "img")) {
       return(x@file@name)
