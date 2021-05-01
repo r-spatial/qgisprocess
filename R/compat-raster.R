@@ -88,7 +88,7 @@ qgis_as_raster.qgis_result <- function(output, ...) {
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
 qgis_as_brick.qgis_result <- function(output, ...) {
-  # find the first rqster output and read it
+  # find the first raster output and read it
   for (result in output) {
     if (inherits(result, "qgis_outputRaster") || inherits(result, "qgis_outputLayer")) {
       return(raster::brick(unclass(result), ...))
