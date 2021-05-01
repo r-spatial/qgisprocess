@@ -37,3 +37,24 @@ as_qgis_argument_stars <- function(x, spec = qgis_argument_spec()) {
   structure(path, class = "qgis_tempfile_arg")
 }
 
+# dynamically registered in zzz.R
+st_as_stars.qgis_outputRaster <- function(output, ...) {
+  stars::read_stars(unclass(output), ...)
+}
+
+# dynamically registered in zzz.R
+st_as_stars.qgis_outputLayer <- function(output, ...) {
+  stars::read_stars(unclass(output), ...)
+}
+
+# dynamically registered in zzz.R
+st_as_stars.qgis_result <- function(output, ...) {
+  # find the first raster output and read it
+  for (result in output) {
+    if (inherits(result, "qgis_outputRaster") || inherits(result, "qgis_outputLayer")) {
+      return(stars::read_stars(unclass(result), ...))
+    }
+  }
+
+  abort("Can't extract 'stars' raster from result: zero outputs of type 'outputRaster' or 'outputLayer'.")
+}

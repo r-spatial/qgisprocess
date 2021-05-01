@@ -25,3 +25,43 @@ test_that("stars argument coercers work", {
     system.file("longlake/longlake.tif", package = "qgisprocess")
   )
 })
+
+
+test_that("stars result coercers work", {
+  skip_if_not_installed("stars")
+
+  expect_is(
+    stars::st_as_stars(
+      structure(
+        system.file("longlake/longlake.tif", package = "qgisprocess"),
+        class = "qgis_outputRaster"
+      )
+    ),
+    "stars"
+  )
+
+  expect_is(
+    stars::st_as_stars(
+      structure(
+        system.file("longlake/longlake.tif", package = "qgisprocess"),
+        class = "qgis_outputLayer"
+      )
+    ),
+    "stars"
+  )
+
+  expect_is(
+    stars::st_as_stars(
+      structure(
+        list(
+          OUTPUT = structure(
+            system.file("longlake/longlake.tif", package = "qgisprocess"),
+            class = "qgis_outputRaster"
+          )
+        ),
+        class = "qgis_result"
+      )
+    ),
+    "stars"
+  )
+})

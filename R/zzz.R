@@ -5,6 +5,9 @@
   qgis_configure(quiet = TRUE)
 
   vctrs::s3_register("sf::st_as_sf", "qgis_result")
+  vctrs::s3_register("stars::st_as_stars", "qgis_result")
+  vctrs::s3_register("stars::st_as_stars", "qgis_outputLayer")
+  vctrs::s3_register("stars::st_as_stars", "qgis_outputRaster")
 
   # create package temporary directory
   qgis_tmp_dir_location <<- tempfile()
