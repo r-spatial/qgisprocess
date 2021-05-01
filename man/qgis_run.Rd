@@ -15,7 +15,7 @@
 \alias{qgis_query_algorithms}
 \title{Configure and run 'qgis_process'}
 \usage{
-qgis_run(..., env = qgis_env(), path = qgis_path())
+qgis_run(args = character(), ..., env = qgis_env(), path = qgis_path())
 
 has_qgis()
 
@@ -40,6 +40,8 @@ qgis_query_version(quiet = FALSE)
 qgis_query_algorithms(quiet = FALSE)
 }
 \arguments{
+\item{args}{Command-line arguments}
+
 \item{...}{Passed to \code{\link[processx:run]{processx::run()}}.}
 
 \item{env}{A \code{\link[=list]{list()}} of environment variables. Defaults to \code{\link[=qgis_env]{qgis_env()}}.}

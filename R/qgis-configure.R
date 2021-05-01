@@ -14,6 +14,7 @@
 #' OSGeo4W(64)/bin.
 #'
 #' @param ... Passed to [processx::run()].
+#' @param args Command-line arguments
 #' @param quiet Use `FALSE` to display more information about the command, possibly
 #'   useful for debugging.
 #' @param query Use `TRUE` to refresh the cached value.
@@ -31,13 +32,20 @@
 #' if (has_qgis()) qgis_algorithms()
 #' qgis_configure()
 #'
-qgis_run <- function(..., env = qgis_env(), path = qgis_path()) {
-  result <- withr::with_envvar(
-    env,
-    processx::run(path, ...),
-  )
-
-  result
+qgis_run <- function(args = character(), ..., env = qgis_env(), path = qgis_path()) {
+  # workaround for running Windows batch files where arguments have spaces
+  # see https://github.com/r-lib/processx/issues/301
+  if (is_windows()) {
+    withr::with_envvar(
+      env,
+      processx::run("cmd.exe", c("/c", "call", path, args), ...),
+    )
+  } else {
+    withr::with_envvar(
+      env,
+      processx::run(path, args, ...),
+    )
+  }
 }
 
 #' @rdname qgis_run
