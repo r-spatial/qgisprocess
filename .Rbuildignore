@@ -4,3 +4,6 @@
 ^README\.Rmd$
 ^Dockerfile$
 ^data-raw$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

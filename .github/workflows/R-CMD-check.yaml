@@ -53,9 +53,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
 
-# installs homebrew QGIS
-# currently 3.14 with no 'qgis_process'
-# leaving this out until 3.16
       - name: Install QGIS (MacOS homebrew)
         if: matrix.config.qgis == 'macos-brew'
         run: |
