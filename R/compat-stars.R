@@ -2,8 +2,6 @@
 #' Convert raster objects to/from QGIS inputs/outputs
 #'
 #' @param x A stars or stars_proxy object.
-#' @param output The result from [qgis_run_algorithm()] or [qgis_output()].
-#' @param ... Passed to [stars::read_stars()].
 #' @inheritParams as_qgis_argument
 #'
 #' @export

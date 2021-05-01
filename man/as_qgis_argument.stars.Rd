@@ -15,10 +15,6 @@
 \item{spec}{A \code{list()} with values for \code{algorithm}, \code{name},
 \code{description}, and \code{qgis_type}. See \code{\link[=qgis_argument_spec]{qgis_argument_spec()}} to
 create a blank \code{spec} for testing.}
-
-\item{output}{The result from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} or \code{\link[=qgis_output]{qgis_output()}}.}
-
-\item{...}{Passed to \code{\link[stars:read_stars]{stars::read_stars()}}.}
 }
 \description{
 Convert raster objects to/from QGIS inputs/outputs
