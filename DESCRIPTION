@@ -36,5 +36,6 @@ Suggests:
     testthat,
     sf,
     raster,
-    covr
+    covr,
+    stars
 SystemRequirements: QGIS (>= 3.16). OSGeo4W is recommended for Windows users. 
