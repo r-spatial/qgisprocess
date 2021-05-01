@@ -35,7 +35,6 @@ test_that("qgis_run_algorithm() ignores unknown inputs", {
 test_that("qgis_run_algorithm accepts multipleinput arguments", {
   skip_if_not(has_qgis())
   skip_if_not_installed("sf")
-  skip("Requires recent QGIS")
 
   v_1 = sf::read_sf(
     system.file("longlake/longlake.gpkg", package = "qgisprocess"))

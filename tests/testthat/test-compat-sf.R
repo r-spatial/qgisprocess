@@ -37,3 +37,52 @@ test_that("sf objects can be extracted from a qgis_result", {
   result$OUTPUT <- NULL
   expect_error(sf::st_as_sf(result), "Can't extract sf object.")
 })
+
+test_that("sf crs work", {
+  skip_if_not_installed("sf")
+  sf_obj <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
+
+
+  crs_representation <- expect_match(
+    as_qgis_argument(sf::st_crs(sf_obj), qgis_argument_spec(qgis_type = "crs")),
+    "^GEOGCS"
+  )
+
+  expect_is(crs_representation, "character")
+
+})
+
+test_that("sf bbox work", {
+  skip_if_not_installed("sf")
+  sf_obj <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
+
+
+  bbox_representation <- expect_match(
+    as_qgis_argument(sf::st_bbox(sf_obj), qgis_argument_spec(qgis_type = "extent")),
+    "-84\\.3238525390625,-75\\.4569778442383,33\\.8819923400879,36\\.5896492004395\\[EPSG:4267\\]"
+  )
+
+  expect_is(bbox_representation, "character")
+
+})
+
+test_that("sf crs and bbox work", {
+  skip_if_not_installed("sf")
+  skip_if_not(has_qgis())
+
+  sf_obj <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
+
+  result <- qgis_run_algorithm(
+    "native:createconstantrasterlayer",
+    EXTENT = sf::st_bbox(sf_obj),
+    TARGET_CRS = sf::st_crs(5514),
+    PIXEL_SIZE = 1000,
+    OUTPUT_TYPE = "Byte",
+    OUTPUT = qgis_tmp_raster(),
+    NUMBER = 5,
+    .quiet = TRUE
+  )
+
+  expect_true(file.exists(result$OUTPUT))
+  qgis_result_clean(result)
+})
