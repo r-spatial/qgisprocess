@@ -19,6 +19,7 @@ jobs:
       matrix:
         config:
           - {os: macOS-latest, qgis: 'none', r: 'release'}
+          - {os: macOS-latest, qgis: 'macos-brew', r: 'release'}
           - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release'}
           - {os: ubuntu-20.04, qgis: 'ubuntu-nightly', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04, qgis: 'ubuntu', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
@@ -52,13 +53,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
 
-# installs homebrew QGIS
-# currently 3.14 with no 'qgis_process'
-# leaving this out until 3.16
       - name: Install QGIS (MacOS homebrew)
         if: matrix.config.qgis == 'macos-brew'
         run: |
-          brew cask install qgis
+          brew install --cask qgis
 
 # installs last nightly build of QGIS
 # works locally, hangs on GHA after download
@@ -109,6 +107,14 @@ jobs:
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
+        shell: Rscript {0}
+
+      # run with CMD check because installing QGIS is expensive
+      - name: Test Coverage
+        if: matrix.config.qgis == 'macos-brew'
+        run: |
+          install.packages("covr")
+          covr::codecov()
         shell: Rscript {0}
 
       - name: Show testthat output
