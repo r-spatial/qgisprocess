@@ -112,16 +112,15 @@ test_that("raster crs work", {
 
   obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
 
-
   crs_representation <- expect_match(
     as_qgis_argument(raster::crs(obj), qgis_argument_spec(qgis_type = "crs")),
-    "North American Datum 1983"
+    "UTM zone 20N"
   )
 
   expect_is(crs_representation, "character")
 })
 
-test_that("raster extent work", {
+test_that("raster argument coercer for extent works", {
   skip_if_not_installed("raster")
   skip_if_not_installed("rgdal")
 
@@ -136,10 +135,13 @@ test_that("raster extent work", {
   expect_is(bbox_representation, "character")
 })
 
-test_that("raster crs and extent work", {
+test_that("raster argument coercer for crs works", {
   skip_if_not_installed("raster")
   skip_if_not_installed("rgdal")
   skip_if_not(has_qgis())
+
+  # Until Issue #36 is resolved (WKT2 as an argument causes a failure)
+  skip_on_os("windows")
 
   obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
 

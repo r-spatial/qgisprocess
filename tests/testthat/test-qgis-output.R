@@ -17,10 +17,12 @@ test_that("characters are not incorrectly re-encoded from output", {
 
 test_that("output parsing for string, numeric, and classed types works", {
   skip_if_not(has_qgis())
-  skip_if_not_installed("raster")
-  skip_if_not_installed("rgdal")
+  skip_if_not_installed("stars")
 
-  longlake_depth <- raster::raster(system.file("longlake/longlake_depth.tif", package = "qgisprocess"))
+  longlake_depth <- stars::read_stars(
+    system.file("longlake/longlake_depth.tif", package = "qgisprocess")
+  ) %>%
+    sf::st_set_crs(sf::NA_crs_)
   longlake_mask <- longlake_depth > 0
 
   result <- qgis_run_algorithm(
