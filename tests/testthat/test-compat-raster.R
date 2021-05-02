@@ -112,10 +112,9 @@ test_that("raster crs work", {
 
   obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
 
-
   crs_representation <- expect_match(
     as_qgis_argument(raster::crs(obj), qgis_argument_spec(qgis_type = "crs")),
-    "North American Datum 1983"
+    "UTM zone 20N"
   )
 
   expect_is(crs_representation, "character")
