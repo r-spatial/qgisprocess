@@ -140,9 +140,6 @@ test_that("raster argument coercer for crs works", {
   skip_if_not_installed("rgdal")
   skip_if_not(has_qgis())
 
-  # Until Issue #36 is resolved (WKT2 as an argument causes a failure)
-  skip_on_os("windows")
-
   obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
 
   result <- qgis_run_algorithm(

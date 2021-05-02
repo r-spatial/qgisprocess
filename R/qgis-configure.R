@@ -34,11 +34,17 @@
 #'
 qgis_run <- function(args = character(), ..., env = qgis_env(), path = qgis_path()) {
   # workaround for running Windows batch files where arguments have spaces
+  # or special characters (here, notably the newline and the quote)
   # see https://github.com/r-lib/processx/issues/301
   if (is_windows()) {
+    cmd_args <- c("/c", "call", path, args)
+
+    # need to shell-escape special characters using the cmd.exe shell escape
+    cmd_args_esc <- gsub('(["\n])', "^\\1", cmd_args)
+
     withr::with_envvar(
       env,
-      processx::run("cmd.exe", c("/c", "call", path, args), ...),
+      processx::run("cmd.exe", cmd_args_esc, ...),
     )
   } else {
     withr::with_envvar(
