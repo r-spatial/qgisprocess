@@ -55,7 +55,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
   args = rlang::set_names(c(arg_meta$name, "PROJECT_PATH", "ELIPSOID"))
   # we need to write it like this due to duplicated names
   ind = names(args) %in% names(dots)
-  args[ind] <- dots[names(args)[ind]]
+  args[ind] <- dots[which(names(dots) %in% names(args))]
   args[!ind] <-
     lapply(args[!ind], function(x) qgis_default_value())
   args["PROJECT_PATH"] <- list(PROJECT_PATH)
