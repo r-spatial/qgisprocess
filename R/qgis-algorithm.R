@@ -62,7 +62,15 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
   ind = names(args) %in% names(notdups) # find indices for common parameters, except duplicates
   args[ind] <- dots[names(args)[ind]] # replace those values
   ind_dups = names(args) %in% names(dups) # find indices for duplicate parameters
-  args[ind_dups] <- dots[names(args)[ind_dups] == names(dups)[1]] # replace duplicate values
+  suppressWarnings({
+    # replace duplicate values. it is in general not recommended to have
+    # duplicate names in lists, but if we cannot get around that, this
+    # should be the way to do it
+    # Taken from: https://stackoverflow.com/a/33244373/12118669
+    # gives a warning:
+    # number of items to replace is not a multiple of replacement length,
+    args[ind_dups] <- dots[names(args)[ind_dups] == names(dups)[1]]
+  })
   args[!ind & !ind_dups] <- # replace defaults
     lapply(args[!ind & !ind_dups], function(x) qgis_default_value())
   args["PROJECT_PATH"] <- list(PROJECT_PATH)
