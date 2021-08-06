@@ -87,8 +87,9 @@ qgis_configure <- function(quiet = FALSE) {
       message(
         glue::glue(
           "Metadata of { nrow(algo) } algorithms queried and stored in cache.\n",
-          "Run `qgis_algorithms()` to see them.")
+          "Run `qgis_algorithms()` to see them."
         )
+      )
     }
   }, error = function(e) {
     qgis_unconfigure()
