@@ -24,7 +24,7 @@ as_qgis_argument_raster <- function(x, spec = qgis_argument_spec()) {
   }
 
   # try to use a filename if present
-  if (x@file@name != ""){
+  if (x@file@name != "") {
     file_ext <- stringr::str_to_lower(tools::file_ext(x@file@name))
     if (file_ext %in% c("grd", "asc", "sdat", "rst", "nc", "tif", "tiff", "gtiff", "envi", "bil", "img")) {
       return(x@file@name)
@@ -88,7 +88,7 @@ qgis_as_raster.qgis_result <- function(output, ...) {
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
 qgis_as_brick.qgis_result <- function(output, ...) {
-  # find the first rqster output and read it
+  # find the first raster output and read it
   for (result in output) {
     if (inherits(result, "qgis_outputRaster") || inherits(result, "qgis_outputLayer")) {
       return(raster::brick(unclass(result), ...))
@@ -96,4 +96,22 @@ qgis_as_brick.qgis_result <- function(output, ...) {
   }
 
   abort("Can't extract brick from result: zero outputs of type 'outputRaster' or 'outputLayer'.")
+}
+
+#' @export
+as_qgis_argument.CRS <- function(x, spec = qgis_argument_spec()) {
+  if (!isTRUE(spec$qgis_type %in% c("crs"))) {
+    abort(glue("Can't convert 'crs' object to QGIS type '{ spec$qgis_type }'"))
+  }
+
+  raster::wkt(x)
+}
+
+#' @export
+as_qgis_argument.Extent <- function(x, spec = qgis_argument_spec()) {
+  if (!isTRUE(spec$qgis_type %in% c("extent"))) {
+    abort(glue("Can't convert 'Extent' object to QGIS type '{ spec$qgis_type }'"))
+  }
+
+  glue("{x@xmin},{x@xmax},{x@ymin},{x@ymax}")
 }

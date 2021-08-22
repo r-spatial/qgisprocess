@@ -11,6 +11,8 @@
 status](https://github.com/paleolimbot/qgisprocess/workflows/R-CMD-check/badge.svg)](https://github.com/paleolimbot/qgisprocess/actions)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Codecov test
+coverage](https://codecov.io/gh/paleolimbot/qgisprocess/branch/master/graph/badge.svg)](https://codecov.io/gh/paleolimbot/qgisprocess?branch=master)
 <!-- badges: end -->
 
 The goal of `qgisprocess` is to provide an R interface to the popular
@@ -32,22 +34,20 @@ remotes::install_github("paleolimbot/qgisprocess")
 ```
 
 The qgisprocess package wraps the `qgis_process` command-line utility,
-which is available in QGIS \>=
+which is available in QGIS &gt;=
 [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16),
 [released](https://qgis.org/en/site/getinvolved/development/roadmap.html)
-in September 2020. MacOS users will have to install a [recent nightly
-build](https://qgis.org/en/site/forusers/alldownloads.html#qgis-nightly-release)
-until QGIS 3.16 has been released; download instructions for all
-platforms are available at <https://download.qgis.org/>. If a recent
-version of QGIS isn’t available for your OS, you can use one of the
-[Geocomputation with R Docker
-images](https://github.com/geocompr/docker) with QGIS installed.
+in September 2020. MacOS users will have to install QIGS &gt;= 3.16;
+download instructions for all platforms are available at
+<https://download.qgis.org/>. If a recent version of QGIS isn’t
+available for your OS, you can use one of the [Geocomputation with R
+Docker images](https://github.com/geocompr/docker) with QGIS installed.
 
 If the automatic configuration fails (or if you have more than one
 installation and would like to choose which one is used by qgisprocess),
 you can set `options(qgisprocess.path = "path/to/qgis_process")`,
 possibly in your `.Rprofile` to persist between sessions. You can run
-`qgis_configure()` to print the gritty details\!
+`qgis_configure()` to print the gritty details!
 
 ``` r
 library(qgisprocess)
@@ -57,7 +57,7 @@ qgis_configure()
 #> getOption('qgisprocess.path') was not found.
 #> Sys.getenv('R_QGISPROCESS_PATH') was not found.
 #> Trying 'qgis_process' on PATH
-#> Error in rethrow_call(c_processx_exec, command, c(command, args), stdin, : cannot start processx process 'qgis_process' (system error 2, No such file or directory) @unix/processx.c:592 (processx_exec)
+#> Error in rethrow_call(c_processx_exec, command, c(command, args), stdin, : cannot start processx process 'qgis_process' (system error 2, No such file or directory) @unix/processx.c:604 (processx_exec)
 #> Found 1 QGIS installation containing 'qgis_process':
 #>  /Applications/QGIS.app/Contents/MacOS/bin/qgis_process
 #> Trying command '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'
@@ -70,7 +70,7 @@ The following example demonstrates the
 [buffer](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer)
 algorithm in action. The passing of [sf](https://r-spatial.github.io/sf)
 and [raster](https://cran.r-project.org/package=raster) objects is
-experimentally supported (and will be well-supported in the future\!).
+experimentally supported (and will be well-supported in the future!).
 
 ``` r
 input <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
@@ -91,7 +91,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmpVgzxbF/file72c13eef96a0/file72c12e382e1e.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmptXCayy/file9b2b462efaa9/file9b2b5212f730.gpkg"
 
 output_sf <- sf::read_sf(qgis_output(result, "OUTPUT"))
 plot(sf::st_geometry(output_sf))
@@ -188,7 +188,7 @@ When using R interactively, it may be useful to use
 
 ``` r
 qgis_algorithms()
-#> # A tibble: 971 x 5
+#> # A tibble: 986 x 5
 #>    provider provider_title algorithm         algorithm_id    algorithm_title    
 #>    <chr>    <chr>          <chr>             <chr>           <chr>              
 #>  1 3d       QGIS (3D)      3d:tessellate     tessellate      Tessellate         
@@ -201,16 +201,16 @@ qgis_algorithms()
 #>  8 gdal     GDAL           gdal:cliprasterb… cliprasterbyma… Clip raster by mas…
 #>  9 gdal     GDAL           gdal:clipvectorb… clipvectorbyex… Clip vector by ext…
 #> 10 gdal     GDAL           gdal:clipvectorb… clipvectorbypo… Clip vector by mas…
-#> # … with 961 more rows
+#> # … with 976 more rows
 ```
 
 ## Further reading
 
-  - A
+-   A
     [paper](https://journal.r-project.org/archive/2017/RJ-2017-067/index.html)
     on the original RQGIS package published in the R Journal
-  - A [discussion](https://github.com/r-spatial/discuss/issues/41)
+-   A [discussion](https://github.com/r-spatial/discuss/issues/41)
     options for running QGIS from R that led to this package
-  - The [pull request](https://github.com/qgis/QGIS/pull/34617) in the
+-   The [pull request](https://github.com/qgis/QGIS/pull/34617) in the
     QGIS repo that led to the development of the `qgis_process`
     command-line utility

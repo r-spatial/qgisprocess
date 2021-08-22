@@ -33,7 +33,6 @@
 qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = NULL, .quiet = FALSE) {
   assert_qgis()
   assert_qgis_algorithm(algorithm)
-
   # use list2 so that users can !!! argument lists
   dots <- rlang::list2(...)
   if (length(dots) > 0 && !rlang::is_named(dots)) {
@@ -42,10 +41,38 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
 
   # generate an argument template and fill in provided arguments
   arg_meta <- qgis_arguments(algorithm)
-  args <- lapply(
-    rlang::set_names(c(arg_meta$name, "PROJECT_PATH", "ELIPSOID")),
-    function(x) if (x %in% names(dots)) dots[[x]] else qgis_default_value()
-  )
+  # take care of multiple input arguments
+  # so far this works only if only one argument is duplicated (but I can't
+  # remember that a QGIS algorithm has more than 1 argument of type multiple
+  # input)
+  # Beware, subsetting list by names in R will always take the first
+  # match. Subsetting should be done in steps to arrive at the good result.
+  ind = duplicated(names(dots)) |
+    duplicated(names(dots), fromLast = TRUE) # duplicated indices
+  dups <- dots[ind] # get duplicated elements
+  notdups <- dots[!ind] # get everything else
+
+  ind = `if`(length(dups) > 0, arg_meta$name == names(dups[1]), NA)
+  ro <- 1:nrow(arg_meta)  # row order
+  r <- rep(1, nrow(arg_meta))  # number of times to be repeated
+  r[ind] <- length(dups)
+  arg_meta <- arg_meta[rep(ro, times = r), ]
+  args = rlang::set_names(c(arg_meta$name, "PROJECT_PATH", "ELIPSOID"))
+  # we need to write it like this due to duplicated names
+  ind = names(args) %in% names(notdups) # find indices for common parameters, except duplicates
+  args[ind] <- dots[names(args)[ind]] # replace those values
+  ind_dups = names(args) %in% names(dups) # find indices for duplicate parameters
+  suppressWarnings({
+    # replace duplicate values. it is in general not recommended to have
+    # duplicate names in lists, but if we cannot get around that, this
+    # should be the way to do it
+    # Taken from: https://stackoverflow.com/a/33244373/12118669
+    # gives a warning:
+    # number of items to replace is not a multiple of replacement length,
+    args[ind_dups] <- dots[names(args)[ind_dups] == names(dups)[1]]
+  })
+  args[!ind & !ind_dups] <- # replace defaults
+    lapply(args[!ind & !ind_dups], function(x) qgis_default_value())
   args["PROJECT_PATH"] <- list(PROJECT_PATH)
   args["ELIPSOID"] <- list(ELIPSOID)
 
@@ -88,13 +115,27 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
     args_str <- character(0)
   }
 
+  # To get around a bug in processx (#302), we need to use a stdout callback
+  # to buffer stdout manually. For large outputs this would be slow, but
+  # the size of the buffer seems to be large enough that this doesn't
+  # matter.
+  stdout_output <- ""
+
   if (.quiet) {
-    result <- qgis_run(args = c("run", algorithm, args_str))
+    result <- qgis_run(
+      args = c("run", algorithm, args_str),
+      stdout_callback = function(x, ...) {
+        stdout_output <<- paste0(stdout_output, x)
+      }
+    )
   } else {
     result <- qgis_run(
       args = c("run", algorithm, args_str),
       echo_cmd = TRUE,
-      stdout_callback = function(x, ...) cat(x),
+      stdout_callback = function(x, ...) {
+        stdout_output <<- paste0(stdout_output, x)
+        cat(x)
+      },
       stderr_callback = function(x, ...) message(x, appendLF = FALSE)
     )
     cat("\n")
@@ -105,7 +146,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
   structure(
     rlang::list2(
       # ... eventually, this will contain the parsed output values
-      !!! qgis_parse_results(algorithm, result$stdout),
+      !!! qgis_parse_results(algorithm, stdout_output),
       .algorithm = algorithm,
       .args = args,
       .processx_result = result

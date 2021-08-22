@@ -26,3 +26,33 @@ st_as_sf.qgis_result <- function(x, ...) {
 
   abort("Can't extract sf object from result: zero outputs of type 'outputVector' or 'outputLayer'.")
 }
+
+#'
+#' @inheritParams as_qgis_argument
+#'
+#' @export
+#'
+as_qgis_argument.crs <- function(x, spec = qgis_argument_spec()) {
+  if (!isTRUE(spec$qgis_type %in% c("crs"))) {
+    abort(glue("Can't convert 'crs' object to QGIS type '{ spec$qgis_type }'"))
+  }
+
+  x$Wkt
+}
+
+#'
+#' @inheritParams as_qgis_argument
+#'
+#' @export
+#'
+as_qgis_argument.bbox <- function(x, spec = qgis_argument_spec()) {
+  if (!isTRUE(spec$qgis_type %in% c("extent"))) {
+    abort(glue("Can't convert 'bbox' object to QGIS type '{ spec$qgis_type }'"))
+  }
+
+  if (!is.na(sf::st_crs(x)$epsg)){
+    glue("{x$xmin},{x$xmax},{x$ymin},{x$ymax}[EPSG:{sf::st_crs(x)$epsg}]")
+  }else{
+    glue("{x$xmin},{x$xmax},{x$ymin},{x$ymax}")
+  }
+}

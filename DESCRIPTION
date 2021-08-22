@@ -13,7 +13,7 @@ Authors@R: c(
              comment = c(ORCID = "0000-0001-5679-6536")),
       person(given = "Jan",
              family = "Caha",
-             role = c("ctb"))
+             role = c("aut"))
     )
 Description: Provides seamless access to the 'QGIS' <https://qgis.org/>
   processing toolbox using the 'qgis_process' command-line utility.
@@ -33,12 +33,16 @@ Imports:
 URL: https://github.com/paleolimbot/qgisprocess
 BugReports: https://github.com/paleolimbot/qgisprocess/issues
 Suggests: 
+    covr,
+    fs,
     knitr,
-    testthat,
     raster,
     rgdal,
+    spDataLarge,
     sf,
-    spDataLarge
+    stars,
+    testthat
 Remotes:
     nowosad/spDataLarge
 VignetteBuilder: knitr
+SystemRequirements: QGIS (>= 3.16). OSGeo4W is recommended for Windows users. 

@@ -14,6 +14,7 @@
 #' OSGeo4W(64)/bin.
 #'
 #' @param ... Passed to [processx::run()].
+#' @param args Command-line arguments
 #' @param quiet Use `FALSE` to display more information about the command, possibly
 #'   useful for debugging.
 #' @param query Use `TRUE` to refresh the cached value.
@@ -31,13 +32,20 @@
 #' if (has_qgis()) qgis_algorithms()
 #' qgis_configure()
 #'
-qgis_run <- function(..., env = qgis_env(), path = qgis_path()) {
-  result <- withr::with_envvar(
-    env,
-    processx::run(path, ...),
-  )
-
-  result
+qgis_run <- function(args = character(), ..., env = qgis_env(), path = qgis_path()) {
+  # workaround for running Windows batch files where arguments have spaces
+  # see https://github.com/r-lib/processx/issues/301
+  if (is_windows()) {
+    withr::with_envvar(
+      env,
+      processx::run("cmd.exe", c("/c", "call", path, args), ...),
+    )
+  } else {
+    withr::with_envvar(
+      env,
+      processx::run(path, args, ...),
+    )
+  }
 }
 
 #' @rdname qgis_run
@@ -70,8 +78,19 @@ qgis_configure <- function(quiet = FALSE) {
     qgis_unconfigure()
 
     qgis_path(query = TRUE, quiet = quiet)
-    qgis_version(query = TRUE, quiet = quiet)
-    qgis_algorithms(query = TRUE, quiet = quiet)
+
+    version <- qgis_version(query = TRUE, quiet = quiet)
+    if (!quiet) message(glue::glue("QGIS version: { version }"))
+
+    algo <- qgis_algorithms(query = TRUE, quiet = quiet)
+    if (!quiet) {
+      message(
+        glue::glue(
+          "Metadata of { nrow(algo) } algorithms queried and stored in cache.\n",
+          "Run `qgis_algorithms()` to see them."
+        )
+      )
+    }
   }, error = function(e) {
     qgis_unconfigure()
     if (!quiet) message(e)
@@ -204,7 +223,7 @@ qgis_env <- function() {
 qgis_query_version <- function(quiet = FALSE) {
   result <- qgis_run(args = character(0))
   lines <- readLines(textConnection(result$stdout))
-  match <- stringr::str_match(lines, "\\(([0-9.]+[A-Za-z0-9.-]*)\\)")[, 2, drop = TRUE]
+  match <- stringr::str_match(lines, "\\(([0-9.]+[[:cntrl:][:alnum:].-]*)\\)")[, 2, drop = TRUE]
   if (all(is.na(match))) {
     abort(
       message(
