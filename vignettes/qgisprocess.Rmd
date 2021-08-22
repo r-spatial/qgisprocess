@@ -68,7 +68,7 @@ Next, let's list all available providers including available 3rd party applicati
 qgis_providers()
 ```
 
-This tells us that we can also use the third-party providers GDAL, SAGA and GRASS trough the QGIS interface.
+This tells us that we can also use the third-party providers GDAL, SAGA and GRASS through the QGIS interface.
 To find out about the available geoalgorithms, run:
 
 ```{r algs}
