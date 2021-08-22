@@ -38,38 +38,40 @@ out = qgis_run_algorithm(
 
 sdem = raster(qgis_output(out, "DEM_PREPROC")[1])
 qgis_show_help("saga:sagawetnessindex")
+qgis_arguments("saga:sagawetnessindex")$available_values
+outs = qgis_outputs("saga:sagawetnessindex")$name
+out_nms = paste0(tempdir(), "/", outs, ".sdat")
+args = rlang::set_names(out_nms, outs)
 out = qgis_run_algorithm(
   algorithm = "saga:sagawetnessindex",
   DEM = file.path(tempdir(), "sdem.sdat"),
-  SLOPE_TYPE = 1, 
-  AREA_TYPE = 0,
-  SLOPE = file.path(tempdir(), "cslope.sdat"),
-  AREA = file.path(tempdir(), "carea.sdat"),
-  AREA_MOD = file.path(tempdir(), "area_mod.sdat"),
-  TWI = file.path(tempdir(), "twi.sdat")
-  )
-cslope = raster(qgis_output(out, "SLOPE")[1])
-carea = raster(qgis_output(out, "AREA")[1])
-plot(stack(cslope, carea))
-cslope = cslope * 180 /pi
-log_carea = log(carea / 1e+06)
+  SLOPE_TYPE = 1, AREA_TYPE = 0,
+  !!!args)
+# we are only interested in cslope and carea
+s = c(lapply(out[c("AREA", "SLOPE")], \(x) terra::rast(x[1])))
+names(s) = c("log_carea", "cslope")
+s$cslope = s$cslope * 180 /pi
+s$log_carea = log(s$log_carea / 1e+06)
+plot(s$log_carea)
+plot(s$cslope)
 
 ## ------------------------------------------------------------------------
 data("ndvi", package = "spDataLarge")
-projection(ndvi) = projection(carea)
-
+ndvi = rast(ndvi)
+crs(ndvi) = crs(s$cslope)
+s = c(s, ndvi = ndvi)
+plot(s$ndvi)
 algs = qgis_algorithms()
 filter(algs, grepl("value", algorithm_title)) %>% as.data.frame
 qgisprocess::qgis_show_help("saga:addrastervaluestopoints")
 qgis_arguments("saga:addrastervaluestopoints")
-
+args = rlang::set_names(paste0(tempdir(), "/", names(s), ".sdat"), rep("GRIDS", length(s)))
 data(random_points, package = "spDataLarge")
 out = qgis_run_algorithm("saga:addrastervaluestopoints",
                          SHAPES = random_points,
-                         GRIDS = file.path(tempdir(), "cslope.sdat"),
-                         GRIDS = file.path(tempdir(), "carea.sdat"),
-                         GRIDS = ndvi,
-                         GRIDS = log_carea,
+                         GRIDS = as.raster(s$cslope),
+                         GRIDS = as.raster(s$ndvi),
+                         GRIDS = as.raster(s$log_carea),
                          RESAMPLING = 0,
                          RESULT = file.path(tempdir(), "vals.shp"))
 vals = read_sf(qgis_output(out, "RESULT"))
