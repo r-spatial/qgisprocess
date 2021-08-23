@@ -23,9 +23,11 @@ knitr::opts_chunk$set(
 ```
 
 ```{r sinkremoval, eval=FALSE}
-library("raster")
 library("dplyr")
 library("qgisprocess")
+library("raster")
+library("sf")
+library("terra")
 data(dem, package = "spDataLarge")
 projection(dem) = sf::st_crs(32717)$proj4string
 qgis_arguments("saga:sinkremoval")
@@ -48,34 +50,48 @@ out = qgis_run_algorithm(
   SLOPE_TYPE = 1, AREA_TYPE = 0,
   !!!args)
 # we are only interested in cslope and carea
-s = c(lapply(out[c("AREA", "SLOPE")], \(x) terra::rast(x[1])))
+s = c(rast(out$AREA[1]), rast(out$SLOPE[1]))
 names(s) = c("log_carea", "cslope")
 s$cslope = s$cslope * 180 /pi
 s$log_carea = log(s$log_carea / 1e+06)
-plot(s$log_carea)
-plot(s$cslope)
+plot(s)
 
 ## ------------------------------------------------------------------------
 data("ndvi", package = "spDataLarge")
+# raster::origin(ndvi) = terra::origin(s)
+raster::projection(ndvi) = st_crs(32717)$proj4string
 ndvi = rast(ndvi)
-crs(ndvi) = crs(s$cslope)
-s = c(s, ndvi = ndvi)
-plot(s$ndvi)
+# crs(ndvi) = crs(s$cslope)
+terra::ext(ndvi) = terra::ext(s)
+# this also changes the origin!!
+s = c(s, ndvi)
+plot(s)
+fnms = paste0(tempdir(), "/", names(s), ".sdat")
+terra::writeRaster(s, fnms, overwrite = TRUE)
 algs = qgis_algorithms()
 filter(algs, grepl("value", algorithm_title)) %>% as.data.frame
 qgisprocess::qgis_show_help("saga:addrastervaluestopoints")
 qgis_arguments("saga:addrastervaluestopoints")
-args = rlang::set_names(paste0(tempdir(), "/", names(s), ".sdat"), rep("GRIDS", length(s)))
+args = rlang::set_names(fnms, rep("GRIDS", length(fnms)))
 data(random_points, package = "spDataLarge")
-out = qgis_run_algorithm("saga:addrastervaluestopoints",
-                         SHAPES = random_points,
-                         GRIDS = as.raster(s$cslope),
-                         GRIDS = as.raster(s$ndvi),
-                         GRIDS = as.raster(s$log_carea),
-                         RESAMPLING = 0,
-                         RESULT = file.path(tempdir(), "vals.shp"))
+out = qgis_run_algorithm(
+  "saga:addrastervaluestopoints",
+  SHAPES = random_points,
+  # multilayer objects are so far not supported as R objects
+  # GRIDS = s$log_carea,
+  # GRIDS = s$cslope,
+  # GRIDS = s$ndvi,
+  # !!!args,
+  GRIDS = file.path(tempdir(), "clsope.sdat"),
+  GRIDS = file.path(tempdir(), "ndvi.sdat"),
+  GRIDS = file.path(tempdir(), "log_carea.sdat"),
+  RESAMPLING = 0,
+  RESULT = file.path(tempdir(), "vals.shp"))
 vals = read_sf(qgis_output(out, "RESULT"))
 ```
+
+Same as `terra::extract(s, as(random_points, "SpatVector")`.
+
 <!--
 ## ------------------------------------------------------------------------
 get_usage("saga:sinkremoval")
