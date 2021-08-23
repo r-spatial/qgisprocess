@@ -36,11 +36,13 @@ Suggests:
     covr,
     fs,
     knitr,
+    mapview,
     raster,
     rgdal,
     spDataLarge,
     sf,
     stars,
+    terra,
     testthat
 Remotes:
     nowosad/spDataLarge
