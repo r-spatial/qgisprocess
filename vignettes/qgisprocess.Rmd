@@ -3,16 +3,16 @@ title: "1. Basic usage of qgisprocess"
 author: "Jannes Muenchow"
 date: "`r Sys.Date()`"
 output:
-  html_document:
-    toc: true
+  html_document: 
+    toc: yes
     toc_float:
-      collapsed: false
-      smooth_scroll: false
+      collapsed: no
+      smooth_scroll: no
     toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{1. Basic usage of qgisprocess}
-  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::knitr}
 ---
 
 # Setting up the system
@@ -28,7 +28,7 @@ docker pull geocompr/geocompr:qgis-ext
 
 For a more detailed introduction on how to use docker with **qgisprocess** have a look a the corresponding vignette.
 
-# How to use qgisprocess
+# Basic usage
 
 Since **qgisprocess** depends on the command line tool `qgis_process`, it already tries to detect `qgis_process` on your system when it is being attached, and complains if it cannot find it.
 
@@ -75,15 +75,28 @@ To find out about the available geoalgorithms, run:
 algs = qgis_algorithms()
 algs
 # or use the cached algorithms which have been collected while
-# calling library(qgisprocess) under Windows
+# calling library(qgisprocess)
 # algs = qgisprocess_cache$algorithms
 ```
 
 Since we have also installed GRASS and SAGA, nearly 1000 geoalgorithms are at our disposal.
 To find out about a specific geoalgorithm and a description of its arguments, use `qgis_show_help()`, e.g.:
 
-```{r desc}
+```{r help, eval=FALSE}
 qgis_show_help("native:buffer")
+## Buffer (native:buffer)
+## 
+## ----------------
+## Description
+## ----------------
+## This algorithm computes a buffer area for all the features in an input layer, using a fixed or dynamic distance.
+## 
+## The segments parameter controls the number of line segments to use to approximate a quarter circle when creating rounded offsets.
+## 
+##...
+```
+
+```{r, eval=FALSE, echo=FALSE}
 # cat(qgis_description("native:buffer"))
 # cat(qgis_help_text("native:buffer"))
 ```
@@ -94,23 +107,54 @@ Find out the arguments of a specific geoalgorithm:
 qgis_arguments("native:buffer")
 ```
 
+And finally run it:
 
-Vector example
-
-If you would like to have an R-like experience running QGIS, create R functions first.
-
-```{r function-creation}
-qgis_buffer = qgis_function("native:buffer")
+```{r buffer}
+data("random_points", package = "spDataLarge")
+out = qgis_run_algorithm("native:buffer", INPUT = random_points, DISTANCE = 50,
+                         .quiet = TRUE)
 ```
 
+As a convenience to the user, `qgis_run_algorithm()` reports all unspecified and automatically chosen arguments.
+The `out` object is of class `qgis_result` and contains the path to the output object created by `qgis_process` (when not explicitly setting an output object, **qgisprocess** creates it automatically for you), the used algorithm and input arguments as well as an object`.processx_result` which is especially useful if somethings went wrong.
 
-Raster example (GRASS7)
+```{r inspect}
+# inspect the out object
+class(out)
+str(out)
+```
+
+To read in the QGIS output and visualize it, we can run:
+
+```{r plot-buffer, message=FALSE}
+library("sf")
+library("mapview")
+# attach QGIS output
+buf = read_sf(out$OUTPUT[1])
+# plot your result
+mapview(buf, col.regions = "blue") + 
+  mapview(random_points, col.regions = "red", cex = 3)
+```
+
+You can convert each qgis-algorithm into an R function with `qgis_function()`.
+So using our buffer example from above, we could also run:
+
+```{r function-creation, eval=FALSE}
+# create a function
+qgis_buffer = qgis_function("native:buffer")
+# run the function
+out = qgis_buffer(INPUT = random_points, DISTANCE = 50)
+```
+
+As a second example, let's have a look at how to do raster processing running GRASS in the background.
+To compute various terrain attributes of a digital elevation model, we can use `grass7:r.slope.aspect`.
+We can find out about its arguments again with the help of `qgis_arguments()`
 
 ```{r}
 qgis_arguments("grass7:r.slope.aspect")
 ```
 
-```{r slopeaspect}
+```{r slopeaspect, message=FALSE}
 library("raster")
 # attach digital elevation model from Mt. Mongón (Peru)
 data("dem", package = "spDataLarge")
@@ -125,24 +169,4 @@ nms = grep("^\\.", names(info), invert = TRUE, value = TRUE)
 s = stack(lapply(info[nms], unclass))
 # plot the output
 plot(s)
-
 ```
-
-<!--
-# raster example
-## ----slope_aspect, eval = TRUE, messages = FALSE, cache = FALSE----------
-params$elevation <- dem
-params$pcurvature <- file.path(tempdir(), "pcurv.tif")
-params$tcurvature <- file.path(tempdir(), "tcurv.tif")
-out <- run_qgis(alg = "grass7:r.slope.aspect",
-                params = params,
-                load_output = TRUE,
-                show_output_paths = FALSE)
-class(out)
-names(out)
-
-## ----eval = FALSE--------------------------------------------------------
-library("raster")
-plot(stack(out))
-
--->
