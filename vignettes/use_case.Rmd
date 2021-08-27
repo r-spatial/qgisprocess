@@ -28,8 +28,16 @@ library("qgisprocess")
 library("raster")
 library("sf")
 library("terra")
-data(dem, package = "spDataLarge")
-projection(dem) = sf::st_crs(32717)$proj4string
+data(dem, study_area, ndvi, random_points, package = "spDataLarge")
+dem = dem / 1000
+my_poly = poly(values(dem), degree = 2)
+dem1 = dem2 = dem
+values(dem1) = my_poly[, 1]
+values(dem2) = my_poly[, 2]
+dn = c(rast(dem1), rast(dem2), rast(ndvi))
+names(dn) = c("dem1", "dem2", "ndvi")
+# crs(dn) = "epsg:32717"
+
 qgis_arguments("saga:sinkremoval")
 out = qgis_run_algorithm(
   algorithm = "saga:sinkremoval",
@@ -55,42 +63,67 @@ names(s) = c("log_carea", "cslope")
 s$cslope = s$cslope * 180 /pi
 s$log_carea = log(s$log_carea / 1e+06)
 plot(s)
-
-## ------------------------------------------------------------------------
-data("ndvi", package = "spDataLarge")
-# raster::origin(ndvi) = terra::origin(s)
-raster::projection(ndvi) = st_crs(32717)$proj4string
-ndvi = rast(ndvi)
-# crs(ndvi) = crs(s$cslope)
-terra::ext(ndvi) = terra::ext(s)
 # this also changes the origin!!
-s = c(s, ndvi)
+ext(dn) = ext(s)
+s = c(dn, s)
+
+# data("ndvi", package = "spDataLarge")
+# # raster::origin(ndvi) = terra::origin(s)
+# raster::projection(ndvi) = st_crs(32717)$proj4string
+# ndvi = rast(ndvi)
+# # crs(ndvi) = crs(s$cslope)
+# terra::ext(ndvi) = terra::ext(s)
+# # this also changes the origin!!
+# s = c(s, ndvi)
 plot(s)
-fnms = paste0(tempdir(), "/", names(s), ".sdat")
-terra::writeRaster(s, fnms, overwrite = TRUE)
-algs = qgis_algorithms()
-filter(algs, grepl("value", algorithm_title)) %>% as.data.frame
-qgisprocess::qgis_show_help("saga:addrastervaluestopoints")
-qgis_arguments("saga:addrastervaluestopoints")
-args = rlang::set_names(fnms, rep("GRIDS", length(fnms)))
-data(random_points, package = "spDataLarge")
-out = qgis_run_algorithm(
-  "saga:addrastervaluestopoints",
-  SHAPES = random_points,
-  # multilayer objects are so far not supported as R objects
-  # GRIDS = s$log_carea,
-  # GRIDS = s$cslope,
-  # GRIDS = s$ndvi,
-  # !!!args,
-  GRIDS = file.path(tempdir(), "clsope.sdat"),
-  GRIDS = file.path(tempdir(), "ndvi.sdat"),
-  GRIDS = file.path(tempdir(), "log_carea.sdat"),
-  RESAMPLING = 0,
-  RESULT = file.path(tempdir(), "vals.shp"))
+# fnms = paste0(tempdir(), "/", names(s), ".tif")
+# terra::writeRaster(s, fnms, overwrite = TRUE)
+# algs = qgis_algorithms()
+# filter(algs, grepl("value", algorithm_title)) %>% as.data.frame
+# qgisprocess::qgis_show_help("saga:addrastervaluestopoints")
+# qgis_arguments("saga:addrastervaluestopoints")
+# # args = rlang::set_names(fnms, rep("GRIDS", length(fnms)))
+# out = qgis_run_algorithm(
+#   "saga:addrastervaluestopoints",
+#   SHAPES = random_points,
+#   # multilayer objects are so far not supported as R objects
+#   # GRIDS = s$log_carea,
+#   # GRIDS = s$cslope,
+#   # GRIDS = s$ndvi,
+#   # !!!args,
+#   GRIDS = file.path(tempdir(), "clsope.tif"),
+#   GRIDS = file.path(tempdir(), "ndvi.tif"),
+#   GRIDS = file.path(tempdir(), "log_carea.tif"),
+#  # GRIDS = file.path(tempdir(), "dem1.sdat"),
+#   #GRIDS = file.path(tempdir(), "dem2.sdat"),
+#   #GRIDS = file.path(tempdir(), "dem2.sdat"),
+#   RESAMPLING = 0,
+#   RESULT = file.path(tempdir(), "vals.shp"))
+
 vals = read_sf(qgis_output(out, "RESULT"))
+vals = terra::extract(s, as(random_points, "SpatVector"))
+vals = inner_join(random_points, vals, by = c("id" = "ID"))
+fit = glm(formula = spri ~ dem1 + dem2 + cslope + ndvi + log_carea,
+           data = vals,
+           family = "poisson")
+
+pred = predict(object = s,
+                model = fit,
+                fun = predict,
+                type = "response")
+pred = mask(x = pred, mask = as(study_area, "SpatVector"))
+# plot the output (shown in Figure 5)
+hs = raster::hillShade(terrain(dem), terra::terrain(dem, "aspect")) |>
+  raster::mask(mask = study_area)
+plot(hs, col = gray(seq(0, 1, length.out = 100)), legend = FALSE,
+     xlim = c(795000, 797500), ylim = c(8932000, 8935000))
+plot(raster(pred), col = RColorBrewer::brewer.pal(name = "YlOrRd", n = 9),
+     add = TRUE, alpha = 0.8)
+plot(st_geometry(random_points), add = TRUE)
+
 ```
 
-Same as `terra::extract(s, as(random_points, "SpatVector")`.
+Same as `terra::extract(s, as(random_points, "SpatVector"))`.
 
 <!--
 ## ------------------------------------------------------------------------
