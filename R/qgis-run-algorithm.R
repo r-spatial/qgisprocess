@@ -98,7 +98,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
   arg_spec <- arg_spec[!is_default_value]
 
   # make sure cleanup is run on any temporary files created
-  on.exit(Map(qgis_clean_argument, args, arg_spec))
+  on.exit(Map(qgis_clean_argument, args))
 
   # look for sanitizer errors and stop() for them
   arg_errors <- vapply(args, inherits, "try-error", FUN.VALUE = logical(1))

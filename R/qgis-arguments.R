@@ -13,41 +13,91 @@
 #' @param spec A `list()` with values for `algorithm`, `name`,
 #'   `description`, and `qgis_type`. See [qgis_argument_spec()] to
 #'   create a blank `spec` for testing.
-#' @param arguments The result of [qgis_make_arguments()].
+#' @param arguments The result of [qgis_sanitize_arguments()].
+#' @param .algorithm_arguments The result of [qgis_arguments()]
 #' @inheritParams qgis_run_algorithm
 #'
 #' @export
 #'
-qgis_make_arguments <- function(algorithm, ...) {
+qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_arguments(algorithm)) {
+  dots <- rlang::list2(...)
+  if (length(dots) > 0 && !rlang::is_named(dots)) {
+    abort("All ... arguments to `qgis_sanitize_arguments()` must be named.")
+  }
 
+  # get QGIS types, values, and names for this algorithm
+  arg_meta <- .algorithm_arguments
+
+  # specifying an argument twice is the command-line equivalent
+  # of passing multiple values. Here, we generate a qgis_list_input()
+  # and let qgis_serialize_arguments() take care of the details
+  dot_names <- names(dots)
+  duplicated_dot_names <- unique(dot_names[duplicated(dot_names)])
+  regular_dot_names <- sefdiff(dot_names, duplicated_dot_names)
+
+  user_args <- vector("list", length(unique(dot_names)))
+  names(user_args) <- unique(dot_names)
+  user_args[regular_dot_names] <- dots[regular_dot_names]
+  for (arg_name in duplicated_dot_names) {
+    items <- unname(dots[dot_names == arg_name])
+    user_args[[arg_name]] <- qgis_list_input(!!! items)
+  }
+
+  # warn about unspecified arguments (don't error so that users can
+  # write code for more than one QGIS install if args are added)
+  unknown_args <- setdiff(names(dots), arg_meta$name)
+  if (length(unknown_args) > 0){
+    for (arg_name in unknown_args) {
+      message(glue("Ignoring unknown input '{ arg_name }'"))
+      user_args[[arg_name]] <- NULL
+    }
+  }
+
+  # get argument info for user args
+  user_arg_spec <- Map(qgis_argument_spec_by_name, list(algorithm), names(user_args), list(arg_meta))
+
+  # sanitize arguments but make sure to clean up everything if one of the sanitizers errors
+  args_sanitized <- vector("list", length(user_args))
+  names(args_sanitized) <- names(user_args)
+
+  # this works because on.exit() evaluates in the execution environment
+  # (so `all_args_sanitized` can be set to TRUE)
+  all_args_sanitized <- FALSE
+  on.exit(if (!all_args_sanitized) qgis_clean_arguments(args_sanitized))
+
+  for (name in names(user_args)) {
+    args_sanitized[[name]] <-
+      as_qgis_argument(user_args[[name]], user_arg_spec[[name]])
+  }
+  all_args_sanitized <- TRUE
+
+  # remove instances of qgis_default_value()
+  is_default_value <- vapply(user_args, is_qgis_default_value, logical(1))
+  args_sanitized <- args_sanitized[!is_default_value]
+
+  args_sanitized
 }
 
-#' @rdname qgis_make_arguments
-#' @export
-qgis_serialize_arguments <- function(arguments) {
-
-}
-
-#' @rdname qgis_make_arguments
+#' @rdname qgis_sanitize_arguments
 #' @export
 qgis_clean_arguments <- function(arguments) {
   lapply(arguments, qgis_clean_argument)
   invisible(NULL)
 }
 
-#' @rdname qgis_make_arguments
+#' @rdname qgis_sanitize_arguments
 #' @export
 as_qgis_argument <- function(x, spec = qgis_argument_spec()) {
   UseMethod("as_qgis_argument")
 }
 
-#' @rdname qgis_make_arguments
+#' @rdname qgis_sanitize_arguments
 #' @export
 qgis_default_value <- function() {
   structure(list(), class = "qgis_default_value")
 }
 
-#' @rdname qgis_make_arguments
+#' @rdname qgis_sanitize_arguments
 #' @export
 is_qgis_default_value <- function(x) {
   inherits(x, "qgis_default_value")
@@ -63,7 +113,7 @@ is_qgis_default_value <- function(x) {
 #   "execute_sql", "raster_calc_expression", "relief_colors", "color"
 # )
 
-#' @rdname qgis_make_arguments
+#' @rdname qgis_sanitize_arguments
 #' @export
 as_qgis_argument.default <- function(x, spec = qgis_argument_spec()) {
   abort(
@@ -77,7 +127,7 @@ as_qgis_argument.default <- function(x, spec = qgis_argument_spec()) {
   )
 }
 
-#' @rdname qgis_make_arguments
+#' @rdname qgis_sanitize_arguments
 #' @export
 as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec()) {
   # This is an opportunity to fill in a missing value based on the
@@ -112,7 +162,7 @@ as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec()) 
   }
 }
 
-#' @rdname qgis_make_arguments
+#' @rdname qgis_sanitize_arguments
 #' @export
 as_qgis_argument.NULL <- function(x, spec = qgis_argument_spec()) {
   # NULL is similar to qgis_default_value() except it (1) never fills in
@@ -122,7 +172,7 @@ as_qgis_argument.NULL <- function(x, spec = qgis_argument_spec()) {
   qgis_default_value()
 }
 
-#' @rdname qgis_make_arguments
+#' @rdname qgis_sanitize_arguments
 #' @export
 as_qgis_argument.character <- function(x, spec = qgis_argument_spec()) {
   switch(
@@ -150,33 +200,33 @@ as_qgis_argument.character <- function(x, spec = qgis_argument_spec()) {
   )
 }
 
-#' @rdname qgis_make_arguments
+#' @rdname qgis_sanitize_arguments
 #' @export
 as_qgis_argument.logical <- function(x, spec = qgis_argument_spec()) {
   paste0(x, collapse = ",")
 }
 
-#' @rdname qgis_make_arguments
+#' @rdname qgis_sanitize_arguments
 #' @export
 as_qgis_argument.numeric <- function(x, spec = qgis_argument_spec()) {
   paste0(x, collapse = ",")
 }
 
-#' @rdname qgis_make_arguments
+#' @rdname qgis_sanitize_arguments
 #' @export
-qgis_clean_argument <- function(value, spec = qgis_argument_spec()) {
+qgis_clean_argument <- function(value) {
   UseMethod("qgis_clean_argument")
 }
 
-#' @rdname qgis_make_arguments
+#' @rdname qgis_sanitize_arguments
 #' @export
-qgis_clean_argument.default <- function(value, spec = qgis_argument_spec()) {
+qgis_clean_argument.default <- function(value) {
   # by default, do nothing!
 }
 
-#' @rdname qgis_make_arguments
+#' @rdname qgis_sanitize_arguments
 #' @export
-qgis_clean_argument.qgis_tempfile_arg <- function(value, spec = qgis_argument_spec()) {
+qgis_clean_argument.qgis_tempfile_arg <- function(value) {
   unlink(value)
 }
 
@@ -208,9 +258,10 @@ qgis_argument_spec <- function(algorithm = NA_character_, name = NA_character_,
   )
 }
 
-#' @rdname qgis_make_arguments
+#' @rdname qgis_sanitize_arguments
 #' @export
-qgis_argument_spec_by_name <- function(algorithm, name, arguments = qgis_arguments(algorithm)) {
+qgis_argument_spec_by_name <- function(algorithm, name,
+                                       .algorithm_arguments = qgis_arguments(algorithm)) {
   # These are special-cased at the command-line level, so they don't have
   # types defined in the help file. Here, we create two special types
   # ELIPSOID and PROJECT_PATH.
@@ -218,7 +269,7 @@ qgis_argument_spec_by_name <- function(algorithm, name, arguments = qgis_argumen
     return(qgis_argument_spec(algorithm, name, name))
   }
 
-  position <- match(name, arguments$name)
+  position <- match(name, .algorithm_arguments$name)
   if (is.na(position)) {
     abort(
       glue(
@@ -230,5 +281,60 @@ qgis_argument_spec_by_name <- function(algorithm, name, arguments = qgis_argumen
     )
   }
 
-  c(list(algorithm = algorithm), lapply(arguments, "[[", position))
+  c(list(algorithm = algorithm), lapply(.algorithm_arguments, "[[", position))
+}
+
+
+#' Specify lists and dictionary inputs
+#'
+#' @param ... Named values for [qgis_dict_input()] or
+#'   unnamed values for [qgis_list_input()].
+#'
+#' @return
+#'   - `qgis_list_input()`: An object of class 'qgis_list_input'
+#'   - `qgis_dict_input()`: An object of class 'qgis_dict_input'
+#' @export
+#'
+#' @examples
+#' qgis_list_input(1, 2, 3)
+#' qgis_dict_input(a = 1, b = 2, c = 3)
+#'
+qgis_list_input <- function(...) {
+  dots <- rlang::list2(...)
+  if (length(dots) > 0 && rlang::is_named(dots)) {
+    abort("All ... arguments to `qgis_sanitize_arguments()` must be unnamed.")
+  }
+
+  structure(dots, class = "qgis_list_input")
+}
+
+#' @rdname qgis_list_input
+#' @export
+qgis_dict_input <- function(...) {
+  dots <- rlang::list2(...)
+  if (length(dots) > 0 && !rlang::is_dictionaryish(dots)) {
+    abort("All ... arguments to `qgis_dict_input()` must have unique names.")
+  }
+
+  structure(dots, class = "qgis_dict_input")
+}
+
+#' @export
+as_qgis_argument.qgis_list_input <- function(x, spec = qgis_argument_spec()) {
+  lapply(x, as_qgis_argument, spec = spec)
+}
+
+#' @export
+as_qgis_argument.qgis_dict_input <- function(x, spec = qgis_argument_spec()) {
+  lapply(x, as_qgis_argument, spec = spec)
+}
+
+#' @export
+qgis_clean_argument.qgis_list_input <- function(value, spec = qgis_argument_spec()) {
+  lapply(value, qgis_clean_argument, spec = spec)
+}
+
+#' @export
+qgis_clean_argument.qgis_dict_input <- function(value, spec = qgis_argument_spec()) {
+  lapply(value, qgis_clean_argument, spec = spec)
 }
