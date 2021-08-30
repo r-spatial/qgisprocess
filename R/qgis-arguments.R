@@ -13,25 +13,41 @@
 #' @param spec A `list()` with values for `algorithm`, `name`,
 #'   `description`, and `qgis_type`. See [qgis_argument_spec()] to
 #'   create a blank `spec` for testing.
-#' @param name,description,qgis_type,available_values,acceptable_values
-#'   Column values of `arguments` denoting
-#'   the argument name, description, and acceptable values.
-#' @param arguments The result of [qgis_arguments()].
+#' @param arguments The result of [qgis_make_arguments()].
 #' @inheritParams qgis_run_algorithm
 #'
 #' @export
 #'
+qgis_make_arguments <- function(algorithm, ...) {
+
+}
+
+#' @rdname qgis_make_arguments
+#' @export
+qgis_serialize_arguments <- function(arguments) {
+
+}
+
+#' @rdname qgis_make_arguments
+#' @export
+qgis_clean_arguments <- function(arguments) {
+  lapply(arguments, qgis_clean_argument)
+  invisible(NULL)
+}
+
+#' @rdname qgis_make_arguments
+#' @export
 as_qgis_argument <- function(x, spec = qgis_argument_spec()) {
   UseMethod("as_qgis_argument")
 }
 
-#' @rdname as_qgis_argument
+#' @rdname qgis_make_arguments
 #' @export
 qgis_default_value <- function() {
   structure(list(), class = "qgis_default_value")
 }
 
-#' @rdname as_qgis_argument
+#' @rdname qgis_make_arguments
 #' @export
 is_qgis_default_value <- function(x) {
   inherits(x, "qgis_default_value")
@@ -47,7 +63,7 @@ is_qgis_default_value <- function(x) {
 #   "execute_sql", "raster_calc_expression", "relief_colors", "color"
 # )
 
-#' @rdname as_qgis_argument
+#' @rdname qgis_make_arguments
 #' @export
 as_qgis_argument.default <- function(x, spec = qgis_argument_spec()) {
   abort(
@@ -61,7 +77,7 @@ as_qgis_argument.default <- function(x, spec = qgis_argument_spec()) {
   )
 }
 
-#' @rdname as_qgis_argument
+#' @rdname qgis_make_arguments
 #' @export
 as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec()) {
   # This is an opportunity to fill in a missing value based on the
@@ -96,7 +112,7 @@ as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec()) 
   }
 }
 
-#' @rdname as_qgis_argument
+#' @rdname qgis_make_arguments
 #' @export
 as_qgis_argument.NULL <- function(x, spec = qgis_argument_spec()) {
   # NULL is similar to qgis_default_value() except it (1) never fills in
@@ -106,7 +122,7 @@ as_qgis_argument.NULL <- function(x, spec = qgis_argument_spec()) {
   qgis_default_value()
 }
 
-#' @rdname as_qgis_argument
+#' @rdname qgis_make_arguments
 #' @export
 as_qgis_argument.character <- function(x, spec = qgis_argument_spec()) {
   switch(
@@ -134,38 +150,51 @@ as_qgis_argument.character <- function(x, spec = qgis_argument_spec()) {
   )
 }
 
-#' @rdname as_qgis_argument
+#' @rdname qgis_make_arguments
 #' @export
 as_qgis_argument.logical <- function(x, spec = qgis_argument_spec()) {
   paste0(x, collapse = ",")
 }
 
-#' @rdname as_qgis_argument
+#' @rdname qgis_make_arguments
 #' @export
 as_qgis_argument.numeric <- function(x, spec = qgis_argument_spec()) {
   paste0(x, collapse = ",")
 }
 
-#' @rdname as_qgis_argument
+#' @rdname qgis_make_arguments
 #' @export
 qgis_clean_argument <- function(value, spec = qgis_argument_spec()) {
   UseMethod("qgis_clean_argument")
 }
 
-#' @rdname as_qgis_argument
+#' @rdname qgis_make_arguments
 #' @export
 qgis_clean_argument.default <- function(value, spec = qgis_argument_spec()) {
   # by default, do nothing!
 }
 
-#' @rdname as_qgis_argument
+#' @rdname qgis_make_arguments
 #' @export
 qgis_clean_argument.qgis_tempfile_arg <- function(value, spec = qgis_argument_spec()) {
   unlink(value)
 }
 
-#' @rdname as_qgis_argument
+
+#' Specify QGIS argument types
+#'
+#' @param name,description,qgis_type,available_values,acceptable_values
+#'   Column values of `arguments` denoting
+#'   the argument name, description, and acceptable values.
+#' @param arguments The result of [qgis_arguments()].
+#'
+#' @return A [list()] with an element for each input argument.
 #' @export
+#'
+#' @examples
+#' qgis_argument_spec()
+#' if (has_qgis()) qgis_argument_spec_by_name("native:filedownloader", "URL")
+#'
 qgis_argument_spec <- function(algorithm = NA_character_, name = NA_character_,
                                description = NA_character_, qgis_type = NA_character_,
                                available_values = character(0), acceptable_values = character(0)) {
@@ -179,7 +208,7 @@ qgis_argument_spec <- function(algorithm = NA_character_, name = NA_character_,
   )
 }
 
-#' @rdname as_qgis_argument
+#' @rdname qgis_make_arguments
 #' @export
 qgis_argument_spec_by_name <- function(algorithm, name, arguments = qgis_arguments(algorithm)) {
   # These are special-cased at the command-line level, so they don't have
