@@ -84,6 +84,28 @@ qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_
   args_sanitized
 }
 
+# turn sanitized arguments into command-line arguments
+# in the future this might be JSON to accommodate more input types
+qgis_serialize_arguments <- function(arguments) {
+  # we can't deal with dict items yet
+  args_dict <- vapply(arguments, inherits, logical(1), "qgis_dict_input")
+  if (any(args_dict)) {
+    labels <- names(arguments)[args_dict]
+    abort("`qgis_run_algorithm()` can't generate command-line arguments from `qgis_dict_input()`")
+  }
+
+  # otherwise, unlist() will flatten qgis_list_input() items
+  args_flat <- unlist(arguments)
+  arg_name_n <- vapply(arguments, length, integer(1))
+  names(args_flat) <- unlist(Map(rep, names(arguments), arg_name_n))
+
+  if (length(args_flat) > 0) {
+    paste0("--", names(args_flat), "=", vapply(args_flat, as.character, character(1)))
+  } else {
+    character(0)
+  }
+}
+
 #' @rdname qgis_sanitize_arguments
 #' @export
 qgis_clean_arguments <- function(arguments) {

@@ -44,26 +44,8 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
   )
   on.exit(qgis_clean_arguments(args))
 
-  # turn sanitized arguments into command-line arguments
-  # in the future this might be JSON to accommodate more input types
-
-  # we can't deal with dict items yet
-  args_dict <- vapply(args, inherits, logical(1), "qgis_dict_input")
-  if (any(args_dict)) {
-    labels <- names(args)[args_dict]
-    abort("`qgis_run_algorithm()` can't generate command-line arguments from `qgis_dict_input()()`")
-  }
-
-  # otherwise, unlist() will flatten qgis_list_input() items
-  args_flat <- unlist(args)
-  arg_name_n <- vapply(args, length, integer(1))
-  names(args_flat) <- unlist(Map(rep, names(args), arg_name_n))
-
-  if (length(args_flat) > 0) {
-    args_str <- paste0("--", names(args_flat), "=", vapply(args_flat, as.character, character(1)))
-  } else {
-    args_str <- character(0)
-  }
+  # generate command-line args
+  args_str <- qgis_serialize_arguments(args)
 
   # To get around a bug in processx (#302), we need to use a stdout callback
   # to buffer stdout manually. For large outputs this would be slow, but
