@@ -59,7 +59,12 @@ qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_
   args[intersect(names(args), names(user_args))] <- user_args[intersect(names(args), names(user_args))]
 
   # get argument specs to pass to as_qgis_argument()
-  arg_spec <- Map(qgis_argument_spec_by_name, list(algorithm), names(args), list(arg_meta))
+  arg_spec <- Map(
+    qgis_argument_spec_by_name,
+    rep_len(list(algorithm), length(args)),
+    names(args),
+    rep_len(list(arg_meta), length(args))
+  )
   names(arg_spec) <- names(args)
 
   # sanitize arguments but make sure to clean up everything if one of the sanitizers errors
@@ -330,7 +335,7 @@ qgis_argument_spec_by_name <- function(algorithm, name,
 qgis_list_input <- function(...) {
   dots <- rlang::list2(...)
   if (length(dots) > 0 && rlang::is_named(dots)) {
-    abort("All ... arguments to `qgis_sanitize_arguments()` must be unnamed.")
+    abort("All ... arguments to `qgis_list_input()` must be unnamed.")
   }
 
   structure(dots, class = "qgis_list_input")
@@ -349,20 +354,20 @@ qgis_dict_input <- function(...) {
 
 #' @export
 as_qgis_argument.qgis_list_input <- function(x, spec = qgis_argument_spec()) {
-  lapply(x, as_qgis_argument, spec = spec)
+  qgis_list_input(!!! lapply(x, as_qgis_argument, spec = spec))
 }
 
 #' @export
 as_qgis_argument.qgis_dict_input <- function(x, spec = qgis_argument_spec()) {
-  lapply(x, as_qgis_argument, spec = spec)
+  qgis_dict_input(!!! lapply(x, as_qgis_argument, spec = spec))
 }
 
 #' @export
 qgis_clean_argument.qgis_list_input <- function(value) {
-  lapply(value, qgis_clean_argument, spec = spec)
+  lapply(value, qgis_clean_argument)
 }
 
 #' @export
 qgis_clean_argument.qgis_dict_input <- function(value) {
-  lapply(value, qgis_clean_argument, spec = spec)
+  lapply(value, qgis_clean_argument)
 }

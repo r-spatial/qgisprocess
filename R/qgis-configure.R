@@ -205,7 +205,7 @@ qgis_query_path <- function(quiet = FALSE) {
 #' @rdname qgis_run
 #' @export
 qgis_env <- function() {
-  getOption("qgisprocess.env", list(QT_QPA_PLATFORM = 'offscreen'))
+  getOption("qgisprocess.env", list(QT_QPA_PLATFORM = 'offscreen', PROJ_LIB=""))
 }
 
 #' @rdname qgis_run
