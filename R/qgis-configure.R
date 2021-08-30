@@ -121,16 +121,6 @@ qgis_version <- function(query = FALSE, quiet = TRUE) {
 
 #' @rdname qgis_run
 #' @export
-qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
-  if (query) {
-    qgisprocess_cache$algorithms <- qgis_query_algorithms(quiet = quiet)
-  }
-
-  qgisprocess_cache$algorithms
-}
-
-#' @rdname qgis_run
-#' @export
 qgis_path <- function(query = FALSE, quiet = TRUE) {
   if (query) {
     qgisprocess_cache$path <- qgis_query_path(quiet = quiet)

@@ -14,6 +14,7 @@
 #'   [rlang::list2()] are supported. These arguments
 #'   are converted to strings using [as_qgis_argument()].
 #' @param .quiet Use `TRUE` to suppress output from processing algorithms.
+#' @inheritParams qgis_run
 #'
 #' @export
 #'
@@ -164,9 +165,19 @@ qgis_has_algorithm <- function(algorithm) {
 
 #' @rdname qgis_run_algorithm
 #' @export
-qgis_has_provider <- function(provider) {
+qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
+  if (query) {
+    qgisprocess_cache$algorithms <- qgis_query_algorithms(quiet = quiet)
+  }
+
+  qgisprocess_cache$algorithms
+}
+
+#' @rdname qgis_run_algorithm
+#' @export
+qgis_has_provider <- function(provider, query = FALSE, quiet = TRUE) {
   assert_qgis()
-  as.character(provider) %in% unique(qgis_algorithms()$provider)
+  as.character(provider) %in% unique(qgis_algorithms(query, quiet)$provider)
 }
 
 #' @rdname qgis_run_algorithm

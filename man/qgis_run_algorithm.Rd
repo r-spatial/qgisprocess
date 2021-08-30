@@ -3,6 +3,7 @@
 \name{qgis_run_algorithm}
 \alias{qgis_run_algorithm}
 \alias{qgis_has_algorithm}
+\alias{qgis_algorithms}
 \alias{qgis_has_provider}
 \alias{qgis_providers}
 \alias{assert_qgis_algorithm}
@@ -18,7 +19,9 @@ qgis_run_algorithm(
 
 qgis_has_algorithm(algorithm)
 
-qgis_has_provider(provider)
+qgis_algorithms(query = FALSE, quiet = TRUE)
+
+qgis_has_provider(provider, query = FALSE, quiet = TRUE)
 
 qgis_providers(provider)
 
@@ -36,6 +39,11 @@ are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()
 elipsoid name for distance calculations.}
 
 \item{.quiet}{Use \code{TRUE} to suppress output from processing algorithms.}
+
+\item{query}{Use \code{TRUE} to refresh the cached value.}
+
+\item{quiet}{Use \code{FALSE} to display more information about the command, possibly
+useful for debugging.}
 
 \item{provider}{A provider identifier (e.g., "native")}
 }
