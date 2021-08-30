@@ -14,10 +14,11 @@ qgis_argument_spec(
 )
 }
 \arguments{
+\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
+a path to a QGIS model file.}
+
 \item{name, description, qgis_type, available_values, acceptable_values}{Column values of \code{arguments} denoting
 the argument name, description, and acceptable values.}
-
-\item{arguments}{The result of \code{\link[=qgis_arguments]{qgis_arguments()}}.}
 }
 \value{
 A \code{\link[=list]{list()}} with an element for each input argument.

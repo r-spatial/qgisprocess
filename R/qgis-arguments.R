@@ -8,6 +8,7 @@
 #' generics provide hooks for argument values to be serialized correctly.
 #'
 #' @param x An object passed to a QGIS processing algorithm
+#' @param name The name of the input argument
 #' @param value The result of [as_qgis_argument()] after the QGIS processing
 #'   algorithm has been run.
 #' @param spec A `list()` with values for `algorithm`, `name`,
@@ -33,7 +34,7 @@ qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_
   # and let qgis_serialize_arguments() take care of the details
   dot_names <- names(dots)
   duplicated_dot_names <- unique(dot_names[duplicated(dot_names)])
-  regular_dot_names <- sefdiff(dot_names, duplicated_dot_names)
+  regular_dot_names <- setdiff(dot_names, duplicated_dot_names)
 
   user_args <- vector("list", length(unique(dot_names)))
   names(user_args) <- unique(dot_names)
@@ -45,34 +46,39 @@ qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_
 
   # warn about unspecified arguments (don't error so that users can
   # write code for more than one QGIS install if args are added)
-  unknown_args <- setdiff(names(dots), arg_meta$name)
+  unknown_args <- setdiff(names(dots), c("PROJECT_PATH", "ELIPSOID", arg_meta$name))
   if (length(unknown_args) > 0){
     for (arg_name in unknown_args) {
       message(glue("Ignoring unknown input '{ arg_name }'"))
-      user_args[[arg_name]] <- NULL
     }
   }
 
-  # get argument info for user args
-  user_arg_spec <- Map(qgis_argument_spec_by_name, list(algorithm), names(user_args), list(arg_meta))
+  # generate argument list template and populate user-supplied values
+  args <- rep(list(qgis_default_value()), nrow(arg_meta))
+  names(args) <- arg_meta$name
+  args[intersect(names(args), names(user_args))] <- user_args[intersect(names(args), names(user_args))]
+
+  # get argument specs to pass to as_qgis_argument()
+  arg_spec <- Map(qgis_argument_spec_by_name, list(algorithm), names(args), list(arg_meta))
+  names(arg_spec) <- names(args)
 
   # sanitize arguments but make sure to clean up everything if one of the sanitizers errors
-  args_sanitized <- vector("list", length(user_args))
-  names(args_sanitized) <- names(user_args)
+  args_sanitized <- vector("list", length(args))
+  names(args_sanitized) <- names(args)
 
-  # this works because on.exit() evaluates in the execution environment
+  # on.exit() works because it evaluates in the execution environment
   # (so `all_args_sanitized` can be set to TRUE)
   all_args_sanitized <- FALSE
   on.exit(if (!all_args_sanitized) qgis_clean_arguments(args_sanitized))
 
-  for (name in names(user_args)) {
+  for (name in names(args)) {
     args_sanitized[[name]] <-
-      as_qgis_argument(user_args[[name]], user_arg_spec[[name]])
+      as_qgis_argument(args[[name]], arg_spec[[name]])
   }
   all_args_sanitized <- TRUE
 
   # remove instances of qgis_default_value()
-  is_default_value <- vapply(user_args, is_qgis_default_value, logical(1))
+  is_default_value <- vapply(args_sanitized, is_qgis_default_value, logical(1))
   args_sanitized <- args_sanitized[!is_default_value]
 
   args_sanitized
@@ -236,7 +242,7 @@ qgis_clean_argument.qgis_tempfile_arg <- function(value) {
 #' @param name,description,qgis_type,available_values,acceptable_values
 #'   Column values of `arguments` denoting
 #'   the argument name, description, and acceptable values.
-#' @param arguments The result of [qgis_arguments()].
+#' @inheritParams qgis_run_algorithm
 #'
 #' @return A [list()] with an element for each input argument.
 #' @export
@@ -330,11 +336,11 @@ as_qgis_argument.qgis_dict_input <- function(x, spec = qgis_argument_spec()) {
 }
 
 #' @export
-qgis_clean_argument.qgis_list_input <- function(value, spec = qgis_argument_spec()) {
+qgis_clean_argument.qgis_list_input <- function(value) {
   lapply(value, qgis_clean_argument, spec = spec)
 }
 
 #' @export
-qgis_clean_argument.qgis_dict_input <- function(value, spec = qgis_argument_spec()) {
+qgis_clean_argument.qgis_dict_input <- function(value) {
   lapply(value, qgis_clean_argument, spec = spec)
 }

@@ -5,6 +5,7 @@
 #' for a detailed description of the algorithms provided
 #' 'out of the box' on QGIS (versions >= 3.14).
 #'
+#' @param provider A provider identifier (e.g., "native")
 #' @inheritParams qgis_run_algorithm
 #' @inheritParams qgis_run
 #'

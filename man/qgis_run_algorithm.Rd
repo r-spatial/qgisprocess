@@ -24,8 +24,6 @@ are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()
 elipsoid name for distance calculations.}
 
 \item{.quiet}{Use \code{TRUE} to suppress output from processing algorithms.}
-
-\item{provider}{A provider identifier (e.g., "native")}
 }
 \description{
 Run QGIS algorithms.

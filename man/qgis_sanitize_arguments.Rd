@@ -76,6 +76,8 @@ create a blank \code{spec} for testing.}
 
 \item{value}{The result of \code{\link[=as_qgis_argument]{as_qgis_argument()}} after the QGIS processing
 algorithm has been run.}
+
+\item{name}{The name of the input argument}
 }
 \description{
 Calls to \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} can and should contain R objects that
