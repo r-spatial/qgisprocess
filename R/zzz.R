@@ -22,7 +22,13 @@
 .onAttach <- function(...) {
   if (has_qgis()) {
     packageStartupMessage(
-      glue::glue("Using 'qgis_process' at '{ qgis_path() }'.\nRun `qgis_configure()` for details.")
+      glue::glue(
+        "Using 'qgis_process' at '{ qgis_path() }'.",
+        "QGIS version: { qgis_version() }",
+        "Metadata of { nrow(qgis_algorithms()) } algorithms successfully cached.",
+        "Run `qgis_configure()` for details.",
+        .sep = "\n"
+      )
     )
   } else {
     packageStartupMessage(

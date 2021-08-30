@@ -45,8 +45,13 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
   # so far this works only if only one argument is duplicated (but I can't
   # remember that a QGIS algorithm has more than 1 argument of type multiple
   # input)
-  dups <- dots[duplicated(names(dots)) |
-                 duplicated(names(dots), fromLast = TRUE)]
+  # Beware, subsetting list by names in R will always take the first
+  # match. Subsetting should be done in steps to arrive at the good result.
+  ind = duplicated(names(dots)) |
+    duplicated(names(dots), fromLast = TRUE) # duplicated indices
+  dups <- dots[ind] # get duplicated elements
+  notdups <- dots[!ind] # get everything else
+
   ind = `if`(length(dups) > 0, arg_meta$name == names(dups[1]), NA)
   ro <- 1:nrow(arg_meta)  # row order
   r <- rep(1, nrow(arg_meta))  # number of times to be repeated
@@ -54,10 +59,20 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
   arg_meta <- arg_meta[rep(ro, times = r), ]
   args = rlang::set_names(c(arg_meta$name, "PROJECT_PATH", "ELIPSOID"))
   # we need to write it like this due to duplicated names
-  ind = names(args) %in% names(dots)
-  args[ind] <- dots[names(args)[ind]]
-  args[!ind] <-
-    lapply(args[!ind], function(x) qgis_default_value())
+  ind = names(args) %in% names(notdups) # find indices for common parameters, except duplicates
+  args[ind] <- dots[names(args)[ind]] # replace those values
+  ind_dups = names(args) %in% names(dups) # find indices for duplicate parameters
+  suppressWarnings({
+    # replace duplicate values. it is in general not recommended to have
+    # duplicate names in lists, but if we cannot get around that, this
+    # should be the way to do it
+    # Taken from: https://stackoverflow.com/a/33244373/12118669
+    # gives a warning:
+    # number of items to replace is not a multiple of replacement length,
+    args[ind_dups] <- dots[names(args)[ind_dups] == names(dups)[1]]
+  })
+  args[!ind & !ind_dups] <- # replace defaults
+    lapply(args[!ind & !ind_dups], function(x) qgis_default_value())
   args["PROJECT_PATH"] <- list(PROJECT_PATH)
   args["ELIPSOID"] <- list(ELIPSOID)
 

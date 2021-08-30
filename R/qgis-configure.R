@@ -84,8 +84,19 @@ qgis_configure <- function(quiet = FALSE) {
     qgis_unconfigure()
 
     qgis_path(query = TRUE, quiet = quiet)
-    qgis_version(query = TRUE, quiet = quiet)
-    qgis_algorithms(query = TRUE, quiet = quiet)
+
+    version <- qgis_version(query = TRUE, quiet = quiet)
+    if (!quiet) message(glue::glue("QGIS version: { version }"))
+
+    algo <- qgis_algorithms(query = TRUE, quiet = quiet)
+    if (!quiet) {
+      message(
+        glue::glue(
+          "Metadata of { nrow(algo) } algorithms queried and stored in cache.\n",
+          "Run `qgis_algorithms()` to see them."
+        )
+      )
+    }
   }, error = function(e) {
     qgis_unconfigure()
     if (!quiet) message(e)
