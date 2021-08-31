@@ -1,10 +1,50 @@
 
+test_that("qgis_sanitize_arguments() ignores unknown inputs", {
+  expect_message(
+    expect_identical(
+      qgis_sanitize_arguments(
+        "some_algorithm",
+        unknown_arg = 1,
+        .algorithm_arguments = tibble::tibble(name = character())
+      ),
+      rlang::set_names(list(), character())
+    ),
+    "Ignoring unknown input"
+  )
+})
+
+test_that("qgis_sanitize_arguments() accepts multiple input arguments", {
+  sanitized <- qgis_sanitize_arguments(
+    "some_algorithm",
+    multi_arg = 1,
+    multi_arg = 2,
+    .algorithm_arguments = tibble::tibble(name = "multi_arg", qgis_type = NA_character_)
+  )
+
+  expect_identical(sanitized$multi_arg, qgis_list_input("1", "2"))
+  expect_identical(qgis_serialize_arguments(sanitized), c("--multi_arg=1", "--multi_arg=2"))
+
+  expect_identical(
+    qgis_sanitize_arguments(
+      "some_algorithm",
+      multi_arg = qgis_list_input("1", "2"),
+      .algorithm_arguments = tibble::tibble(name = "multi_arg", qgis_type = NA_character_)
+    ),
+    sanitized
+  )
+})
+
 test_that("argument coercers work", {
   expect_error(as_qgis_argument(list()), "Don't know how to convert object of type")
   expect_identical(as_qgis_argument("chr value"), "chr value")
   expect_identical(as_qgis_argument(1), "1")
   expect_identical(as_qgis_argument(1L), "1")
   expect_identical(as_qgis_argument(TRUE), "TRUE")
+  expect_identical(as_qgis_argument(qgis_list_input(1, 2)), qgis_list_input("1", "2"))
+  expect_identical(
+    as_qgis_argument(qgis_dict_input(a = 1, b = 2)),
+    qgis_dict_input(a = "1", b = "2")
+  )
 })
 
 test_that("character -> enum works", {

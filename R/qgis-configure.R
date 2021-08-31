@@ -121,16 +121,6 @@ qgis_version <- function(query = FALSE, quiet = TRUE) {
 
 #' @rdname qgis_run
 #' @export
-qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
-  if (query) {
-    qgisprocess_cache$algorithms <- qgis_query_algorithms(quiet = quiet)
-  }
-
-  qgisprocess_cache$algorithms
-}
-
-#' @rdname qgis_run
-#' @export
 qgis_path <- function(query = FALSE, quiet = TRUE) {
   if (query) {
     qgisprocess_cache$path <- qgis_query_path(quiet = quiet)
@@ -215,7 +205,7 @@ qgis_query_path <- function(quiet = FALSE) {
 #' @rdname qgis_run
 #' @export
 qgis_env <- function() {
-  getOption("qgisprocess.env", list(QT_QPA_PLATFORM = 'offscreen'))
+  getOption("qgisprocess.env", list(QT_QPA_PLATFORM = 'offscreen', PROJ_LIB=""))
 }
 
 #' @rdname qgis_run

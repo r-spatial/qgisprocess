@@ -7,7 +7,6 @@
 \alias{qgis_configure}
 \alias{qgis_unconfigure}
 \alias{qgis_version}
-\alias{qgis_algorithms}
 \alias{qgis_path}
 \alias{qgis_query_path}
 \alias{qgis_env}
@@ -26,8 +25,6 @@ qgis_configure(quiet = FALSE)
 qgis_unconfigure()
 
 qgis_version(query = FALSE, quiet = TRUE)
-
-qgis_algorithms(query = FALSE, quiet = TRUE)
 
 qgis_path(query = FALSE, quiet = TRUE)
 
