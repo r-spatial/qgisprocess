@@ -121,7 +121,7 @@ test_that("sfc to QGIS point rasises issues", {
   expect_error(as_qgis_argument(point, qgis_argument_spec(qgis_type = "point")),
                "Can't convert 'sfc' object to QGIS type 'point' as the length is not equal to 1")
 
-  points <- sf::st_sfc(st_multipoint(matrix(1:15, , 3)), crs = st_crs("EPSG:5514"))
+  points <- sf::st_sfc(st_multipoint(matrix(1:15, , 3)), crs = sf::st_crs("EPSG:5514"))
 
   expect_error(as_qgis_argument(points, qgis_argument_spec(qgis_type = "point")),
                "Can't convert 'sfc' object to QGIS type 'point' as type is not 'POINT'")
