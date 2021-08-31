@@ -149,8 +149,6 @@ OSGeo4W(64)/bin.</p>
 
 <span class='fu'>qgis_version</span><span class='op'>(</span>query <span class='op'>=</span> <span class='cn'>FALSE</span>, quiet <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='fu'>qgis_algorithms</span><span class='op'>(</span>query <span class='op'>=</span> <span class='cn'>FALSE</span>, quiet <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-
 <span class='fu'>qgis_path</span><span class='op'>(</span>query <span class='op'>=</span> <span class='cn'>FALSE</span>, quiet <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='fu'>qgis_query_path</span><span class='op'>(</span>quiet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
@@ -203,7 +201,7 @@ useful for debugging.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'>has_qgis</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='fu'>qgis_path</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "/Applications/QGIS.app/Contents/MacOS/bin/qgis_process"</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'>has_qgis</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='fu'>qgis_version</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "3.20.0-Odense"</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'>has_qgis</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='fu'>qgis_algorithms</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "3.20.1-Odense"</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'>has_qgis</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='fu'><a href='qgis_has_algorithm.html'>qgis_algorithms</a></span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 989 × 5</span>
 #&gt;    provider provider_title algorithm                  algorithm_id algorithm_title
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          
@@ -219,7 +217,7 @@ useful for debugging.</p></td>
 #&gt; <span style='color: #BCBCBC;'>10</span> gdal     GDAL           gdal:clipvectorbypolygon   clipvectorb… Clip vector by…
 #&gt; <span style='color: #949494;'># … with 979 more rows</span></div><div class='input'><span class='fu'>qgis_configure</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>getOption('qgisprocess.path') was not found.</span></div><div class='output co'>#&gt; <span class='message'>Sys.getenv('R_QGISPROCESS_PATH') was not found.</span></div><div class='output co'>#&gt; <span class='message'>Trying 'qgis_process' on PATH</span></div><div class='output co'>#&gt; <span class='message'>Error in rethrow_call(c_processx_exec, command, c(command, args), pty, : cannot start processx process 'qgis_process' (system error 2, No such file or directory) @unix/processx.c:610 (processx_exec)</span></div><div class='output co'>#&gt; <span class='message'>Found 1 QGIS installation containing 'qgis_process':</span>
-#&gt; <span class='message'> /Applications/QGIS.app/Contents/MacOS/bin/qgis_process</span></div><div class='output co'>#&gt; <span class='message'>Trying command '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'</span></div><div class='output co'>#&gt; <span class='message'>Success!</span></div><div class='output co'>#&gt; <span class='message'>QGIS version: 3.20.0-Odense</span></div><div class='output co'>#&gt; <span class='message'>Metadata of 989 algorithms queried and stored in cache.</span>
+#&gt; <span class='message'> /Applications/QGIS.app/Contents/MacOS/bin/qgis_process</span></div><div class='output co'>#&gt; <span class='message'>Trying command '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'</span></div><div class='output co'>#&gt; <span class='message'>Success!</span></div><div class='output co'>#&gt; <span class='message'>QGIS version: 3.20.1-Odense</span></div><div class='output co'>#&gt; <span class='message'>Metadata of 989 algorithms queried and stored in cache.</span>
 #&gt; <span class='message'>Run `qgis_algorithms()` to see them.</span></div><div class='input'>
 </div></pre>
   </div>

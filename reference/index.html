@@ -139,12 +139,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="as_qgis_argument.html">as_qgis_argument()</a></code> <code><a href="as_qgis_argument.html">qgis_default_value()</a></code> <code><a href="as_qgis_argument.html">is_qgis_default_value()</a></code> <code><a href="as_qgis_argument.html">qgis_clean_argument()</a></code> <code><a href="as_qgis_argument.html">qgis_argument_spec()</a></code> <code><a href="as_qgis_argument.html">qgis_argument_spec_by_name()</a></code> </p>
-        </td>
-        <td><p>Type coercion for arguments to QGIS processing algorithms</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="as_qgis_argument.sf.html">as_qgis_argument(<i>&lt;sf&gt;</i>)</a></code> </p>
         </td>
         <td><p>Convert sf objects to/from QGIS inputs/outputs</p></td>
@@ -163,6 +157,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="qgis_argument_spec.html">qgis_argument_spec()</a></code> </p>
+        </td>
+        <td><p>Specify QGIS argument types</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="qgis_detect_windows.html">qgis_detect_windows()</a></code> <code><a href="qgis_detect_windows.html">qgis_detect_macos()</a></code> <code><a href="qgis_detect_windows.html">is_macos()</a></code> <code><a href="qgis_detect_windows.html">is_windows()</a></code> </p>
         </td>
         <td><p>Detect QGIS installations with 'qgis_process'</p></td>
@@ -175,15 +175,33 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="qgis_run.html">qgis_run()</a></code> <code><a href="qgis_run.html">has_qgis()</a></code> <code><a href="qgis_run.html">assert_qgis()</a></code> <code><a href="qgis_run.html">qgis_configure()</a></code> <code><a href="qgis_run.html">qgis_unconfigure()</a></code> <code><a href="qgis_run.html">qgis_version()</a></code> <code><a href="qgis_run.html">qgis_algorithms()</a></code> <code><a href="qgis_run.html">qgis_path()</a></code> <code><a href="qgis_run.html">qgis_query_path()</a></code> <code><a href="qgis_run.html">qgis_env()</a></code> <code><a href="qgis_run.html">qgis_query_version()</a></code> <code><a href="qgis_run.html">qgis_query_algorithms()</a></code> </p>
+          <p><code><a href="qgis_has_algorithm.html">qgis_has_algorithm()</a></code> <code><a href="qgis_has_algorithm.html">qgis_algorithms()</a></code> <code><a href="qgis_has_algorithm.html">qgis_has_provider()</a></code> <code><a href="qgis_has_algorithm.html">qgis_providers()</a></code> <code><a href="qgis_has_algorithm.html">assert_qgis_algorithm()</a></code> </p>
+        </td>
+        <td><p>Run algorithms using 'qgis_process'</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="qgis_list_input.html">qgis_list_input()</a></code> <code><a href="qgis_list_input.html">qgis_dict_input()</a></code> </p>
+        </td>
+        <td><p>Specify lists and dictionary inputs</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="qgis_run.html">qgis_run()</a></code> <code><a href="qgis_run.html">has_qgis()</a></code> <code><a href="qgis_run.html">assert_qgis()</a></code> <code><a href="qgis_run.html">qgis_configure()</a></code> <code><a href="qgis_run.html">qgis_unconfigure()</a></code> <code><a href="qgis_run.html">qgis_version()</a></code> <code><a href="qgis_run.html">qgis_path()</a></code> <code><a href="qgis_run.html">qgis_query_path()</a></code> <code><a href="qgis_run.html">qgis_env()</a></code> <code><a href="qgis_run.html">qgis_query_version()</a></code> <code><a href="qgis_run.html">qgis_query_algorithms()</a></code> </p>
         </td>
         <td><p>Configure and run 'qgis_process'</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="qgis_run_algorithm.html">qgis_run_algorithm()</a></code> <code><a href="qgis_run_algorithm.html">qgis_has_algorithm()</a></code> <code><a href="qgis_run_algorithm.html">qgis_has_provider()</a></code> <code><a href="qgis_run_algorithm.html">qgis_providers()</a></code> <code><a href="qgis_run_algorithm.html">assert_qgis_algorithm()</a></code> </p>
+          <p><code><a href="qgis_run_algorithm.html">qgis_run_algorithm()</a></code> </p>
         </td>
         <td><p>Run algorithms using 'qgis_process'</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="qgis_sanitize_arguments.html">qgis_sanitize_arguments()</a></code> <code><a href="qgis_sanitize_arguments.html">qgis_clean_arguments()</a></code> <code><a href="qgis_sanitize_arguments.html">as_qgis_argument()</a></code> <code><a href="qgis_sanitize_arguments.html">qgis_default_value()</a></code> <code><a href="qgis_sanitize_arguments.html">is_qgis_default_value()</a></code> <code><a href="qgis_sanitize_arguments.html">qgis_clean_argument()</a></code> <code><a href="qgis_sanitize_arguments.html">qgis_argument_spec_by_name()</a></code> </p>
+        </td>
+        <td><p>Type coercion for arguments to QGIS processing algorithms</p></td>
       </tr><tr>
         
         <td>
