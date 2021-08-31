@@ -56,3 +56,43 @@ as_qgis_argument.bbox <- function(x, spec = qgis_argument_spec()) {
     glue("{x$xmin},{x$xmax},{x$ymin},{x$ymax}")
   }
 }
+
+#'
+#' @inheritParams as_qgis_argument
+#'
+#' @export
+#'
+as_qgis_argument.sfc <- function(x, spec = qgis_argument_spec()) {
+
+  if (!isTRUE(spec$qgis_type %in% c("point"))) {
+    abort(glue("Can't convert 'sfc' object to QGIS type '{ spec$qgis_type }'"))
+  }
+
+  if (isTRUE(length(x) != 1)){
+    abort(glue("Can't convert 'sfc' object to QGIS type '{ spec$qgis_type }' as the length is not equal to 1"))
+  }
+
+  if (isTRUE((sf::st_geometry_type(x) != "POINT"))){
+    abort(glue("Can't convert 'sfc' object to QGIS type '{ spec$qgis_type }' as type is not 'POINT'"))
+  }
+
+  if (!is.na(sf::st_crs(x)$epsg)){
+    glue("{x[[1]][1]},{x[[1]][2]}[EPSG:{sf::st_crs(x)$epsg}]")
+  }else{
+    glue("{x[[1]][1]},{x[[1]][2]}")
+  }
+}
+
+#'
+#' @inheritParams as_qgis_argument
+#'
+#' @export
+#'
+as_qgis_argument.POINT <- function(x, spec = qgis_argument_spec()) {
+
+  if (!isTRUE(spec$qgis_type %in% c("point"))) {
+    abort(glue("Can't convert 'POINT' object to QGIS type '{ spec$qgis_type }'"))
+  }
+
+  glue("{x[1]},{x[2]}")
+}
