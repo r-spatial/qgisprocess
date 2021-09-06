@@ -139,7 +139,9 @@ test_that("sf to QGIS point rasises issues", {
 
   skip_if_not_installed("sf")
 
-  points <- sf::st_centroid(sf::read_sf(system.file("shape/nc.shp", package = "sf")))
+  suppressWarnings(
+    points <- sf::st_centroid(sf::read_sf(system.file("shape/nc.shp", package = "sf")))
+  )
 
   expect_error(
     as_qgis_argument(
