@@ -86,3 +86,113 @@ test_that("sf crs and bbox work", {
   expect_true(file.exists(result$OUTPUT))
   qgis_result_clean(result)
 })
+
+test_that("sfc to QGIS point work", {
+
+  skip_if_not_installed("sf")
+
+  point <- sf::st_sfc(sf::st_point(c(1, 2)), crs = sf::st_crs("EPSG:5514"))
+
+  point_representation <- expect_match(
+    as_qgis_argument(point, qgis_argument_spec(qgis_type = "point")),
+    "1,2\\[EPSG:5514\\]"
+  )
+
+  expect_is(point_representation, "character")
+
+  skip_if_not_installed("sf")
+
+  point <- sf::st_sfc(sf::st_point(c(1, 2)))
+
+  point_representation <- expect_match(
+    as_qgis_argument(point, qgis_argument_spec(qgis_type = "point")),
+    "1,2"
+  )
+
+  expect_is(point_representation, "character")
+})
+
+test_that("sfc to QGIS point rasises issues", {
+
+  skip_if_not_installed("sf")
+
+  points <- sf::st_sfc(list(sf::st_point(c(1, 2)),sf::st_point(c(1, 2))), crs = sf::st_crs("EPSG:5514"))
+
+  expect_error(
+    as_qgis_argument(
+      points,
+      qgis_argument_spec(qgis_type = "point")),
+    "Can't convert 'sfc' object to QGIS type 'point' as the length is not equal to 1"
+  )
+
+  points <- sf::st_sfc(sf::st_multipoint(matrix(1:15, , 3)), crs = sf::st_crs("EPSG:5514"))
+
+  expect_error(
+    as_qgis_argument(
+      points,
+      qgis_argument_spec(qgis_type = "point")),
+    "Can't convert 'sfc' object to QGIS type 'point' as type is not 'POINT'"
+  )
+})
+
+test_that("sf to QGIS point rasises issues", {
+
+  skip_if_not_installed("sf")
+
+  suppressWarnings(
+    points <- sf::st_centroid(sf::read_sf(system.file("shape/nc.shp", package = "sf")))
+  )
+
+  expect_error(
+    as_qgis_argument(
+      points,
+      qgis_argument_spec(qgis_type = "point")
+    ),
+    "Can't convert 'sfc' object to QGIS type 'point' as the length is not equal to 1"
+  )
+
+  points <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))[1,]
+
+  expect_error(
+    as_qgis_argument(
+      points,
+      qgis_argument_spec(qgis_type = "point")
+    ),
+    "Can't convert 'sfc' object to QGIS type 'point' as type is not 'POINT'"
+  )
+})
+
+test_that("POINT to QGIS point work", {
+
+  skip_if_not_installed("sf")
+
+  point <- sf::st_point(c(1, 2))
+
+  point_representation <- expect_match(
+    as_qgis_argument(point, qgis_argument_spec(qgis_type = "point")),
+    "1,2"
+  )
+
+  expect_is(point_representation, "character")
+})
+
+test_that("sf to QGIS point work", {
+
+  skip_if_not_installed("sf")
+
+  data <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
+  data <- sf::st_transform(data, sf::st_crs("EPSG:32019"))
+
+  suppressWarnings(
+    points <- sf::st_centroid(data[1,])
+  )
+
+  point_representation <- expect_match(
+    as_qgis_argument(
+      points,
+      qgis_argument_spec(qgis_type = "point")
+    ),
+    "1265036\\.90059[0-9]+,985175\\.481905[0-9]+\\[EPSG:32019\\]")
+
+  expect_is(point_representation, "character")
+})
