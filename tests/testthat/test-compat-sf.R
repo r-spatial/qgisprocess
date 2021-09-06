@@ -183,7 +183,7 @@ test_that("sf to QGIS point work", {
     as_qgis_argument(
       points,
       qgis_argument_spec(qgis_type = "point")),
-    "1265036\\.90059085,985175\\.481905457\\[EPSG:32019\\]")
+    "1265036\\.90059[0-9]+,985175\\.481905[0-9]+\\[EPSG:32019\\]")
 
   expect_is(point_representation, "character")
 })
