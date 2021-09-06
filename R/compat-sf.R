@@ -10,10 +10,9 @@ as_qgis_argument.sf <- function(x, spec = qgis_argument_spec()) {
     abort(glue("Can't convert 'sf' object to QGIS type '{ spec$qgis_type }'"))
   }
 
-  if (spec$qgis_type == "point"){
+  if (spec$qgis_type == "point") {
     as_qgis_argument(sf::st_geometry(x), spec=spec)
-  }
-  else{
+  } else {
     path <- qgis_tmp_vector()
     sf::write_sf(x, path)
     structure(path, class = "qgis_tempfile_arg")
