@@ -122,7 +122,8 @@ test_that("sfc to QGIS point rasises issues", {
     as_qgis_argument(
       points,
       qgis_argument_spec(qgis_type = "point")),
-    "Can't convert 'sfc' object to QGIS type 'point' as the length is not equal to 1")
+    "Can't convert 'sfc' object to QGIS type 'point' as the length is not equal to 1"
+  )
 
   points <- sf::st_sfc(sf::st_multipoint(matrix(1:15, , 3)), crs = sf::st_crs("EPSG:5514"))
 
@@ -130,7 +131,8 @@ test_that("sfc to QGIS point rasises issues", {
     as_qgis_argument(
       points,
       qgis_argument_spec(qgis_type = "point")),
-    "Can't convert 'sfc' object to QGIS type 'point' as type is not 'POINT'")
+    "Can't convert 'sfc' object to QGIS type 'point' as type is not 'POINT'"
+  )
 })
 
 test_that("sf to QGIS point rasises issues", {
@@ -142,16 +144,20 @@ test_that("sf to QGIS point rasises issues", {
   expect_error(
     as_qgis_argument(
       points,
-      qgis_argument_spec(qgis_type = "point")),
-    "Can't convert 'sfc' object to QGIS type 'point' as the length is not equal to 1")
+      qgis_argument_spec(qgis_type = "point")
+    ),
+    "Can't convert 'sfc' object to QGIS type 'point' as the length is not equal to 1"
+  )
 
   points <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))[1,]
 
   expect_error(
     as_qgis_argument(
       points,
-      qgis_argument_spec(qgis_type = "point")),
-    "Can't convert 'sfc' object to QGIS type 'point' as type is not 'POINT'")
+      qgis_argument_spec(qgis_type = "point")
+    ),
+    "Can't convert 'sfc' object to QGIS type 'point' as type is not 'POINT'"
+  )
 })
 
 test_that("POINT to QGIS point work", {
@@ -182,7 +188,8 @@ test_that("sf to QGIS point work", {
   point_representation <- expect_match(
     as_qgis_argument(
       points,
-      qgis_argument_spec(qgis_type = "point")),
+      qgis_argument_spec(qgis_type = "point")
+    ),
     "1265036\\.90059[0-9]+,985175\\.481905[0-9]+\\[EPSG:32019\\]")
 
   expect_is(point_representation, "character")
