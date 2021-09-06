@@ -23,7 +23,7 @@ test_that("qgis_result_*() functions work", {
   expect_is(result, "qgis_result")
   expect_true(is_qgis_result(result))
   expect_output(print(result), "^<Result")
-  expect_named(qgis_result_args(result), c("URL", "OUTPUT"))
+  expect_true(all(c("URL", "OUTPUT") %in% names(qgis_result_args(result))))
   expect_is(qgis_result_stderr(result), "character")
   expect_is(qgis_result_stdout(result), "character")
 })
