@@ -42,20 +42,17 @@ test_that("sf crs work", {
   skip_if_not_installed("sf")
   sf_obj <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
 
-
   crs_representation <- expect_match(
     as_qgis_argument(sf::st_crs(sf_obj), qgis_argument_spec(qgis_type = "crs")),
     "^GEOGCS"
   )
 
   expect_is(crs_representation, "character")
-
 })
 
 test_that("sf bbox work", {
   skip_if_not_installed("sf")
   sf_obj <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
-
 
   bbox_representation <- expect_match(
     as_qgis_argument(sf::st_bbox(sf_obj), qgis_argument_spec(qgis_type = "extent")),
@@ -63,7 +60,6 @@ test_that("sf bbox work", {
   )
 
   expect_is(bbox_representation, "character")
-
 })
 
 test_that("sf crs and bbox work", {
@@ -88,7 +84,6 @@ test_that("sf crs and bbox work", {
 })
 
 test_that("sfc to QGIS point work", {
-
   skip_if_not_installed("sf")
 
   point <- sf::st_sfc(sf::st_point(c(1, 2)), crs = sf::st_crs("EPSG:5514"))
@@ -99,8 +94,6 @@ test_that("sfc to QGIS point work", {
   )
 
   expect_is(point_representation, "character")
-
-  skip_if_not_installed("sf")
 
   point <- sf::st_sfc(sf::st_point(c(1, 2)))
 
@@ -113,7 +106,6 @@ test_that("sfc to QGIS point work", {
 })
 
 test_that("sfc to QGIS point rasises issues", {
-
   skip_if_not_installed("sf")
 
   points <- sf::st_sfc(list(sf::st_point(c(1, 2)),sf::st_point(c(1, 2))), crs = sf::st_crs("EPSG:5514"))
@@ -121,22 +113,23 @@ test_that("sfc to QGIS point rasises issues", {
   expect_error(
     as_qgis_argument(
       points,
-      qgis_argument_spec(qgis_type = "point")),
+      qgis_argument_spec(qgis_type = "point")
+    ),
     "Can't convert 'sfc' object to QGIS type 'point' as the length is not equal to 1"
   )
 
-  points <- sf::st_sfc(sf::st_multipoint(matrix(1:15, , 3)), crs = sf::st_crs("EPSG:5514"))
+  points <- sf::st_sfc(sf::st_multipoint(matrix(1:15, ncol = 3)), crs = sf::st_crs("EPSG:5514"))
 
   expect_error(
     as_qgis_argument(
       points,
-      qgis_argument_spec(qgis_type = "point")),
+      qgis_argument_spec(qgis_type = "point")
+    ),
     "Can't convert 'sfc' object to QGIS type 'point' as type is not 'POINT'"
   )
 })
 
 test_that("sf to QGIS point rasises issues", {
-
   skip_if_not_installed("sf")
 
   suppressWarnings(
@@ -163,7 +156,6 @@ test_that("sf to QGIS point rasises issues", {
 })
 
 test_that("POINT to QGIS point work", {
-
   skip_if_not_installed("sf")
 
   point <- sf::st_point(c(1, 2))
@@ -177,7 +169,6 @@ test_that("POINT to QGIS point work", {
 })
 
 test_that("sf to QGIS point work", {
-
   skip_if_not_installed("sf")
 
   data <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
