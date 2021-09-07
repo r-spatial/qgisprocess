@@ -2,9 +2,21 @@
 % Please edit documentation in R/compat-sf.R
 \name{as_qgis_argument.sf}
 \alias{as_qgis_argument.sf}
+\alias{as_qgis_argument.crs}
+\alias{as_qgis_argument.bbox}
+\alias{as_qgis_argument.sfc}
+\alias{as_qgis_argument.POINT}
 \title{Convert sf objects to/from QGIS inputs/outputs}
 \usage{
 \method{as_qgis_argument}{sf}(x, spec = qgis_argument_spec())
+
+\method{as_qgis_argument}{crs}(x, spec = qgis_argument_spec())
+
+\method{as_qgis_argument}{bbox}(x, spec = qgis_argument_spec())
+
+\method{as_qgis_argument}{sfc}(x, spec = qgis_argument_spec())
+
+\method{as_qgis_argument}{POINT}(x, spec = qgis_argument_spec())
 }
 \arguments{
 \item{x}{An object passed to a QGIS processing algorithm}

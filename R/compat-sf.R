@@ -4,7 +4,6 @@
 #' @inheritParams as_qgis_argument
 #'
 #' @export
-#'
 as_qgis_argument.sf <- function(x, spec = qgis_argument_spec()) {
   if (!isTRUE(spec$qgis_type %in% c("source", "layer", "vector", "multilayer", "point"))) {
     abort(glue("Can't convert 'sf' object to QGIS type '{ spec$qgis_type }'"))
@@ -31,11 +30,8 @@ st_as_sf.qgis_result <- function(x, ...) {
   abort("Can't extract sf object from result: zero outputs of type 'outputVector' or 'outputLayer'.")
 }
 
-#'
-#' @inheritParams as_qgis_argument
-#'
+#' @rdname as_qgis_argument.sf
 #' @export
-#'
 as_qgis_argument.crs <- function(x, spec = qgis_argument_spec()) {
   if (!isTRUE(spec$qgis_type %in% c("crs"))) {
     abort(glue("Can't convert 'crs' object to QGIS type '{ spec$qgis_type }'"))
@@ -44,11 +40,8 @@ as_qgis_argument.crs <- function(x, spec = qgis_argument_spec()) {
   x$Wkt
 }
 
-#'
-#' @inheritParams as_qgis_argument
-#'
+#' @rdname as_qgis_argument.sf
 #' @export
-#'
 as_qgis_argument.bbox <- function(x, spec = qgis_argument_spec()) {
   if (!isTRUE(spec$qgis_type %in% c("extent"))) {
     abort(glue("Can't convert 'bbox' object to QGIS type '{ spec$qgis_type }'"))
@@ -61,11 +54,8 @@ as_qgis_argument.bbox <- function(x, spec = qgis_argument_spec()) {
   }
 }
 
-#'
-#' @inheritParams as_qgis_argument
-#'
+#' @rdname as_qgis_argument.sf
 #' @export
-#'
 as_qgis_argument.sfc <- function(x, spec = qgis_argument_spec()) {
 
   if (!isTRUE(spec$qgis_type %in% c("point"))) {
@@ -87,11 +77,8 @@ as_qgis_argument.sfc <- function(x, spec = qgis_argument_spec()) {
   }
 }
 
-#'
-#' @inheritParams as_qgis_argument
-#'
+#' @rdname as_qgis_argument.sf
 #' @export
-#'
 as_qgis_argument.POINT <- function(x, spec = qgis_argument_spec()) {
 
   if (!isTRUE(spec$qgis_type %in% c("point"))) {

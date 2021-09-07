@@ -11,6 +11,10 @@ test_that("qgis_run_algorithm() works", {
   expect_true(file.exists(tmp_json))
 
   unlink(tmp_json)
+
+  # arguments to native:filedownloader changed in recent nightly
+  skip_if_not(identical(qgis_arguments("native:filedownloader")$name, c("URL", "OUTPUT")))
+
   result <- expect_silent(
     qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = TRUE)
   )
