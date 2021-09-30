@@ -8,7 +8,7 @@ qgis_run_algorithm(
   algorithm,
   ...,
   PROJECT_PATH = NULL,
-  ELIPSOID = NULL,
+  ELLIPSOID = NULL,
   .quiet = FALSE
 )
 }
@@ -20,7 +20,7 @@ a path to a QGIS model file.}
 \code{\link[rlang:list2]{rlang::list2()}} are supported. These arguments
 are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()}}.}
 
-\item{PROJECT_PATH, ELIPSOID}{Global values for QGIS project file and
+\item{PROJECT_PATH, ELLIPSOID}{Global values for QGIS project file and
 elipsoid name for distance calculations.}
 
 \item{.quiet}{Use \code{TRUE} to suppress output from processing algorithms.}
