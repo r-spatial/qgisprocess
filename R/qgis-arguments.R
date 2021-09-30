@@ -27,7 +27,10 @@ qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_
   }
 
   # get QGIS types, values, and names for this algorithm
-  arg_meta <- .algorithm_arguments
+  arg_meta <- vctrs::vec_rbind(
+    .algorithm_arguments,
+    tibble::tibble(name = c("PROJECT_PATH", "ELLIPSOID"))
+  )
 
   # specifying an argument twice is the command-line equivalent
   # of passing multiple values. Here, we generate a qgis_list_input()
