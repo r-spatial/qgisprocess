@@ -44,7 +44,7 @@ qgis_function <- function(algorithm, ...) {
   assert_qgis_algorithm(algorithm)
 
   args <- qgis_arguments(algorithm)
-  arg_names <- c(args$name, "PROJECT_PATH", "ELIPSOID", ".quiet")
+  arg_names <- c(args$name, "PROJECT_PATH", "ELLIPSOID", ".quiet")
 
   # The dots are the default values and are not exposed as
   # function arguments, and become the environment for the function
@@ -82,7 +82,7 @@ qgis_function <- function(algorithm, ...) {
 
   # the non-algorithm args (but args to qgis_run_algorithm()) are not
   # qgis_default_value()
-  default_run_alg_args <- list(PROJECT_PATH = NULL, ELIPSOID = NULL, .quiet = TRUE)
+  default_run_alg_args <- list(PROJECT_PATH = NULL, ELLIPSOID = NULL, .quiet = TRUE)
   qgis_fun_args[intersect(names(default_run_alg_args), names(qgis_fun_args))] <-
     default_run_alg_args[intersect(names(default_run_alg_args), names(qgis_fun_args))]
 

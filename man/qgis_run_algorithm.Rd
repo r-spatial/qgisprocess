@@ -21,7 +21,7 @@ a path to a QGIS model file.}
 are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()}}.}
 
 \item{PROJECT_PATH, ELLIPSOID}{Global values for QGIS project file and
-elipsoid name for distance calculations.}
+ellipsoid name for distance calculations.}
 
 \item{.quiet}{Use \code{TRUE} to suppress output from processing algorithms.}
 }

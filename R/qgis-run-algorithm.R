@@ -9,7 +9,7 @@
 #' @param algorithm A qualified algorithm name (e.g., "native:filedownloader") or
 #'   a path to a QGIS model file.
 #' @param PROJECT_PATH,ELLIPSOID Global values for QGIS project file and
-#'   elipsoid name for distance calculations.
+#'   ellipsoid name for distance calculations.
 #' @param ... Named key-value pairs as arguments for each algorithm. Features of
 #'   [rlang::list2()] are supported. These arguments
 #'   are converted to strings using [as_qgis_argument()].

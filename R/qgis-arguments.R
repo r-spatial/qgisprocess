@@ -27,10 +27,7 @@ qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_
   }
 
   # get QGIS types, values, and names for this algorithm
-  arg_meta <- vctrs::vec_rbind(
-    .algorithm_arguments,
-    tibble::tibble(name = c("PROJECT_PATH", "ELLIPSOID"))
-  )
+  arg_meta <- .algorithm_arguments
 
   # specifying an argument twice is the command-line equivalent
   # of passing multiple values. Here, we generate a qgis_list_input()
@@ -49,7 +46,7 @@ qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_
 
   # warn about unspecified arguments (don't error so that users can
   # write code for more than one QGIS install if args are added)
-  unknown_args <- setdiff(names(dots), c("PROJECT_PATH", "ELIPSOID", arg_meta$name))
+  unknown_args <- setdiff(names(dots), c("PROJECT_PATH", "ELLIPSOID", arg_meta$name))
   if (length(unknown_args) > 0){
     for (arg_name in unknown_args) {
       message(glue("Ignoring unknown input '{ arg_name }'"))
@@ -300,8 +297,8 @@ qgis_argument_spec_by_name <- function(algorithm, name,
                                        .algorithm_arguments = qgis_arguments(algorithm)) {
   # These are special-cased at the command-line level, so they don't have
   # types defined in the help file. Here, we create two special types
-  # ELIPSOID and PROJECT_PATH.
-  if (isTRUE(name %in% c("ELIPSOID", "PROJECT_PATH"))) {
+  # ELLIPSOID and PROJECT_PATH.
+  if (isTRUE(name %in% c("ELLIPSOID", "PROJECT_PATH"))) {
     return(qgis_argument_spec(algorithm, name, name))
   }
 
