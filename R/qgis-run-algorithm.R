@@ -8,7 +8,7 @@
 #'
 #' @param algorithm A qualified algorithm name (e.g., "native:filedownloader") or
 #'   a path to a QGIS model file.
-#' @param PROJECT_PATH,ELIPSOID Global values for QGIS project file and
+#' @param PROJECT_PATH,ELLIPSOID Global values for QGIS project file and
 #'   elipsoid name for distance calculations.
 #' @param ... Named key-value pairs as arguments for each algorithm. Features of
 #'   [rlang::list2()] are supported. These arguments
@@ -26,7 +26,7 @@
 #'   )
 #' }
 #'
-qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = NULL, .quiet = FALSE) {
+qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = NULL, .quiet = FALSE) {
   assert_qgis()
   assert_qgis_algorithm(algorithm)
 
@@ -40,7 +40,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELIPSOID = N
     algorithm,
     !!! dots,
     PROJECT_PATH = PROJECT_PATH,
-    ELIPSOID = ELIPSOID
+    ELLIPSOID = ELLIPSOID
   )
   on.exit(qgis_clean_arguments(args))
 

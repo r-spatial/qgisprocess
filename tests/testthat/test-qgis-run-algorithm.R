@@ -19,6 +19,7 @@ test_that("qgis_run_algorithm() works", {
     qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = TRUE)
   )
   expect_true(file.exists(tmp_json))
+  unlink(tmp_json)
 })
 
 test_that("qgis_run_algorithm() ignores unknown inputs", {
