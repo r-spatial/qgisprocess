@@ -18,10 +18,10 @@ as_qgis_argument_terra <- function(x, spec = qgis_argument_spec()) {
   }
 
   # try to use a filename if present
-  if (terra::sources(obj)$source != "") {
-    file_ext <- stringr::str_to_lower(tools::file_ext(terra::sources(obj)$source))
+  if (terra::sources(x)$source != "") {
+    file_ext <- stringr::str_to_lower(tools::file_ext(terra::sources(x)$source))
     if (file_ext %in% c("grd", "asc", "sdat", "rst", "nc", "tif", "tiff", "gtiff", "envi", "bil", "img")) {
-      return(terra::sources(obj)$source)
+      return(terra::sources(x)$source)
     }
   }
 
@@ -33,7 +33,7 @@ as_qgis_argument_terra <- function(x, spec = qgis_argument_spec()) {
 #' @rdname as_qgis_argument.SpatRaster
 #' @export
 qgis_as_terra <- function(output, ...) {
-  UseMethod("qgis_as_raster")
+  UseMethod("qgis_as_terra")
 }
 
 #' @rdname as_qgis_argument.SpatRaster
@@ -48,7 +48,7 @@ qgis_as_terra.qgis_outputLayer <- function(output, ...) {
   terra::rast(unclass(output), ...)
 }
 
-#' @rdname as_qgis_argument.RasterLayer
+#' @rdname as_qgis_argument.SpatRaster
 #' @export
 qgis_as_terra.qgis_result <- function(output, ...) {
   # find the first raster output and read it
@@ -61,23 +61,13 @@ qgis_as_terra.qgis_result <- function(output, ...) {
   abort("Can't extract 'terra' raster from result: zero outputs of type 'outputRaster' or 'outputLayer'.")
 }
 
-
-#' @export
-as_qgis_argument.CRS <- function(x, spec = qgis_argument_spec()) {
-  if (!isTRUE(spec$qgis_type %in% c("crs"))) {
-    abort(glue("Can't convert 'crs' object to QGIS type '{ spec$qgis_type }'"))
-  }
-
-  raster::wkt(x)
-}
-
 #' @export
 as_qgis_argument.SpatExtent <- function(x, spec = qgis_argument_spec()) {
   if (!isTRUE(spec$qgis_type %in% c("extent"))) {
     abort(glue("Can't convert 'SpatExtent' object to QGIS type '{ spec$qgis_type }'"))
   }
 
-  ex <- as.vector(bb)
+  ex <- as.vector(terra::ext(x))
 
   glue("{ex[['xmin']]},{ex[['xmax']]},{ex[['ymin']]},{ex[['ymax']]}")
 }
