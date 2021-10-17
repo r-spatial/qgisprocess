@@ -15,7 +15,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 coverage](https://codecov.io/gh/paleolimbot/qgisprocess/branch/master/graph/badge.svg)](https://codecov.io/gh/paleolimbot/qgisprocess?branch=master)
 <!-- badges: end -->
 
-The goal of `qgisprocess` is to provide an R interface to the popular
+The goal of **qgisprocess** is to provide an R interface to the popular
 and open source desktop geographic information system (GIS) program
 [QGIS](https://qgis.org/en/site/). The package is a re-implementation of
 functionality provided by the archived
@@ -33,35 +33,37 @@ You can install the development version from
 remotes::install_github("paleolimbot/qgisprocess")
 ```
 
-The qgisprocess package wraps the `qgis_process` command-line utility,
-which is available in QGIS &gt;=
+The **qgisprocess** package wraps the `qgis_process` command-line
+utility, which is available in QGIS \>=
 [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16),
 [released](https://qgis.org/en/site/getinvolved/development/roadmap.html)
-in September 2020. MacOS users will have to install QIGS &gt;= 3.16;
+in September 2020. MacOS users will have to install QIGS \>= 3.16;
 download instructions for all platforms are available at
 <https://download.qgis.org/>. If a recent version of QGIS isn’t
 available for your OS, you can use one of the [Geocomputation with R
 Docker images](https://github.com/geocompr/docker) with QGIS installed.
 
 If the automatic configuration fails (or if you have more than one
-installation and would like to choose which one is used by qgisprocess),
-you can set `options(qgisprocess.path = "path/to/qgis_process")`,
-possibly in your `.Rprofile` to persist between sessions. You can run
-`qgis_configure()` to print the gritty details!
+installation and would like to choose which one is used by
+**qgisprocess**), you can set
+`options(qgisprocess.path = "path/to/qgis_process")`, possibly in your
+`.Rprofile` to persist between sessions. You can run `qgis_configure()`
+to print the gritty details!
 
 ``` r
 library(qgisprocess)
-#> Using 'qgis_process' at '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'.
+#> Using 'qgis_process' at 'qgis_process'.
+#> QGIS version: 3.18.3-Zürich
+#> Metadata of 620 algorithms successfully cached.
 #> Run `qgis_configure()` for details.
 qgis_configure()
 #> getOption('qgisprocess.path') was not found.
 #> Sys.getenv('R_QGISPROCESS_PATH') was not found.
 #> Trying 'qgis_process' on PATH
-#> Error in rethrow_call(c_processx_exec, command, c(command, args), stdin, : cannot start processx process 'qgis_process' (system error 2, No such file or directory) @unix/processx.c:604 (processx_exec)
-#> Found 1 QGIS installation containing 'qgis_process':
-#>  /Applications/QGIS.app/Contents/MacOS/bin/qgis_process
-#> Trying command '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'
 #> Success!
+#> QGIS version: 3.18.3-Zürich
+#> Metadata of 620 algorithms queried and stored in cache.
+#> Run `qgis_algorithms()` to see them.
 ```
 
 ## Example
@@ -91,7 +93,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmptXCayy/file9b2b462efaa9/file9b2b5212f730.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpiBHVzN/file141d2493528b8/file141d2457ec02d.gpkg"
 
 output_sf <- sf::read_sf(qgis_output(result, "OUTPUT"))
 plot(sf::st_geometry(output_sf))
@@ -188,7 +190,7 @@ When using R interactively, it may be useful to use
 
 ``` r
 qgis_algorithms()
-#> # A tibble: 986 x 5
+#> # A tibble: 620 x 5
 #>    provider provider_title algorithm         algorithm_id    algorithm_title    
 #>    <chr>    <chr>          <chr>             <chr>           <chr>              
 #>  1 3d       QGIS (3D)      3d:tessellate     tessellate      Tessellate         
@@ -201,7 +203,7 @@ qgis_algorithms()
 #>  8 gdal     GDAL           gdal:cliprasterb… cliprasterbyma… Clip raster by mas…
 #>  9 gdal     GDAL           gdal:clipvectorb… clipvectorbyex… Clip vector by ext…
 #> 10 gdal     GDAL           gdal:clipvectorb… clipvectorbypo… Clip vector by mas…
-#> # … with 976 more rows
+#> # … with 610 more rows
 ```
 
 ## Further reading

@@ -24,7 +24,8 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/paleolimbot/qgisprocess/branch/master/graph/badge.svg)](https://codecov.io/gh/paleolimbot/qgisprocess?branch=master)
 <!-- badges: end -->
 
-The goal of `qgisprocess` is to provide an R interface to the popular and open source desktop geographic information system (GIS) program [QGIS](https://qgis.org/en/site/). The package is a re-implementation of functionality provided by the archived [RQGIS](https://cran.r-project.org/package=RQGIS) package, which was partially revived in the [RQGIS3](https://github.com/r-spatial/RQGIS3) package.
+The goal of **qgisprocess** is to provide an R interface to the popular and open source desktop geographic information system (GIS) program [QGIS](https://qgis.org/en/site/).
+The package is a re-implementation of functionality provided by the archived [RQGIS](https://cran.r-project.org/package=RQGIS) package, which was partially revived in the [RQGIS3](https://github.com/r-spatial/RQGIS3) package.
 
 ## Installation
 
@@ -35,9 +36,12 @@ You can install the development version from [GitHub](https://github.com/) with:
 remotes::install_github("paleolimbot/qgisprocess")
 ```
 
-The qgisprocess package wraps the `qgis_process` command-line utility, which is available in QGIS >= [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16), [released](https://qgis.org/en/site/getinvolved/development/roadmap.html) in September 2020. MacOS users will have to install QIGS >= 3.16; download instructions for all platforms are available at <https://download.qgis.org/>. If a recent version of QGIS isn't available for your OS, you can use one of the [Geocomputation with R Docker images](https://github.com/geocompr/docker) with QGIS installed.
+The **qgisprocess** package wraps the `qgis_process` command-line utility, which is available in QGIS >= [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16), [released](https://qgis.org/en/site/getinvolved/development/roadmap.html) in September 2020. 
+MacOS users will have to install QIGS >= 3.16; download instructions for all platforms are available at <https://download.qgis.org/>. 
+If a recent version of QGIS isn't available for your OS, you can use one of the [Geocomputation with R Docker images](https://github.com/geocompr/docker) with QGIS installed.
 
-If the automatic configuration fails (or if you have more than one installation and would like to choose which one is used by qgisprocess), you can set `options(qgisprocess.path = "path/to/qgis_process")`, possibly in your `.Rprofile` to persist between sessions. You can run `qgis_configure()` to print the gritty details!
+If the automatic configuration fails (or if you have more than one installation and would like to choose which one is used by **qgisprocess**), you can set `options(qgisprocess.path = "path/to/qgis_process")`, possibly in your `.Rprofile` to persist between sessions.
+You can run `qgis_configure()` to print the gritty details!
 
 ```{r}
 library(qgisprocess)
@@ -75,7 +79,8 @@ It may also be useful to run an algorithm in the QGIS GUI and examine the consol
 
 ![](man/figures/qgis-buffer.png)
 
-A list of available algorithms can be found using `qgis_algorithms()`. When using R interactively, it may be useful to use `View(qgis_algorithms())` to search.
+A list of available algorithms can be found using `qgis_algorithms()`.
+When using R interactively, it may be useful to use `View(qgis_algorithms())` to search.
 
 ```{r}
 qgis_algorithms()
