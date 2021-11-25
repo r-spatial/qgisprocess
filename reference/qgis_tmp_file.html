@@ -127,8 +127,8 @@ files are created in a special temporary directory
 (<code>qgis_tmp_base()</code>) that should be periodically cleaned up
 using <code>qgis_tmp_clean()</code>. You can set your preferred
 vector and/or raster file extension using
-<code><a href='https://rdrr.io/r/base/options.html'>options(qgisprocess.tmp_vector_ext = "...")</a></code> and/or
-<code><a href='https://rdrr.io/r/base/options.html'>options(qgisprocess.tmp_raster_ext = "...")</a></code>, respectively.</p>
+<code>options(qgisprocess.tmp_vector_ext = "...")</code> and/or
+<code>options(qgisprocess.tmp_raster_ext = "...")</code>, respectively.</p>
     </div>
 
     <pre class="usage"><span class='fu'>qgis_tmp_file</span><span class='op'>(</span><span class='va'>ext</span><span class='op'>)</span>
@@ -164,12 +164,16 @@ vector and/or raster file extension using
 (not yet created) temporary file.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>qgis_tmp_base</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpCZd5Yc/file3f9f737351a"</div><div class='input'><span class='fu'>qgis_tmp_file</span><span class='op'>(</span><span class='st'>".csv"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpCZd5Yc/file3f9f737351a/file3f9f779d4244.csv"</div><div class='input'><span class='fu'>qgis_tmp_vector</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpCZd5Yc/file3f9f737351a/file3f9f7569bbb5.gpkg"</div><div class='input'><span class='fu'>qgis_tmp_raster</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpCZd5Yc/file3f9f737351a/file3f9f70a2a44b.tif"</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>qgis_tmp_base</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJpxlhz/file5f6268f6e42d"</span>
+<span class='r-in'><span class='fu'>qgis_tmp_file</span><span class='op'>(</span><span class='st'>".csv"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJpxlhz/file5f6268f6e42d/file5f62f6cb945.csv"</span>
+<span class='r-in'><span class='fu'>qgis_tmp_vector</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJpxlhz/file5f6268f6e42d/file5f622af768ec.gpkg"</span>
+<span class='r-in'><span class='fu'>qgis_tmp_raster</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpJpxlhz/file5f6268f6e42d/file5f62590973fd.tif"</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
