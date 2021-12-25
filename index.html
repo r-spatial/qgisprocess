@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,18 +41,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/paleolimbot/qgisprocess/">
+  <a href="https://github.com/paleolimbot/qgisprocess/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -67,24 +63,24 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="qgisprocess" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#qgisprocess" class="anchor"></a>qgisprocess</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="qgisprocess">qgisprocess<a class="anchor" aria-label="anchor" href="#qgisprocess"></a>
+</h1></div>
 <p><img src="reference/figures/qgisprocess_icon.png" align="right" hspace="10" vspace="0" width="20%"></p>
 <!-- badges: start -->
-<p><a href="https://github.com/paleolimbot/qgisprocess/actions"><img src="https://github.com/paleolimbot/qgisprocess/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a> <a href="https://codecov.io/gh/paleolimbot/qgisprocess?branch=master"><img src="https://codecov.io/gh/paleolimbot/qgisprocess/branch/master/graph/badge.svg" alt="Codecov test coverage"></a> <!-- badges: end --></p>
-<p>The goal of <code>qgisprocess</code> is to provide an R interface to the popular and open source desktop geographic information system (GIS) program <a href="https://qgis.org/en/site/">QGIS</a>. The package is a re-implementation of functionality provided by the archived <a href="https://cran.r-project.org/package=RQGIS">RQGIS</a> package, which was partially revived in the <a href="https://github.com/r-spatial/RQGIS3">RQGIS3</a> package.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
+
+<p>The goal of <code>qgisprocess</code> is to provide an R interface to the popular and open source desktop geographic information system (GIS) program <a href="https://qgis.org/en/site/" class="external-link">QGIS</a>. The package is a re-implementation of functionality provided by the archived <a href="https://cran.r-project.org/package=RQGIS" class="external-link">RQGIS</a> package, which was partially revived in the <a href="https://github.com/r-spatial/RQGIS3" class="external-link">RQGIS3</a> package.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"paleolimbot/qgisprocess"</span><span class="op">)</span></code></pre></div>
-<p>The qgisprocess package wraps the <code>qgis_process</code> command-line utility, which is available in QGIS &gt;= <a href="https://github.com/qgis/QGIS/releases/tag/final-3_14_16">3.14.16</a>, <a href="https://qgis.org/en/site/getinvolved/development/roadmap.html">released</a> in September 2020. MacOS users will have to install QIGS &gt;= 3.16; download instructions for all platforms are available at <a href="https://download.qgis.org/" class="uri">https://download.qgis.org/</a>. If a recent version of QGIS isn’t available for your OS, you can use one of the <a href="https://github.com/geocompr/docker">Geocomputation with R Docker images</a> with QGIS installed.</p>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"paleolimbot/qgisprocess"</span><span class="op">)</span></code></pre></div>
+<p>The qgisprocess package wraps the <code>qgis_process</code> command-line utility, which is available in QGIS &gt;= <a href="https://github.com/qgis/QGIS/releases/tag/final-3_14_16" class="external-link">3.14.16</a>, <a href="https://qgis.org/en/site/getinvolved/development/roadmap.html" class="external-link">released</a> in September 2020. MacOS users will have to install QIGS &gt;= 3.16; download instructions for all platforms are available at <a href="https://download.qgis.org/" class="external-link uri">https://download.qgis.org/</a>. If a recent version of QGIS isn’t available for your OS, you can use one of the <a href="https://github.com/geocompr/docker" class="external-link">Geocomputation with R Docker images</a> with QGIS installed.</p>
 <p>If the automatic configuration fails (or if you have more than one installation and would like to choose which one is used by qgisprocess), you can set <code>options(qgisprocess.path = "path/to/qgis_process")</code>, possibly in your <code>.Rprofile</code> to persist between sessions. You can run <code><a href="reference/qgis_run.html">qgis_configure()</a></code> to print the gritty details!</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paleolimbot/qgisprocess">qgisprocess</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paleolimbot/qgisprocess" class="external-link">qgisprocess</a></span><span class="op">)</span>
 <span class="co">#&gt; Using 'qgis_process' at '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'.</span>
 <span class="co">#&gt; Run `qgis_configure()` for details.</span>
 <span class="fu"><a href="reference/qgis_run.html">qgis_configure</a></span><span class="op">(</span><span class="op">)</span>
@@ -97,12 +93,12 @@
 <span class="co">#&gt; Trying command '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'</span>
 <span class="co">#&gt; Success!</span></code></pre></div>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
-<p>The following example demonstrates the <a href="https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer">buffer</a> algorithm in action. The passing of <a href="https://r-spatial.github.io/sf">sf</a> and <a href="https://cran.r-project.org/package=raster">raster</a> objects is experimentally supported (and will be well-supported in the future!).</p>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<p>The following example demonstrates the <a href="https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer" class="external-link">buffer</a> algorithm in action. The passing of <a href="https://r-spatial.github.io/sf" class="external-link">sf</a> and <a href="https://cran.r-project.org/package=raster" class="external-link">raster</a> objects is experimentally supported (and will be well-supported in the future!).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/qgis_run_algorithm.html">qgis_run_algorithm</a></span><span class="op">(</span>
   <span class="st">"native:buffer"</span>,
@@ -122,8 +118,8 @@
 <span class="co">#&gt; List of 1</span>
 <span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmptXCayy/file9b2b462efaa9/file9b2b5212f730.gpkg"</span>
 
-<span class="va">output_sf</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf</a></span><span class="op">(</span><span class="fu"><a href="reference/is_qgis_result.html">qgis_output</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"OUTPUT"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">output_sf</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">output_sf</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="reference/is_qgis_result.html">qgis_output</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"OUTPUT"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">output_sf</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-buffer-1.png" width="100%"></p>
 <p>You can read the help associated with an algorithm using <code><a href="reference/qgis_show_help.html">qgis_show_help()</a></code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -218,13 +214,13 @@
 <span class="co">#&gt; 10 gdal     GDAL           gdal:clipvectorb… clipvectorbypo… Clip vector by mas…</span>
 <span class="co">#&gt; # … with 976 more rows</span></code></pre></div>
 </div>
-<div id="further-reading" class="section level2">
-<h2 class="hasAnchor">
-<a href="#further-reading" class="anchor"></a>Further reading</h2>
+<div class="section level2">
+<h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
+</h2>
 <ul>
-<li>A <a href="https://journal.r-project.org/archive/2017/RJ-2017-067/index.html">paper</a> on the original RQGIS package published in the R Journal</li>
-<li>A <a href="https://github.com/r-spatial/discuss/issues/41">discussion</a> options for running QGIS from R that led to this package</li>
-<li>The <a href="https://github.com/qgis/QGIS/pull/34617">pull request</a> in the QGIS repo that led to the development of the <code>qgis_process</code> command-line utility</li>
+<li>A <a href="https://journal.r-project.org/archive/2017/RJ-2017-067/index.html" class="external-link">paper</a> on the original RQGIS package published in the R Journal</li>
+<li>A <a href="https://github.com/r-spatial/discuss/issues/41" class="external-link">discussion</a> options for running QGIS from R that led to this package</li>
+<li>The <a href="https://github.com/qgis/QGIS/pull/34617" class="external-link">pull request</a> in the QGIS repo that led to the development of the <code>qgis_process</code> command-line utility</li>
 </ul>
 </div>
 </div>
@@ -232,26 +228,43 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/paleolimbot/qgisprocess/">https://​github.com/​paleolimbot/​qgisprocess/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/paleolimbot/qgisprocess/issues">https://​github.com/​paleolimbot/​qgisprocess/​issues</a>
-</li>
+<li><a href="https://github.com/paleolimbot/qgisprocess/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/paleolimbot/qgisprocess/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Dewey Dunnington <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-9415-4582" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html#citation">Citing qgisprocess</a></li>
+</ul>
+</div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Dewey Dunnington <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-9415-4582" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Jan Caha <br><small class="roles"> Author </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/paleolimbot/qgisprocess/actions" class="external-link"><img src="https://github.com/paleolimbot/qgisprocess/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://codecov.io/gh/paleolimbot/qgisprocess?branch=master" class="external-link"><img src="https://codecov.io/gh/paleolimbot/qgisprocess/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 
@@ -260,11 +273,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Dewey Dunnington, Jan Caha.</p>
+  <p></p>
+<p>Developed by Dewey Dunnington, Jan Caha.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -272,6 +287,8 @@
 
   
 
+
+  
 
   </body>
 </html>
