@@ -39,11 +39,6 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::rcmdcheck
-          needs: check
-
       - name: Install QGIS (Ubuntu Nightly)
         if: matrix.config.qgis == 'ubuntu-nightly'
         run: |
@@ -83,18 +78,12 @@ jobs:
         with:
           args: install qgis
 
-      - name: Query dependencies
-        run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
-        shell: Rscript {0}
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rcmdcheck
+          needs: check
 
-      - name: Check
-        env:
-          _R_CHECK_CRAN_INCOMING_REMOTE_: false
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
+      - uses: r-lib/actions/check-r-package@v2
 
       # run with CMD check because installing QGIS is expensive
       - name: Test Coverage
