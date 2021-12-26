@@ -6,8 +6,7 @@
 \alias{qgisprocess-package}
 \title{qgisprocess: Use 'QGIS' Processing Algorithms}
 \description{
-Provides seamless access to the 'QGIS' <https://qgis.org/>
-  processing toolbox using the 'qgis_process' command-line utility.
+Provides seamless access to the 'QGIS' <https://qgis.org/> processing toolbox using the 'qgis_process' command-line utility.
 }
 \seealso{
 Useful links:
