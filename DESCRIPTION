@@ -29,7 +29,8 @@ Imports:
     glue,
     tibble,
     rlang,
-    vctrs
+    vctrs,
+    jsonlite
 URL: https://github.com/paleolimbot/qgisprocess
 BugReports: https://github.com/paleolimbot/qgisprocess/issues
 Suggests: 
