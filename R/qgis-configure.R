@@ -38,12 +38,12 @@ qgis_run <- function(args = character(), ..., env = qgis_env(), path = qgis_path
   if (is_windows()) {
     withr::with_envvar(
       env,
-      processx::run("cmd.exe", c("/c", "call", path, args), ...),
+      processx::run("cmd.exe", c("/c", "call", path, args), ..., encoding = "UTF-8"),
     )
   } else {
     withr::with_envvar(
       env,
-      processx::run(path, args, ...),
+      processx::run(path, args, ..., encoding = "UTF-8"),
     )
   }
 }
