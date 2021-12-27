@@ -71,12 +71,12 @@ qgis_result_output <- function(value, qgis_output_type) {
     qgis_output_type,
 
     # numbers and strings have clear mappings to R types
-    outputNumber = as.numeric(value),
-    outputString = as.character(value),
+    outputNumber = as.numeric(value %||% NA_character_),
+    outputString = as.character(value %||% NA_character_),
 
     outputMultilayer = structure(as.character(value), class = paste0("qgis_", qgis_output_type)),
 
     # by default, a classed string that can be reinterpreted
-    structure(value, class = paste0("qgis_", qgis_output_type))
+    structure(value %||% NA, class = paste0("qgis_", qgis_output_type))
   )
 }

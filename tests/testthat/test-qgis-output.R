@@ -42,6 +42,9 @@ test_that("output parsing for string, numeric, and classed types works", {
   expect_true(is.numeric(result$HEIGHT_IN_PIXELS))
   expect_identical(attr(result$HEIGHT_IN_PIXELS, "class"), NULL)
 
+  # na not null for string
+  expect_identical(result$CRS_AUTHID, NA_character_)
+
   # vector outputs should have a class
   expect_is(result$OUTPUT_TABLE, "qgis_outputVector")
 
