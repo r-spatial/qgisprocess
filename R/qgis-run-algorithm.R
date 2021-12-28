@@ -49,11 +49,11 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
 
   if (.quiet) {
     result <- qgis_run(
-      args = c("--json", "run", algorithm, args_str)
+      args = c("run", algorithm, args_str)
     )
   } else {
     result <- qgis_run(
-      args = c("--json", "run", algorithm, args_str),
+      args = c("run", algorithm, args_str),
       echo_cmd = TRUE,
       stdout_callback = function(x, ...) cat(x),
       stderr_callback = function(x, ...) message(x, appendLF = FALSE)
