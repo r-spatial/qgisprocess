@@ -47,16 +47,32 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
   # generate command-line args
   args_str <- qgis_serialize_arguments(args)
 
+  # for now, don't do this on linux because a bug results in
+  # the proj database not being found
+  use_json_output <- is_macos() || is_windows()
+
   if (.quiet) {
     result <- qgis_run(
-      args = c("run", algorithm, args_str)
+      args = c(
+        if (use_json_output) "--json",
+        "run",
+        algorithm,
+        args_str
+      ),
+      encoding = if (use_json_output) "UTF-8" else ""
     )
   } else {
     result <- qgis_run(
-      args = c("run", algorithm, args_str),
+      args = c(
+        if (use_json_output) "--json",
+        "run",
+        algorithm,
+        args_str
+      ),
       echo_cmd = TRUE,
       stdout_callback = function(x, ...) cat(x),
-      stderr_callback = function(x, ...) message(x, appendLF = FALSE)
+      stderr_callback = function(x, ...) message(x, appendLF = FALSE),
+      encoding = if (use_json_output) "UTF-8" else ""
     )
     cat("\n")
   }
