@@ -8,11 +8,13 @@
 #'
 #' @export
 #'
-as_qgis_argument.SpatRaster <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.SpatRaster <- function(x, spec = qgis_argument_spec(),
+                                        use_json_input = FALSE) {
   as_qgis_argument_terra(x, spec)
 }
 
-as_qgis_argument_terra <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument_terra <- function(x, spec = qgis_argument_spec(),
+                                   use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("raster", "layer", "multilayer"))) {
     abort(glue("Can't convert '{ class(x)[1] }' object to QGIS type '{ spec$qgis_type }'"))
   }
@@ -62,7 +64,8 @@ qgis_as_terra.qgis_result <- function(output, ...) {
 }
 
 #' @export
-as_qgis_argument.SpatExtent <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.SpatExtent <- function(x, spec = qgis_argument_spec(),
+                                        use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("extent"))) {
     abort(glue("Can't convert 'SpatExtent' object to QGIS type '{ spec$qgis_type }'"))
   }

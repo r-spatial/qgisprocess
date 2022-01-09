@@ -16,11 +16,14 @@
 #'   create a blank `spec` for testing.
 #' @param arguments The result of [qgis_sanitize_arguments()].
 #' @param .algorithm_arguments The result of [qgis_arguments()]
+#' @param .use_json_input,use_json_input TRUE if the outputs will be
+#'   serialized as JSON instead of serialized as a command-line argument.
 #' @inheritParams qgis_run_algorithm
 #'
 #' @export
 #'
-qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_arguments(algorithm)) {
+qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_arguments(algorithm),
+                                    .use_json_input = FALSE) {
   dots <- rlang::list2(...)
   if (length(dots) > 0 && !rlang::is_named(dots)) {
     abort("All ... arguments to `qgis_sanitize_arguments()` must be named.")
@@ -78,7 +81,7 @@ qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_
 
   for (name in names(args)) {
     args_sanitized[[name]] <-
-      as_qgis_argument(args[[name]], arg_spec[[name]])
+      as_qgis_argument(args[[name]], arg_spec[[name]], use_json_input = .use_json_input)
   }
   all_args_sanitized <- TRUE
 
@@ -128,7 +131,7 @@ qgis_clean_arguments <- function(arguments) {
 
 #' @rdname qgis_sanitize_arguments
 #' @export
-as_qgis_argument <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
   UseMethod("as_qgis_argument")
 }
 
@@ -156,7 +159,7 @@ is_qgis_default_value <- function(x) {
 
 #' @rdname qgis_sanitize_arguments
 #' @export
-as_qgis_argument.default <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.default <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
   abort(
     glue(
       paste0(
@@ -170,7 +173,8 @@ as_qgis_argument.default <- function(x, spec = qgis_argument_spec()) {
 
 #' @rdname qgis_sanitize_arguments
 #' @export
-as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec(),
+                                                use_json_input = FALSE) {
   # This is an opportunity to fill in a missing value based on the
   # information provided in `spec` (or `qgis_default_value()` to keep missingness).
 
@@ -194,7 +198,7 @@ as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec()) 
   } else if (isTRUE(spec$qgis_type == "enum") && length(spec$available_values) > 0) {
     default_enum_value <- rlang::as_label(spec$available_values[1])
     message(glue("Using `{ spec$name } = { default_enum_value }`"))
-    "0"
+    if (use_json_input) 0 else "0"
 
   } else {
     # We don't know the actual default values here as far as I can tell
@@ -205,7 +209,8 @@ as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec()) 
 
 #' @rdname qgis_sanitize_arguments
 #' @export
-as_qgis_argument.NULL <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.NULL <- function(x, spec = qgis_argument_spec(),
+                                  use_json_input = FALSE) {
   # NULL is similar to qgis_default_value() except it (1) never fills in
   # a default value at the R level and (2) never generates any messages.
   # It returns qgis_default_value() because this is the sentinel for removing
@@ -215,10 +220,11 @@ as_qgis_argument.NULL <- function(x, spec = qgis_argument_spec()) {
 
 #' @rdname qgis_sanitize_arguments
 #' @export
-as_qgis_argument.character <- function(x, spec = qgis_argument_spec()) {
-  switch(
+as_qgis_argument.character <- function(x, spec = qgis_argument_spec(),
+                                       use_json_input = FALSE) {
+  result <- switch(
     as.character(spec$qgis_type),
-    field = paste0(x, collapse = ";"),
+    field = if (use_json_input) x else paste0(x, collapse = ";"),
     enum = {
       x_int <- match(x, spec$available_values)
       invalid_values <- x[is.na(x_int)]
@@ -235,22 +241,26 @@ as_qgis_argument.character <- function(x, spec = qgis_argument_spec()) {
         )
       }
 
-      paste0(x_int - 1, collapse = ",")
+      x_int - 1
     },
-    paste0(x, collapse = ",")
+    x
   )
+
+  if (use_json_input) result else paste(result, collapse = ",")
 }
 
 #' @rdname qgis_sanitize_arguments
 #' @export
-as_qgis_argument.logical <- function(x, spec = qgis_argument_spec()) {
-  paste0(x, collapse = ",")
+as_qgis_argument.logical <- function(x, spec = qgis_argument_spec(),
+                                     use_json_input = FALSE) {
+  if (use_json_input) x else paste0(x, collapse = ",")
 }
 
 #' @rdname qgis_sanitize_arguments
 #' @export
-as_qgis_argument.numeric <- function(x, spec = qgis_argument_spec()) {
-  paste0(x, collapse = ",")
+as_qgis_argument.numeric <- function(x, spec = qgis_argument_spec(),
+                                     use_json_input = FALSE) {
+  if (use_json_input) x else paste0(x, collapse = ",")
 }
 
 #' @rdname qgis_sanitize_arguments
@@ -361,13 +371,15 @@ qgis_dict_input <- function(...) {
 }
 
 #' @export
-as_qgis_argument.qgis_list_input <- function(x, spec = qgis_argument_spec()) {
-  qgis_list_input(!!! lapply(x, as_qgis_argument, spec = spec))
+as_qgis_argument.qgis_list_input <- function(x, spec = qgis_argument_spec(),
+                                             use_json_input = FALSE) {
+  qgis_list_input(!!! lapply(x, as_qgis_argument, spec = spec, use_json_input = use_json_input))
 }
 
 #' @export
-as_qgis_argument.qgis_dict_input <- function(x, spec = qgis_argument_spec()) {
-  qgis_dict_input(!!! lapply(x, as_qgis_argument, spec = spec))
+as_qgis_argument.qgis_dict_input <- function(x, spec = qgis_argument_spec(),
+                                             use_json_input = FALSE) {
+  qgis_dict_input(!!! lapply(x, as_qgis_argument, spec = spec, use_json_input = use_json_input))
 }
 
 #' @export

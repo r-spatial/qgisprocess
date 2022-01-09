@@ -35,20 +35,21 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
     abort("All ... arguments to `qgis_run_algorithm()` must be named.")
   }
 
+  # for now, don't do use JSON output on linux because a bug results in
+  # the PROJ database not being found
+  use_json_output <- is_macos() || is_windows()
+  use_json_input <- use_json_output &&
+    (package_version(strsplit(qgis_version(), "-")[[1]][1]) >= "3.23.0")
+
   # sanitize arguments and make sure they are cleaned up on exit
   args <- qgis_sanitize_arguments(
     algorithm,
     !!! dots,
     PROJECT_PATH = PROJECT_PATH,
-    ELLIPSOID = ELLIPSOID
+    ELLIPSOID = ELLIPSOID,
+    .use_json_input = use_json_input
   )
   on.exit(qgis_clean_arguments(args))
-
-  # for now, don't do this on linux because a bug results in
-  # the proj database not being found
-  use_json_output <- is_macos() || is_windows()
-  use_json_input <- use_json_output &&
-    (package_version(strsplit(qgis_version(), "-")[[1]][1]) >= "3.23.0")
 
   # generate command-line args or JSON input
   args_str <- qgis_serialize_arguments(args, use_json_input = use_json_input)

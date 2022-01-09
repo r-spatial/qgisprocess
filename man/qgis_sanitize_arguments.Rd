@@ -21,28 +21,29 @@
 qgis_sanitize_arguments(
   algorithm,
   ...,
-  .algorithm_arguments = qgis_arguments(algorithm)
+  .algorithm_arguments = qgis_arguments(algorithm),
+  .use_json_input = FALSE
 )
 
 qgis_clean_arguments(arguments)
 
-as_qgis_argument(x, spec = qgis_argument_spec())
+as_qgis_argument(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
 qgis_default_value()
 
 is_qgis_default_value(x)
 
-\method{as_qgis_argument}{default}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{default}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
-\method{as_qgis_argument}{qgis_default_value}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{qgis_default_value}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
-\method{as_qgis_argument}{`NULL`}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{`NULL`}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
-\method{as_qgis_argument}{character}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{character}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
-\method{as_qgis_argument}{logical}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{logical}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
-\method{as_qgis_argument}{numeric}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{numeric}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
 qgis_clean_argument(value)
 
@@ -65,6 +66,9 @@ a path to a QGIS model file.}
 are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()}}.}
 
 \item{.algorithm_arguments}{The result of \code{\link[=qgis_arguments]{qgis_arguments()}}}
+
+\item{.use_json_input, use_json_input}{TRUE if the outputs will be
+serialized as JSON instead of serialized as a command-line argument.}
 
 \item{arguments}{The result of \code{\link[=qgis_sanitize_arguments]{qgis_sanitize_arguments()}}.}
 

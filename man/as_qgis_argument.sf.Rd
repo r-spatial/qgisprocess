@@ -8,15 +8,15 @@
 \alias{as_qgis_argument.POINT}
 \title{Convert sf objects to/from QGIS inputs/outputs}
 \usage{
-\method{as_qgis_argument}{sf}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{sf}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
-\method{as_qgis_argument}{crs}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{crs}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
-\method{as_qgis_argument}{bbox}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{bbox}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
-\method{as_qgis_argument}{sfc}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{sfc}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
-\method{as_qgis_argument}{POINT}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{POINT}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 }
 \arguments{
 \item{x}{An object passed to a QGIS processing algorithm}
@@ -24,6 +24,9 @@
 \item{spec}{A \code{list()} with values for \code{algorithm}, \code{name},
 \code{description}, and \code{qgis_type}. See \code{\link[=qgis_argument_spec]{qgis_argument_spec()}} to
 create a blank \code{spec} for testing.}
+
+\item{use_json_input}{TRUE if the outputs will be
+serialized as JSON instead of serialized as a command-line argument.}
 }
 \description{
 Convert sf objects to/from QGIS inputs/outputs
