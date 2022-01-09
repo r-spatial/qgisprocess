@@ -22,6 +22,9 @@
 #'   found.
 #' @param env A [list()] of environment variables. Defaults to [qgis_env()].
 #' @param path A path to the 'qgis_process' executable. Defaults to [qgis_path()].
+#' @param use_cached_data Use the cached algorithm list and `path` found when
+#'   configuring qgisprocess during the last session. This saves some time
+#'   loading the package.
 #'
 #' @return The result of [processx::run()].
 #' @export
@@ -74,27 +77,38 @@ assert_qgis <- function(action = abort) {
 #' @rdname qgis_run
 #' @export
 qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
-  version <- as.character(packageVersion("qgisprocess"))
-
-  cache_data_file <- file.path(
-    rappdirs::user_cache_dir("R-qgisprocess"),
-    glue("cache-{version}.rds")
-  )
-
-  if (use_cached_data && file.exists(cache_data_file)) {
-    cached_data <- readRDS(cache_data_file)
-    if (!quiet) message(glue("Restoring configuration from '{cache_data_file}'"))
-
-    qgisprocess_cache$path <- cached_data$path
-    qgisprocess_cache$version <- cached_data$version
-    qgisprocess_cache$algorithms <- cached_data$algorithms
-    qgisprocess_cache$help_text <- NULL
-
-    return(invisible(TRUE))
-  }
-
   tryCatch({
     qgis_unconfigure()
+
+    version <- as.character(packageVersion("qgisprocess"))
+
+    cache_data_file <- file.path(
+      rappdirs::user_cache_dir("R-qgisprocess"),
+      glue("cache-{version}.rds")
+    )
+
+    if (use_cached_data && file.exists(cache_data_file)) {
+      try({
+        cached_data <- readRDS(cache_data_file)
+        if (!quiet) message(glue("Restoring configuration from '{cache_data_file}'"))
+
+        # respect environment variable/option for path
+        option_path <- getOption(
+          "qgisprocess.path",
+          Sys.getenv("R_QGISPROCESS_PATH")
+        )
+
+        if (identical(option_path, "") || identical(option_path, cached_data$path)) {
+          qgisprocess_cache$path <- cached_data$path
+          qgisprocess_cache$version <- cached_data$version
+          qgisprocess_cache$algorithms <- cached_data$algorithms
+          qgisprocess_cache$help_text <- new.env(parent = emptyenv())
+          qgisprocess_cache$loaded_from <- cache_data_file
+
+          return(invisible(TRUE))
+        }
+      })
+    }
 
     path <- qgis_path(query = TRUE, quiet = quiet)
 
@@ -103,15 +117,18 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
     algorithms <- qgis_algorithms(query = TRUE, quiet = quiet)
 
-    if (!quiet) message("Saving configuration to '{cache_data_file}'")
-    if (!dir.exists(dirname(cache_data_file))) {
-      dir.create(dirname(cache_data_file), recursive = TRUE)
-    }
+    if (!quiet) message(glue("Saving configuration to '{cache_data_file}'"))
 
-    saveRDS(
-      list(path = path, version = version, algorithms = algorithms),
-      cache_data_file
-    )
+    try({
+      if (!dir.exists(dirname(cache_data_file))) {
+        dir.create(dirname(cache_data_file), recursive = TRUE)
+      }
+
+      saveRDS(
+        list(path = path, version = version, algorithms = algorithms),
+        cache_data_file
+      )
+    })
 
     if (!quiet) {
       message(
@@ -144,6 +161,7 @@ qgis_unconfigure <- function() {
   qgisprocess_cache$version <- NULL
   qgisprocess_cache$algorithms <- NULL
   qgisprocess_cache$help_text <- new.env(parent = emptyenv())
+  qgisprocess_cache$loaded_from <- NULL
   invisible(NULL)
 }
 
@@ -440,3 +458,4 @@ qgisprocess_cache$path <- NULL
 qgisprocess_cache$version <- NULL
 qgisprocess_cache$algorithms <- NULL
 qgisprocess_cache$help_text <- NULL
+qgisprocess_cache$loaded_from <- NULL

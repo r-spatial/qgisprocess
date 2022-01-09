@@ -25,7 +25,11 @@
       glue::glue(
         "Using 'qgis_process' at '{ qgis_path() }'.\n",
         "QGIS version: { qgis_version() }\n",
-        "Metadata of { nrow(qgis_algorithms()) } algorithms successfully cached, ",
+        if (is.null(qgisprocess_cache$loaded_from)) {
+          "Metadata of { nrow(qgis_algorithms()) } algorithms successfully cached\n"
+        } else {
+          "Configuration loaded from '{ qgisprocess_cache$loaded_from }'\n"
+        },
         "Run `qgis_configure()` for details.\n",
         if (qgis_use_json_input()) "Using JSON for input serialization\n" else "",
         if (qgis_use_json_output()) "Using JSON for output serialization\n" else "",
