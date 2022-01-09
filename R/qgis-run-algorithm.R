@@ -44,38 +44,41 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
   )
   on.exit(qgis_clean_arguments(args))
 
-  # generate command-line args
-  args_str <- qgis_serialize_arguments(args)
-
   # for now, don't do this on linux because a bug results in
   # the proj database not being found
   use_json_output <- is_macos() || is_windows()
+  use_json_input <- use_json_output &&
+    (package_version(strsplit(qgis_version(), "-")[[1]][1]) >= "3.23.0")
 
-  if (.quiet) {
-    result <- qgis_run(
-      args = c(
-        if (use_json_output) "--json",
-        "run",
-        algorithm,
-        args_str
-      ),
-      encoding = if (use_json_output) "UTF-8" else ""
-    )
-  } else {
-    result <- qgis_run(
-      args = c(
-        if (use_json_output) "--json",
-        "run",
-        algorithm,
-        args_str
-      ),
-      echo_cmd = TRUE,
-      stdout_callback = function(x, ...) cat(x),
-      stderr_callback = function(x, ...) message(x, appendLF = FALSE),
-      encoding = if (use_json_output) "UTF-8" else ""
-    )
-    cat("\n")
+  # generate command-line args or JSON input
+  args_str <- qgis_serialize_arguments(args, use_json_input = use_json_input)
+  if (use_json_input) {
+    stdin_file <- tempfile()
+    on.exit(unlink(stdin_file), add = TRUE)
+    writeLines(args_str, stdin_file, useBytes = TRUE)
+
+    if (!.quiet) {
+      cat("JSON input ----\n")
+      cat(jsonlite::prettify(args_str, indent = 2))
+      cat("\n")
+    }
   }
+
+  result <- qgis_run(
+    args = c(
+      if (use_json_output) "--json",
+      "run",
+      algorithm,
+      if (use_json_input) "-" else args_str
+    ),
+    echo_cmd = !.quiet,
+    stdout_callback = if (!.quiet && !use_json_output) function(x, ...) cat(x),
+    stderr_callback = if (!.quiet) function(x, ...) message(x, appendLF = FALSE),
+    stdin = if (use_json_input) stdin_file,
+    encoding = if (use_json_output) "UTF-8" else ""
+  )
+
+  if (!.quiet) cat("\n")
 
   # return a custom object to keep as much information as possible
   # about the output

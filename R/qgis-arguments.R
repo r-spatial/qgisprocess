@@ -90,24 +90,32 @@ qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_
 }
 
 # turn sanitized arguments into command-line arguments
-# in the future this might be JSON to accommodate more input types
-qgis_serialize_arguments <- function(arguments) {
-  # we can't deal with dict items yet
-  args_dict <- vapply(arguments, inherits, logical(1), "qgis_dict_input")
-  if (any(args_dict)) {
-    labels <- names(arguments)[args_dict]
-    abort("`qgis_run_algorithm()` can't generate command-line arguments from `qgis_dict_input()`")
-  }
+qgis_serialize_arguments <- function(arguments, use_json_input = FALSE) {
+  if (use_json_input) {
+    unclass_recursive <- function(x) {
+      is_list <- vapply(x, is.list, logical(1))
+      x[is_list] <- lapply(x[is_list], unclass_recursive)
+      lapply(x, unclass)
+    }
 
-  # otherwise, unlist() will flatten qgis_list_input() items
-  args_flat <- unlist(arguments)
-  arg_name_n <- vapply(arguments, length, integer(1))
-  names(args_flat) <- unlist(Map(rep, names(arguments), arg_name_n))
-
-  if (length(args_flat) > 0) {
-    paste0("--", names(args_flat), "=", vapply(args_flat, as.character, character(1)))
+    jsonlite::toJSON(list(inputs = unclass_recursive(arguments)), auto_unbox = TRUE)
   } else {
-    character(0)
+    args_dict <- vapply(arguments, inherits, logical(1), "qgis_dict_input")
+    if (any(args_dict)) {
+      labels <- names(arguments)[args_dict]
+      abort("`qgis_run_algorithm()` can't generate command-line arguments from `qgis_dict_input()`")
+    }
+
+    # otherwise, unlist() will flatten qgis_list_input() items
+    args_flat <- unlist(arguments)
+    arg_name_n <- vapply(arguments, length, integer(1))
+    names(args_flat) <- unlist(Map(rep, names(arguments), arg_name_n))
+
+    if (length(args_flat) > 0) {
+      paste0("--", names(args_flat), "=", vapply(args_flat, as.character, character(1)))
+    } else {
+      character(0)
+    }
   }
 }
 

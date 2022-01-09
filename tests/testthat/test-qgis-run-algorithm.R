@@ -6,7 +6,7 @@ test_that("qgis_run_algorithm() works", {
   tmp_json <- qgis_tmp_file(".json")
   result <- expect_output(
     qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = FALSE),
-    "^Running\\s+"
+    "Running\\s+"
   )
   expect_true(file.exists(tmp_json))
 
@@ -37,7 +37,7 @@ test_that("qgis_run_algorithm() ignores unknown inputs", {
   )
 })
 
-test_that("qgis_run_algorithm accepts multipleinput arguments", {
+test_that("qgis_run_algorithm accepts multiple input arguments", {
   skip_if_not(has_qgis())
   skip_if_not_installed("sf")
 
