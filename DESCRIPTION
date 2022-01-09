@@ -30,7 +30,8 @@ Imports:
     tibble,
     rlang,
     vctrs,
-    jsonlite
+    jsonlite,
+    rappdirs
 URL: https://github.com/paleolimbot/qgisprocess
 BugReports: https://github.com/paleolimbot/qgisprocess/issues
 Suggests: 

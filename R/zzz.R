@@ -2,7 +2,7 @@
 # nocov start
 
 .onLoad <- function(...) {
-  qgis_configure(quiet = TRUE)
+  qgis_configure(quiet = TRUE, use_cached_data = TRUE)
 
   vctrs::s3_register("sf::st_as_sf", "qgis_result")
   vctrs::s3_register("stars::st_as_stars", "qgis_result")

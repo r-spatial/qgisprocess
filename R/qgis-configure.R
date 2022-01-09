@@ -73,20 +73,50 @@ assert_qgis <- function(action = abort) {
 
 #' @rdname qgis_run
 #' @export
-qgis_configure <- function(quiet = FALSE) {
+qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
+  version <- as.character(packageVersion("qgisprocess"))
+
+  cache_data_file <- file.path(
+    rappdirs::user_cache_dir("R-qgisprocess"),
+    glue("cache-{version}.rds")
+  )
+
+  if (use_cached_data && file.exists(cache_data_file)) {
+    cached_data <- readRDS(cache_data_file)
+    if (!quiet) message(glue("Restoring configuration from '{cache_data_file}'"))
+
+    qgisprocess_cache$path <- cached_data$path
+    qgisprocess_cache$version <- cached_data$version
+    qgisprocess_cache$algorithms <- cached_data$algorithms
+    qgisprocess_cache$help_text <- NULL
+
+    return(invisible(TRUE))
+  }
+
   tryCatch({
     qgis_unconfigure()
 
-    qgis_path(query = TRUE, quiet = quiet)
+    path <- qgis_path(query = TRUE, quiet = quiet)
 
     version <- qgis_version(query = TRUE, quiet = quiet)
     if (!quiet) message(glue::glue("QGIS version: { version }"))
 
-    algo <- qgis_algorithms(query = TRUE, quiet = quiet)
+    algorithms <- qgis_algorithms(query = TRUE, quiet = quiet)
+
+    if (!quiet) message("Saving configuration to '{cache_data_file}'")
+    if (!dir.exists(dirname(cache_data_file))) {
+      dir.create(dirname(cache_data_file), recursive = TRUE)
+    }
+
+    saveRDS(
+      list(path = path, version = version, algorithms = algorithms),
+      cache_data_file
+    )
+
     if (!quiet) {
       message(
         glue::glue(
-          "Metadata of { nrow(algo) } algorithms queried and stored in cache.\n",
+          "Metadata of { nrow(algorithms) } algorithms queried and stored in cache.\n",
           "Run `qgis_algorithms()` to see them."
         )
       )
