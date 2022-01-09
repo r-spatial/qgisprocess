@@ -23,11 +23,13 @@
   if (has_qgis()) {
     packageStartupMessage(
       glue::glue(
-        "Using 'qgis_process' at '{ qgis_path() }'.",
-        "QGIS version: { qgis_version() }",
-        "Metadata of { nrow(qgis_algorithms()) } algorithms successfully cached.",
-        "Run `qgis_configure()` for details.",
-        .sep = "\n"
+        "Using 'qgis_process' at '{ qgis_path() }'.\n",
+        "QGIS version: { qgis_version() }\n",
+        "Metadata of { nrow(qgis_algorithms()) } algorithms successfully cached, ",
+        "Run `qgis_configure()` for details.\n",
+        if (qgis_use_json_input()) "Using JSON for input serialization\n" else "",
+        if (qgis_use_json_output()) "Using JSON for output serialization\n" else "",
+        .sep = ""
       )
     )
   } else {

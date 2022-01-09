@@ -90,6 +90,14 @@ qgis_configure <- function(quiet = FALSE) {
           "Run `qgis_algorithms()` to see them."
         )
       )
+
+      if (qgis_use_json_input()) {
+        message("- Using JSON for input serialization")
+      }
+
+      if (qgis_use_json_output()) {
+        message("- Using JSON for output serialization")
+      }
     }
   }, error = function(e) {
     qgis_unconfigure()
@@ -200,6 +208,47 @@ qgis_query_path <- function(quiet = FALSE) {
   }
 
   abort("QGIS installation found, but all candidate paths failed to execute.")
+}
+
+#' @rdname qgis_run
+#' @export
+qgis_use_json_output <- function() {
+  opt <- getOption(
+    "qgisprocess.use_json_output",
+    Sys.getenv(
+      "R_QGISPROCESS_USE_JSON_OUTPUT",
+      ""
+    )
+  )
+
+  # for now, don't do use JSON output on linux by default
+  # because a bug results in the PROJ database not being found
+  if (identical(opt, "")) {
+    is_windows() || is_macos()
+  } else {
+    isTRUE(opt) || identical(opt, "true")
+  }
+}
+
+#' @rdname qgis_run
+#' @export
+qgis_use_json_input <- function() {
+  opt <- getOption(
+    "qgisprocess.use_json_input",
+    Sys.getenv(
+      "R_QGISPROCESS_USE_JSON_INPUT",
+      ""
+    )
+  )
+
+  # JSON input implies JSON output, see note above about being the default
+  # on linux
+  if (identical(opt, "")) {
+    (is_windows() || is_macos()) &&
+      (package_version(strsplit(qgis_version(), "-")[[1]][1]) >= "3.23.0")
+  } else {
+    isTRUE(opt) || identical(opt, "true")
+  }
 }
 
 #' @rdname qgis_run
