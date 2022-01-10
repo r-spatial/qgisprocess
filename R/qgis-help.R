@@ -35,12 +35,19 @@ qgis_arguments <- function(algorithm) {
       name = names(help$parameters),
       description = vapply(help$parameters, "[[", character(1), "description"),
       qgis_type = vapply(help$parameters, "[[", character(1), c("type", "id")),
+      default_value = lapply(help$parameters, "[[", "default_value"),
       available_values = lapply(help$parameters, "[[", c("raw_definition", "options")),
       acceptable_values = lapply(help$parameters, "[[", c("type", "acceptable_values"))
     )
 
     out[] <- lapply(out, unname)
-    out
+
+    # The order of the parameters is alphabetized in JSON but has a
+    # natural ordering in the parsed help text (which we need for backward
+    # compatibility)
+    out_legacy <- qgis_parsed_help(algorithm)$arguments
+
+    out[match(out_legacy$name, out$name), ]
   } else {
     qgis_parsed_help(algorithm)$arguments
   }
