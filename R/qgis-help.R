@@ -29,13 +29,58 @@ qgis_description <- function(algorithm) {
 #' @rdname qgis_show_help
 #' @export
 qgis_arguments <- function(algorithm) {
-  qgis_parsed_help(algorithm)$arguments
+  if (qgis_use_json_output()) {
+    help <- qgis_help(algorithm)
+    out <- tibble::tibble(
+      name = names(help$parameters),
+      description = vapply(help$parameters, "[[", character(1), "description"),
+      qgis_type = vapply(help$parameters, "[[", character(1), c("type", "id")),
+      available_values = lapply(help$parameters, "[[", c("raw_definition", "options")),
+      acceptable_values = lapply(help$parameters, "[[", c("type", "acceptable_values"))
+    )
+
+    out[] <- lapply(out, unname)
+    out
+  } else {
+    qgis_parsed_help(algorithm)$arguments
+  }
 }
 
 #' @rdname qgis_show_help
 #' @export
 qgis_outputs <- function(algorithm) {
-  qgis_parsed_help(algorithm)$outputs
+  if (qgis_use_json_output()) {
+    help <- qgis_help(algorithm)
+    out <- tibble::tibble(
+      name = names(help$outputs),
+      description = vapply(help$outputs, "[[", character(1), "description"),
+      qgis_output_type = vapply(help$outputs, "[[", character(1), "type")
+    )
+
+    out[] <- lapply(out, unname)
+    out
+  } else {
+    qgis_parsed_help(algorithm)$outputs
+  }
+}
+
+#' @rdname qgis_show_help
+#' @export
+qgis_help <- function(algorithm) {
+  if (algorithm %in% names(qgisprocess_cache$help)) {
+    return(qgisprocess_cache$help[[algorithm]])
+  }
+
+  assert_qgis()
+  assert_qgis_algorithm(algorithm)
+
+  result <- qgis_run(
+    args = c("--json", "help", algorithm),
+    encoding = "UTF-8"
+  )
+
+  qgisprocess_cache$help[[algorithm]] <- jsonlite::fromJSON(result$stdout)
+  qgisprocess_cache$help[[algorithm]]
 }
 
 qgis_help_text <- function(algorithm) {
