@@ -9,6 +9,7 @@ qgis_run_algorithm(
   ...,
   PROJECT_PATH = NULL,
   ELLIPSOID = NULL,
+  .raw_json_input = NULL,
   .quiet = FALSE
 )
 }
@@ -22,6 +23,8 @@ are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()
 
 \item{PROJECT_PATH, ELLIPSOID}{Global values for QGIS project file and
 ellipsoid name for distance calculations.}
+
+\item{.raw_json_input}{The raw JSON to use as input in place of \code{...}.}
 
 \item{.quiet}{Use \code{TRUE} to suppress output from processing algorithms.}
 }
