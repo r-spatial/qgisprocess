@@ -74,8 +74,9 @@ qgis_outputs <- function(algorithm) {
 #' @rdname qgis_show_help
 #' @export
 qgis_help <- function(algorithm) {
-  if (algorithm %in% names(qgisprocess_cache$help)) {
-    return(qgisprocess_cache$help[[algorithm]])
+  cached <- help_cache_file(algorithm, json = TRUE)
+  if (qgis_use_cached_help() && file.exists(cached)) {
+    try(return(jsonlite::fromJSON(readRDS(cached))))
   }
 
   assert_qgis()
@@ -86,13 +87,18 @@ qgis_help <- function(algorithm) {
     encoding = "UTF-8"
   )
 
-  qgisprocess_cache$help[[algorithm]] <- jsonlite::fromJSON(result$stdout)
-  qgisprocess_cache$help[[algorithm]]
+  try({
+    if (!dir.exists(dirname(cached))) dir.create(dirname(cached))
+    saveRDS(result$stdout, cached)
+  })
+
+  jsonlite::fromJSON(result$stdout)
 }
 
 qgis_help_text <- function(algorithm) {
-  if (algorithm %in% names(qgisprocess_cache$help_text)) {
-    return(qgisprocess_cache$help_text[[algorithm]])
+  cached <- help_cache_file(algorithm, json = FALSE)
+  if (qgis_use_cached_help() && file.exists(cached)) {
+    try(return(readRDS(cached)))
   }
 
   assert_qgis()
@@ -102,7 +108,11 @@ qgis_help_text <- function(algorithm) {
     args = c("help", algorithm)
   )
 
-  qgisprocess_cache$help_text[[algorithm]] <- result$stdout
+  try({
+    if (!dir.exists(dirname(cached))) dir.create(dirname(cached))
+    saveRDS(result$stdout, cached)
+  })
+
   result$stdout
 }
 
@@ -189,6 +199,33 @@ qgis_parsed_help <- function(algorithm) {
       description = outputs[, 4, drop = TRUE],
       qgis_output_type = outputs[, 3, drop = TRUE]
     )
+  )
+}
+
+qgis_use_cached_help <- function() {
+  opt <- getOption(
+    "qgisprocess.use_cached_help",
+    Sys.getenv("R_QGISPROCESS_USE_CACHED_HELP", "true")
+  )
+
+  isTRUE(opt) || identical(opt, "true")
+}
+
+help_cache_file <- function(algorithm, json) {
+  hash <- rlang::hash(
+    list(
+      qgisprocess_cache$path,
+      qgis_version(),
+      utils::packageVersion("qgisprocess"),
+      json
+    )
+  )
+
+  alg <- gsub(":", "_", algorithm)
+
+  file.path(
+    rappdirs::user_cache_dir("R-qgisprocess"),
+    glue("help-{ alg }-{ hash }.rds")
   )
 }
 

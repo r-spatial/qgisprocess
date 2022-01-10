@@ -102,8 +102,6 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           qgisprocess_cache$path <- cached_data$path
           qgisprocess_cache$version <- cached_data$version
           qgisprocess_cache$algorithms <- cached_data$algorithms
-          qgisprocess_cache$help_text <- new.env(parent = emptyenv())
-          qgisprocess_cache$help <- new.env(parent = emptyenv())
           qgisprocess_cache$loaded_from <- cache_data_file
 
           return(invisible(TRUE))
@@ -161,8 +159,6 @@ qgis_unconfigure <- function() {
   qgisprocess_cache$path <- NULL
   qgisprocess_cache$version <- NULL
   qgisprocess_cache$algorithms <- NULL
-  qgisprocess_cache$help_text <- new.env(parent = emptyenv())
-  qgisprocess_cache$help <- new.env(parent = emptyenv())
   qgisprocess_cache$loaded_from <- NULL
   invisible(NULL)
 }
@@ -459,6 +455,4 @@ qgisprocess_cache <- new.env(parent = emptyenv())
 qgisprocess_cache$path <- NULL
 qgisprocess_cache$version <- NULL
 qgisprocess_cache$algorithms <- NULL
-qgisprocess_cache$help_text <- NULL
-qgisprocess_cache$help <- NULL
 qgisprocess_cache$loaded_from <- NULL
