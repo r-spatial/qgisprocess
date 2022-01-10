@@ -19,7 +19,10 @@ test_that("qgis_function() works", {
   buffer_args <- qgis_arguments("native:buffer")
   expect_identical(
     names(formals(qgis_buffer)),
-    c(buffer_args$name, setdiff(names(formals(qgis_run_algorithm)), c("algorithm", "...")))
+    c(
+      buffer_args$name,
+      setdiff(names(formals(qgis_run_algorithm)), c("algorithm", "...", ".raw_json_input"))
+    )
   )
 
   result <- qgis_buffer(
