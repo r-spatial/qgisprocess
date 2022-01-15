@@ -57,7 +57,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
     args_str <- .raw_json_input
     args <- list()
     if (length(list(...)) > 0) {
-      abort("Can't use `.json_input` with arguments in `qgis_run_algorithm()`")
+      abort("Can't use `.raw_json_input` with arguments in `qgis_run_algorithm()`")
     }
   }
 
