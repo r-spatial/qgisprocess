@@ -7,6 +7,7 @@
 \alias{qgis_default_value}
 \alias{is_qgis_default_value}
 \alias{as_qgis_argument.default}
+\alias{as_qgis_argument.list}
 \alias{as_qgis_argument.qgis_default_value}
 \alias{as_qgis_argument.NULL}
 \alias{as_qgis_argument.character}
@@ -34,6 +35,8 @@ qgis_default_value()
 is_qgis_default_value(x)
 
 \method{as_qgis_argument}{default}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
+
+\method{as_qgis_argument}{list}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
 \method{as_qgis_argument}{qgis_default_value}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 

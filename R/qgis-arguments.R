@@ -173,6 +173,16 @@ as_qgis_argument.default <- function(x, spec = qgis_argument_spec(), use_json_in
 
 #' @rdname qgis_sanitize_arguments
 #' @export
+as_qgis_argument.list <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
+  if (use_json_input) {
+    return(x)
+  }
+
+  NextMethod()
+}
+
+#' @rdname qgis_sanitize_arguments
+#' @export
 as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec(),
                                                 use_json_input = FALSE) {
   # This is an opportunity to fill in a missing value based on the
