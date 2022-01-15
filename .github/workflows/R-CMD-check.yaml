@@ -47,8 +47,8 @@ jobs:
           sudo add-apt-repository "deb https://qgis.org/ubuntu-nightly `lsb_release -c -s` main"
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
-          projinfo --searchpaths
-          QT_QPA_PLATFORM=offscreen qgis_process --version
+          projinfo --main-db-path path || true
+          QT_QPA_PLATFORM=offscreen qgis_process --version || true
 
       - name: Install QGIS (Ubuntu)
         if: matrix.config.qgis == 'ubuntu'
@@ -58,8 +58,8 @@ jobs:
           sudo add-apt-repository "deb https://qgis.org/ubuntu `lsb_release -c -s` main"
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
-          projinfo --searchpaths
-          QT_QPA_PLATFORM=offscreen qgis_process --version
+          projinfo --main-db-path path || true
+          QT_QPA_PLATFORM=offscreen qgis_process --version || true
 
       - name: Install QGIS (MacOS homebrew)
         if: matrix.config.qgis == 'macos-brew'
