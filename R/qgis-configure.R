@@ -267,10 +267,8 @@ qgis_use_json_output <- function() {
     )
   )
 
-  # for now, don't do use JSON output on linux by default
-  # because a bug results in the PROJ database not being found
   if (identical(opt, "")) {
-    is_windows() || is_macos()
+    TRUE
   } else {
     isTRUE(opt) || identical(opt, "true")
   }
@@ -287,11 +285,8 @@ qgis_use_json_input <- function() {
     )
   )
 
-  # JSON input implies JSON output, see note above about being the default
-  # on linux
   if (identical(opt, "")) {
-    (is_windows() || is_macos()) &&
-      (package_version(strsplit(qgis_version(), "-")[[1]][1]) >= "3.23.0")
+    package_version(strsplit(qgis_version(), "-")[[1]][1]) >= "3.23.0"
   } else {
     isTRUE(opt) || identical(opt, "true")
   }
