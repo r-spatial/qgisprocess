@@ -101,6 +101,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
         if (identical(option_path, "") || identical(option_path, cached_data$path)) {
           qgisprocess_cache$path <- cached_data$path
           qgisprocess_cache$version <- cached_data$version
+          qgisprocess_cache$use_json_output <- cached_data$use_json_output
           qgisprocess_cache$algorithms <- cached_data$algorithms
           qgisprocess_cache$loaded_from <- cache_data_file
 
@@ -114,6 +115,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
     version <- qgis_version(query = TRUE, quiet = quiet)
     if (!quiet) message(glue::glue("QGIS version: { version }"))
 
+    use_json_output <- qgis_use_json_output(query = TRUE)
     algorithms <- qgis_algorithms(query = TRUE, quiet = quiet)
 
     if (!quiet) message(glue("Saving configuration to '{cache_data_file}'"))
@@ -124,7 +126,12 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
       }
 
       saveRDS(
-        list(path = path, version = version, algorithms = algorithms),
+        list(
+          path = path,
+          version = version,
+          algorithms = algorithms,
+          use_json_output = use_json_output
+        ),
         cache_data_file
       )
     })
@@ -258,20 +265,29 @@ qgis_query_path <- function(quiet = FALSE) {
 
 #' @rdname qgis_run
 #' @export
-qgis_use_json_output <- function() {
-  opt <- getOption(
-    "qgisprocess.use_json_output",
-    Sys.getenv(
-      "R_QGISPROCESS_USE_JSON_OUTPUT",
-      ""
+qgis_use_json_output <- function(query = FALSE) {
+  if (query) {
+    opt <- getOption(
+      "qgisprocess.use_json_output",
+      Sys.getenv(
+        "R_QGISPROCESS_USE_JSON_OUTPUT",
+        ""
+      )
     )
-  )
 
-  if (identical(opt, "")) {
-    TRUE
-  } else {
-    isTRUE(opt) || identical(opt, "true")
+    if (identical(opt, "")) {
+      # This doesn't work on the default GHA runner for Ubuntu and
+      # maybe can't be guaranteed to work on Linux. On Linux, we try
+      # to list algorithms with --json and check if the command fails
+      qgisprocess_cache$use_json_output <- is_windows() ||
+        is_macos() ||
+        (qgis_run(c("--json", "list"), error_on_status = FALSE)$status == 0)
+    } else {
+      qgisprocess_cache$use_json_output <- isTRUE(opt) || identical(opt, "true")
+    }
   }
+
+  qgisprocess_cache$use_json_output
 }
 
 #' @rdname qgis_run
@@ -286,7 +302,8 @@ qgis_use_json_input <- function() {
   )
 
   if (identical(opt, "")) {
-    package_version(strsplit(qgis_version(), "-")[[1]][1]) >= "3.23.0"
+    qgis_use_json_output() &&
+      (package_version(strsplit(qgis_version(), "-")[[1]][1]) >= "3.23.0")
   } else {
     isTRUE(opt) || identical(opt, "true")
   }
@@ -450,4 +467,5 @@ qgisprocess_cache <- new.env(parent = emptyenv())
 qgisprocess_cache$path <- NULL
 qgisprocess_cache$version <- NULL
 qgisprocess_cache$algorithms <- NULL
+qgisprocess_cache$use_json_output <- NULL
 qgisprocess_cache$loaded_from <- NULL
