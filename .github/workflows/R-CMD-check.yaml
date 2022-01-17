@@ -48,7 +48,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
           projinfo --main-db-path path || true
-          QT_QPA_PLATFORM=offscreen qgis_process --version || true
+          QT_QPA_PLATFORM=offscreen qgis_process list || true
+          QT_QPA_PLATFORM=offscreen qgis_process --json list || true
 
       - name: Install QGIS (Ubuntu)
         if: matrix.config.qgis == 'ubuntu'
@@ -59,7 +60,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
           projinfo --main-db-path path || true
-          QT_QPA_PLATFORM=offscreen qgis_process --version || true
+          QT_QPA_PLATFORM=offscreen qgis_process list || true
+          QT_QPA_PLATFORM=offscreen qgis_process --json list || true
 
       - name: Install QGIS (MacOS homebrew)
         if: matrix.config.qgis == 'macos-brew'
