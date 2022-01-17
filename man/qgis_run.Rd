@@ -32,7 +32,7 @@ qgis_path(query = FALSE, quiet = TRUE)
 
 qgis_query_path(quiet = FALSE)
 
-qgis_use_json_output()
+qgis_use_json_output(query = FALSE)
 
 qgis_use_json_input()
 
