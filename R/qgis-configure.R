@@ -309,22 +309,12 @@ qgis_use_json_input <- function() {
   }
 }
 
-qgis_proj_lib <- function() {
-  getOption(
-    "qgisprocess.proj_lib",
-    Sys.getenv(
-      "R_QGISPROCESS_PROJ_LIB",
-      ""
-    )
-  )
-}
-
 #' @rdname qgis_run
 #' @export
 qgis_env <- function() {
   getOption(
     "qgisprocess.env",
-    list(QT_QPA_PLATFORM = 'offscreen', PROJ_LIB = qgis_proj_lib())
+    list(QT_QPA_PLATFORM = "offscreen")
   )
 }
 
