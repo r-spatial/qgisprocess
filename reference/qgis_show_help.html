@@ -56,7 +56,9 @@
 
 <span class="fu">qgis_arguments</span><span class="op">(</span><span class="va">algorithm</span><span class="op">)</span>
 
-<span class="fu">qgis_outputs</span><span class="op">(</span><span class="va">algorithm</span><span class="op">)</span></code></pre></div>
+<span class="fu">qgis_outputs</span><span class="op">(</span><span class="va">algorithm</span><span class="op">)</span>
+
+<span class="fu">qgis_help</span><span class="op">(</span><span class="va">algorithm</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -116,13 +118,13 @@ a path to a QGIS model file.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                native:filedownloader </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "This algorithm downloads a URL on the file system." </span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="qgis_run.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_arguments</span><span class="op">(</span><span class="st">"native:filedownloader"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   name   description      qgis_type       available_values acceptable_values</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> URL    URL              string          <span style="color: #949494;">&lt;chr [0]&gt;</span>        <span style="color: #949494;">&lt;chr [1]&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> METHOD Method           enum            <span style="color: #949494;">&lt;chr [2]&gt;</span>        <span style="color: #949494;">&lt;chr [2]&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> DATA   Data             string          <span style="color: #949494;">&lt;chr [0]&gt;</span>        <span style="color: #949494;">&lt;chr [1]&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> OUTPUT File destination fileDestination <span style="color: #949494;">&lt;chr [0]&gt;</span>        <span style="color: #949494;">&lt;chr [1]&gt;</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   name   description  qgis_type  default_value available_values acceptable_valu…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> URL    URL          string     <span style="color: #949494;">&lt;NULL&gt;</span>        <span style="color: #949494;">&lt;NULL&gt;</span>           <span style="color: #949494;">&lt;chr [1]&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> METHOD Method       enum       <span style="color: #949494;">&lt;int [1]&gt;</span>     <span style="color: #949494;">&lt;chr [2]&gt;</span>        <span style="color: #949494;">&lt;chr [2]&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> DATA   Data         string     <span style="color: #949494;">&lt;NULL&gt;</span>        <span style="color: #949494;">&lt;NULL&gt;</span>           <span style="color: #949494;">&lt;chr [1]&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> OUTPUT File destin… fileDesti… <span style="color: #949494;">&lt;NULL&gt;</span>        <span style="color: #949494;">&lt;NULL&gt;</span>           <span style="color: #949494;">&lt;chr [1]&gt;</span>       </span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
@@ -138,7 +140,7 @@ a path to a QGIS model file.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>
