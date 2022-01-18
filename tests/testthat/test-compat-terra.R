@@ -19,7 +19,7 @@ test_that("terra argument coercers work", {
   obj <- terra::rast(system.file("longlake/longlake.tif", package = "qgisprocess"))
   expect_identical(
     as_qgis_argument(obj, qgis_argument_spec(qgis_type = "layer")),
-    terra::sources(obj)$source
+    terra::sources(obj)
   )
 })
 
@@ -75,4 +75,3 @@ test_that("terra argument coercer for extent works", {
 
   expect_is(bbox_representation, "character")
 })
-
