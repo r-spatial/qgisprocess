@@ -52,9 +52,9 @@ jobs:
           sudo add-apt-repository "deb https://qgis.org/ubuntu-nightly `lsb_release -c -s` main"
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
-          projinfo --main-db-path path || true
-          R -e 'str(processx::run("qgis_process", args = c("--json", "list"), env = c(QT_QPA_PLATFORM="offscreen")))' || true
-          R -e 'str(processx::run("qgis_process", args = c("list"), env = c(QT_QPA_PLATFORM="offscreen")))' || true
+          echo "proj lib: $PROJ_LIB"
+          QT_QPA_PLATFORM=offscreen R -e 'str(processx::run("qgis_process", args = c("--json", "list"))' || true
+          QT_QPA_PLATFORM=offscreen R -e 'str(processx::run("qgis_process", args = c("list")))' || true
 
       - name: Install QGIS (Ubuntu)
         if: matrix.config.qgis == 'ubuntu'
@@ -64,9 +64,9 @@ jobs:
           sudo add-apt-repository "deb https://qgis.org/ubuntu `lsb_release -c -s` main"
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
-          projinfo --main-db-path path || true
-          R -e 'str(processx::run("qgis_process", args = c("--json", "list"), env = c(QT_QPA_PLATFORM="offscreen")))' || true
-          R -e 'str(processx::run("qgis_process", args = c("list"), env = c(QT_QPA_PLATFORM="offscreen")))' || true
+          echo "proj lib: $PROJ_LIB"
+          QT_QPA_PLATFORM=offscreen R -e 'str(processx::run("qgis_process", args = c("--json", "list")))' || true
+          QT_QPA_PLATFORM=offscreen R -e 'str(processx::run("qgis_process", args = c("list")))' || true
 
       - name: Install QGIS (MacOS homebrew)
         if: matrix.config.qgis == 'macos-brew'
