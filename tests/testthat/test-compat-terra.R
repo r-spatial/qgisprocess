@@ -17,9 +17,12 @@ test_that("terra argument coercers work", {
 
   # also check rasters with embedded files
   obj <- terra::rast(system.file("longlake/longlake.tif", package = "qgisprocess"))
+
+  # behaviour changed in a terra update
+  sources <- terra::sources(obj)
   expect_identical(
     as_qgis_argument(obj, qgis_argument_spec(qgis_type = "layer")),
-    terra::sources(obj)
+    if (is.character(sources)) sources else sources$source
   )
 })
 
