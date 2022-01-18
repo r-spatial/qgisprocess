@@ -11,7 +11,7 @@ name: pkgdown
 
 jobs:
   pkgdown:
-    runs-on: macOS-latest
+    runs-on: ubuntu-20.04
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -21,9 +21,13 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v1
 
-      - name: Install QGIS (MacOS homebrew)
+      - name: Install QGIS (Ubuntu)
         run: |
-          brew install --cask qgis
+          wget -qO - https://qgis.org/downloads/qgis-2021.gpg.key | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import || true
+          sudo chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
+          sudo add-apt-repository "deb https://qgis.org/ubuntu `lsb_release -c -s` main"
+          sudo apt-get update
+          sudo apt-get install -y qgis qgis-plugin-grass saga
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:

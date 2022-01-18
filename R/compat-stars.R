@@ -6,17 +6,19 @@
 #'
 #' @export
 #'
-as_qgis_argument.stars <- function(x, spec = qgis_argument_spec()) {
-  as_qgis_argument_stars(x, spec)
+as_qgis_argument.stars <- function(x, spec = qgis_argument_spec(),
+                                   use_json_input = FALSE) {
+  as_qgis_argument_stars(x, spec, use_json_input)
 }
 
 #' @rdname as_qgis_argument.stars
 #' @export
-as_qgis_argument.stars_proxy <- function(x, spec = qgis_argument_spec()) {
-  as_qgis_argument_stars(x, spec)
+as_qgis_argument.stars_proxy <- function(x, spec = qgis_argument_spec(),
+                                         use_json_input = FALSE) {
+  as_qgis_argument_stars(x, spec, use_json_input)
 }
 
-as_qgis_argument_stars <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument_stars <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("raster", "layer", "multilayer"))) {
     abort(glue("Can't convert '{ class(x)[1] }' object to QGIS type '{ spec$qgis_type }'"))
   }

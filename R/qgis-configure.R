@@ -22,6 +22,9 @@
 #'   found.
 #' @param env A [list()] of environment variables. Defaults to [qgis_env()].
 #' @param path A path to the 'qgis_process' executable. Defaults to [qgis_path()].
+#' @param use_cached_data Use the cached algorithm list and `path` found when
+#'   configuring qgisprocess during the last session. This saves some time
+#'   loading the package.
 #'
 #' @return The result of [processx::run()].
 #' @export
@@ -73,23 +76,81 @@ assert_qgis <- function(action = abort) {
 
 #' @rdname qgis_run
 #' @export
-qgis_configure <- function(quiet = FALSE) {
+qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
   tryCatch({
     qgis_unconfigure()
 
-    qgis_path(query = TRUE, quiet = quiet)
+    version <- as.character(utils::packageVersion("qgisprocess"))
+
+    cache_data_file <- file.path(
+      rappdirs::user_cache_dir("R-qgisprocess"),
+      glue("cache-{version}.rds")
+    )
+
+    if (use_cached_data && file.exists(cache_data_file)) {
+      try({
+        cached_data <- readRDS(cache_data_file)
+        if (!quiet) message(glue("Restoring configuration from '{cache_data_file}'"))
+
+        # respect environment variable/option for path
+        option_path <- getOption(
+          "qgisprocess.path",
+          Sys.getenv("R_QGISPROCESS_PATH")
+        )
+
+        if (identical(option_path, "") || identical(option_path, cached_data$path)) {
+          qgisprocess_cache$path <- cached_data$path
+          qgisprocess_cache$version <- cached_data$version
+          qgisprocess_cache$use_json_output <- cached_data$use_json_output
+          qgisprocess_cache$algorithms <- cached_data$algorithms
+          qgisprocess_cache$loaded_from <- cache_data_file
+
+          return(invisible(TRUE))
+        }
+      })
+    }
+
+    path <- qgis_path(query = TRUE, quiet = quiet)
 
     version <- qgis_version(query = TRUE, quiet = quiet)
     if (!quiet) message(glue::glue("QGIS version: { version }"))
 
-    algo <- qgis_algorithms(query = TRUE, quiet = quiet)
+    use_json_output <- qgis_use_json_output(query = TRUE)
+    algorithms <- qgis_algorithms(query = TRUE, quiet = quiet)
+
+    if (!quiet) message(glue("Saving configuration to '{cache_data_file}'"))
+
+    try({
+      if (!dir.exists(dirname(cache_data_file))) {
+        dir.create(dirname(cache_data_file), recursive = TRUE)
+      }
+
+      saveRDS(
+        list(
+          path = path,
+          version = version,
+          algorithms = algorithms,
+          use_json_output = use_json_output
+        ),
+        cache_data_file
+      )
+    })
+
     if (!quiet) {
       message(
         glue::glue(
-          "Metadata of { nrow(algo) } algorithms queried and stored in cache.\n",
+          "Metadata of { nrow(algorithms) } algorithms queried and stored in cache.\n",
           "Run `qgis_algorithms()` to see them."
         )
       )
+
+      if (qgis_use_json_input()) {
+        message("- Using JSON for input serialization")
+      }
+
+      if (qgis_use_json_output()) {
+        message("- Using JSON for output serialization")
+      }
     }
   }, error = function(e) {
     qgis_unconfigure()
@@ -105,7 +166,7 @@ qgis_unconfigure <- function() {
   qgisprocess_cache$path <- NULL
   qgisprocess_cache$version <- NULL
   qgisprocess_cache$algorithms <- NULL
-  qgisprocess_cache$help_text <- new.env(parent = emptyenv())
+  qgisprocess_cache$loaded_from <- NULL
   invisible(NULL)
 }
 
@@ -204,8 +265,57 @@ qgis_query_path <- function(quiet = FALSE) {
 
 #' @rdname qgis_run
 #' @export
+qgis_use_json_output <- function(query = FALSE) {
+  if (query) {
+    opt <- getOption(
+      "qgisprocess.use_json_output",
+      Sys.getenv(
+        "R_QGISPROCESS_USE_JSON_OUTPUT",
+        ""
+      )
+    )
+
+    if (identical(opt, "")) {
+      # This doesn't work on the default GHA runner for Ubuntu and
+      # maybe can't be guaranteed to work on Linux. On Linux, we try
+      # to list algorithms with --json and check if the command fails
+      qgisprocess_cache$use_json_output <- is_windows() ||
+        is_macos() ||
+        (qgis_run(c("--json", "list"), error_on_status = FALSE)$status == 0)
+    } else {
+      qgisprocess_cache$use_json_output <- isTRUE(opt) || identical(opt, "true")
+    }
+  }
+
+  qgisprocess_cache$use_json_output
+}
+
+#' @rdname qgis_run
+#' @export
+qgis_use_json_input <- function() {
+  opt <- getOption(
+    "qgisprocess.use_json_input",
+    Sys.getenv(
+      "R_QGISPROCESS_USE_JSON_INPUT",
+      ""
+    )
+  )
+
+  if (identical(opt, "")) {
+    qgis_use_json_output() &&
+      (package_version(strsplit(qgis_version(), "-")[[1]][1]) >= "3.23.0")
+  } else {
+    isTRUE(opt) || identical(opt, "true")
+  }
+}
+
+#' @rdname qgis_run
+#' @export
 qgis_env <- function() {
-  getOption("qgisprocess.env", list(QT_QPA_PLATFORM = 'offscreen', PROJ_LIB=""))
+  getOption(
+    "qgisprocess.env",
+    list(QT_QPA_PLATFORM = "offscreen")
+  )
 }
 
 #' @rdname qgis_run
@@ -226,34 +336,120 @@ qgis_query_version <- function(quiet = FALSE) {
 #' @rdname qgis_run
 #' @export
 qgis_query_algorithms <- function(quiet = FALSE) {
-  result <- qgis_run(args = "list")
-  lines <- trimws(readLines(textConnection(trimws(result$stdout))))
+  if (qgis_use_json_output()) {
+    result <- qgis_run(args = c("list", "--json"), encoding = "UTF-8")
+    result_parsed <- jsonlite::fromJSON(result$stdout)
 
-  which_lines_blank <- which(lines == "")
-  provider_title <- lines[which_lines_blank + 1]
-  alg_start <- which_lines_blank + 2
-  alg_end <- c(which_lines_blank[-1] - 1, length(lines))
-  alg_indices_lst <- Map(seq, alg_start, alg_end)
-  alg_indices <- unlist(alg_indices_lst)
+    providers_ptype <- tibble::tibble(
+      provider_can_be_activated = logical(),
+      default_raster_file_extension = character(),
+      default_vector_file_extension = character(),
+      provider_is_active = logical(),
+      provider_long_name = character(),
+      provider_name = character(),
+      supported_output_raster_extensions = list(),
+      supported_output_table_extensions = list(),
+      supported_output_vector_extensions = list(),
+      supports_non_file_based_output = logical(),
+      provider_version = character(),
+      provider_warning = character()
+    )
 
-  alg_split <- stringr::str_split(lines, "\\s+", n = 2)
-  alg_full_id <- vapply(alg_split, "[", 1, FUN.VALUE = character(1))
-  alg_title <- vapply(alg_split, "[", 2, FUN.VALUE = character(1))
+    provider_mod_names <- c(
+      "can_be_activated", "is_active", "long_name", "name",
+      "version", "warning"
+    )
 
-  alg_id_split <- strsplit(alg_full_id, ":", fixed = TRUE)
-  provider <- vapply(alg_id_split, "[", 1, FUN.VALUE = character(1))
-  alg_id <- vapply(alg_id_split, "[", 2, FUN.VALUE = character(1))
+    providers <- lapply(result_parsed$providers, function(p) {
+      p_tbl <- providers_ptype[NA_integer_, ]
 
-  algorithms <- tibble::tibble(
-    provider = do.call("[", list(provider, alg_indices)),
-    provider_title = unlist(Map(rep, provider_title, each = vapply(alg_indices_lst, length, integer(1)))),
-    algorithm = do.call("[", list(alg_full_id, alg_indices)),
-    algorithm_id = do.call("[", list(alg_id, alg_indices)),
-    algorithm_title = do.call("[", list(alg_title, alg_indices))
-  )
+      p$algorithms <- NULL
+      p <- p[!vapply(p, is.null, logical(1))]
+      mod_names <- names(p) %in% provider_mod_names
+      names(p)[mod_names] <- paste0("provider_", names(p)[mod_names])
 
-  # sometimes items such as 'Models' don't have algorithm IDs listed
-  algorithms[!is.na(algorithms$algorithm_id), ]
+      field_needs_wrap <- vapply(p_tbl[names(p)], is.list, logical(1))
+      p[field_needs_wrap] <- lapply(p[field_needs_wrap], list)
+      p_tbl[names(p)] <- p
+      p_tbl
+    })
+
+    providers <- vctrs::vec_rbind(!!! providers, .ptype = providers_ptype, .names_to = "provider_id")
+
+    fields_ptype <- tibble::tibble(
+      can_cancel = logical(),
+      deprecated = logical(),
+      group = character(),
+      has_known_issues = logical(),
+      help_url = character(),
+      name = character(),
+      requires_matching_crs = logical(),
+      short_description = character(),
+      tags = list()
+    )
+
+    algs <- lapply(result_parsed$providers, function(p) {
+      algs_p <- lapply(p$algorithms, function(alg) {
+        alg_tbl <- fields_ptype[NA_integer_, ]
+
+        alg <- alg[!vapply(alg, is.null, logical(1))]
+        alg <- alg[intersect(names(alg), names(alg_tbl))]
+
+        field_needs_wrap <- vapply(alg_tbl[names(alg)], is.list, logical(1))
+        alg[field_needs_wrap] <- lapply(alg[field_needs_wrap], list)
+
+        alg_tbl[names(alg)] <- alg
+        alg_tbl
+      })
+
+      vctrs::vec_rbind(!!! algs_p, ptype = fields_ptype, .names_to = "algorithm")
+    })
+
+    fields_ptype$algorithm <- character()
+    algs <- vctrs::vec_rbind(!!! algs, ptype = fields_ptype, .names_to = "provider_id")
+    algs <- vctrs::vec_cbind(
+      algs,
+      providers[match(algs$provider_id, providers$provider_id), setdiff(names(providers), "provider_id")]
+    )
+
+    # for compatibility with old output
+    algs$algorithm_id <- stringr::str_remove(algs$algorithm, "^.*?:")
+    algs$algorithm_title <- algs$name
+    algs$provider_title <- algs$provider_name
+    algs$provider <- algs$provider_id
+
+    first_cols <- c("provider", "provider_title", "algorithm", "algorithm_id", "algorithm_title")
+    algs[c(first_cols, setdiff(names(algs), first_cols))]
+  } else {
+    result <- qgis_run(args = "list")
+    lines <- trimws(readLines(textConnection(trimws(result$stdout))))
+
+    which_lines_blank <- which(lines == "")
+    provider_title <- lines[which_lines_blank + 1]
+    alg_start <- which_lines_blank + 2
+    alg_end <- c(which_lines_blank[-1] - 1, length(lines))
+    alg_indices_lst <- Map(seq, alg_start, alg_end)
+    alg_indices <- unlist(alg_indices_lst)
+
+    alg_split <- stringr::str_split(lines, "\\s+", n = 2)
+    alg_full_id <- vapply(alg_split, "[", 1, FUN.VALUE = character(1))
+    alg_title <- vapply(alg_split, "[", 2, FUN.VALUE = character(1))
+
+    alg_id_split <- strsplit(alg_full_id, ":", fixed = TRUE)
+    provider <- vapply(alg_id_split, "[", 1, FUN.VALUE = character(1))
+    alg_id <- vapply(alg_id_split, "[", 2, FUN.VALUE = character(1))
+
+    algorithms <- tibble::tibble(
+      provider = do.call("[", list(provider, alg_indices)),
+      provider_title = unlist(Map(rep, provider_title, each = vapply(alg_indices_lst, length, integer(1)))),
+      algorithm = do.call("[", list(alg_full_id, alg_indices)),
+      algorithm_id = do.call("[", list(alg_id, alg_indices)),
+      algorithm_title = do.call("[", list(alg_title, alg_indices))
+    )
+
+    # sometimes items such as 'Models' don't have algorithm IDs listed
+    algorithms[!is.na(algorithms$algorithm_id), ]
+  }
 }
 
 # environment for cache
@@ -261,4 +457,5 @@ qgisprocess_cache <- new.env(parent = emptyenv())
 qgisprocess_cache$path <- NULL
 qgisprocess_cache$version <- NULL
 qgisprocess_cache$algorithms <- NULL
-qgisprocess_cache$help_text <- NULL
+qgisprocess_cache$use_json_output <- NULL
+qgisprocess_cache$loaded_from <- NULL

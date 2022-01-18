@@ -63,6 +63,6 @@ qgis_result_args <- function(x) {
 #' @export
 print.qgis_result <- function(x, ...) {
   cat(glue("<Result of `qgis_run_algorithm(\"{ x$.algorithm }\", ...)`>\n\n"))
-  utils::str(x[!(names(x) %in% c(".algorithm", ".args", ".processx_result"))], ...)
+  utils::str(x[!(names(x) %in% c(".algorithm", ".args", ".processx_result", ".raw_json_input"))], ...)
   invisible(x)
 }

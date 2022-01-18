@@ -8,20 +8,27 @@
 #'
 #' @export
 #'
-as_qgis_argument.SpatRaster <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.SpatRaster <- function(x, spec = qgis_argument_spec(),
+                                        use_json_input = FALSE) {
   as_qgis_argument_terra(x, spec)
 }
 
-as_qgis_argument_terra <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument_terra <- function(x, spec = qgis_argument_spec(),
+                                   use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("raster", "layer", "multilayer"))) {
     abort(glue("Can't convert '{ class(x)[1] }' object to QGIS type '{ spec$qgis_type }'"))
   }
 
-  # try to use a filename if present
-  if (terra::sources(x)$source != "") {
-    file_ext <- stringr::str_to_lower(tools::file_ext(terra::sources(x)$source))
+  # try to use a filename if present (behaviour changed around terra 1.5.12)
+  sources <- terra::sources(x)
+  if (!is.character(sources)) {
+    sources <- sources$source
+  }
+
+  if (!identical(sources, "") && length(sources) == 1) {
+    file_ext <- stringr::str_to_lower(tools::file_ext(sources))
     if (file_ext %in% c("grd", "asc", "sdat", "rst", "nc", "tif", "tiff", "gtiff", "envi", "bil", "img")) {
-      return(terra::sources(x)$source)
+      return(sources)
     }
   }
 
@@ -62,7 +69,8 @@ qgis_as_terra.qgis_result <- function(output, ...) {
 }
 
 #' @export
-as_qgis_argument.SpatExtent <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.SpatExtent <- function(x, spec = qgis_argument_spec(),
+                                        use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("extent"))) {
     abort(glue("Can't convert 'SpatExtent' object to QGIS type '{ spec$qgis_type }'"))
   }

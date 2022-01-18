@@ -4,7 +4,8 @@
 #' @inheritParams as_qgis_argument
 #'
 #' @export
-as_qgis_argument.sf <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.sf <- function(x, spec = qgis_argument_spec(),
+                                use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("source", "layer", "vector", "multilayer", "point"))) {
     abort(glue("Can't convert 'sf' object to QGIS type '{ spec$qgis_type }'"))
   }
@@ -32,7 +33,8 @@ st_as_sf.qgis_result <- function(x, ...) {
 
 #' @rdname as_qgis_argument.sf
 #' @export
-as_qgis_argument.crs <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.crs <- function(x, spec = qgis_argument_spec(),
+                                 use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("crs"))) {
     abort(glue("Can't convert 'crs' object to QGIS type '{ spec$qgis_type }'"))
   }
@@ -42,7 +44,8 @@ as_qgis_argument.crs <- function(x, spec = qgis_argument_spec()) {
 
 #' @rdname as_qgis_argument.sf
 #' @export
-as_qgis_argument.bbox <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.bbox <- function(x, spec = qgis_argument_spec(),
+                                  use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("extent"))) {
     abort(glue("Can't convert 'bbox' object to QGIS type '{ spec$qgis_type }'"))
   }
@@ -56,7 +59,8 @@ as_qgis_argument.bbox <- function(x, spec = qgis_argument_spec()) {
 
 #' @rdname as_qgis_argument.sf
 #' @export
-as_qgis_argument.sfc <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.sfc <- function(x, spec = qgis_argument_spec(),
+                                 use_json_input = FALSE) {
 
   if (!isTRUE(spec$qgis_type %in% c("point"))) {
     abort(glue("Can't convert 'sfc' object to QGIS type '{ spec$qgis_type }'"))
@@ -79,7 +83,8 @@ as_qgis_argument.sfc <- function(x, spec = qgis_argument_spec()) {
 
 #' @rdname as_qgis_argument.sf
 #' @export
-as_qgis_argument.POINT <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.POINT <- function(x, spec = qgis_argument_spec(),
+                                   use_json_input = FALSE) {
 
   if (!isTRUE(spec$qgis_type %in% c("point"))) {
     abort(glue("Can't convert 'POINT' object to QGIS type '{ spec$qgis_type }'"))

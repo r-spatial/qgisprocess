@@ -9,6 +9,8 @@
 \alias{qgis_version}
 \alias{qgis_path}
 \alias{qgis_query_path}
+\alias{qgis_use_json_output}
+\alias{qgis_use_json_input}
 \alias{qgis_env}
 \alias{qgis_query_version}
 \alias{qgis_query_algorithms}
@@ -20,7 +22,7 @@ has_qgis()
 
 assert_qgis(action = abort)
 
-qgis_configure(quiet = FALSE)
+qgis_configure(quiet = FALSE, use_cached_data = FALSE)
 
 qgis_unconfigure()
 
@@ -29,6 +31,10 @@ qgis_version(query = FALSE, quiet = TRUE)
 qgis_path(query = FALSE, quiet = TRUE)
 
 qgis_query_path(quiet = FALSE)
+
+qgis_use_json_output(query = FALSE)
+
+qgis_use_json_input()
 
 qgis_env()
 
@@ -50,6 +56,10 @@ found.}
 
 \item{quiet}{Use \code{FALSE} to display more information about the command, possibly
 useful for debugging.}
+
+\item{use_cached_data}{Use the cached algorithm list and \code{path} found when
+configuring qgisprocess during the last session. This saves some time
+loading the package.}
 
 \item{query}{Use \code{TRUE} to refresh the cached value.}
 }

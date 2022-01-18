@@ -2,7 +2,7 @@
 # nocov start
 
 .onLoad <- function(...) {
-  qgis_configure(quiet = TRUE)
+  qgis_configure(quiet = TRUE, use_cached_data = TRUE)
 
   vctrs::s3_register("sf::st_as_sf", "qgis_result")
   vctrs::s3_register("stars::st_as_stars", "qgis_result")
@@ -23,11 +23,17 @@
   if (has_qgis()) {
     packageStartupMessage(
       glue::glue(
-        "Using 'qgis_process' at '{ qgis_path() }'.",
-        "QGIS version: { qgis_version() }",
-        "Metadata of { nrow(qgis_algorithms()) } algorithms successfully cached.",
-        "Run `qgis_configure()` for details.",
-        .sep = "\n"
+        "Using 'qgis_process' at '{ qgis_path() }'.\n",
+        "QGIS version: { qgis_version() }\n",
+        if (is.null(qgisprocess_cache$loaded_from)) {
+          "Metadata of { nrow(qgis_algorithms()) } algorithms successfully cached\n"
+        } else {
+          "Configuration loaded from '{ qgisprocess_cache$loaded_from }'\n"
+        },
+        "Run `qgis_configure()` for details.\n",
+        if (qgis_use_json_input()) "Using JSON for input serialization\n" else "",
+        if (qgis_use_json_output()) "Using JSON for output serialization\n" else "",
+        .sep = ""
       )
     )
   } else {

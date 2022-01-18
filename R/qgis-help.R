@@ -29,18 +29,76 @@ qgis_description <- function(algorithm) {
 #' @rdname qgis_show_help
 #' @export
 qgis_arguments <- function(algorithm) {
-  qgis_parsed_help(algorithm)$arguments
+  if (qgis_use_json_output()) {
+    help <- qgis_help(algorithm)
+    out <- tibble::tibble(
+      name = names(help$parameters),
+      description = vapply(help$parameters, "[[", character(1), "description"),
+      qgis_type = vapply(help$parameters, "[[", character(1), c("type", "id")),
+      default_value = lapply(help$parameters, "[[", "default_value"),
+      available_values = lapply(help$parameters, "[[", c("raw_definition", "options")),
+      acceptable_values = lapply(help$parameters, "[[", c("type", "acceptable_values"))
+    )
+
+    out[] <- lapply(out, unname)
+
+    # The order of the parameters is alphabetized in JSON but has a
+    # natural ordering in the parsed help text (which we need for backward
+    # compatibility)
+    out_legacy <- qgis_parsed_help(algorithm)$arguments
+
+    out[match(out_legacy$name, out$name), ]
+  } else {
+    qgis_parsed_help(algorithm)$arguments
+  }
 }
 
 #' @rdname qgis_show_help
 #' @export
 qgis_outputs <- function(algorithm) {
-  qgis_parsed_help(algorithm)$outputs
+  if (qgis_use_json_output()) {
+    help <- qgis_help(algorithm)
+    out <- tibble::tibble(
+      name = names(help$outputs),
+      description = vapply(help$outputs, "[[", character(1), "description"),
+      qgis_output_type = vapply(help$outputs, "[[", character(1), "type")
+    )
+
+    out[] <- lapply(out, unname)
+    out
+  } else {
+    qgis_parsed_help(algorithm)$outputs
+  }
+}
+
+#' @rdname qgis_show_help
+#' @export
+qgis_help <- function(algorithm) {
+  cached <- help_cache_file(algorithm, json = TRUE)
+  if (qgis_use_cached_help() && file.exists(cached)) {
+    try(return(jsonlite::fromJSON(readRDS(cached))))
+  }
+
+  assert_qgis()
+  assert_qgis_algorithm(algorithm)
+
+  result <- qgis_run(
+    args = c("--json", "help", algorithm),
+    encoding = "UTF-8"
+  )
+
+  try({
+    if (!dir.exists(dirname(cached))) dir.create(dirname(cached))
+    saveRDS(result$stdout, cached)
+  })
+
+  jsonlite::fromJSON(result$stdout)
 }
 
 qgis_help_text <- function(algorithm) {
-  if (algorithm %in% names(qgisprocess_cache$help_text)) {
-    return(qgisprocess_cache$help_text[[algorithm]])
+  cached <- help_cache_file(algorithm, json = FALSE)
+  if (qgis_use_cached_help() && file.exists(cached)) {
+    try(return(readRDS(cached)))
   }
 
   assert_qgis()
@@ -50,7 +108,11 @@ qgis_help_text <- function(algorithm) {
     args = c("help", algorithm)
   )
 
-  qgisprocess_cache$help_text[[algorithm]] <- result$stdout
+  try({
+    if (!dir.exists(dirname(cached))) dir.create(dirname(cached))
+    saveRDS(result$stdout, cached)
+  })
+
   result$stdout
 }
 
@@ -137,6 +199,33 @@ qgis_parsed_help <- function(algorithm) {
       description = outputs[, 4, drop = TRUE],
       qgis_output_type = outputs[, 3, drop = TRUE]
     )
+  )
+}
+
+qgis_use_cached_help <- function() {
+  opt <- getOption(
+    "qgisprocess.use_cached_help",
+    Sys.getenv("R_QGISPROCESS_USE_CACHED_HELP", "true")
+  )
+
+  isTRUE(opt) || identical(opt, "true")
+}
+
+help_cache_file <- function(algorithm, json) {
+  hash <- rlang::hash(
+    list(
+      qgisprocess_cache$path,
+      qgis_version(),
+      utils::packageVersion("qgisprocess"),
+      json
+    )
+  )
+
+  alg <- gsub(":", "_", algorithm)
+
+  file.path(
+    rappdirs::user_cache_dir("R-qgisprocess"),
+    glue("help-{ alg }-{ hash }.rds")
   )
 }
 

@@ -23,13 +23,15 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports: 
-    processx,
+    processx (>= 3.5.2),
     stringr,
     withr,
     glue,
     tibble,
     rlang,
-    vctrs
+    vctrs,
+    jsonlite,
+    rappdirs
 URL: https://github.com/paleolimbot/qgisprocess
 BugReports: https://github.com/paleolimbot/qgisprocess/issues
 Suggests: 

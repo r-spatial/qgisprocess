@@ -11,7 +11,12 @@ test_that("qgis_algorithms() works", {
   algs <- qgis_algorithms()
   expect_true(tibble::is_tibble(algs))
   expect_true(nrow(algs) > 1)
-  expect_true(all(vapply(algs, function(x) all(!is.na(x)), logical(1))))
+
+  old_names <- c(
+    "provider", "provider_title", "algorithm",
+    "algorithm_id", "algorithm_title"
+  )
+  expect_true(all(vapply(algs[old_names], function(x) all(!is.na(x)), logical(1))))
 })
 
 test_that("qgis_configure() returns FALSE with no QGIS", {

@@ -8,17 +8,18 @@
 #'
 #' @export
 #'
-as_qgis_argument.RasterLayer <- function(x, spec = qgis_argument_spec()) {
-  as_qgis_argument_raster(x, spec)
+as_qgis_argument.RasterLayer <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
+  as_qgis_argument_raster(x, spec, use_json_input)
 }
 
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
-as_qgis_argument.RasterBrick <- function(x, spec = qgis_argument_spec()) {
-  as_qgis_argument_raster(x, spec)
+as_qgis_argument.RasterBrick <- function(x, spec = qgis_argument_spec(),
+                                         use_json_input = FALSE) {
+  as_qgis_argument_raster(x, spec, use_json_input)
 }
 
-as_qgis_argument_raster <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument_raster <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("raster", "layer", "multilayer"))) {
     abort(glue("Can't convert '{ class(x)[1] }' object to QGIS type '{ spec$qgis_type }'"))
   }
@@ -99,7 +100,7 @@ qgis_as_brick.qgis_result <- function(output, ...) {
 }
 
 #' @export
-as_qgis_argument.CRS <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.CRS <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("crs"))) {
     abort(glue("Can't convert 'crs' object to QGIS type '{ spec$qgis_type }'"))
   }
@@ -108,7 +109,7 @@ as_qgis_argument.CRS <- function(x, spec = qgis_argument_spec()) {
 }
 
 #' @export
-as_qgis_argument.Extent <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.Extent <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("extent"))) {
     abort(glue("Can't convert 'Extent' object to QGIS type '{ spec$qgis_type }'"))
   }
