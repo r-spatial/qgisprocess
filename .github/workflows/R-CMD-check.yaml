@@ -39,6 +39,11 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rcmdcheck
+          needs: check
+
       - name: Install QGIS (Ubuntu Nightly)
         if: matrix.config.qgis == 'ubuntu-nightly'
         run: |
@@ -48,8 +53,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
           projinfo --main-db-path path || true
-          QT_QPA_PLATFORM=offscreen qgis_process list || true
-          QT_QPA_PLATFORM=offscreen qgis_process --json list || true
+          R -e 'str(processx::run("qgis_process", args = c("--json", "list"), env = c(QT_QPA_PLATFORM="offscreen")))' || true
+          R -e 'str(processx::run("qgis_process", args = c("list"), env = c(QT_QPA_PLATFORM="offscreen")))' || true
 
       - name: Install QGIS (Ubuntu)
         if: matrix.config.qgis == 'ubuntu'
@@ -60,8 +65,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
           projinfo --main-db-path path || true
-          QT_QPA_PLATFORM=offscreen qgis_process list || true
-          QT_QPA_PLATFORM=offscreen qgis_process --json list || true
+          R -e 'str(processx::run("qgis_process", args = c("--json", "list"), env = c(QT_QPA_PLATFORM="offscreen")))' || true
+          R -e 'str(processx::run("qgis_process", args = c("list"), env = c(QT_QPA_PLATFORM="offscreen")))' || true
 
       - name: Install QGIS (MacOS homebrew)
         if: matrix.config.qgis == 'macos-brew'
@@ -83,11 +88,6 @@ jobs:
         uses: crazy-max/ghaction-chocolatey@v1
         with:
           args: install qgis
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::rcmdcheck
-          needs: check
 
       - uses: r-lib/actions/check-r-package@v2
 
