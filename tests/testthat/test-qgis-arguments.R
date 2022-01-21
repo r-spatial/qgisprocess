@@ -7,7 +7,7 @@ test_that("qgis_sanitize_arguments() ignores unknown inputs", {
         unknown_arg = 1,
         .algorithm_arguments = tibble::tibble(name = character())
       ),
-      rlang::set_names(list(), character())
+      list()
     ),
     "Ignoring unknown input"
   )
