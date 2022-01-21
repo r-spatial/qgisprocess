@@ -55,11 +55,14 @@ qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_
       message(glue("Ignoring unknown input '{ arg_name }'"))
     }
   }
+  special_args <- user_args[c("PROJECT_PATH", "ELLIPSOID")]
+  special_args <- special_args[!sapply(special_args, is.null)]
 
   # generate argument list template and populate user-supplied values
   args <- rep(list(qgis_default_value()), nrow(arg_meta))
   names(args) <- arg_meta$name
   args[intersect(names(args), names(user_args))] <- user_args[intersect(names(args), names(user_args))]
+  args <- c(args, special_args)
 
   # get argument specs to pass to as_qgis_argument()
   arg_spec <- Map(
