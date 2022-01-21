@@ -13,6 +13,21 @@ test_that("qgis_sanitize_arguments() ignores unknown inputs", {
   )
 })
 
+test_that("qgis_sanitize_arguments() doesn't drop special arguments", {
+  special <- list(PROJECT_PATH = "some_path", ELLIPSOID = "some_ellipse")
+  for (i in 1:3) {
+    if (i == 3) i <- 1:2
+    expect_identical(
+      qgis_sanitize_arguments(
+        "some_algorithm",
+        !!!special[i],
+        .algorithm_arguments = tibble::tibble(name = character())
+      ),
+      !!special[i]
+    )
+  }
+})
+
 test_that("qgis_sanitize_arguments() accepts multiple input arguments", {
   sanitized <- qgis_sanitize_arguments(
     "some_algorithm",
