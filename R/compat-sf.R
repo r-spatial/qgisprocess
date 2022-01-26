@@ -21,15 +21,14 @@ as_qgis_argument.sf <- function(x, spec = qgis_argument_spec(),
 
 # dynamically registered in zzz.R
 st_as_sf.qgis_result <- function(x, ...) {
-  # find the first vector output and read it
-  for (result in x) {
-    if (inherits(result, "qgis_outputVector") || inherits(result, "qgis_outputLayer")) {
-      return(sf::read_sf(result, ...))
-    }
-  }
 
-  abort("Can't extract sf object from result: zero outputs of type 'outputVector' or 'outputLayer'.")
+  result <- qgis_result_single(x, c("qgis_outputVector", "qgis_outputLayer"))
+
+  sf::read_sf(result, ...)
+
 }
+
+
 
 #' @rdname as_qgis_argument.sf
 #' @export

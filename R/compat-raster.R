@@ -76,27 +76,15 @@ qgis_as_brick.qgis_outputLayer <- function(output, ...) {
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
 qgis_as_raster.qgis_result <- function(output, ...) {
-  # find the first raster output and read it
-  for (result in output) {
-    if (inherits(result, "qgis_outputRaster") || inherits(result, "qgis_outputLayer")) {
-      return(raster::raster(unclass(result), ...))
-    }
-  }
-
-  abort("Can't extract raster from result: zero outputs of type 'outputRaster' or 'outputLayer'.")
+  result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  raster::raster(unclass(result), ...)
 }
 
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
 qgis_as_brick.qgis_result <- function(output, ...) {
-  # find the first raster output and read it
-  for (result in output) {
-    if (inherits(result, "qgis_outputRaster") || inherits(result, "qgis_outputLayer")) {
-      return(raster::brick(unclass(result), ...))
-    }
-  }
-
-  abort("Can't extract brick from result: zero outputs of type 'outputRaster' or 'outputLayer'.")
+  result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  raster::brick(unclass(result), ...)
 }
 
 #' @export
