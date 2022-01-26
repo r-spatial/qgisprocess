@@ -35,7 +35,7 @@ test_that("sf objects can be extracted from a qgis_result", {
   expect_is(result_sf, "sf")
 
   result$OUTPUT <- NULL
-  expect_error(sf::st_as_sf(result), "Can't extract sf object.")
+  expect_error(sf::st_as_sf(result), "Can't extract object.")
 })
 
 test_that("sf crs work", {
