@@ -24,7 +24,12 @@ st_as_sf.qgis_result <- function(x, ...) {
 
   result <- qgis_result_single(x, c("qgis_outputVector", "qgis_outputLayer"))
 
-  sf::read_sf(result, ...)
+  if (grepl("\\|layer", result)) {
+    result_splitted <- strsplit(result, "\\|layer.*=")[[1]]
+    sf::read_sf(result_splitted[1], result_splitted[2], ...)
+  } else{
+    sf::read_sf(result, ...)
+  }
 
 }
 
