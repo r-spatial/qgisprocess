@@ -16,7 +16,12 @@ qgis_detect_windows <- function(drive_letter = strsplit(R.home(), ":")[[1]][1]) 
     abort("Can't use `qgis_detect_windows()` on a non-windows platform.")
   }
 
-  bat_files <- c("qgis_process-qgis.bat", "qgis_process-qgis-dev.bat")
+  bat_files <-
+    c(
+      "qgis_process-qgis.bat",
+      "qgis_process-qgis-ltr.bat",
+      "qgis_process-qgis-dev.bat"
+      )
   posssible_locs_win_df <- expand.grid(
     qgis = c(
       list.files(glue::glue("{ drive_letter }:/Program Files"), "QGIS*", full.names = TRUE),
