@@ -27,7 +27,7 @@ st_as_sf.qgis_result <- function(x, ...) {
   if (grepl("\\|layer", result)) {
     result_splitted <- strsplit(result, "\\|layer.*=")[[1]]
     sf::read_sf(result_splitted[1], result_splitted[2], ...)
-  } else{
+  } else {
     sf::read_sf(result, ...)
   }
 
