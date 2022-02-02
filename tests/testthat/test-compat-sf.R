@@ -21,16 +21,16 @@ test_that("sf objects can be extracted from a qgis_result", {
 
   buffer_longlake <- function(OUTPUT, ...) {
     qgis_run_algorithm(
-    "native:buffer",
-    INPUT = system.file("longlake/longlake.gpkg", package = "qgisprocess"),
-    DISTANCE = 100,
-    DISSOLVE = TRUE,
-    MITER_LIMIT = 2,
-    OUTPUT = OUTPUT,
-    END_CAP_STYLE = 0,
-    JOIN_STYLE = 0,
-    .quiet = TRUE
-  )
+      "native:buffer",
+      INPUT = system.file("longlake/longlake.gpkg", package = "qgisprocess"),
+      DISTANCE = 100,
+      DISSOLVE = TRUE,
+      MITER_LIMIT = 2,
+      OUTPUT = OUTPUT,
+      END_CAP_STYLE = 0,
+      JOIN_STYLE = 0,
+      .quiet = TRUE
+    )
   }
 
   result <- buffer_longlake(OUTPUT = qgis_tmp_vector())

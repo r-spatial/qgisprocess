@@ -27,6 +27,8 @@ test_that("qgis_result_*() functions work", {
   expect_is(qgis_result_stderr(result), "character")
   expect_is(qgis_result_stdout(result), "character")
   expect_error(qgis_result_single(result, "numeric"), "zero outputs of type")
-  expect_identical(qgis_result_single(result, "qgis_outputFile"),
-                   result$OUTPUT)
+  expect_identical(
+    qgis_result_single(result, "qgis_outputFile"),
+    result$OUTPUT
+    )
 })
