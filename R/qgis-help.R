@@ -26,6 +26,15 @@ qgis_description <- function(algorithm) {
   )
 }
 
+#' @keywords internal
+extract_type_component <- function(param_element, component) {
+  type <- param_element[["type"]]
+  if (length(type) == 1L && inherits(type, "character")) {
+    if (component == "id") return(type) else return(NULL)
+  }
+  type[[component]]
+}
+
 #' @rdname qgis_show_help
 #' @export
 qgis_arguments <- function(algorithm) {
@@ -34,10 +43,10 @@ qgis_arguments <- function(algorithm) {
     out <- tibble::tibble(
       name = names(help$parameters),
       description = vapply(help$parameters, "[[", character(1), "description"),
-      qgis_type = vapply(help$parameters, "[[", character(1), c("type", "id")),
+      qgis_type = vapply(help$parameters, extract_type_component, character(1), "id"),
       default_value = lapply(help$parameters, "[[", "default_value"),
       available_values = lapply(help$parameters, "[[", c("raw_definition", "options")),
-      acceptable_values = lapply(help$parameters, "[[", c("type", "acceptable_values"))
+      acceptable_values = lapply(help$parameters, extract_type_component, "acceptable_values")
     )
 
     out[] <- lapply(out, unname)
