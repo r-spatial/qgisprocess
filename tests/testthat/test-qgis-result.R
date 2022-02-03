@@ -10,24 +10,28 @@ test_that("qgis_result_*() functions work", {
   skip_if_offline()
 
   tmp_gpkg <- qgis_tmp_vector(".gpkg")
+  tmp_gpkg2 <- qgis_tmp_vector(".gpkg")
 
   result <- qgis_run_algorithm(
-    "native:reprojectlayer",
-    INPUT = system.file("longlake/longlake.gpkg", package = "qgisprocess"),
-    TARGET_CRS = "EPSG:4326",
+    "native:extractbyattribute",
+    INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+    FIELD = "WAYPOINT_I",
+    OPERATOR = 0,
+    VALUE = "10",
     OUTPUT = tmp_gpkg,
+    FAIL_OUTPUT = tmp_gpkg2,
     .quiet = TRUE
   )
 
-  expect_true(file.exists(tmp_gpkg))
+  expect_true(all(file.exists(tmp_gpkg, tmp_gpkg2)))
   qgis_result_clean(result)
-  expect_false(file.exists(tmp_gpkg))
+  expect_false(any(file.exists(tmp_gpkg, tmp_gpkg2)))
 
   expect_is(result, "qgis_result")
   expect_true(is_qgis_result(result))
   expect_output(print(result), "^<Result")
   expect_true(
-    all(c("INPUT", "TARGET_CRS", "OUTPUT") %in%
+    all(c("INPUT", "FIELD", "OPERATOR", "VALUE", "OUTPUT", "FAIL_OUTPUT") %in%
           names(qgis_result_args(result)))
     )
   expect_is(qgis_result_stderr(result), "character")
