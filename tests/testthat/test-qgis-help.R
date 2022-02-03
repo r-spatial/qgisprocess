@@ -31,6 +31,27 @@ test_that("qgis_description() works for algorithms", {
   }
 })
 
+test_that("qgis_arguments() and qgis_outputs() work for selected algorithms", {
+  skip_if_not(has_qgis())
+
+  selected_algorithms <- c("native:buffer", "qgis:executesql")
+
+  for (algorithm in selected_algorithms) {
+    if (interactive()) message(algorithm)
+    expect_is(qgis_arguments(!! algorithm), "data.frame")
+    expect_false(any(is.na(qgis_arguments(!! algorithm)$name)))
+    expect_false(any(is.na(qgis_arguments(!! algorithm)$qgis_type)))
+    expect_false(any(is.na(qgis_arguments(!! algorithm)$description)))
+  }
+
+  for (algorithm in selected_algorithms) {
+    expect_is(qgis_outputs(!! algorithm), "data.frame")
+    expect_false(any(is.na(qgis_outputs(!! algorithm)$name)))
+    expect_false(any(is.na(qgis_outputs(!! algorithm)$qgis_output_type)))
+  }
+
+})
+
 test_that("qgis_arguments() and qgis_outputs() works for all algorithms", {
   skip("Test takes ~1 hr to run")
   for (algorithm in qgis_algorithms()$algorithm) {
