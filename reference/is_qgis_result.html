@@ -58,6 +58,8 @@
 
 <span class="fu">qgis_error_output_does_not_exist</span><span class="op">(</span><span class="va">x</span>, <span class="va">which</span><span class="op">)</span>
 
+<span class="fu">qgis_result_single</span><span class="op">(</span><span class="va">x</span>, <span class="va">what</span><span class="op">)</span>
+
 <span class="fu">qgis_result_stdout</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 
 <span class="fu">qgis_result_stderr</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
@@ -73,7 +75,16 @@
 <dd><p>The name or index of an output.</p></dd>
 <dt>default</dt>
 <dd><p>A default value if the output does not exist.</p></dd>
+<dt>what</dt>
+<dd><p>Character vector of classes.
+At least one class must be inherited by an element of <code>x</code> for that element
+to be selected.</p></dd>
 </dl></div>
+    <div id="details">
+    <h2>Details</h2>
+    <p><code>qgis_result_single()</code> tries to extract the single most useful element
+from a <code>qgis_result</code> object.</p>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
