@@ -49,12 +49,7 @@ st_as_stars.qgis_outputLayer <- function(output, ...) {
 
 # dynamically registered in zzz.R
 st_as_stars.qgis_result <- function(output, ...) {
-  # find the first raster output and read it
-  for (result in output) {
-    if (inherits(result, "qgis_outputRaster") || inherits(result, "qgis_outputLayer")) {
-      return(stars::read_stars(unclass(result), ...))
-    }
-  }
-
-  abort("Can't extract 'stars' raster from result: zero outputs of type 'outputRaster' or 'outputLayer'.")
+  result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  stars::read_stars(unclass(result), ...)
 }
+

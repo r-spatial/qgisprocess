@@ -19,23 +19,31 @@ test_that("sf objects can be extracted from a qgis_result", {
   skip_if_not_installed("sf")
   skip_if_not(has_qgis())
 
-  result <- qgis_run_algorithm(
-    "native:buffer",
-    INPUT = system.file("longlake/longlake.gpkg", package = "qgisprocess"),
-    DISTANCE = 100,
-    DISSOLVE = TRUE,
-    MITER_LIMIT = 2,
-    OUTPUT = qgis_tmp_vector(),
-    END_CAP_STYLE = 0,
-    JOIN_STYLE = 0,
-    .quiet = TRUE
-  )
+  buffer_longlake <- function(OUTPUT, ...) {
+    qgis_run_algorithm(
+      "native:buffer",
+      INPUT = system.file("longlake/longlake.gpkg", package = "qgisprocess"),
+      DISTANCE = 100,
+      DISSOLVE = TRUE,
+      MITER_LIMIT = 2,
+      OUTPUT = OUTPUT,
+      END_CAP_STYLE = 0,
+      JOIN_STYLE = 0,
+      .quiet = TRUE
+    )
+  }
+
+  result <- buffer_longlake(OUTPUT = qgis_tmp_vector())
+  result_alt <- buffer_longlake(OUTPUT = "ogr:dbname=llbuffer.gpkg table=llbuffer")
 
   result_sf <- sf::st_as_sf(result)
   expect_is(result_sf, "sf")
 
+  result_sf_alt <- sf::st_as_sf(result_alt)
+  expect_identical(result_sf, result_sf_alt)
+
   result$OUTPUT <- NULL
-  expect_error(sf::st_as_sf(result), "Can't extract sf object.")
+  expect_error(sf::st_as_sf(result), "Can't extract object.")
 })
 
 test_that("sf crs work", {

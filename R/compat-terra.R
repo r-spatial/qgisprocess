@@ -58,14 +58,8 @@ qgis_as_terra.qgis_outputLayer <- function(output, ...) {
 #' @rdname as_qgis_argument.SpatRaster
 #' @export
 qgis_as_terra.qgis_result <- function(output, ...) {
-  # find the first raster output and read it
-  for (result in output) {
-    if (inherits(result, "qgis_outputRaster") || inherits(result, "qgis_outputLayer")) {
-      return(terra::rast(unclass(result), ...))
-    }
-  }
-
-  abort("Can't extract 'terra' raster from result: zero outputs of type 'outputRaster' or 'outputLayer'.")
+  result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  terra::rast(unclass(result), ...)
 }
 
 #' @export

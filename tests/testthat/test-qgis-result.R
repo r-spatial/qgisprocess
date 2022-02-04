@@ -9,21 +9,36 @@ test_that("qgis_result_*() functions work", {
   skip_if_not(has_qgis())
   skip_if_offline()
 
-  tmp_json <- qgis_tmp_file(".json")
+  tmp_gpkg <- qgis_tmp_vector(".gpkg")
+  tmp_gpkg2 <- qgis_tmp_vector(".gpkg")
+
   result <- qgis_run_algorithm(
-    "native:filedownloader",
-    URL = "https://httpbin.org/get",
-    OUTPUT = tmp_json,
+    "native:extractbyattribute",
+    INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+    FIELD = "WAYPOINT_I",
+    OPERATOR = 0,
+    VALUE = "10",
+    OUTPUT = tmp_gpkg,
+    FAIL_OUTPUT = tmp_gpkg2,
     .quiet = TRUE
   )
-  expect_true(file.exists(tmp_json))
+
+  expect_true(all(file.exists(tmp_gpkg, tmp_gpkg2)))
   qgis_result_clean(result)
-  expect_false(file.exists(tmp_json))
+  expect_false(any(file.exists(tmp_gpkg, tmp_gpkg2)))
 
   expect_is(result, "qgis_result")
   expect_true(is_qgis_result(result))
   expect_output(print(result), "^<Result")
-  expect_true(all(c("URL", "OUTPUT") %in% names(qgis_result_args(result))))
+  expect_true(
+    all(c("INPUT", "FIELD", "OPERATOR", "VALUE", "OUTPUT", "FAIL_OUTPUT") %in%
+          names(qgis_result_args(result)))
+    )
   expect_is(qgis_result_stderr(result), "character")
   expect_is(qgis_result_stdout(result), "character")
+  expect_error(qgis_result_single(result, "numeric"), "zero outputs of type")
+  expect_identical(
+    qgis_result_single(result, "qgis_outputVector"),
+    result$OUTPUT
+    )
 })
