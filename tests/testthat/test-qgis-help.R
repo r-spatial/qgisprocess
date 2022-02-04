@@ -37,7 +37,6 @@ test_that("qgis_arguments() and qgis_outputs() work for selected algorithms", {
   selected_algorithms <- c("native:buffer", "qgis:executesql")
 
   for (algorithm in selected_algorithms) {
-    if (interactive()) message(algorithm)
     expect_is(qgis_arguments(!! algorithm), "data.frame")
     expect_false(any(is.na(qgis_arguments(!! algorithm)$name)))
     expect_false(any(is.na(qgis_arguments(!! algorithm)$qgis_type)))
