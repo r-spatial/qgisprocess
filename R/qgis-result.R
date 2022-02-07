@@ -76,6 +76,12 @@ qgis_result_single <- function(x, what) {
 
 #' @rdname is_qgis_result
 #' @export
+qgis_result_status <- function(x) {
+  x$.processx_result$status
+}
+
+#' @rdname is_qgis_result
+#' @export
 qgis_result_stdout <- function(x) {
   x$.processx_result$stdout
 }

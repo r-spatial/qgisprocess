@@ -6,6 +6,7 @@
 \alias{qgis_output}
 \alias{qgis_error_output_does_not_exist}
 \alias{qgis_result_single}
+\alias{qgis_result_status}
 \alias{qgis_result_stdout}
 \alias{qgis_result_stderr}
 \alias{qgis_result_args}
@@ -20,6 +21,8 @@ qgis_output(x, which, default = qgis_error_output_does_not_exist(x, which))
 qgis_error_output_does_not_exist(x, which)
 
 qgis_result_single(x, what)
+
+qgis_result_status(x)
 
 qgis_result_stdout(x)
 
