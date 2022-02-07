@@ -57,6 +57,7 @@ test_that("qgis_run_algorithm accepts multiple input arguments", {
 })
 
 test_that("qgis_run_algorithm runs with qgis:relief, for which the acceptable value of COLORS is NULL", {
+  skip_if_not(has_qgis())
 
   relief_args <- qgis_arguments("qgis:relief")
   expect_identical(relief_args["COLORS", ]$acceptable_values, list(NULL))
