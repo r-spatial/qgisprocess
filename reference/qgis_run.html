@@ -130,9 +130,9 @@ loading the package.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu">has_qgis</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_path</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "qgis_process"</span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu">has_qgis</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_version</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "3.22.3-Białowieża"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "3.24.0-Tisler"</span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu">has_qgis</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="qgis_has_algorithm.html">qgis_algorithms</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 340 × 27</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 344 × 27</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    provider provider_title algorithm    algorithm_id algorithm_title provider_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 3d       QGIS (3D)      3d:tessella… tessellate   Tessellate      3d         </span>
@@ -145,7 +145,7 @@ loading the package.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> gdal     GDAL           gdal:clipra… cliprasterb… Clip raster by… gdal       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> gdal     GDAL           gdal:clipve… clipvectorb… Clip vector by… gdal       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> gdal     GDAL           gdal:clipve… clipvectorb… Clip vector by… gdal       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 330 more rows, and 21 more variables: can_cancel &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 334 more rows, and 21 more variables: can_cancel &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   deprecated &lt;lgl&gt;, group &lt;chr&gt;, has_known_issues &lt;lgl&gt;, help_url &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   name &lt;chr&gt;, requires_matching_crs &lt;lgl&gt;, short_description &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tags &lt;list&gt;, provider_can_be_activated &lt;lgl&gt;,</span></span>
@@ -155,12 +155,13 @@ loading the package.</p></dd>
 <span class="r-in"><span class="fu">qgis_configure</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> getOption('qgisprocess.path') was not found.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Sys.getenv('R_QGISPROCESS_PATH') was not found.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Trying 'qgis_process' on PATH</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Trying 'qgis_process' on PATH...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Success!</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> QGIS version: 3.22.3-Białowieża</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> QGIS version: 3.24.0-Tisler</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Saving configuration to '~/.cache/R-qgisprocess/cache-0.0.0.9000.rds'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Metadata of 340 algorithms queried and stored in cache.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Metadata of 344 algorithms queried and stored in cache.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Run `qgis_algorithms()` to see them.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> - Using JSON for input serialization</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> - Using JSON for output serialization</span>
 <span class="r-in"></span>
 </code></pre></div>
