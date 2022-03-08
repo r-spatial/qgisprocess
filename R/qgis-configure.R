@@ -221,13 +221,13 @@ qgis_query_path <- function(quiet = FALSE) {
     if (!quiet) message("Sys.getenv('R_QGISPROCESS_PATH') was not found.")
   }
 
-  if (!quiet) message(glue::glue("Trying 'qgis_process' on PATH"))
+  if (!quiet) message(glue::glue("Trying 'qgis_process' on PATH..."))
   tryCatch({
     qgis_run(path = "qgis_process")
     if (!quiet) message("Success!")
     return("qgis_process")
   }, error = function(e) {
-    if (!quiet) message(as.character(e))
+    if (!quiet) message("'qgis_process' is not available on PATH.")
   })
 
   possible_locs <- if (is_macos()) {
