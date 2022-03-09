@@ -3,23 +3,34 @@ test_that("qgis_run_algorithm() works", {
   skip_if_not(has_qgis())
   skip_if_offline()
 
-  tmp_json <- qgis_tmp_file(".json")
+  tmp_gpkg <- qgis_tmp_vector(".gpkg")
+
   result <- expect_output(
-    qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = FALSE),
+    qgis_run_algorithm(
+      "native:reprojectlayer",
+      INPUT = system.file("longlake/longlake.gpkg", package = "qgisprocess"),
+      TARGET_CRS = "EPSG:4326",
+      OUTPUT = tmp_gpkg,
+      .quiet = FALSE
+    ),
     "Running\\s+"
   )
-  expect_true(file.exists(tmp_json))
+  expect_true(file.exists(tmp_gpkg))
 
-  unlink(tmp_json)
+  unlink(tmp_gpkg)
 
-  # arguments to native:filedownloader changed in recent nightly
-  skip_if_not(identical(qgis_arguments("native:filedownloader")$name, c("URL", "OUTPUT")))
-
-  result <- expect_silent(
-    qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = TRUE)
+  result <- expect_output(
+    qgis_run_algorithm(
+      "native:reprojectlayer",
+      INPUT = system.file("longlake/longlake.gpkg", package = "qgisprocess"),
+      TARGET_CRS = "EPSG:4326",
+      OUTPUT = tmp_gpkg,
+      .quiet = TRUE
+    ),
+    NA
   )
-  expect_true(file.exists(tmp_json))
-  unlink(tmp_json)
+  expect_true(file.exists(tmp_gpkg))
+  unlink(tmp_gpkg)
 })
 
 test_that("qgis_run_algorithm() ignores unknown inputs", {
