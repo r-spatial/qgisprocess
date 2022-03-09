@@ -103,6 +103,5 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
   )
 
   qgis_check_stdout(result)
-  return(result)
-
+  result
 }
