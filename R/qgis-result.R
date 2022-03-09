@@ -56,8 +56,7 @@ qgis_check_stdout <- function(x) {
     warning(
       "The algorithm appears to have run without error, ",
       "but the output could not be captured in R.\n",
-      "Please try again after running:\noptions(qgisprocess.use_json_output = ",
-      "!qgis_use_json_output()); qgis_configure()\n",
+      "Please try again after running:\noptions(qgisprocess.use_json_output = FALSE); qgis_configure()\n",
       "Consider posting an issue at the source repo if you don't ",
       "succeed and if no issue exists that already covers it."
     )
