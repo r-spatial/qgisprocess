@@ -3,23 +3,34 @@ test_that("qgis_run_algorithm() works", {
   skip_if_not(has_qgis())
   skip_if_offline()
 
-  tmp_json <- qgis_tmp_file(".json")
+  tmp_gpkg <- qgis_tmp_vector(".gpkg")
+
   result <- expect_output(
-    qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = FALSE),
+    qgis_run_algorithm(
+      "native:reprojectlayer",
+      INPUT = system.file("longlake/longlake.gpkg", package = "qgisprocess"),
+      TARGET_CRS = "EPSG:4326",
+      OUTPUT = tmp_gpkg,
+      .quiet = FALSE
+    ),
     "Running\\s+"
   )
-  expect_true(file.exists(tmp_json))
+  expect_true(file.exists(tmp_gpkg))
 
-  unlink(tmp_json)
+  unlink(tmp_gpkg)
 
-  # arguments to native:filedownloader changed in recent nightly
-  skip_if_not(identical(qgis_arguments("native:filedownloader")$name, c("URL", "OUTPUT")))
-
-  result <- expect_silent(
-    qgis_run_algorithm("native:filedownloader", URL = "https://httpbin.org/get", OUTPUT = tmp_json, .quiet = TRUE)
+  result <- expect_output(
+    qgis_run_algorithm(
+      "native:reprojectlayer",
+      INPUT = system.file("longlake/longlake.gpkg", package = "qgisprocess"),
+      TARGET_CRS = "EPSG:4326",
+      OUTPUT = tmp_gpkg,
+      .quiet = TRUE
+    ),
+    NA
   )
-  expect_true(file.exists(tmp_json))
-  unlink(tmp_json)
+  expect_true(file.exists(tmp_gpkg))
+  unlink(tmp_gpkg)
 })
 
 test_that("qgis_run_algorithm() ignores unknown inputs", {
@@ -54,4 +65,25 @@ test_that("qgis_run_algorithm accepts multiple input arguments", {
   )
   tmp <- sf::read_sf(qgis_output(out, "OUTPUT"))
   expect_equal(nrow(tmp), 3)
+})
+
+test_that("qgis_run_algorithm runs with qgis:relief, for which the acceptable value of COLORS is NULL", {
+  skip_if_not(has_qgis())
+
+  relief_args <- qgis_arguments("qgis:relief")
+  expect_identical(relief_args["COLORS", ]$acceptable_values, list(NULL))
+
+  result <- qgis_run_algorithm(
+    "qgis:relief",
+    INPUT=system.file("longlake/longlake_depth.tif", package = "qgisprocess"),
+    Z_FACTOR=1,
+    AUTO_COLORS=FALSE,
+    COLORS="-0.5, 0, 170, 0, 0; 0, 0.5, 85, 255, 255; 0.5, 1, 0, 255, 0; 1, 2.5, 85, 85, 255"
+    )
+
+  expect_s3_class(result$OUTPUT, "qgis_outputRaster")
+  expect_s3_class(result$FREQUENCY_DISTRIBUTION, "qgis_outputFile")
+  expect_true(file.exists(result$OUTPUT))
+  expect_true(file.exists(result$FREQUENCY_DISTRIBUTION))
+
 })

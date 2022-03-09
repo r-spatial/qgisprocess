@@ -91,7 +91,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
 
   # return a custom object to keep as much information as possible
   # about the output
-  structure(
+  result <- structure(
     rlang::list2(
       !!! qgis_parse_results(algorithm, result$stdout),
       .algorithm = algorithm,
@@ -101,4 +101,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
     ),
     class = "qgis_result"
   )
+
+  qgis_check_stdout(result)
+  result
 }

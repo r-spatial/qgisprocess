@@ -49,6 +49,20 @@ qgis_error_output_does_not_exist <- function(x, which) {
   abort(glue("Result has no output '{ which }'.\nAvailable outputs are { available_outputs }"))
 }
 
+
+#' @keywords internal
+qgis_check_stdout <- function(x) {
+  if (qgis_result_status(x) == 0L && qgis_result_stdout(x) == "") {
+    stop(
+      "The algorithm appears to have run without error, ",
+      "but the output could not be captured in R.\n",
+      "Please try again after running:\noptions(qgisprocess.use_json_output = FALSE); qgis_configure()\n",
+      call. = FALSE
+    )
+  }
+}
+
+
 #' @rdname is_qgis_result
 #' @export
 qgis_result_single <- function(x, what) {
@@ -73,6 +87,12 @@ qgis_result_single <- function(x, what) {
 }
 
 
+
+#' @rdname is_qgis_result
+#' @export
+qgis_result_status <- function(x) {
+  x$.processx_result$status
+}
 
 #' @rdname is_qgis_result
 #' @export
