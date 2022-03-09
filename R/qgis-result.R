@@ -53,12 +53,11 @@ qgis_error_output_does_not_exist <- function(x, which) {
 #' @keywords internal
 qgis_check_stdout <- function(x) {
   if (qgis_result_status(x) == 0L && qgis_result_stdout(x) == "") {
-    warning(
+    stop(
       "The algorithm appears to have run without error, ",
       "but the output could not be captured in R.\n",
       "Please try again after running:\noptions(qgisprocess.use_json_output = FALSE); qgis_configure()\n",
-      "Consider posting an issue at the source repo if you don't ",
-      "succeed and if no issue exists that already covers it."
+      call. = FALSE
     )
   }
 }

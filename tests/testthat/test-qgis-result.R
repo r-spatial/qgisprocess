@@ -44,5 +44,5 @@ test_that("qgis_result_*() functions work", {
     )
 
   result$.processx_result$stdout <- ""
-  expect_warning(qgis_check_stdout(result), "output could not be captured")
+  expect_error(qgis_check_stdout(result), "output could not be captured")
 })
