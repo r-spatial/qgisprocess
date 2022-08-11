@@ -326,8 +326,10 @@ qgis_query_version <- function(quiet = FALSE) {
   match <- stringr::str_match(lines, "\\(([0-9.]+[[:cntrl:][:alnum:].?-]*)\\)")[, 2, drop = TRUE]
   if (all(is.na(match))) {
     abort(
-      "Output did not contain expected version information and was:\n\n",
-      paste(lines, collapse = "\n")
+      paste0(
+        "Output did not contain expected version information and was:\n\n",
+        paste(lines, collapse = "\n")
+      )
     )
   }
   match[!is.na(match)]
