@@ -323,11 +323,13 @@ qgis_env <- function() {
 qgis_query_version <- function(quiet = FALSE) {
   result <- qgis_run(args = character(0))
   lines <- readLines(textConnection(result$stdout))
-  match <- stringr::str_match(lines, "\\(([0-9.]+[[:cntrl:][:alnum:].?-]*)\\)")[, 2, drop = TRUE]
+  match <- stringr::str_match(lines, "\\((\\d{1,2}\\.\\d+.*-.+)\\)")[, 2, drop = TRUE]
   if (all(is.na(match))) {
     abort(
-      "Output did not contain expected version information and was:\n\n",
-      paste(lines, collapse = "\n")
+      paste0(
+        "Output did not contain expected version information and was:\n\n",
+        paste(lines, collapse = "\n")
+      )
     )
   }
   match[!is.na(match)]
