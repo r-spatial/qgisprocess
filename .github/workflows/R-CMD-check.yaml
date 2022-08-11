@@ -47,7 +47,7 @@ jobs:
       - name: Install QGIS (Ubuntu Nightly)
         if: matrix.config.qgis == 'ubuntu-nightly'
         run: |
-          wget -qO - https://qgis.org/downloads/qgis-2021.gpg.key | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import || true
+          wget -qO - https://qgis.org/downloads/qgis-2022.gpg.key | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import || true
           sudo chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
           sudo add-apt-repository "deb https://qgis.org/ubuntu-nightly `lsb_release -c -s` main"
           sudo apt-get update
@@ -56,7 +56,7 @@ jobs:
       - name: Install QGIS (Ubuntu)
         if: matrix.config.qgis == 'ubuntu'
         run: |
-          wget -qO - https://qgis.org/downloads/qgis-2021.gpg.key | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import || true
+          wget -qO - https://qgis.org/downloads/qgis-2022.gpg.key | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import || true
           sudo chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
           sudo add-apt-repository "deb https://qgis.org/ubuntu `lsb_release -c -s` main"
           sudo apt-get update
