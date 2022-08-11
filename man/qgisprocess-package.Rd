@@ -21,6 +21,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Floris Vanderhaeghe (\href{https://orcid.org/0000-0002-6378-6229}{ORCID})
   \item Jan Caha
 }
 
