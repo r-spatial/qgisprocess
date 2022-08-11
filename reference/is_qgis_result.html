@@ -50,37 +50,44 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">is_qgis_result</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">qgis_result_clean</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">qgis_output</span><span class="op">(</span><span class="va">x</span>, <span class="va">which</span>, default <span class="op">=</span> <span class="fu">qgis_error_output_does_not_exist</span><span class="op">(</span><span class="va">x</span>, <span class="va">which</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">qgis_error_output_does_not_exist</span><span class="op">(</span><span class="va">x</span>, <span class="va">which</span><span class="op">)</span>
-
-<span class="fu">qgis_result_single</span><span class="op">(</span><span class="va">x</span>, <span class="va">what</span><span class="op">)</span>
-
-<span class="fu">qgis_result_status</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">qgis_result_stdout</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">qgis_result_stderr</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">qgis_result_args</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_qgis_result</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_result_clean</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_output</span><span class="op">(</span><span class="va">x</span>, <span class="va">which</span>, default <span class="op">=</span> <span class="fu">qgis_error_output_does_not_exist</span><span class="op">(</span><span class="va">x</span>, <span class="va">which</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_error_output_does_not_exist</span><span class="op">(</span><span class="va">x</span>, <span class="va">which</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_result_single</span><span class="op">(</span><span class="va">x</span>, <span class="va">what</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_result_status</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_result_stdout</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_result_stderr</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_result_args</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>An object returned by <code><a href="qgis_run_algorithm.html">qgis_run_algorithm()</a></code>.</p></dd>
+
+
 <dt>which</dt>
 <dd><p>The name or index of an output.</p></dd>
+
+
 <dt>default</dt>
 <dd><p>A default value if the output does not exist.</p></dd>
+
+
 <dt>what</dt>
 <dd><p>Character vector of classes.
 At least one class must be inherited by an element of <code>x</code> for that element
 to be selected.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -100,7 +107,7 @@ from a <code>qgis_result</code> object.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

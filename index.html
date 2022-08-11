@@ -68,151 +68,150 @@
 </h1></div>
 <p><img src="reference/figures/qgisprocess_icon.png" align="right" hspace="10" vspace="0" width="20%"></p>
 <!-- badges: start -->
-
 <p>The goal of <code>qgisprocess</code> is to provide an R interface to the popular and open source desktop geographic information system (GIS) program <a href="https://qgis.org/en/site/" class="external-link">QGIS</a>. The package is a re-implementation of functionality provided by the archived <a href="https://cran.r-project.org/package=RQGIS" class="external-link">RQGIS</a> package, which was partially revived in the <a href="https://github.com/r-spatial/RQGIS3" class="external-link">RQGIS3</a> package.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"paleolimbot/qgisprocess"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"paleolimbot/qgisprocess"</span><span class="op">)</span></span></code></pre></div>
 <p>The qgisprocess package wraps the <code>qgis_process</code> command-line utility, which is available in QGIS &gt;= <a href="https://github.com/qgis/QGIS/releases/tag/final-3_14_16" class="external-link">3.14.16</a>, <a href="https://qgis.org/en/site/getinvolved/development/roadmap.html" class="external-link">released</a> in September 2020. MacOS users will have to install QIGS &gt;= 3.16; download instructions for all platforms are available at <a href="https://download.qgis.org/" class="external-link uri">https://download.qgis.org/</a>. If a recent version of QGIS isn’t available for your OS, you can use one of the <a href="https://github.com/geocompr/docker" class="external-link">Geocomputation with R Docker images</a> with QGIS installed.</p>
 <p>If the automatic configuration fails (or if you have more than one installation and would like to choose which one is used by qgisprocess), you can set <code>options(qgisprocess.path = "path/to/qgis_process")</code>, possibly in your <code>.Rprofile</code> to persist between sessions. You can run <code><a href="reference/qgis_run.html">qgis_configure()</a></code> to print the gritty details!</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paleolimbot/qgisprocess" class="external-link">qgisprocess</a></span><span class="op">)</span>
-<span class="co">#&gt; Using 'qgis_process' at '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'.</span>
-<span class="co">#&gt; Run `qgis_configure()` for details.</span>
-<span class="fu"><a href="reference/qgis_run.html">qgis_configure</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; getOption('qgisprocess.path') was not found.</span>
-<span class="co">#&gt; Sys.getenv('R_QGISPROCESS_PATH') was not found.</span>
-<span class="co">#&gt; Trying 'qgis_process' on PATH</span>
-<span class="co">#&gt; Error in rethrow_call(c_processx_exec, command, c(command, args), stdin, : cannot start processx process 'qgis_process' (system error 2, No such file or directory) @unix/processx.c:604 (processx_exec)</span>
-<span class="co">#&gt; Found 1 QGIS installation containing 'qgis_process':</span>
-<span class="co">#&gt;  /Applications/QGIS.app/Contents/MacOS/bin/qgis_process</span>
-<span class="co">#&gt; Trying command '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'</span>
-<span class="co">#&gt; Success!</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paleolimbot/qgisprocess" class="external-link">qgisprocess</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using 'qgis_process' at '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'.</span></span>
+<span><span class="co">#&gt; Run `qgis_configure()` for details.</span></span>
+<span><span class="fu"><a href="reference/qgis_run.html">qgis_configure</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; getOption('qgisprocess.path') was not found.</span></span>
+<span><span class="co">#&gt; Sys.getenv('R_QGISPROCESS_PATH') was not found.</span></span>
+<span><span class="co">#&gt; Trying 'qgis_process' on PATH</span></span>
+<span><span class="co">#&gt; Error in rethrow_call(c_processx_exec, command, c(command, args), stdin, : cannot start processx process 'qgis_process' (system error 2, No such file or directory) @unix/processx.c:604 (processx_exec)</span></span>
+<span><span class="co">#&gt; Found 1 QGIS installation containing 'qgis_process':</span></span>
+<span><span class="co">#&gt;  /Applications/QGIS.app/Contents/MacOS/bin/qgis_process</span></span>
+<span><span class="co">#&gt; Trying command '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'</span></span>
+<span><span class="co">#&gt; Success!</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>The following example demonstrates the <a href="https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer" class="external-link">buffer</a> algorithm in action. The passing of <a href="https://r-spatial.github.io/sf" class="external-link">sf</a> and <a href="https://cran.r-project.org/package=raster" class="external-link">raster</a> objects is experimentally supported (and will be well-supported in the future!).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/qgis_run_algorithm.html">qgis_run_algorithm</a></span><span class="op">(</span>
-  <span class="st">"native:buffer"</span>,
-  INPUT <span class="op">=</span> <span class="va">input</span>,
-  DISTANCE <span class="op">=</span> <span class="fl">1</span>,
-  DISSOLVE <span class="op">=</span> <span class="cn">TRUE</span>,
-  .quiet <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-<span class="co">#&gt; Argument `SEGMENTS` is unspecified (using QGIS default value).</span>
-<span class="co">#&gt; Using `END_CAP_STYLE = "Round"`</span>
-<span class="co">#&gt; Using `JOIN_STYLE = "Round"`</span>
-<span class="co">#&gt; Argument `MITER_LIMIT` is unspecified (using QGIS default value).</span>
-<span class="co">#&gt; Using `OUTPUT = qgis_tmp_vector()`</span>
-
-<span class="va">result</span>
-<span class="co">#&gt; &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span>
-<span class="co">#&gt; List of 1</span>
-<span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmptXCayy/file9b2b462efaa9/file9b2b5212f730.gpkg"</span>
-
-<span class="va">output_sf</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="reference/is_qgis_result.html">qgis_output</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"OUTPUT"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">output_sf</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/qgis_run_algorithm.html">qgis_run_algorithm</a></span><span class="op">(</span></span>
+<span>  <span class="st">"native:buffer"</span>,</span>
+<span>  INPUT <span class="op">=</span> <span class="va">input</span>,</span>
+<span>  DISTANCE <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  DISSOLVE <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  .quiet <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Argument `SEGMENTS` is unspecified (using QGIS default value).</span></span>
+<span><span class="co">#&gt; Using `END_CAP_STYLE = "Round"`</span></span>
+<span><span class="co">#&gt; Using `JOIN_STYLE = "Round"`</span></span>
+<span><span class="co">#&gt; Argument `MITER_LIMIT` is unspecified (using QGIS default value).</span></span>
+<span><span class="co">#&gt; Using `OUTPUT = qgis_tmp_vector()`</span></span>
+<span></span>
+<span><span class="va">result</span></span>
+<span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span></span>
+<span><span class="co">#&gt; List of 1</span></span>
+<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmptXCayy/file9b2b462efaa9/file9b2b5212f730.gpkg"</span></span>
+<span></span>
+<span><span class="va">output_sf</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="reference/is_qgis_result.html">qgis_output</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"OUTPUT"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">output_sf</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-buffer-1.png" width="100%"></p>
 <p>You can read the help associated with an algorithm using <code><a href="reference/qgis_show_help.html">qgis_show_help()</a></code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/qgis_show_help.html">qgis_show_help</a></span><span class="op">(</span><span class="st">"native:buffer"</span><span class="op">)</span>
-<span class="co">#&gt; Buffer (native:buffer)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ----------------</span>
-<span class="co">#&gt; Description</span>
-<span class="co">#&gt; ----------------</span>
-<span class="co">#&gt; This algorithm computes a buffer area for all the features in an input layer, using a fixed or dynamic distance.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; The segments parameter controls the number of line segments to use to approximate a quarter circle when creating rounded offsets.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; The end cap style parameter controls how line endings are handled in the buffer.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; The join style parameter specifies whether round, miter or beveled joins should be used when offsetting corners in a line.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; The miter limit parameter is only applicable for miter join styles, and controls the maximum distance from the offset curve to use when creating a mitered join.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ----------------</span>
-<span class="co">#&gt; Arguments</span>
-<span class="co">#&gt; ----------------</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; INPUT: Input layer</span>
-<span class="co">#&gt;  Argument type:  source</span>
-<span class="co">#&gt;  Acceptable values:</span>
-<span class="co">#&gt;      - Path to a vector layer</span>
-<span class="co">#&gt; DISTANCE: Distance</span>
-<span class="co">#&gt;  Argument type:  distance</span>
-<span class="co">#&gt;  Acceptable values:</span>
-<span class="co">#&gt;      - A numeric value</span>
-<span class="co">#&gt; SEGMENTS: Segments</span>
-<span class="co">#&gt;  The segments parameter controls the number of line segments to use to approximate a quarter circle when creating rounded offsets.</span>
-<span class="co">#&gt;  Argument type:  number</span>
-<span class="co">#&gt;  Acceptable values:</span>
-<span class="co">#&gt;      - A numeric value</span>
-<span class="co">#&gt; END_CAP_STYLE: End cap style</span>
-<span class="co">#&gt;  Argument type:  enum</span>
-<span class="co">#&gt;  Available values:</span>
-<span class="co">#&gt;      - 0: Round</span>
-<span class="co">#&gt;      - 1: Flat</span>
-<span class="co">#&gt;      - 2: Square</span>
-<span class="co">#&gt;  Acceptable values:</span>
-<span class="co">#&gt;      - Number of selected option, e.g. '1'</span>
-<span class="co">#&gt;      - Comma separated list of options, e.g. '1,3'</span>
-<span class="co">#&gt; JOIN_STYLE: Join style</span>
-<span class="co">#&gt;  Argument type:  enum</span>
-<span class="co">#&gt;  Available values:</span>
-<span class="co">#&gt;      - 0: Round</span>
-<span class="co">#&gt;      - 1: Miter</span>
-<span class="co">#&gt;      - 2: Bevel</span>
-<span class="co">#&gt;  Acceptable values:</span>
-<span class="co">#&gt;      - Number of selected option, e.g. '1'</span>
-<span class="co">#&gt;      - Comma separated list of options, e.g. '1,3'</span>
-<span class="co">#&gt; MITER_LIMIT: Miter limit</span>
-<span class="co">#&gt;  Argument type:  number</span>
-<span class="co">#&gt;  Acceptable values:</span>
-<span class="co">#&gt;      - A numeric value</span>
-<span class="co">#&gt; DISSOLVE: Dissolve result</span>
-<span class="co">#&gt;  Argument type:  boolean</span>
-<span class="co">#&gt;  Acceptable values:</span>
-<span class="co">#&gt;      - 1 for true/yes</span>
-<span class="co">#&gt;      - 0 for false/no</span>
-<span class="co">#&gt; OUTPUT: Buffered</span>
-<span class="co">#&gt;  Argument type:  sink</span>
-<span class="co">#&gt;  Acceptable values:</span>
-<span class="co">#&gt;      - Path for new vector layer</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ----------------</span>
-<span class="co">#&gt; Outputs</span>
-<span class="co">#&gt; ----------------</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; OUTPUT: &lt;outputVector&gt;</span>
-<span class="co">#&gt;  Buffered</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/qgis_show_help.html">qgis_show_help</a></span><span class="op">(</span><span class="st">"native:buffer"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Buffer (native:buffer)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ----------------</span></span>
+<span><span class="co">#&gt; Description</span></span>
+<span><span class="co">#&gt; ----------------</span></span>
+<span><span class="co">#&gt; This algorithm computes a buffer area for all the features in an input layer, using a fixed or dynamic distance.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; The segments parameter controls the number of line segments to use to approximate a quarter circle when creating rounded offsets.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; The end cap style parameter controls how line endings are handled in the buffer.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; The join style parameter specifies whether round, miter or beveled joins should be used when offsetting corners in a line.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; The miter limit parameter is only applicable for miter join styles, and controls the maximum distance from the offset curve to use when creating a mitered join.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ----------------</span></span>
+<span><span class="co">#&gt; Arguments</span></span>
+<span><span class="co">#&gt; ----------------</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; INPUT: Input layer</span></span>
+<span><span class="co">#&gt;  Argument type:  source</span></span>
+<span><span class="co">#&gt;  Acceptable values:</span></span>
+<span><span class="co">#&gt;      - Path to a vector layer</span></span>
+<span><span class="co">#&gt; DISTANCE: Distance</span></span>
+<span><span class="co">#&gt;  Argument type:  distance</span></span>
+<span><span class="co">#&gt;  Acceptable values:</span></span>
+<span><span class="co">#&gt;      - A numeric value</span></span>
+<span><span class="co">#&gt; SEGMENTS: Segments</span></span>
+<span><span class="co">#&gt;  The segments parameter controls the number of line segments to use to approximate a quarter circle when creating rounded offsets.</span></span>
+<span><span class="co">#&gt;  Argument type:  number</span></span>
+<span><span class="co">#&gt;  Acceptable values:</span></span>
+<span><span class="co">#&gt;      - A numeric value</span></span>
+<span><span class="co">#&gt; END_CAP_STYLE: End cap style</span></span>
+<span><span class="co">#&gt;  Argument type:  enum</span></span>
+<span><span class="co">#&gt;  Available values:</span></span>
+<span><span class="co">#&gt;      - 0: Round</span></span>
+<span><span class="co">#&gt;      - 1: Flat</span></span>
+<span><span class="co">#&gt;      - 2: Square</span></span>
+<span><span class="co">#&gt;  Acceptable values:</span></span>
+<span><span class="co">#&gt;      - Number of selected option, e.g. '1'</span></span>
+<span><span class="co">#&gt;      - Comma separated list of options, e.g. '1,3'</span></span>
+<span><span class="co">#&gt; JOIN_STYLE: Join style</span></span>
+<span><span class="co">#&gt;  Argument type:  enum</span></span>
+<span><span class="co">#&gt;  Available values:</span></span>
+<span><span class="co">#&gt;      - 0: Round</span></span>
+<span><span class="co">#&gt;      - 1: Miter</span></span>
+<span><span class="co">#&gt;      - 2: Bevel</span></span>
+<span><span class="co">#&gt;  Acceptable values:</span></span>
+<span><span class="co">#&gt;      - Number of selected option, e.g. '1'</span></span>
+<span><span class="co">#&gt;      - Comma separated list of options, e.g. '1,3'</span></span>
+<span><span class="co">#&gt; MITER_LIMIT: Miter limit</span></span>
+<span><span class="co">#&gt;  Argument type:  number</span></span>
+<span><span class="co">#&gt;  Acceptable values:</span></span>
+<span><span class="co">#&gt;      - A numeric value</span></span>
+<span><span class="co">#&gt; DISSOLVE: Dissolve result</span></span>
+<span><span class="co">#&gt;  Argument type:  boolean</span></span>
+<span><span class="co">#&gt;  Acceptable values:</span></span>
+<span><span class="co">#&gt;      - 1 for true/yes</span></span>
+<span><span class="co">#&gt;      - 0 for false/no</span></span>
+<span><span class="co">#&gt; OUTPUT: Buffered</span></span>
+<span><span class="co">#&gt;  Argument type:  sink</span></span>
+<span><span class="co">#&gt;  Acceptable values:</span></span>
+<span><span class="co">#&gt;      - Path for new vector layer</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ----------------</span></span>
+<span><span class="co">#&gt; Outputs</span></span>
+<span><span class="co">#&gt; ----------------</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; OUTPUT: &lt;outputVector&gt;</span></span>
+<span><span class="co">#&gt;  Buffered</span></span></code></pre></div>
 <p>It may also be useful to run an algorithm in the QGIS GUI and examine the console ‘Input parameters’ to determine how the various input values are translated to string processing arguments:</p>
 <p><img src="reference/figures/qgis-buffer.png"></p>
 <p>A list of available algorithms can be found using <code><a href="reference/qgis_has_algorithm.html">qgis_algorithms()</a></code>. When using R interactively, it may be useful to use <code>View(qgis_algorithms())</code> to search.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/qgis_has_algorithm.html">qgis_algorithms</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 986 x 5</span>
-<span class="co">#&gt;    provider provider_title algorithm         algorithm_id    algorithm_title    </span>
-<span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;          &lt;chr&gt;             &lt;chr&gt;           &lt;chr&gt;              </span>
-<span class="co">#&gt;  1 3d       QGIS (3D)      3d:tessellate     tessellate      Tessellate         </span>
-<span class="co">#&gt;  2 gdal     GDAL           gdal:aspect       aspect          Aspect             </span>
-<span class="co">#&gt;  3 gdal     GDAL           gdal:assignproje… assignprojecti… Assign projection  </span>
-<span class="co">#&gt;  4 gdal     GDAL           gdal:buffervecto… buffervectors   Buffer vectors     </span>
-<span class="co">#&gt;  5 gdal     GDAL           gdal:buildvirtua… buildvirtualra… Build virtual rast…</span>
-<span class="co">#&gt;  6 gdal     GDAL           gdal:buildvirtua… buildvirtualve… Build virtual vect…</span>
-<span class="co">#&gt;  7 gdal     GDAL           gdal:cliprasterb… cliprasterbyex… Clip raster by ext…</span>
-<span class="co">#&gt;  8 gdal     GDAL           gdal:cliprasterb… cliprasterbyma… Clip raster by mas…</span>
-<span class="co">#&gt;  9 gdal     GDAL           gdal:clipvectorb… clipvectorbyex… Clip vector by ext…</span>
-<span class="co">#&gt; 10 gdal     GDAL           gdal:clipvectorb… clipvectorbypo… Clip vector by mas…</span>
-<span class="co">#&gt; # … with 976 more rows</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/qgis_has_algorithm.html">qgis_algorithms</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 986 x 5</span></span>
+<span><span class="co">#&gt;    provider provider_title algorithm         algorithm_id    algorithm_title    </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;          &lt;chr&gt;             &lt;chr&gt;           &lt;chr&gt;              </span></span>
+<span><span class="co">#&gt;  1 3d       QGIS (3D)      3d:tessellate     tessellate      Tessellate         </span></span>
+<span><span class="co">#&gt;  2 gdal     GDAL           gdal:aspect       aspect          Aspect             </span></span>
+<span><span class="co">#&gt;  3 gdal     GDAL           gdal:assignproje… assignprojecti… Assign projection  </span></span>
+<span><span class="co">#&gt;  4 gdal     GDAL           gdal:buffervecto… buffervectors   Buffer vectors     </span></span>
+<span><span class="co">#&gt;  5 gdal     GDAL           gdal:buildvirtua… buildvirtualra… Build virtual rast…</span></span>
+<span><span class="co">#&gt;  6 gdal     GDAL           gdal:buildvirtua… buildvirtualve… Build virtual vect…</span></span>
+<span><span class="co">#&gt;  7 gdal     GDAL           gdal:cliprasterb… cliprasterbyex… Clip raster by ext…</span></span>
+<span><span class="co">#&gt;  8 gdal     GDAL           gdal:cliprasterb… cliprasterbyma… Clip raster by mas…</span></span>
+<span><span class="co">#&gt;  9 gdal     GDAL           gdal:clipvectorb… clipvectorbyex… Clip vector by ext…</span></span>
+<span><span class="co">#&gt; 10 gdal     GDAL           gdal:clipvectorb… clipvectorbypo… Clip vector by mas…</span></span>
+<span><span class="co">#&gt; # … with 976 more rows</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
@@ -279,7 +278,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

@@ -56,15 +56,15 @@ for a detailed description of the algorithms provided
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">qgis_has_algorithm</span><span class="op">(</span><span class="va">algorithm</span><span class="op">)</span>
-
-<span class="fu">qgis_algorithms</span><span class="op">(</span>query <span class="op">=</span> <span class="cn">FALSE</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">qgis_has_provider</span><span class="op">(</span><span class="va">provider</span>, query <span class="op">=</span> <span class="cn">FALSE</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">qgis_providers</span><span class="op">(</span><span class="va">provider</span><span class="op">)</span>
-
-<span class="fu">assert_qgis_algorithm</span><span class="op">(</span><span class="va">algorithm</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">qgis_has_algorithm</span><span class="op">(</span><span class="va">algorithm</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_algorithms</span><span class="op">(</span>query <span class="op">=</span> <span class="cn">FALSE</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_has_provider</span><span class="op">(</span><span class="va">provider</span>, query <span class="op">=</span> <span class="cn">FALSE</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_providers</span><span class="op">(</span><span class="va">provider</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">assert_qgis_algorithm</span><span class="op">(</span><span class="va">algorithm</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -72,50 +72,28 @@ for a detailed description of the algorithms provided
     <dl><dt>algorithm</dt>
 <dd><p>A qualified algorithm name (e.g., "native:filedownloader") or
 a path to a QGIS model file.</p></dd>
+
+
 <dt>query</dt>
 <dd><p>Use <code>TRUE</code> to refresh the cached value.</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>Use <code>TRUE</code> to suppress output from processing algorithms.</p></dd>
+
+
 <dt>provider</dt>
 <dd><p>A provider identifier (e.g., "native")</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="qgis_run.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_has_algorithm</span><span class="op">(</span><span class="st">"native:filedownloader"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="qgis_run.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_algorithms</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 344 × 27</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    provider provider_title algorithm    algorithm_id algorithm_title provider_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 3d       QGIS (3D)      3d:tessella… tessellate   Tessellate      3d         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> gdal     GDAL           gdal:aspect  aspect       Aspect          gdal       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> gdal     GDAL           gdal:assign… assignproje… Assign project… gdal       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> gdal     GDAL           gdal:buffer… buffervecto… Buffer vectors  gdal       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> gdal     GDAL           gdal:buildv… buildvirtua… Build virtual … gdal       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> gdal     GDAL           gdal:buildv… buildvirtua… Build virtual … gdal       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> gdal     GDAL           gdal:clipra… cliprasterb… Clip raster by… gdal       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> gdal     GDAL           gdal:clipra… cliprasterb… Clip raster by… gdal       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> gdal     GDAL           gdal:clipve… clipvectorb… Clip vector by… gdal       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> gdal     GDAL           gdal:clipve… clipvectorb… Clip vector by… gdal       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 334 more rows, and 21 more variables: can_cancel &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   deprecated &lt;lgl&gt;, group &lt;chr&gt;, has_known_issues &lt;lgl&gt;, help_url &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   name &lt;chr&gt;, requires_matching_crs &lt;lgl&gt;, short_description &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tags &lt;list&gt;, provider_can_be_activated &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   default_raster_file_extension &lt;chr&gt;, default_vector_file_extension &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   provider_is_active &lt;lgl&gt;, provider_long_name &lt;chr&gt;, provider_name &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   supported_output_raster_extensions &lt;list&gt;, …</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="qgis_run.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_has_provider</span><span class="op">(</span><span class="st">"native"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="qgis_run.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_providers</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   provider provider_title   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 3d       QGIS (3D)        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> gdal     GDAL             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> native   QGIS (native c++)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> qgis     QGIS             </span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="qgis_run.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_has_algorithm</span><span class="op">(</span><span class="st">"native:filedownloader"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="qgis_run.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_algorithms</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="qgis_run.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_has_provider</span><span class="op">(</span><span class="st">"native"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="qgis_run.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_providers</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -130,7 +108,7 @@ a path to a QGIS model file.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -58,55 +58,55 @@ generics provide hooks for argument values to be serialized correctly.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">qgis_sanitize_arguments</span><span class="op">(</span>
-  <span class="va">algorithm</span>,
-  <span class="va">...</span>,
-  .algorithm_arguments <span class="op">=</span> <span class="fu"><a href="qgis_show_help.html">qgis_arguments</a></span><span class="op">(</span><span class="va">algorithm</span><span class="op">)</span>,
-  .use_json_input <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu">qgis_clean_arguments</span><span class="op">(</span><span class="va">arguments</span><span class="op">)</span>
-
-<span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">qgis_default_value</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">is_qgis_default_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for default</span>
-<span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co"># S3 method for list</span>
-<span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co"># S3 method for qgis_default_value</span>
-<span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co"># S3 method for `NULL`</span>
-<span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co"># S3 method for character</span>
-<span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co"># S3 method for logical</span>
-<span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co"># S3 method for numeric</span>
-<span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">qgis_clean_argument</span><span class="op">(</span><span class="va">value</span><span class="op">)</span>
-
-<span class="co"># S3 method for default</span>
-<span class="fu">qgis_clean_argument</span><span class="op">(</span><span class="va">value</span><span class="op">)</span>
-
-<span class="co"># S3 method for qgis_tempfile_arg</span>
-<span class="fu">qgis_clean_argument</span><span class="op">(</span><span class="va">value</span><span class="op">)</span>
-
-<span class="fu">qgis_argument_spec_by_name</span><span class="op">(</span>
-  <span class="va">algorithm</span>,
-  <span class="va">name</span>,
-  .algorithm_arguments <span class="op">=</span> <span class="fu"><a href="qgis_show_help.html">qgis_arguments</a></span><span class="op">(</span><span class="va">algorithm</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">qgis_sanitize_arguments</span><span class="op">(</span></span>
+<span>  <span class="va">algorithm</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .algorithm_arguments <span class="op">=</span> <span class="fu"><a href="qgis_show_help.html">qgis_arguments</a></span><span class="op">(</span><span class="va">algorithm</span><span class="op">)</span>,</span>
+<span>  .use_json_input <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_clean_arguments</span><span class="op">(</span><span class="va">arguments</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_default_value</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">is_qgis_default_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for list</span></span>
+<span><span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for qgis_default_value</span></span>
+<span><span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for `NULL`</span></span>
+<span><span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for character</span></span>
+<span><span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for logical</span></span>
+<span><span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for numeric</span></span>
+<span><span class="fu">as_qgis_argument</span><span class="op">(</span><span class="va">x</span>, spec <span class="op">=</span> <span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span><span class="op">)</span>, use_json_input <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_clean_argument</span><span class="op">(</span><span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">qgis_clean_argument</span><span class="op">(</span><span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for qgis_tempfile_arg</span></span>
+<span><span class="fu">qgis_clean_argument</span><span class="op">(</span><span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qgis_argument_spec_by_name</span><span class="op">(</span></span>
+<span>  <span class="va">algorithm</span>,</span>
+<span>  <span class="va">name</span>,</span>
+<span>  .algorithm_arguments <span class="op">=</span> <span class="fu"><a href="qgis_show_help.html">qgis_arguments</a></span><span class="op">(</span><span class="va">algorithm</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -114,28 +114,45 @@ generics provide hooks for argument values to be serialized correctly.</p>
     <dl><dt>algorithm</dt>
 <dd><p>A qualified algorithm name (e.g., "native:filedownloader") or
 a path to a QGIS model file.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Named key-value pairs as arguments for each algorithm. Features of
 <code><a href="https://rlang.r-lib.org/reference/list2.html" class="external-link">rlang::list2()</a></code> are supported. These arguments
 are converted to strings using <code>as_qgis_argument()</code>.</p></dd>
+
+
 <dt>.algorithm_arguments</dt>
 <dd><p>The result of <code><a href="qgis_show_help.html">qgis_arguments()</a></code></p></dd>
+
+
 <dt>.use_json_input, use_json_input</dt>
 <dd><p>TRUE if the outputs will be
 serialized as JSON instead of serialized as a command-line argument.</p></dd>
+
+
 <dt>arguments</dt>
 <dd><p>The result of <code>qgis_sanitize_arguments()</code>.</p></dd>
+
+
 <dt>x</dt>
 <dd><p>An object passed to a QGIS processing algorithm</p></dd>
+
+
 <dt>spec</dt>
 <dd><p>A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> with values for <code>algorithm</code>, <code>name</code>,
 <code>description</code>, and <code>qgis_type</code>. See <code><a href="qgis_argument_spec.html">qgis_argument_spec()</a></code> to
 create a blank <code>spec</code> for testing.</p></dd>
+
+
 <dt>value</dt>
 <dd><p>The result of <code>as_qgis_argument()</code> after the QGIS processing
 algorithm has been run.</p></dd>
+
+
 <dt>name</dt>
 <dd><p>The name of the input argument</p></dd>
+
 </dl></div>
 
   </div>
@@ -150,7 +167,7 @@ algorithm has been run.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
