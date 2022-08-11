@@ -2,6 +2,10 @@ Package: qgisprocess
 Title: Use 'QGIS' Processing Algorithms
 Version: 0.0.0.9000
 Authors@R: c(
+      person(given = "Floris",
+             family = "Vanderhaeghe",
+             role = c("aut"),
+             comment = c("ORCID" = "0000-0002-6378-6229")),
       person(given = "Dewey",
              family = "Dunnington",
              role = c("aut", "cre"),
@@ -21,7 +25,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Imports: 
     processx (>= 3.5.2),
     stringr,

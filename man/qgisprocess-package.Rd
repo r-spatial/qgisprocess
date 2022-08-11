@@ -6,7 +6,7 @@
 \alias{qgisprocess-package}
 \title{qgisprocess: Use 'QGIS' Processing Algorithms}
 \description{
-Provides seamless access to the 'QGIS' <https://qgis.org/> processing toolbox using the 'qgis_process' command-line utility.
+Provides seamless access to the 'QGIS' \url{https://qgis.org/} processing toolbox using the 'qgis_process' command-line utility.
 }
 \seealso{
 Useful links:
@@ -21,6 +21,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Floris Vanderhaeghe (\href{https://orcid.org/0000-0002-6378-6229}{ORCID})
   \item Jan Caha
 }
 
