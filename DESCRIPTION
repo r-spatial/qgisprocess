@@ -2,15 +2,15 @@ Package: qgisprocess
 Title: Use 'QGIS' Processing Algorithms
 Version: 0.0.0.9000
 Authors@R: c(
-      person(given = "Floris",
-             family = "Vanderhaeghe",
-             role = c("aut"),
-             comment = c("ORCID" = "0000-0002-6378-6229")),
       person(given = "Dewey",
              family = "Dunnington",
              role = c("aut", "cre"),
              email = "dewey@fishandwhistle.net",
              comment = c(ORCID = "0000-0002-9415-4582")),
+      person(given = "Floris",
+             family = "Vanderhaeghe",
+             role = c("aut"),
+             comment = c("ORCID" = "0000-0002-6378-6229")),
       person(given = "Robin",
              family = "Lovelace",
              role = c("ctb"),
