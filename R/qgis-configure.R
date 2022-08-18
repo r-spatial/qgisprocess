@@ -121,6 +121,21 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
             qgisprocess_cache$algorithms <- cached_data$algorithms
             qgisprocess_cache$loaded_from <- cache_data_file
 
+            if (!quiet) {
+              message(
+                glue::glue(
+                  "Metadata of { nrow(cached_data$algorithms) } algorithms are present in cache.\n",
+                  "Run `qgis_algorithms()` to see them."
+                )
+              )
+              if (qgis_use_json_input()) {
+                message("- Using JSON for input serialization.")
+              }
+              if (qgis_use_json_output()) {
+                message("- Using JSON for output serialization.")
+              }
+            }
+
             return(invisible(TRUE))
 
           }
@@ -164,11 +179,11 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
       )
 
       if (qgis_use_json_input()) {
-        message("- Using JSON for input serialization")
+        message("- Using JSON for input serialization.")
       }
 
       if (qgis_use_json_output()) {
-        message("- Using JSON for output serialization")
+        message("- Using JSON for output serialization.")
       }
     }
   }, error = function(e) {
