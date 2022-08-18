@@ -138,9 +138,21 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
             return(invisible(TRUE))
 
+          } else {
+            message(glue(
+              "QGIS version change detected:\n",
+              "- in the qgisprocess cache it was: {cached_data$version}\n",
+              "- while '{cached_data$path}' is at {qversion}"
+            ))
           }
-
+        } else {
+          message(glue(
+            "The user's qgisprocess.path option or the R_QGISPROCESS_PATH environment ",
+            "variable specify a different qgis_process path ({option_path}) ",
+            "than the cache did ({cached_data$path})."))
         }
+
+        message("Hence rebuilding cache to reflect this change.")
       })
     }
 
