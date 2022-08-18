@@ -26,11 +26,18 @@
         "Using 'qgis_process' at '{ qgis_path() }'.\n",
         "QGIS version: { qgis_version() }\n",
         if (is.null(qgisprocess_cache$loaded_from)) {
-          "Metadata of { nrow(qgis_algorithms()) } algorithms successfully cached\n"
+          paste0(
+            "Metadata of { nrow(qgis_algorithms()) } algorithms successfully cached.\n",
+            "Run `qgis_algorithms()` to see them.\n"
+          )
         } else {
-          "Configuration loaded from '{ qgisprocess_cache$loaded_from }'\n"
+          paste0(
+            "Configuration loaded from '{ qgisprocess_cache$loaded_from }'\n",
+            "Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.\n"
+          )
         },
-        "Run `qgis_configure()` for details.\n",
+        ">>> If you need another installed QGIS version, run `qgis_configure()`; see ",
+        "its documentation if you need to preset the path of qgis_process.\n",
         if (qgis_use_json_input()) "Using JSON for input serialization\n" else "",
         if (qgis_use_json_output()) "Using JSON for output serialization\n" else "",
         .sep = ""
