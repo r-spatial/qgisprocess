@@ -22,7 +22,7 @@
 .onAttach <- function(...) {
   if (has_qgis()) {
     packageStartupMessage(
-      glue::glue(
+      glue(
         "Using 'qgis_process' at '{ qgis_path() }'.\n",
         "QGIS version: { qgis_version() }\n",
         if (is.null(qgisprocess_cache$loaded_from)) {

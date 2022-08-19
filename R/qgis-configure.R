@@ -159,7 +159,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
     path <- qgis_path(query = TRUE, quiet = quiet)
 
     version <- qgis_version(query = TRUE, quiet = quiet)
-    if (!quiet) message(glue::glue("QGIS version: { version }"))
+    if (!quiet) message(glue("QGIS version: { version }"))
 
     use_json_output <- qgis_use_json_output(query = TRUE)
     algorithms <- qgis_algorithms(query = TRUE, quiet = quiet)
@@ -184,7 +184,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
     if (!quiet) {
       message(
-        glue::glue(
+        glue(
           "Metadata of { nrow(algorithms) } algorithms queried and stored in cache.\n",
           "Run `qgis_algorithms()` to see them."
         )
@@ -241,7 +241,7 @@ qgis_path <- function(query = FALSE, quiet = TRUE) {
 qgis_query_path <- function(quiet = FALSE) {
   if (!is.null(getOption("qgisprocess.path"))) {
     path <- getOption("qgisprocess.path", "qgis_process")
-    if (!quiet) message(glue::glue("Trying getOption('qgisprocess.path'): '{ path }'"))
+    if (!quiet) message(glue("Trying getOption('qgisprocess.path'): '{ path }'"))
     tryCatch({
       qgis_run(path = path)
       if (!quiet) message("Success!")
@@ -255,7 +255,7 @@ qgis_query_path <- function(quiet = FALSE) {
 
   if (Sys.getenv("R_QGISPROCESS_PATH", "") != "") {
     path <- Sys.getenv("R_QGISPROCESS_PATH")
-    if (!quiet) message(glue::glue("Trying Sys.getenv('R_QGISPROCESS_PATH'): '{ path }'"))
+    if (!quiet) message(glue("Trying Sys.getenv('R_QGISPROCESS_PATH'): '{ path }'"))
     tryCatch({
       qgis_run(path = path)
       if (!quiet) message("Success!")
@@ -267,7 +267,7 @@ qgis_query_path <- function(quiet = FALSE) {
     if (!quiet) message("Sys.getenv('R_QGISPROCESS_PATH') was not found.")
   }
 
-  if (!quiet) message(glue::glue("Trying 'qgis_process' on PATH..."))
+  if (!quiet) message(glue("Trying 'qgis_process' on PATH..."))
   tryCatch({
     qgis_run(path = "qgis_process")
     if (!quiet) message("Success!")
@@ -298,7 +298,7 @@ qgis_query_path <- function(quiet = FALSE) {
   }
 
   for (path in possible_locs) {
-    if (!quiet) message(glue::glue("Trying command '{ path }'"))
+    if (!quiet) message(glue("Trying command '{ path }'"))
     tryCatch({
       qgis_run(path = path)
       if (!quiet) message("Success!")
