@@ -43,8 +43,8 @@
             "Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.\n"
           )
         },
-        ">>> If you need another installed QGIS version, run `qgis_configure()`; see ",
-        "its documentation if you need to preset the path of qgis_process.\n",
+        ">>> If you need another installed QGIS version, run `qgis_configure()`;\n",
+        "    see its documentation if you need to preset the path of qgis_process.\n",
         if (qgis_use_json_input()) "- Using JSON for input serialization.\n" else "",
         if (qgis_use_json_output()) "- Using JSON for output serialization.\n" else "",
         .sep = ""
