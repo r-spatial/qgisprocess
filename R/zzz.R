@@ -21,9 +21,16 @@
 
 .onAttach <- function(...) {
   if (has_qgis()) {
+    path <- qgis_path()
+    pathstring <-
+      if (path == "qgis_process") {
+        "in the system PATH"
+      } else {
+        glue("at '{path}'")
+    }
     packageStartupMessage(
       glue(
-        "Using 'qgis_process' at '{ qgis_path() }'.\n",
+        "Using 'qgis_process' {pathstring}.\n",
         "QGIS version: { qgis_version() }\n",
         if (is.null(qgisprocess_cache$loaded_from)) {
           paste0(
