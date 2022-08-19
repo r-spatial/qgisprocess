@@ -98,11 +98,25 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           "qgisprocess.path",
           Sys.getenv("R_QGISPROCESS_PATH")
         )
+
         if (identical(option_path, "") || identical(option_path, cached_data$path)) {
 
           if (!quiet) message(glue(
             "Checking cached QGIS version with version reported by '{cached_data$path}' ..."
           ))
+
+          # since we will query the program, first check that it still works
+
+          tryCatch({
+            qgis_run(path = cached_data$path)
+          }, error = function(e) {
+            abort(
+              glue(
+                "'{cached_data$path}' (cached path) is not available anymore.\n",
+                "Will try to reconfigure qgisprocess and build new cache ..."
+              )
+            )
+          })
 
           # note the difference with the further qgis_version() statement,
           # where it will also respect the outcome of qgis_path(query = TRUE);
