@@ -38,8 +38,8 @@
         },
         ">>> If you need another installed QGIS version, run `qgis_configure()`; see ",
         "its documentation if you need to preset the path of qgis_process.\n",
-        if (qgis_use_json_input()) "Using JSON for input serialization\n" else "",
-        if (qgis_use_json_output()) "Using JSON for output serialization\n" else "",
+        if (qgis_use_json_input()) "- Using JSON for input serialization.\n" else "",
+        if (qgis_use_json_output()) "- Using JSON for output serialization.\n" else "",
         .sep = ""
       )
     )
