@@ -45,7 +45,9 @@
     )
   } else {
     packageStartupMessage(
-      "The 'qgis_process' command-line utility was not found.\nRun `qgis_configure()` for details."
+      "The 'qgis_process' command-line utility was not found.\n",
+      "Please run `qgis_configure()` to fix this and rebuild the cache.\n",
+      "See its documentation if you need to preset the path of qgis_process."
     )
   }
 }
