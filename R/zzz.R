@@ -21,24 +21,40 @@
 
 .onAttach <- function(...) {
   if (has_qgis()) {
+    path <- qgis_path()
+    pathstring <-
+      if (path == "qgis_process") {
+        "in the system PATH"
+      } else {
+        glue("at '{path}'")
+    }
     packageStartupMessage(
       glue(
-        "Using 'qgis_process' at '{ qgis_path() }'.\n",
+        "Using 'qgis_process' {pathstring}.\n",
         "QGIS version: { qgis_version() }\n",
         if (is.null(qgisprocess_cache$loaded_from)) {
-          "Metadata of { nrow(qgis_algorithms()) } algorithms successfully cached\n"
+          paste0(
+            "Metadata of { nrow(qgis_algorithms()) } algorithms successfully cached.\n",
+            "Run `qgis_algorithms()` to see them.\n"
+          )
         } else {
-          "Configuration loaded from '{ qgisprocess_cache$loaded_from }'\n"
+          paste0(
+            "Configuration loaded from '{ qgisprocess_cache$loaded_from }'\n",
+            "Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.\n"
+          )
         },
-        "Run `qgis_configure()` for details.\n",
-        if (qgis_use_json_input()) "Using JSON for input serialization\n" else "",
-        if (qgis_use_json_output()) "Using JSON for output serialization\n" else "",
+        ">>> If you need another installed QGIS version, run `qgis_configure()`;\n",
+        "    see its documentation if you need to preset the path of qgis_process.\n",
+        if (qgis_use_json_input()) "- Using JSON for input serialization.\n" else "",
+        if (qgis_use_json_output()) "- Using JSON for output serialization.\n" else "",
         .sep = ""
       )
     )
   } else {
     packageStartupMessage(
-      "The 'qgis_process' command-line utility was not found.\nRun `qgis_configure()` for details."
+      "The 'qgis_process' command-line utility was not found.\n",
+      "Please run `qgis_configure()` to fix this and rebuild the cache.\n",
+      "See its documentation if you need to preset the path of qgis_process."
     )
   }
 }

@@ -90,7 +90,8 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
     if (use_cached_data && file.exists(cache_data_file)) {
       try({
         cached_data <- readRDS(cache_data_file)
-        if (!quiet) message(glue("Restoring configuration from '{cache_data_file}'"))
+
+        if (!quiet) message(glue("Checking configuration from '{cache_data_file}'"))
 
         # respect environment variable/option for path
         option_path <- getOption(
@@ -99,14 +100,73 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
         )
 
         if (identical(option_path, "") || identical(option_path, cached_data$path)) {
-          qgisprocess_cache$path <- cached_data$path
-          qgisprocess_cache$version <- cached_data$version
-          qgisprocess_cache$use_json_output <- cached_data$use_json_output
-          qgisprocess_cache$algorithms <- cached_data$algorithms
-          qgisprocess_cache$loaded_from <- cache_data_file
 
-          return(invisible(TRUE))
+          if (!quiet) message(glue(
+            "Checking cached QGIS version with version reported by '{cached_data$path}' ..."
+          ))
+
+          # since we will query the program, first check that it still works
+
+          tryCatch({
+            qgis_run(path = cached_data$path)
+          }, error = function(e) {
+            abort(
+              glue(
+                "'{cached_data$path}' (cached path) is not available anymore.\n",
+                "Will try to reconfigure qgisprocess and build new cache ..."
+              )
+            )
+          })
+
+          # note the difference with the further qgis_version() statement,
+          # where it will also respect the outcome of qgis_path(query = TRUE);
+          # below it uses qgis_path(query = FALSE), hence takes cached_data$path
+          qgisprocess_cache$path <- cached_data$path
+          qversion <- qgis_version(query = TRUE, quiet = quiet)
+          qgisprocess_cache$path <- NULL
+
+          if (identical(qversion, cached_data$version)) {
+            if (!quiet) message(glue("QGIS versions match! ({qversion})"))
+            if (!quiet) message(glue("Restoring configuration from '{cache_data_file}'"))
+
+            qgisprocess_cache$path <- cached_data$path
+            qgisprocess_cache$version <- cached_data$version
+            qgisprocess_cache$use_json_output <- cached_data$use_json_output
+            qgisprocess_cache$algorithms <- cached_data$algorithms
+            qgisprocess_cache$loaded_from <- cache_data_file
+
+            if (!quiet) {
+              message(
+                glue::glue(
+                  "Metadata of { nrow(cached_data$algorithms) } algorithms are present in cache.\n",
+                  "Run `qgis_algorithms()` to see them."
+                )
+              )
+              if (qgis_use_json_input()) {
+                message("- Using JSON for input serialization.")
+              }
+              if (qgis_use_json_output()) {
+                message("- Using JSON for output serialization.")
+              }
+            }
+
+            return(invisible(TRUE))
+
+          } else {
+            message(glue(
+              "QGIS version change detected:\n",
+              "- in the qgisprocess cache it was: {cached_data$version}\n",
+              "- while '{cached_data$path}' is at {qversion}"
+            ))
+          }
+        } else {
+          message(glue(
+            "The user's qgisprocess.path option or the R_QGISPROCESS_PATH environment ",
+            "variable specify a different qgis_process path ({option_path}) ",
+            "than the cache did ({cached_data$path})."))
         }
+
+        message("Hence rebuilding cache to reflect this change.")
       })
     }
 
@@ -145,11 +205,11 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
       )
 
       if (qgis_use_json_input()) {
-        message("- Using JSON for input serialization")
+        message("- Using JSON for input serialization.")
       }
 
       if (qgis_use_json_output()) {
-        message("- Using JSON for output serialization")
+        message("- Using JSON for output serialization.")
       }
     }
   }, error = function(e) {
