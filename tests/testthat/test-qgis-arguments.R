@@ -49,6 +49,66 @@ test_that("qgis_sanitize_arguments() accepts multiple input arguments", {
   )
 })
 
+test_that("qgis_serialize_arguments() outputs correct JSON strings", {
+  arguments <- list(
+    LAYOUT = "Layout 1",
+    TEXT_FORMAT = 0,
+    OUTPUT = "output.pdf",
+    PROJECT_PATH = "test.qgs",
+    AGGREGATES = list(
+      list(
+        aggregate = "first_value",
+        delimiter = ",",
+        input = '"admin"',
+        length = 36,
+        name = "admin",
+        precision = 0,
+        type = 10
+      ),
+      list(
+        aggregate = "concatenate",
+        delimiter = ",",
+        input = '"name"',
+        length = 3000,
+        name = "name",
+        precision = 0,
+        type = 10
+      )
+    )
+  )
+  json <- qgis_serialize_arguments(arguments = arguments, use_json_input = TRUE)
+  expect_identical(
+    jsonlite::fromJSON(json, simplifyVector = FALSE),
+    list(
+      inputs = list(
+        LAYOUT = "Layout 1",
+        TEXT_FORMAT = 0L,
+        OUTPUT = "output.pdf",
+        AGGREGATES = list(
+          list(
+            aggregate = "first_value",
+            delimiter = ",",
+            input = "\"admin\"",
+            length = 36L,
+            name = "admin",
+            precision = 0L,
+            type = 10L
+          ),
+          list(
+            aggregate = "concatenate",
+            delimiter = ",",
+            input = "\"name\"",
+            length = 3000L,
+            name = "name",
+            precision = 0L,
+            type = 10L
+            )
+          )
+        ),
+      project_path = "test.qgs")
+    )
+})
+
 test_that("argument coercers work", {
   expect_error(as_qgis_argument(list()), "Don't know how to convert object of type")
   expect_identical(as_qgis_argument("chr value"), "chr value")
