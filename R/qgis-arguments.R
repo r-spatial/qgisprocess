@@ -107,7 +107,15 @@ unclass_recursive <- function(x) {
 # turn sanitized arguments into command-line arguments
 qgis_serialize_arguments <- function(arguments, use_json_input = FALSE) {
   if (use_json_input) {
-    jsonlite::toJSON(list(inputs = unclass_recursive(arguments)), auto_unbox = TRUE)
+    arguments <- unclass_recursive(arguments)
+    arglist <-
+      list(
+        inputs = arguments[!(names(arguments) %in% c("ELLIPSOID", "PROJECT_PATH"))],
+        ellipsoid = arguments$ELLIPSOID,
+        project_path = arguments$PROJECT_PATH
+      )
+    arglist <- arglist[!vapply(arglist, is.null, logical(1))]
+    jsonlite::toJSON(arglist, auto_unbox = TRUE)
   } else {
     args_dict <- vapply(arguments, inherits, logical(1), "qgis_dict_input")
     if (any(args_dict)) {
