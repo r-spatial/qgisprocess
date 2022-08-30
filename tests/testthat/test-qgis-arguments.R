@@ -105,7 +105,8 @@ test_that("qgis_serialize_arguments() outputs correct JSON strings", {
             )
           )
         ),
-      project_path = "test.qgs")
+      project_path = "test.qgs"
+      )
     )
 })
 
