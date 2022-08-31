@@ -1,6 +1,8 @@
 capture.output({
 
-test_that("qgis_run_algorithm() works", {
+input <- if (qgis_use_json_input()) "(using JSON input)" else "(NOT using JSON input)"
+
+test_that(glue("qgis_run_algorithm() works {input}"), {
   skip_if_not(has_qgis())
   skip_if_offline()
 
@@ -34,7 +36,7 @@ test_that("qgis_run_algorithm() works", {
   unlink(tmp_gpkg)
 })
 
-test_that("qgis_run_algorithm() ignores unknown inputs", {
+test_that(glue("qgis_run_algorithm() ignores unknown inputs {input}"), {
   skip_if_not(has_qgis())
 
   expect_message(
@@ -49,7 +51,7 @@ test_that("qgis_run_algorithm() ignores unknown inputs", {
   )
 })
 
-test_that("qgis_run_algorithm accepts multiple input arguments", {
+test_that(glue("qgis_run_algorithm accepts multiple input arguments {input}"), {
   skip_if_not(has_qgis())
   skip_if_not_installed("sf")
 
@@ -68,7 +70,7 @@ test_that("qgis_run_algorithm accepts multiple input arguments", {
   expect_equal(nrow(tmp), 3)
 })
 
-test_that("qgis_run_algorithm runs with qgis:relief, for which the acceptable value of COLORS is NULL", {
+test_that(glue("qgis_run_algorithm runs with qgis:relief, for which the acceptable value of COLORS is NULL {input}"), {
   skip_if_not(has_qgis())
 
   relief_args <- qgis_arguments("qgis:relief")
@@ -90,7 +92,7 @@ test_that("qgis_run_algorithm runs with qgis:relief, for which the acceptable va
 })
 
 
-test_that("qgis_run_algorithm succeeds when it needs a QGIS project", {
+test_that(glue("qgis_run_algorithm succeeds when it needs a QGIS project {input}"), {
   skip_if_not(has_qgis())
   skip_on_os("mac")
 
