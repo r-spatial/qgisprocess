@@ -91,6 +91,7 @@ test_that("qgis_run_algorithm runs with qgis:relief, for which the acceptable va
 
 test_that("qgis_run_algorithm succeeds when it needs a QGIS project", {
   skip_if_not(has_qgis())
+  skip_on_os("mac")
 
   tmp_pdf <- qgis_tmp_file(".pdf")
 
