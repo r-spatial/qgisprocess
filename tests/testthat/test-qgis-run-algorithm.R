@@ -87,3 +87,22 @@ test_that("qgis_run_algorithm runs with qgis:relief, for which the acceptable va
   expect_true(file.exists(result$FREQUENCY_DISTRIBUTION))
 
 })
+
+
+test_that("qgis_run_algorithm succeeds when it needs a QGIS project", {
+  skip_if_not(has_qgis())
+  skip_on_os("mac")
+
+  tmp_pdf <- qgis_tmp_file(".pdf")
+
+  result <- qgis_run_algorithm(
+    "native:printlayouttopdf",
+    LAYOUT = "Layout 1",
+    OUTPUT = tmp_pdf,
+    PROJECT_PATH = system.file("extdata/longlake.qgs", package = "qgisprocess")
+  )
+
+  expect_true(file.exists(tmp_pdf))
+  expect_identical(tmp_pdf, as.character(result$OUTPUT))
+  unlink(tmp_pdf)
+})
