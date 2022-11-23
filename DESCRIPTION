@@ -43,7 +43,6 @@ Suggests:
     sf,
     raster,
     rgdal,
-    covr,
     stars,
     terra,
     fs
