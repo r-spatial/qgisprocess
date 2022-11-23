@@ -44,6 +44,5 @@ Suggests:
     raster,
     rgdal,
     stars,
-    terra,
-    fs
+    terra
 SystemRequirements: QGIS (>= 3.16). OSGeo4W is recommended for Windows users. 
