@@ -7,7 +7,6 @@ test_that("qgis_output() works", {
 
 test_that("qgis_result_*() functions work", {
   skip_if_not(has_qgis())
-  skip_if_offline()
 
   tmp_gpkg <- qgis_tmp_vector(".gpkg")
   tmp_gpkg2 <- qgis_tmp_vector(".gpkg")

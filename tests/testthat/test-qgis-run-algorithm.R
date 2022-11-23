@@ -5,7 +5,6 @@ input <-
 
 test_that(glue("qgis_run_algorithm() works{input}"), {
   skip_if_not(has_qgis())
-  skip_if_offline()
 
   tmp_gpkg <- qgis_tmp_vector(".gpkg")
 
