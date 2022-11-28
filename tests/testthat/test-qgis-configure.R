@@ -11,6 +11,24 @@ test_that("qgis_query_version() works", {
   expect_match(qgis_query_version(), "^\\d{1,2}\\.\\d+.*-.+")
 })
 
+test_that("qgis_query_version() works for development versions of QGIS", {
+  skip_if_not(has_qgis())
+  qversion <- qgis_query_version()
+  skip_if_not(
+    stringr::str_detect(
+      qversion,
+      "^\\d{1,2}\\.\\d*[13579][\\.-]"
+    ),
+    paste("QGIS version", qversion, "is not a development version.")
+  )
+
+  expect_match(
+    qversion,
+    "^\\d{1,2}\\.\\d+.*-\\p{L}+, development state [0-9a-f]{8,}",
+    perl = TRUE
+  )
+})
+
 test_that("qgis_algorithms() works", {
   skip_if_not(has_qgis())
 
