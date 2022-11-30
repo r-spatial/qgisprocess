@@ -21,8 +21,8 @@ jobs:
           - {os: macOS-latest, qgis: 'none', r: 'release'}
           - {os: macOS-latest, qgis: 'macos-brew', r: 'release'}
           - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release'}
-          - {os: ubuntu-20.04, qgis: 'ubuntu-nightly', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04, qgis: 'ubuntu', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-20.04, qgis: 'ubuntu-nightly', r: 'release'}
+          - {os: ubuntu-20.04, qgis: 'ubuntu', r: 'release'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
