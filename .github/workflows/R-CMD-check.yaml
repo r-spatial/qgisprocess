@@ -22,6 +22,7 @@ jobs:
           - {os: macOS-latest, qgis: 'macos-brew', r: 'release'}
           - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release'}
           - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'release'}
+          - {os: ubuntu-22.04, qgis: 'ubuntugis', r: 'release'}
           - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release'}
 
     env:
@@ -44,7 +45,7 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
-      - name: Install QGIS (Ubuntu Nightly)
+      - name: Install QGIS (Ubuntu Nightly QGIS repo + possibly older GRASS from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu-nightly'
         run: |
           sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
@@ -52,7 +53,19 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
 
-      - name: Install QGIS (Ubuntu)
+      - name: Install QGIS (Ubuntugis QGIS repo + ubuntugis-unstable PPA, which has the current GRASS release)
+        if: matrix.config.qgis == 'ubuntugis'
+        run: |
+          sudo mkdir -p /root/.gnupg
+          sudo chmod 700 /root/.gnupg
+          sudo gpg --no-default-keyring --keyring /etc/apt/keyrings/ubuntugis-unstable-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6B827C12C2D425E227EDCA75089EBE08314DF160
+          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/ubuntugis-unstable-archive-keyring.gpg] http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/ubuntugis-unstable.list'
+          sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
+          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntugis `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
+          sudo apt-get update
+          sudo apt-get install -y qgis qgis-plugin-grass saga
+
+      - name: Install QGIS (Ubuntu QGIS repo + possibly older GRASS from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu'
         run: |
           sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
