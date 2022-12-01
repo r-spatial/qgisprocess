@@ -105,5 +105,5 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-${{ matrix.config.qgis }}-results
+          name: ${{ matrix.config.os }}_r-${{ matrix.config.r }}_qgis-${{ matrix.config.qgis }}_results
           path: check
