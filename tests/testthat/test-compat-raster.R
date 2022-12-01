@@ -1,7 +1,6 @@
 
 test_that("raster argument coercers work", {
   skip_if_not_installed("raster")
-  skip_if_not_installed("rgdal")
 
   obj <- raster::raster()
   expect_error(
@@ -33,7 +32,6 @@ test_that("raster argument coercers work", {
 
 test_that("raster result coercers work", {
   skip_if_not_installed("raster")
-  skip_if_not_installed("rgdal")
 
   expect_is(
     qgis_as_raster(
@@ -122,7 +120,6 @@ test_that("raster crs work", {
 
 test_that("raster argument coercer for extent works", {
   skip_if_not_installed("raster")
-  skip_if_not_installed("rgdal")
 
   obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
 
