@@ -85,10 +85,10 @@ jobs:
 
       # run with CMD check because installing QGIS is expensive
       - name: Test Coverage
-        if: matrix.config.qgis == 'macos-brew'
+        if: matrix.config.qgis == 'ubuntu'
         run: |
           install.packages("covr")
-          covr::codecov()
+          covr::codecov(quiet = FALSE)
         shell: Rscript {0}
 
       - name: Show testthat output
@@ -103,7 +103,7 @@ jobs:
 
       - name: Upload check results
         if: failure()
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-${{ matrix.config.qgis }}-results
           path: check
