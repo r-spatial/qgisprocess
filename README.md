@@ -12,7 +12,7 @@ status](https://github.com/paleolimbot/qgisprocess/workflows/R-CMD-check/badge.s
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Codecov test
-coverage](https://codecov.io/gh/paleolimbot/qgisprocess/branch/master/graph/badge.svg)](https://codecov.io/gh/paleolimbot/qgisprocess?branch=master)
+coverage](https://codecov.io/gh/paleolimbot/qgisprocess/branch/main/graph/badge.svg)](https://codecov.io/gh/paleolimbot/qgisprocess?branch=main)
 <!-- badges: end -->
 
 The goal of `qgisprocess` is to provide an R interface to the popular
