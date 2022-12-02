@@ -166,7 +166,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
             "than the cache did ({cached_data$path})."))
         }
 
-        message("Hence rebuilding cache to reflect this change.")
+        message("Hence rebuilding cache to reflect this change ...")
       })
     }
 

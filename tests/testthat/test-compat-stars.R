@@ -21,8 +21,8 @@ test_that("stars argument coercers work", {
     proxy = TRUE
   )
   expect_equal(
-    fs::path_abs(as_qgis_argument(obj, qgis_argument_spec(qgis_type = "layer"))),
-    fs::path_abs(system.file("longlake/longlake.tif", package = "qgisprocess"))
+    normalizePath(as_qgis_argument(obj, qgis_argument_spec(qgis_type = "layer"))),
+    normalizePath(system.file("longlake/longlake.tif", package = "qgisprocess"))
   )
 })
 

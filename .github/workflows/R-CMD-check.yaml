@@ -23,15 +23,16 @@ jobs:
           - {os: macOS-latest, qgis: 'none', r: 'release'}
           - {os: macOS-latest, qgis: 'macos-brew', r: 'release'}
           - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release'}
-          - {os: ubuntu-20.04, qgis: 'ubuntu-nightly', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04, qgis: 'ubuntu', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'release'}
+          - {os: ubuntu-22.04, qgis: 'ubuntugis', r: 'release'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -46,21 +47,31 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
-      - name: Install QGIS (Ubuntu Nightly)
+      - name: Install QGIS (Ubuntu Nightly QGIS repo + possibly older GRASS from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu-nightly'
         run: |
-          wget -qO - https://qgis.org/downloads/qgis-2022.gpg.key | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import || true
-          sudo chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
-          sudo add-apt-repository "deb https://qgis.org/ubuntu-nightly `lsb_release -c -s` main"
+          sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
+          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
 
-      - name: Install QGIS (Ubuntu)
+      - name: Install QGIS (Ubuntugis QGIS repo + ubuntugis-unstable PPA, which has the current GRASS release)
+        if: matrix.config.qgis == 'ubuntugis'
+        run: |
+          sudo mkdir -p /root/.gnupg
+          sudo chmod 700 /root/.gnupg
+          sudo gpg --no-default-keyring --keyring /etc/apt/keyrings/ubuntugis-unstable-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6B827C12C2D425E227EDCA75089EBE08314DF160
+          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/ubuntugis-unstable-archive-keyring.gpg] http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/ubuntugis-unstable.list'
+          sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
+          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntugis `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
+          sudo apt-get update
+          sudo apt-get install -y qgis qgis-plugin-grass saga
+
+      - name: Install QGIS (Ubuntu QGIS repo + possibly older GRASS from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu'
         run: |
-          wget -qO - https://qgis.org/downloads/qgis-2022.gpg.key | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import || true
-          sudo chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
-          sudo add-apt-repository "deb https://qgis.org/ubuntu `lsb_release -c -s` main"
+          sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
+          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
 
@@ -81,7 +92,7 @@ jobs:
 
       - name: Install QGIS (Windows chocolatey)
         if: matrix.config.qgis == 'windows-chocolatey'
-        uses: crazy-max/ghaction-chocolatey@v1
+        uses: crazy-max/ghaction-chocolatey@v2
         with:
           args: install qgis
 
@@ -89,10 +100,10 @@ jobs:
 
       # run with CMD check because installing QGIS is expensive
       - name: Test Coverage
-        if: matrix.config.qgis == 'macos-brew'
+        if: matrix.config.qgis == 'ubuntu'
         run: |
           install.packages("covr")
-          covr::codecov()
+          covr::codecov(quiet = FALSE)
         shell: Rscript {0}
 
       - name: Show testthat output
@@ -107,7 +118,7 @@ jobs:
 
       - name: Upload check results
         if: failure()
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v3
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-${{ matrix.config.qgis }}-results
+          name: ${{ matrix.config.os }}_r-${{ matrix.config.r }}_qgis-${{ matrix.config.qgis }}_results
           path: check
