@@ -381,18 +381,33 @@ qgis_env <- function() {
 #' @rdname qgis_run
 #' @export
 qgis_query_version <- function(quiet = FALSE) {
-  result <- qgis_run(args = character(0))
+  result <- qgis_run(args = "--version")
   lines <- readLines(textConnection(result$stdout))
-  match <- stringr::str_match(lines, "\\((\\d{1,2}\\.\\d+.*-.+)\\)")[, 2, drop = TRUE]
-  if (all(is.na(match))) {
+  match <- stringr::str_match(
+    lines,
+    "QGIS\\s(\\d{1,2}\\.\\d+.*-\\p{L}+)\\s.*\\(([0-9a-f]{8,})\\)"
+  )[, 2:3, drop = TRUE]
+  match <- match[!is.na(match)]
+  if (length(match) == 0L) abort_query_version(lines = lines)
+  if (
+    stringr::str_detect(match[1], "[Mm]aster") ||
+    stringr::str_detect(match[1], "^\\d{1,2}\\.\\d*[13579][\\.-]")
+  ) {
+    if (length(match) < 2L) abort_query_version(lines = lines)
+    return(paste0(match[1], ", development state ", match[2]))
+  } else {
+    return(match[1])
+  }
+}
+
+#' @keywords internal
+abort_query_version <- function(lines) {
     abort(
       paste0(
         "Output did not contain expected version information and was:\n\n",
         paste(lines, collapse = "\n")
       )
     )
-  }
-  match[!is.na(match)]
 }
 
 #' @rdname qgis_run
