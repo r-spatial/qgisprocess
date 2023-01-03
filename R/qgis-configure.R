@@ -385,7 +385,7 @@ qgis_query_version <- function(quiet = FALSE) {
   lines <- readLines(textConnection(result$stdout))
   match <- stringr::str_match(
     lines,
-    "QGIS\\s(\\d{1,2}\\.\\d+.*-\\p{L}+)\\s.*\\(([0-9a-f]{8,})\\)"
+    "QGIS\\s(\\d{1,2}\\.\\d+.*-\\p{L}+)\\s.*\\((\\w+)\\)"
   )[, 2:3, drop = TRUE]
   match <- match[!is.na(match)]
   if (length(match) == 0L) abort_query_version(lines = lines)
