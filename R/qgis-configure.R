@@ -394,6 +394,17 @@ qgis_query_version <- function(quiet = FALSE) {
     stringr::str_detect(match[1], "^\\d{1,2}\\.\\d*[13579][\\.-]")
   ) {
     if (length(match) < 2L) abort_query_version(lines = lines)
+    if (!stringr::str_detect(match[2], "[0-9a-f]{7,}")) {
+      warning("Please consider building the QGIS development version from ",
+              "within the QGIS git repository, in order to have a unique ",
+              "version identier of QGIS, or propose the people making the ",
+              "QGIS build to do so. ",
+              "Currently the specific version identifier is '",
+              match[2],
+              "'.",
+              call. = TRUE)
+      match[2] <- paste("unclear:", match[2])
+    }
     return(paste0(match[1], ", development state ", match[2]))
   } else {
     return(match[1])
