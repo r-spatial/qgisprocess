@@ -390,7 +390,7 @@ qgis_query_version <- function(quiet = FALSE) {
   match <- match[!is.na(match)]
   if (length(match) == 0L) abort_query_version(lines = lines)
   if (
-    stringr::str_detect(match[1], "[Mm]aster") ||
+    stringr::str_detect(match[1], "[Mm]a(ster|in)") ||
     stringr::str_detect(match[1], "^\\d{1,2}\\.\\d*[13579][\\.-]")
   ) {
     if (length(match) < 2L) abort_query_version(lines = lines)
