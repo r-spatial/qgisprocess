@@ -51,7 +51,7 @@ jobs:
         if: matrix.config.qgis == 'ubuntu-nightly'
         run: |
           sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
-          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
+          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu-nightly `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
 
