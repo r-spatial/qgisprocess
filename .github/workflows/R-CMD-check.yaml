@@ -100,7 +100,18 @@ jobs:
       - name: In the ubuntugis job, reinstall some pkgs from source
         if: matrix.config.qgis == 'ubuntugis'
         run: |
-          install.packages(c("raster", "sf", "terra", "lwgeom", "rgdal"), repos = "https://cloud.r-project.org")
+          if (!requireNamespace("sf", quietly = TRUE)) {
+            install.packages("sf", repos = "https://cloud.r-project.org")
+          }
+          if (!requireNamespace("terra", quietly = TRUE)) {
+            install.packages("terra", repos = "https://cloud.r-project.org")
+          }
+          if (!requireNamespace("raster", quietly = TRUE)) {  # rgdal: temporarily
+            install.packages(c("rgdal", "raster"), repos = "https://cloud.r-project.org")
+          }
+          if (!requireNamespace("lwgeom", quietly = TRUE)) {  # needed for stars
+            install.packages("lwgeom", repos = "https://cloud.r-project.org")
+          }
         shell: Rscript {0}
 
       - uses: r-lib/actions/check-r-package@v2
