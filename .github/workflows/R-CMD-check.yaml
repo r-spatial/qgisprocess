@@ -112,6 +112,7 @@ jobs:
           if (!requireNamespace("lwgeom", quietly = TRUE)) {  # needed for stars
             install.packages("lwgeom", repos = "https://cloud.r-project.org")
           }
+          sessioninfo::session_info(pkgs = "installed", include_base = TRUE)
         shell: Rscript {0}
 
       - uses: r-lib/actions/check-r-package@v2
