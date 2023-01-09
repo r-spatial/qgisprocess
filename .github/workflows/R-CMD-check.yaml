@@ -96,6 +96,13 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
+      # raster, sf, terra, lwgeom and rgdal from RSPM use older sysdeps than ubuntugis
+      - name: In the ubuntugis job, reinstall some pkgs from source
+        if: matrix.config.qgis == 'ubuntugis'
+        run: |
+          install.packages(c("raster", "sf", "terra", "lwgeom", "rgdal"), repos = "https://cloud.r-project.org")
+        shell: Rscript {0}
+
       - uses: r-lib/actions/check-r-package@v2
 
       # run with CMD check because installing QGIS is expensive
