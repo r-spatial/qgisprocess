@@ -107,8 +107,8 @@ test_that(glue("qgis_run_algorithm succeeds when it needs a QGIS project{input}"
       "QGIS version",
       qversion,
       "is reported to segfault with 'native:printlayouttopdf'."
-      )
     )
+  )
 
   tmp_pdf <- qgis_tmp_file(".pdf")
 
