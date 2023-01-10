@@ -100,7 +100,7 @@ jobs:
         run: |
           # Query R dependencies and report available versions
           cat("::group::Install pak\n")
-          install.packages("pak")
+          install.packages("pak", repos = "https://r-lib.github.io/p/pak/stable/")
           cat("::endgroup::\n")
           cat("::group::Create minimal data frame with pkg deps and store them\n")
           depends <- pak::pkg_deps(c("deps::.", "any::sessioninfo", "any::rcmdcheck"), dependencies = c("Config/Needs/check", "all"))[, c("ref", "version")]
