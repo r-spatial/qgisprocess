@@ -102,7 +102,7 @@ test_that(glue("qgis_run_algorithm succeeds when it needs a QGIS project{input}"
   # see https://github.com/qgis/QGIS/issues/51383
   qversion <- qgis_version()
   skip_if(
-    stringr::str_detect(qversion, "^3.28.2-|^3.29"),
+    stringr::str_detect(qversion, "^3\\.28\\.2-|^3\\.29"),
     paste(
       "QGIS version",
       qversion,
