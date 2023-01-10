@@ -20,12 +20,12 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest, qgis: 'none', r: 'release'}
-          - {os: macOS-latest, qgis: 'macos-brew', r: 'release'}
-          - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release'}
-          - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'release'}
-          - {os: ubuntu-22.04, qgis: 'ubuntugis', r: 'release'}
-          - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release'}
+          - {os: macOS-latest, qgis: 'none', r: 'release', r-pkg-cache: 'v0'}
+          - {os: macOS-latest, qgis: 'macos-brew', r: 'release', r-pkg-cache: 'v0'}
+          - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release', r-pkg-cache: 'v0'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'release', r-pkg-cache: 'v0'}
+          - {os: ubuntu-22.04, qgis: 'ubuntugis', r: 'release', r-pkg-cache: 'v1'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', r-pkg-cache: 'v0'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -95,6 +95,7 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
+          cache-version: ${{ matrix.config.r-pkg-cache }}
 
       # raster, sf, terra, lwgeom and rgdal from RSPM use older sysdeps than ubuntugis
       - name: In the ubuntugis job, reinstall some pkgs from source
