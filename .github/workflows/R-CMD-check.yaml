@@ -95,11 +95,28 @@ jobs:
         with:
           args: install qgis
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
+      - name: Query R dependencies based on available versions
+        run: |
+          install.packages("pak")
+          depends <- pak::pkg_deps(c("deps::.", "any::sessioninfo", "any::rcmdcheck"), dependencies = c("Config/Needs/check", "all"))[, c("ref", "version")]
+          depends <- depends[depends$ref != "deps::.", ]
+          saveRDS(depends, ".github/depends.Rds")
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+        shell: Rscript {0}
+
+      - name: Restore (or define new) R package cache
+        uses: actions/cache@v3
         with:
-          extra-packages: any::rcmdcheck
-          needs: check
-          cache-version: ${{ matrix.config.r-pkg-cache }}
+          path: |
+            ${{ env.R_LIBS_USER }}/*
+            !${{ env.R_LIBS_USER }}/pak
+          key: ${{ matrix.config.os }}-${{ matrix.config.r-pkg-cache }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+
+      - name: Install missing package dependencies
+        run: |
+          pak::pkg_install(c("deps::.", "any::sessioninfo", "any::rcmdcheck"), upgrade = FALSE, dependencies = c("Config/Needs/check", "all"))
+          # This is based on the minimum needed version, not the hash of what is available at RSPM
+        shell: Rscript {0}
 
       # raster, sf, terra, lwgeom and rgdal from RSPM use older sysdeps than ubuntugis
       - name: In the ubuntugis job, reinstall some pkgs from source
