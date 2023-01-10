@@ -45,6 +45,7 @@ jobs:
       - name: Install QGIS (Ubuntu Nightly QGIS repo + possibly older GRASS from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu-nightly'
         run: |
+          # Setup QGIS from Ubuntu Nightly
           sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu-nightly `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
@@ -53,6 +54,7 @@ jobs:
       - name: Install QGIS (Ubuntugis QGIS repo + ubuntugis-unstable PPA, which has the current GRASS release)
         if: matrix.config.qgis == 'ubuntugis'
         run: |
+          # Setup QGIS from Ubuntugis
           sudo mkdir -p /root/.gnupg
           sudo chmod 700 /root/.gnupg
           sudo gpg --no-default-keyring --keyring /etc/apt/keyrings/ubuntugis-unstable-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6B827C12C2D425E227EDCA75089EBE08314DF160
@@ -65,6 +67,7 @@ jobs:
       - name: Install QGIS (Ubuntu QGIS repo + possibly older GRASS from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu'
         run: |
+          # Setup QGIS from Ubuntu
           sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
@@ -81,6 +84,7 @@ jobs:
       - name: Install QGIS (MacOS nightly)
         if: matrix.config.qgis == 'macos-nightly'
         run: |
+          # Setup QGIS from MacOS nightly
           curl https://qgis.org/downloads/macos/qgis-macos-nightly.dmg --output qgis-macos-nightly.dmg
           yes | hdiutil attach -nobrowse -noverify -mountpoint qgis qgis-macos-nightly.dmg > /dev/null
           sudo cp -R qgis/QGIS.app /Applications
@@ -101,6 +105,7 @@ jobs:
       - name: In the ubuntugis job, reinstall some pkgs from source
         if: matrix.config.qgis == 'ubuntugis'
         run: |
+          # Rebuild and install sf, terra etc. from source if the RSPM binaries don't load
           cat("::group::sf\n")
           if (!requireNamespace("sf", quietly = TRUE)) {
             install.packages("sf", repos = "https://cloud.r-project.org")
@@ -132,6 +137,7 @@ jobs:
       - name: Test Coverage
         if: matrix.config.qgis == 'ubuntu'
         run: |
+          # Setup code coverage with Codecov
           install.packages("covr")
           covr::codecov(quiet = FALSE)
         shell: Rscript {0}
