@@ -95,13 +95,25 @@ jobs:
         with:
           args: install qgis
 
-      - name: Query R dependencies based on available versions
+      - name: Query R dependencies and report available versions
+        id: query
         run: |
+          # Query R dependencies and report available versions
+          cat("::group::Install pak\n")
           install.packages("pak")
+          cat("::endgroup::\n")
+          cat("::group::Create minimal data frame with pkg deps and store them\n")
           depends <- pak::pkg_deps(c("deps::.", "any::sessioninfo", "any::rcmdcheck"), dependencies = c("Config/Needs/check", "all"))[, c("ref", "version")]
           depends <- depends[depends$ref != "deps::.", ]
           saveRDS(depends, ".github/depends.Rds")
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+          cat("::endgroup::\n")
+          cat("::group::Store R-version\n")
+          cat("r-version=", sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep = "", append = TRUE)
+          cat("::endgroup::\n")
+          cat("::group::Print results\n")
+          cat("R version:", sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), "\n")
+          print(as.data.frame(depends), row.names = FALSE)
+          cat("::endgroup::\n")
         shell: Rscript {0}
 
       - name: Restore (or define new) R package cache
@@ -110,12 +122,17 @@ jobs:
           path: |
             ${{ env.R_LIBS_USER }}/*
             !${{ env.R_LIBS_USER }}/pak
-          key: ${{ matrix.config.os }}-${{ matrix.config.r-pkg-cache }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          key: ${{ matrix.config.os }}-${{ steps.query.outputs.r-version }}-${{ matrix.config.r-pkg-cache }}-${{ hashFiles('.github/depends.Rds') }}
 
       - name: Install missing package dependencies
         run: |
+          cat("::group::Install\n")
           pak::pkg_install(c("deps::.", "any::sessioninfo", "any::rcmdcheck"), upgrade = FALSE, dependencies = c("Config/Needs/check", "all"))
           # This is based on the minimum needed version, not the hash of what is available at RSPM
+          cat("::endgroup::\n")
+          cat("::group::Session info\n")
+          sessioninfo::session_info(pkgs = "installed", include_base = TRUE)
+          cat("::endgroup::\n")
         shell: Rscript {0}
 
       # raster, sf, terra, lwgeom and rgdal from RSPM use older sysdeps than ubuntugis
