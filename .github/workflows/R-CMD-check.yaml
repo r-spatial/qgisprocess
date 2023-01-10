@@ -126,6 +126,7 @@ jobs:
 
       - name: Install missing package dependencies
         run: |
+          # Install missing package dependencies
           cat("::group::Install\n")
           pak::pkg_install(c("deps::.", "any::sessioninfo", "any::rcmdcheck"), upgrade = FALSE, dependencies = c("Config/Needs/check", "all"))
           # This is based on the minimum needed version, not the hash of what is available at RSPM
@@ -136,10 +137,10 @@ jobs:
         shell: Rscript {0}
 
       # raster, sf, terra, lwgeom and rgdal from RSPM use older sysdeps than ubuntugis
-      - name: In the ubuntugis job, reinstall some pkgs from source
+      - name: In the ubuntugis job, reinstall some pkgs from source if needed
         if: matrix.config.qgis == 'ubuntugis'
         run: |
-          # Rebuild and install sf, terra etc. from source if the RSPM binaries don't load
+          # Rebuild and install sf, terra etc. if the RSPM binaries (or cached pkgs) don't load
           cat("::group::sf\n")
           if (!requireNamespace("sf", quietly = TRUE)) {
             install.packages("sf", repos = "https://cloud.r-project.org")
