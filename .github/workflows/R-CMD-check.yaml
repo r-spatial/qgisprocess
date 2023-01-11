@@ -20,12 +20,12 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest, qgis: 'none', r: 'release'}
-          - {os: macOS-latest, qgis: 'macos-brew', r: 'release'}
-          - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release'}
-          - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'release'}
-          - {os: ubuntu-22.04, qgis: 'ubuntugis', r: 'release'}
-          - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release'}
+          - {os: macOS-latest, qgis: 'none', r: 'release', r-pkg-cache: 'v0'}
+          - {os: macOS-latest, qgis: 'macos-brew', r: 'release', r-pkg-cache: 'v0'}
+          - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release', r-pkg-cache: 'v0'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'release', r-pkg-cache: 'v0'}
+          - {os: ubuntu-22.04, qgis: 'ubuntugis', r: 'release', r-pkg-cache: 'v1'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', r-pkg-cache: 'v0'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -42,22 +42,19 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::rcmdcheck
-          needs: check
-
       - name: Install QGIS (Ubuntu Nightly QGIS repo + possibly older GRASS from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu-nightly'
         run: |
+          # Setup QGIS from Ubuntu Nightly
           sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
-          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
+          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu-nightly `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
 
       - name: Install QGIS (Ubuntugis QGIS repo + ubuntugis-unstable PPA, which has the current GRASS release)
         if: matrix.config.qgis == 'ubuntugis'
         run: |
+          # Setup QGIS from Ubuntugis
           sudo mkdir -p /root/.gnupg
           sudo chmod 700 /root/.gnupg
           sudo gpg --no-default-keyring --keyring /etc/apt/keyrings/ubuntugis-unstable-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6B827C12C2D425E227EDCA75089EBE08314DF160
@@ -70,6 +67,7 @@ jobs:
       - name: Install QGIS (Ubuntu QGIS repo + possibly older GRASS from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu'
         run: |
+          # Setup QGIS from Ubuntu
           sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
@@ -86,6 +84,7 @@ jobs:
       - name: Install QGIS (MacOS nightly)
         if: matrix.config.qgis == 'macos-nightly'
         run: |
+          # Setup QGIS from MacOS nightly
           curl https://qgis.org/downloads/macos/qgis-macos-nightly.dmg --output qgis-macos-nightly.dmg
           yes | hdiutil attach -nobrowse -noverify -mountpoint qgis qgis-macos-nightly.dmg > /dev/null
           sudo cp -R qgis/QGIS.app /Applications
@@ -96,12 +95,84 @@ jobs:
         with:
           args: install qgis
 
+      - name: Query R dependencies and report available versions
+        id: query
+        run: |
+          # Query R dependencies and report available versions
+          cat("::group::Install pak\n")
+          install.packages("pak", repos = "https://r-lib.github.io/p/pak/stable/")
+          cat("::endgroup::\n")
+          cat("::group::Create minimal data frame with pkg deps and store them\n")
+          depends <- pak::pkg_deps(c("deps::.", "any::sessioninfo", "any::rcmdcheck"), dependencies = c("Config/Needs/check", "all"))[, c("ref", "version")]
+          depends <- depends[depends$ref != "deps::.", ]
+          saveRDS(depends, ".github/depends.Rds")
+          cat("::endgroup::\n")
+          cat("::group::Store R-version\n")
+          cat("r-version=", sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep = "", append = TRUE)
+          cat("::endgroup::\n")
+          cat("::group::Print results\n")
+          cat("R version:", sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), "\n")
+          print(as.data.frame(depends), row.names = FALSE)
+          cat("::endgroup::\n")
+        shell: Rscript {0}
+
+      - name: Restore (or define new) R package cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ env.R_LIBS_USER }}/*
+            !${{ env.R_LIBS_USER }}/pak
+          key: ${{ matrix.config.os }}-${{ steps.query.outputs.r-version }}-${{ matrix.config.r-pkg-cache }}-${{ hashFiles('.github/depends.Rds') }}
+
+      - name: Install missing package dependencies
+        run: |
+          # Install missing package dependencies
+          cat("::group::Install\n")
+          pak::pkg_install(c("deps::.", "any::sessioninfo", "any::rcmdcheck"), upgrade = FALSE, dependencies = c("Config/Needs/check", "all"))
+          # This is based on the minimum needed version, not the hash of what is available at RSPM
+          cat("::endgroup::\n")
+          cat("::group::Session info\n")
+          sessioninfo::session_info(pkgs = "installed", include_base = TRUE)
+          cat("::endgroup::\n")
+        shell: Rscript {0}
+
+      # raster, sf, terra, lwgeom and rgdal from RSPM use older sysdeps than ubuntugis
+      - name: In the ubuntugis job, reinstall some pkgs from source if needed
+        if: matrix.config.qgis == 'ubuntugis'
+        run: |
+          # Rebuild and install sf, terra etc. if the RSPM binaries (or cached pkgs) don't load
+          cat("::group::sf\n")
+          if (!requireNamespace("sf", quietly = TRUE)) {
+            install.packages("sf", repos = "https://cloud.r-project.org")
+          }
+          cat("::endgroup::\n")
+          cat("::group::terra\n")
+          if (!requireNamespace("terra", quietly = TRUE)) {
+            install.packages("terra", repos = "https://cloud.r-project.org")
+          }
+          cat("::endgroup::\n")
+          cat("::group::raster and rgdal (rgdal still needed)\n")
+          if (!requireNamespace("raster", quietly = TRUE)) {  # rgdal: temporarily
+            install.packages(c("rgdal", "raster"), repos = "https://cloud.r-project.org")
+          }
+          cat("::endgroup::\n")
+          cat("::group::lwgeom (needed by stars)\n")
+          if (!requireNamespace("lwgeom", quietly = TRUE)) {  # needed for stars
+            install.packages("lwgeom", repos = "https://cloud.r-project.org")
+          }
+          cat("::endgroup::\n")
+          cat("::group::Session info\n")
+          sessioninfo::session_info(pkgs = "installed", include_base = TRUE)
+          cat("::endgroup::\n")
+        shell: Rscript {0}
+
       - uses: r-lib/actions/check-r-package@v2
 
       # run with CMD check because installing QGIS is expensive
       - name: Test Coverage
         if: matrix.config.qgis == 'ubuntu'
         run: |
+          # Setup code coverage with Codecov
           install.packages("covr")
           covr::codecov(quiet = FALSE)
         shell: Rscript {0}
