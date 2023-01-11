@@ -24,9 +24,13 @@ test_that("qgis_query_version() works for development versions of QGIS", {
 
   expect_match(
     qversion,
-    "^\\d{1,2}\\.\\d+.*-\\p{L}+, development state [0-9a-f]{8,}",
+    "^\\d{1,2}\\.\\d+.*-\\p{L}+, development state ([0-9a-f]{7,}|unclear:.+)",
     perl = TRUE
   )
+
+  if (stringr::str_detect(qversion, ".+development state unclear:.+")) {
+    expect_warning(qgis_query_version(), "version identifier")
+  }
 })
 
 test_that("qgis_algorithms() works", {
