@@ -29,7 +29,7 @@ test_that("qgis_query_version() works for development versions of QGIS", {
   )
 
   if (stringr::str_detect(qversion, ".+development state unclear:.+")) {
-    expect_warning(qgis_query_version(), "version identier")
+    expect_warning(qgis_query_version(), "version identifier")
   }
 })
 

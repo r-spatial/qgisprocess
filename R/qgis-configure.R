@@ -399,7 +399,7 @@ qgis_query_version <- function(quiet = FALSE) {
     if (!stringr::str_detect(match[2], "^[0-9a-f]{7,}$")) {
       warning("Please consider building the QGIS development version from ",
               "within the QGIS git repository, in order to have a unique ",
-              "version identier of QGIS, or propose the people making the ",
+              "version identifier of QGIS, or propose the people making the ",
               "QGIS build to do so. ",
               "Currently the specific version identifier is '",
               match[2],
