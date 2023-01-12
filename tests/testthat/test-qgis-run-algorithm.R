@@ -98,11 +98,11 @@ test_that(glue("qgis_run_algorithm succeeds when it needs a QGIS project{input}"
   skip_if_not(has_qgis())
   # Until Issue #68 is resolved (native:printlayouttopdf segfaults on MacOS):
   skip_on_os("mac")
-  # QGIS 3.28.2 and a series of QGIS 3.29.0 builds always segfault
+  # QGIS 3.28.2 (and a series of QGIS 3.29 builds) always segfault
   # see https://github.com/qgis/QGIS/issues/51383
   qversion <- qgis_version()
   skip_if(
-    stringr::str_detect(qversion, "^3\\.28\\.2-|^3\\.29"),
+    stringr::str_detect(qversion, "^3\\.28\\.2-"),
     paste(
       "QGIS version",
       qversion,
