@@ -137,6 +137,15 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
             qgisprocess_cache$algorithms <- cached_data$algorithms
             qgisprocess_cache$loaded_from <- cache_data_file
 
+            if (!has_qgis()) {
+              if (!quiet) message(
+                "The cache does not contain all required data.\n",
+                "Will try to reconfigure qgisprocess and build new cache ..."
+                )
+              qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+              return(invisible(TRUE))
+            }
+
             if (!quiet) {
               message(
                 glue::glue(
