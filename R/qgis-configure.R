@@ -56,7 +56,8 @@ qgis_run <- function(args = character(), ..., env = qgis_env(), path = qgis_path
 has_qgis <- function() {
   !is.null(qgisprocess_cache$path) &&
     !is.null(qgisprocess_cache$version) &&
-    !is.null(qgisprocess_cache$algorithms)
+    !is.null(qgisprocess_cache$algorithms) &&
+    !is.null(qgisprocess_cache$plugins)
 }
 
 #' @rdname qgis_run
