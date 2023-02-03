@@ -94,6 +94,20 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
         if (!quiet) message(glue("Checking configuration from '{cache_data_file}'"))
 
+        if (
+          !all(
+            c("path", "version", "algorithms", "plugins", "use_json_output")
+            %in% names(cached_data)
+          )
+        ) {
+          if (!quiet) message(
+            "The cache does not contain all required elements.\n",
+            "Will try to reconfigure qgisprocess and build new cache ..."
+          )
+          qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+          return(invisible(has_qgis()))
+        }
+
         # respect environment variable/option for path
         option_path <- getOption(
           "qgisprocess.path",
