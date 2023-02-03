@@ -117,7 +117,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
               )
             )
             qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
-            return(invisible(TRUE))
+            return(invisible(has_qgis()))
           })
 
           # note the difference with the further qgis_version() statement,
@@ -143,7 +143,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
                 "Will try to reconfigure qgisprocess and build new cache ..."
                 )
               qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
-              return(invisible(TRUE))
+              return(invisible(has_qgis()))
             }
 
             if (!quiet) {
@@ -156,7 +156,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
               messages_json()
             }
 
-            return(invisible(TRUE))
+            return(invisible(has_qgis()))
 
           } else {
             message(glue(
