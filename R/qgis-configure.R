@@ -116,6 +116,8 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
                 "Will try to reconfigure qgisprocess and build new cache ..."
               )
             )
+            qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+            return(invisible(TRUE))
           })
 
           # note the difference with the further qgis_version() statement,
@@ -142,12 +144,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
                   "Run `qgis_algorithms()` to see them."
                 )
               )
-              if (qgis_use_json_input()) {
-                message("- Using JSON for input serialization.")
-              }
-              if (qgis_use_json_output()) {
-                message("- Using JSON for output serialization.")
-              }
+              messages_json()
             }
 
             return(invisible(TRUE))
@@ -170,48 +167,8 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
       })
     }
 
-    path <- qgis_path(query = TRUE, quiet = quiet)
+    qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
 
-    version <- qgis_version(query = TRUE, quiet = quiet)
-    if (!quiet) message(glue("QGIS version: { version }"))
-
-    use_json_output <- qgis_use_json_output(query = TRUE)
-    algorithms <- qgis_algorithms(query = TRUE, quiet = quiet)
-
-    if (!quiet) message(glue("Saving configuration to '{cache_data_file}'"))
-
-    try({
-      if (!dir.exists(dirname(cache_data_file))) {
-        dir.create(dirname(cache_data_file), recursive = TRUE)
-      }
-
-      saveRDS(
-        list(
-          path = path,
-          version = version,
-          algorithms = algorithms,
-          use_json_output = use_json_output
-        ),
-        cache_data_file
-      )
-    })
-
-    if (!quiet) {
-      message(
-        glue(
-          "Metadata of { nrow(algorithms) } algorithms queried and stored in cache.\n",
-          "Run `qgis_algorithms()` to see them."
-        )
-      )
-
-      if (qgis_use_json_input()) {
-        message("- Using JSON for input serialization.")
-      }
-
-      if (qgis_use_json_output()) {
-        message("- Using JSON for output serialization.")
-      }
-    }
   }, error = function(e) {
     qgis_unconfigure()
     if (!quiet) message(e)
@@ -219,6 +176,64 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
   invisible(has_qgis())
 }
+
+
+
+
+#' @keywords internal
+messages_json <- function() {
+  if (qgis_use_json_input()) {
+    message("- Using JSON for input serialization.")
+  }
+  if (qgis_use_json_output()) {
+    message("- Using JSON for output serialization.")
+  }
+}
+
+
+
+
+#' @keywords internal
+qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
+
+  path <- qgis_path(query = TRUE, quiet = quiet)
+
+  version <- qgis_version(query = TRUE, quiet = quiet)
+  if (!quiet) message(glue("QGIS version: { version }"))
+
+  use_json_output <- qgis_use_json_output(query = TRUE)
+  algorithms <- qgis_algorithms(query = TRUE, quiet = quiet)
+
+  if (!quiet) message(glue("Saving configuration to '{cache_data_file}'"))
+
+  try({
+    if (!dir.exists(dirname(cache_data_file))) {
+      dir.create(dirname(cache_data_file), recursive = TRUE)
+    }
+
+    saveRDS(
+      list(
+        path = path,
+        version = version,
+        algorithms = algorithms,
+        use_json_output = use_json_output
+      ),
+      cache_data_file
+    )
+  })
+
+  if (!quiet) {
+    message(
+      glue(
+        "Metadata of { nrow(algorithms) } algorithms queried and stored in cache.\n",
+        "Run `qgis_algorithms()` to see them."
+      )
+    )
+    messages_json()
+  }
+
+}
+
 
 #' @rdname qgis_run
 #' @export
