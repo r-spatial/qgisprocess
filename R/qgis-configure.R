@@ -135,6 +135,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
             qgisprocess_cache$version <- cached_data$version
             qgisprocess_cache$use_json_output <- cached_data$use_json_output
             qgisprocess_cache$algorithms <- cached_data$algorithms
+            qgisprocess_cache$plugins <- cached_data$plugins
             qgisprocess_cache$loaded_from <- cache_data_file
 
             if (!has_qgis()) {
@@ -212,6 +213,7 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
 
   use_json_output <- qgis_use_json_output(query = TRUE)
   algorithms <- qgis_algorithms(query = TRUE, quiet = quiet)
+  plugins <- qgis_plugins(query = TRUE, quiet = quiet)
 
   if (!quiet) message(glue("Saving configuration to '{cache_data_file}'"))
 
@@ -225,6 +227,7 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
         path = path,
         version = version,
         algorithms = algorithms,
+        plugins = plugins,
         use_json_output = use_json_output
       ),
       cache_data_file
@@ -569,5 +572,6 @@ qgisprocess_cache <- new.env(parent = emptyenv())
 qgisprocess_cache$path <- NULL
 qgisprocess_cache$version <- NULL
 qgisprocess_cache$algorithms <- NULL
+qgisprocess_cache$plugins <- NULL
 qgisprocess_cache$use_json_output <- NULL
 qgisprocess_cache$loaded_from <- NULL
