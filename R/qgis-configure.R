@@ -143,88 +143,106 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           Sys.getenv("R_QGISPROCESS_PATH")
         )
 
-        if (identical(option_path, "") || identical(option_path, cached_data$path)) {
-
-          # CACHE CONDITION: qgis_process is indeed available on the path
-
-          tryCatch({
-            qgis_run(path = cached_data$path)
-          }, error = function(e) {
-            abort(
-              glue(
-                "'{cached_data$path}' (cached path) is not available anymore.\n",
-                "Will try to reconfigure qgisprocess and build new cache ..."
-              )
-            )
-            qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
-            return(invisible(has_qgis()))
-          })
-
-          # CACHE CONDITION: the cached QGIS version equals the one reported by
-          # qgis_process
-
-          if (!quiet) message(glue(
-            "Checking cached QGIS version with version reported by '{cached_data$path}' ..."
-          ))
-
-          # note the difference with the further qgis_version() statement,
-          # where it will also respect the outcome of qgis_path(query = TRUE);
-          # below it uses qgis_path(query = FALSE), hence takes cached_data$path
-          qgisprocess_cache$path <- cached_data$path
-          qversion <- qgis_query_version(quiet = quiet)
-          qgisprocess_cache$path <- NULL
-
-          if (identical(qversion, cached_data$version)) {
-            if (!quiet) message(glue("QGIS versions match! ({qversion})"))
-            if (!quiet) message(glue("Restoring configuration from '{cache_data_file}'"))
-
-            qgisprocess_cache$path <- cached_data$path
-            qgisprocess_cache$version <- cached_data$version
-            qgisprocess_cache$use_json_output <- cached_data$use_json_output
-            qgisprocess_cache$algorithms <- cached_data$algorithms
-            qgisprocess_cache$plugins <- cached_data$plugins
-            qgisprocess_cache$loaded_from <- cache_data_file
-
-            # CACHE CONDITION: the elements checked by has_qgis() are not NULL
-
-            if (!has_qgis()) {
-              if (!quiet) message(
-                "The cache does not contain all required data.\n",
-                "Will try to reconfigure qgisprocess and build new cache ..."
-                )
-              qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
-              return(invisible(has_qgis()))
-            }
-
-            if (!quiet) {
-              message(
-                glue::glue(
-                  "Metadata of { nrow(cached_data$algorithms) } algorithms are present in cache.\n",
-                  "Run `qgis_algorithms()` to see them."
-                )
-              )
-              messages_json()
-            }
-
-            return(invisible(has_qgis()))
-
-          } else {
-            message(glue(
-              "QGIS version change detected:\n",
-              "- in the qgisprocess cache it was: {cached_data$version}\n",
-              "- while '{cached_data$path}' is at {qversion}"
-            ))
-          }
-        } else {
+        if (!identical(option_path, "") && !identical(option_path, cached_data$path)) {
           message(glue(
             "The user's qgisprocess.path option or the R_QGISPROCESS_PATH environment ",
             "variable specify a different qgis_process path ({option_path}) ",
-            "than the cache did ({cached_data$path})."))
+            "than the cache did ({cached_data$path}).\n",
+            "Hence rebuilding cache to reflect this change ..."
+          ))
+          qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+          return(invisible(has_qgis()))
         }
 
-        message("Hence rebuilding cache to reflect this change ...")
+        # CACHE CONDITION: the elements checked by has_qgis() look OK
+
+        condition <-
+          is.character(cached_data$version) &&
+          length(cached_data$version) == 1L &&
+          nchar(cached_data$version) > 0L &&
+          is.character(cached_data$path) &&
+          length(cached_data$path) == 1L &&
+          nchar(cached_data$path) > 0L &&
+          inherits(cached_data$algorithms, "data.frame") &&
+          inherits(cached_data$plugins, "data.frame")
+
+        if (!condition) {
+          if (!quiet) message(
+            "The cache does not contain all required data.\n",
+            "Will try to reconfigure qgisprocess and build new cache ..."
+          )
+          qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+          return(invisible(has_qgis()))
+        }
+
+        # CACHE CONDITION: qgis_process is indeed available in the cached path
+
+        tryCatch({
+          qgis_run(path = cached_data$path)
+        }, error = function(e) {
+          abort(
+            glue(
+              "'{cached_data$path}' (cached path) is not available anymore.\n",
+              "Will try to reconfigure qgisprocess and build new cache ..."
+            )
+          )
+          qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+          return(invisible(has_qgis()))
+        })
+
+        # CACHE CONDITION: the cached QGIS version equals the one reported by
+        # qgis_process
+
+        if (!quiet) message(glue(
+          "Checking cached QGIS version with version reported by '{cached_data$path}' ..."
+        ))
+
+        qgisprocess_cache$path <- cached_data$path
+        qversion <- qgis_query_version(quiet = quiet)
+        qgisprocess_cache$path <- NULL
+
+        if (!identical(qversion, cached_data$version)) {
+          message(glue(
+            "QGIS version change detected:\n",
+            "- in the qgisprocess cache it was: {cached_data$version}\n",
+            "- while '{cached_data$path}' is at {qversion}\n",
+            "Hence rebuilding cache to reflect this change ..."
+          ))
+          qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+          return(invisible(has_qgis()))
+        }
+
+        if (!quiet) message(glue("QGIS versions match! ({qversion})"))
+
+        # ASSIGNING CACHE OBJECTS
+
+        if (!quiet) message(glue("Restoring configuration from '{cache_data_file}'"))
+
+        qgisprocess_cache$path <- cached_data$path
+        qgisprocess_cache$version <- cached_data$version
+        qgisprocess_cache$use_json_output <- cached_data$use_json_output
+        qgisprocess_cache$algorithms <- cached_data$algorithms
+        qgisprocess_cache$plugins <- cached_data$plugins
+        qgisprocess_cache$loaded_from <- cache_data_file
+
+        # FINAL HANDLING OF SUCCESSFUL use_cached_data = TRUE
+
+        if (!quiet) {
+          message(
+            glue::glue(
+              "Metadata of { nrow(cached_data$algorithms) } algorithms are present in cache.\n",
+              "Run `qgis_algorithms()` to see them."
+            )
+          )
+          messages_json()
+        }
+
+        return(invisible(has_qgis()))
+
       })
     }
+
+    # use_cached_data = FALSE :
 
     qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
 
@@ -500,12 +518,12 @@ qgis_query_version <- function(quiet = FALSE) {
 
 #' @keywords internal
 abort_query_version <- function(lines) {
-    abort(
-      paste0(
-        "Output did not contain expected version information and was:\n\n",
-        paste(lines, collapse = "\n")
-      )
+  abort(
+    paste0(
+      "Output did not contain expected version information and was:\n\n",
+      paste(lines, collapse = "\n")
     )
+  )
 }
 
 
