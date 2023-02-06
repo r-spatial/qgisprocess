@@ -10,15 +10,22 @@
 #' If you installed, removed, enabled or disabled plugins in the QGIS GUI, then
 #' run `qgis_configure()` to make those changes available in R.
 #'
+#' If `names` is not provided to `qgis_enable_plugins()`, it is assumed that all
+#' _disabled_ plugins are to be enabled.
+#' If `names` is not provided to `qgis_disable_plugins()`, it is assumed that all
+#' _enabled_ plugins are to be disabled.
+#' Note that the 'processing' plugin is ignored, because it is always available
+#' to 'qgis_process' (not QGIS though).
+#'
 #' @note
 #' Only plugins that implement Processing providers are supported.
 #' Installing or removing plugins is not supported.
 #'
 #' @inheritParams qgis_run
-#' @param which String defining which plugins to enlist, based on their
+#' @param which String defining which plugins to select, based on their
 #' status in QGIS (enabled or disabled).
 #' Must be one of: `"all"`, `"enabled"`, `"disabled"`.
-#'
+#' @param names Optional character vector of plugin names.
 #' @return
 #' A tibble of plugins and their status.
 #' @export
@@ -96,10 +103,111 @@ message_disabled_plugins <- function(plugins, prepend_newline = FALSE) {
     message(glue(
       '==> Run `qgis_enable_plugins()` to enable ',
       '{ nrow(plugins[!plugins$enabled, ]) } disabled ',
-      'plugins and access their algorithms: ',
+      'plugin(s) and access their algorithms: ',
       '{ paste(plugins$name[!plugins$enabled], collapse = ", ") }'
     ))
   }
+}
+
+
+
+
+#' @rdname qgis_plugins
+#' @export
+qgis_enable_plugins <- function(names = NULL, quiet = FALSE){
+  handle_plugins(names = names, quiet = quiet, mode = "enable")
+}
+
+
+
+
+#' @rdname qgis_plugins
+#' @export
+qgis_disable_plugins <- function(names = NULL, quiet = FALSE){
+  handle_plugins(names = names, quiet = quiet, mode = "disable")
+}
+
+
+
+
+#' @keywords internal
+handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
+
+  moded <- paste0(mode, "d")
+  moded_rev <- ifelse(moded == "enabled", "disabled", "enabled")
+
+  if (is.null(names)) {
+    names <- qgis_plugins(which = moded_rev)$name
+    names <- names[names != "processing"]
+  } else {
+    stopifnot(is.character(names))
+    names_old <- names
+    names_unavailable <- names_old[!names_old %in% qgis_plugins(which = "all")$name]
+    names_skip <- names_old[names_old %in% qgis_plugins(which = moded)$name]
+    if (!quiet && length(names_unavailable) > 0L) message(
+        "Ignoring unknown plugins: ",
+        paste(names_unavailable, collapse = ", ")
+    )
+    if (!quiet && length(names_skip) > 0L) message(glue(
+        "Ignoring plugins that are {moded} already: ",
+        "{paste(names_skip, collapse = ', ')}"
+    ))
+    names <- names_old[names_old %in% qgis_plugins(which = moded_rev)$name]
+    if (!quiet && "processing" %in% names) message(
+      "Ignoring the 'processing' plugin, because it is always available to ",
+      "'qgis_process' (not QGIS though)."
+    )
+    names <- names[names != "processing"]
+  }
+
+  if (length(names) == 0L) {
+    if (!quiet) message("No QGIS plugins to be handled; exiting.")
+    return(invisible(NULL))
+  }
+
+  if (!quiet) message(glue(
+    "Trying to {mode} following plugin(s): ",
+    "{paste(names, collapse = ', ')}"
+  ))
+
+  if (mode == "enable") for (p in names) enable_plugin(p, quiet = quiet)
+  if (mode == "disable") for (p in names) disable_plugin(p, quiet = quiet)
+
+  if (!quiet) message("\nRebuilding cache to reflect these changes ...\n")
+  qgis_configure(use_cached_data = FALSE, quiet = quiet)
+
+  return(invisible(sum(names %in% qgis_plugins(which = moded_rev)$name) == 0))
+
+}
+
+
+
+#' @keywords internal
+enable_plugin <- function(name, quiet = FALSE) {
+  tryCatch({
+    qgis_run(args = c("plugins", "enable", name))
+    if (!quiet) message(name, " successfully enabled!")
+  }, error = function(e) {
+    message(glue(
+      "'{name}' was not successfully enabled. Error message was: ",
+      e$stderr
+    ))
+  })
+}
+
+
+
+#' @keywords internal
+disable_plugin <- function(name, quiet = FALSE) {
+  tryCatch({
+    qgis_run(args = c("plugins", "disable", name))
+    if (!quiet) message(name, " successfully disabled!")
+  }, error = function(e) {
+    message(glue(
+      "'{name}' was not successfully disabled. Error message was: ",
+      e$stderr
+    ))
+  })
 }
 
 

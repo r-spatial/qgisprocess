@@ -2,12 +2,18 @@
 % Please edit documentation in R/qgis-plugin.R
 \name{qgis_plugins}
 \alias{qgis_plugins}
+\alias{qgis_enable_plugins}
+\alias{qgis_disable_plugins}
 \title{List, enable or disable QGIS plugins}
 \usage{
 qgis_plugins(which = "all", query = FALSE, quiet = TRUE)
+
+qgis_enable_plugins(names = NULL, quiet = FALSE)
+
+qgis_disable_plugins(names = NULL, quiet = FALSE)
 }
 \arguments{
-\item{which}{String defining which plugins to enlist, based on their
+\item{which}{String defining which plugins to select, based on their
 status in QGIS (enabled or disabled).
 Must be one of: \code{"all"}, \code{"enabled"}, \code{"disabled"}.}
 
@@ -15,6 +21,8 @@ Must be one of: \code{"all"}, \code{"enabled"}, \code{"disabled"}.}
 
 \item{quiet}{Use \code{FALSE} to display more information about the command, possibly
 useful for debugging.}
+
+\item{names}{Optional character vector of plugin names.}
 }
 \value{
 A tibble of plugins and their status.
@@ -30,6 +38,13 @@ The cache is immediately updated upon enabling or disabling plugins from R.
 
 If you installed, removed, enabled or disabled plugins in the QGIS GUI, then
 run \code{qgis_configure()} to make those changes available in R.
+
+If \code{names} is not provided to \code{qgis_enable_plugins()}, it is assumed that all
+\emph{disabled} plugins are to be enabled.
+If \code{names} is not provided to \code{qgis_disable_plugins()}, it is assumed that all
+\emph{enabled} plugins are to be disabled.
+Note that the 'processing' plugin is ignored, because it is always available
+to 'qgis_process' (not QGIS though).
 }
 \note{
 Only plugins that implement Processing providers are supported.
