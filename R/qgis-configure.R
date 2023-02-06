@@ -88,12 +88,20 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
       glue("cache-{version}.rds")
     )
 
+    # Practically all code of this function now consists of handling
+    # use_cached_data = TRUE. This includes cases where qgis_reconfigure() must
+    # be called, when a condition about the cache is not met. Note that
+    # qgis_configure() by default (use_cached_data = FALSE) calls
+    # qgis_reconfigure() straight away.
+
     if (use_cached_data && file.exists(cache_data_file)) {
       try({
         cached_data <- readRDS(cache_data_file)
 
         if (!quiet) message(glue("Checking configuration from '{cache_data_file}'"))
 
+        # CACHE CONDITION: contains minimum required elements (i.e. objects; the
+        # cache is an environment)
         if (
           !all(
             c("path", "version", "algorithms", "plugins", "use_json_output")
@@ -108,7 +116,8 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           return(invisible(has_qgis()))
         }
 
-        # respect environment variable/option for path
+        # CACHE CONDITION: the path element does not contradict the environment
+        # variable/option for the qgis_process path
         option_path <- getOption(
           "qgisprocess.path",
           Sys.getenv("R_QGISPROCESS_PATH")
@@ -116,11 +125,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
         if (identical(option_path, "") || identical(option_path, cached_data$path)) {
 
-          if (!quiet) message(glue(
-            "Checking cached QGIS version with version reported by '{cached_data$path}' ..."
-          ))
-
-          # since we will query the program, first check that it still works
+          # CACHE CONDITION: qgis_process is indeed available on the path
 
           tryCatch({
             qgis_run(path = cached_data$path)
@@ -134,6 +139,13 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
             qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
             return(invisible(has_qgis()))
           })
+
+          # CACHE CONDITION: the cached QGIS version equals the one reported by
+          # qgis_process
+
+          if (!quiet) message(glue(
+            "Checking cached QGIS version with version reported by '{cached_data$path}' ..."
+          ))
 
           # note the difference with the further qgis_version() statement,
           # where it will also respect the outcome of qgis_path(query = TRUE);
@@ -152,6 +164,8 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
             qgisprocess_cache$algorithms <- cached_data$algorithms
             qgisprocess_cache$plugins <- cached_data$plugins
             qgisprocess_cache$loaded_from <- cache_data_file
+
+            # CACHE CONDITION: the elements checked by has_qgis() are not NULL
 
             if (!has_qgis()) {
               if (!quiet) message(
