@@ -308,8 +308,7 @@ qgis_path <- function(query = FALSE, quiet = TRUE) {
   qgisprocess_cache$path
 }
 
-#' @rdname qgis_run
-#' @export
+#' @keywords internal
 qgis_query_path <- function(quiet = FALSE) {
   if (!is.null(getOption("qgisprocess.path"))) {
     path <- getOption("qgisprocess.path", "qgis_process")
@@ -436,8 +435,7 @@ qgis_env <- function() {
   )
 }
 
-#' @rdname qgis_run
-#' @export
+#' @keywords internal
 qgis_query_version <- function(quiet = FALSE) {
   result <- qgis_run(args = "--version")
   lines <- readLines(textConnection(result$stdout))
@@ -479,8 +477,7 @@ abort_query_version <- function(lines) {
     )
 }
 
-#' @rdname qgis_run
-#' @export
+#' @keywords internal
 qgis_query_algorithms <- function(quiet = FALSE) {
   if (qgis_use_json_output()) {
     result <- qgis_run(args = c("list", "--json"), encoding = "UTF-8")
