@@ -282,7 +282,9 @@ qgis_unconfigure <- function() {
   qgisprocess_cache$path <- NULL
   qgisprocess_cache$version <- NULL
   qgisprocess_cache$algorithms <- NULL
+  qgisprocess_cache$plugins <- NULL
   qgisprocess_cache$loaded_from <- NULL
+  qgisprocess_cache$use_json_output <- NULL
   invisible(NULL)
 }
 
