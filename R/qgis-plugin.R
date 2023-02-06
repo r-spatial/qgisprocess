@@ -36,6 +36,19 @@ qgis_plugins <- function(
 
   plugins <- qgisprocess_cache$plugins
 
+  if (!quiet && query) message(glue(
+    "{ nrow(plugins[plugins$enabled, ]) } out of { nrow(plugins) } ",
+    "available processing provider plugins are enabled."
+  ))
+
+  if (!quiet && !query) message(
+    "Reading plugin list from the qgisprocess cache.\n",
+    "  If you changed plugin availability or status in the QGIS GUI\n",
+    "  since you loaded the qgisprocess package,\n",
+    "  then you must run `qgis_configure()` or reload the package\n",
+    "  to capture these changes."
+  )
+
   switch(
     which,
     "all" = plugins,

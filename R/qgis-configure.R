@@ -293,6 +293,7 @@ qgis_unconfigure <- function() {
 qgis_version <- function(query = FALSE, quiet = TRUE) {
   if (query) {
     qgisprocess_cache$version <- qgis_query_version(quiet = quiet)
+    if (!quiet) message("QGIS version is now set to: ", qgisprocess_cache$version)
   }
 
   qgisprocess_cache$version
@@ -303,6 +304,10 @@ qgis_version <- function(query = FALSE, quiet = TRUE) {
 qgis_path <- function(query = FALSE, quiet = TRUE) {
   if (query) {
     qgisprocess_cache$path <- qgis_query_path(quiet = quiet)
+    if (!quiet) message(
+      "Filepath of the qgis_process command is now set to: ",
+      qgisprocess_cache$path
+    )
   }
 
   qgisprocess_cache$path
@@ -382,7 +387,7 @@ qgis_query_path <- function(quiet = FALSE) {
 
 #' @rdname qgis_run
 #' @export
-qgis_use_json_output <- function(query = FALSE) {
+qgis_use_json_output <- function(query = FALSE, quiet = TRUE) {
   if (query) {
     opt <- getOption(
       "qgisprocess.use_json_output",
@@ -402,6 +407,10 @@ qgis_use_json_output <- function(query = FALSE) {
     } else {
       qgisprocess_cache$use_json_output <- isTRUE(opt) || identical(opt, "true")
     }
+    if (!quiet) message(
+      ifelse(qgisprocess_cache$use_json_output, "Using ", "Not using "),
+      "JSON for output serialization."
+    )
   }
 
   qgisprocess_cache$use_json_output
