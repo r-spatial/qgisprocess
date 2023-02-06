@@ -151,7 +151,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           # where it will also respect the outcome of qgis_path(query = TRUE);
           # below it uses qgis_path(query = FALSE), hence takes cached_data$path
           qgisprocess_cache$path <- cached_data$path
-          qversion <- qgis_version(query = TRUE, quiet = quiet)
+          qversion <- qgis_query_version(quiet = quiet)
           qgisprocess_cache$path <- NULL
 
           if (identical(qversion, cached_data$version)) {
