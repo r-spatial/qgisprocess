@@ -7,7 +7,7 @@
 #'
 #' The cache is immediately updated upon enabling or disabling plugins from R.
 #'
-#' If you installed, removed, enabled or disabled plugins in the GUI, then
+#' If you installed, removed, enabled or disabled plugins in the QGIS GUI, then
 #' run `qgis_configure()` to make those changes available in R.
 #'
 #' @note

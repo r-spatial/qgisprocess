@@ -1,9 +1,26 @@
-
 #' Configure and run 'qgis_process'
 #'
+#' Run `qgis_configure()` to bring the package configuration in line with
+#' QGIS and to save this configuration to a persistent cache.
+#' See the _Details_ section for more information about setting the path of
+#' the 'qgis_process' command line tool.
+#' `qgis_run()` is meant for directly calling this tool, but should normally not
+#' be needed.
+#'
 #' The qgisprocess package is a wapper around the 'qgis_process' command line
-#' tool distributed with QGIS (>=3.14). These functions use heuristics to
-#' detect the location of the 'qgis_process' executable. If the configuration
+#' tool distributed with QGIS (>=3.14). Several functions use heuristics to
+#' detect the location of the 'qgis_process' executable.
+#'
+#' When loading the package, the configuration is automatically read from the
+#' cache with `qgis_configure(use_cached_data = TRUE, quiet = TRUE)` in order
+#' to save time.
+#' Run `qgis_configure(use_cached_data = TRUE)` manually to get more details.
+#'
+#' Use `qgis_algorithms()`, `qgis_providers()`, `qgis_plugins()`,
+#' `qgis_use_json_output()`, `qgis_path()` and `qgis_version()` to inspect cache
+#' contents.
+#'
+#' If the configuration
 #' fails or you have more than one QGIS installation, you can set
 #' `options(qgisprocess.path = "path/to/qgis_process")` or the
 #' `R_QGISPROCESS_PATH` environment variable (useful on CI). On Linux the
@@ -33,6 +50,9 @@
 #' if (has_qgis()) qgis_path()
 #' if (has_qgis()) qgis_version()
 #' if (has_qgis()) qgis_algorithms()
+#' if (has_qgis()) qgis_providers()
+#' if (has_qgis()) qgis_plugins()
+#' qgis_configure(use_cached_data = TRUE)
 #' qgis_configure()
 #'
 qgis_run <- function(args = character(), ..., env = qgis_env(), path = qgis_path()) {
