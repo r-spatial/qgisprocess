@@ -41,7 +41,7 @@ qgis_has_provider <- function(provider, query = FALSE, quiet = TRUE) {
 
 #' @rdname qgis_has_algorithm
 #' @export
-qgis_providers <- function(provider) {
+qgis_providers <- function() {
   assert_qgis()
   algs <- qgis_algorithms()
   algs[!duplicated(algs$provider), c("provider", "provider_title"), drop = FALSE]
