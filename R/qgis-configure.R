@@ -323,7 +323,10 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
   )
 
   plugins <- qgis_plugins(query = TRUE, quiet = quiet)
+
   algorithms <- qgis_algorithms(query = TRUE, quiet = quiet)
+
+  if (!quiet) message_disabled_plugins(plugins, prepend_newline = TRUE)
 
   if (!quiet) message(glue("\n\nSaving configuration to '{cache_data_file}'"))
 

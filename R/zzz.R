@@ -50,6 +50,7 @@
         .sep = ""
       )
     )
+    message_disabled_plugins(qgisprocess_cache$plugins)
   } else {
     packageStartupMessage(
       "The 'qgis_process' command-line utility was not found.\n",
