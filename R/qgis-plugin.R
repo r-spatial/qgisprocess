@@ -57,6 +57,8 @@ qgis_plugins <- function(
   )
 }
 
+
+
 #' @keywords internal
 qgis_query_plugins <- function(quiet = FALSE) {
 
@@ -82,4 +84,23 @@ qgis_query_plugins <- function(quiet = FALSE) {
 
   return(plugins)
 }
+
+
+
+
+
+#' @keywords internal
+message_disabled_plugins <- function(plugins, prepend_newline = FALSE) {
+  if (!identical(nrow(plugins[plugins$enabled, ]), nrow(plugins))) {
+    if(prepend_newline) message()
+    message(glue(
+      '==> Run `qgis_enable_plugins()` to enable ',
+      '{ nrow(plugins[!plugins$enabled, ]) } disabled ',
+      'plugins and access their algorithms: ',
+      '{ paste(plugins$name[!plugins$enabled], collapse = ", ") }'
+    ))
+  }
+}
+
+
 

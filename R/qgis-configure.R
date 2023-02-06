@@ -214,9 +214,49 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
         if (!quiet) message(glue("QGIS versions match! ({qversion})"))
 
+        # CACHE CONDITION: the cached QGIS plugins equal the ones reported by
+        # qgis_process, including their state
+
+        if (!quiet) message(glue(
+          "Checking cached QGIS plugins (and state) with those reported by '{cached_data$path}' ..."
+        ))
+
+        qgisprocess_cache$path <- cached_data$path
+        qgisprocess_cache$use_json_output <- cached_data$use_json_output
+        qplugins <- qgis_query_plugins(quiet = quiet)
+        qgisprocess_cache$path <- NULL
+        qgisprocess_cache$use_json_output <- NULL
+
+        if (!identical(qplugins, cached_data$plugins)) {
+          message(
+            "Change detected in (enabled) QGIS processing provider plugins!\n",
+            "- in the qgisprocess cache it was:"
+          )
+          print(cached_data$plugins)
+          message(glue(
+            "- while '{cached_data$path}' currently returns:"
+          ))
+          print(qplugins)
+          message(
+            "Hence rebuilding cache to reflect this change ..."
+          )
+          qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+          return(invisible(has_qgis()))
+        }
+
+        if (!quiet) {
+          message(glue(
+          "QGIS plugins match! ({ nrow(qplugins[qplugins$enabled, ]) } ",
+          "processing provider plugins enabled)"
+          ))
+          message_disabled_plugins(qplugins, prepend_newline = TRUE)
+        }
+
         # ASSIGNING CACHE OBJECTS
 
-        if (!quiet) message(glue("Restoring configuration from '{cache_data_file}'"))
+        if (!quiet) message(glue(
+          "\n\nRestoring configuration from '{cache_data_file}'"
+        ))
 
         qgisprocess_cache$path <- cached_data$path
         qgisprocess_cache$version <- cached_data$version
@@ -266,7 +306,6 @@ messages_json <- function() {
     message("- Using JSON for output serialization.")
   }
 }
-
 
 
 
