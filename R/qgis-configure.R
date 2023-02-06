@@ -236,15 +236,19 @@ messages_json <- function() {
 qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
 
   path <- qgis_path(query = TRUE, quiet = quiet)
-
   version <- qgis_version(query = TRUE, quiet = quiet)
-  if (!quiet) message(glue("QGIS version: { version }"))
 
-  use_json_output <- qgis_use_json_output(query = TRUE)
-  algorithms <- qgis_algorithms(query = TRUE, quiet = quiet)
+  use_json_output <- qgis_use_json_output(query = TRUE, quiet = quiet)
+
+  if (!quiet) message(
+    ifelse(qgis_use_json_input(), "Using ", "Not using "),
+    "JSON for input serialization."
+  )
+
   plugins <- qgis_plugins(query = TRUE, quiet = quiet)
+  algorithms <- qgis_algorithms(query = TRUE, quiet = quiet)
 
-  if (!quiet) message(glue("Saving configuration to '{cache_data_file}'"))
+  if (!quiet) message(glue("\n\nSaving configuration to '{cache_data_file}'"))
 
   try({
     if (!dir.exists(dirname(cache_data_file))) {
@@ -265,12 +269,10 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
 
   if (!quiet) {
     message(
-      glue(
-        "Metadata of { nrow(algorithms) } algorithms queried and stored in cache.\n",
-        "Run `qgis_algorithms()` to see them."
-      )
+      "Use qgis_algorithms(), qgis_providers(), qgis_plugins(), ",
+      "qgis_use_json_output(), qgis_path() and qgis_version() ",
+      "to inspect cache contents."
     )
-    messages_json()
   }
 
 }
