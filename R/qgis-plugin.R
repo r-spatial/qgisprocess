@@ -35,7 +35,9 @@ qgis_plugins <- function(
     quiet = TRUE
 ) {
 
-  stopifnot(which %in% c("all", "enabled", "disabled"))
+  assert_that(which %in% c("all", "enabled", "disabled"))
+  assert_that(is.flag(query), !is.na(query))
+  assert_that(is.flag(quiet), !is.na(quiet))
 
   if (query) {
     qgisprocess_cache$plugins <- qgis_query_plugins(quiet = quiet)
@@ -139,6 +141,9 @@ qgis_disable_plugins <- function(names = NULL, quiet = FALSE){
 #' @keywords internal
 handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
 
+  assert_that(is.flag(quiet), !is.na(quiet))
+  assert_that(mode %in% c("enable", "disable"))
+
   moded <- paste0(mode, "d")
   moded_rev <- ifelse(moded == "enabled", "disabled", "enabled")
 
@@ -146,7 +151,7 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
     names <- qgis_plugins(which = moded_rev)$name
     names <- names[names != "processing"]
   } else {
-    stopifnot(is.character(names))
+    assert_that(is.character(names))
     names_old <- names
     names_unavailable <- names_old[!names_old %in% qgis_plugins(which = "all")$name]
     names_skip <- names_old[names_old %in% qgis_plugins(which = moded)$name]
