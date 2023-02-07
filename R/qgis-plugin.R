@@ -97,17 +97,23 @@ qgis_query_plugins <- function(quiet = FALSE) {
 
 
 #' @keywords internal
-message_disabled_plugins <- function(plugins, prepend_newline = FALSE) {
-  if (!identical(nrow(plugins[plugins$enabled, ]), nrow(plugins))) {
-    if(prepend_newline) message()
-    message(glue(
-      '==> Run `qgis_enable_plugins()` to enable ',
-      '{ nrow(plugins[!plugins$enabled, ]) } disabled ',
-      'plugin(s) and access their algorithms: ',
-      '{ paste(plugins$name[!plugins$enabled], collapse = ", ") }'
-    ))
+message_disabled_plugins <-
+  function(
+    plugins,
+    prepend_newline = FALSE,
+    startup = FALSE
+  ) {
+    if (!identical(nrow(plugins[plugins$enabled, ]), nrow(plugins))) {
+      if(prepend_newline && !startup) message()
+      msg <- glue(
+        '==> Run `qgis_enable_plugins()` to enable ',
+        '{ nrow(plugins[!plugins$enabled, ]) } disabled ',
+        'plugin(s) and access their algorithms: ',
+        '{ paste(plugins$name[!plugins$enabled], collapse = ", ") }'
+      )
+      if (!startup) message(msg) else packageStartupMessage(msg)
+    }
   }
-}
 
 
 
