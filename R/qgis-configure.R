@@ -128,7 +128,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
             %in% names(cached_data)
           )
         ) {
-          if (!quiet) message(
+          message(
             "The cache does not contain all required elements.\n",
             "Will try to reconfigure qgisprocess and build new cache ..."
           )
@@ -167,7 +167,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           inherits(cached_data$plugins, "data.frame")
 
         if (!condition) {
-          if (!quiet) message(
+          message(
             "The cache does not contain all required data.\n",
             "Will try to reconfigure qgisprocess and build new cache ..."
           )
