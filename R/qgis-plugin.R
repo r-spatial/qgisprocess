@@ -91,7 +91,7 @@ qgis_query_plugins <- function(quiet = FALSE) {
 
   }
 
-  return(plugins)
+  plugins
 }
 
 
@@ -187,8 +187,7 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
   if (!quiet) message("\nRebuilding cache to reflect these changes ...\n")
   qgis_configure(use_cached_data = FALSE, quiet = quiet)
 
-  return(invisible(sum(names %in% qgis_plugins(which = moded_rev)$name) == 0))
-
+  invisible(sum(names %in% qgis_plugins(which = moded_rev)$name) == 0)
 }
 
 
