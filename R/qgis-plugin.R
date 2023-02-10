@@ -46,7 +46,7 @@ qgis_plugins <- function(
   plugins <- qgisprocess_cache$plugins
 
   if (!quiet && query) message(glue(
-    "{ nrow(plugins[plugins$enabled, ]) } out of { nrow(plugins) } ",
+    "{ sum(plugins$enabled) } out of { nrow(plugins) } ",
     "available processing provider plugins are enabled."
   ))
 
@@ -105,11 +105,11 @@ message_disabled_plugins <-
     prepend_newline = FALSE,
     startup = FALSE
   ) {
-    if (!identical(nrow(plugins[plugins$enabled, ]), nrow(plugins))) {
+    if (!identical(sum(plugins$enabled), nrow(plugins))) {
       if(prepend_newline && !startup) message()
       msg <- glue(
         '==> Run `qgis_enable_plugins()` to enable ',
-        '{ nrow(plugins[!plugins$enabled, ]) } disabled ',
+        '{ sum(!plugins$enabled) } disabled ',
         'plugin(s) and access their algorithms: ',
         '{ paste(plugins$name[!plugins$enabled], collapse = ", ") }'
       )

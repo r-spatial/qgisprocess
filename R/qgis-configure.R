@@ -246,8 +246,8 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
         if (!quiet) {
           message(glue(
-          "QGIS plugins match! ({ nrow(qplugins[qplugins$enabled, ]) } ",
-          "processing provider plugins enabled)"
+          "QGIS plugins match! ({ sum(qplugins$enabled) } ",
+          "processing provider plugin(s) enabled)"
           ))
           message_disabled_plugins(qplugins, prepend_newline = TRUE)
         }
