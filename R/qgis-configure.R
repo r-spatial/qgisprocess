@@ -263,14 +263,17 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
         # FINAL HANDLING OF SUCCESSFUL use_cached_data = TRUE
 
-        if (!quiet) {
+        if (!quiet) {       # triggers messages
+          invisible(qgis_version(query = FALSE, quiet = FALSE))
+          invisible(qgis_path(query = FALSE, quiet = FALSE))
+          invisible(qgis_use_json_output(query = FALSE, quiet = FALSE))
           message(
-            glue::glue(
-              "Metadata of { nrow(cached_data$algorithms) } algorithms are present in cache.\n",
-              "Run `qgis_algorithms()` to see them."
-            )
+            ifelse(qgis_use_json_input(), "Using ", "Not using "),
+            "JSON for input serialization."
           )
-          messages_json()
+          invisible(qgis_plugins(query = FALSE, quiet = FALSE, msg = FALSE))
+          invisible(qgis_algorithms(query = FALSE, quiet = FALSE))
+          message_inspect_cache()
         }
 
         return(invisible(has_qgis()))
@@ -340,15 +343,21 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
     )
   })
 
-  if (!quiet) {
-    message(
-      "Use qgis_algorithms(), qgis_providers(), qgis_plugins(), ",
-      "qgis_use_json_output(), qgis_path() and qgis_version() ",
-      "to inspect cache contents."
-    )
-  }
+  if (!quiet) message_inspect_cache()
 
 }
+
+
+
+#' @keywords internal
+message_inspect_cache <- function() {
+  message(
+    "Use qgis_algorithms(), qgis_providers(), qgis_plugins(), ",
+    "qgis_use_json_output(),\nqgis_path() and qgis_version() ",
+    "to inspect the cache environment."
+  )
+}
+
 
 
 #' @rdname qgis_run
