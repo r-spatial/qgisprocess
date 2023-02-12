@@ -115,6 +115,15 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
     # qgis_reconfigure() straight away.
 
     if (use_cached_data && file.exists(cache_data_file)) {
+
+      # this message is usually relevant when loading the package, and serves to
+      # announce some waiting time (checking and reading the cache) in case this
+      # process will happen silently (as is the case when loading the pkg). Put
+      # here, since packagestartupmessages in .onLoad are not good practice and
+      # trigger a note during R CMD check. Same applies to the Success! message
+      # further down.
+      if (quiet) message("Attempting to load the cache ... ", appendLF = FALSE)
+
       try({
         cached_data <- readRDS(cache_data_file)
 
@@ -274,6 +283,11 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           invisible(qgis_plugins(query = FALSE, quiet = FALSE, msg = FALSE))
           invisible(qgis_algorithms(query = FALSE, quiet = FALSE))
           message_inspect_cache()
+        }
+
+        # usually applicable only on loading the package:
+        if (quiet && !is.null(qgisprocess_cache$loaded_from)) {
+          (packageStartupMessage("Success!"))
         }
 
         return(invisible(has_qgis()))
