@@ -74,8 +74,8 @@ qgis_result_single <- function(x, what) {
       paste(
         "Can't extract object from result: zero outputs of type",
         paste(what, collapse = " or ")
-        )
       )
+    )
   }
 
   # By default, take the first element named as output or OUTPUT.
