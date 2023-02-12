@@ -301,21 +301,11 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
 
 #' @keywords internal
-messages_json <- function() {
-  if (qgis_use_json_input()) {
-    message("- Using JSON for input serialization.")
-  }
-  if (qgis_use_json_output()) {
-    message("- Using JSON for output serialization.")
-  }
-}
-
-
-
-#' @keywords internal
 qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
 
   path <- qgis_path(query = TRUE, quiet = quiet)
+  if (!quiet) message()
+
   version <- qgis_version(query = TRUE, quiet = quiet)
 
   use_json_output <- qgis_use_json_output(query = TRUE, quiet = quiet)
