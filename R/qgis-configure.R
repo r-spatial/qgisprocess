@@ -278,7 +278,14 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
       })
     }
 
-    # use_cached_data = FALSE :
+    if (use_cached_data && !file.exists(cache_data_file)) {
+      message(
+        "No cache found.\n",
+        "Will reconfigure qgisprocess and build new cache ..."
+      )
+    }
+
+    # use_cached_data = FALSE or cache is missing:
 
     qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
 
