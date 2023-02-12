@@ -21,32 +21,12 @@
 
 .onAttach <- function(...) {
   if (has_qgis()) {
-    path <- qgis_path()
-    pathstring <-
-      if (path == "qgis_process") {
-        "in the system PATH"
-      } else {
-        glue("at '{path}'")
-    }
     packageStartupMessage(
       glue(
-        "Using 'qgis_process' {pathstring}.\n",
         "QGIS version: { qgis_version() }\n",
-        if (is.null(qgisprocess_cache$loaded_from)) {
-          paste0(
-            "Metadata of { nrow(qgis_algorithms()) } algorithms successfully cached.\n",
-            "Run `qgis_algorithms()` to see them.\n"
-          )
-        } else {
-          paste0(
-            "Configuration loaded from '{ qgisprocess_cache$loaded_from }'\n",
-            "Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.\n"
-          )
-        },
-        ">>> If you need another installed QGIS version, run `qgis_configure()`;\n",
-        "    see its documentation if you need to preset the path of qgis_process.\n",
-        if (qgis_use_json_input()) "- Using JSON for input serialization.\n" else "",
-        if (qgis_use_json_output()) "- Using JSON for output serialization.\n" else "",
+        "Having access to { nrow(qgis_algorithms()) } algorithms ",
+        "from { nrow(qgis_providers()) } QGIS processing providers.\n",
+        "Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.\n",
         .sep = ""
       )
     )
