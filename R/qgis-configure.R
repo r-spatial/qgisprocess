@@ -118,7 +118,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
       try({
         cached_data <- readRDS(cache_data_file)
 
-        if (!quiet) message(glue("Checking configuration from '{cache_data_file}'"))
+        if (!quiet) message(glue("Checking configuration in cache file ({cache_data_file})"))
 
         # CACHE CONDITION: contains minimum required elements (i.e. objects; the
         # cache is an environment)
