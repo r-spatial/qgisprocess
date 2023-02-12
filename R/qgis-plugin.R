@@ -26,18 +26,23 @@
 #' status in QGIS (enabled or disabled).
 #' Must be one of: `"all"`, `"enabled"`, `"disabled"`.
 #' @param names Optional character vector of plugin names.
+#' @param ... Only used by other functions calling this function.
 #' @return
 #' A tibble of plugins and their status.
 #' @export
 qgis_plugins <- function(
     which = "all",
     query = FALSE,
-    quiet = TRUE
+    quiet = TRUE,
+    ...
 ) {
 
   assert_that(which %in% c("all", "enabled", "disabled"))
   assert_that(is.flag(query), !is.na(query))
   assert_that(is.flag(quiet), !is.na(quiet))
+
+  if (!("msg" %in% names(list(...)))) msg <- TRUE else msg <- list(...)$msg[[1]]
+  assert_that(is.flag(msg), !is.na(msg))
 
   if (query) {
     qgisprocess_cache$plugins <- qgis_query_plugins(quiet = quiet)
@@ -45,18 +50,18 @@ qgis_plugins <- function(
 
   plugins <- qgisprocess_cache$plugins
 
-  if (!quiet && query) message(glue(
+  if (!quiet && msg && !query) message(
+    "Reading plugin list from the qgisprocess cache.\n",
+    "  If you changed plugin availability or status in the QGIS GUI ",
+    "since you loaded the\n",
+    "  qgisprocess package, then you must run `qgis_configure()` or reload ",
+    "the package\n  to capture these changes."
+  )
+
+  if (!quiet) message(glue(
     "{ sum(plugins$enabled) } out of { nrow(plugins) } ",
     "available processing provider plugins are enabled."
   ))
-
-  if (!quiet && !query) message(
-    "Reading plugin list from the qgisprocess cache.\n",
-    "  If you changed plugin availability or status in the QGIS GUI\n",
-    "  since you loaded the qgisprocess package,\n",
-    "  then you must run `qgis_configure()` or reload the package\n",
-    "  to capture these changes."
-  )
 
   switch(
     which,
@@ -108,10 +113,14 @@ message_disabled_plugins <-
     if (!identical(sum(plugins$enabled), nrow(plugins))) {
       if(prepend_newline && !startup) message()
       msg <- glue(
-        '==> Run `qgis_enable_plugins()` to enable ',
+        'Run `qgis_enable_plugins()` to enable ',
         '{ sum(!plugins$enabled) } disabled ',
         'plugin(s) and access their algorithms: ',
         '{ paste(plugins$name[!plugins$enabled], collapse = ", ") }'
+      )
+      msg <- paste0(
+        strwrap(msg, prefix = "    ", initial = ">>> "),
+        collapse = "\n"
       )
       if (!startup) message(msg) else packageStartupMessage(msg)
     }

@@ -6,7 +6,7 @@
 \alias{qgis_disable_plugins}
 \title{List, enable or disable QGIS plugins}
 \usage{
-qgis_plugins(which = "all", query = FALSE, quiet = TRUE)
+qgis_plugins(which = "all", query = FALSE, quiet = TRUE, ...)
 
 qgis_enable_plugins(names = NULL, quiet = FALSE)
 
@@ -21,6 +21,8 @@ Must be one of: \code{"all"}, \code{"enabled"}, \code{"disabled"}.}
 
 \item{quiet}{Use \code{FALSE} to display more information about the command, possibly
 useful for debugging.}
+
+\item{...}{Only used by other functions calling this function.}
 
 \item{names}{Optional character vector of plugin names.}
 }

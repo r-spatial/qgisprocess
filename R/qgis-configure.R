@@ -325,7 +325,7 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
     "JSON for input serialization."
   )
 
-  plugins <- qgis_plugins(query = TRUE, quiet = quiet)
+  plugins <- qgis_plugins(query = TRUE, quiet = quiet, msg = FALSE)
 
   algorithms <- qgis_algorithms(query = TRUE, quiet = quiet)
 
