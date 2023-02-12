@@ -157,12 +157,8 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
         # CACHE CONDITION: the elements checked by has_qgis() look OK
 
         condition <-
-          is.character(cached_data$version) &&
-          length(cached_data$version) == 1L &&
-          nchar(cached_data$version) > 0L &&
-          is.character(cached_data$path) &&
-          length(cached_data$path) == 1L &&
-          nchar(cached_data$path) > 0L &&
+          is.string(cached_data$version) && nchar(cached_data$version) > 0L &&
+          is.string(cached_data$path) && nchar(cached_data$path) > 0L &&
           inherits(cached_data$algorithms, "data.frame") &&
           inherits(cached_data$plugins, "data.frame")
 
