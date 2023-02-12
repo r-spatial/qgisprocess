@@ -366,9 +366,12 @@ qgis_unconfigure <- function() {
 #' @rdname qgis_run
 #' @export
 qgis_version <- function(query = FALSE, quiet = TRUE) {
-  if (query) {
-    qgisprocess_cache$version <- qgis_query_version(quiet = quiet)
-    if (!quiet) message("QGIS version is now set to: ", qgisprocess_cache$version)
+  if (query) qgisprocess_cache$version <- qgis_query_version(quiet = quiet)
+
+  if (!quiet) {
+    message("QGIS version",
+            ifelse(query, " is now set to: ", ": "),
+            qgisprocess_cache$version)
   }
 
   qgisprocess_cache$version
@@ -377,16 +380,30 @@ qgis_version <- function(query = FALSE, quiet = TRUE) {
 #' @rdname qgis_run
 #' @export
 qgis_path <- function(query = FALSE, quiet = TRUE) {
-  if (query) {
-    qgisprocess_cache$path <- qgis_query_path(quiet = quiet)
-    if (!quiet) message(
-      "Filepath of the qgis_process command is now set to: ",
-      qgisprocess_cache$path
-    )
-  }
-
+  if (query) qgisprocess_cache$path <- qgis_query_path(quiet = quiet)
+  if (!quiet) message_path(query = query)
   qgisprocess_cache$path
 }
+
+
+#' @keywords internal
+message_path <- function(query = FALSE) {
+  pathstring <-
+    if (qgisprocess_cache$path == "qgis_process") {
+      "in the system PATH"
+    } else {
+      glue("at '{qgisprocess_cache$path}'")
+    }
+  message(
+    ifelse(query, "Now using ", "Using "),
+    glue("'qgis_process' {pathstring}.")
+  )
+  message(
+    ">>> If you need another installed QGIS instance, run `qgis_configure()`;\n",
+    "    see `?qgis_configure` if you need to preset the path of 'qgis_process'."
+  )
+}
+
 
 #' @keywords internal
 qgis_query_path <- function(quiet = FALSE) {
@@ -482,11 +499,12 @@ qgis_use_json_output <- function(query = FALSE, quiet = TRUE) {
     } else {
       qgisprocess_cache$use_json_output <- isTRUE(opt) || identical(opt, "true")
     }
-    if (!quiet) message(
-      ifelse(qgisprocess_cache$use_json_output, "Using ", "Not using "),
-      "JSON for output serialization."
-    )
   }
+
+  if (!quiet) message(
+    ifelse(qgisprocess_cache$use_json_output, "Using ", "Not using "),
+    "JSON for output serialization."
+    )
 
   qgisprocess_cache$use_json_output
 }

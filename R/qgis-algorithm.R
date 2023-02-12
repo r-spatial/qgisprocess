@@ -27,12 +27,12 @@ qgis_has_algorithm <- function(algorithm) {
 qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
   if (query) {
     qgisprocess_cache$algorithms <- qgis_query_algorithms(quiet = quiet)
-    if (!quiet) message(glue(
-      "You now have access to { nrow(qgisprocess_cache$algorithms) } ",
-      "algorithms from { nrow(qgis_providers()) } QGIS processing providers."
-    ))
   }
-
+  if (!quiet) message(glue(
+    "{ifelse(query, 'You now have ', 'Having ')}",
+    "access to { nrow(qgisprocess_cache$algorithms) } algorithms ",
+    "from { nrow(qgis_providers()) } QGIS processing providers."
+  ))
   qgisprocess_cache$algorithms
 }
 
