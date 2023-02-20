@@ -26,7 +26,7 @@ test_that("qgis_result_*() functions work", {
   qgis_result_clean(result)
   expect_false(any(file.exists(tmp_gpkg, tmp_gpkg2)))
 
-  expect_is(result, "qgis_result")
+  expect_s3_class(result, "qgis_result")
   expect_true(is_qgis_result(result))
   expect_output(print(result), "^<Result")
   expect_true(
@@ -34,8 +34,8 @@ test_that("qgis_result_*() functions work", {
           names(qgis_result_args(result)))
     )
   expect_identical(qgis_result_status(result), 0L)
-  expect_is(qgis_result_stderr(result), "character")
-  expect_is(qgis_result_stdout(result), "character")
+  expect_type(qgis_result_stderr(result), "character")
+  expect_type(qgis_result_stdout(result), "character")
   expect_error(qgis_result_single(result, "numeric"), "zero outputs of type")
   expect_identical(
     qgis_result_single(result, "qgis_outputVector"),
