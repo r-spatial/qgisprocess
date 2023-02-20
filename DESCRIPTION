@@ -11,13 +11,19 @@ Authors@R: c(
              family = "Vanderhaeghe",
              role = c("aut"),
              comment = c("ORCID" = "0000-0002-6378-6229")),
+      person(given = "Jan",
+             family = "Caha",
+             role = c("aut"),
+             comment = c("ORCID" = "0000-0003-0165-0606")),
+      person(given = "Antony",
+             family = "Barja",
+             role = c("ctb"),
+             email = "antony.barja8@gmail.com",
+             comment = c(ORCID = "0000-0001-5921-2858")),
       person(given = "Robin",
              family = "Lovelace",
              role = c("ctb"),
-             comment = c(ORCID = "0000-0001-5679-6536")),
-      person(given = "Jan",
-             family = "Caha",
-             role = c("aut"))
+             comment = c(ORCID = "0000-0001-5679-6536"))
     )
 Description: Provides seamless access to the 'QGIS' <https://qgis.org/>
   processing toolbox using the 'qgis_process' command-line utility.
