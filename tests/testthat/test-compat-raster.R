@@ -12,7 +12,7 @@ test_that("raster argument coercers work", {
     suppressWarnings(as_qgis_argument(obj, qgis_argument_spec(qgis_type = "layer"))),
     "\\.tif$"
   )
-  expect_is(tmp_file, "qgis_tempfile_arg")
+  expect_s3_class(tmp_file, "qgis_tempfile_arg")
   unlink(tmp_file)
 
   # also check rasters with embedded files
@@ -33,7 +33,7 @@ test_that("raster argument coercers work", {
 test_that("raster result coercers work", {
   skip_if_not_installed("raster")
 
-  expect_is(
+  expect_s4_class(
     qgis_as_raster(
       structure(
         system.file("longlake/longlake.tif", package = "qgisprocess"),
@@ -43,7 +43,7 @@ test_that("raster result coercers work", {
     "RasterLayer"
   )
 
-  expect_is(
+  expect_s4_class(
     qgis_as_brick(
       structure(
         system.file("longlake/longlake.tif", package = "qgisprocess"),
@@ -53,7 +53,7 @@ test_that("raster result coercers work", {
     "RasterBrick"
   )
 
-  expect_is(
+  expect_s4_class(
     qgis_as_raster(
       structure(
         system.file("longlake/longlake.tif", package = "qgisprocess"),
@@ -63,7 +63,7 @@ test_that("raster result coercers work", {
     "RasterLayer"
   )
 
-  expect_is(
+  expect_s4_class(
     qgis_as_brick(
       structure(
         system.file("longlake/longlake.tif", package = "qgisprocess"),
@@ -73,7 +73,7 @@ test_that("raster result coercers work", {
     "RasterBrick"
   )
 
-  expect_is(
+  expect_s4_class(
     qgis_as_raster(
       structure(
         list(
@@ -88,7 +88,7 @@ test_that("raster result coercers work", {
     "RasterLayer"
   )
 
-  expect_is(
+  expect_s4_class(
     qgis_as_brick(
       structure(
         list(
@@ -115,7 +115,7 @@ test_that("raster crs work", {
     "UTM zone 20N"
   )
 
-  expect_is(crs_representation, "character")
+  expect_type(crs_representation, "character")
 })
 
 test_that("raster argument coercer for extent works", {
@@ -129,7 +129,7 @@ test_that("raster argument coercer for extent works", {
     "409891\\.446955431,411732\\.936955431,5083288\\.89932423,5084852\\.61932423"
   )
 
-  expect_is(bbox_representation, "character")
+  expect_s3_class(bbox_representation, "character")
 })
 
 test_that("raster argument coercer for crs works", {

@@ -46,7 +46,7 @@ test_that("output parsing for string, numeric, and classed types works", {
   # expect_identical(result$CRS_AUTHID, NA_character_)
 
   # vector outputs should have a class
-  expect_is(result$OUTPUT_TABLE, "qgis_outputVector")
+  expect_s3_class(result$OUTPUT_TABLE, "qgis_outputVector")
 
   result$OUTPUT_TABLE
 })
@@ -80,5 +80,5 @@ test_that("output parsing for multilayer outputs works", {
 
   expect_true(dir.exists(result$OUTPUT))
   expect_identical(length(list.files(result$OUTPUT)), length(result$OUTPUT_LAYERS))
-  expect_is(result$OUTPUT_LAYERS, "qgis_outputMultilayer")
+  expect_s3_class(result$OUTPUT_LAYERS, "qgis_outputMultilayer")
 })
