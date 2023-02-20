@@ -130,7 +130,7 @@ message_disabled_plugins <- function(
 
 #' @rdname qgis_plugins
 #' @export
-qgis_enable_plugins <- function(names = NULL, quiet = FALSE){
+qgis_enable_plugins <- function(names = NULL, quiet = FALSE) {
   handle_plugins(names = names, quiet = quiet, mode = "enable")
 }
 
@@ -139,7 +139,7 @@ qgis_enable_plugins <- function(names = NULL, quiet = FALSE){
 
 #' @rdname qgis_plugins
 #' @export
-qgis_disable_plugins <- function(names = NULL, quiet = FALSE){
+qgis_disable_plugins <- function(names = NULL, quiet = FALSE) {
   handle_plugins(names = names, quiet = quiet, mode = "disable")
 }
 
