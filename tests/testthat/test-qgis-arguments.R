@@ -222,7 +222,7 @@ test_that("default arguments are handled correctly", {
 })
 
 test_that("argument cleaners work", {
-  expect_null(qgis_clean_argument("some valule"))
+  expect_equal(qgis_clean_argument("some value"), NULL)
 
   tmp <- structure(tempfile(), class = "qgis_tempfile_arg")
   file.create(tmp)
