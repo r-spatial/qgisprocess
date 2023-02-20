@@ -12,7 +12,7 @@ test_that("qgis_function() works", {
   )
 
   qgis_buffer <- qgis_function("native:buffer")
-  expect_is(qgis_buffer, "function")
+  expect_type(qgis_buffer, "closure")
   expect_identical(parent.env(environment(qgis_buffer)), baseenv())
   expect_true(rlang::is_call(body(qgis_buffer), "qgis_run_algorithm", ns = "qgisprocess"))
 
@@ -35,7 +35,7 @@ test_that("qgis_function() works", {
     JOIN_STYLE = 0
   )
 
-  expect_is(result, "qgis_result")
+  expect_s3_class(result, "qgis_result")
 })
 
 test_that("qgis_pipe() works", {
@@ -52,6 +52,6 @@ test_that("qgis_pipe() works", {
       JOIN_STYLE = 0
     )
 
-  expect_is(result, "qgis_result")
+  expect_s3_class(result, "qgis_result")
 })
 
