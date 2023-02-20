@@ -122,7 +122,10 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
     # trigger a note during R CMD check. Same applies to the Success! message
     # further down.
     if (use_cached_data && quiet) {
-      message("Attempting to load the cache ... ", appendLF = FALSE)
+      packageStartupMessage(
+        "Attempting to load the cache ... ",
+        appendLF = FALSE
+        )
     }
 
     if (use_cached_data && file.exists(cache_data_file)) {
