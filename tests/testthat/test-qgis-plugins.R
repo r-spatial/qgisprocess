@@ -35,7 +35,7 @@ test_that("qgis_plugins(query = FALSE, quiet = FALSE) messages are OK", {
     qgis_plugins(query = FALSE, quiet = FALSE, msg = FALSE),
     message = "Reading plugin list"
   )
-  expect_message(qgis_plugins(query = FALSE, quiet = FALSE), "out of .+ plugins are enabled")
+  expect_message(qgis_plugins(query = FALSE, quiet = FALSE), "out of .+? plugins are enabled")
 })
 
 output <-
