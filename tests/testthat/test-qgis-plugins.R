@@ -41,13 +41,13 @@ test_that("qgis_plugins(query = FALSE, quiet = FALSE) messages are OK", {
   )
 })
 
-output <-
-  if (has_qgis()) {
-    if (qgis_use_json_output()) " (using JSON output)" else " (NOT using JSON output)"
-  } else ""
-
-test_that(glue("qgis_plugins(query = TRUE) works{output}"), {
+test_that(glue("qgis_plugins(query = TRUE) works when using JSON output"), {
   skip_if_not(has_qgis())
+
+  if (!qgis_use_json_output()) local_json_output(flip = TRUE)
+
+  skip_if_not(qgis_use_json_output(), "Not using JSON output.")
+
   plugins <- qgis_plugins(query = TRUE)
   expect_s3_class(plugins, "data.frame")
   expect_named(plugins, c("name", "enabled"))
@@ -56,28 +56,13 @@ test_that(glue("qgis_plugins(query = TRUE) works{output}"), {
   expect_gte(sum(plugins$enabled), 1)
 })
 
-output2 <-
-  if (has_qgis()) {
-    if (!qgis_use_json_output()) " (using JSON output)" else " (NOT using JSON output)"
-  } else ""
-
-test_that(glue("qgis_plugins(query = TRUE) works{output2}"), {
+test_that(glue("qgis_plugins(query = TRUE) works when NOT using JSON output"), {
   skip_if_not(has_qgis())
 
-  # FLIPPING qgis_use_json_output() STATE
-  withr::local_envvar(c(JSON_OUTPUT = qgis_use_json_output()))
-  withr::local_options(qgisprocess.use_json_output = !qgis_use_json_output())
-  qgis_use_json_output(query = TRUE) # updates cache environment
-  # plan to restore this cache setting before exiting the test:
-  withr::defer_parent(qgis_use_json_output(query = TRUE), priority = "last")
+  if (qgis_use_json_output()) local_json_output(flip = TRUE)
 
-  # CHECK FLIPPED STATE
-  expect_identical(
-    as.logical(Sys.getenv("JSON_OUTPUT")),
-    !qgis_use_json_output()
-  )
+  skip_if_not(!qgis_use_json_output(), "Using JSON output instead of 'not'.")
 
-  # EXPECTATIONS UNDER FLIPPED STATE
   plugins <- qgis_plugins(query = TRUE)
   expect_s3_class(plugins, "data.frame")
   expect_named(plugins, c("name", "enabled"))
@@ -85,6 +70,7 @@ test_that(glue("qgis_plugins(query = TRUE) works{output2}"), {
   expect_type(plugins$enabled, "logical")
   expect_gte(sum(plugins$enabled), 1)
 })
+
 
 test_that("message_disabled_plugins() works", {
   plugins <- qgis_plugins()
