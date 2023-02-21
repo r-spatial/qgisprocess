@@ -6,7 +6,7 @@
 \alias{qgis_as_terra.qgis_outputRaster}
 \alias{qgis_as_terra.qgis_outputLayer}
 \alias{qgis_as_terra.qgis_result}
-\title{Convert raster objects to/from QGIS inputs/outputs}
+\title{Convert terra objects to/from QGIS inputs/outputs}
 \usage{
 \method{as_qgis_argument}{SpatRaster}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
@@ -33,5 +33,5 @@ serialized as JSON instead of serialized as a command-line argument.}
 \item{...}{Passed to \code{\link[terra:rast]{terra::rast()}}.}
 }
 \description{
-Convert raster objects to/from QGIS inputs/outputs
+Convert terra objects to/from QGIS inputs/outputs
 }
