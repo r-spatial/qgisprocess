@@ -57,7 +57,7 @@ test_that(glue("qgis_run_algorithm accepts multiple input arguments{input}"), {
 
   v_1 <- sf::read_sf(system.file("longlake/longlake.gpkg", package = "qgisprocess"))
   v_2 <- v_3 <- v_1
-  v_2$geom = v_2$geom + 1000
+  v_2$geom <- v_2$geom + 1000
   sf::st_crs(v_2) <- sf::st_crs(v_1)
   v_3$geom <- v_3$geom - 1000
   sf::st_crs(v_3) <- sf::st_crs(v_1)
