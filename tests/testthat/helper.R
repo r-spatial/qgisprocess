@@ -7,3 +7,10 @@ local_json_output <- function(flip) {
     withr::defer_parent(qgis_use_json_output(query = TRUE), priority = "last")
   }
 }
+
+expect_correct_plugins_format <- function(plugins) {
+  expect_s3_class(plugins, "data.frame")
+  expect_named(plugins, c("name", "enabled"))
+  expect_type(plugins$name, "character")
+  expect_type(plugins$enabled, "logical")
+}
