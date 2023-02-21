@@ -79,10 +79,10 @@ test_that(glue("qgis_run_algorithm runs with qgis:relief, for which the acceptab
   capture.output({
     result <- qgis_run_algorithm(
       "qgis:relief",
-      INPUT=system.file("longlake/longlake_depth.tif", package = "qgisprocess"),
-      Z_FACTOR=1,
-      AUTO_COLORS=FALSE,
-      COLORS="-0.5, 0, 170, 0, 0; 0, 0.5, 85, 255, 255; 0.5, 1, 0, 255, 0; 1, 2.5, 85, 85, 255"
+      INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess"),
+      Z_FACTOR = 1,
+      AUTO_COLORS = FALSE,
+      COLORS = "-0.5, 0, 170, 0, 0; 0, 0.5, 85, 255, 255; 0.5, 1, 0, 255, 0; 1, 2.5, 85, 85, 255"
     )
   })
 

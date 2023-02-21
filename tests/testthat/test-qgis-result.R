@@ -31,8 +31,8 @@ test_that("qgis_result_*() functions work", {
   expect_output(print(result), "^<Result")
   expect_true(
     all(c("INPUT", "FIELD", "OPERATOR", "VALUE", "OUTPUT", "FAIL_OUTPUT") %in%
-          names(qgis_result_args(result)))
-    )
+      names(qgis_result_args(result)))
+  )
   expect_identical(qgis_result_status(result), 0L)
   expect_type(qgis_result_stderr(result), "character")
   expect_type(qgis_result_stdout(result), "character")
@@ -40,7 +40,7 @@ test_that("qgis_result_*() functions work", {
   expect_identical(
     qgis_result_single(result, "qgis_outputVector"),
     result$OUTPUT
-    )
+  )
 
   result$.processx_result$stdout <- ""
   expect_error(qgis_check_stdout(result), "output could not be captured")

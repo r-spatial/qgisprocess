@@ -52,4 +52,3 @@ st_as_stars.qgis_result <- function(output, ...) {
   result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
   stars::read_stars(unclass(result), ...)
 }
-

@@ -35,7 +35,7 @@ qgis_plugins <- function(
     query = FALSE,
     quiet = TRUE,
     ...
-) {
+    ) {
 
   assert_that(which %in% c("all", "enabled", "disabled"))
   assert_that(is.flag(query), !is.na(query))
@@ -108,9 +108,9 @@ message_disabled_plugins <- function(
     plugins,
     prepend_newline = FALSE,
     startup = FALSE
-) {
+    ) {
   if (!identical(sum(plugins$enabled), nrow(plugins))) {
-    if(prepend_newline && !startup) message()
+    if (prepend_newline && !startup) message()
     msg <- glue(
       'Run `qgis_enable_plugins()` to enable ',
       '{ sum(!plugins$enabled) } disabled ',
@@ -164,12 +164,12 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
     names_unavailable <- names_old[!names_old %in% qgis_plugins(which = "all")$name]
     names_skip <- names_old[names_old %in% qgis_plugins(which = moded)$name]
     if (!quiet && length(names_unavailable) > 0L) message(
-        "Ignoring unknown plugins: ",
-        paste(names_unavailable, collapse = ", ")
+      "Ignoring unknown plugins: ",
+      paste(names_unavailable, collapse = ", ")
     )
     if (!quiet && length(names_skip) > 0L) message(glue(
-        "Ignoring plugins that are {moded} already: ",
-        "{paste(names_skip, collapse = ', ')}"
+      "Ignoring plugins that are {moded} already: ",
+      "{paste(names_skip, collapse = ', ')}"
     ))
     names <- names_old[names_old %in% qgis_plugins(which = moded_rev)$name]
     if (!quiet && "processing" %in% names) message(
@@ -202,31 +202,32 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
 
 #' @keywords internal
 enable_plugin <- function(name, quiet = FALSE) {
-  tryCatch({
-    qgis_run(args = c("plugins", "enable", name))
-    if (!quiet) message(name, " successfully enabled!")
-  }, error = function(e) {
-    message(glue(
-      "'{name}' was not successfully enabled. Error message was: ",
-      e$stderr
-    ))
-  })
+  tryCatch(
+    {
+      qgis_run(args = c("plugins", "enable", name))
+      if (!quiet) message(name, " successfully enabled!")
+    },
+    error = function(e) {
+      message(glue(
+        "'{name}' was not successfully enabled. Error message was: ",
+        e$stderr
+      ))
+    })
 }
 
 
 
 #' @keywords internal
 disable_plugin <- function(name, quiet = FALSE) {
-  tryCatch({
-    qgis_run(args = c("plugins", "disable", name))
-    if (!quiet) message(name, " successfully disabled!")
-  }, error = function(e) {
-    message(glue(
-      "'{name}' was not successfully disabled. Error message was: ",
-      e$stderr
-    ))
-  })
+  tryCatch(
+    {
+      qgis_run(args = c("plugins", "disable", name))
+      if (!quiet) message(name, " successfully disabled!")
+    },
+    error = function(e) {
+      message(glue(
+        "'{name}' was not successfully disabled. Error message was: ",
+        e$stderr
+      ))
+    })
 }
-
-
-

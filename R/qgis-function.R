@@ -90,7 +90,7 @@ qgis_function <- function(algorithm, ...) {
   qgis_algorithm_call <- rlang::call2(
     "qgis_run_algorithm",
     algorithm,
-    !!! qgis_algorithm_args,
+    !!!qgis_algorithm_args,
     .ns = "qgisprocess"
   )
 

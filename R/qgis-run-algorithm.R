@@ -44,7 +44,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
     # sanitize arguments and make sure they are cleaned up on exit
     args <- qgis_sanitize_arguments(
       algorithm,
-      !!! dots,
+      !!!dots,
       PROJECT_PATH = PROJECT_PATH,
       ELLIPSOID = ELLIPSOID,
       .use_json_input = use_json_input
@@ -93,7 +93,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
   # about the output
   result <- structure(
     rlang::list2(
-      !!! qgis_parse_results(algorithm, result$stdout),
+      !!!qgis_parse_results(algorithm, result$stdout),
       .algorithm = algorithm,
       .args = args,
       .raw_json_input = if (use_json_input) args_str,

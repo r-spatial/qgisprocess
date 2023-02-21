@@ -237,4 +237,3 @@ help_cache_file <- function(algorithm, json) {
     glue("help-{ alg }-{ hash }.rds")
   )
 }
-

@@ -54,4 +54,3 @@ test_that("qgis_pipe() works", {
 
   expect_s3_class(result, "qgis_result")
 })
-

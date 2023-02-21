@@ -44,13 +44,13 @@ qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_
   user_args[regular_dot_names] <- dots[regular_dot_names]
   for (arg_name in duplicated_dot_names) {
     items <- unname(dots[dot_names == arg_name])
-    user_args[[arg_name]] <- qgis_list_input(!!! items)
+    user_args[[arg_name]] <- qgis_list_input(!!!items)
   }
 
   # warn about unspecified arguments (don't error so that users can
   # write code for more than one QGIS install if args are added)
   unknown_args <- setdiff(names(dots), c("PROJECT_PATH", "ELLIPSOID", arg_meta$name))
-  if (length(unknown_args) > 0){
+  if (length(unknown_args) > 0) {
     for (arg_name in unknown_args) {
       message(glue("Ignoring unknown input '{ arg_name }'"))
     }
@@ -397,13 +397,13 @@ qgis_dict_input <- function(...) {
 #' @export
 as_qgis_argument.qgis_list_input <- function(x, spec = qgis_argument_spec(),
                                              use_json_input = FALSE) {
-  qgis_list_input(!!! lapply(x, as_qgis_argument, spec = spec, use_json_input = use_json_input))
+  qgis_list_input(!!!lapply(x, as_qgis_argument, spec = spec, use_json_input = use_json_input))
 }
 
 #' @export
 as_qgis_argument.qgis_dict_input <- function(x, spec = qgis_argument_spec(),
                                              use_json_input = FALSE) {
-  qgis_dict_input(!!! lapply(x, as_qgis_argument, spec = spec, use_json_input = use_json_input))
+  qgis_dict_input(!!!lapply(x, as_qgis_argument, spec = spec, use_json_input = use_json_input))
 }
 
 #' @export

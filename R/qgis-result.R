@@ -66,7 +66,6 @@ qgis_check_stdout <- function(x) {
 #' @rdname is_qgis_result
 #' @export
 qgis_result_single <- function(x, what) {
-
   # Limit result to elements that match class
   x <- x[vapply(x, inherits, what, FUN.VALUE = logical(1))]
   if (length(x) == 0L) {

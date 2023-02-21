@@ -91,11 +91,3 @@ test_that("message_disabled_plugins() works", {
     "Run `qgis_enable_plugins\\(\\)`.+access"
   )
 })
-
-
-
-
-
-
-
-

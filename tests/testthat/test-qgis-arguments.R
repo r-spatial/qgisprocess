@@ -102,12 +102,12 @@ test_that("qgis_serialize_arguments() outputs correct JSON strings", {
             name = "name",
             precision = 0L,
             type = 10L
-            )
           )
-        ),
+        )
+      ),
       project_path = "test.qgs"
-      )
     )
+  )
 })
 
 test_that("argument coercers work", {
