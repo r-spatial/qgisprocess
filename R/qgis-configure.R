@@ -205,7 +205,8 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
               )
               qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
               return(invisible(has_qgis()))
-            })
+            }
+          )
 
           # CACHE CONDITION: the cached QGIS version equals the one reported by
           # qgis_process
@@ -286,7 +287,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
           # FINAL HANDLING OF SUCCESSFUL use_cached_data = TRUE
 
-          if (!quiet) {       # triggers messages
+          if (!quiet) { # triggers messages
             invisible(qgis_version(query = FALSE, quiet = FALSE))
             invisible(qgis_path(query = FALSE, quiet = FALSE))
             invisible(qgis_use_json_output(query = FALSE, quiet = FALSE))
@@ -305,7 +306,6 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           }
 
           return(invisible(has_qgis()))
-
         })
       }
 
@@ -319,12 +319,12 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
       # use_cached_data = FALSE or cache is missing:
 
       qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
-
     },
     error = function(e) {
       qgis_unconfigure()
       if (!quiet) message(e)
-    })
+    }
+  )
 
   invisible(has_qgis())
 }
@@ -334,7 +334,6 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
 #' @keywords internal
 qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
-
   path <- qgis_path(query = TRUE, quiet = quiet)
   if (!quiet) message()
 
@@ -373,7 +372,6 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
   })
 
   if (!quiet) message_inspect_cache()
-
 }
 
 
@@ -407,9 +405,11 @@ qgis_version <- function(query = FALSE, quiet = TRUE) {
   if (query) qgisprocess_cache$version <- qgis_query_version(quiet = quiet)
 
   if (!quiet) {
-    message("QGIS version",
+    message(
+      "QGIS version",
       ifelse(query, " is now set to: ", ": "),
-      qgisprocess_cache$version)
+      qgisprocess_cache$version
+    )
   }
 
   qgisprocess_cache$version
@@ -456,7 +456,8 @@ qgis_query_path <- function(quiet = FALSE) {
       },
       error = function(e) {
         if (!quiet) message(as.character(e))
-      })
+      }
+    )
   } else {
     if (!quiet) message("getOption('qgisprocess.path') was not found.")
   }
@@ -472,7 +473,8 @@ qgis_query_path <- function(quiet = FALSE) {
       },
       error = function(e) {
         if (!quiet) message(as.character(e))
-      })
+      }
+    )
   } else {
     if (!quiet) message("Sys.getenv('R_QGISPROCESS_PATH') was not found.")
   }
@@ -486,7 +488,8 @@ qgis_query_path <- function(quiet = FALSE) {
     },
     error = function(e) {
       if (!quiet) message("'qgis_process' is not available on PATH.")
-    })
+    }
+  )
 
   possible_locs <- if (is_macos()) {
     qgis_detect_macos()
@@ -517,7 +520,8 @@ qgis_query_path <- function(quiet = FALSE) {
         if (!quiet) message("Success!")
         return(path)
       },
-      error = function(e) {})
+      error = function(e) {}
+    )
   }
 
   abort("QGIS installation found, but all candidate paths failed to execute.")
@@ -608,7 +612,8 @@ qgis_query_version <- function(quiet = FALSE) {
         "Currently the specific version identifier is '",
         match[2],
         "'.",
-        call. = TRUE)
+        call. = TRUE
+      )
       match[2] <- paste("unclear:", match[2])
     }
     return(paste0(match[1], ", development state ", match[2]))

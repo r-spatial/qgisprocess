@@ -1,4 +1,3 @@
-
 test_that("qgis_has_algorithm() works", {
   skip_if_not(has_qgis())
   expect_true(qgis_has_algorithm("native:filedownloader"))

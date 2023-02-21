@@ -1,4 +1,3 @@
-
 test_that("qgis_sanitize_arguments() ignores unknown inputs", {
   expect_message(
     expect_identical(

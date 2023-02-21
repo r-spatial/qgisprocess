@@ -1,4 +1,3 @@
-
 test_that("qgis_output() works", {
   expect_identical(qgis_output(list(a = 1), "a"), 1)
   expect_identical(qgis_output(list(a = 1), "b", default = 2), 2)

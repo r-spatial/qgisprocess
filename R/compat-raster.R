@@ -1,4 +1,3 @@
-
 #' Convert raster objects to/from QGIS inputs/outputs
 #'
 #' @param x A [raster::raster()] or [raster::brick()].

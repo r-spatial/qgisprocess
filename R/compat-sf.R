@@ -1,4 +1,3 @@
-
 #' Convert sf objects to/from QGIS inputs/outputs
 #'
 #' @inheritParams as_qgis_argument
@@ -21,7 +20,6 @@ as_qgis_argument.sf <- function(x, spec = qgis_argument_spec(),
 
 # dynamically registered in zzz.R
 st_as_sf.qgis_result <- function(x, ...) {
-
   result <- qgis_result_single(x, c("qgis_outputVector", "qgis_outputLayer"))
 
   if (grepl("\\|layer", result)) {
@@ -30,7 +28,6 @@ st_as_sf.qgis_result <- function(x, ...) {
   } else {
     sf::read_sf(result, ...)
   }
-
 }
 
 
@@ -65,7 +62,6 @@ as_qgis_argument.bbox <- function(x, spec = qgis_argument_spec(),
 #' @export
 as_qgis_argument.sfc <- function(x, spec = qgis_argument_spec(),
                                  use_json_input = FALSE) {
-
   if (!isTRUE(spec$qgis_type %in% c("point"))) {
     abort(glue("Can't convert 'sfc' object to QGIS type '{ spec$qgis_type }'"))
   }
@@ -89,7 +85,6 @@ as_qgis_argument.sfc <- function(x, spec = qgis_argument_spec(),
 #' @export
 as_qgis_argument.POINT <- function(x, spec = qgis_argument_spec(),
                                    use_json_input = FALSE) {
-
   if (!isTRUE(spec$qgis_type %in% c("point"))) {
     abort(glue("Can't convert 'POINT' object to QGIS type '{ spec$qgis_type }'"))
   }

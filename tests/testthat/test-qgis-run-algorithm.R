@@ -90,7 +90,6 @@ test_that(glue("qgis_run_algorithm runs with qgis:relief, for which the acceptab
   expect_s3_class(result$FREQUENCY_DISTRIBUTION, "qgis_outputFile")
   expect_true(file.exists(result$OUTPUT))
   expect_true(file.exists(result$FREQUENCY_DISTRIBUTION))
-
 })
 
 

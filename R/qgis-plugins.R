@@ -34,9 +34,7 @@ qgis_plugins <- function(
     which = "all",
     query = FALSE,
     quiet = TRUE,
-    ...
-    ) {
-
+    ...) {
   assert_that(which %in% c("all", "enabled", "disabled"))
   assert_that(is.flag(query), !is.na(query))
   assert_that(is.flag(quiet), !is.na(quiet))
@@ -63,8 +61,7 @@ qgis_plugins <- function(
     "available processing provider plugins are enabled."
   ))
 
-  switch(
-    which,
+  switch(which,
     "all" = plugins,
     "enabled" = plugins[plugins$enabled, ],
     "disabled" = plugins[!plugins$enabled, ]
@@ -75,17 +72,13 @@ qgis_plugins <- function(
 
 #' @keywords internal
 qgis_query_plugins <- function(quiet = FALSE) {
-
   if (qgis_use_json_output()) {
-
     out <- qgis_run(args = c("plugins", "--json"))$stdout
     pluginlist <- jsonlite::fromJSON(out)$plugins
     plugins <- tibble::enframe(pluginlist)
     plugins$value <- unlist(plugins$value, use.names = FALSE)
     colnames(plugins) <- c("name", "enabled")
-
   } else {
-
     lines <- readLines(textConnection(qgis_run("plugins")$stdout))
     pluginvec <- stringr::str_extract(lines, "^\\*?\\s+\\w+")
     pluginvec <- pluginvec[!is.na(pluginvec)]
@@ -93,7 +86,6 @@ qgis_query_plugins <- function(quiet = FALSE) {
       name = stringr::str_match(pluginvec, "^\\*?\\s+(\\w+)")[, 2],
       enabled = stringr::str_detect(pluginvec, "^\\*")
     )
-
   }
 
   plugins
@@ -107,8 +99,7 @@ qgis_query_plugins <- function(quiet = FALSE) {
 message_disabled_plugins <- function(
     plugins,
     prepend_newline = FALSE,
-    startup = FALSE
-    ) {
+    startup = FALSE) {
   if (!identical(sum(plugins$enabled), nrow(plugins))) {
     if (prepend_newline && !startup) message()
     msg <- glue(
@@ -148,7 +139,6 @@ qgis_disable_plugins <- function(names = NULL, quiet = FALSE) {
 
 #' @keywords internal
 handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
-
   assert_that(is.flag(quiet), !is.na(quiet))
   assert_that(mode %in% c("enable", "disable"))
 
@@ -212,7 +202,8 @@ enable_plugin <- function(name, quiet = FALSE) {
         "'{name}' was not successfully enabled. Error message was: ",
         e$stderr
       ))
-    })
+    }
+  )
 }
 
 
@@ -229,5 +220,6 @@ disable_plugin <- function(name, quiet = FALSE) {
         "'{name}' was not successfully disabled. Error message was: ",
         e$stderr
       ))
-    })
+    }
+  )
 }

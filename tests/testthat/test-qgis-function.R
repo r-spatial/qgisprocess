@@ -1,4 +1,3 @@
-
 test_that("qgis_function() works", {
   skip_if_not(has_qgis())
 

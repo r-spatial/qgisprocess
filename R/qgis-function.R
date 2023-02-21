@@ -1,4 +1,3 @@
-
 #' Create functions from QGIS algorithms
 #'
 #' As opposed to [qgis_run_algorithm()], [qgis_function()] creates a callable

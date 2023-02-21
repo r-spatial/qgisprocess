@@ -1,4 +1,3 @@
-
 test_that("qgis_help_text()/show works", {
   skip_if_not(has_qgis())
   expect_match(qgis_help_text("native:filedownloader"), "native:filedownloader")
@@ -48,7 +47,6 @@ test_that("qgis_arguments() and qgis_outputs() work for selected algorithms", {
     expect_false(any(is.na(qgis_outputs(!!algorithm)$name)))
     expect_false(any(is.na(qgis_outputs(!!algorithm)$qgis_output_type)))
   }
-
 })
 
 test_that("qgis_arguments() and qgis_outputs() works for all algorithms", {

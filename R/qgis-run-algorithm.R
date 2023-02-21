@@ -1,4 +1,3 @@
-
 #' Run algorithms using 'qgis_process'
 #'
 #' Run QGIS algorithms.

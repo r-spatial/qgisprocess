@@ -1,4 +1,3 @@
-
 library(qgisprocess)
 
 qgis_configure()

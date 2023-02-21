@@ -1,4 +1,3 @@
-
 test_that("sf argument coercers work", {
   skip_if_not_installed("sf")
   sf_obj <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
@@ -192,7 +191,8 @@ test_that("sf to QGIS point work", {
       points,
       qgis_argument_spec(qgis_type = "point")
     ),
-    "1265036\\.90059[0-9]+,985175\\.481905[0-9]+\\[EPSG:32019\\]")
+    "1265036\\.90059[0-9]+,985175\\.481905[0-9]+\\[EPSG:32019\\]"
+  )
 
   expect_s3_class(point_representation, "character")
 })

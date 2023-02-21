@@ -1,4 +1,3 @@
-
 qgis_parse_results <- function(algorithm, output) {
   if (stringr::str_detect(output, "^\\s*\\{")) {
     output_parsed <- jsonlite::fromJSON(output)
@@ -45,8 +44,7 @@ qgis_parse_results <- function(algorithm, output) {
 #   "outputLayer"
 # )
 qgis_parse_result_output <- function(value, qgis_output_type) {
-  switch(
-    qgis_output_type,
+  switch(qgis_output_type,
 
     # numbers and strings have clear mappings to R types
     outputNumber = as.numeric(value),
@@ -67,13 +65,11 @@ qgis_parse_result_output <- function(value, qgis_output_type) {
 }
 
 qgis_result_output <- function(value, qgis_output_type) {
-  switch(
-    qgis_output_type,
+  switch(qgis_output_type,
 
     # numbers and strings have clear mappings to R types
     outputNumber = as.numeric(value %||% NA_character_),
     outputString = as.character(value %||% NA_character_),
-
     outputMultilayer = structure(as.character(value), class = paste0("qgis_", qgis_output_type)),
 
     # by default, a classed string that can be reinterpreted

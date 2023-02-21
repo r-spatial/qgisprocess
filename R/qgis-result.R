@@ -1,4 +1,3 @@
-
 #' Access algorithm results
 #'
 #' @param x An object returned by [qgis_run_algorithm()].
@@ -82,7 +81,6 @@ qgis_result_single <- function(x, what) {
   result <- x[grepl("^(output|OUTPUT)$", names(x))][1][[1]]
   if (is.null(result)) result <- x[[1]]
   result
-
 }
 
 
