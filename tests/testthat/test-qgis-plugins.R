@@ -68,9 +68,124 @@ test_that("message_disabled_plugins() works", {
 })
 
 
+test_that("qgis_has_plugin() works", {
+  skip_if_not(has_qgis())
+  expect_true(qgis_has_plugin("processing"))
+  expect_false(qgis_has_plugin("notaplugin"))
+})
+
+
+test_that("qgis_enable_plugins() messages are OK", {
+  skip_if_not(has_qgis())
+  expect_message(qgis_enable_plugins(names = ""), "exiting")
+  expect_message(
+    qgis_enable_plugins(names = "processing"),
+    "Ignoring.+processing"
+  )
+  expect_message(
+    qgis_enable_plugins(names = "notaplugin"),
+    "Ignoring unknown plugins: notaplugin"
+  )
+})
+
+
+test_that("qgis_disable_plugins() messages are OK", {
+  skip_if_not(has_qgis())
+  expect_message(qgis_disable_plugins(names = ""), "exiting")
+  expect_message(
+    qgis_disable_plugins(names = "processing"),
+    "Ignoring.+processing"
+  )
+  expect_message(
+    qgis_disable_plugins(names = "notaplugin"),
+    "Ignoring unknown plugins: notaplugin"
+  )
+})
 
 
 
+test_that("qgis_enable_plugins() ignores an already enabled grassprovider plugin", {
+  skip_if_not(has_qgis())
+  skip_if_not(
+    qgis_has_plugin("grassprovider"),
+    "The 'grassprovider' plugin is missing."
+  )
+  skip_if(
+    !subset(qgis_plugins(), name == "grassprovider")$enabled,
+    "The 'grassprovider' plugin is disabled."
+  )
+  expect_message(
+    qgis_enable_plugins("grassprovider"),
+    "Ignoring plugins that are enabled already: grassprovider"
+  )
+})
+
+
+test_that("qgis_disable_plugins() ignores an already disabled grassprovider plugin", {
+  skip_if_not(has_qgis())
+  skip_if_not(
+    qgis_has_plugin("grassprovider"),
+    "The 'grassprovider' plugin is missing."
+  )
+  skip_if(
+    subset(qgis_plugins(), name == "grassprovider")$enabled,
+    "The 'grassprovider' plugin is enabled."
+  )
+  expect_message(
+    qgis_disable_plugins("grassprovider"),
+    "Ignoring plugins that are disabled already: grassprovider"
+  )
+})
+
+
+
+
+
+test_that("qgis_*able_plugins() works for a disabled grassprovider plugin", {
+  skip_if_not(has_qgis())
+  skip_if_not(
+    qgis_has_plugin("grassprovider"),
+    "The 'grassprovider' plugin is missing."
+    )
+  skip_if(
+    subset(qgis_plugins(), name == "grassprovider")$enabled,
+    "The 'grassprovider' plugin is enabled."
+  )
+  expect_message(
+    qgis_enable_plugins("grassprovider"),
+    "grassprovider successfully enabled!"
+  )
+  expect_true(subset(qgis_plugins(), name == "grassprovider")$enabled)
+  expect_message(
+    qgis_disable_plugins("grassprovider"),
+    "grassprovider successfully disabled!"
+  )
+  expect_false(subset(qgis_plugins(), name == "grassprovider")$enabled)
+})
+
+
+
+test_that("qgis_*able_plugins() works for an enabled grassprovider plugin", {
+  skip_if_not(has_qgis())
+  skip_if_not(
+    qgis_has_plugin("grassprovider"),
+    "The 'grassprovider' plugin is missing."
+  )
+  skip_if(
+    !subset(qgis_plugins(), name == "grassprovider")$enabled,
+    "The 'grassprovider' plugin is disabled."
+  )
+  expect_message(
+    qgis_disable_plugins("grassprovider"),
+    "grassprovider successfully disabled!"
+  )
+  expect_false(subset(qgis_plugins(), name == "grassprovider")$enabled)
+  expect_message(
+    qgis_enable_plugins("grassprovider"),
+    "grassprovider successfully enabled!"
+  )
+  expect_true(subset(qgis_plugins(), name == "grassprovider")$enabled)
+})
 
 
 
