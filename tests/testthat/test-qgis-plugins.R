@@ -58,6 +58,7 @@ test_that(glue("qgis_plugins(query = TRUE) works when NOT using JSON output"), {
 
 
 test_that("message_disabled_plugins() works", {
+  skip_if_not(has_qgis())
   plugins <- qgis_plugins()
   plugins$enabled <- FALSE
   expect_message(
