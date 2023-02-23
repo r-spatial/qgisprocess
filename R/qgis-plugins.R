@@ -128,6 +128,16 @@ message_disabled_plugins <- function(
 
 
 
+#' @keywords internal
+qgis_has_plugin <- function(plugin, query = FALSE, quiet = TRUE) {
+  assert_that(is.string(plugin))
+  plugin %in% qgis_plugins(query = query, quiet = quiet)$name
+}
+
+
+
+
+
 #' @rdname qgis_plugins
 #' @export
 qgis_enable_plugins <- function(names = NULL, quiet = FALSE) {
