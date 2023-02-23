@@ -161,7 +161,7 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
   } else {
     assert_that(is.character(names))
     names_old <- names
-    names_unavailable <- names_old[!names_old %in% qgis_plugins(which = "all")$name]
+    names_unavailable <- names_old[!names_old %in% c(qgis_plugins(which = "all")$name, "")]
     names_skip <- names_old[names_old %in% qgis_plugins(which = moded)$name]
     if (!quiet && length(names_unavailable) > 0L) message(
         "Ignoring unknown plugins: ",
