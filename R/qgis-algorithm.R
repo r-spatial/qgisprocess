@@ -109,7 +109,7 @@ qgis_query_algorithms <- function(quiet = FALSE) {
       p_tbl
     })
 
-    providers <- vctrs::vec_rbind(!!! providers, .ptype = providers_ptype, .names_to = "provider_id")
+    providers <- vctrs::vec_rbind(!!!providers, .ptype = providers_ptype, .names_to = "provider_id")
 
     fields_ptype <- tibble::tibble(
       can_cancel = logical(),
@@ -137,11 +137,11 @@ qgis_query_algorithms <- function(quiet = FALSE) {
         alg_tbl
       })
 
-      vctrs::vec_rbind(!!! algs_p, ptype = fields_ptype, .names_to = "algorithm")
+      vctrs::vec_rbind(!!!algs_p, ptype = fields_ptype, .names_to = "algorithm")
     })
 
     fields_ptype$algorithm <- character()
-    algs <- vctrs::vec_rbind(!!! algs, ptype = fields_ptype, .names_to = "provider_id")
+    algs <- vctrs::vec_rbind(!!!algs, ptype = fields_ptype, .names_to = "provider_id")
     algs <- vctrs::vec_cbind(
       algs,
       providers[match(algs$provider_id, providers$provider_id), setdiff(names(providers), "provider_id")]
@@ -186,4 +186,3 @@ qgis_query_algorithms <- function(quiet = FALSE) {
     algorithms[!is.na(algorithms$algorithm_id), ]
   }
 }
-

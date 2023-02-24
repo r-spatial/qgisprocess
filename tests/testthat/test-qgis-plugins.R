@@ -146,7 +146,7 @@ test_that("qgis_*able_plugins() works for a disabled grassprovider plugin", {
   skip_if_not(
     qgis_has_plugin("grassprovider"),
     "The 'grassprovider' plugin is missing."
-    )
+  )
   skip_if(
     subset(qgis_plugins(), name == "grassprovider")$enabled,
     "The 'grassprovider' plugin is enabled."
@@ -186,6 +186,3 @@ test_that("qgis_*able_plugins() works for an enabled grassprovider plugin", {
   )
   expect_true(subset(qgis_plugins(), name == "grassprovider")$enabled)
 })
-
-
-

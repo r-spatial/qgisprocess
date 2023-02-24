@@ -1,4 +1,3 @@
-
 test_that("sf argument coercers work", {
   skip_if_not_installed("sf")
   sf_obj <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
@@ -117,7 +116,7 @@ test_that("sfc to QGIS point work", {
 test_that("sfc to QGIS point rasises issues", {
   skip_if_not_installed("sf")
 
-  points <- sf::st_sfc(list(sf::st_point(c(1, 2)),sf::st_point(c(1, 2))), crs = sf::st_crs("EPSG:5514"))
+  points <- sf::st_sfc(list(sf::st_point(c(1, 2)), sf::st_point(c(1, 2))), crs = sf::st_crs("EPSG:5514"))
 
   expect_error(
     as_qgis_argument(
@@ -153,7 +152,7 @@ test_that("sf to QGIS point rasises issues", {
     "Can't convert 'sfc' object to QGIS type 'point' as the length is not equal to 1"
   )
 
-  points <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))[1,]
+  points <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))[1, ]
 
   expect_error(
     as_qgis_argument(
@@ -184,7 +183,7 @@ test_that("sf to QGIS point work", {
   data <- sf::st_transform(data, sf::st_crs("EPSG:32019"))
 
   suppressWarnings(
-    points <- sf::st_centroid(data[1,])
+    points <- sf::st_centroid(data[1, ])
   )
 
   point_representation <- expect_match(
@@ -192,7 +191,8 @@ test_that("sf to QGIS point work", {
       points,
       qgis_argument_spec(qgis_type = "point")
     ),
-    "1265036\\.90059[0-9]+,985175\\.481905[0-9]+\\[EPSG:32019\\]")
+    "1265036\\.90059[0-9]+,985175\\.481905[0-9]+\\[EPSG:32019\\]"
+  )
 
   expect_s3_class(point_representation, "character")
 })

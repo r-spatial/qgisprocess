@@ -1,4 +1,3 @@
-
 test_that("characters are not incorrectly re-encoded from output", {
   skip_if_not(has_qgis())
 

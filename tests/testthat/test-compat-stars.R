@@ -1,4 +1,3 @@
-
 test_that("stars argument coercers work", {
   skip_if_not_installed("stars")
 

@@ -1,4 +1,3 @@
-
 #' Create functions from QGIS algorithms
 #'
 #' As opposed to [qgis_run_algorithm()], [qgis_function()] creates a callable
@@ -90,7 +89,7 @@ qgis_function <- function(algorithm, ...) {
   qgis_algorithm_call <- rlang::call2(
     "qgis_run_algorithm",
     algorithm,
-    !!! qgis_algorithm_args,
+    !!!qgis_algorithm_args,
     .ns = "qgisprocess"
   )
 

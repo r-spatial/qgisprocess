@@ -98,229 +98,233 @@ assert_qgis <- function(action = abort) {
 #' @rdname qgis_run
 #' @export
 qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
-  tryCatch({
-    qgis_unconfigure()
+  tryCatch(
+    {
+      qgis_unconfigure()
 
-    version <- as.character(utils::packageVersion("qgisprocess"))
+      version <- as.character(utils::packageVersion("qgisprocess"))
 
-    cache_data_file <- file.path(
-      rappdirs::user_cache_dir("R-qgisprocess"),
-      glue("cache-{version}.rds")
-    )
+      cache_data_file <- file.path(
+        rappdirs::user_cache_dir("R-qgisprocess"),
+        glue("cache-{version}.rds")
+      )
 
-    # Practically all code of this function now consists of handling
-    # use_cached_data = TRUE. This includes cases where qgis_reconfigure() must
-    # be called, when a condition about the cache is not met. Note that
-    # qgis_configure() by default (use_cached_data = FALSE) calls
-    # qgis_reconfigure() straight away.
+      # Practically all code of this function now consists of handling
+      # use_cached_data = TRUE. This includes cases where qgis_reconfigure() must
+      # be called, when a condition about the cache is not met. Note that
+      # qgis_configure() by default (use_cached_data = FALSE) calls
+      # qgis_reconfigure() straight away.
 
 
-    # below message is usually relevant when loading the package, and serves to
-    # announce some waiting time (checking and reading the cache) in case this
-    # process will happen silently (as is the case when loading the pkg). Put
-    # here, since packagestartupmessages in .onLoad are not good practice and
-    # trigger a note during R CMD check. Same applies to the Success! message
-    # further down.
-    if (use_cached_data && quiet) {
-      packageStartupMessage(
-        "Attempting to load the cache ... ",
-        appendLF = FALSE
+      # below message is usually relevant when loading the package, and serves to
+      # announce some waiting time (checking and reading the cache) in case this
+      # process will happen silently (as is the case when loading the pkg). Put
+      # here, since packagestartupmessages in .onLoad are not good practice and
+      # trigger a note during R CMD check. Same applies to the Success! message
+      # further down.
+      if (use_cached_data && quiet) {
+        packageStartupMessage(
+          "Attempting to load the cache ... ",
+          appendLF = FALSE
         )
-    }
+      }
 
-    if (use_cached_data && file.exists(cache_data_file)) {
-      try({
-        cached_data <- readRDS(cache_data_file)
+      if (use_cached_data && file.exists(cache_data_file)) {
+        try({
+          cached_data <- readRDS(cache_data_file)
 
-        if (!quiet) message(glue("Checking configuration in cache file ({cache_data_file})"))
+          if (!quiet) message(glue("Checking configuration in cache file ({cache_data_file})"))
 
-        # CACHE CONDITION: contains minimum required elements (i.e. objects; the
-        # cache is an environment)
-        if (
-          !all(
-            c("path", "version", "algorithms", "plugins", "use_json_output")
-            %in% names(cached_data)
-          )
-        ) {
-          if (quiet) message()
-          message(
-            "The cache does not contain all required elements.\n",
-            "Will try to reconfigure qgisprocess and build new cache ..."
-          )
-          qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
-          return(invisible(has_qgis()))
-        }
-
-        # CACHE CONDITION: the path element does not contradict the environment
-        # variable/option for the qgis_process path
-        option_path <- getOption(
-          "qgisprocess.path",
-          Sys.getenv("R_QGISPROCESS_PATH")
-        )
-
-        if (!identical(option_path, "") && !identical(option_path, cached_data$path)) {
-          if (quiet) message()
-          message(glue(
-            "The user's qgisprocess.path option or the R_QGISPROCESS_PATH environment ",
-            "variable specify a different qgis_process path ({option_path}) ",
-            "than the cache did ({cached_data$path}).\n",
-            "Hence rebuilding cache to reflect this change ..."
-          ))
-          qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
-          return(invisible(has_qgis()))
-        }
-
-        # CACHE CONDITION: the elements checked by has_qgis() look OK
-
-        condition <-
-          is.string(cached_data$version) && nchar(cached_data$version) > 0L &&
-          is.string(cached_data$path) && nchar(cached_data$path) > 0L &&
-          inherits(cached_data$algorithms, "data.frame") &&
-          inherits(cached_data$plugins, "data.frame")
-
-        if (!condition) {
-          if (quiet) message()
-          message(
-            "The cache does not contain all required data.\n",
-            "Will try to reconfigure qgisprocess and build new cache ..."
-          )
-          qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
-          return(invisible(has_qgis()))
-        }
-
-        # CACHE CONDITION: qgis_process is indeed available in the cached path
-
-        tryCatch({
-          qgis_run(path = cached_data$path)
-        }, error = function(e) {
-          if (quiet) message()
-          abort(
-            glue(
-              "'{cached_data$path}' (cached path) is not available anymore.\n",
+          # CACHE CONDITION: contains minimum required elements (i.e. objects; the
+          # cache is an environment)
+          if (
+            !all(
+              c("path", "version", "algorithms", "plugins", "use_json_output")
+              %in% names(cached_data)
+            )
+          ) {
+            if (quiet) message()
+            message(
+              "The cache does not contain all required elements.\n",
               "Will try to reconfigure qgisprocess and build new cache ..."
             )
+            qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+            return(invisible(has_qgis()))
+          }
+
+          # CACHE CONDITION: the path element does not contradict the environment
+          # variable/option for the qgis_process path
+          option_path <- getOption(
+            "qgisprocess.path",
+            Sys.getenv("R_QGISPROCESS_PATH")
           )
-          qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+
+          if (!identical(option_path, "") && !identical(option_path, cached_data$path)) {
+            if (quiet) message()
+            message(glue(
+              "The user's qgisprocess.path option or the R_QGISPROCESS_PATH environment ",
+              "variable specify a different qgis_process path ({option_path}) ",
+              "than the cache did ({cached_data$path}).\n",
+              "Hence rebuilding cache to reflect this change ..."
+            ))
+            qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+            return(invisible(has_qgis()))
+          }
+
+          # CACHE CONDITION: the elements checked by has_qgis() look OK
+
+          condition <-
+            is.string(cached_data$version) && nchar(cached_data$version) > 0L &&
+              is.string(cached_data$path) && nchar(cached_data$path) > 0L &&
+              inherits(cached_data$algorithms, "data.frame") &&
+              inherits(cached_data$plugins, "data.frame")
+
+          if (!condition) {
+            if (quiet) message()
+            message(
+              "The cache does not contain all required data.\n",
+              "Will try to reconfigure qgisprocess and build new cache ..."
+            )
+            qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+            return(invisible(has_qgis()))
+          }
+
+          # CACHE CONDITION: qgis_process is indeed available in the cached path
+
+          tryCatch(
+            {
+              qgis_run(path = cached_data$path)
+            },
+            error = function(e) {
+              if (quiet) message()
+              abort(
+                glue(
+                  "'{cached_data$path}' (cached path) is not available anymore.\n",
+                  "Will try to reconfigure qgisprocess and build new cache ..."
+                )
+              )
+              qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+              return(invisible(has_qgis()))
+            }
+          )
+
+          # CACHE CONDITION: the cached QGIS version equals the one reported by
+          # qgis_process
+
+          if (!quiet) message(glue(
+            "Checking cached QGIS version with version reported by '{cached_data$path}' ..."
+          ))
+
+          qgisprocess_cache$path <- cached_data$path
+          qversion <- qgis_query_version(quiet = quiet)
+          qgisprocess_cache$path <- NULL
+
+          if (!identical(qversion, cached_data$version)) {
+            if (quiet) message()
+            message(glue(
+              "QGIS version change detected:\n",
+              "- in the qgisprocess cache it was: {cached_data$version}\n",
+              "- while '{cached_data$path}' is at {qversion}\n",
+              "Hence rebuilding cache to reflect this change ..."
+            ))
+            qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+            return(invisible(has_qgis()))
+          }
+
+          if (!quiet) message(glue("QGIS versions match! ({qversion})"))
+
+          # CACHE CONDITION: the cached QGIS plugins equal the ones reported by
+          # qgis_process, including their state
+
+          if (!quiet) message(glue(
+            "Checking cached QGIS plugins (and state) with those reported by '{cached_data$path}' ..."
+          ))
+
+          qgisprocess_cache$path <- cached_data$path
+          qgisprocess_cache$use_json_output <- cached_data$use_json_output
+          qplugins <- qgis_query_plugins(quiet = quiet)
+          qgisprocess_cache$path <- NULL
+          qgisprocess_cache$use_json_output <- NULL
+
+          if (!identical(qplugins, cached_data$plugins)) {
+            if (quiet) message()
+            message(
+              "Change detected in (enabled) QGIS processing provider plugins!\n",
+              "- in the qgisprocess cache it was:"
+            )
+            print(cached_data$plugins)
+            message(glue(
+              "- while '{cached_data$path}' currently returns:"
+            ))
+            print(qplugins)
+            message(
+              "Hence rebuilding cache to reflect this change ..."
+            )
+            qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+            return(invisible(has_qgis()))
+          }
+
+          if (!quiet) {
+            message(glue(
+              "QGIS plugins match! ({ sum(qplugins$enabled) } ",
+              "processing provider plugin(s) enabled)"
+            ))
+            message_disabled_plugins(qplugins, prepend_newline = TRUE)
+          }
+
+          # ASSIGNING CACHE OBJECTS
+
+          if (!quiet) message(glue(
+            "\n\nRestoring configuration from '{cache_data_file}'"
+          ))
+
+          qgisprocess_cache$path <- cached_data$path
+          qgisprocess_cache$version <- cached_data$version
+          qgisprocess_cache$use_json_output <- cached_data$use_json_output
+          qgisprocess_cache$algorithms <- cached_data$algorithms
+          qgisprocess_cache$plugins <- cached_data$plugins
+          qgisprocess_cache$loaded_from <- cache_data_file
+
+          # FINAL HANDLING OF SUCCESSFUL use_cached_data = TRUE
+
+          if (!quiet) { # triggers messages
+            invisible(qgis_version(query = FALSE, quiet = FALSE))
+            invisible(qgis_path(query = FALSE, quiet = FALSE))
+            invisible(qgis_use_json_output(query = FALSE, quiet = FALSE))
+            message(
+              ifelse(qgis_use_json_input(), "Using ", "Not using "),
+              "JSON for input serialization."
+            )
+            invisible(qgis_plugins(query = FALSE, quiet = FALSE, msg = FALSE))
+            invisible(qgis_algorithms(query = FALSE, quiet = FALSE))
+            message_inspect_cache()
+          }
+
+          # usually applicable only on loading the package:
+          if (quiet && !is.null(qgisprocess_cache$loaded_from)) {
+            (packageStartupMessage("Success!"))
+          }
+
           return(invisible(has_qgis()))
         })
+      }
 
-        # CACHE CONDITION: the cached QGIS version equals the one reported by
-        # qgis_process
+      if (use_cached_data && !file.exists(cache_data_file)) {
+        message(
+          "No cache found.\n",
+          "Will try to reconfigure qgisprocess and build new cache ..."
+        )
+      }
 
-        if (!quiet) message(glue(
-          "Checking cached QGIS version with version reported by '{cached_data$path}' ..."
-        ))
+      # use_cached_data = FALSE or cache is missing:
 
-        qgisprocess_cache$path <- cached_data$path
-        qversion <- qgis_query_version(quiet = quiet)
-        qgisprocess_cache$path <- NULL
-
-        if (!identical(qversion, cached_data$version)) {
-          if (quiet) message()
-          message(glue(
-            "QGIS version change detected:\n",
-            "- in the qgisprocess cache it was: {cached_data$version}\n",
-            "- while '{cached_data$path}' is at {qversion}\n",
-            "Hence rebuilding cache to reflect this change ..."
-          ))
-          qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
-          return(invisible(has_qgis()))
-        }
-
-        if (!quiet) message(glue("QGIS versions match! ({qversion})"))
-
-        # CACHE CONDITION: the cached QGIS plugins equal the ones reported by
-        # qgis_process, including their state
-
-        if (!quiet) message(glue(
-          "Checking cached QGIS plugins (and state) with those reported by '{cached_data$path}' ..."
-        ))
-
-        qgisprocess_cache$path <- cached_data$path
-        qgisprocess_cache$use_json_output <- cached_data$use_json_output
-        qplugins <- qgis_query_plugins(quiet = quiet)
-        qgisprocess_cache$path <- NULL
-        qgisprocess_cache$use_json_output <- NULL
-
-        if (!identical(qplugins, cached_data$plugins)) {
-          if (quiet) message()
-          message(
-            "Change detected in (enabled) QGIS processing provider plugins!\n",
-            "- in the qgisprocess cache it was:"
-          )
-          print(cached_data$plugins)
-          message(glue(
-            "- while '{cached_data$path}' currently returns:"
-          ))
-          print(qplugins)
-          message(
-            "Hence rebuilding cache to reflect this change ..."
-          )
-          qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
-          return(invisible(has_qgis()))
-        }
-
-        if (!quiet) {
-          message(glue(
-          "QGIS plugins match! ({ sum(qplugins$enabled) } ",
-          "processing provider plugin(s) enabled)"
-          ))
-          message_disabled_plugins(qplugins, prepend_newline = TRUE)
-        }
-
-        # ASSIGNING CACHE OBJECTS
-
-        if (!quiet) message(glue(
-          "\n\nRestoring configuration from '{cache_data_file}'"
-        ))
-
-        qgisprocess_cache$path <- cached_data$path
-        qgisprocess_cache$version <- cached_data$version
-        qgisprocess_cache$use_json_output <- cached_data$use_json_output
-        qgisprocess_cache$algorithms <- cached_data$algorithms
-        qgisprocess_cache$plugins <- cached_data$plugins
-        qgisprocess_cache$loaded_from <- cache_data_file
-
-        # FINAL HANDLING OF SUCCESSFUL use_cached_data = TRUE
-
-        if (!quiet) {       # triggers messages
-          invisible(qgis_version(query = FALSE, quiet = FALSE))
-          invisible(qgis_path(query = FALSE, quiet = FALSE))
-          invisible(qgis_use_json_output(query = FALSE, quiet = FALSE))
-          message(
-            ifelse(qgis_use_json_input(), "Using ", "Not using "),
-            "JSON for input serialization."
-          )
-          invisible(qgis_plugins(query = FALSE, quiet = FALSE, msg = FALSE))
-          invisible(qgis_algorithms(query = FALSE, quiet = FALSE))
-          message_inspect_cache()
-        }
-
-        # usually applicable only on loading the package:
-        if (quiet && !is.null(qgisprocess_cache$loaded_from)) {
-          (packageStartupMessage("Success!"))
-        }
-
-        return(invisible(has_qgis()))
-
-      })
+      qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+    },
+    error = function(e) {
+      qgis_unconfigure()
+      if (!quiet) message(e)
     }
-
-    if (use_cached_data && !file.exists(cache_data_file)) {
-      message(
-        "No cache found.\n",
-        "Will try to reconfigure qgisprocess and build new cache ..."
-      )
-    }
-
-    # use_cached_data = FALSE or cache is missing:
-
-    qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
-
-  }, error = function(e) {
-    qgis_unconfigure()
-    if (!quiet) message(e)
-  })
+  )
 
   invisible(has_qgis())
 }
@@ -330,7 +334,6 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
 #' @keywords internal
 qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
-
   path <- qgis_path(query = TRUE, quiet = quiet)
   if (!quiet) message()
 
@@ -369,7 +372,6 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
   })
 
   if (!quiet) message_inspect_cache()
-
 }
 
 
@@ -403,9 +405,11 @@ qgis_version <- function(query = FALSE, quiet = TRUE) {
   if (query) qgisprocess_cache$version <- qgis_query_version(quiet = quiet)
 
   if (!quiet) {
-    message("QGIS version",
-            ifelse(query, " is now set to: ", ": "),
-            qgisprocess_cache$version)
+    message(
+      "QGIS version",
+      ifelse(query, " is now set to: ", ": "),
+      qgisprocess_cache$version
+    )
   }
 
   qgisprocess_cache$version
@@ -444,13 +448,16 @@ qgis_query_path <- function(quiet = FALSE) {
   if (!is.null(getOption("qgisprocess.path"))) {
     path <- getOption("qgisprocess.path", "qgis_process")
     if (!quiet) message(glue("Trying getOption('qgisprocess.path'): '{ path }'"))
-    tryCatch({
-      qgis_run(path = path)
-      if (!quiet) message("Success!")
-      return(path)
-    }, error = function(e) {
-      if (!quiet) message(as.character(e))
-    })
+    tryCatch(
+      {
+        qgis_run(path = path)
+        if (!quiet) message("Success!")
+        return(path)
+      },
+      error = function(e) {
+        if (!quiet) message(as.character(e))
+      }
+    )
   } else {
     if (!quiet) message("getOption('qgisprocess.path') was not found.")
   }
@@ -458,25 +465,31 @@ qgis_query_path <- function(quiet = FALSE) {
   if (Sys.getenv("R_QGISPROCESS_PATH", "") != "") {
     path <- Sys.getenv("R_QGISPROCESS_PATH")
     if (!quiet) message(glue("Trying Sys.getenv('R_QGISPROCESS_PATH'): '{ path }'"))
-    tryCatch({
-      qgis_run(path = path)
-      if (!quiet) message("Success!")
-      return(path)
-    }, error = function(e) {
-      if (!quiet) message(as.character(e))
-    })
+    tryCatch(
+      {
+        qgis_run(path = path)
+        if (!quiet) message("Success!")
+        return(path)
+      },
+      error = function(e) {
+        if (!quiet) message(as.character(e))
+      }
+    )
   } else {
     if (!quiet) message("Sys.getenv('R_QGISPROCESS_PATH') was not found.")
   }
 
   if (!quiet) message(glue("Trying 'qgis_process' on PATH..."))
-  tryCatch({
-    qgis_run(path = "qgis_process")
-    if (!quiet) message("Success!")
-    return("qgis_process")
-  }, error = function(e) {
-    if (!quiet) message("'qgis_process' is not available on PATH.")
-  })
+  tryCatch(
+    {
+      qgis_run(path = "qgis_process")
+      if (!quiet) message("Success!")
+      return("qgis_process")
+    },
+    error = function(e) {
+      if (!quiet) message("'qgis_process' is not available on PATH.")
+    }
+  )
 
   possible_locs <- if (is_macos()) {
     qgis_detect_macos()
@@ -501,11 +514,14 @@ qgis_query_path <- function(quiet = FALSE) {
 
   for (path in possible_locs) {
     if (!quiet) message(glue("Trying command '{ path }'"))
-    tryCatch({
-      qgis_run(path = path)
-      if (!quiet) message("Success!")
-      return(path)
-    }, error = function(e) {})
+    tryCatch(
+      {
+        qgis_run(path = path)
+        if (!quiet) message("Success!")
+        return(path)
+      },
+      error = function(e) {}
+    )
   }
 
   abort("QGIS installation found, but all candidate paths failed to execute.")
@@ -538,7 +554,7 @@ qgis_use_json_output <- function(query = FALSE, quiet = TRUE) {
   if (!quiet) message(
     ifelse(qgisprocess_cache$use_json_output, "Using ", "Not using "),
     "JSON for output serialization."
-    )
+  )
 
   qgisprocess_cache$use_json_output
 }
@@ -583,20 +599,21 @@ qgis_query_version <- function(quiet = FALSE) {
   if (length(match) == 0L) abort_query_version(lines = lines)
   if (
     !stringr::str_detect(match[1], "-[Mm]a(ster|in)$") &&
-    !stringr::str_detect(match[1], "^\\d{1,2}\\.\\d*[13579][\\.-]")
+      !stringr::str_detect(match[1], "^\\d{1,2}\\.\\d*[13579][\\.-]")
   ) {
     return(match[1])
   } else {
     if (length(match) < 2L) abort_query_version(lines = lines)
     if (!stringr::str_detect(match[2], "^[0-9a-f]{7,}$")) {
       warning("Please consider building the QGIS development version from ",
-              "within the QGIS git repository, in order to have a unique ",
-              "version identifier of QGIS, or propose the people making the ",
-              "QGIS build to do so. ",
-              "Currently the specific version identifier is '",
-              match[2],
-              "'.",
-              call. = TRUE)
+        "within the QGIS git repository, in order to have a unique ",
+        "version identifier of QGIS, or propose the people making the ",
+        "QGIS build to do so. ",
+        "Currently the specific version identifier is '",
+        match[2],
+        "'.",
+        call. = TRUE
+      )
       match[2] <- paste("unclear:", match[2])
     }
     return(paste0(match[1], ", development state ", match[2]))

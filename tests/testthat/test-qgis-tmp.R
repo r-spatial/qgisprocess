@@ -1,4 +1,3 @@
-
 test_that("tempfile generators work", {
   expect_true(dir.exists(qgis_tmp_base()))
   expect_false(is_qgis_tmp_file(qgis_tmp_base()))
