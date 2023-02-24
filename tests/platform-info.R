@@ -1,7 +1,7 @@
 
 library(qgisprocess)
 
-qgis_configure()
+qgis_configure(use_cached_data = TRUE) # triggers reconfiguration if needed
 
 has_qgis()
 if (is_macos()) qgis_detect_macos()
