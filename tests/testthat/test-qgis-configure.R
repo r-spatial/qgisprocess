@@ -3,6 +3,11 @@ test_that("qgis_version() works", {
   skip_if_not(has_qgis())
 
   expect_match(qgis_version(), "^\\d{1,2}\\.\\d+.*-.+")
+
+  capture.output({
+    expect_message(qgis_version(debug = TRUE), "PROJ version")
+    expect_message(qgis_version(debug = TRUE), "EPSG ")
+  })
 })
 
 test_that("qgis_query_version() works", {
