@@ -1,9 +1,9 @@
 local_flipped_json_output <- function() {
-    # FLIPPING qgis_use_json_output() STATE
-    withr::local_options(qgisprocess.use_json_output = !qgis_use_json_output())
-    qgis_use_json_output(query = TRUE) # updates cache environment
-    # plan to restore this cache setting before exiting the test:
-    withr::defer_parent(qgis_use_json_output(query = TRUE), priority = "last")
+  # FLIPPING qgis_use_json_output() STATE
+  withr::local_options(qgisprocess.use_json_output = !qgis_use_json_output())
+  qgis_use_json_output(query = TRUE) # updates cache environment
+  # plan to restore this cache setting before exiting the test:
+  withr::defer_parent(qgis_use_json_output(query = TRUE), priority = "last")
 }
 
 expect_correct_plugins_format <- function(plugins) {
