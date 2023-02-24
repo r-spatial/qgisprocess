@@ -17,7 +17,8 @@ qgis_disable_plugins(names = NULL, quiet = FALSE)
 status in QGIS (enabled or disabled).
 Must be one of: \code{"all"}, \code{"enabled"}, \code{"disabled"}.}
 
-\item{query}{Use \code{TRUE} to refresh the cached value.}
+\item{query}{Use \code{TRUE} to replace the cached value by the one reported by
+'qgis_process'.}
 
 \item{quiet}{Use \code{FALSE} to display more information about the command, possibly
 useful for debugging.}

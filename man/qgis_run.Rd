@@ -52,7 +52,8 @@ useful for debugging.}
 configuring qgisprocess during the last session. This saves some time
 loading the package.}
 
-\item{query}{Use \code{TRUE} to refresh the cached value.}
+\item{query}{Use \code{TRUE} to replace the cached value by the one reported by
+'qgis_process'.}
 
 \item{debug}{Logical.
 If \code{TRUE}, also output the version of QGIS, the operating system and all
