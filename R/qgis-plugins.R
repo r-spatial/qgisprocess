@@ -119,6 +119,16 @@ message_disabled_plugins <- function(
 
 
 
+#' @keywords internal
+qgis_has_plugin <- function(plugin, query = FALSE, quiet = TRUE) {
+  assert_that(is.string(plugin))
+  plugin %in% qgis_plugins(query = query, quiet = quiet)$name
+}
+
+
+
+
+
 #' @rdname qgis_plugins
 #' @export
 qgis_enable_plugins <- function(names = NULL, quiet = FALSE) {
@@ -151,7 +161,7 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
   } else {
     assert_that(is.character(names))
     names_old <- names
-    names_unavailable <- names_old[!names_old %in% qgis_plugins(which = "all")$name]
+    names_unavailable <- names_old[!names_old %in% c(qgis_plugins(which = "all")$name, "")]
     names_skip <- names_old[names_old %in% qgis_plugins(which = moded)$name]
     if (!quiet && length(names_unavailable) > 0L) message(
       "Ignoring unknown plugins: ",
@@ -185,7 +195,7 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
   if (!quiet) message("\nRebuilding cache to reflect these changes ...\n")
   qgis_configure(use_cached_data = FALSE, quiet = quiet)
 
-  invisible(sum(names %in% qgis_plugins(which = moded_rev)$name) == 0)
+  invisible(qgis_plugins())
 }
 
 
