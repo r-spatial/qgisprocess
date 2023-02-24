@@ -11,13 +11,13 @@ if (is_windows()) qgis_detect_windows()
 if (has_qgis()) qgis_path()
 if (has_qgis()) qgis_version()
 
+if (has_qgis()) qgis_version(debug = TRUE)
+
 if (has_qgis()) qgis_use_json_output()
 if (has_qgis()) qgis_use_json_input()
 
 if (has_qgis()) cat(qgis_run()$stdout)
 if (has_qgis()) cat(qgis_run()$stderr)
-
-if (has_qgis()) cat(qgis_run(args = "--version")$stdout)
 
 if (has_qgis()) qgis_plugins()
 
