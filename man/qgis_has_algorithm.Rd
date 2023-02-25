@@ -22,7 +22,8 @@ assert_qgis_algorithm(algorithm)
 \item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
 a path to a QGIS model file.}
 
-\item{query}{Use \code{TRUE} to refresh the cached value.}
+\item{query}{Use \code{TRUE} to replace the cached value by the one reported by
+'qgis_process'.}
 
 \item{quiet}{Use \code{TRUE} to suppress output from processing algorithms.}
 

@@ -34,7 +34,8 @@
 #' @param args Command-line arguments
 #' @param quiet Use `FALSE` to display more information about the command, possibly
 #'   useful for debugging.
-#' @param query Use `TRUE` to refresh the cached value.
+#' @param query Use `TRUE` to replace the cached value by the one reported by
+#' 'qgis_process'.
 #' @param action An action to take if the 'qgis_process' executable could not be
 #'   found.
 #' @param env A [list()] of environment variables. Defaults to [qgis_env()].
@@ -42,6 +43,9 @@
 #' @param use_cached_data Use the cached algorithm list and `path` found when
 #'   configuring qgisprocess during the last session. This saves some time
 #'   loading the package.
+#' @param debug Logical.
+#' If `TRUE`, also output the version of QGIS, the operating system and all
+#' relevant libraries, as reported by the 'qgis_process' command.
 #'
 #' @return The result of [processx::run()].
 #' @export
@@ -401,7 +405,7 @@ qgis_unconfigure <- function() {
 
 #' @rdname qgis_run
 #' @export
-qgis_version <- function(query = FALSE, quiet = TRUE) {
+qgis_version <- function(query = FALSE, quiet = TRUE, debug = FALSE) {
   if (query) qgisprocess_cache$version <- qgis_query_version(quiet = quiet)
 
   if (!quiet) {
@@ -410,6 +414,15 @@ qgis_version <- function(query = FALSE, quiet = TRUE) {
       ifelse(query, " is now set to: ", ": "),
       qgisprocess_cache$version
     )
+  }
+
+  if (debug) {
+    print(qgisprocess_cache$version)
+    message()
+    message("Versions reported by 'qgis_process':")
+    message("------------------------------------")
+    message(qgis_run(args = "--version")$stdout)
+    return(invisible(qgisprocess_cache$version))
   }
 
   qgisprocess_cache$version

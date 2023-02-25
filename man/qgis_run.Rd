@@ -23,7 +23,7 @@ qgis_configure(quiet = FALSE, use_cached_data = FALSE)
 
 qgis_unconfigure()
 
-qgis_version(query = FALSE, quiet = TRUE)
+qgis_version(query = FALSE, quiet = TRUE, debug = FALSE)
 
 qgis_path(query = FALSE, quiet = TRUE)
 
@@ -52,7 +52,12 @@ useful for debugging.}
 configuring qgisprocess during the last session. This saves some time
 loading the package.}
 
-\item{query}{Use \code{TRUE} to refresh the cached value.}
+\item{query}{Use \code{TRUE} to replace the cached value by the one reported by
+'qgis_process'.}
+
+\item{debug}{Logical.
+If \code{TRUE}, also output the version of QGIS, the operating system and all
+relevant libraries, as reported by the 'qgis_process' command.}
 }
 \value{
 The result of \code{\link[processx:run]{processx::run()}}.
