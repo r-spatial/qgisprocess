@@ -3,7 +3,7 @@
 
 # qgisprocess
 
-<img src="man/figures/qgisprocess_icon.png" align="right" hspace="10" vspace="0" width="20%">
+<img src="man/figures/qgisprocess.svg" align="right" hspace="10" vspace="0" width="20%">
 
 <!-- badges: start -->
 

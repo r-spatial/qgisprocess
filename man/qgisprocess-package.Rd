@@ -21,13 +21,15 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Floris Vanderhaeghe (\href{https://orcid.org/0000-0002-6378-6229}{ORCID})
-  \item Jan Caha
+  \item Floris Vanderhaeghe \email{floris.vanderhaeghe@inbo.be} (\href{https://orcid.org/0000-0002-6378-6229}{ORCID})
+  \item Jan Caha \email{jan.caha@outlook.com} (\href{https://orcid.org/0000-0003-0165-0606}{ORCID})
 }
 
 Other contributors:
 \itemize{
-  \item Robin Lovelace (\href{https://orcid.org/0000-0001-5679-6536}{ORCID}) [contributor]
+  \item Antony Barja \email{antony.barja8@gmail.com} (\href{https://orcid.org/0000-0001-5921-2858}{ORCID}) [contributor]
+  \item Robin Lovelace \email{rob00x@gmail.com} (\href{https://orcid.org/0000-0001-5679-6536}{ORCID}) [contributor]
+  \item Jakub Nowosad \email{nowosad.jakub@gmail.com} (\href{https://orcid.org/0000-0002-1057-3721}{ORCID}) [contributor]
 }
 
 }
