@@ -1,3 +1,5 @@
+packageVersion("qgisprocess")
+
 library(qgisprocess)
 
 qgis_configure(use_cached_data = TRUE) # triggers reconfiguration if needed
