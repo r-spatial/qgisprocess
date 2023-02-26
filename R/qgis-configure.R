@@ -34,8 +34,7 @@
 #' @param args Command-line arguments
 #' @param quiet Use `FALSE` to display more information about the command, possibly
 #'   useful for debugging.
-#' @param query Use `TRUE` to replace the cached value by the one reported by
-#' 'qgis_process'.
+#' @param query Use `TRUE` to refresh the cached value.
 #' @param action An action to take if the 'qgis_process' executable could not be
 #'   found.
 #' @param env A [list()] of environment variables. Defaults to [qgis_env()].
