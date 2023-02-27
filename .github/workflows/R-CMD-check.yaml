@@ -138,7 +138,7 @@ jobs:
           cat("::endgroup::\n")
         shell: Rscript {0}
 
-      # raster, sf, terra, lwgeom and rgdal from RSPM use older sysdeps than ubuntugis
+      # raster, sf, terra and lwgeom from RSPM use older sysdeps than ubuntugis
       - name: In the ubuntugis job, reinstall some pkgs from source if needed
         if: matrix.config.qgis == 'ubuntugis'
         run: |
@@ -153,9 +153,9 @@ jobs:
             install.packages("terra", repos = "https://cloud.r-project.org")
           }
           cat("::endgroup::\n")
-          cat("::group::raster and rgdal (rgdal still needed)\n")
-          if (!requireNamespace("raster", quietly = TRUE)) {  # rgdal: temporarily
-            install.packages(c("rgdal", "raster"), repos = "https://cloud.r-project.org")
+          cat("::group::raster\n")
+          if (!requireNamespace("raster", quietly = TRUE)) {
+            install.packages("raster", repos = "https://cloud.r-project.org")
           }
           cat("::endgroup::\n")
           cat("::group::lwgeom (needed by stars)\n")
