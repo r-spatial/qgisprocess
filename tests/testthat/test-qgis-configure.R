@@ -226,3 +226,12 @@ test_that("qgis_configure() works OK if cache conditions unmet", {
 
 
 
+
+test_that("abort_query_version() works", {
+  lines <- c("aa", "bb")
+  expect_error(
+    abort_query_version(lines),
+    "Output did not contain expected version information and was:"
+  )
+})
+
