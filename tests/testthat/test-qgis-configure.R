@@ -220,8 +220,6 @@ test_that("qgis_configure() works OK if cache conditions unmet", {
     capture.output(qgis_configure(use_cached_data = TRUE)),
     "Change detected in \\(enabled\\) QGIS processing provider plugins!"
   )
-
-
 })
 
 
@@ -234,4 +232,3 @@ test_that("abort_query_version() works", {
     "Output did not contain expected version information and was:"
   )
 })
-
