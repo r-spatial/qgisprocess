@@ -9,15 +9,7 @@ navbar:
     right: [github, twitter, linkedin]
 
   components:
-    twitter:
-      icon: fa-twitter
-      href: http://twitter.com/antony_barja
-      aria-label: Twitter
     github:
      icon: fa-github
-     href: https://github.com/ambarja
+     href: https://github.com/paleolimbot/qgisprocess
      aria-label: GitHub
-    linkedin:
-     icon: fa-linkedin
-     href: https://www.linkedin.com/in/antonybarja/
-     aria-label: Linkedin
