@@ -35,3 +35,19 @@ h1,h2,h3 {
     color: #f0e64a !important;
 }
 
+a, code a {
+  color: #7f9624;
+}
+
+a:hover, code a:hover {
+  color: #ee7913;
+}
+
+a:not([href]) {
+  color: inherit;
+}
+
+a:not([href]):hover {
+  color: inherit;
+}
+
