@@ -48,7 +48,17 @@ qgis_has_provider <- function(provider, query = FALSE, quiet = TRUE) {
 qgis_providers <- function() {
   assert_qgis()
   algs <- qgis_algorithms()
-  algs[!duplicated(algs$provider), c("provider", "provider_title"), drop = FALSE]
+  counted <- stats::aggregate(
+    algs[[1]],
+    by = list(algs$provider, algs$provider_title),
+    FUN = length
+  )
+  tibble::as_tibble(
+    stats::setNames(
+      counted,
+      c("provider", "provider_title", "algorithm_count")
+    )
+  )
 }
 
 #' @rdname qgis_has_algorithm
