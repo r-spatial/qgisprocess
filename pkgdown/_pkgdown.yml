@@ -1,0 +1,15 @@
+url: ~
+template:
+  bootstrap: 5
+
+
+navbar:
+  bg: custom
+  structure:
+    right: [github, twitter, linkedin]
+
+  components:
+    github:
+     icon: fa-github
+     href: https://github.com/paleolimbot/qgisprocess
+     aria-label: GitHub
