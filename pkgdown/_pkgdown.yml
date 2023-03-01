@@ -1,0 +1,23 @@
+url: ~
+template:
+  bootstrap: 5
+
+
+navbar:
+  bg: custom
+  structure:
+    right: [github, twitter, linkedin]
+
+  components:
+    twitter:
+      icon: fa-twitter
+      href: http://twitter.com/antony_barja
+      aria-label: Twitter
+    github:
+     icon: fa-github
+     href: https://github.com/ambarja
+     aria-label: GitHub
+    linkedin:
+     icon: fa-linkedin
+     href: https://www.linkedin.com/in/antonybarja/
+     aria-label: Linkedin

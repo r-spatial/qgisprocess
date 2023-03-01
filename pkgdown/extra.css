@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway|Ubuntu+Mono');
+
+
+body{
+  font-family: 'Raleway', sans-serif;
+}
+
+code{
+  font-family: 'Ubuntu Mono', monospace;
+}
+
+h1,h2,h3 {
+  font-weight: bold;
+}
+
+
+.navbar-dark {
+    background-color:#497d29;
+}
+
+.navbar-dark input[type="search"] {
+    border-color: #6c757d;
+    background-color: #ffffff;
+    color: #e9ecef;
+}
+
+.navbar-nav .nav-item>.nav-link {
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    color: white;
+}
+
+.text-muted {
+    --bs-text-opacity: 1;
+    color: #f0e64a !important;
+}
+
