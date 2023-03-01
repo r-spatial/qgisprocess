@@ -1,4 +1,3 @@
-
 #' Manage temporary files
 #'
 #' These functions create temporary files that can be used

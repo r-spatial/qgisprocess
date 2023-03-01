@@ -14,7 +14,7 @@ qgis_algorithms(query = FALSE, quiet = TRUE)
 
 qgis_has_provider(provider, query = FALSE, quiet = TRUE)
 
-qgis_providers(provider)
+qgis_providers()
 
 assert_qgis_algorithm(algorithm)
 }

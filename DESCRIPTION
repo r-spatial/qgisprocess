@@ -41,6 +41,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
+    assertthat,
     processx (>= 3.5.2),
     stringr,
     withr,
@@ -57,5 +58,6 @@ Suggests:
     sf,
     raster,
     stars,
-    terra
+    terra,
+    stringi
 SystemRequirements: QGIS (>= 3.16). OSGeo4W is recommended for Windows users. 

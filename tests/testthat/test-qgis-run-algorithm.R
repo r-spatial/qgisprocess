@@ -57,7 +57,7 @@ test_that(glue("qgis_run_algorithm accepts multiple input arguments{input}"), {
 
   v_1 <- sf::read_sf(system.file("longlake/longlake.gpkg", package = "qgisprocess"))
   v_2 <- v_3 <- v_1
-  v_2$geom = v_2$geom + 1000
+  v_2$geom <- v_2$geom + 1000
   sf::st_crs(v_2) <- sf::st_crs(v_1)
   v_3$geom <- v_3$geom - 1000
   sf::st_crs(v_3) <- sf::st_crs(v_1)
@@ -79,10 +79,10 @@ test_that(glue("qgis_run_algorithm runs with qgis:relief, for which the acceptab
   capture.output({
     result <- qgis_run_algorithm(
       "qgis:relief",
-      INPUT=system.file("longlake/longlake_depth.tif", package = "qgisprocess"),
-      Z_FACTOR=1,
-      AUTO_COLORS=FALSE,
-      COLORS="-0.5, 0, 170, 0, 0; 0, 0.5, 85, 255, 255; 0.5, 1, 0, 255, 0; 1, 2.5, 85, 85, 255"
+      INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess"),
+      Z_FACTOR = 1,
+      AUTO_COLORS = FALSE,
+      COLORS = "-0.5, 0, 170, 0, 0; 0, 0.5, 85, 255, 255; 0.5, 1, 0, 255, 0; 1, 2.5, 85, 85, 255"
     )
   })
 
@@ -90,7 +90,6 @@ test_that(glue("qgis_run_algorithm runs with qgis:relief, for which the acceptab
   expect_s3_class(result$FREQUENCY_DISTRIBUTION, "qgis_outputFile")
   expect_true(file.exists(result$OUTPUT))
   expect_true(file.exists(result$FREQUENCY_DISTRIBUTION))
-
 })
 
 
