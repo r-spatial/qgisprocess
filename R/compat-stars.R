@@ -1,4 +1,3 @@
-
 #' Convert raster objects to/from QGIS inputs/outputs
 #'
 #' @param x A stars or stars_proxy object.
@@ -52,4 +51,3 @@ st_as_stars.qgis_result <- function(output, ...) {
   result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
   stars::read_stars(unclass(result), ...)
 }
-

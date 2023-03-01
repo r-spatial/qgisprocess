@@ -1,4 +1,3 @@
-
 test_that("terra argument coercers work", {
   skip_if_not_installed("terra")
 
@@ -63,7 +62,6 @@ test_that("terra result coercers work", {
     ),
     "SpatRaster"
   )
-
 })
 
 test_that("terra argument coercer for extent works", {

@@ -1,4 +1,3 @@
-
 #' Type coercion for arguments to QGIS processing algorithms
 #'
 #' Calls to [qgis_run_algorithm()] can and should contain R objects that
@@ -44,13 +43,13 @@ qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_
   user_args[regular_dot_names] <- dots[regular_dot_names]
   for (arg_name in duplicated_dot_names) {
     items <- unname(dots[dot_names == arg_name])
-    user_args[[arg_name]] <- qgis_list_input(!!! items)
+    user_args[[arg_name]] <- qgis_list_input(!!!items)
   }
 
   # warn about unspecified arguments (don't error so that users can
   # write code for more than one QGIS install if args are added)
   unknown_args <- setdiff(names(dots), c("PROJECT_PATH", "ELLIPSOID", arg_meta$name))
-  if (length(unknown_args) > 0){
+  if (length(unknown_args) > 0) {
     for (arg_name in unknown_args) {
       message(glue("Ignoring unknown input '{ arg_name }'"))
     }
@@ -205,25 +204,20 @@ as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec(),
   if (isTRUE(spec$qgis_type %in% c("sink", "vectorDestination"))) {
     message(glue("Using `{ spec$name } = qgis_tmp_vector()`"))
     qgis_tmp_vector()
-
   } else if (isTRUE(spec$qgis_type == "rasterDestination")) {
     message(glue("Using `{ spec$name } = qgis_tmp_raster()`"))
     qgis_tmp_raster()
-
   } else if (isTRUE(spec$qgis_type == "folderDestination")) {
     message(glue("Using `{ spec$name } = qgis_tmp_folder()`"))
     qgis_tmp_folder()
-
   } else if (isTRUE(spec$qgis_type == "fileDestination")) {
     # these are various types of files (pdf, raster stats, etc.)
     message(glue("Using `{ spec$name } = qgis_tmp_file(\"\")`"))
     qgis_tmp_file("")
-
   } else if (isTRUE(spec$qgis_type == "enum") && length(spec$available_values) > 0) {
     default_enum_value <- rlang::as_label(spec$available_values[1])
     message(glue("Using `{ spec$name } = { default_enum_value }`"))
     if (use_json_input) 0 else "0"
-
   } else {
     # We don't know the actual default values here as far as I can tell
     message(glue("Argument `{ spec$name }` is unspecified (using QGIS default value)."))
@@ -246,8 +240,7 @@ as_qgis_argument.NULL <- function(x, spec = qgis_argument_spec(),
 #' @export
 as_qgis_argument.character <- function(x, spec = qgis_argument_spec(),
                                        use_json_input = FALSE) {
-  result <- switch(
-    as.character(spec$qgis_type),
+  result <- switch(as.character(spec$qgis_type),
     field = if (use_json_input) x else paste0(x, collapse = ";"),
     enum = {
       x_int <- match(x, spec$available_values)
@@ -259,7 +252,8 @@ as_qgis_argument.character <- function(x, spec = qgis_argument_spec(),
             glue("All values for input '{ spec$name }' must be one of the following:\n\n"),
             glue::glue_collapse(
               paste0('"', spec$available_values, '"'),
-              ", ", last = " or "
+              ", ",
+              last = " or "
             )
           )
         )
@@ -397,13 +391,13 @@ qgis_dict_input <- function(...) {
 #' @export
 as_qgis_argument.qgis_list_input <- function(x, spec = qgis_argument_spec(),
                                              use_json_input = FALSE) {
-  qgis_list_input(!!! lapply(x, as_qgis_argument, spec = spec, use_json_input = use_json_input))
+  qgis_list_input(!!!lapply(x, as_qgis_argument, spec = spec, use_json_input = use_json_input))
 }
 
 #' @export
 as_qgis_argument.qgis_dict_input <- function(x, spec = qgis_argument_spec(),
                                              use_json_input = FALSE) {
-  qgis_dict_input(!!! lapply(x, as_qgis_argument, spec = spec, use_json_input = use_json_input))
+  qgis_dict_input(!!!lapply(x, as_qgis_argument, spec = spec, use_json_input = use_json_input))
 }
 
 #' @export

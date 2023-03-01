@@ -1,4 +1,3 @@
-
 test_that("raster argument coercers work", {
   skip_if_not_installed("raster")
 
@@ -106,13 +105,12 @@ test_that("raster result coercers work", {
 
 test_that("raster crs work", {
   skip_if_not_installed("raster")
-  skip_if_not_installed("rgdal")
 
   obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
 
   crs_representation <- expect_match(
-    as_qgis_argument(raster::crs(obj), qgis_argument_spec(qgis_type = "crs")),
-    "UTM zone 20N"
+    as_qgis_argument(slot(raster::crs(obj), "projargs"), qgis_argument_spec(qgis_type = "crs")),
+    "\\+proj=utm \\+zone=20"
   )
 
   expect_type(crs_representation, "character")
@@ -134,7 +132,6 @@ test_that("raster argument coercer for extent works", {
 
 test_that("raster argument coercer for crs works", {
   skip_if_not_installed("raster")
-  skip_if_not_installed("rgdal")
   skip_if_not(has_qgis())
 
   obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
@@ -142,7 +139,7 @@ test_that("raster argument coercer for crs works", {
   result <- qgis_run_algorithm(
     "native:createconstantrasterlayer",
     EXTENT = raster::extent(obj),
-    TARGET_CRS = raster::crs(obj),
+    TARGET_CRS = slot(raster::crs(obj), "projargs"),
     PIXEL_SIZE = 1000,
     OUTPUT_TYPE = "Byte",
     OUTPUT = qgis_tmp_raster(),

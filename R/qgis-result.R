@@ -1,4 +1,3 @@
-
 #' Access algorithm results
 #'
 #' @param x An object returned by [qgis_run_algorithm()].
@@ -66,7 +65,6 @@ qgis_check_stdout <- function(x) {
 #' @rdname is_qgis_result
 #' @export
 qgis_result_single <- function(x, what) {
-
   # Limit result to elements that match class
   x <- x[vapply(x, inherits, what, FUN.VALUE = logical(1))]
   if (length(x) == 0L) {
@@ -74,8 +72,8 @@ qgis_result_single <- function(x, what) {
       paste(
         "Can't extract object from result: zero outputs of type",
         paste(what, collapse = " or ")
-        )
       )
+    )
   }
 
   # By default, take the first element named as output or OUTPUT.
@@ -83,7 +81,6 @@ qgis_result_single <- function(x, what) {
   result <- x[grepl("^(output|OUTPUT)$", names(x))][1][[1]]
   if (is.null(result)) result <- x[[1]]
   result
-
 }
 
 
