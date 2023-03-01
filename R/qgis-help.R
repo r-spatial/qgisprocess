@@ -1,4 +1,3 @@
-
 #' Show algorithm help
 #'
 #' @inheritParams qgis_run_algorithm
@@ -186,7 +185,8 @@ qgis_parsed_help <- function(algorithm) {
     sec_outputs,
     stringr::regex(
       paste0(
-        "^([A-Za-z0-9_]+):\\s+<([A-Za-z0-9_ .-]+)>\n\\s([A-Za-z0-9_ .]+)\\s*"),
+        "^([A-Za-z0-9_]+):\\s+<([A-Za-z0-9_ .-]+)>\n\\s([A-Za-z0-9_ .]+)\\s*"
+      ),
       dotall = TRUE, multiline = TRUE
     )
   )[[1]]
@@ -198,7 +198,7 @@ qgis_parsed_help <- function(algorithm) {
     description = sec_description,
     arguments = tibble::tibble(
       name = vapply(arg_info, "[[", 1, FUN.VALUE = character(1)),
-      description =  vapply(arg_info, "[[", 2, FUN.VALUE = character(1)),
+      description = vapply(arg_info, "[[", 2, FUN.VALUE = character(1)),
       qgis_type = arg_type,
       available_values = arg_available,
       acceptable_values = arg_acceptable
@@ -237,4 +237,3 @@ help_cache_file <- function(algorithm, json) {
     glue("help-{ alg }-{ hash }.rds")
   )
 }
-

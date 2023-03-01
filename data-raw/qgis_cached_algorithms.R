@@ -1,4 +1,3 @@
-
 # The algorithm list is always available, but the help text
 # associated with all algorithms can take up to an hour to load
 # because it takes so many calls to qgis_process. This builds

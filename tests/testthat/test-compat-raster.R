@@ -1,4 +1,3 @@
-
 test_that("raster argument coercers work", {
   skip_if_not_installed("raster")
 

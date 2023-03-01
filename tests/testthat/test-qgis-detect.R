@@ -1,4 +1,3 @@
-
 test_that("qgis_detect_macos() works", {
   if (is_macos()) {
     expect_type(qgis_detect_macos(), "character")

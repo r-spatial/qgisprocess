@@ -1,4 +1,3 @@
-
 #' Detect QGIS installations with 'qgis_process'
 #'
 #' @param drive_letter The drive letter on which to search. By default,

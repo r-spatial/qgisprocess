@@ -1,4 +1,3 @@
-
 #' Convert terra objects to/from QGIS inputs/outputs
 #'
 #' @param x A [terra::rast()].
