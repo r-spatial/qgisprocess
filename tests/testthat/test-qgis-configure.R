@@ -37,20 +37,6 @@ test_that("qgis_query_version() works for development versions of QGIS", {
   }
 })
 
-test_that("qgis_algorithms() works", {
-  skip_if_not(has_qgis())
-
-  algs <- qgis_algorithms()
-  expect_true(tibble::is_tibble(algs))
-  expect_true(nrow(algs) > 1)
-
-  old_names <- c(
-    "provider", "provider_title", "algorithm",
-    "algorithm_id", "algorithm_title"
-  )
-  expect_true(all(vapply(algs[old_names], function(x) all(!is.na(x)), logical(1))))
-})
-
 test_that("qgis_configure() returns FALSE with no QGIS", {
   skip_if(has_qgis())
   expect_false(

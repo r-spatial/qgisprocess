@@ -1,8 +1,14 @@
 test_that("qgis_algorithms() works", {
   skip_if_not(has_qgis())
-  expect_s3_class(qgis_algorithms(), "data.frame")
-  expect_gt(nrow(qgis_algorithms()), 200)
-  expect_gt(ncol(qgis_algorithms()), 20)
+  algs <- qgis_algorithms()
+  expect_true(tibble::is_tibble(algs))
+  expect_gt(nrow(algs), 200)
+  expect_gt(ncol(algs), 20)
+  old_names <- c(
+    "provider", "provider_title", "algorithm",
+    "algorithm_id", "algorithm_title"
+  )
+  expect_true(all(vapply(algs[old_names], function(x) all(!is.na(x)), logical(1))))
 })
 
 test_that("qgis_has_algorithm() works", {
