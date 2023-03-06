@@ -92,36 +92,36 @@ a path to a QGIS model file.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="qgis_run.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_has_algorithm</span><span class="op">(</span><span class="st">"native:filedownloader"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="qgis_run.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_algorithms</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 349 × 27</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    provi…¹ provi…² algor…³ algor…⁴ algor…⁵ provi…⁶ can_c…⁷ depre…⁸ group has_k…⁹</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 3d      QGIS (… 3d:tes… tessel… Tessel… 3d      TRUE    FALSE   Vect… FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> gdal    GDAL    gdal:a… aspect  Aspect  gdal    TRUE    FALSE   Rast… FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> gdal    GDAL    gdal:a… assign… Assign… gdal    TRUE    FALSE   Rast… FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> gdal    GDAL    gdal:b… buffer… Buffer… gdal    TRUE    FALSE   Vect… FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> gdal    GDAL    gdal:b… buildv… Build … gdal    TRUE    FALSE   Rast… FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> gdal    GDAL    gdal:b… buildv… Build … gdal    TRUE    FALSE   Vect… FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> gdal    GDAL    gdal:c… clipra… Clip r… gdal    TRUE    FALSE   Rast… FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> gdal    GDAL    gdal:c… clipra… Clip r… gdal    TRUE    FALSE   Rast… FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> gdal    GDAL    gdal:c… clipve… Clip v… gdal    TRUE    FALSE   Vect… FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> gdal    GDAL    gdal:c… clipve… Clip v… gdal    FALSE   FALSE   Vect… FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 339 more rows, 17 more variables: help_url &lt;chr&gt;, name &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   requires_matching_crs &lt;lgl&gt;, short_description &lt;chr&gt;, tags &lt;list&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   provider_can_be_activated &lt;lgl&gt;, default_raster_file_extension &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   default_vector_file_extension &lt;chr&gt;, provider_is_active &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   provider_long_name &lt;chr&gt;, provider_name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 349 × 24</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    provider provider_t…¹ algor…² algor…³ algor…⁴ provi…⁵ provi…⁶ provi…⁷ provi…⁸</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 3d       QGIS (3D)    3d:tes… tessel… Tessel… TRUE    TRUE    QGIS (… <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> gdal     GDAL         gdal:a… aspect  Aspect  TRUE    TRUE    GDAL (… <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> gdal     GDAL         gdal:a… assign… Assign… TRUE    TRUE    GDAL (… <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> gdal     GDAL         gdal:b… buffer… Buffer… TRUE    TRUE    GDAL (… <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> gdal     GDAL         gdal:b… buildv… Build … TRUE    TRUE    GDAL (… <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> gdal     GDAL         gdal:b… buildv… Build … TRUE    TRUE    GDAL (… <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> gdal     GDAL         gdal:c… clipra… Clip r… TRUE    TRUE    GDAL (… <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> gdal     GDAL         gdal:c… clipra… Clip r… TRUE    TRUE    GDAL (… <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> gdal     GDAL         gdal:c… clipve… Clip v… TRUE    TRUE    GDAL (… <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> gdal     GDAL         gdal:c… clipve… Clip v… TRUE    TRUE    GDAL (… <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 339 more rows, 15 more variables: provider_warning &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   can_cancel &lt;lgl&gt;, deprecated &lt;lgl&gt;, group &lt;chr&gt;, has_known_issues &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   help_url &lt;chr&gt;, requires_matching_crs &lt;lgl&gt;, short_description &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tags &lt;list&gt;, default_raster_file_extension &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   default_vector_file_extension &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   supported_output_raster_extensions &lt;list&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   supported_output_table_extensions &lt;list&gt;, …</span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="qgis_run.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_has_provider</span><span class="op">(</span><span class="st">"native"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="qgis_run.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">qgis_providers</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   provider provider_title   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 3d       QGIS (3D)        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> gdal     GDAL             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> native   QGIS (native c++)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> qgis     QGIS             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   provider provider_title    algorithm_count</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> gdal     GDAL                           56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> qgis     QGIS                           50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3d       QGIS (3D)                       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> native   QGIS (native c++)             242</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
