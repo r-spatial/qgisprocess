@@ -8,6 +8,7 @@ test_that("qgis_algorithms() works", {
     "provider", "provider_title", "algorithm",
     "algorithm_id", "algorithm_title"
   )
+  # check that the 'old_names' columns have complete data (no NAs):
   expect_true(all(vapply(algs[old_names], function(x) all(!is.na(x)), logical(1))))
 })
 
