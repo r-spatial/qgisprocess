@@ -48,7 +48,17 @@ qgis_has_provider <- function(provider, query = FALSE, quiet = TRUE) {
 qgis_providers <- function() {
   assert_qgis()
   algs <- qgis_algorithms()
-  algs[!duplicated(algs$provider), c("provider", "provider_title"), drop = FALSE]
+  counted <- stats::aggregate(
+    algs[[1]],
+    by = list(algs$provider, algs$provider_title),
+    FUN = length
+  )
+  tibble::as_tibble(
+    rlang::set_names(
+      counted,
+      c("provider", "provider_title", "algorithm_count")
+    )
+  )
 }
 
 #' @rdname qgis_has_algorithm
@@ -149,12 +159,16 @@ qgis_query_algorithms <- function(quiet = FALSE) {
 
     # for compatibility with old output
     algs$algorithm_id <- stringr::str_remove(algs$algorithm, "^.*?:")
-    algs$algorithm_title <- algs$name
-    algs$provider_title <- algs$provider_name
-    algs$provider <- algs$provider_id
+    colnames(algs)[colnames(algs) == "name"] <- "algorithm_title"
+    colnames(algs)[colnames(algs) == "provider_name"] <- "provider_title"
+    colnames(algs)[colnames(algs) == "provider_id"] <- "provider"
 
     first_cols <- c("provider", "provider_title", "algorithm", "algorithm_id", "algorithm_title")
-    algs[c(first_cols, setdiff(names(algs), first_cols))]
+    second_cols <- setdiff(
+      names(algs)[grepl("provider", names(algs))],
+      first_cols
+    )
+    algs[c(first_cols, second_cols, setdiff(names(algs), c(first_cols, second_cols)))]
   } else {
     result <- qgis_run(args = "list")
     lines <- trimws(readLines(textConnection(trimws(result$stdout))))
