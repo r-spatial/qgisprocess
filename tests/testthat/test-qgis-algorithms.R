@@ -29,7 +29,10 @@ test_that("qgis_providers() works", {
   expect_s3_class(qgis_providers(), "data.frame")
   expect_true("native" %in% qgis_providers()$provider)
   expect_false("notaprovider" %in% qgis_providers()$provider)
-  expect_identical(ncol(qgis_providers()), 3L)
+  expect_named(
+    qgis_providers(),
+    c("provider", "provider_title", "algorithm_count")
+  )
 })
 
 test_that("assert_qgis_algorithm() works", {
