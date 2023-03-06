@@ -54,7 +54,7 @@ qgis_providers <- function() {
     FUN = length
   )
   tibble::as_tibble(
-    stats::setNames(
+    rlang::set_names(
       counted,
       c("provider", "provider_title", "algorithm_count")
     )
