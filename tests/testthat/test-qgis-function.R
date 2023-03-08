@@ -52,4 +52,18 @@ test_that("qgis_pipe() works", {
     )
 
   expect_s3_class(result, "qgis_result")
+
+  result2 <- result |>
+    qgis_pipe("native:subdivide", MAX_NODES = 10) |>
+    qgis_pipe("native:dissolve")
+
+  expect_s3_class(result2, "qgis_result")
+  expect_named(result2, c("OUTPUT", ".algorithm", ".args", ".raw_json_input", ".processx_result"))
+  expect_equal(sf::st_area(sf::st_as_sf(result)), sf::st_area(sf::st_as_sf(result2)))
+
+  fake_result <- structure(result[".processx_result"], class = "qgis_result")
+  expect_error(
+    fake_result |> qgis_pipe("native:subdivide", MAX_NODES = 10),
+    "The qgis_result object misses an 'OUTPUT' element"
+  )
 })
