@@ -70,7 +70,7 @@ are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()
 
 \item{.algorithm_arguments}{The result of \code{\link[=qgis_arguments]{qgis_arguments()}}}
 
-\item{.use_json_input, use_json_input}{TRUE if the outputs will be
+\item{.use_json_input, use_json_input}{TRUE if the arguments will be
 serialized as JSON instead of serialized as a command-line argument.}
 
 \item{arguments}{The result of \code{\link[=qgis_sanitize_arguments]{qgis_sanitize_arguments()}}.}

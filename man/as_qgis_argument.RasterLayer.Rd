@@ -40,7 +40,7 @@ qgis_as_brick(output, ...)
 \code{description}, and \code{qgis_type}. See \code{\link[=qgis_argument_spec]{qgis_argument_spec()}} to
 create a blank \code{spec} for testing.}
 
-\item{use_json_input}{TRUE if the outputs will be
+\item{use_json_input}{TRUE if the arguments will be
 serialized as JSON instead of serialized as a command-line argument.}
 
 \item{output}{The result from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} or \code{\link[=qgis_output]{qgis_output()}}.}

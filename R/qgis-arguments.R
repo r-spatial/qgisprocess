@@ -15,7 +15,7 @@
 #'   create a blank `spec` for testing.
 #' @param arguments The result of [qgis_sanitize_arguments()].
 #' @param .algorithm_arguments The result of [qgis_arguments()]
-#' @param .use_json_input,use_json_input TRUE if the outputs will be
+#' @param .use_json_input,use_json_input TRUE if the arguments will be
 #'   serialized as JSON instead of serialized as a command-line argument.
 #' @inheritParams qgis_run_algorithm
 #'
