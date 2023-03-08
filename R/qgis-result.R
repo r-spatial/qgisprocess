@@ -2,7 +2,6 @@
 #'
 #' @param x An object returned by [qgis_run_algorithm()].
 #' @param which The name or index of an output.
-#' @param default A default value if the output does not exist.
 #' @param what Character vector of classes.
 #' At least one class must be inherited by an element of `x` for that element
 #' to be selected.
@@ -27,21 +26,31 @@ qgis_result_clean <- function(x) {
 
 #' @rdname is_qgis_result
 #' @export
-qgis_output <- function(x, which, default = qgis_error_output_does_not_exist(x, which)) {
+qgis_output <- function(x, which) {
+  assert_that(inherits(x, "qgis_result"), length(which) == 1L)
+  output_names <- setdiff(
+    names(x),
+    c(".algorithm", ".args", ".processx_result", ".raw_json_input")
+  )
+  x <- x[output_names]
   if (is.numeric(which) && (which %in% seq_along(x))) {
     x[[which]]
   } else if (which %in% names(x)) {
     x[[which]]
   } else {
-    default
+    qgis_error_output_does_not_exist(x, which)
   }
 }
 
-#' @rdname is_qgis_result
-#' @export
+#' @keywords internal
 qgis_error_output_does_not_exist <- function(x, which) {
+  assert_that(
+    !any(names(x) %in%
+           c(".algorithm", ".args", ".processx_result", ".raw_json_input")),
+    inherits(x, "list")
+  )
   available_outputs <- glue::glue_collapse(
-    paste0("'", setdiff(names(x), c(".algorithm", ".args", ".processx_result")), "'"),
+    paste0("'", names(x), "'"),
     sep = ", ", last = " and "
   )
 
