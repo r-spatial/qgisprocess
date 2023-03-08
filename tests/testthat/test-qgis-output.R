@@ -20,7 +20,7 @@ test_that("output parsing for string, numeric, and classed types works", {
 
   longlake_depth <- stars::read_stars(
     system.file("longlake/longlake_depth.tif", package = "qgisprocess")
-  ) %>%
+  ) |>
     sf::st_set_crs(sf::NA_crs_)
   longlake_mask <- longlake_depth > 0
 

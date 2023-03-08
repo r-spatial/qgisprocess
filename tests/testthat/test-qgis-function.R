@@ -40,7 +40,7 @@ test_that("qgis_function() works", {
 test_that("qgis_pipe() works", {
   skip_if_not(has_qgis())
 
-  result <- system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") %>%
+  result <- system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") |>
     qgis_pipe(
       "native:buffer",
       DISTANCE = 100,
