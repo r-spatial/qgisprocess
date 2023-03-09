@@ -46,7 +46,7 @@ qgis_output <- function(x, which) {
 qgis_error_output_does_not_exist <- function(x, which) {
   assert_that(
     !any(names(x) %in%
-           c(".algorithm", ".args", ".processx_result", ".raw_json_input")),
+      c(".algorithm", ".args", ".processx_result", ".raw_json_input")),
     inherits(x, "list")
   )
   available_outputs <- glue::glue_collapse(
