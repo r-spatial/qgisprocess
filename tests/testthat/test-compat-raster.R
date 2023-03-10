@@ -109,8 +109,8 @@ test_that("raster crs work", {
   obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
 
   crs_representation <- expect_match(
-    as_qgis_argument(slot(raster::crs(obj), "projargs"), qgis_argument_spec(qgis_type = "crs")),
-    "\\+proj=utm \\+zone=20"
+    as_qgis_argument(raster::wkt(obj), qgis_argument_spec(qgis_type = "crs")),
+    "UTM zone 20N"
   )
 
   expect_type(crs_representation, "character")
@@ -139,7 +139,7 @@ test_that("raster argument coercer for crs works", {
   result <- qgis_run_algorithm(
     "native:createconstantrasterlayer",
     EXTENT = raster::extent(obj),
-    TARGET_CRS = slot(raster::crs(obj), "projargs"),
+    TARGET_CRS = raster::wkt(obj),
     PIXEL_SIZE = 1000,
     OUTPUT_TYPE = "Byte",
     OUTPUT = qgis_tmp_raster(),
