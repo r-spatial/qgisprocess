@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   width="86.575119mm"
-   height="87.084175mm"
-   viewBox="0 0 86.575087 87.084184"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1013.515mm"
+   height="1066.0863mm"
+   viewBox="0 0 1013.5148 1066.0864"
    version="1.1"
    id="svg8"
-   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
-   sodipodi:docname="qgisprocess.svg"
-   inkscape:export-filename="qgisprocess.png"
-   inkscape:export-xdpi="500"
-   inkscape:export-ydpi="500"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:dc="http://purl.org/dc/elements/1.1/">
+   inkscape:version="1.0.1 (0767f8302a, 2020-10-17)"
+   sodipodi:docname="qgisprocess.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -25,23 +22,20 @@
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="0"
+     inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="89.285714"
-     inkscape:cy="183.21429"
+     inkscape:zoom="0.087499999"
+     inkscape:cx="1400.5435"
+     inkscape:cy="2069.2024"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
-     inkscape:window-width="1600"
-     inkscape:window-height="822"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
-     inkscape:showpageshadow="0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1" />
+     inkscape:window-width="1366"
+     inkscape:window-height="707"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -50,6 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -57,10 +52,10 @@
      inkscape:label="Capa 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(208.03059,397.11057)">
+     transform="translate(207.83741,379.46179)">
     <path
-       style="fill:#fafafa;fill-opacity:1;stroke:#589632;stroke-width:1.73667;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -207.16225,-330.18301 v -46.84734 l 42.29042,-19.1277 42.52415,19.11459 0.0236,46.8516 -42.21813,19.21225 z"
+       style="fill:#fafafa;fill-opacity:1;stroke:#19b703;stroke-width:20.7889;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -197.44296,439.9582 v -573.68966 l 494.85581,-234.23673 497.59096,234.07612 0.27615,573.74192 -494.01026,235.27209 z"
        id="path5515"
        inkscape:export-filename="/home/antony/Documentos/ALL_QGIS/CS_qgisprocess/img/qgisprocess_icon.png"
        inkscape:export-xdpi="150"
@@ -71,7 +66,7 @@
        style="fill:none;stroke-width:2.3;stroke-miterlimit:4;stroke-dasharray:none" />
     <g
        id="g5538"
-       transform="matrix(0.09079936,0,0,0.08847178,-190.34442,-366.51173)"
+       transform="matrix(1.062477,0,0,1.0834202,-2.8627941,-11.864044)"
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        inkscape:export-filename="/home/antony/Documentos/ALL_QGIS/CS_qgisprocess/img/qgisprocess_icon.png"
        inkscape:export-xdpi="150"
@@ -132,18 +127,18 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:7.37395px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.21085;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="-175.99731"
-       y="-338.45621"
+       style="font-style:normal;font-weight:normal;font-size:88.2708px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.524;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="-3.5311599"
+       y="501.9469"
        id="text5527"
-       transform="scale(1.040611,0.96097388)"
+       transform="scale(1.0172103,0.98308089)"
        inkscape:export-filename="/home/antony/Documentos/ALL_QGIS/CS_qgisprocess/img/qgisprocess_icon.png"
        inkscape:export-xdpi="150"
        inkscape:export-ydpi="150"><tspan
          sodipodi:role="line"
          id="tspan5525"
-         x="-175.99731"
-         y="-338.45621"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Fira Code';-inkscape-font-specification:'Fira Code Semi-Bold';fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.21085;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">qgisprocess</tspan></text>
+         x="-3.5311599"
+         y="501.9469"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Fira Code';-inkscape-font-specification:'Fira Code Semi-Bold';fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.524;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">qgisprocess</tspan></text>
   </g>
 </svg>
