@@ -52,8 +52,8 @@ Imports:
     jsonlite,
     rappdirs,
     stats
-URL: https://github.com/paleolimbot/qgisprocess
-BugReports: https://github.com/paleolimbot/qgisprocess/issues
+URL: https://github.com/r-spatial/qgisprocess
+BugReports: https://github.com/r-spatial/qgisprocess/issues
 Suggests: 
     testthat,
     sf,

@@ -11,8 +11,8 @@ Provides seamless access to the 'QGIS' \url{https://qgis.org/} processing toolbo
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/paleolimbot/qgisprocess}
-  \item Report bugs at \url{https://github.com/paleolimbot/qgisprocess/issues}
+  \item \url{https://github.com/r-spatial/qgisprocess}
+  \item Report bugs at \url{https://github.com/r-spatial/qgisprocess/issues}
 }
 
 }

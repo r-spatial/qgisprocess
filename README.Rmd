@@ -19,9 +19,9 @@ knitr::opts_chunk$set(
 <img src="man/figures/qgisprocess.svg" align="right" hspace="10" vspace="0" width="20%">
 
 <!-- badges: start -->
-[![R build status](https://github.com/paleolimbot/qgisprocess/workflows/R-CMD-check/badge.svg)](https://github.com/paleolimbot/qgisprocess/actions)
+[![R build status](https://github.com/r-spatial/qgisprocess/workflows/R-CMD-check/badge.svg)](https://github.com/r-spatial/qgisprocess/actions)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Codecov test coverage](https://codecov.io/gh/paleolimbot/qgisprocess/branch/main/graph/badge.svg)](https://codecov.io/gh/paleolimbot/qgisprocess?branch=main)
+[![Codecov test coverage](https://codecov.io/gh/r-spatial/qgisprocess/branch/main/graph/badge.svg)](https://codecov.io/gh/r-spatial/qgisprocess?branch=main)
 <!-- badges: end -->
 
 The goal of `qgisprocess` is to provide an R interface to the popular and open source desktop geographic information system (GIS) program [QGIS](https://qgis.org/en/site/). The package is a re-implementation of functionality provided by the archived [RQGIS](https://cran.r-project.org/package=RQGIS) package, which was partially revived in the [RQGIS3](https://github.com/r-spatial/RQGIS3) package.
@@ -32,7 +32,7 @@ You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("paleolimbot/qgisprocess")
+remotes::install_github("r-spatial/qgisprocess")
 ```
 
 The qgisprocess package wraps the `qgis_process` command-line utility, which is available in QGIS >= [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16), [released](https://qgis.org/en/site/getinvolved/development/roadmap.html) in September 2020. MacOS users will have to install QIGS >= 3.16; download instructions for all platforms are available at <https://download.qgis.org/>. If a recent version of QGIS isn't available for your OS, you can use one of the [Geocomputation with R Docker images](https://github.com/geocompr/docker) with QGIS installed.
