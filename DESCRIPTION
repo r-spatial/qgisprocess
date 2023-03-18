@@ -1,6 +1,7 @@
 Package: qgisprocess
 Title: Use 'QGIS' Processing Algorithms
 Version: 0.0.0.9000
+Maintainer: Floris Vanderhaeghe <floris.vanderhaeghe@inbo.be>
 Authors@R: c(
       person(given = "Dewey",
              family = "Dunnington",
