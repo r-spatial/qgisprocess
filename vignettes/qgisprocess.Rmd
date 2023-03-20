@@ -163,9 +163,13 @@ info = qgis_run_algorithm(alg = "grass7:r.slope.aspect",
                           elevation = dem, 
                           .quiet = TRUE)
 # just keep the names of output rasters
-nms = grep("^\\.", names(info), invert = TRUE, value = TRUE)
-# read in the output rasters as a raster stack
-s = stack(lapply(info[nms], unclass))
+nms = qgis_outputs("grass7:r.slope.aspect")$name
+# read in the output rasters 
+r = info[nms] |>
+  unlist() |>
+  terra::rast()
+r = terra::app(r, as.numeric)
+names(r) = nms
 # plot the output
-plot(s)
+plot(r)
 ```
