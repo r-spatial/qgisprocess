@@ -155,10 +155,9 @@ qgis_arguments("grass7:r.slope.aspect")
 ```
 
 ```{r slopeaspect, message=FALSE}
-library("raster")
+library("terra")
 # attach digital elevation model from Mt. Mongón (Peru)
-data("dem", package = "spDataLarge")
-projection(dem) = sf::st_crs(32717)$proj4string
+dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
 
 info = qgis_run_algorithm(alg = "grass7:r.slope.aspect",
                           elevation = dem, 
