@@ -111,6 +111,7 @@ And finally run it:
 
 ```{r buffer}
 data("random_points", package = "spDataLarge")
+sf::st_crs(random_points) = "EPSG:32717"
 out = qgis_run_algorithm("native:buffer", INPUT = random_points, DISTANCE = 50,
                          .quiet = TRUE)
 ```
@@ -130,7 +131,10 @@ To read in the QGIS output and visualize it, we can run:
 library("sf")
 library("mapview")
 # attach QGIS output
+# either do it "manually" or ...
 buf = read_sf(out$OUTPUT[1])
+# use the st_as_sf.qgis_result method
+buf = sf::st_as_sf(out)
 # plot your result
 mapview(buf, col.regions = "blue") + 
   mapview(random_points, col.regions = "red", cex = 3)
@@ -167,9 +171,14 @@ nms = qgis_outputs("grass7:r.slope.aspect")$name
 # read in the output rasters 
 r = info[nms] |>
   unlist() |>
-  terra::rast()
-r = terra::app(r, as.numeric)
+  terra::rast() |>
+  as.numeric()
 names(r) = nms
 # plot the output
+plot(r)
+
+# another way of doing it
+r = lapply(info[nms], \(x) as.numeric(qgis_as_terra(x))) |> 
+  rast()
 plot(r)
 ```
