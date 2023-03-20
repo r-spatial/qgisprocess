@@ -1,7 +1,5 @@
-
 test_that("raster argument coercers work", {
   skip_if_not_installed("raster")
-  skip_if_not_installed("rgdal")
 
   obj <- raster::raster()
   expect_error(
@@ -13,7 +11,7 @@ test_that("raster argument coercers work", {
     suppressWarnings(as_qgis_argument(obj, qgis_argument_spec(qgis_type = "layer"))),
     "\\.tif$"
   )
-  expect_is(tmp_file, "qgis_tempfile_arg")
+  expect_s3_class(tmp_file, "qgis_tempfile_arg")
   unlink(tmp_file)
 
   # also check rasters with embedded files
@@ -33,9 +31,8 @@ test_that("raster argument coercers work", {
 
 test_that("raster result coercers work", {
   skip_if_not_installed("raster")
-  skip_if_not_installed("rgdal")
 
-  expect_is(
+  expect_s4_class(
     qgis_as_raster(
       structure(
         system.file("longlake/longlake.tif", package = "qgisprocess"),
@@ -45,7 +42,7 @@ test_that("raster result coercers work", {
     "RasterLayer"
   )
 
-  expect_is(
+  expect_s4_class(
     qgis_as_brick(
       structure(
         system.file("longlake/longlake.tif", package = "qgisprocess"),
@@ -55,7 +52,7 @@ test_that("raster result coercers work", {
     "RasterBrick"
   )
 
-  expect_is(
+  expect_s4_class(
     qgis_as_raster(
       structure(
         system.file("longlake/longlake.tif", package = "qgisprocess"),
@@ -65,7 +62,7 @@ test_that("raster result coercers work", {
     "RasterLayer"
   )
 
-  expect_is(
+  expect_s4_class(
     qgis_as_brick(
       structure(
         system.file("longlake/longlake.tif", package = "qgisprocess"),
@@ -75,7 +72,7 @@ test_that("raster result coercers work", {
     "RasterBrick"
   )
 
-  expect_is(
+  expect_s4_class(
     qgis_as_raster(
       structure(
         list(
@@ -90,7 +87,7 @@ test_that("raster result coercers work", {
     "RasterLayer"
   )
 
-  expect_is(
+  expect_s4_class(
     qgis_as_brick(
       structure(
         list(
@@ -108,21 +105,19 @@ test_that("raster result coercers work", {
 
 test_that("raster crs work", {
   skip_if_not_installed("raster")
-  skip_if_not_installed("rgdal")
 
   obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
 
   crs_representation <- expect_match(
-    as_qgis_argument(raster::crs(obj), qgis_argument_spec(qgis_type = "crs")),
+    as_qgis_argument(raster::wkt(obj), qgis_argument_spec(qgis_type = "crs")),
     "UTM zone 20N"
   )
 
-  expect_is(crs_representation, "character")
+  expect_type(crs_representation, "character")
 })
 
 test_that("raster argument coercer for extent works", {
   skip_if_not_installed("raster")
-  skip_if_not_installed("rgdal")
 
   obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
 
@@ -132,23 +127,19 @@ test_that("raster argument coercer for extent works", {
     "409891\\.446955431,411732\\.936955431,5083288\\.89932423,5084852\\.61932423"
   )
 
-  expect_is(bbox_representation, "character")
+  expect_s3_class(bbox_representation, "character")
 })
 
 test_that("raster argument coercer for crs works", {
   skip_if_not_installed("raster")
-  skip_if_not_installed("rgdal")
   skip_if_not(has_qgis())
-
-  # Until Issue #36 is resolved (WKT2 as an argument causes a failure)
-  skip_on_os("windows")
 
   obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
 
   result <- qgis_run_algorithm(
     "native:createconstantrasterlayer",
     EXTENT = raster::extent(obj),
-    TARGET_CRS = raster::crs(obj),
+    TARGET_CRS = raster::wkt(obj),
     PIXEL_SIZE = 1000,
     OUTPUT_TYPE = "Byte",
     OUTPUT = qgis_tmp_raster(),

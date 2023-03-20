@@ -1,8 +1,7 @@
-
 # nocov start
 
 .onLoad <- function(...) {
-  qgis_configure(quiet = TRUE)
+  qgis_configure(quiet = TRUE, use_cached_data = TRUE)
 
   vctrs::s3_register("sf::st_as_sf", "qgis_result")
   vctrs::s3_register("stars::st_as_stars", "qgis_result")
@@ -22,17 +21,20 @@
 .onAttach <- function(...) {
   if (has_qgis()) {
     packageStartupMessage(
-      glue::glue(
-        "Using 'qgis_process' at '{ qgis_path() }'.",
-        "QGIS version: { qgis_version() }",
-        "Metadata of { nrow(qgis_algorithms()) } algorithms successfully cached.",
-        "Run `qgis_configure()` for details.",
-        .sep = "\n"
+      glue(
+        "QGIS version: { qgis_version() }\n",
+        "Having access to { nrow(qgis_algorithms()) } algorithms ",
+        "from { nrow(qgis_providers()) } QGIS processing providers.\n",
+        "Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.\n",
+        .sep = ""
       )
     )
+    message_disabled_plugins(qgisprocess_cache$plugins, startup = TRUE)
   } else {
     packageStartupMessage(
-      "The 'qgis_process' command-line utility was not found.\nRun `qgis_configure()` for details."
+      "The 'qgis_process' command-line utility was not found.\n",
+      "Please run `qgis_configure()` to fix this and rebuild the cache.\n",
+      "See its documentation if you need to preset the path of qgis_process."
     )
   }
 }

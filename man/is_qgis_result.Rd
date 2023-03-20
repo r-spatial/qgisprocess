@@ -5,6 +5,8 @@
 \alias{qgis_result_clean}
 \alias{qgis_output}
 \alias{qgis_error_output_does_not_exist}
+\alias{qgis_result_single}
+\alias{qgis_result_status}
 \alias{qgis_result_stdout}
 \alias{qgis_result_stderr}
 \alias{qgis_result_args}
@@ -18,6 +20,10 @@ qgis_output(x, which, default = qgis_error_output_does_not_exist(x, which))
 
 qgis_error_output_does_not_exist(x, which)
 
+qgis_result_single(x, what)
+
+qgis_result_status(x)
+
 qgis_result_stdout(x)
 
 qgis_result_stderr(x)
@@ -30,7 +36,15 @@ qgis_result_args(x)
 \item{which}{The name or index of an output.}
 
 \item{default}{A default value if the output does not exist.}
+
+\item{what}{Character vector of classes.
+At least one class must be inherited by an element of \code{x} for that element
+to be selected.}
 }
 \description{
 Access algorithm results
+}
+\details{
+\code{qgis_result_single()} tries to extract the single most useful element
+from a \code{qgis_result} object.
 }

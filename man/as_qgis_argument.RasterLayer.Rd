@@ -13,9 +13,9 @@
 \alias{qgis_as_brick.qgis_result}
 \title{Convert raster objects to/from QGIS inputs/outputs}
 \usage{
-\method{as_qgis_argument}{RasterLayer}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{RasterLayer}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
-\method{as_qgis_argument}{RasterBrick}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{RasterBrick}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
 qgis_as_raster(output, ...)
 
@@ -39,6 +39,9 @@ qgis_as_brick(output, ...)
 \item{spec}{A \code{list()} with values for \code{algorithm}, \code{name},
 \code{description}, and \code{qgis_type}. See \code{\link[=qgis_argument_spec]{qgis_argument_spec()}} to
 create a blank \code{spec} for testing.}
+
+\item{use_json_input}{TRUE if the arguments will be
+serialized as JSON instead of serialized as a command-line argument.}
 
 \item{output}{The result from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} or \code{\link[=qgis_output]{qgis_output()}}.}
 

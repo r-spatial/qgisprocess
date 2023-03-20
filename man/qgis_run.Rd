@@ -7,12 +7,10 @@
 \alias{qgis_configure}
 \alias{qgis_unconfigure}
 \alias{qgis_version}
-\alias{qgis_algorithms}
 \alias{qgis_path}
-\alias{qgis_query_path}
+\alias{qgis_use_json_output}
+\alias{qgis_use_json_input}
 \alias{qgis_env}
-\alias{qgis_query_version}
-\alias{qgis_query_algorithms}
 \title{Configure and run 'qgis_process'}
 \usage{
 qgis_run(args = character(), ..., env = qgis_env(), path = qgis_path())
@@ -21,23 +19,19 @@ has_qgis()
 
 assert_qgis(action = abort)
 
-qgis_configure(quiet = FALSE)
+qgis_configure(quiet = FALSE, use_cached_data = FALSE)
 
 qgis_unconfigure()
 
-qgis_version(query = FALSE, quiet = TRUE)
-
-qgis_algorithms(query = FALSE, quiet = TRUE)
+qgis_version(query = FALSE, quiet = TRUE, debug = FALSE)
 
 qgis_path(query = FALSE, quiet = TRUE)
 
-qgis_query_path(quiet = FALSE)
+qgis_use_json_output(query = FALSE, quiet = TRUE)
+
+qgis_use_json_input()
 
 qgis_env()
-
-qgis_query_version(quiet = FALSE)
-
-qgis_query_algorithms(quiet = FALSE)
 }
 \arguments{
 \item{args}{Command-line arguments}
@@ -54,15 +48,42 @@ found.}
 \item{quiet}{Use \code{FALSE} to display more information about the command, possibly
 useful for debugging.}
 
+\item{use_cached_data}{Use the cached algorithm list and \code{path} found when
+configuring qgisprocess during the last session. This saves some time
+loading the package.}
+
 \item{query}{Use \code{TRUE} to refresh the cached value.}
+
+\item{debug}{Logical.
+If \code{TRUE}, also output the version of QGIS, the operating system and all
+relevant libraries, as reported by the 'qgis_process' command.}
 }
 \value{
 The result of \code{\link[processx:run]{processx::run()}}.
 }
 \description{
+Run \code{qgis_configure()} to bring the package configuration in line with
+QGIS and to save this configuration to a persistent cache.
+See the \emph{Details} section for more information about setting the path of
+the 'qgis_process' command line tool.
+\code{qgis_run()} is meant for directly calling this tool, but should normally not
+be needed.
+}
+\details{
 The qgisprocess package is a wapper around the 'qgis_process' command line
-tool distributed with QGIS (>=3.14). These functions use heuristics to
-detect the location of the 'qgis_process' executable. If the configuration
+tool distributed with QGIS (>=3.14). Several functions use heuristics to
+detect the location of the 'qgis_process' executable.
+
+When loading the package, the configuration is automatically read from the
+cache with \code{qgis_configure(use_cached_data = TRUE, quiet = TRUE)} in order
+to save time.
+Run \code{qgis_configure(use_cached_data = TRUE)} manually to get more details.
+
+Use \code{qgis_algorithms()}, \code{qgis_providers()}, \code{qgis_plugins()},
+\code{qgis_use_json_output()}, \code{qgis_path()} and \code{qgis_version()} to inspect cache
+contents.
+
+If the configuration
 fails or you have more than one QGIS installation, you can set
 \code{options(qgisprocess.path = "path/to/qgis_process")} or the
 \code{R_QGISPROCESS_PATH} environment variable (useful on CI). On Linux the
@@ -76,6 +97,9 @@ OSGeo4W(64)/bin.
 if (has_qgis()) qgis_path()
 if (has_qgis()) qgis_version()
 if (has_qgis()) qgis_algorithms()
+if (has_qgis()) qgis_providers()
+if (has_qgis()) qgis_plugins()
+qgis_configure(use_cached_data = TRUE)
 qgis_configure()
 
 }

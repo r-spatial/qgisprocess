@@ -7,13 +7,31 @@ Authors@R: c(
              role = c("aut", "cre"),
              email = "dewey@fishandwhistle.net",
              comment = c(ORCID = "0000-0002-9415-4582")),
+      person(given = "Floris",
+             family = "Vanderhaeghe",
+             role = c("aut"),
+             email = "floris.vanderhaeghe@inbo.be",
+             comment = c(ORCID = "0000-0002-6378-6229")),
+      person(given = "Jan",
+             family = "Caha",
+             role = c("aut"),
+             email = "jan.caha@outlook.com",
+             comment = c(ORCID = "0000-0003-0165-0606")),
+      person(given = "Antony",
+             family = "Barja",
+             role = c("ctb"),
+             email = "antony.barja8@gmail.com",
+             comment = c(ORCID = "0000-0001-5921-2858")),
       person(given = "Robin",
              family = "Lovelace",
              role = c("ctb"),
+             email = "rob00x@gmail.com",
              comment = c(ORCID = "0000-0001-5679-6536")),
-      person(given = "Jan",
-             family = "Caha",
-             role = c("aut"))
+      person(given = "Jakub",
+             family = "Nowosad",
+             role = c("ctb"),
+             email = "nowosad.jakub@gmail.com",
+             comment = c(ORCID = "0000-0002-1057-3721"))
     )
 Description: Provides seamless access to the 'QGIS' <https://qgis.org/>
   processing toolbox using the 'qgis_process' command-line utility.
@@ -21,30 +39,29 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 Imports: 
-    processx,
+    assertthat,
+    processx (>= 3.5.2),
     stringr,
     withr,
     glue,
     tibble,
     rlang,
-    vctrs
+    vctrs,
+    jsonlite,
+    rappdirs,
+    stats
 URL: https://github.com/paleolimbot/qgisprocess
 BugReports: https://github.com/paleolimbot/qgisprocess/issues
 Suggests: 
-    covr,
-    fs,
-    knitr,
-    mapview,
-    raster,
-    rgdal,
-    spDataLarge,
+    testthat,
     sf,
+    raster,
     stars,
     terra,
-    testthat
-Remotes:
-    nowosad/spDataLarge
-VignetteBuilder: knitr
+    knitr,
+    rmarkdown,
+    stringi
 SystemRequirements: QGIS (>= 3.16). OSGeo4W is recommended for Windows users. 
+VignetteBuilder: knitr

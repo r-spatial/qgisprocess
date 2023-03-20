@@ -1,4 +1,3 @@
-
 #' Convert raster objects to/from QGIS inputs/outputs
 #'
 #' @param x A [raster::raster()] or [raster::brick()].
@@ -8,17 +7,18 @@
 #'
 #' @export
 #'
-as_qgis_argument.RasterLayer <- function(x, spec = qgis_argument_spec()) {
-  as_qgis_argument_raster(x, spec)
+as_qgis_argument.RasterLayer <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
+  as_qgis_argument_raster(x, spec, use_json_input)
 }
 
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
-as_qgis_argument.RasterBrick <- function(x, spec = qgis_argument_spec()) {
-  as_qgis_argument_raster(x, spec)
+as_qgis_argument.RasterBrick <- function(x, spec = qgis_argument_spec(),
+                                         use_json_input = FALSE) {
+  as_qgis_argument_raster(x, spec, use_json_input)
 }
 
-as_qgis_argument_raster <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument_raster <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("raster", "layer", "multilayer"))) {
     abort(glue("Can't convert '{ class(x)[1] }' object to QGIS type '{ spec$qgis_type }'"))
   }
@@ -75,31 +75,19 @@ qgis_as_brick.qgis_outputLayer <- function(output, ...) {
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
 qgis_as_raster.qgis_result <- function(output, ...) {
-  # find the first raster output and read it
-  for (result in output) {
-    if (inherits(result, "qgis_outputRaster") || inherits(result, "qgis_outputLayer")) {
-      return(raster::raster(unclass(result), ...))
-    }
-  }
-
-  abort("Can't extract raster from result: zero outputs of type 'outputRaster' or 'outputLayer'.")
+  result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  raster::raster(unclass(result), ...)
 }
 
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
 qgis_as_brick.qgis_result <- function(output, ...) {
-  # find the first raster output and read it
-  for (result in output) {
-    if (inherits(result, "qgis_outputRaster") || inherits(result, "qgis_outputLayer")) {
-      return(raster::brick(unclass(result), ...))
-    }
-  }
-
-  abort("Can't extract brick from result: zero outputs of type 'outputRaster' or 'outputLayer'.")
+  result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  raster::brick(unclass(result), ...)
 }
 
 #' @export
-as_qgis_argument.CRS <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.CRS <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("crs"))) {
     abort(glue("Can't convert 'crs' object to QGIS type '{ spec$qgis_type }'"))
   }
@@ -108,7 +96,7 @@ as_qgis_argument.CRS <- function(x, spec = qgis_argument_spec()) {
 }
 
 #' @export
-as_qgis_argument.Extent <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument.Extent <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("extent"))) {
     abort(glue("Can't convert 'Extent' object to QGIS type '{ spec$qgis_type }'"))
   }

@@ -4,9 +4,10 @@ on:
   push:
     branches:
       - master
+      - main
   pull_request:
-    branches:
-      - master
+  schedule:
+    - cron:  '0 3 * * 4'
 
 name: R-CMD-check
 
@@ -18,38 +19,56 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest, qgis: 'none', r: 'release'}
-          - {os: macOS-latest, qgis: 'macos-brew', r: 'release'}
-          - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release'}
-          - {os: ubuntu-20.04, qgis: 'ubuntu-nightly', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04, qgis: 'ubuntu', r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: macOS-latest, qgis: 'none', r: 'release', r-pkg-cache: 'v0'}
+          - {os: macOS-latest, qgis: 'macos-brew', r: 'release', r-pkg-cache: 'v0'}
+          - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release', r-pkg-cache: 'v0'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'release', r-pkg-cache: 'v0'}
+          - {os: ubuntu-22.04, qgis: 'ubuntugis', r: 'release', r-pkg-cache: 'v1'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', r-pkg-cache: 'v0'}
 
     env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@master
+      - uses: actions/checkout@v3
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
-      - uses: r-lib/actions/setup-pandoc@master
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+          use-public-rspm: true
 
-      - name: Install QGIS (Ubuntu Nightly)
+      - name: Install QGIS (Ubuntu Nightly QGIS repo + possibly older GRASS from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu-nightly'
         run: |
-          wget -qO - https://qgis.org/downloads/qgis-2020.gpg.key | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import || true
-          sudo chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
-          sudo add-apt-repository "deb https://qgis.org/ubuntu-nightly `lsb_release -c -s` main"
+          # Setup QGIS from Ubuntu Nightly
+          sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
+          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu-nightly `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
 
-      - name: Install QGIS (Ubuntu)
+      - name: Install QGIS (Ubuntugis QGIS repo + ubuntugis-unstable PPA, which has the current GRASS release)
+        if: matrix.config.qgis == 'ubuntugis'
+        run: |
+          # Setup QGIS from Ubuntugis
+          sudo mkdir -p /root/.gnupg
+          sudo chmod 700 /root/.gnupg
+          sudo gpg --no-default-keyring --keyring /etc/apt/keyrings/ubuntugis-unstable-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6B827C12C2D425E227EDCA75089EBE08314DF160
+          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/ubuntugis-unstable-archive-keyring.gpg] http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/ubuntugis-unstable.list'
+          sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
+          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntugis `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
+          sudo apt-get update
+          sudo apt-get install -y qgis qgis-plugin-grass saga
+
+      - name: Install QGIS (Ubuntu QGIS repo + possibly older GRASS from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu'
         run: |
-          wget -qO - https://qgis.org/downloads/qgis-2020.gpg.key | sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import || true
-          sudo chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg
-          sudo add-apt-repository "deb https://qgis.org/ubuntu `lsb_release -c -s` main"
+          # Setup QGIS from Ubuntu
+          sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
+          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
 
@@ -64,57 +83,97 @@ jobs:
       - name: Install QGIS (MacOS nightly)
         if: matrix.config.qgis == 'macos-nightly'
         run: |
+          # Setup QGIS from MacOS nightly
           curl https://qgis.org/downloads/macos/qgis-macos-nightly.dmg --output qgis-macos-nightly.dmg
           yes | hdiutil attach -nobrowse -noverify -mountpoint qgis qgis-macos-nightly.dmg > /dev/null
           sudo cp -R qgis/QGIS.app /Applications
 
       - name: Install QGIS (Windows chocolatey)
         if: matrix.config.qgis == 'windows-chocolatey'
-        uses: crazy-max/ghaction-chocolatey@v1
+        uses: crazy-max/ghaction-chocolatey@v2
         with:
           args: install qgis
 
-      - name: Query dependencies
+      - name: Query R dependencies and report available versions
+        id: query
         run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+          # Query R dependencies and report available versions
+          cat("::group::Install pak\n")
+          install.packages("pak", repos = "https://r-lib.github.io/p/pak/stable/")
+          cat("::endgroup::\n")
+          cat("::group::Create minimal data frame with pkg deps and store them\n")
+          depends <- pak::pkg_deps(c("deps::.", "any::sessioninfo", "any::rcmdcheck"), dependencies = c("Config/Needs/check", "all"))[, c("ref", "version")]
+          depends <- depends[depends$ref != "deps::.", ]
+          saveRDS(depends, ".github/depends.Rds")
+          cat("::endgroup::\n")
+          cat("::group::Store R-version\n")
+          cat("r-version=", sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep = "", append = TRUE)
+          cat("::endgroup::\n")
+          cat("::group::Print results\n")
+          cat("R version:", sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), "\n")
+          print(as.data.frame(depends), row.names = FALSE)
+          cat("::endgroup::\n")
         shell: Rscript {0}
 
-      - name: Cache R packages
-        if: runner.os != 'Windows'
-        uses: actions/cache@v2
+      - name: Restore (or define new) R package cache
+        uses: actions/cache@v3
         with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+          path: |
+            ${{ env.R_LIBS_USER }}/*
+            !${{ env.R_LIBS_USER }}/pak
+          key: ${{ matrix.config.os }}-${{ steps.query.outputs.r-version }}-${{ matrix.config.r-pkg-cache }}-${{ hashFiles('.github/depends.Rds') }}
 
-      - name: Install system dependencies
-        if: runner.os == 'Linux'
+      - name: Install missing package dependencies
         run: |
-          while read -r cmd
-          do
-            eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
-
-      - name: Install dependencies
-        run: |
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("rcmdcheck")
+          # Install missing package dependencies
+          cat("::group::Install\n")
+          pak::pkg_install(c("deps::.", "any::sessioninfo", "any::rcmdcheck"), upgrade = FALSE, dependencies = c("Config/Needs/check", "all"))
+          # This is based on the minimum needed version, not the hash of what is available at RSPM
+          cat("::endgroup::\n")
+          cat("::group::Session info\n")
+          sessioninfo::session_info(pkgs = "installed", include_base = TRUE)
+          cat("::endgroup::\n")
         shell: Rscript {0}
 
-      - name: Check
-        env:
-          _R_CHECK_CRAN_INCOMING_REMOTE_: false
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
+      # raster, sf, terra and lwgeom from RSPM use older sysdeps than ubuntugis
+      - name: In the ubuntugis job, reinstall some pkgs from source if needed
+        if: matrix.config.qgis == 'ubuntugis'
+        run: |
+          # Rebuild and install sf, terra etc. if the RSPM binaries (or cached pkgs) don't load
+          cat("::group::sf\n")
+          if (!requireNamespace("sf", quietly = TRUE)) {
+            install.packages("sf", repos = "https://cloud.r-project.org")
+          }
+          cat("::endgroup::\n")
+          cat("::group::terra\n")
+          if (!requireNamespace("terra", quietly = TRUE)) {
+            install.packages("terra", repos = "https://cloud.r-project.org")
+          }
+          cat("::endgroup::\n")
+          cat("::group::raster\n")
+          if (!requireNamespace("raster", quietly = TRUE)) {
+            install.packages("raster", repos = "https://cloud.r-project.org")
+          }
+          cat("::endgroup::\n")
+          cat("::group::lwgeom (needed by stars)\n")
+          if (!requireNamespace("lwgeom", quietly = TRUE)) {  # needed for stars
+            install.packages("lwgeom", repos = "https://cloud.r-project.org")
+          }
+          cat("::endgroup::\n")
+          cat("::group::Session info\n")
+          sessioninfo::session_info(pkgs = "installed", include_base = TRUE)
+          cat("::endgroup::\n")
         shell: Rscript {0}
+
+      - uses: r-lib/actions/check-r-package@v2
 
       # run with CMD check because installing QGIS is expensive
       - name: Test Coverage
-        if: matrix.config.qgis == 'macos-brew'
+        if: matrix.config.qgis == 'ubuntu'
         run: |
+          # Setup code coverage with Codecov
           install.packages("covr")
-          covr::codecov()
+          covr::codecov(quiet = FALSE)
         shell: Rscript {0}
 
       - name: Show testthat output
@@ -129,7 +188,7 @@ jobs:
 
       - name: Upload check results
         if: failure()
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v3
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-${{ matrix.config.qgis }}-results
+          name: ${{ matrix.config.os }}_r-${{ matrix.config.r }}_qgis-${{ matrix.config.qgis }}_results
           path: check

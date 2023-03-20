@@ -1,4 +1,3 @@
-
 test_that("stars argument coercers work", {
   skip_if_not_installed("stars")
 
@@ -12,7 +11,7 @@ test_that("stars argument coercers work", {
     suppressWarnings(as_qgis_argument(obj, qgis_argument_spec(qgis_type = "layer"))),
     "\\.tif$"
   )
-  expect_is(tmp_file, "qgis_tempfile_arg")
+  expect_s3_class(tmp_file, "qgis_tempfile_arg")
   unlink(tmp_file)
 
   # also check stars_proxy
@@ -21,8 +20,8 @@ test_that("stars argument coercers work", {
     proxy = TRUE
   )
   expect_equal(
-    fs::path_abs(as_qgis_argument(obj, qgis_argument_spec(qgis_type = "layer"))),
-    fs::path_abs(system.file("longlake/longlake.tif", package = "qgisprocess"))
+    normalizePath(as_qgis_argument(obj, qgis_argument_spec(qgis_type = "layer"))),
+    normalizePath(system.file("longlake/longlake.tif", package = "qgisprocess"))
   )
 })
 
@@ -30,7 +29,7 @@ test_that("stars argument coercers work", {
 test_that("stars result coercers work", {
   skip_if_not_installed("stars")
 
-  expect_is(
+  expect_s3_class(
     stars::st_as_stars(
       structure(
         system.file("longlake/longlake.tif", package = "qgisprocess"),
@@ -40,7 +39,7 @@ test_that("stars result coercers work", {
     "stars"
   )
 
-  expect_is(
+  expect_s3_class(
     stars::st_as_stars(
       structure(
         system.file("longlake/longlake.tif", package = "qgisprocess"),
@@ -50,7 +49,7 @@ test_that("stars result coercers work", {
     "stars"
   )
 
-  expect_is(
+  expect_s3_class(
     stars::st_as_stars(
       structure(
         list(

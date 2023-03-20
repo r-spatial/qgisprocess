@@ -1,4 +1,3 @@
-
 #' Convert raster objects to/from QGIS inputs/outputs
 #'
 #' @param x A stars or stars_proxy object.
@@ -6,17 +5,19 @@
 #'
 #' @export
 #'
-as_qgis_argument.stars <- function(x, spec = qgis_argument_spec()) {
-  as_qgis_argument_stars(x, spec)
+as_qgis_argument.stars <- function(x, spec = qgis_argument_spec(),
+                                   use_json_input = FALSE) {
+  as_qgis_argument_stars(x, spec, use_json_input)
 }
 
 #' @rdname as_qgis_argument.stars
 #' @export
-as_qgis_argument.stars_proxy <- function(x, spec = qgis_argument_spec()) {
-  as_qgis_argument_stars(x, spec)
+as_qgis_argument.stars_proxy <- function(x, spec = qgis_argument_spec(),
+                                         use_json_input = FALSE) {
+  as_qgis_argument_stars(x, spec, use_json_input)
 }
 
-as_qgis_argument_stars <- function(x, spec = qgis_argument_spec()) {
+as_qgis_argument_stars <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("raster", "layer", "multilayer"))) {
     abort(glue("Can't convert '{ class(x)[1] }' object to QGIS type '{ spec$qgis_type }'"))
   }
@@ -47,12 +48,6 @@ st_as_stars.qgis_outputLayer <- function(output, ...) {
 
 # dynamically registered in zzz.R
 st_as_stars.qgis_result <- function(output, ...) {
-  # find the first raster output and read it
-  for (result in output) {
-    if (inherits(result, "qgis_outputRaster") || inherits(result, "qgis_outputLayer")) {
-      return(stars::read_stars(unclass(result), ...))
-    }
-  }
-
-  abort("Can't extract 'stars' raster from result: zero outputs of type 'outputRaster' or 'outputLayer'.")
+  result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  stars::read_stars(unclass(result), ...)
 }

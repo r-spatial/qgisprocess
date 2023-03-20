@@ -5,9 +5,9 @@
 \alias{as_qgis_argument.stars_proxy}
 \title{Convert raster objects to/from QGIS inputs/outputs}
 \usage{
-\method{as_qgis_argument}{stars}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{stars}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 
-\method{as_qgis_argument}{stars_proxy}(x, spec = qgis_argument_spec())
+\method{as_qgis_argument}{stars_proxy}(x, spec = qgis_argument_spec(), use_json_input = FALSE)
 }
 \arguments{
 \item{x}{A stars or stars_proxy object.}
@@ -15,6 +15,9 @@
 \item{spec}{A \code{list()} with values for \code{algorithm}, \code{name},
 \code{description}, and \code{qgis_type}. See \code{\link[=qgis_argument_spec]{qgis_argument_spec()}} to
 create a blank \code{spec} for testing.}
+
+\item{use_json_input}{TRUE if the arguments will be
+serialized as JSON instead of serialized as a command-line argument.}
 }
 \description{
 Convert raster objects to/from QGIS inputs/outputs

@@ -1,4 +1,3 @@
-
 test_that("characters are not incorrectly re-encoded from output", {
   skip_if_not(has_qgis())
 
@@ -37,13 +36,16 @@ test_that("output parsing for string, numeric, and classed types works", {
   )
 
   # string and numeric args should have no class
-  expect_is(result$CRS_AUTHID, "character")
-  expect_identical(class(result$CRS_AUTHID), "character")
-  expect_is(result$HEIGHT_IN_PIXELS, "numeric")
-  expect_identical(class(result$HEIGHT_IN_PIXELS), "numeric")
+  expect_true(is.character(result$EXTENT))
+  expect_identical(attr(result$EXTENT, "class"), NULL)
+  expect_true(is.numeric(result$HEIGHT_IN_PIXELS))
+  expect_identical(attr(result$HEIGHT_IN_PIXELS, "class"), NULL)
+
+  # na not null for string
+  # expect_identical(result$CRS_AUTHID, NA_character_)
 
   # vector outputs should have a class
-  expect_is(result$OUTPUT_TABLE, "qgis_outputVector")
+  expect_s3_class(result$OUTPUT_TABLE, "qgis_outputVector")
 
   result$OUTPUT_TABLE
 })
@@ -77,5 +79,5 @@ test_that("output parsing for multilayer outputs works", {
 
   expect_true(dir.exists(result$OUTPUT))
   expect_identical(length(list.files(result$OUTPUT)), length(result$OUTPUT_LAYERS))
-  expect_is(result$OUTPUT_LAYERS, "qgis_outputMultilayer")
+  expect_s3_class(result$OUTPUT_LAYERS, "qgis_outputMultilayer")
 })
