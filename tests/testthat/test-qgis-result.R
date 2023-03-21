@@ -40,6 +40,10 @@ test_that("qgis_result_*() functions work", {
     qgis_result_single(result, "qgis_outputVector"),
     result$OUTPUT
   )
+  expect_identical(
+    qgis_result_single(result),
+    result$OUTPUT
+  )
 
   result$.processx_result$stdout <- ""
   expect_error(qgis_check_stdout(result), "output could not be captured")
