@@ -17,6 +17,7 @@ is_qgis_result <- function(x) {
   inherits(x, "qgis_result")
 }
 
+
 #' @rdname is_qgis_result
 #' @export
 qgis_result_clean <- function(x) {
@@ -25,17 +26,66 @@ qgis_result_clean <- function(x) {
   invisible(x)
 }
 
+
 #' @rdname is_qgis_result
 #' @export
-qgis_output <- function(x, which, default = qgis_error_output_does_not_exist(x, which)) {
-  if (is.numeric(which) && (which %in% seq_along(x))) {
-    x[[which]]
-  } else if (which %in% names(x)) {
+#'
+qgis_extract_output_by_name <- function(x, which = "OUTPUT") {
+  if (which %in% names(x)) {
     x[[which]]
   } else {
-    default
+    abort(
+      qgis_error_output_does_not_exist(x, which)
+    )
   }
 }
+
+
+#' @rdname is_qgis_result
+#' @export
+#'
+qgis_extract_output_by_position <- function(x, which) {
+  if (is.numeric(which) && (which %in% seq_along(x))) {
+    x[[which]]
+  } else {
+    abort(
+      qgis_error_output_does_not_exist(x, which)
+    )
+  }
+}
+
+
+#' @rdname is_qgis_result
+#' @export
+qgis_extract_output_by_class <- function(x, what) {
+  # Limit result to elements that match class
+  x <- x[vapply(x, inherits, what, FUN.VALUE = logical(1))]
+  if (length(x) == 0L) {
+    abort(
+      paste(
+        "Can't extract object from result: zero outputs of type",
+        paste(what, collapse = " or ")
+      )
+    )
+  }
+
+  # By default, take the first element named as output or OUTPUT.
+  # Otherwise, take the first element that matches class.
+  result <- x[grepl("^(output|OUTPUT)$", names(x))][1][[1]]
+  if (is.null(result)) result <- x[[1]]
+  result
+}
+
+
+#' @rdname is_qgis_result
+#' @export
+qgis_result_single <- function(x) {
+  # Limit result to elements that match class
+  result <- x[grepl("^(output|OUTPUT)$", names(x))][1][[1]]
+  if (is.null(result)) result <- x[[1]]
+  result
+}
+
 
 #' @rdname is_qgis_result
 #' @export
@@ -60,31 +110,6 @@ qgis_check_stdout <- function(x) {
     )
   }
 }
-
-
-#' @rdname is_qgis_result
-#' @export
-qgis_result_single <- function(x, what) {
-  # Limit result to elements that match class
-  if (!missing(what)) {
-    x <- x[vapply(x, inherits, what, FUN.VALUE = logical(1))]
-    if (length(x) == 0L) {
-      abort(
-        paste(
-          "Can't extract object from result: zero outputs of type",
-          paste(what, collapse = " or ")
-        )
-      )
-    }
-  }
-
-  # By default, take the first element named as output or OUTPUT.
-  # Otherwise, take the first element that matches class.
-  result <- x[grepl("^(output|OUTPUT)$", names(x))][1][[1]]
-  if (is.null(result)) result <- x[[1]]
-  result
-}
-
 
 
 #' @rdname is_qgis_result
