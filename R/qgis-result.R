@@ -66,14 +66,16 @@ qgis_check_stdout <- function(x) {
 #' @export
 qgis_result_single <- function(x, what) {
   # Limit result to elements that match class
-  x <- x[vapply(x, inherits, what, FUN.VALUE = logical(1))]
-  if (length(x) == 0L) {
-    abort(
-      paste(
-        "Can't extract object from result: zero outputs of type",
-        paste(what, collapse = " or ")
+  if (!missing(what)) {
+    x <- x[vapply(x, inherits, what, FUN.VALUE = logical(1))]
+    if (length(x) == 0L) {
+      abort(
+        paste(
+          "Can't extract object from result: zero outputs of type",
+          paste(what, collapse = " or ")
+        )
       )
-    )
+    }
   }
 
   # By default, take the first element named as output or OUTPUT.
