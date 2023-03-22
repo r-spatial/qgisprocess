@@ -416,6 +416,10 @@ qgis_version <- function(query = FALSE, quiet = TRUE, debug = FALSE) {
   }
 
   if (debug) {
+    if (package_version(strsplit(qgis_version(), "-")[[1]][1]) < "3.22.0") {
+      warning("'debug = TRUE' is not supported for QGIS versions < 3.22")
+      return(qgisprocess_cache$version)
+    }
     print(qgisprocess_cache$version)
     message()
     message("Versions reported by 'qgis_process':")
