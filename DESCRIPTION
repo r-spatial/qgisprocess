@@ -1,5 +1,5 @@
 Package: qgisprocess
-Title: Use 'QGIS' Processing Algorithms
+Title: Using QGIS Processing Algorithms from R
 Version: 0.0.0.9000
 Authors@R: c(
       person(given = "Dewey",
@@ -33,8 +33,11 @@ Authors@R: c(
              email = "nowosad.jakub@gmail.com",
              comment = c(ORCID = "0000-0002-1057-3721"))
     )
-Description: Provides seamless access to the 'QGIS' <https://qgis.org/>
+Description: Provides seamless access to the QGIS <https://qgis.org/>
   processing toolbox using the 'qgis_process' command-line utility.
+  Both native and third-party (plugin) processing providers are supported.
+  Beside referring data sources from file, also common R-objects like sf, terra
+  and stars objects are supported.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
