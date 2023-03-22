@@ -1,0 +1,45 @@
+---
+title: "How to use QGIS expressions with reference to other layers?"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How to use QGIS expressions with reference to other layers?}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(qgisprocess)
+```
+
+In many QGIS processing algorithms, the possibility exists to make use of QGIS expressions.
+This can happen in two situations:
+
+- the expected value of an algorithm argument is a QGIS expression string.
+In the QGIS processing dialog, this is typically marked by a button that opens the QGIS expression builder (e.g. in `native:extractbyexpression`), or by a directly integrated QGIS expression builder (e.g. in `native:fieldcalculator`).
+
+  Such arguments are of type `expression`, as seen in the output of `qgis_arguments()`.
+  
+```{r}
+qgis_arguments("native:fieldcalculator") |> subset(name == "FORMULA")
+```
+
+- sometimes an algorithm argument is usually a fixed (numeric or boolean) value, but it can _also_ refer to the value of another field or the result of an expression: so-called _data-defined_ overriding.
+In the QGIS processing dialog, such arguments have a 'data-defined override' button.
+
+```{r}
+qgis_arguments("native:buffer") |> 
+  subset(name == "DISTANCE") |> 
+  dplyr::select(name, qgis_type, acceptable_values) |> 
+  tidyr::unnest(cols = acceptable_values) |> 
+  as.data.frame()
+```
+
+
+
