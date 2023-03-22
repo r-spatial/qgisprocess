@@ -55,7 +55,7 @@
 
       <ul class="navbar-nav">
 <li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/paleolimbot/qgisprocess" aria-label="GitHub">
+  <a class="external-link nav-link" href="https://github.com/r-spatial/qgisprocess" aria-label="GitHub">
     <span class="fa fa-github"></span>
      
   </a>
@@ -80,11 +80,11 @@
 <p>You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"paleolimbot/qgisprocess"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-spatial/qgisprocess"</span><span class="op">)</span></span></code></pre></div>
 <p>The qgisprocess package wraps the <code>qgis_process</code> command-line utility, which is available in QGIS &gt;= <a href="https://github.com/qgis/QGIS/releases/tag/final-3_14_16" class="external-link">3.14.16</a>, <a href="https://qgis.org/en/site/getinvolved/development/roadmap.html" class="external-link">released</a> in September 2020. MacOS users will have to install QIGS &gt;= 3.16; download instructions for all platforms are available at <a href="https://download.qgis.org/" class="external-link uri">https://download.qgis.org/</a>. If a recent version of QGIS isn’t available for your OS, you can use one of the <a href="https://github.com/geocompr/docker" class="external-link">Geocomputation with R Docker images</a> with QGIS installed.</p>
 <p>If the automatic configuration fails (or if you have more than one installation and would like to choose which one is used by qgisprocess), you can set <code>options(qgisprocess.path = "path/to/qgis_process")</code>, possibly in your <code>.Rprofile</code> to persist between sessions. You can run <code><a href="reference/qgis_run.html">qgis_configure()</a></code> to print the gritty details!</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paleolimbot/qgisprocess" class="external-link">qgisprocess</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/qgisprocess" class="external-link">qgisprocess</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using 'qgis_process' at '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'.</span></span>
 <span><span class="co">#&gt; Run `qgis_configure()` for details.</span></span>
 <span><span class="fu"><a href="reference/qgis_run.html">qgis_configure</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -231,8 +231,8 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/paleolimbot/qgisprocess/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/paleolimbot/qgisprocess/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/r-spatial/qgisprocess/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/r-spatial/qgisprocess/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -254,8 +254,8 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Dewey Dunnington <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-9415-4582" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Floris Vanderhaeghe <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-6378-6229" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Dewey Dunnington <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-9415-4582" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Floris Vanderhaeghe <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6378-6229" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Jan Caha <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-0165-0606" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
@@ -264,9 +264,9 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/paleolimbot/qgisprocess/actions" class="external-link"><img src="https://github.com/paleolimbot/qgisprocess/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://github.com/r-spatial/qgisprocess/actions" class="external-link"><img src="https://github.com/r-spatial/qgisprocess/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://codecov.io/gh/paleolimbot/qgisprocess?branch=main" class="external-link"><img src="https://codecov.io/gh/paleolimbot/qgisprocess/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://codecov.io/gh/r-spatial/qgisprocess?branch=main" class="external-link"><img src="https://codecov.io/gh/r-spatial/qgisprocess/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 
