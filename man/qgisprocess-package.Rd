@@ -11,17 +11,17 @@ Provides seamless access to the 'QGIS' \url{https://qgis.org/} processing toolbo
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/paleolimbot/qgisprocess}
-  \item Report bugs at \url{https://github.com/paleolimbot/qgisprocess/issues}
+  \item \url{https://github.com/r-spatial/qgisprocess}
+  \item Report bugs at \url{https://github.com/r-spatial/qgisprocess/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Dewey Dunnington \email{dewey@fishandwhistle.net} (\href{https://orcid.org/0000-0002-9415-4582}{ORCID})
+\strong{Maintainer}: Floris Vanderhaeghe \email{floris.vanderhaeghe@inbo.be} (\href{https://orcid.org/0000-0002-6378-6229}{ORCID})
 
 Authors:
 \itemize{
-  \item Floris Vanderhaeghe \email{floris.vanderhaeghe@inbo.be} (\href{https://orcid.org/0000-0002-6378-6229}{ORCID})
+  \item Dewey Dunnington \email{dewey@fishandwhistle.net} (\href{https://orcid.org/0000-0002-9415-4582}{ORCID})
   \item Jan Caha \email{jan.caha@outlook.com} (\href{https://orcid.org/0000-0003-0165-0606}{ORCID})
 }
 

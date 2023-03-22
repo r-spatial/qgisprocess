@@ -4,12 +4,12 @@ Version: 0.0.0.9000
 Authors@R: c(
       person(given = "Dewey",
              family = "Dunnington",
-             role = c("aut", "cre"),
+             role = c("aut"),
              email = "dewey@fishandwhistle.net",
              comment = c(ORCID = "0000-0002-9415-4582")),
       person(given = "Floris",
              family = "Vanderhaeghe",
-             role = c("aut"),
+             role = c("aut", "cre"),
              email = "floris.vanderhaeghe@inbo.be",
              comment = c(ORCID = "0000-0002-6378-6229")),
       person(given = "Jan",
@@ -52,8 +52,8 @@ Imports:
     jsonlite,
     rappdirs,
     stats
-URL: https://github.com/paleolimbot/qgisprocess
-BugReports: https://github.com/paleolimbot/qgisprocess/issues
+URL: https://github.com/r-spatial/qgisprocess
+BugReports: https://github.com/r-spatial/qgisprocess/issues
 Suggests: 
     testthat,
     sf,
