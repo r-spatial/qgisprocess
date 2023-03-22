@@ -63,5 +63,6 @@ Suggests:
     knitr,
     rmarkdown,
     stringi
-SystemRequirements: QGIS (>= 3.16). OSGeo4W is recommended for Windows users. 
+SystemRequirements: QGIS latest or long-term release (>= 3.28). Older QGIS 
+  releases are not officially supported, but may work since QGIS 3.16.
 VignetteBuilder: knitr
