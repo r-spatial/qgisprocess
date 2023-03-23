@@ -94,7 +94,7 @@ This tells us that we can also use the third-party providers GDAL, SAGA and GRAS
 To find out about the available (cached) geoalgorithms, run:
 
 ```{r algs}
-algs = qgis_algorithms()
+algs <- qgis_algorithms()
 algs
 ```
 
@@ -125,8 +125,8 @@ And finally run it:
 
 ```{r buffer}
 data("random_points", package = "spDataLarge")
-out = qgis_run_algorithm("native:buffer", INPUT = random_points, DISTANCE = 50,
-                         .quiet = TRUE)
+out <- qgis_run_algorithm("native:buffer", INPUT = random_points, DISTANCE = 50,
+                          .quiet = TRUE)
 # if needed, first install spDataLarge:
 # remotes::install_github("Nowosad/spDataLarge")
 ```
@@ -153,9 +153,9 @@ library("sf")
 library("mapview")
 # attach QGIS output
 # either do it "manually":
-buf = read_sf(out$OUTPUT[1])
+buf <- read_sf(out$OUTPUT[1])
 # or use the st_as_sf.qgis_result method:
-buf = sf::st_as_sf(out)
+buf <- sf::st_as_sf(out)
 # plot your result
 mapview(buf, col.regions = "blue") + 
   mapview(random_points, col.regions = "red", cex = 3)
@@ -166,9 +166,9 @@ So using our buffer example from above, we could also run:
 
 ```{r function-creation, eval=FALSE}
 # create a function
-qgis_buffer = qgis_function("native:buffer")
+qgis_buffer <- qgis_function("native:buffer")
 # run the function
-out = qgis_buffer(INPUT = random_points, DISTANCE = 50)
+out <- qgis_buffer(INPUT = random_points, DISTANCE = 50)
 ```
 
 ## Second example
@@ -199,11 +199,11 @@ Now let us calculate the terrain attributes.
 ```{r slopeaspect, message=FALSE}
 library("terra")
 # attach digital elevation model from Mt. Mongón (Peru)
-dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
+dem <- rast(system.file("raster/dem.tif", package = "spDataLarge"))
 
-info = qgis_run_algorithm(alg = "grass7:r.slope.aspect",
-                          elevation = dem, 
-                          .quiet = TRUE)
+info <- qgis_run_algorithm(alg = "grass7:r.slope.aspect",
+                           elevation = dem, 
+                           .quiet = TRUE)
 ```
 
 Just printing the `info` object shows which output objects have been made:
@@ -216,13 +216,13 @@ Combine these output rasters as a multi-layered `SpatRaster` object and plot it:
 
 ```{r combine1, message=FALSE}
 # just keep the names of output rasters
-nms = qgis_outputs("grass7:r.slope.aspect")$name
+nms <- qgis_outputs("grass7:r.slope.aspect")$name
 # read in the output rasters 
-r = info[nms] |>
+r <- info[nms] |>
   unlist() |>
   terra::rast() |>
   as.numeric()
-names(r) = nms
+names(r) <- nms
 # plot the output
 plot(r)
 ```
@@ -230,7 +230,7 @@ plot(r)
 An alternative way to combine the rasters is given below.
 
 ```{r combine2, message=FALSE}
-r = lapply(info[nms], \(x) as.numeric(qgis_as_terra(x))) |> 
+r <- lapply(info[nms], \(x) as.numeric(qgis_as_terra(x))) |> 
   rast()
 plot(r)
 ```
