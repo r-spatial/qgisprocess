@@ -60,8 +60,12 @@ Suggests:
     raster,
     stars,
     terra,
+    mapview,
     knitr,
     rmarkdown,
-    stringi
+    stringi,
+    spDataLarge
+Remotes:
+    Nowosad/spDataLarge
 SystemRequirements: QGIS (>= 3.16). OSGeo4W is recommended for Windows users. 
 VignetteBuilder: knitr

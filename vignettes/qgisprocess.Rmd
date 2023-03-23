@@ -1,7 +1,7 @@
 ---
-title: "1. Basic usage of qgisprocess"
-author: "Jannes Muenchow"
-date: "`r Sys.Date()`"
+title: "Basic usage of qgisprocess"
+author: "Jannes Muenchow & Floris Vanderhaeghe"
+date: "Last updated: yyyy-mm-dd"
 output:
   html_document: 
     toc: yes
@@ -10,15 +10,23 @@ output:
       smooth_scroll: no
     toc_depth: 2
 vignette: >
-  %\VignetteIndexEntry{1. Basic usage of qgisprocess}
+  %\VignetteIndexEntry{Basic usage of qgisprocess}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::knitr}
 ---
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
 # Setting up the system
 
 **qgisprocess** is basically a wrapper around the standalone command line tool [`qgis_process`](https://github.com/qgis/QGIS-Documentation/issues/5803).
-Therefore, you need to have installed QGIS on your system as well as 3rd party providers such as GRASS and SAGA to access and run all geoalgorithms provided through `qgis_process` from within R.
+Therefore, you need to have installed QGIS on your system as well as third-party providers such as GRASS and SAGA to access and run all geoalgorithms provided through `qgis_process` from within R.
+
 To facilitate using **qgisprocess**, we have created a docker image that already comes with the needed software packages.
 You can pull it from dockerhub by running:
 
@@ -26,57 +34,68 @@ You can pull it from dockerhub by running:
 docker pull geocompr/geocompr:qgis-ext
 ```
 
-For a more detailed introduction on how to use docker with **qgisprocess** have a look a the corresponding vignette.
+For a more detailed introduction on how to use docker with **qgisprocess**, have a look a the corresponding vignette.
 
-# Basic usage
+# Package configuration
 
-Since **qgisprocess** depends on the command line tool `qgis_process`, it already tries to detect `qgis_process` on your system when it is being attached, and complains if it cannot find it.
+Since **qgisprocess** depends on the command line tool `qgis_process`, it already tries to detect `qgis_process` on your system when it is being loaded, and complains if it cannot find it.
 
 ```{r}
 library("qgisprocess")
 ```
 
-If you want to find out, how **qgisprocess**  detected `qgis_process`, run `qgis_configure()`.
+More specifically, **qgisprocess** tries to make use of the previously saved state of the package, including the filepath of `qgis_process`, the QGIS version and the list of known algorithms.
+Both the filepath and the QGIS version are checked, as well as other conditions.
+
+So the **main point** is that usually you don't have to do any configuration yourself, unless there's a message telling you to do so.
+
+If you want to find out more details about this process, e.g. how **qgisprocess**  detected `qgis_process`, run `qgis_configure(use_cached_data = TRUE)`.
 
 ```{r config}
-qgis_configure()
+qgis_configure(use_cached_data = TRUE)
 ```
 
-Here, `qgis_process` was detected in the PATH variable.
-However, `qgis_configure()` first tries if the R option `qgisprocess.path` or the global environment variable `R_QGISPROCESS_PATH` has been set.
-This already indicates that you can specify one of these variables in case `qgis_process` has not been installed in one of the most common locations or if there are multiple QGIS versions available (both of which might sometimes happen under Windows).
-If this is the case, set `options(qgisprocess.path = '/path/to/qgis_process')` and re-run `qgis_configure()`.
+If needed the cache will be rebuilt automatically upon loading the package.
+This is the case when the QGIS version or the location of the `qgis_process` command-line utility has changed, user-settings (e.g. the option `qgisprocess.path`) have been altered or a changed state of the processing provider plugins (enabled vs. disabled) has been detected.
+
+Rebuilding the cache can be triggered manually by running `qgis_configure()` (its default is `use_cached_data = FALSE`).
+
+To determine the location of `qgis_process`, `qgis_configure()` first checks if the R option `qgisprocess.path` or the global environment variable `R_QGISPROCESS_PATH` has been set.
+This already indicates that you can specify one of these settings in case `qgis_process` has not been installed in one of the most common locations or if there are multiple QGIS versions available.
+If this is the case, set `options(qgisprocess.path = '/path/to/qgis_process')` or set the environment variable (e.g. in `.Renviron`) and run `qgis_configure()`.
 Under Windows make sure to indicate the path to the `qgis_process-qgis.bat` file, e.g.,
 
 ```{r win-config, eval=FALSE}
 # specify path to QGIS installation on Windows 
-options("qgisprocess.path" = "C:/Program Files/QGIS 3.16/bin/qgis_process-qgis.bat")
+options(qgisprocess.path = "C:/Program Files/QGIS 3.28/bin/qgis_process-qgis.bat")
 # or use the QGIS nightly version (if installed via OSGeo4W)
-# options("qgisprocess.path" = "C:/OSGeo4W64/bin/qgis_process-qgis-dev.bat")
-qgis_configure()
+# options(qgisprocess.path = "C:/OSGeo4W64/bin/qgis_process-qgis-dev.bat")
+qgis_configure() # or use library(qgisprocess) if package was not loaded yet
 ```
 
-Assuming that `qgis_configure()` ran successfully, we can check which QGIS version our system is running:
+Assuming that package loading or `qgis_configure()` ran successfully, we can check which QGIS version our system is running (it takes this from the cache):
 
 ```{r vers}
 qgis_version()
 ```
 
-Next, let's list all available providers including available 3rd party applications: 
+Next, let's list all available providers including available third-party applications: 
 
 ```{r providers}
 qgis_providers()
 ```
 
 This tells us that we can also use the third-party providers GDAL, SAGA and GRASS through the QGIS interface.
-To find out about the available geoalgorithms, run:
+
+# Basic usage
+
+## First example
+
+To find out about the available (cached) geoalgorithms, run:
 
 ```{r algs}
 algs = qgis_algorithms()
 algs
-# or use the cached algorithms which have been collected while
-# calling library(qgisprocess)
-# algs = qgisprocess_cache$algorithms
 ```
 
 Since we have also installed GRASS and SAGA, nearly 1000 geoalgorithms are at our disposal.
@@ -96,14 +115,9 @@ qgis_show_help("native:buffer")
 ##...
 ```
 
-```{r, eval=FALSE, echo=FALSE}
-# cat(qgis_description("native:buffer"))
-# cat(qgis_help_text("native:buffer"))
-```
-
 Find out the arguments of a specific geoalgorithm:
 
-```{r args}
+```{r args-buffer}
 qgis_arguments("native:buffer")
 ```
 
@@ -111,13 +125,20 @@ And finally run it:
 
 ```{r buffer}
 data("random_points", package = "spDataLarge")
-sf::st_crs(random_points) = "EPSG:32717"
 out = qgis_run_algorithm("native:buffer", INPUT = random_points, DISTANCE = 50,
                          .quiet = TRUE)
+# if needed, first install spDataLarge:
+# remotes::install_github("Nowosad/spDataLarge")
 ```
 
 As a convenience to the user, `qgis_run_algorithm()` reports all unspecified and automatically chosen arguments.
-The `out` object is of class `qgis_result` and contains the path to the output object created by `qgis_process` (when not explicitly setting an output object, **qgisprocess** creates it automatically for you), the used algorithm and input arguments as well as an object`.processx_result` which is especially useful if somethings went wrong.
+The `out` object is of class `qgis_result` and contains the path to the output object created by `qgis_process` (when not explicitly setting an output object, **qgisprocess** creates it automatically for you), the used algorithm and input arguments as well as an object `.processx_result` which is especially useful if somethings went wrong.
+
+For QGIS 3.24 and later, `qgis_run_algorithm()` passes the input arguments to QGIS as a JSON string.
+The JSON input string is also included in the `out` object.
+Moreover, the user can specify input arguments directly as JSON in `qgis_run_algorithm()`.
+That is useful since input parameters can be copied from the QGIS GUI as JSON.
+This will be demonstrated in a separate tutorial.
 
 ```{r inspect}
 # inspect the out object
@@ -131,9 +152,9 @@ To read in the QGIS output and visualize it, we can run:
 library("sf")
 library("mapview")
 # attach QGIS output
-# either do it "manually" or ...
+# either do it "manually":
 buf = read_sf(out$OUTPUT[1])
-# use the st_as_sf.qgis_result method
+# or use the st_as_sf.qgis_result method:
 buf = sf::st_as_sf(out)
 # plot your result
 mapview(buf, col.regions = "blue") + 
@@ -150,13 +171,30 @@ qgis_buffer = qgis_function("native:buffer")
 out = qgis_buffer(INPUT = random_points, DISTANCE = 50)
 ```
 
+## Second example
+
 As a second example, let's have a look at how to do raster processing running GRASS in the background.
 To compute various terrain attributes of a digital elevation model, we can use `grass7:r.slope.aspect`.
-We can find out about its arguments again with the help of `qgis_arguments()`
 
-```{r}
+`qgis_description()` (also included in `qgis_show_help()`) gives us the general description of the algorithm.
+
+```{r desc}
+qgis_description("grass7:r.slope.aspect")
+```
+
+We can find out about the arguments again with the help of `qgis_arguments()`.
+
+```{r args}
 qgis_arguments("grass7:r.slope.aspect")
 ```
+
+`qgis_outputs()` shows the different outputs that will be calculated:
+
+```{r outputs}
+qgis_outputs("grass7:r.slope.aspect")
+```
+
+Now let us calculate the terrain attributes.
 
 ```{r slopeaspect, message=FALSE}
 library("terra")
@@ -166,6 +204,17 @@ dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
 info = qgis_run_algorithm(alg = "grass7:r.slope.aspect",
                           elevation = dem, 
                           .quiet = TRUE)
+```
+
+Just printing the `info` object shows which output objects have been made:
+
+```{r info}
+info
+```
+
+Combine these output rasters as a multi-layered `SpatRaster` object and plot it:
+
+```{r combine1, message=FALSE}
 # just keep the names of output rasters
 nms = qgis_outputs("grass7:r.slope.aspect")$name
 # read in the output rasters 
@@ -176,8 +225,11 @@ r = info[nms] |>
 names(r) = nms
 # plot the output
 plot(r)
+```
 
-# another way of doing it
+An alternative way to combine the rasters is given below.
+
+```{r combine2, message=FALSE}
 r = lapply(info[nms], \(x) as.numeric(qgis_as_terra(x))) |> 
   rast()
 plot(r)
