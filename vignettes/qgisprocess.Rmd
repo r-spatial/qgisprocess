@@ -206,13 +206,13 @@ info = qgis_run_algorithm(alg = "grass7:r.slope.aspect",
                           .quiet = TRUE)
 ```
 
-Just printing the info objects shows which output objects have been made:
+Just printing the `info` object shows which output objects have been made:
 
 ```{r info}
 info
 ```
 
-Then combine these output rasters as a multi-layered `SpatRaster` object and plot it:
+Combine these output rasters as a multi-layered `SpatRaster` object and plot it:
 
 ```{r combine1, message=FALSE}
 # just keep the names of output rasters
