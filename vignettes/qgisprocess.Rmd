@@ -127,6 +127,8 @@ And finally run it:
 data("random_points", package = "spDataLarge")
 out = qgis_run_algorithm("native:buffer", INPUT = random_points, DISTANCE = 50,
                          .quiet = TRUE)
+# if needed, first install spDataLarge:
+# remotes::install_github("Nowosad/spDataLarge")
 ```
 
 As a convenience to the user, `qgis_run_algorithm()` reports all unspecified and automatically chosen arguments.
