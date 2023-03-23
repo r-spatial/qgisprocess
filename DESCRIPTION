@@ -58,6 +58,8 @@ Imports:
 URL: https://github.com/r-spatial/qgisprocess
 BugReports: https://github.com/r-spatial/qgisprocess/issues
 Suggests: 
+    dplyr,
+    tidyr,
     testthat,
     sf,
     raster,
