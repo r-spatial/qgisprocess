@@ -1,7 +1,7 @@
 ---
-title: "1. Basic usage of qgisprocess"
+title: "Basic usage of qgisprocess"
 author: "Jannes Muenchow"
-date: "`r Sys.Date()`"
+date: "Last updated: yyyy-mm-dd"
 output:
   html_document: 
     toc: yes
@@ -10,7 +10,7 @@ output:
       smooth_scroll: no
     toc_depth: 2
 vignette: >
-  %\VignetteIndexEntry{1. Basic usage of qgisprocess}
+  %\VignetteIndexEntry{Basic usage of qgisprocess}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::knitr}
 ---
