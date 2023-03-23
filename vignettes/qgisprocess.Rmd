@@ -107,11 +107,6 @@ qgis_show_help("native:buffer")
 ##...
 ```
 
-```{r, eval=FALSE, echo=FALSE}
-# cat(qgis_description("native:buffer"))
-# cat(qgis_help_text("native:buffer"))
-```
-
 Find out the arguments of a specific geoalgorithm:
 
 ```{r args}
