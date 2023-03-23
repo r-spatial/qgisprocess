@@ -88,9 +88,6 @@ To find out about the available (cached) geoalgorithms, run:
 ```{r algs}
 algs = qgis_algorithms()
 algs
-# or use the cached algorithms which have been collected while
-# calling library(qgisprocess)
-# algs = qgisprocess_cache$algorithms
 ```
 
 Since we have also installed GRASS and SAGA, nearly 1000 geoalgorithms are at our disposal.
