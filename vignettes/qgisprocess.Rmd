@@ -18,7 +18,8 @@ vignette: >
 # Setting up the system
 
 **qgisprocess** is basically a wrapper around the standalone command line tool [`qgis_process`](https://github.com/qgis/QGIS-Documentation/issues/5803).
-Therefore, you need to have installed QGIS on your system as well as 3rd party providers such as GRASS and SAGA to access and run all geoalgorithms provided through `qgis_process` from within R.
+Therefore, you need to have installed QGIS on your system as well as third-party providers such as GRASS and SAGA to access and run all geoalgorithms provided through `qgis_process` from within R.
+
 To facilitate using **qgisprocess**, we have created a docker image that already comes with the needed software packages.
 You can pull it from dockerhub by running:
 
@@ -26,7 +27,7 @@ You can pull it from dockerhub by running:
 docker pull geocompr/geocompr:qgis-ext
 ```
 
-For a more detailed introduction on how to use docker with **qgisprocess** have a look a the corresponding vignette.
+For a more detailed introduction on how to use docker with **qgisprocess**, have a look a the corresponding vignette.
 
 # Package configuration
 
@@ -142,9 +143,9 @@ To read in the QGIS output and visualize it, we can run:
 library("sf")
 library("mapview")
 # attach QGIS output
-# either do it "manually" or ...
+# either do it "manually":
 buf = read_sf(out$OUTPUT[1])
-# use the st_as_sf.qgis_result method
+# or use the st_as_sf.qgis_result method:
 buf = sf::st_as_sf(out)
 # plot your result
 mapview(buf, col.regions = "blue") + 
