@@ -60,7 +60,7 @@ This is the case when the QGIS version or the location of the `qgis_process` com
 
 Rebuilding the cache can be triggered manually by running `qgis_configure()` (its default is `use_cached_data = FALSE`).
 
-To determine the location of `qgis_process`, `qgis_configure()` first tries if the R option `qgisprocess.path` or the global environment variable `R_QGISPROCESS_PATH` has been set.
+To determine the location of `qgis_process`, `qgis_configure()` first checks if the R option `qgisprocess.path` or the global environment variable `R_QGISPROCESS_PATH` has been set.
 This already indicates that you can specify one of these settings in case `qgis_process` has not been installed in one of the most common locations or if there are multiple QGIS versions available.
 If this is the case, set `options(qgisprocess.path = '/path/to/qgis_process')` or set the environment variable (e.g. in `.Renviron`) and run `qgis_configure()`.
 Under Windows make sure to indicate the path to the `qgis_process-qgis.bat` file, e.g.,
