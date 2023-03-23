@@ -1,6 +1,6 @@
 ---
 title: "Basic usage of qgisprocess"
-author: "Jannes Muenchow"
+author: "Jannes Muenchow & Floris Vanderhaeghe"
 date: "Last updated: yyyy-mm-dd"
 output:
   html_document: 
