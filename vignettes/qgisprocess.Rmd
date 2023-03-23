@@ -49,14 +49,14 @@ Both the filepath and the QGIS version are checked, as well as other conditions.
 
 So the **main point** is that usually you don't have to do any configuration yourself, unless there's a message telling you to do so.
 
-If you want to find out more about this process, e.g. how **qgisprocess**  detected `qgis_process`, run `qgis_configure(use_cached_data = TRUE)`.
+If you want to find out more details about this process, e.g. how **qgisprocess**  detected `qgis_process`, run `qgis_configure(use_cached_data = TRUE)`.
 
 ```{r config}
 qgis_configure(use_cached_data = TRUE)
 ```
 
-If needed the cache will be rebuilt upon loading the package.
-Example reasons for automated rebuild include changed QGIS version, changed `qgis_process` location, a non-matching user-setting (e.g. the option `qgisprocess.path`) and a changed state of processing provider plugins.
+If needed the cache will be rebuilt automatically upon loading the package.
+This is the case when the QGIS version or the location of the `qgis_process` command-line utility has changed, user-settings (e.g. the option `qgisprocess.path`) have been altered or a changed state of the processing provider plugins (enabled vs. disabled) has been detected.
 
 Rebuilding the cache can be triggered manually by running `qgis_configure()` (its default is `use_cached_data = FALSE`).
 
