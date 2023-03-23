@@ -117,7 +117,7 @@ qgis_show_help("native:buffer")
 
 Find out the arguments of a specific geoalgorithm:
 
-```{r args}
+```{r args-buffer}
 qgis_arguments("native:buffer")
 ```
 
