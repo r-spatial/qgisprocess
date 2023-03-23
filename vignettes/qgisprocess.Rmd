@@ -15,6 +15,13 @@ vignette: >
   %\VignetteEngine{knitr::knitr}
 ---
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
 # Setting up the system
 
 **qgisprocess** is basically a wrapper around the standalone command line tool [`qgis_process`](https://github.com/qgis/QGIS-Documentation/issues/5803).
