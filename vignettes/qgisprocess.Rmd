@@ -122,7 +122,13 @@ out = qgis_run_algorithm("native:buffer", INPUT = random_points, DISTANCE = 50,
 ```
 
 As a convenience to the user, `qgis_run_algorithm()` reports all unspecified and automatically chosen arguments.
-The `out` object is of class `qgis_result` and contains the path to the output object created by `qgis_process` (when not explicitly setting an output object, **qgisprocess** creates it automatically for you), the used algorithm and input arguments as well as an object`.processx_result` which is especially useful if somethings went wrong.
+The `out` object is of class `qgis_result` and contains the path to the output object created by `qgis_process` (when not explicitly setting an output object, **qgisprocess** creates it automatically for you), the used algorithm and input arguments as well as an object `.processx_result` which is especially useful if somethings went wrong.
+
+For QGIS 3.24 and later, `qgis_run_algorithm()` passes the input arguments to QGIS as a JSON string.
+The JSON input string is also included in the `out` object.
+Moreover, the user can specify input arguments directly as JSON in `qgis_run_algorithm()`.
+That is useful since input parameters can be copied from the QGIS GUI as JSON.
+This will be demonstrated in a separate tutorial.
 
 ```{r inspect}
 # inspect the out object
