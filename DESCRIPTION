@@ -60,6 +60,7 @@ Suggests:
     raster,
     stars,
     terra,
+    mapview,
     knitr,
     rmarkdown,
     stringi
