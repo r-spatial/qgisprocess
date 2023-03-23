@@ -161,13 +161,30 @@ qgis_buffer = qgis_function("native:buffer")
 out = qgis_buffer(INPUT = random_points, DISTANCE = 50)
 ```
 
+## Second example
+
 As a second example, let's have a look at how to do raster processing running GRASS in the background.
 To compute various terrain attributes of a digital elevation model, we can use `grass7:r.slope.aspect`.
-We can find out about its arguments again with the help of `qgis_arguments()`
 
-```{r}
+`qgis_description()` (also included in `qgis_show_help()`) gives us the general description of the algorithm.
+
+```{r desc}
+qgis_description("grass7:r.slope.aspect")
+```
+
+We can find out about the arguments again with the help of `qgis_arguments()`.
+
+```{r args}
 qgis_arguments("grass7:r.slope.aspect")
 ```
+
+`qgis_outputs()` shows the different outputs that will be calculated:
+
+```{r outputs}
+qgis_outputs("grass7:r.slope.aspect")
+```
+
+Now let us calculate the terrain attributes.
 
 ```{r slopeaspect, message=FALSE}
 library("terra")
@@ -177,6 +194,17 @@ dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
 info = qgis_run_algorithm(alg = "grass7:r.slope.aspect",
                           elevation = dem, 
                           .quiet = TRUE)
+```
+
+Just printing the info objects shows which output objects have been made:
+
+```{r info}
+info
+```
+
+Then combine these output rasters as a multi-layered `SpatRaster` object and plot it:
+
+```{r combine1, message=FALSE}
 # just keep the names of output rasters
 nms = qgis_outputs("grass7:r.slope.aspect")$name
 # read in the output rasters 
@@ -187,8 +215,11 @@ r = info[nms] |>
 names(r) = nms
 # plot the output
 plot(r)
+```
 
-# another way of doing it
+An alternative way to combine the rasters is given below.
+
+```{r combine2, message=FALSE}
 r = lapply(info[nms], \(x) as.numeric(qgis_as_terra(x))) |> 
   rast()
 plot(r)
