@@ -28,13 +28,22 @@ knitr::opts_chunk$set(
 Therefore, you need to have installed QGIS on your system as well as third-party providers such as GRASS and SAGA to access and run all geoalgorithms provided through `qgis_process` from within R.
 
 To facilitate using **qgisprocess**, we have created a docker image that already comes with the needed software packages.
-You can pull it from dockerhub by running:
+You can pull it from Github's container registry by running:
 
 ```{sh, eval=FALSE}
-docker pull geocompr/geocompr:qgis-ext
+docker pull ghcr.io/geocompx/docker:qgis
 ```
 
-For a more detailed introduction on how to use docker with **qgisprocess**, have a look a the corresponding vignette.
+For a more detailed introduction on how to get started with docker, please refer to https://github.com/geocompx/docker.
+
+<!--
+in the docker container I needed to refer to /usr/bin/qgis_process.bin, hence, only the following worked:
+
+```{r, eval=FALSE}
+options(qgisprocess.path = "/usr/bin/qgis_process.bin")
+library(qgisprocess)
+```
+-->
 
 # Package configuration
 
