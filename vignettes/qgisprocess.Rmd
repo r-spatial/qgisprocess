@@ -49,7 +49,7 @@ Both the filepath and the QGIS version are checked, as well as other conditions.
 
 So the **main point** is that usually you don't have to do any configuration yourself, unless there's a message telling you to do so.
 
-If you want to find out more details about this process, e.g. how **qgisprocess**  detected `qgis_process`, run `qgis_configure(use_cached_data = TRUE)`.
+If you want to find out more about this process, e.g. how **qgisprocess**  detected `qgis_process`, run `qgis_configure(use_cached_data = TRUE)`.
 
 ```{r config}
 qgis_configure(use_cached_data = TRUE)
