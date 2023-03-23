@@ -117,7 +117,6 @@ And finally run it:
 
 ```{r buffer}
 data("random_points", package = "spDataLarge")
-sf::st_crs(random_points) = "EPSG:32717"
 out = qgis_run_algorithm("native:buffer", INPUT = random_points, DISTANCE = 50,
                          .quiet = TRUE)
 ```
