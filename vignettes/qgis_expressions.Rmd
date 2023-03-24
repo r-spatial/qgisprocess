@@ -24,10 +24,8 @@ library(sf)
 ```{r child=if (has_qgis()) "../man/vignette_childs/_qgis_expressions.Rmd"}
 ```
 
-```{r echo=FALSE, results="asis"}
-if (!has_qgis()) {
-  cat("This vignette has been built in absence of a QGIS installation.\n\n")
-  cat("Read it online at <https://r-spatial.github.io/qgisprocess/articles/qgis_expressions.html>.")
-}
+```{r eval=!has_qgis(), echo=FALSE, results="asis"}
+cat("This vignette has been built in absence of a QGIS installation.\n\n")
+cat("Read it online at <https://r-spatial.github.io/qgisprocess/articles/qgis_expressions.html>.")
 ```
 
