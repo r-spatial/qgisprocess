@@ -67,7 +67,8 @@ Suggests:
     terra,
     knitr,
     rmarkdown,
-    stringi
+    stringi,
+    rprojroot
 SystemRequirements: QGIS latest or long-term release (>= 3.28). Older QGIS 
   releases are not officially supported, but may work since QGIS 3.16.
 VignetteBuilder: knitr

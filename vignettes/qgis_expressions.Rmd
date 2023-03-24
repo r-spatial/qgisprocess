@@ -21,7 +21,7 @@ library(qgisprocess)
 library(sf)
 ```
 
-```{r child=if (has_qgis()) "../man/vignette_childs/_qgis_expressions.Rmd"}
+```{r child=if (has_qgis()) file.path(rprojroot::find_root(rprojroot::is_r_package), "man/vignette_childs/_qgis_expressions.Rmd")}
 ```
 
 ```{r eval=!has_qgis(), echo=FALSE, results="asis"}
