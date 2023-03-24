@@ -26,7 +26,7 @@ library(sf)
 In many QGIS processing algorithms, the possibility exists to make use of [QGIS expressions](https://docs.qgis.org/latest/en/docs/user_manual/expressions/index.html).
 This can happen in two situations:
 
-- An algorithm argument expects a QGIS expression string.
+- An algorithm argument expects a QGIS expression.
 In the QGIS processing dialog, this is typically marked by a button that opens the QGIS expression builder (e.g. in `native:extractbyexpression`), or by a directly integrated QGIS expression builder (e.g. in `native:fieldcalculator`).
 
   Such arguments are of type `expression`, as seen in the output of `qgis_arguments()`.
@@ -36,8 +36,8 @@ qgis_arguments("native:fieldcalculator") |> subset(name == "FORMULA")
 ```
 
 - Sometimes an algorithm argument that is usually a fixed (numeric or boolean) value, can _also_ refer to the value of another field or the result of an expression: this is called _data-defined_ overriding.
-In the QGIS processing dialog, such arguments have a 'data-defined override' button.
-An example is provided by the `DISTANCE` argument of `native:buffer`.
+In the QGIS processing dialog, such arguments have a '[data-defined override](https://docs.qgis.org/latest/en/docs/user_manual/introduction/general_tools.html#data-defined)' button.
+An example is provided by the `DISTANCE` argument of `native:buffer`, for which we query the acceptable values below.
 
 ```{r}
 qgis_arguments("native:buffer") |> 
@@ -47,7 +47,7 @@ qgis_arguments("native:buffer") |>
   knitr::kable()
 ```
 
-# Examples where an argument is a QGIS expression string
+# Examples where the argument expects a QGIS expression
 
 In these cases, provide the expression as a string in R.
 
@@ -77,6 +77,8 @@ qgis_run_algorithm(
 More often, you will want to use QGIS functions in expressions, and look at the relationship between geometries or create new geometries.
 
 Let's calculate the distance between the points and the lake border, and add it as an attribute to the points.
+For that we will use the `native:fieldcalculator` algorithm.
+
 We first create the lake border:
 
 ```{r}
@@ -103,15 +105,15 @@ expr <- glue::glue("distance(
                     )")
 ```
 
-Referring the lake border is a bit more involved, since it needs several QGIS functions.
+Referring the lake border geometry in the expression is a bit more involved, since it needs several QGIS functions.
 The layer can be loaded from a filepath with the `load_layer()` function, then the first (and only) feature is selected with `get_feature_by_id()`, and the geometry of that feature is referred by `geometry()`.
 These steps are needed because the `distance()` function needs geometries to work on, not features, layers or filepaths.
 
 Use the QGIS expression builder to look up function documentation, or consult the online [QGIS function documentation](https://docs.qgis.org/latest/en/docs/user_manual/expressions/functions_list.html).
 
-Note: the `load_layer()` function is only available since QGIS 3.30!
+Note: the `load_layer()` function is only available since QGIS 3.30.0!
 In earlier versions, you needed to refer the layer's name as present in an _existing_ QGIS project, and refer the project path in `qgis_run_algorithm()` with the special `PROJECT_PATH` argument.
-The `load_layer()` approach since QGIS 3.30 avoids the need for a QGIS project.
+The `load_layer()` approach since QGIS 3.30.0 avoids the need for a QGIS project.
 
 Now we can run the algorithm:
 
