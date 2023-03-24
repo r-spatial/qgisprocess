@@ -42,9 +42,9 @@ An example is provided by the `DISTANCE` argument of `native:buffer`.
 ```{r}
 qgis_arguments("native:buffer") |> 
   subset(name == "DISTANCE") |> 
-  dplyr::select(name, qgis_type, acceptable_values) |> 
+  dplyr::select(acceptable_values) |> 
   tidyr::unnest(cols = acceptable_values) |> 
-  as.data.frame()
+  knitr::kable()
 ```
 
 # Examples where an argument is a QGIS expression string
