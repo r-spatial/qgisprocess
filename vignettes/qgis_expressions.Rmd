@@ -131,7 +131,7 @@ qgis_run_algorithm(
 
 Suppose that we want to create a buffer around the points with a dynamic radius expressed as a function of `DEPTH_M`, e.g. 10 times the depth at each point.
 We will use `native:buffer` for that purpose.
-Note: applying a data-defined override with qgisprocess is only possible since since QGIS 3.30.0!
+Note: applying a data-defined override with **qgisprocess** is only possible since since QGIS 3.30.0!
 
 Because `DISTANCE` by default expects a numeric value, you have to use the prefix `expression:` if you want to pass an expression string.
 Double quotes are used in QGIS expressions to denote fields (attributes), but you can also omit them.
