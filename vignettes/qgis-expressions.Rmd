@@ -129,10 +129,43 @@ qgis_run_algorithm(
 
 # Example applying a data-defined override
 
+Suppose that we want to create a buffer around the points with a dynamic radius expressed as a function of `DEPTH_M`, e.g. 10 times the depth at each point.
+We will use `native:buffer` for that purpose.
+Note: applying a data-defined override with qgisprocess is only possible since since QGIS 3.30.0!
 
+Because `DISTANCE` by default expects a numeric value, you have to use the prefix `expression:` if you want to pass an expression string.
+Double quotes are used in QGIS expressions to denote fields (attributes), but you can also omit them.
 
+Let's try:
 
+```{r}
+buffer <- qgis_run_algorithm(
+  "native:buffer",
+  INPUT = longlake_depth_path,
+  DISTANCE = 'expression: "DEPTH_M" * 10',
+  .quiet = TRUE
+) |> 
+  st_as_sf()
+```
 
+Plot the result:
+
+```{r}
+par(mar = rep(0.1, 4))
+plot(read_sf(lake_border_path) |> st_geometry())
+plot(buffer[, "DEPTH_M"], add = TRUE)
+```
+
+If you just want to refer the value of another attribute, then you can also use the `field:` prefix instead, _without_ double quotes around the attribute name and _without_ spaces:
+
+```{r eval=FALSE}
+qgis_run_algorithm(
+  "native:buffer",
+  INPUT = longlake_depth_path,
+  DISTANCE = "field:DEPTH_M"
+) |> 
+  st_as_sf()
+```
 
 
 
