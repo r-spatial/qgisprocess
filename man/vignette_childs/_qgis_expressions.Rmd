@@ -94,7 +94,7 @@ The `load_layer()` approach since QGIS 3.30.0 avoids the need for a QGIS project
 
 Now we can run the algorithm:
 
-```{r eval=(package_version(strsplit(qgis_version(), "-")[[1]][1]) >= "3.30.0")}
+```{r eval=(package_version(strsplit(qgis_version(), "-")[[1]][1]) >= "3.30.0") && !is_windows()}
 qgis_run_algorithm(
   "native:fieldcalculator",
   INPUT = longlake_depth_path,
