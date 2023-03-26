@@ -64,7 +64,7 @@ lake_border_path <- qgis_run_algorithm(
 ```
 
 Next, build the QGIS expression.
-Referring the `INPUT` geometry is done with the `@geometry` variable.
+Referring to the `INPUT` geometry is done with the `@geometry` variable.
 
 ```{r}
 expr <- glue::glue("distance(
