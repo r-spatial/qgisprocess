@@ -23,8 +23,6 @@ qgis_arguments("native:buffer") |>
 
 # Examples where the argument expects a QGIS expression
 
-In these cases, provide the expression as a string in R.
-
 As example data, we use a lake polygon and a set of points that have lake depth as attribute.
 
 ```{r}
@@ -36,7 +34,8 @@ longlake_depth_path <- system.file("longlake/longlake_depth.gpkg", package = "qg
 nrow(read_sf(longlake_depth_path))
 ```
 
-Using a QGIS expression to filter points by depth:
+In a first example, we use a QGIS expression to filter points by depth.
+We can simply pass the expression as a string:
 
 ```{r}
 qgis_run_algorithm(
