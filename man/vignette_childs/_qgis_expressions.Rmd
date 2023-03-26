@@ -1,18 +1,15 @@
 # Introduction
 
-In many QGIS processing algorithms, the possibility exists to make use of [QGIS expressions](https://docs.qgis.org/latest/en/docs/user_manual/expressions/index.html).
-This can happen in two situations:
-
-- An algorithm argument expects a QGIS expression.
-In the QGIS processing dialog, this is typically marked by a button that opens the QGIS expression builder (e.g. in `native:extractbyexpression`), or by a directly integrated QGIS expression builder (e.g. in `native:fieldcalculator`).
-
-  Such arguments are of type `expression`, as seen in the output of `qgis_arguments()`.
+Many QGIS processing algorithms provide the possibility to use [QGIS expressions](https://docs.qgis.org/latest/en/docs/user_manual/expressions/index.html).
+If an algorithm argument expects a QGIS expression, this is typically marked by a button in the QGIS processing dialog that opens the QGIS expression builder (e.g. in `native:extractbyexpression`), or by a directly integrated QGIS expression builder (e.g. in `native:fieldcalculator`).
+Such arguments are of type `expression`, as seen in the output of `qgis_arguments()`.
   
 ```{r}
 qgis_arguments("native:fieldcalculator") |> subset(name == "FORMULA")
 ```
 
-- Sometimes an algorithm argument that is usually a fixed (numeric or boolean) value, can _also_ refer to the value of another field or the result of an expression: this is called _data-defined_ overriding.
+Secondly, one can use expressions for _data-defined_ overriding.
+This means, that an algorithm argument that is usually a fixed (numeric or boolean) value can _also_ take on the value of another field or the result of an expression.
 In the QGIS processing dialog, such arguments have a '[data-defined override](https://docs.qgis.org/latest/en/docs/user_manual/introduction/general_tools.html#data-defined)' button.
 An example is provided by the `DISTANCE` argument of `native:buffer`, for which we query the acceptable values below.
 
