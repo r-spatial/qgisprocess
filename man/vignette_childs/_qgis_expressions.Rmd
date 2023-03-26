@@ -78,14 +78,14 @@ expr <- glue::glue("distance(
                     )")
 ```
 
-Referring the lake border geometry in the expression is a bit more involved, since it needs several QGIS functions.
-The layer can be loaded from a filepath with the `load_layer()` function, then the first (and only) feature is selected with `get_feature_by_id()`, and the geometry of that feature is referred by `geometry()`.
+Referring to the lake border geometry in an expression is a bit more tricky, since it requires several QGIS functions.
+The layer can be loaded from a filepath with the `load_layer()` function, then the first (and only) feature is selected with `get_feature_by_id()`, and the geometry of that feature is selected using the `geometry()` function.
 These steps are needed because the `distance()` function needs geometries to work on, not features, layers or filepaths.
 
 Use the QGIS expression builder to look up function documentation, or consult the online [QGIS function documentation](https://docs.qgis.org/latest/en/docs/user_manual/expressions/functions_list.html).
 
 Note: the `load_layer()` function is only available since QGIS 3.30.0!
-In earlier versions, you needed to refer the layer's name as present in an _existing_ QGIS project, and refer the project path in `qgis_run_algorithm()` with the special `PROJECT_PATH` argument.
+In earlier versions, you needed to refer to the layer's name in an _existing_ QGIS project, and refer to the project path in `qgis_run_algorithm()` with the special `PROJECT_PATH` argument.
 The `load_layer()` approach since QGIS 3.30.0 avoids the need for a QGIS project.
 
 Now we can run the algorithm:
@@ -129,7 +129,7 @@ plot(read_sf(lake_border_path) |> st_geometry())
 plot(buffer[, "DEPTH_M"], add = TRUE)
 ```
 
-If you just want to refer the value of another attribute, then you can also use the `field:` prefix instead, _without_ double quotes around the attribute name and _without_ spaces:
+If you just want to refer to the value of another attribute, then you can also use the `field:` prefix instead, _without_ double quotes around the attribute name and _without_ spaces:
 
 ```{r eval=FALSE}
 qgis_run_algorithm(
