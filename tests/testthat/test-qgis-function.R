@@ -52,10 +52,13 @@ test_that("qgis_pipe() works", {
     )
 
   expect_s3_class(result, "qgis_result")
+  expect_true(file.exists(result$.args$OUTPUT))
 
   result2 <- result |>
-    qgis_pipe("native:subdivide", MAX_NODES = 10) |>
-    qgis_pipe("native:dissolve")
+    qgis_pipe("native:subdivide", MAX_NODES = 10, .clean = FALSE) |>
+    qgis_pipe("native:dissolve", .clean = FALSE)
+
+  expect_true(file.exists(result$.args$OUTPUT))
 
   expect_s3_class(result2, "qgis_result")
   expect_named(result2, c("OUTPUT", ".algorithm", ".args", ".raw_json_input", ".processx_result"))
@@ -66,6 +69,10 @@ test_that("qgis_pipe() works", {
     qgis_pipe("native:subdivide", MAX_NODES = 10)
   expect_s3_class(result3, "qgis_result")
   expect_named(result3, c("OUTPUT", ".algorithm", ".args", ".raw_json_input", ".processx_result"))
+
+  result4 <- result |>
+    qgis_pipe("native:subdivide", MAX_NODES = 10)
+  expect_false(file.exists(result$.args$OUTPUT))
 
   fake_result <- structure(result[".processx_result"], class = "qgis_result")
   expect_error(

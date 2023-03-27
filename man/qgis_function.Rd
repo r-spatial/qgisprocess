@@ -7,7 +7,7 @@
 \usage{
 qgis_function(algorithm, ...)
 
-qgis_pipe(.data, algorithm, ..., .quiet = TRUE)
+qgis_pipe(.data, algorithm, ..., .clean = TRUE, .quiet = TRUE)
 }
 \arguments{
 \item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
@@ -18,6 +18,10 @@ These values are evaluated once and immediately, so you shouldn't
 call \code{\link[=qgis_tmp_file]{qgis_tmp_file()}} here.}
 
 \item{.data}{Passed to the first input of \code{algorithm}.}
+
+\item{.clean}{Logical.
+Should an incoming \code{qgis_result} be cleaned (using \code{\link[=qgis_result_clean]{qgis_result_clean()}})
+after processing?}
 
 \item{.quiet}{Use \code{TRUE} to suppress output from processing algorithms.}
 }
