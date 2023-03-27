@@ -109,24 +109,49 @@ qgis_function <- function(algorithm, ...) {
 #' @rdname qgis_function
 #' @export
 qgis_pipe <- function(.data, algorithm, ..., .quiet = TRUE) {
-  if (inherits(.data, "qgis_result")) {
-    withr::with_options(
-      list(warning.length = 6e3),
-      assert_that(
-        any(grepl("^(output|OUTPUT)$", names(.data))),
-        msg = paste0(
-          "The qgis_result object misses an 'OUTPUT' element; ",
-          "hence piping is not supported.\n",
-          "You can extract the needed output element (see `?qgis_output()`) ",
-          "and pipe that instead.\n",
-          "The included JSON-output was:\n",
-          jsonlite::prettify(.data$.processx_result$stdout)
-        )
+  UseMethod("qgis_pipe")
+}
+
+#' @keywords internal
+#' @export
+qgis_pipe.qgis_result <- function(.data, algorithm, ..., .quiet = TRUE) {
+  withr::with_options(
+    list(warning.length = 6e3),
+    assert_that(
+      any(grepl("^(output|OUTPUT)$", names(.data))),
+      msg = paste0(
+        "The qgis_result object misses an 'OUTPUT' element; ",
+        "hence piping is not supported.\n",
+        "You can extract the needed output element (see `?qgis_output()`) ",
+        "and pipe that instead.\n",
+        "The included JSON-output was:\n",
+        jsonlite::prettify(.data$.processx_result$stdout)
       )
     )
-    # take the first OUTPUT or output element of .data and coerce to character:
-    .data <- as.character(.data[grepl("^(output|OUTPUT)$", names(.data))][1][[1]])
+  )
+  # take the first OUTPUT or output element of .data and coerce to character:
+  .data <- as.character(.data[grepl("^(output|OUTPUT)$", names(.data))][1][[1]])
+  fun <- qgis_function(algorithm)
+  fun(.data, ..., .quiet = .quiet)
+}
+
+#' @keywords internal
+#' @export
+qgis_pipe.character <- function(.data, algorithm, ..., .quiet = TRUE) {
+  assert_that(is.string(.data))
+  fun <- qgis_function(algorithm)
+  fun(.data, ..., .quiet = .quiet)
+}
+
+#' @keywords internal
+#' @export
+qgis_pipe.default <- function(.data, algorithm, ..., .quiet = TRUE) {
+  if (stringr::str_detect(class(.data), "^qgis_output")) {
+    .data <- as.character(.data)
+    assert_that(is.string(.data))
   }
   fun <- qgis_function(algorithm)
   fun(.data, ..., .quiet = .quiet)
 }
+
+
