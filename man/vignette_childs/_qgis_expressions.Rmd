@@ -121,6 +121,12 @@ buffer <- qgis_run_algorithm(
   st_as_sf()
 ```
 
+So from the `r nrow(buffer)` points we have created `r nrow(buffer)` polygons:
+
+```{r}
+st_geometry_type(buffer) |> as.character() |> table()
+```
+
 Plot the result:
 
 ```{r}
