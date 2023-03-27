@@ -1,6 +1,6 @@
 ---
 title: "How to use QGIS expressions in qgisprocess?"
-author: "Floris Vanderhaeghe"
+author: "Floris Vanderhaeghe & Jannes Muenchow"
 date: "Last updated: 2023-03-24"
 output: rmarkdown::html_vignette
 vignette: >
