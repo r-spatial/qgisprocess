@@ -24,7 +24,9 @@ a path to a QGIS model file.}
 These values are evaluated once and immediately, so you shouldn't
 call \code{\link[=qgis_tmp_file]{qgis_tmp_file()}} here.}
 
-\item{.data}{Passed to the first input of \code{algorithm}.}
+\item{.data}{Passed to the first input of \code{algorithm}.
+If \code{.data} is a \code{qgis_result} (the result of a previous processing
+step), \code{.data[[.select]]} is passed instead.}
 
 \item{.select}{String.
 The name of the element to select from \code{.data} if the latter is a

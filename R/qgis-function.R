@@ -9,6 +9,8 @@
 #'
 #' @inheritParams qgis_run_algorithm
 #' @param .data Passed to the first input of `algorithm`.
+#' If `.data` is a `qgis_result` (the result of a previous processing
+#' step), `.data[[.select]]` is passed instead.
 #' @param .select String.
 #' The name of the element to select from `.data` if the latter is a
 #' `qgis_result`.
