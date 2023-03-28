@@ -111,13 +111,25 @@ qgis_function <- function(algorithm, ...) {
 
 #' @rdname qgis_function
 #' @export
-qgis_pipe <- function(.data, algorithm, ..., .clean = TRUE, .quiet = TRUE) {
+qgis_pipe <- function(
+    .data,
+    algorithm,
+    ...,
+    .clean = TRUE,
+    .quiet = TRUE
+) {
   UseMethod("qgis_pipe")
 }
 
 #' @keywords internal
 #' @export
-qgis_pipe.qgis_result <- function(.data, algorithm, ..., .clean = TRUE, .quiet = TRUE) {
+qgis_pipe.qgis_result <- function(
+    .data,
+    algorithm,
+    ...,
+    .clean = TRUE,
+    .quiet = TRUE
+) {
   withr::with_options(
     list(warning.length = 6e3),
     assert_that(
@@ -142,7 +154,13 @@ qgis_pipe.qgis_result <- function(.data, algorithm, ..., .clean = TRUE, .quiet =
 
 #' @keywords internal
 #' @export
-qgis_pipe.character <- function(.data, algorithm, ..., .clean = TRUE, .quiet = TRUE) {
+qgis_pipe.character <- function(
+    .data,
+    algorithm,
+    ...,
+    .clean = TRUE,
+    .quiet = TRUE
+) {
   assert_that(is.string(.data))
   fun <- qgis_function(algorithm)
   fun(.data, ..., .quiet = .quiet)
@@ -150,7 +168,13 @@ qgis_pipe.character <- function(.data, algorithm, ..., .clean = TRUE, .quiet = T
 
 #' @keywords internal
 #' @export
-qgis_pipe.default <- function(.data, algorithm, ..., .clean = TRUE, .quiet = TRUE) {
+qgis_pipe.default <- function(
+    .data,
+    algorithm,
+    ...,
+    .clean = TRUE,
+    .quiet = TRUE
+) {
   if (stringr::str_detect(class(.data), "^qgis_output")) {
     .data <- as.character(.data)
     assert_that(is.string(.data))
