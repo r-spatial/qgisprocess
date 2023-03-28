@@ -70,6 +70,17 @@ test_that("qgis_pipe() works", {
   expect_s3_class(result3, "qgis_result")
   expect_named(result3, c("OUTPUT", ".algorithm", ".args", ".raw_json_input", ".processx_result"))
 
+  expect_error(
+    result |>
+      qgis_pipe(
+        "native:subdivide",
+        MAX_NODES = 10,
+        .clean = FALSE,
+        .select = "dummy"
+      ),
+    "The qgis_result object misses"
+  )
+
   result4 <- result |>
     qgis_pipe("native:subdivide", MAX_NODES = 10)
   expect_false(file.exists(result$.args$OUTPUT))
