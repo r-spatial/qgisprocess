@@ -9,6 +9,10 @@
 #'
 #' @inheritParams qgis_run_algorithm
 #' @param .data Passed to the first input of `algorithm`.
+#' @param .select String.
+#' The name of the element to select from `.data` if the latter is a
+#' `qgis_result`.
+#' Defaults to `"OUTPUT"`.
 #' @param .clean Logical.
 #' Should an incoming `qgis_result` be cleaned (using [qgis_result_clean()])
 #' after processing?
@@ -115,6 +119,7 @@ qgis_pipe <- function(
     .data,
     algorithm,
     ...,
+    .select = "OUTPUT",
     .clean = TRUE,
     .quiet = TRUE
 ) {
@@ -127,25 +132,23 @@ qgis_pipe.qgis_result <- function(
     .data,
     algorithm,
     ...,
+    .select = "OUTPUT",
     .clean = TRUE,
     .quiet = TRUE
 ) {
+  assert_that(is.string(.select))
   withr::with_options(
     list(warning.length = 6e3),
     assert_that(
-      any(grepl("^(output|OUTPUT)$", names(.data))),
-      msg = paste0(
-        "The qgis_result object misses an 'OUTPUT' element; ",
-        "hence piping is not supported.\n",
-        "You can extract the needed output element (see `?qgis_output()`) ",
-        "and pipe that instead.\n",
+      .select %in% names(.data),
+      msg = glue(
+        "The qgis_result object misses a '{.select}' element.\n",
         "The included JSON-output was:\n",
-        jsonlite::prettify(.data$.processx_result$stdout)
+        "{jsonlite::prettify(.data$.processx_result$stdout)}"
       )
     )
   )
-  # take the first OUTPUT or output element of .data and coerce to character:
-  output <- as.character(.data[grepl("^(output|OUTPUT)$", names(.data))][1][[1]])
+  output <- as.character(.data[[.select]])
   fun <- qgis_function(algorithm)
   result <- fun(output, ..., .quiet = .quiet)
   if (.clean) qgis_result_clean(.data)
@@ -158,6 +161,7 @@ qgis_pipe.default <- function(
     .data,
     algorithm,
     ...,
+    .select = "OUTPUT",
     .clean = TRUE,
     .quiet = TRUE
 ) {

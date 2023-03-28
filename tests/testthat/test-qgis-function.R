@@ -77,6 +77,6 @@ test_that("qgis_pipe() works", {
   fake_result <- structure(result[".processx_result"], class = "qgis_result")
   expect_error(
     fake_result |> qgis_pipe("native:subdivide", MAX_NODES = 10),
-    "The qgis_result object misses an 'OUTPUT' element"
+    "The qgis_result object misses"
   )
 })
