@@ -150,7 +150,7 @@ qgis_pipe.qgis_result <- function(
       )
     )
   )
-  output <- as.character(.data[[.select]])
+  output <- unclass(.data[[.select]])
   fun <- qgis_function(algorithm)
   result <- fun(output, ..., .quiet = .quiet)
   if (.clean) qgis_result_clean(.data)
@@ -168,8 +168,7 @@ qgis_pipe.default <- function(
     .quiet = TRUE
 ) {
   if (stringr::str_detect(class(.data), "^qgis_output")) {
-    .data <- as.character(.data)
-    assert_that(is.string(.data))
+    .data <- unclass(.data)
   }
   fun <- qgis_function(algorithm)
   fun(.data, ..., .quiet = .quiet)
