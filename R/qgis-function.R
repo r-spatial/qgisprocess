@@ -154,20 +154,6 @@ qgis_pipe.qgis_result <- function(
 
 #' @keywords internal
 #' @export
-qgis_pipe.character <- function(
-    .data,
-    algorithm,
-    ...,
-    .clean = TRUE,
-    .quiet = TRUE
-) {
-  assert_that(is.string(.data))
-  fun <- qgis_function(algorithm)
-  fun(.data, ..., .quiet = .quiet)
-}
-
-#' @keywords internal
-#' @export
 qgis_pipe.default <- function(
     .data,
     algorithm,
