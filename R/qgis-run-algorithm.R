@@ -1,10 +1,19 @@
 #' Run algorithms using 'qgis_process'
 #'
+#' @rdname qgis_function
+#' @export
+qgis_run_algorithm <- function(.data = NULL,
+    algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = NULL,
+    .raw_json_input = NULL, .quiet = FALSE) {
+  UseMethod("qgis_run_algorithm")
+}
+
+
 #' Run QGIS algorithms.
 #' See the [QGIS docs](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/index.html)
 #' for a detailed description of the algorithms provided
 #' 'out of the box' on QGIS (versions >= 3.14).
-#'
+#' @param .data some data needed for piping
 #' @param algorithm A qualified algorithm name (e.g., "native:filedownloader") or
 #'   a path to a QGIS model file.
 #' @param PROJECT_PATH,ELLIPSOID Global values for QGIS project file and
@@ -26,7 +35,8 @@
 #'   )
 #' }
 #'
-qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = NULL,
+qgis_run_algorithm.default <- function(.data = NULL,
+    algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = NULL,
                                .raw_json_input = NULL, .quiet = FALSE) {
   assert_qgis()
   assert_qgis_algorithm(algorithm)
@@ -103,4 +113,54 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
 
   qgis_check_stdout(result)
   result
+}
+
+
+#' @keywords internal
+#' @export
+qgis_run_algorithm.qgis_result <- function(
+    .data,
+    algorithm,
+    ...,
+    PROJECT_PATH = NULL,
+    ELLIPSOID = NULL,
+    .raw_json_input = NULL,
+    .select = "OUTPUT",
+    .clean = TRUE,
+    .quiet = TRUE
+) {
+  assert_that(is.string(.select))
+  withr::with_options(
+    list(warning.length = 6e3),
+    assert_that(
+      .select %in% names(.data),
+      msg = glue(
+        "The qgis_result object misses a '{.select}' element.\n",
+        "The included JSON-output was:\n",
+        "{jsonlite::prettify(.data$.processx_result$stdout)}"
+      )
+    )
+  )
+  output <- unclass(.data[[.select]])
+  fun <- qgis_function(algorithm)
+  result <- fun(output, ..., .quiet = .quiet)
+  if (.clean) qgis_result_clean(.data)
+  result
+}
+
+#' @keywords internal
+#' @export
+qgis_run_algorithm.character <- function(
+    .data,
+    algorithm,
+    ...,
+    PROJECT_PATH = NULL,
+    ELLIPSOID = NULL,
+    .raw_json_input = NULL,
+    .clean = TRUE,
+    .quiet = TRUE
+) {
+  assert_that(is.string(.data))
+  fun <- qgis_function(algorithm)
+  fun(.data, ..., .quiet = .quiet)
 }

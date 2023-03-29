@@ -19,12 +19,10 @@ qgis_providers()
 assert_qgis_algorithm(algorithm)
 }
 \arguments{
-\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
-a path to a QGIS model file.}
-
 \item{query}{Use \code{TRUE} to refresh the cached value.}
 
-\item{quiet}{Use \code{TRUE} to suppress output from processing algorithms.}
+\item{quiet}{Use \code{FALSE} to display more information about the command, possibly
+useful for debugging.}
 
 \item{provider}{A provider identifier (e.g., "native")}
 }

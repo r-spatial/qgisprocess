@@ -95,10 +95,12 @@ qgis_function <- function(algorithm, ...) {
     default_run_alg_args[intersect(names(default_run_alg_args), names(qgis_fun_args))]
 
   # generate the call to qgis_run_algorithm()
+
   qgis_algorithm_call <- rlang::call2(
     "qgis_run_algorithm",
-    algorithm,
+    algorithm = algorithm,
     !!!qgis_algorithm_args,
+    .data = NULL,
     .ns = "qgisprocess"
   )
 

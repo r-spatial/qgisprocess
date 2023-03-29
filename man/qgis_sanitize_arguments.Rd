@@ -61,12 +61,9 @@ qgis_argument_spec_by_name(
 )
 }
 \arguments{
-\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
-a path to a QGIS model file.}
-
-\item{...}{Named key-value pairs as arguments for each algorithm. Features of
-\code{\link[rlang:list2]{rlang::list2()}} are supported. These arguments
-are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()}}.}
+\item{...}{Default values to set when using \code{\link[=qgis_function]{qgis_function()}}.
+These values are evaluated once and immediately, so you shouldn't
+call \code{\link[=qgis_tmp_file]{qgis_tmp_file()}} here.}
 
 \item{.algorithm_arguments}{The result of \code{\link[=qgis_arguments]{qgis_arguments()}}}
 

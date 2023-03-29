@@ -18,10 +18,6 @@ qgis_outputs(algorithm)
 
 qgis_help(algorithm)
 }
-\arguments{
-\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
-a path to a QGIS model file.}
-}
 \description{
 Show algorithm help
 }
