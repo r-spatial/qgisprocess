@@ -10,7 +10,7 @@ qgis_run_algorithm(
   PROJECT_PATH = NULL,
   ELLIPSOID = NULL,
   .raw_json_input = NULL,
-  .quiet = FALSE
+  .quiet = TRUE
 )
 }
 \arguments{

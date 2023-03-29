@@ -27,7 +27,7 @@
 #' }
 #'
 qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = NULL,
-                               .raw_json_input = NULL, .quiet = FALSE) {
+                               .raw_json_input = NULL, .quiet = TRUE) {
   assert_qgis()
   assert_qgis_algorithm(algorithm)
 
