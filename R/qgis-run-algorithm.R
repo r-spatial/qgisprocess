@@ -5,7 +5,7 @@
 qgis_run_algorithm <- function(.data = NULL,
     algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = NULL,
     .raw_json_input = NULL, .quiet = FALSE) {
-  UseMethod("qgis_run_algorithm")
+  UseMethod("qgis_run_algorithm", .data)
 }
 
 
@@ -160,7 +160,8 @@ qgis_run_algorithm.character <- function(
     .clean = TRUE,
     .quiet = TRUE
 ) {
-  assert_that(is.string(.data) | is.null(.data))
+  browser()
+  assert_that(is.string(.data))
 
   fun <- qgis_function(algorithm)
   fun(.data, ..., .quiet = .quiet)
