@@ -1,6 +1,6 @@
 #' Run algorithms using 'qgis_process'
 #'
-#' @rdname qgis_function
+#' @rdname qgis_run_algorithm
 #' @export
 qgis_run_algorithm <- function(.data = NULL,
     algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = NULL,
@@ -151,7 +151,7 @@ qgis_run_algorithm.qgis_result <- function(
 #' @keywords internal
 #' @export
 qgis_run_algorithm.character <- function(
-    .data,
+    .data = NULL,
     algorithm,
     ...,
     PROJECT_PATH = NULL,
@@ -160,7 +160,8 @@ qgis_run_algorithm.character <- function(
     .clean = TRUE,
     .quiet = TRUE
 ) {
-  assert_that(is.string(.data))
+  assert_that(is.string(.data) | is.null(.data))
+
   fun <- qgis_function(algorithm)
   fun(.data, ..., .quiet = .quiet)
 }

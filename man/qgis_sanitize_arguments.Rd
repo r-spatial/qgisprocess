@@ -61,10 +61,6 @@ qgis_argument_spec_by_name(
 )
 }
 \arguments{
-\item{...}{Default values to set when using \code{\link[=qgis_function]{qgis_function()}}.
-These values are evaluated once and immediately, so you shouldn't
-call \code{\link[=qgis_tmp_file]{qgis_tmp_file()}} here.}
-
 \item{.algorithm_arguments}{The result of \code{\link[=qgis_arguments]{qgis_arguments()}}}
 
 \item{.use_json_input, use_json_input}{TRUE if the arguments will be
