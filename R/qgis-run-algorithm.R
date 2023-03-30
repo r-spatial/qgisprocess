@@ -1,9 +1,9 @@
 #' Run algorithms using 'qgis_process'
 #'
 #' Run QGIS algorithms.
-#' See the [QGIS docs](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/index.html)
+#' See the [QGIS docs](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html)
 #' for a detailed description of the algorithms provided
-#' 'out of the box' on QGIS (versions >= 3.14).
+#' 'out of the box' on QGIS.
 #'
 #' @param algorithm A qualified algorithm name (e.g., "native:filedownloader") or
 #'   a path to a QGIS model file.
