@@ -26,7 +26,8 @@ ellipsoid name for distance calculations.}
 
 \item{.raw_json_input}{The raw JSON to use as input in place of \code{...}.}
 
-\item{.quiet}{Use \code{TRUE} to suppress output from processing algorithms.}
+\item{.quiet}{Use \code{FALSE} to get extra output from processing algorithms.
+This can be useful in debugging.}
 }
 \description{
 Run QGIS algorithms.

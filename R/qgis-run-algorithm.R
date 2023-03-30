@@ -12,7 +12,8 @@
 #' @param ... Named key-value pairs as arguments for each algorithm. Features of
 #'   [rlang::list2()] are supported. These arguments
 #'   are converted to strings using [as_qgis_argument()].
-#' @param .quiet Use `TRUE` to suppress output from processing algorithms.
+#' @param .quiet Use `FALSE` to get extra output from processing algorithms.
+#' This can be useful in debugging.
 #' @param .raw_json_input The raw JSON to use as input in place of `...`.
 #'
 #' @export
