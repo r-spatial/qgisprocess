@@ -160,7 +160,6 @@ qgis_run_algorithm.character <- function(
     .clean = TRUE,
     .quiet = TRUE
 ) {
-  browser()
   assert_that(is.string(.data))
 
   fun <- qgis_function(algorithm)
