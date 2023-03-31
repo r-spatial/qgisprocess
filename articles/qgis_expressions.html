@@ -237,18 +237,6 @@ approach since QGIS 3.30.0 avoids the need for a QGIS project.</p>
 <span><span class="co">#&gt; Argument `FIELD_LENGTH` is unspecified (using QGIS default value).</span></span>
 <span><span class="co">#&gt; Argument `FIELD_PRECISION` is unspecified (using QGIS default value).</span></span>
 <span><span class="co">#&gt; Using `OUTPUT = qgis_tmp_vector()`</span></span>
-<span><span class="co">#&gt; JSON input ----</span></span>
-<span><span class="co">#&gt; {</span></span>
-<span><span class="co">#&gt;   "inputs": {</span></span>
-<span><span class="co">#&gt;     "INPUT": "/home/runner/work/_temp/Library/qgisprocess/longlake/longlake_depth.gpkg",</span></span>
-<span><span class="co">#&gt;     "FIELD_NAME": "distance",</span></span>
-<span><span class="co">#&gt;     "FIELD_TYPE": 0,</span></span>
-<span><span class="co">#&gt;     "FORMULA": "distance(\n @geometry, \n geometry(\n   get_feature_by_id(\n     load_layer('/tmp/RtmpzpGx5n/file2e3f3db63e08/file2e3f169a85ae.gpkg', 'ogr'), \n     1\n   )\n )\n)",</span></span>
-<span><span class="co">#&gt;     "OUTPUT": "/tmp/RtmpzpGx5n/file2e3f3db63e08/file2e3f7b47f07d.gpkg"</span></span>
-<span><span class="co">#&gt;   }</span></span>
-<span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Running qgis_process --json run 'native:fieldcalculator' -</span></span>
 <span><span class="co">#&gt; Simple feature collection with 64 features and 3 fields</span></span>
 <span><span class="co">#&gt; Geometry type: POINT</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
