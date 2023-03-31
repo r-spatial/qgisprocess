@@ -37,7 +37,8 @@ Defaults to \code{"OUTPUT"}.}
 Should an incoming \code{qgis_result} be cleaned (using \code{\link[=qgis_result_clean]{qgis_result_clean()}})
 after processing?}
 
-\item{.quiet}{Use \code{TRUE} to suppress output from processing algorithms.}
+\item{.quiet}{Use \code{FALSE} to get extra output from processing algorithms.
+This can be useful in debugging.}
 }
 \description{
 As opposed to \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, \code{\link[=qgis_function]{qgis_function()}} creates a callable
