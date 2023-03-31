@@ -82,7 +82,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
     ),
     echo_cmd = !.quiet,
     stdout_callback = if (!.quiet && !use_json_output) function(x, ...) cat(x),
-    stderr_callback = if (!.quiet) function(x, ...) message(x, appendLF = FALSE),
+    stderr_callback = function(x, ...) message(x, appendLF = FALSE),
     stdin = if (use_json_input) stdin_file,
     encoding = if (use_json_output) "UTF-8" else ""
   )
