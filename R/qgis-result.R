@@ -7,9 +7,6 @@
 #' At least one class must be inherited by an element of `x` for that element
 #' to be selected.
 #'
-#' @details
-#' `qgis_result_single()` tries to extract the single most useful element
-#' from a `qgis_result` object.
 #'
 #' @export
 #'
@@ -30,13 +27,21 @@ qgis_result_clean <- function(x) {
 #' @rdname is_qgis_result
 #' @export
 #'
-qgis_extract_output_by_name <- function(x, which = "OUTPUT") {
-  if (which %in% names(x)) {
-    x[[which]]
+qgis_extract_output_by_name <- function(x, name = "OUTPUT", single = TRUE) {
+  if (name %in% names(x)) {
+    x[[name]]
   } else {
-    abort(
-      qgis_error_output_does_not_exist(x, which)
-    )
+    default_name = grepl("^(output|OUTPUT)$", name)
+    result <- x[grepl("^(output|OUTPUT)$", names(x))][1][[1]]
+    if (default_name && !is.null(result) && single) {
+      return(result)
+    } else if (default_name && is.null(result) && single) {
+      return(x[[1]])
+    }else {
+      abort(
+        qgis_error_output_does_not_exist(x, name)
+      )
+    }
   }
 }
 
@@ -57,32 +62,27 @@ qgis_extract_output_by_position <- function(x, which) {
 
 #' @rdname is_qgis_result
 #' @export
-qgis_extract_output_by_class <- function(x, what) {
+qgis_extract_output_by_class <- function(x, class, single = TRUE) {
   # Limit result to elements that match class
-  x <- x[vapply(x, inherits, what, FUN.VALUE = logical(1))]
+  x <- x[vapply(x, inherits, class, FUN.VALUE = logical(1))]
   if (length(x) == 0L) {
     abort(
       paste(
         "Can't extract object from result: zero outputs of type",
-        paste(what, collapse = " or ")
+        paste(class, collapse = " or ")
       )
     )
   }
 
   # By default, take the first element named as output or OUTPUT.
   # Otherwise, take the first element that matches class.
-  result <- x[grepl("^(output|OUTPUT)$", names(x))][1][[1]]
-  if (is.null(result)) result <- x[[1]]
-  result
-}
+  if (single) {
+    result <- x[grepl("^(output|OUTPUT)$", names(x))][1][[1]]
+    if (is.null(result)) result <- x[[1]]
+  } else {
+    result <- x
+  }
 
-
-#' @rdname is_qgis_result
-#' @export
-qgis_result_single <- function(x) {
-  # Limit result to elements that match class
-  result <- x[grepl("^(output|OUTPUT)$", names(x))][1][[1]]
-  if (is.null(result)) result <- x[[1]]
   result
 }
 
