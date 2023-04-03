@@ -57,7 +57,7 @@ qgis_as_terra.qgis_outputLayer <- function(output, ...) {
 #' @rdname as_qgis_argument.SpatRaster
 #' @export
 qgis_as_terra.qgis_result <- function(output, ...) {
-  result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  result <- qgis_extract_output_by_class(output, c("qgis_outputRaster", "qgis_outputLayer"))
   terra::rast(unclass(result), ...)
 }
 

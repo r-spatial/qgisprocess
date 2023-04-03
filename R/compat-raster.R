@@ -75,14 +75,14 @@ qgis_as_brick.qgis_outputLayer <- function(output, ...) {
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
 qgis_as_raster.qgis_result <- function(output, ...) {
-  result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  result <- qgis_extract_output_by_class(output, c("qgis_outputRaster", "qgis_outputLayer"))
   raster::raster(unclass(result), ...)
 }
 
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
 qgis_as_brick.qgis_result <- function(output, ...) {
-  result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  result <- qgis_extract_output_by_class(output, c("qgis_outputRaster", "qgis_outputLayer"))
   raster::brick(unclass(result), ...)
 }
 

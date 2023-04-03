@@ -48,6 +48,6 @@ st_as_stars.qgis_outputLayer <- function(output, ...) {
 
 # dynamically registered in zzz.R
 st_as_stars.qgis_result <- function(output, ...) {
-  result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  result <- qgis_extract_output_by_class(output, c("qgis_outputRaster", "qgis_outputLayer"))
   stars::read_stars(unclass(result), ...)
 }
