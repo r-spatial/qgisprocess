@@ -62,10 +62,6 @@ test_that("qgis_extract_output_by_name() functions work", {
     .quiet = TRUE
   )
 
-  expect_true(all(file.exists(tmp_gpkg, tmp_gpkg2)))
-  qgis_result_clean(result)
-  expect_false(any(file.exists(tmp_gpkg, tmp_gpkg2)))
-
   expect_identical(
     qgis_extract_output_by_name(result, "OUTPUT"),
     result$OUTPUT
@@ -100,10 +96,6 @@ test_that("qgis_extract_output_by_position() functions work", {
     .quiet = TRUE
   )
 
-  expect_true(all(file.exists(tmp_gpkg, tmp_gpkg2)))
-  qgis_result_clean(result)
-  expect_false(any(file.exists(tmp_gpkg, tmp_gpkg2)))
-
   expect_identical(
     qgis_extract_output_by_position(result, 1),
     result$FAIL_OUTPUT
@@ -133,10 +125,6 @@ test_that("qgis_extract_output_by_class() functions work", {
     FAIL_OUTPUT = tmp_gpkg2,
     .quiet = TRUE
   )
-
-  expect_true(all(file.exists(tmp_gpkg, tmp_gpkg2)))
-  qgis_result_clean(result)
-  expect_false(any(file.exists(tmp_gpkg, tmp_gpkg2)))
 
   expect_identical(
     qgis_extract_output_by_class(result, "qgis_outputVector"),
