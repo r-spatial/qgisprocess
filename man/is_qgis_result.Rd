@@ -38,8 +38,6 @@ qgis_result_args(x)
 
 \item{which}{The name or index of an output.}
 
-\item{default}{A default value if the output does not exist.}
-
 \item{what}{Character vector of classes.
 At least one class must be inherited by an element of \code{x} for that element
 to be selected.}
@@ -47,3 +45,4 @@ to be selected.}
 \description{
 Access algorithm results
 }
+\keyword{internal}

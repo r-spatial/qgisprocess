@@ -8,11 +8,11 @@
 <!-- badges: start -->
 
 [![R build
-status](https://github.com/paleolimbot/qgisprocess/workflows/R-CMD-check/badge.svg)](https://github.com/paleolimbot/qgisprocess/actions)
+status](https://github.com/r-spatial/qgisprocess/workflows/R-CMD-check/badge.svg)](https://github.com/r-spatial/qgisprocess/actions)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Codecov test
-coverage](https://codecov.io/gh/paleolimbot/qgisprocess/branch/main/graph/badge.svg)](https://codecov.io/gh/paleolimbot/qgisprocess?branch=main)
+coverage](https://codecov.io/gh/r-spatial/qgisprocess/branch/main/graph/badge.svg)](https://codecov.io/gh/r-spatial/qgisprocess?branch=main)
 <!-- badges: end -->
 
 The goal of `qgisprocess` is to provide an R interface to the popular
@@ -30,7 +30,7 @@ You can install the development version from
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("paleolimbot/qgisprocess")
+remotes::install_github("r-spatial/qgisprocess")
 ```
 
 The qgisprocess package wraps the `qgis_process` command-line utility,

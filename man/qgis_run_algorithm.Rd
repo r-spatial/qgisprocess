@@ -10,7 +10,7 @@ qgis_run_algorithm(
   PROJECT_PATH = NULL,
   ELLIPSOID = NULL,
   .raw_json_input = NULL,
-  .quiet = FALSE
+  .quiet = TRUE
 )
 }
 \arguments{
@@ -26,13 +26,14 @@ ellipsoid name for distance calculations.}
 
 \item{.raw_json_input}{The raw JSON to use as input in place of \code{...}.}
 
-\item{.quiet}{Use \code{TRUE} to suppress output from processing algorithms.}
+\item{.quiet}{Use \code{FALSE} to get extra output from processing algorithms.
+This can be useful in debugging.}
 }
 \description{
 Run QGIS algorithms.
-See the \href{https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/index.html}{QGIS docs}
+See the \href{https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html}{QGIS docs}
 for a detailed description of the algorithms provided
-'out of the box' on QGIS (versions >= 3.14).
+'out of the box' on QGIS.
 }
 \examples{
 if (has_qgis()) {

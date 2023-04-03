@@ -19,8 +19,8 @@ Must be one of: \code{"all"}, \code{"enabled"}, \code{"disabled"}.}
 
 \item{query}{Use \code{TRUE} to refresh the cached value.}
 
-\item{quiet}{Use \code{FALSE} to display more information about the command, possibly
-useful for debugging.}
+\item{quiet}{Use \code{FALSE} to display more information about the command,
+possibly useful for debugging.}
 
 \item{...}{Only used by other functions calling this function.}
 

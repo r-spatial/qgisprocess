@@ -9,6 +9,15 @@
 #'
 #' @inheritParams qgis_run_algorithm
 #' @param .data Passed to the first input of `algorithm`.
+#' If `.data` is a `qgis_result` (the result of a previous processing
+#' step), `.data[[.select]]` is passed instead.
+#' @param .select String.
+#' The name of the element to select from `.data` if the latter is a
+#' `qgis_result`.
+#' Defaults to `"OUTPUT"`.
+#' @param .clean Logical.
+#' Should an incoming `qgis_result` be cleaned (using [qgis_result_clean()])
+#' after processing?
 #' @param ... Default values to set when using [qgis_function()].
 #'   These values are evaluated once and immediately, so you shouldn't
 #'   call [qgis_tmp_file()] here.
@@ -108,7 +117,61 @@ qgis_function <- function(algorithm, ...) {
 
 #' @rdname qgis_function
 #' @export
-qgis_pipe <- function(.data, algorithm, ..., .quiet = TRUE) {
+qgis_pipe <- function(
+    .data,
+    algorithm,
+    ...,
+    .select = "OUTPUT",
+    .clean = TRUE,
+    .quiet = TRUE
+) {
+  UseMethod("qgis_pipe")
+}
+
+#' @keywords internal
+#' @export
+qgis_pipe.qgis_result <- function(
+    .data,
+    algorithm,
+    ...,
+    .select = "OUTPUT",
+    .clean = TRUE,
+    .quiet = TRUE
+) {
+  assert_that(is.string(.select))
+  withr::with_options(
+    list(warning.length = 6e3),
+    assert_that(
+      .select %in% names(.data),
+      msg = glue(
+        "The qgis_result object misses a '{.select}' element.\n",
+        "The included JSON-output was:\n",
+        "{jsonlite::prettify(.data$.processx_result$stdout)}"
+      )
+    )
+  )
+  output <- unclass(.data[[.select]])
+  fun <- qgis_function(algorithm)
+  result <- fun(output, ..., .quiet = .quiet)
+  if (.clean) qgis_result_clean(.data)
+  result
+}
+
+#' @keywords internal
+#' @export
+qgis_pipe.default <- function(
+    .data,
+    algorithm,
+    ...,
+    .select = "OUTPUT",
+    .clean = TRUE,
+    .quiet = TRUE
+) {
+  if (stringr::str_detect(class(.data), "^qgis_output")) {
+    .data <- unclass(.data)
+  }
   fun <- qgis_function(algorithm)
   fun(.data, ..., .quiet = .quiet)
 }
+
+

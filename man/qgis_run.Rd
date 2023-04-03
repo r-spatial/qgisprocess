@@ -45,8 +45,8 @@ qgis_env()
 \item{action}{An action to take if the 'qgis_process' executable could not be
 found.}
 
-\item{quiet}{Use \code{FALSE} to display more information about the command, possibly
-useful for debugging.}
+\item{quiet}{Use \code{FALSE} to display more information about the command,
+possibly useful for debugging.}
 
 \item{use_cached_data}{Use the cached algorithm list and \code{path} found when
 configuring qgisprocess during the last session. This saves some time

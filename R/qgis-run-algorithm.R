@@ -1,9 +1,9 @@
 #' Run algorithms using 'qgis_process'
 #'
 #' Run QGIS algorithms.
-#' See the [QGIS docs](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/index.html)
+#' See the [QGIS docs](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html)
 #' for a detailed description of the algorithms provided
-#' 'out of the box' on QGIS (versions >= 3.14).
+#' 'out of the box' on QGIS.
 #'
 #' @param algorithm A qualified algorithm name (e.g., "native:filedownloader") or
 #'   a path to a QGIS model file.
@@ -12,7 +12,8 @@
 #' @param ... Named key-value pairs as arguments for each algorithm. Features of
 #'   [rlang::list2()] are supported. These arguments
 #'   are converted to strings using [as_qgis_argument()].
-#' @param .quiet Use `TRUE` to suppress output from processing algorithms.
+#' @param .quiet Use `FALSE` to get extra output from processing algorithms.
+#' This can be useful in debugging.
 #' @param .raw_json_input The raw JSON to use as input in place of `...`.
 #'
 #' @export
@@ -27,7 +28,7 @@
 #' }
 #'
 qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = NULL,
-                               .raw_json_input = NULL, .quiet = FALSE) {
+                               .raw_json_input = NULL, .quiet = TRUE) {
   assert_qgis()
   assert_qgis_algorithm(algorithm)
 
@@ -81,7 +82,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
     ),
     echo_cmd = !.quiet,
     stdout_callback = if (!.quiet && !use_json_output) function(x, ...) cat(x),
-    stderr_callback = if (!.quiet) function(x, ...) message(x, appendLF = FALSE),
+    stderr_callback = function(x, ...) message(x, appendLF = FALSE),
     stdin = if (use_json_input) stdin_file,
     encoding = if (use_json_output) "UTF-8" else ""
   )

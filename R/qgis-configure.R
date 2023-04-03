@@ -32,8 +32,8 @@
 #'
 #' @param ... Passed to [processx::run()].
 #' @param args Command-line arguments
-#' @param quiet Use `FALSE` to display more information about the command, possibly
-#'   useful for debugging.
+#' @param quiet Use `FALSE` to display more information about the command,
+#' possibly useful for debugging.
 #' @param query Use `TRUE` to refresh the cached value.
 #' @param action An action to take if the 'qgis_process' executable could not be
 #'   found.
@@ -416,6 +416,10 @@ qgis_version <- function(query = FALSE, quiet = TRUE, debug = FALSE) {
   }
 
   if (debug) {
+    if (package_version(strsplit(qgis_version(), "-")[[1]][1]) < "3.22.0") {
+      warning("'debug = TRUE' is not supported for QGIS versions < 3.22")
+      return(qgisprocess_cache$version)
+    }
     print(qgisprocess_cache$version)
     message()
     message("Versions reported by 'qgis_process':")
@@ -601,12 +605,26 @@ qgis_env <- function() {
 
 #' @keywords internal
 qgis_query_version <- function(quiet = FALSE) {
-  result <- qgis_run(args = "--version")
-  lines <- readLines(textConnection(result$stdout))
-  match <- stringr::str_match(
-    lines,
-    "QGIS\\s(\\d{1,2}\\.\\d+.*-\\p{L}+)\\s.*\\((.+)\\)"
-  )[, 2:3, drop = TRUE]
+  tryCatch({
+    result <- qgis_run(args = "--version")
+    lines <- readLines(textConnection(result$stdout))
+    match <- stringr::str_match(
+      lines,
+      "QGIS\\s(\\d{1,2}\\.\\d+.*-\\p{L}+)\\s.*\\((.+)\\)"
+    )[, 2:3, drop = TRUE]
+  },
+  error = function(e) {
+    # QGIS < 3.22 does not support '--version'
+    result <- qgis_run(args = character(0))
+    lines <- readLines(textConnection(result$stdout))
+    match <- stringr::str_match(
+      lines,
+      "\\((\\d{1,2}\\.\\d+.*-.+)\\)"
+    )[, 2, drop = TRUE]
+    assign("match", match, envir = parent.env(environment()))
+    assign("lines", lines, envir = parent.env(environment()))
+  }
+  )
   match <- match[!is.na(match)]
   if (length(match) == 0L) abort_query_version(lines = lines)
   if (
