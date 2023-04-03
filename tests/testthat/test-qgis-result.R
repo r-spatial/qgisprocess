@@ -1,11 +1,19 @@
 test_that("qgis_extract_output_by_name() works", {
-  expect_identical(qgis_extract_output_by_name(list(a = 1), "a"), 1)
-  expect_error(qgis_extract_output_by_name(list(a = 1), "b"), "Result has no output")
-  expect_identical(qgis_extract_output_by_name(list(a = 1, output = 5)), 5)
-  expect_identical(qgis_extract_output_by_name(list(a = 1, notoutput = 8)), 1)
 
-  expect_error(qgis_extract_output_by_name(list(a = 1, notoutput = 8), single = FALSE), "Result has no output")
-  expect_error(qgis_extract_output_by_name(list(a = 1, notoutput = 8), "b", single = FALSE), "Result has no output")
+  output <- list(a = 1)
+  class(output) <- "qgis_result"
+  expect_identical(qgis_extract_output_by_name(output, "a"), 1)
+  expect_error(qgis_extract_output_by_name(output, "b"), "Result has no output")
+
+  output <- list(a = 1, output = 5)
+  class(output) <- "qgis_result"
+  expect_identical(qgis_extract_output_by_name(output), 5)
+
+  output <- list(a = 1, notoutput = 8)
+  class(output) <- "qgis_result"
+  expect_identical(qgis_extract_output_by_name(output), 1)
+  expect_error(qgis_extract_output_by_name(output, single = FALSE), "Result has no output")
+  expect_error(qgis_extract_output_by_name(output, "b", single = FALSE), "Result has no output")
 })
 
 test_that("qgis_result_*() functions work", {
