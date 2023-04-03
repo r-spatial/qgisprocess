@@ -6,7 +6,6 @@
 \alias{qgis_extract_output_by_name}
 \alias{qgis_extract_output_by_position}
 \alias{qgis_extract_output_by_class}
-\alias{qgis_result_single}
 \alias{qgis_error_output_does_not_exist}
 \alias{qgis_result_status}
 \alias{qgis_result_stdout}
@@ -18,13 +17,11 @@ is_qgis_result(x)
 
 qgis_result_clean(x)
 
-qgis_extract_output_by_name(x, which = "OUTPUT")
+qgis_extract_output_by_name(x, name = "OUTPUT", single = TRUE)
 
 qgis_extract_output_by_position(x, which)
 
-qgis_extract_output_by_class(x, what)
-
-qgis_result_single(x)
+qgis_extract_output_by_class(x, class, single = TRUE)
 
 qgis_error_output_does_not_exist(x, which)
 
@@ -41,16 +38,12 @@ qgis_result_args(x)
 
 \item{which}{The name or index of an output.}
 
+\item{default}{A default value if the output does not exist.}
+
 \item{what}{Character vector of classes.
 At least one class must be inherited by an element of \code{x} for that element
 to be selected.}
-
-\item{default}{A default value if the output does not exist.}
 }
 \description{
 Access algorithm results
-}
-\details{
-\code{qgis_result_single()} tries to extract the single most useful element
-from a \code{qgis_result} object.
 }
