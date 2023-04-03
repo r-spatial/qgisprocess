@@ -23,7 +23,7 @@ qgis_result_clean <- function(x) {
 }
 
 qgis_leave_only_results <- function(x) {
-  assert_that(inherits(x, "qgis_result"), length(which) == 1L)
+  assert_that(inherits(x, "qgis_result"))
   output_names <- setdiff(
     names(x),
     c(".algorithm", ".args", ".processx_result", ".raw_json_input")
