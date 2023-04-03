@@ -22,11 +22,21 @@ qgis_result_clean <- function(x) {
   invisible(x)
 }
 
+qgis_leave_only_results <- function(x) {
+  assert_that(inherits(x, "qgis_result"), length(which) == 1L)
+  output_names <- setdiff(
+    names(x),
+    c(".algorithm", ".args", ".processx_result", ".raw_json_input")
+  )
+  x <- x[output_names]
+}
+
 
 #' @rdname is_qgis_result
 #' @export
 #'
 qgis_extract_output_by_name <- function(x, name = "OUTPUT", single = TRUE) {
+  x <- qgis_leave_only_results(x)
   if (name %in% names(x)) {
     x[[name]]
   } else {
@@ -49,6 +59,7 @@ qgis_extract_output_by_name <- function(x, name = "OUTPUT", single = TRUE) {
 #' @export
 #'
 qgis_extract_output_by_position <- function(x, which) {
+  x <- qgis_leave_only_results(x)
   if (is.numeric(which) && (which %in% seq_along(x))) {
     x[[which]]
   } else {
@@ -62,6 +73,7 @@ qgis_extract_output_by_position <- function(x, which) {
 #' @rdname is_qgis_result
 #' @export
 qgis_extract_output_by_class <- function(x, class, single = TRUE) {
+  x <- qgis_leave_only_results(x)
   # Limit result to elements that match class
   x <- x[vapply(x, inherits, class, FUN.VALUE = logical(1))]
   if (length(x) == 0L) {
