@@ -28,7 +28,8 @@ create a blank \code{spec} for testing.}
 \item{use_json_input}{TRUE if the arguments will be
 serialized as JSON instead of serialized as a command-line argument.}
 
-\item{output}{The result from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} or \code{\link[=qgis_output]{qgis_output()}}.}
+\item{output}{The result from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} or \code{\link[=qgis_extract_output_by_name]{qgis_extract_output_by_name()}},
+\code{\link[=qgis_extract_output_by_position]{qgis_extract_output_by_position()}} or \code{\link[=qgis_extract_output_by_class]{qgis_extract_output_by_class()}}.}
 
 \item{...}{Passed to \code{\link[terra:rast]{terra::rast()}}.}
 }

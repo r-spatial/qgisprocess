@@ -1,7 +1,8 @@
 #' Convert terra objects to/from QGIS inputs/outputs
 #'
 #' @param x A [terra::rast()].
-#' @param output The result from [qgis_run_algorithm()] or [qgis_output()].
+#' @param output The result from [qgis_run_algorithm()] or [qgis_extract_output_by_name()],
+#' [qgis_extract_output_by_position()] or [qgis_extract_output_by_class()].
 #' @param ... Passed to [terra::rast()].
 #' @inheritParams as_qgis_argument
 #'
