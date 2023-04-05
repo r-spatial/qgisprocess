@@ -10,5 +10,5 @@ navbar:
   components:
     github:
      icon: fa-github
-     href: https://github.com/paleolimbot/qgisprocess
+     href: https://github.com/r-spatial/qgisprocess
      aria-label: GitHub

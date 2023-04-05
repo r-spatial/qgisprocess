@@ -4,7 +4,6 @@
 \alias{is_qgis_result}
 \alias{qgis_result_clean}
 \alias{qgis_output}
-\alias{qgis_error_output_does_not_exist}
 \alias{qgis_result_single}
 \alias{qgis_result_status}
 \alias{qgis_result_stdout}
@@ -16,9 +15,7 @@ is_qgis_result(x)
 
 qgis_result_clean(x)
 
-qgis_output(x, which, default = qgis_error_output_does_not_exist(x, which))
-
-qgis_error_output_does_not_exist(x, which)
+qgis_output(x, which)
 
 qgis_result_single(x, what)
 
@@ -34,8 +31,6 @@ qgis_result_args(x)
 \item{x}{An object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
 
 \item{which}{The name or index of an output.}
-
-\item{default}{A default value if the output does not exist.}
 
 \item{what}{Character vector of classes.
 At least one class must be inherited by an element of \code{x} for that element

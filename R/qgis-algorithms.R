@@ -6,6 +6,8 @@
 #' 'out of the box' on QGIS (versions >= 3.14).
 #'
 #' @param provider A provider identifier (e.g., "native")
+#' @param quiet Use `FALSE` to display more information about the command,
+#' possibly useful for debugging.
 #' @inheritParams qgis_run_algorithm
 #' @inheritParams qgis_run
 #'

@@ -40,7 +40,7 @@ test_that("qgis_function() works", {
 test_that("qgis_pipe() works", {
   skip_if_not(has_qgis())
 
-  result <- system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") %>%
+  result <- system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") |>
     qgis_pipe(
       "native:buffer",
       DISTANCE = 100,
@@ -52,4 +52,42 @@ test_that("qgis_pipe() works", {
     )
 
   expect_s3_class(result, "qgis_result")
+  expect_true(file.exists(result$.args$OUTPUT))
+
+  result2 <- result |>
+    qgis_pipe("native:subdivide", MAX_NODES = 10, .clean = FALSE) |>
+    qgis_pipe("native:dissolve", .clean = FALSE)
+
+  expect_true(file.exists(result$.args$OUTPUT))
+
+  expect_s3_class(result2, "qgis_result")
+  expect_named(result2, c("OUTPUT", ".algorithm", ".args", ".raw_json_input", ".processx_result"))
+  expect_equal(sf::st_area(sf::st_as_sf(result)), sf::st_area(sf::st_as_sf(result2)))
+
+  result3 <- result |>
+    qgis_output("OUTPUT") |>
+    qgis_pipe("native:subdivide", MAX_NODES = 10)
+  expect_s3_class(result3, "qgis_result")
+  expect_named(result3, c("OUTPUT", ".algorithm", ".args", ".raw_json_input", ".processx_result"))
+
+  expect_error(
+    result |>
+      qgis_pipe(
+        "native:subdivide",
+        MAX_NODES = 10,
+        .clean = FALSE,
+        .select = "dummy"
+      ),
+    "The qgis_result object misses"
+  )
+
+  result4 <- result |>
+    qgis_pipe("native:subdivide", MAX_NODES = 10)
+  expect_false(file.exists(result$.args$OUTPUT))
+
+  fake_result <- structure(result[".processx_result"], class = "qgis_result")
+  expect_error(
+    fake_result |> qgis_pipe("native:subdivide", MAX_NODES = 10),
+    "The qgis_result object misses"
+  )
 })

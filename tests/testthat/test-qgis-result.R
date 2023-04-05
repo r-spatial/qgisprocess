@@ -1,7 +1,13 @@
 test_that("qgis_output() works", {
-  expect_identical(qgis_output(list(a = 1), "a"), 1)
-  expect_identical(qgis_output(list(a = 1), "b", default = 2), 2)
-  expect_error(qgis_output(list(a = 1), "b"), "Result has no output")
+  expect_error(
+    qgis_output(list(abcde = 1), "a"),
+    "does not inherit from class qgis_result"
+  )
+  qres <- structure(list(a = 1, .args = "foo"), class = "qgis_result")
+  expect_identical(qgis_output(qres, "a"), 1)
+  expect_identical(qgis_output(qres, 1), 1)
+  expect_error(qgis_output(qres, "b"), "Result has no output")
+  expect_error(qgis_output(qres, ".args"), "Result has no output")
 })
 
 test_that("qgis_result_*() functions work", {
@@ -38,6 +44,10 @@ test_that("qgis_result_*() functions work", {
   expect_error(qgis_result_single(result, "numeric"), "zero outputs of type")
   expect_identical(
     qgis_result_single(result, "qgis_outputVector"),
+    result$OUTPUT
+  )
+  expect_identical(
+    qgis_result_single(result),
     result$OUTPUT
   )
 
