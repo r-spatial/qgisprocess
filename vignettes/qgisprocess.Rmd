@@ -36,15 +36,6 @@ docker pull ghcr.io/geocompx/docker:qgis
 
 For a more detailed introduction on how to get started with docker, please refer to https://github.com/geocompx/docker.
 
-<!--
-in the docker container I needed to refer to /usr/bin/qgis_process.bin, hence, only the following worked:
-
-```{r, eval=FALSE}
-options(qgisprocess.path = "/usr/bin/qgis_process.bin")
-library(qgisprocess)
-```
--->
-
 # Package configuration
 
 Since **qgisprocess** depends on the command line tool `qgis_process`, it already tries to detect `qgis_process` on your system when it is being loaded, and complains if it cannot find it.
@@ -53,12 +44,10 @@ Since **qgisprocess** depends on the command line tool `qgis_process`, it alread
 library("qgisprocess")
 ```
 
-More specifically, **qgisprocess** tries to make use of the previously saved state of the package, including the filepath of `qgis_process`, the QGIS version and the list of known algorithms.
-Both the filepath and the QGIS version are checked, as well as other conditions.
+In fact, once **qgisprocess** has detected `qgis_process`, it will cache among others the path to the executable, the QGIS version and the list of known algorithms.
+Therefore, usually you don't have to do any configuration yourself, unless there's a message telling you to do so.
 
-So the **main point** is that usually you don't have to do any configuration yourself, unless there's a message telling you to do so.
-
-If you want to find out more details about this process, e.g. how **qgisprocess**  detected `qgis_process`, run `qgis_configure(use_cached_data = TRUE)`.
+If you are interested in the details about this process, e.g. how **qgisprocess**  detected `qgis_process`, run `qgis_configure(use_cached_data = TRUE)`.
 
 ```{r config}
 qgis_configure(use_cached_data = TRUE)
@@ -124,23 +113,23 @@ qgis_show_help("native:buffer")
 ##...
 ```
 
-Find out the arguments of a specific geoalgorithm:
+To find out the arguments of a specific geoalgorithm, run:
 
 ```{r args-buffer}
 qgis_arguments("native:buffer")
 ```
 
-And finally run it:
+And finally run it with `qgis_run_algorithm()`:
 
 ```{r buffer}
-data("random_points", package = "spDataLarge")
-out <- qgis_run_algorithm("native:buffer", INPUT = random_points, DISTANCE = 50,
-                          .quiet = TRUE)
 # if needed, first install spDataLarge:
 # remotes::install_github("Nowosad/spDataLarge")
+data("random_points", package = "spDataLarge")
+out <- qgis_run_algorithm("native:buffer", INPUT = random_points, DISTANCE = 50)
 ```
 
 As a convenience to the user, `qgis_run_algorithm()` reports all unspecified and automatically chosen arguments.
+If you want to have even more information on what is going on in the background, set `.quiet` to `FALSE`.
 The `out` object is of class `qgis_result` and contains the path to the output object created by `qgis_process` (when not explicitly setting an output object, **qgisprocess** creates it automatically for you), the used algorithm and input arguments as well as an object `.processx_result` which is especially useful if somethings went wrong.
 
 For QGIS 3.24 and later, `qgis_run_algorithm()` passes the input arguments to QGIS as a JSON string.
@@ -210,9 +199,8 @@ library("terra")
 # attach digital elevation model from Mt. Mongón (Peru)
 dem <- rast(system.file("raster/dem.tif", package = "spDataLarge"))
 
-info <- qgis_run_algorithm(alg = "grass7:r.slope.aspect",
-                           elevation = dem, 
-                           .quiet = TRUE)
+info <- qgis_run_algorithm(alg = "grass7:r.slope.aspect", elevation = dem)
+                           
 ```
 
 Just printing the `info` object shows which output objects have been made:
