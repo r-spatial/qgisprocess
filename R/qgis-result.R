@@ -1,10 +1,19 @@
 #' Access algorithm results
 #'
 #' @param x An object returned by [qgis_run_algorithm()].
-#' @param which The name or index of an output.
-#' @param what Character vector of classes.
+#' @param which The index of an output.
+#' @param name The name of an output.
+#' @param class Character vector of classes.
 #' At least one class must be inherited by an element of `x` for that element
 #' to be selected.
+#' @param single Logical.
+#' Ensures the selection of a single output in `qgis_extract_output_by_class()`.
+#' The `OUTPUT` or `output` element is taken if available; otherwise falls back
+#' to the first element (that meets the specified class).
+#' @param first Logical.
+#' Should `qgis_extract_output_by_name()` fall back to the first
+#' output element if the default `OUTPUT` or `output` element are not available?
+#' Only takes effect if `name` is not found.
 #'
 #'
 #' @export
