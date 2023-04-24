@@ -88,6 +88,7 @@ qgis_extract_output_by_position <- function(x, which) {
 #' @rdname is_qgis_result
 #' @export
 qgis_extract_output_by_class <- function(x, class, single = TRUE) {
+  assert_that(is.character(class))
   x <- qgis_leave_only_results(x)
   # Limit result to elements that match class
   x <- x[vapply(x, inherits, class, FUN.VALUE = logical(1))]
