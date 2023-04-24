@@ -4,6 +4,7 @@
 \alias{is_qgis_result}
 \alias{qgis_result_clean}
 \alias{qgis_extract_output_by_name}
+\alias{qgis_extract_output}
 \alias{qgis_extract_output_by_position}
 \alias{qgis_extract_output_by_class}
 \alias{qgis_result_status}
@@ -17,6 +18,8 @@ is_qgis_result(x)
 qgis_result_clean(x)
 
 qgis_extract_output_by_name(x, name = "OUTPUT", first = TRUE)
+
+qgis_extract_output(x, name = "OUTPUT", first = TRUE)
 
 qgis_extract_output_by_position(x, which)
 
@@ -53,4 +56,7 @@ to the first element (that meets the specified class).}
 }
 \description{
 Access algorithm results
+}
+\details{
+\code{qgis_extract_output()} is a shortcut for \code{qgis_extract_output_by_name()}
 }

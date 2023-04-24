@@ -1,5 +1,9 @@
 #' Access algorithm results
 #'
+#' @details
+#' `qgis_extract_output()` is a shortcut for `qgis_extract_output_by_name()`
+#'
+#'
 #' @param x An object returned by [qgis_run_algorithm()].
 #' @param which The index of an output.
 #' @param name The name of an output.
@@ -61,6 +65,10 @@ qgis_extract_output_by_name <- function(x, name = "OUTPUT", first = TRUE) {
     }
   }
 }
+
+#' @rdname is_qgis_result
+#' @export
+qgis_extract_output <- qgis_extract_output_by_name
 
 
 #' @rdname is_qgis_result
