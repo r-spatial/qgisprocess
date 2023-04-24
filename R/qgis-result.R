@@ -35,7 +35,7 @@ qgis_leave_only_results <- function(x) {
 #' @rdname is_qgis_result
 #' @export
 #'
-qgis_extract_output_by_name <- function(x, name = "OUTPUT", single = TRUE) {
+qgis_extract_output_by_name <- function(x, name = "OUTPUT", first = TRUE) {
   x <- qgis_leave_only_results(x)
   if (name %in% names(x)) {
     x[[name]]
@@ -44,7 +44,7 @@ qgis_extract_output_by_name <- function(x, name = "OUTPUT", single = TRUE) {
     result <- x[grepl("^(output|OUTPUT)$", names(x))][1][[1]]
     if (default_name && !is.null(result)) {
       return(result)
-    } else if (default_name && is.null(result) && single) {
+    } else if (default_name && is.null(result) && first) {
       return(x[[1]])
     } else {
       qgis_error_output_does_not_exist(x, name)
