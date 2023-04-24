@@ -28,7 +28,7 @@ qgis_leave_only_results <- function(x) {
     names(x),
     c(".algorithm", ".args", ".processx_result", ".raw_json_input")
   )
-  x <- x[output_names]
+  x[output_names]
 }
 
 
