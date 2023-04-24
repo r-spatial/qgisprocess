@@ -121,11 +121,11 @@ qgis_error_output_does_not_exist <- function(x, which) {
     inherits(x, "list")
   )
   available_outputs <- glue::glue_collapse(
-    paste0("'", names(x), "'"),
+    paste0("'", names(x), "' (", seq_along(names(x)), ")"),
     sep = ", ", last = " and "
   )
 
-  abort(glue("Result has no output '{ which }'.\nAvailable outputs are { available_outputs }"))
+  abort(glue("Result has no output { which }.\nAvailable outputs are { available_outputs }"))
 }
 
 
