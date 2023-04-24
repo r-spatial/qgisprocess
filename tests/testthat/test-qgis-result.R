@@ -90,8 +90,8 @@ test_that("qgis_extract_output_by_name() functions work", {
     result$OUTPUT
   )
 
-  expect_error(qgis_extract_output_by_name(result, "A" ), "Result has no output")
-  expect_error(qgis_extract_output_by_name(result, 1), "Result has no output")
+  expect_error(qgis_extract_output_by_name(result, "A"), "Result has no output")
+  expect_error(qgis_extract_output_by_name(result, 1), "name is not a string")
 })
 
 test_that("qgis_extract_output_by_position() functions work", {
@@ -120,7 +120,7 @@ test_that("qgis_extract_output_by_position() functions work", {
     result$OUTPUT
   )
 
-  expect_error(qgis_extract_output_by_position(result, "A"), "Result has no output")
+  expect_error(qgis_extract_output_by_position(result, "A"), "which is not a number")
   expect_error(qgis_extract_output_by_position(result, 8), "Result has no output")
 })
 
@@ -147,5 +147,5 @@ test_that("qgis_extract_output_by_class() functions work", {
   )
 
   expect_error(qgis_extract_output_by_class(result, "A"), "Can't extract object")
-  expect_error(qgis_extract_output_by_class(result, 1), "must be a character vector")
+  expect_error(qgis_extract_output_by_class(result, 1), "is not a character vector")
 })
