@@ -42,7 +42,7 @@ qgis_extract_output_by_name <- function(x, name = "OUTPUT", single = TRUE) {
   } else {
     default_name = grepl("^(output|OUTPUT)$", name)
     result <- x[grepl("^(output|OUTPUT)$", names(x))][1][[1]]
-    if (default_name && !is.null(result) && single) {
+    if (default_name && !is.null(result)) {
       return(result)
     } else if (default_name && is.null(result) && single) {
       return(x[[1]])
