@@ -46,10 +46,8 @@ qgis_extract_output_by_name <- function(x, name = "OUTPUT", single = TRUE) {
       return(result)
     } else if (default_name && is.null(result) && single) {
       return(x[[1]])
-    }else {
-      abort(
-        qgis_error_output_does_not_exist(x, name)
-      )
+    } else {
+      qgis_error_output_does_not_exist(x, name)
     }
   }
 }
@@ -63,9 +61,7 @@ qgis_extract_output_by_position <- function(x, which) {
   if (is.numeric(which) && (which %in% seq_along(x))) {
     x[[which]]
   } else {
-    abort(
-      qgis_error_output_does_not_exist(x, which)
-    )
+    qgis_error_output_does_not_exist(x, which)
   }
 }
 
@@ -98,10 +94,7 @@ qgis_extract_output_by_class <- function(x, class, single = TRUE) {
 }
 
 
-#' @rdname is_qgis_result
-#' @export
 #' @keywords internal
-
 qgis_error_output_does_not_exist <- function(x, which) {
   assert_that(
     !any(names(x) %in%
