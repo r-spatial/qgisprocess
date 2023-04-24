@@ -45,6 +45,7 @@ qgis_leave_only_results <- function(x) {
 #' @export
 #'
 qgis_extract_output_by_name <- function(x, name = "OUTPUT", first = TRUE) {
+  assert_that(is.string(name))
   x <- qgis_leave_only_results(x)
   if (name %in% names(x)) {
     x[[name]]
@@ -66,6 +67,7 @@ qgis_extract_output_by_name <- function(x, name = "OUTPUT", first = TRUE) {
 #' @export
 #'
 qgis_extract_output_by_position <- function(x, which) {
+  assert_that(is.number(which))
   x <- qgis_leave_only_results(x)
   if (is.numeric(which) && (which %in% seq_along(x))) {
     x[[which]]
