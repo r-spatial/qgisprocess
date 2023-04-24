@@ -144,7 +144,17 @@ test_that("qgis_extract_output_by_class() functions work", {
     qgis_extract_output_by_class(result, "qgis_outputVector"),
     result$OUTPUT
   )
+  expect_identical(
+    qgis_extract_output_by_class(result, "qgis_outputVector", single = FALSE),
+    list(FAIL_OUTPUT = result$FAIL_OUTPUT, OUTPUT = result$OUTPUT)
+  )
 
   expect_error(qgis_extract_output_by_class(result, "A"), "Can't extract object")
   expect_error(qgis_extract_output_by_class(result, 1), "is not a character vector")
+
+  result$OUTPUT <- NULL
+  expect_identical(
+    qgis_extract_output_by_class(result, "qgis_outputVector"),
+    result$FAIL_OUTPUT
+  )
 })
