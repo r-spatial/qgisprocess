@@ -1,5 +1,4 @@
 test_that("qgis_extract_output() and qgis_extract_output_by_name() work", {
-
   expect_error(
     qgis_extract_output(list(abcde = 1), "a"),
     "does not inherit from class qgis_result"
