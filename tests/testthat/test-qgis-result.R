@@ -1,19 +1,26 @@
-test_that("qgis_extract_output_by_name() works", {
+test_that("qgis_extract_output() and qgis_extract_output_by_name() work", {
 
-  output <- list(a = 1)
-  class(output) <- "qgis_result"
-  expect_identical(qgis_extract_output_by_name(output, "a"), 1)
-  expect_error(qgis_extract_output_by_name(output, "b"), "Result has no output")
+  expect_error(
+    qgis_extract_output(list(abcde = 1), "a"),
+    "does not inherit from class qgis_result"
+  )
 
-  output <- list(a = 1, output = 5)
-  class(output) <- "qgis_result"
-  expect_identical(qgis_extract_output_by_name(output), 5)
+  qres <- structure(list(a = 1), class = "qgis_result")
+  expect_identical(qgis_extract_output_by_name(qres, "a"), 1)
+  expect_error(qgis_extract_output_by_name(qres, "b"), "Result has no output")
 
-  output <- list(a = 1, notoutput = 8)
-  class(output) <- "qgis_result"
-  expect_identical(qgis_extract_output_by_name(output), 1)
-  expect_error(qgis_extract_output_by_name(output, single = FALSE), "Result has no output")
-  expect_error(qgis_extract_output_by_name(output, "b", single = FALSE), "Result has no output")
+  qres <- structure(list(a = 1, output = 5), class = "qgis_result")
+  expect_identical(qgis_extract_output_by_name(qres), 5)
+
+  qres <- structure(list(a = 1, .args = "foo"), class = "qgis_result")
+  expect_identical(qgis_extract_output(qres, "a"), 1)
+  expect_error(qgis_extract_output(qres, "b"), "Result has no output")
+  expect_error(qgis_extract_output(qres, ".args"), "Result has no output")
+
+  qres <- structure(list(a = 1, notoutput = 8), class = "qgis_result")
+  expect_identical(qgis_extract_output_by_name(qres), 1)
+  expect_error(qgis_extract_output_by_name(qres, first = FALSE), "Result has no output")
+  expect_error(qgis_extract_output_by_name(qres, "b", first = FALSE), "Result has no output")
 })
 
 test_that("qgis_result_*() functions work", {
