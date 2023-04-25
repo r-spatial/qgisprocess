@@ -1,6 +1,5 @@
 #' Deprecated functions
 #'
-#' @details
 #' - Instead of `qgis_output()`, use [qgis_extract_output()] and related
 #' functions.
 #'
