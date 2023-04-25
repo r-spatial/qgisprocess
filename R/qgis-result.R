@@ -1,7 +1,6 @@
 #' Access algorithm results
 #'
-#' @details
-#' `qgis_extract_output()` is a shortcut for `qgis_extract_output_by_name()`
+#' `qgis_extract_output()` is an alias to `qgis_extract_output_by_name()`.
 #'
 #'
 #' @param x An object returned by [qgis_run_algorithm()].
@@ -12,12 +11,13 @@
 #' to be selected.
 #' @param single Logical.
 #' Ensures the selection of a single output in `qgis_extract_output_by_class()`.
-#' The `OUTPUT` or `output` element is taken if available; otherwise falls back
-#' to the first element (that meets the specified class).
+#' The `OUTPUT` or `output` element is taken if available and on condition that
+#' it inherits a specified class; otherwise falls back
+#' to the first element that inherits a specified class.
 #' @param first Logical.
 #' Should `qgis_extract_output_by_name()` fall back to the first
-#' output element if the default `OUTPUT` or `output` element are not available?
-#' Only takes effect if `name` is not found.
+#' output element if the default `OUTPUT` or `output` element is not available?
+#' Only takes effect if `name` is equal to `OUTPUT` or `output`, but not found.
 #'
 #'
 #' @export

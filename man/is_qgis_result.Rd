@@ -40,8 +40,8 @@ qgis_result_args(x)
 
 \item{first}{Logical.
 Should \code{qgis_extract_output_by_name()} fall back to the first
-output element if the default \code{OUTPUT} or \code{output} element are not available?
-Only takes effect if \code{name} is not found.}
+output element if the default \code{OUTPUT} or \code{output} element is not available?
+Only takes effect if \code{name} is equal to \code{OUTPUT} or \code{output}, but not found.}
 
 \item{which}{The index of an output.}
 
@@ -51,12 +51,10 @@ to be selected.}
 
 \item{single}{Logical.
 Ensures the selection of a single output in \code{qgis_extract_output_by_class()}.
-The \code{OUTPUT} or \code{output} element is taken if available; otherwise falls back
-to the first element (that meets the specified class).}
+The \code{OUTPUT} or \code{output} element is taken if available and on condition that
+it inherits a specified class; otherwise falls back
+to the first element that inherits a specified class.}
 }
 \description{
-Access algorithm results
-}
-\details{
-\code{qgis_extract_output()} is a shortcut for \code{qgis_extract_output_by_name()}
+\code{qgis_extract_output()} is an alias to \code{qgis_extract_output_by_name()}.
 }
