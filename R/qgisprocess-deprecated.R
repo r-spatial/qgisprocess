@@ -3,6 +3,7 @@
 #' @inheritParams is_qgis_result
 
 #' @rdname qgisprocess-deprecated
+#' @export
 #' @keywords internal
 qgis_output <- function(x, which) {
   .Deprecated("qgis_extract_output")
