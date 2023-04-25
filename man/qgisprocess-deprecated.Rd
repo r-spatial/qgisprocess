@@ -14,4 +14,10 @@ qgis_output(x, which)
 \description{
 Deprecated functions
 }
+\details{
+\itemize{
+\item Instead of \code{qgis_output()}, use \code{\link[=qgis_extract_output]{qgis_extract_output()}} and related
+functions.
+}
+}
 \keyword{internal}
