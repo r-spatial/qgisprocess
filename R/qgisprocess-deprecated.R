@@ -5,6 +5,7 @@
 #'
 #'
 #' @inheritParams is_qgis_result
+#' @name qgisprocess-deprecated
 
 #' @rdname qgisprocess-deprecated
 #' @export
