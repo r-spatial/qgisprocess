@@ -1,10 +1,23 @@
 #' Access algorithm results
 #'
+#' `qgis_extract_output()` is an alias to `qgis_extract_output_by_name()`.
+#'
+#'
 #' @param x An object returned by [qgis_run_algorithm()].
-#' @param which The name or index of an output.
-#' @param what Character vector of classes.
+#' @param which The index of an output.
+#' @param name The name of an output.
+#' @param class Character vector of classes.
 #' At least one class must be inherited by an element of `x` for that element
 #' to be selected.
+#' @param single Logical.
+#' Ensures the selection of a single output in `qgis_extract_output_by_class()`.
+#' The `OUTPUT` or `output` element is taken if available and on condition that
+#' it inherits a specified class; otherwise falls back
+#' to the first element that inherits a specified class.
+#' @param first Logical.
+#' Should `qgis_extract_output_by_name()` fall back to the first
+#' output element if the default `OUTPUT` or `output` element is not available?
+#' Only takes effect if `name` is equal to `OUTPUT` or `output`, but not found.
 #'
 #'
 #' @export
@@ -28,44 +41,46 @@ qgis_leave_only_results <- function(x) {
     names(x),
     c(".algorithm", ".args", ".processx_result", ".raw_json_input")
   )
-  x <- x[output_names]
+  x[output_names]
 }
 
 
 #' @rdname is_qgis_result
 #' @export
 #'
-qgis_extract_output_by_name <- function(x, name = "OUTPUT", single = TRUE) {
+qgis_extract_output_by_name <- function(x, name = "OUTPUT", first = TRUE) {
+  assert_that(is.string(name))
   x <- qgis_leave_only_results(x)
   if (name %in% names(x)) {
     x[[name]]
   } else {
     default_name = grepl("^(output|OUTPUT)$", name)
     result <- x[grepl("^(output|OUTPUT)$", names(x))][1][[1]]
-    if (default_name && !is.null(result) && single) {
+    if (default_name && !is.null(result)) {
       return(result)
-    } else if (default_name && is.null(result) && single) {
+    } else if (default_name && is.null(result) && first) {
       return(x[[1]])
-    }else {
-      abort(
-        qgis_error_output_does_not_exist(x, name)
-      )
+    } else {
+      qgis_error_output_does_not_exist(x, name)
     }
   }
 }
+
+#' @rdname is_qgis_result
+#' @export
+qgis_extract_output <- qgis_extract_output_by_name
 
 
 #' @rdname is_qgis_result
 #' @export
 #'
 qgis_extract_output_by_position <- function(x, which) {
+  assert_that(is.number(which))
   x <- qgis_leave_only_results(x)
   if (is.numeric(which) && (which %in% seq_along(x))) {
     x[[which]]
   } else {
-    abort(
-      qgis_error_output_does_not_exist(x, which)
-    )
+    qgis_error_output_does_not_exist(x, which)
   }
 }
 
@@ -73,6 +88,7 @@ qgis_extract_output_by_position <- function(x, which) {
 #' @rdname is_qgis_result
 #' @export
 qgis_extract_output_by_class <- function(x, class, single = TRUE) {
+  assert_that(is.character(class))
   x <- qgis_leave_only_results(x)
   # Limit result to elements that match class
   x <- x[vapply(x, inherits, class, FUN.VALUE = logical(1))]
@@ -98,10 +114,7 @@ qgis_extract_output_by_class <- function(x, class, single = TRUE) {
 }
 
 
-#' @rdname is_qgis_result
-#' @export
 #' @keywords internal
-
 qgis_error_output_does_not_exist <- function(x, which) {
   assert_that(
     !any(names(x) %in%
@@ -109,11 +122,11 @@ qgis_error_output_does_not_exist <- function(x, which) {
     inherits(x, "list")
   )
   available_outputs <- glue::glue_collapse(
-    paste0("'", names(x), "'"),
+    paste0("'", names(x), "' (", seq_along(names(x)), ")"),
     sep = ", ", last = " and "
   )
 
-  abort(glue("Result has no output '{ which }'.\nAvailable outputs are { available_outputs }"))
+  abort(glue("Result has no output { which }.\nAvailable outputs are { available_outputs }"))
 }
 
 

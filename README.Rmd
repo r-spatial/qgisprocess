@@ -61,7 +61,7 @@ result <- qgis_run_algorithm(
 
 result
 
-output_sf <- sf::read_sf(qgis_output(result, "OUTPUT"))
+output_sf <- sf::read_sf(qgis_extract_output(result, "OUTPUT"))
 plot(sf::st_geometry(output_sf))
 ```
 

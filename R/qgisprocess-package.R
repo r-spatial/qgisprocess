@@ -10,5 +10,6 @@
 #' assert_that
 #' is.flag
 #' is.string
+#' is.number
 ## usethis namespace: end
 NULL

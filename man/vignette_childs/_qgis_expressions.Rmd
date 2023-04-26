@@ -60,7 +60,7 @@ lake_border_path <- qgis_run_algorithm(
   INPUT = longlake_path,
   .quiet = TRUE
 ) |> 
-  qgis_extract_output_by_name("OUTPUT")
+  qgis_extract_output("OUTPUT")
 ```
 
 Next, build the QGIS expression.

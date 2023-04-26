@@ -1,19 +1,25 @@
-test_that("qgis_extract_output_by_name() works", {
+test_that("qgis_extract_output() and qgis_extract_output_by_name() work", {
+  expect_error(
+    qgis_extract_output(list(abcde = 1), "a"),
+    "does not inherit from class qgis_result"
+  )
 
-  output <- list(a = 1)
-  class(output) <- "qgis_result"
-  expect_identical(qgis_extract_output_by_name(output, "a"), 1)
-  expect_error(qgis_extract_output_by_name(output, "b"), "Result has no output")
+  qres <- structure(list(a = 1), class = "qgis_result")
+  expect_identical(qgis_extract_output_by_name(qres, "a"), 1)
+  expect_error(qgis_extract_output_by_name(qres, "b"), "Result has no output")
 
-  output <- list(a = 1, output = 5)
-  class(output) <- "qgis_result"
-  expect_identical(qgis_extract_output_by_name(output), 5)
+  qres <- structure(list(a = 1, output = 5), class = "qgis_result")
+  expect_identical(qgis_extract_output_by_name(qres), 5)
 
-  output <- list(a = 1, notoutput = 8)
-  class(output) <- "qgis_result"
-  expect_identical(qgis_extract_output_by_name(output), 1)
-  expect_error(qgis_extract_output_by_name(output, single = FALSE), "Result has no output")
-  expect_error(qgis_extract_output_by_name(output, "b", single = FALSE), "Result has no output")
+  qres <- structure(list(a = 1, .args = "foo"), class = "qgis_result")
+  expect_identical(qgis_extract_output(qres, "a"), 1)
+  expect_error(qgis_extract_output(qres, "b"), "Result has no output")
+  expect_error(qgis_extract_output(qres, ".args"), "Result has no output")
+
+  qres <- structure(list(a = 1, notoutput = 8), class = "qgis_result")
+  expect_identical(qgis_extract_output_by_name(qres), 1)
+  expect_error(qgis_extract_output_by_name(qres, first = FALSE), "Result has no output")
+  expect_error(qgis_extract_output_by_name(qres, "b", first = FALSE), "Result has no output")
 })
 
 test_that("qgis_result_*() functions work", {
@@ -83,8 +89,8 @@ test_that("qgis_extract_output_by_name() functions work", {
     result$OUTPUT
   )
 
-  expect_error(qgis_extract_output_by_name(result, "A" ), "Result has no output")
-  expect_error(qgis_extract_output_by_name(result, 1), "Result has no output")
+  expect_error(qgis_extract_output_by_name(result, "A"), "Result has no output")
+  expect_error(qgis_extract_output_by_name(result, 1), "name is not a string")
 })
 
 test_that("qgis_extract_output_by_position() functions work", {
@@ -113,7 +119,7 @@ test_that("qgis_extract_output_by_position() functions work", {
     result$OUTPUT
   )
 
-  expect_error(qgis_extract_output_by_position(result, "A"), "Result has no output")
+  expect_error(qgis_extract_output_by_position(result, "A"), "which is not a number")
   expect_error(qgis_extract_output_by_position(result, 8), "Result has no output")
 })
 
@@ -138,7 +144,17 @@ test_that("qgis_extract_output_by_class() functions work", {
     qgis_extract_output_by_class(result, "qgis_outputVector"),
     result$OUTPUT
   )
+  expect_identical(
+    qgis_extract_output_by_class(result, "qgis_outputVector", single = FALSE),
+    list(FAIL_OUTPUT = result$FAIL_OUTPUT, OUTPUT = result$OUTPUT)
+  )
 
   expect_error(qgis_extract_output_by_class(result, "A"), "Can't extract object")
-  expect_error(qgis_extract_output_by_class(result, 1), "must be a character vector")
+  expect_error(qgis_extract_output_by_class(result, 1), "is not a character vector")
+
+  result$OUTPUT <- NULL
+  expect_identical(
+    qgis_extract_output_by_class(result, "qgis_outputVector"),
+    result$FAIL_OUTPUT
+  )
 })
