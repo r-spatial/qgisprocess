@@ -75,7 +75,7 @@
                         <h4 data-toc-skip class="author">Floris
 Vanderhaeghe &amp; Jannes Muenchow</h4>
             
-            <h4 data-toc-skip class="date">Last updated: 2023-03-27</h4>
+            <h4 data-toc-skip class="date">Last updated: 2023-04-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-spatial/qgisprocess/blob/HEAD/vignettes/qgis_expressions.Rmd" class="external-link"><code>vignettes/qgis_expressions.Rmd</code></a></small>
       <div class="d-none name"><code>qgis_expressions.Rmd</code></div>
@@ -192,7 +192,7 @@ and add it as an attribute to the points. For that we will use the
 <span>  INPUT <span class="op">=</span> <span class="va">longlake_path</span>,</span>
 <span>  .quiet <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="../reference/is_qgis_result.html">qgis_output</a></span><span class="op">(</span><span class="st">"OUTPUT"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/is_qgis_result.html">qgis_extract_output</a></span><span class="op">(</span><span class="st">"OUTPUT"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using `OUTPUT = qgis_tmp_vector()`</span></span></code></pre></div>
 <p>Next, build the QGIS expression. Referring to the <code>INPUT</code>
 geometry in <code>native:fieldcalculator</code> is done with the
