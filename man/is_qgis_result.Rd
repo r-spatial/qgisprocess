@@ -3,8 +3,10 @@
 \name{is_qgis_result}
 \alias{is_qgis_result}
 \alias{qgis_result_clean}
-\alias{qgis_output}
-\alias{qgis_result_single}
+\alias{qgis_extract_output_by_name}
+\alias{qgis_extract_output}
+\alias{qgis_extract_output_by_position}
+\alias{qgis_extract_output_by_class}
 \alias{qgis_result_status}
 \alias{qgis_result_stdout}
 \alias{qgis_result_stderr}
@@ -15,9 +17,13 @@ is_qgis_result(x)
 
 qgis_result_clean(x)
 
-qgis_output(x, which)
+qgis_extract_output_by_name(x, name = "OUTPUT", first = TRUE)
 
-qgis_result_single(x, what)
+qgis_extract_output(x, name = "OUTPUT", first = TRUE)
+
+qgis_extract_output_by_position(x, which)
+
+qgis_extract_output_by_class(x, class, single = TRUE)
 
 qgis_result_status(x)
 
@@ -30,16 +36,25 @@ qgis_result_args(x)
 \arguments{
 \item{x}{An object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
 
-\item{which}{The name or index of an output.}
+\item{name}{The name of an output.}
 
-\item{what}{Character vector of classes.
+\item{first}{Logical.
+Should \code{qgis_extract_output_by_name()} fall back to the first
+output element if the default \code{OUTPUT} or \code{output} element is not available?
+Only takes effect if \code{name} is equal to \code{OUTPUT} or \code{output}, but not found.}
+
+\item{which}{The index of an output.}
+
+\item{class}{Character vector of classes.
 At least one class must be inherited by an element of \code{x} for that element
 to be selected.}
+
+\item{single}{Logical.
+Ensures the selection of a single output in \code{qgis_extract_output_by_class()}.
+The \code{OUTPUT} or \code{output} element is taken if available and on condition that
+it inherits a specified class; otherwise falls back
+to the first element that inherits a specified class.}
 }
 \description{
-Access algorithm results
-}
-\details{
-\code{qgis_result_single()} tries to extract the single most useful element
-from a \code{qgis_result} object.
+\code{qgis_extract_output()} is an alias to \code{qgis_extract_output_by_name()}.
 }

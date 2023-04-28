@@ -93,7 +93,7 @@ result
 #> List of 1
 #>  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmptXCayy/file9b2b462efaa9/file9b2b5212f730.gpkg"
 
-output_sf <- sf::read_sf(qgis_output(result, "OUTPUT"))
+output_sf <- sf::read_sf(qgis_extract_output(result, "OUTPUT"))
 plot(sf::st_geometry(output_sf))
 ```
 
