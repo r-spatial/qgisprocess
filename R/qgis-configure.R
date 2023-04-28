@@ -605,25 +605,26 @@ qgis_env <- function() {
 
 #' @keywords internal
 qgis_query_version <- function(quiet = FALSE) {
-  tryCatch({
-    result <- qgis_run(args = "--version")
-    lines <- readLines(textConnection(result$stdout))
-    match <- stringr::str_match(
-      lines,
-      "QGIS\\s(\\d{1,2}\\.\\d+.*-\\p{L}+)\\s.*\\((.+)\\)"
-    )[, 2:3, drop = TRUE]
-  },
-  error = function(e) {
-    # QGIS < 3.22 does not support '--version'
-    result <- qgis_run(args = character(0))
-    lines <- readLines(textConnection(result$stdout))
-    match <- stringr::str_match(
-      lines,
-      "\\((\\d{1,2}\\.\\d+.*-.+)\\)"
-    )[, 2, drop = TRUE]
-    assign("match", match, envir = parent.env(environment()))
-    assign("lines", lines, envir = parent.env(environment()))
-  }
+  tryCatch(
+    {
+      result <- qgis_run(args = "--version")
+      lines <- readLines(textConnection(result$stdout))
+      match <- stringr::str_match(
+        lines,
+        "QGIS\\s(\\d{1,2}\\.\\d+.*-\\p{L}+)\\s.*\\((.+)\\)"
+      )[, 2:3, drop = TRUE]
+    },
+    error = function(e) {
+      # QGIS < 3.22 does not support '--version'
+      result <- qgis_run(args = character(0))
+      lines <- readLines(textConnection(result$stdout))
+      match <- stringr::str_match(
+        lines,
+        "\\((\\d{1,2}\\.\\d+.*-.+)\\)"
+      )[, 2, drop = TRUE]
+      assign("match", match, envir = parent.env(environment()))
+      assign("lines", lines, envir = parent.env(environment()))
+    }
   )
   match <- match[!is.na(match)]
   if (length(match) == 0L) abort_query_version(lines = lines)

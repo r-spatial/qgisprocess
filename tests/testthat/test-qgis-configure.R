@@ -2,7 +2,6 @@ test_that("qgis_version() works", {
   skip_if_not(has_qgis())
 
   expect_match(qgis_version(), "^\\d{1,2}\\.\\d+.*-.+")
-
 })
 
 test_that("qgis_version(debug = TRUE) works", {
