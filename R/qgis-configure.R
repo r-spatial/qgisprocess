@@ -508,9 +508,9 @@ qgis_query_path <- function(quiet = FALSE) {
   )
 
   possible_locs <- if (is_macos()) {
-    qgis_detect_macos()
+    qgis_detect_macos_paths()
   } else if (is_windows()) {
-    qgis_detect_windows()
+    qgis_detect_windows_paths()
   }
 
   if (length(possible_locs) == 0) {

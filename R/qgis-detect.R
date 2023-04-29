@@ -1,18 +1,29 @@
 #' Detect QGIS installations with 'qgis_process'
 #'
 #' @param drive_letter The drive letter on which to search. By default,
-#'   this is the same drive letter as the R executable.
+#'   this is the same drive letter as the R executable. Only relevant on
+#'   Windows, on other platforms the parameter is ignored.
 #'
 #' @return A character vector of possible paths to the QGIS executable.
 #' @export
 #'
 #' @examples
-#' if (is_windows()) qgis_detect_windows()
-#' if (is_macos()) qgis_detect_macos()
 #'
-qgis_detect_windows <- function(drive_letter = strsplit(R.home(), ":")[[1]][1]) {
+#' qgis_detect_paths()
+#'
+qgis_detect_paths <- function(drive_letter = strsplit(R.home(), ":")[[1]][1]) {
+  if (is_macos()){
+    return (qgis_detect_macos_paths())
+  }
+  else if (is_windows()) {
+    return (qgis_detect_windows_paths(drive_letter))
+  }
+  return ("qgis_process")
+}
+
+qgis_detect_windows_paths <- function(drive_letter = strsplit(R.home(), ":")[[1]][1]) {
   if (!is_windows()) {
-    abort("Can't use `qgis_detect_windows()` on a non-windows platform.")
+    abort("Can't use `qgis_detect_windows_paths()` on a non-windows platform.")
   }
 
   bat_files <- c(
@@ -34,9 +45,7 @@ qgis_detect_windows <- function(drive_letter = strsplit(R.home(), ":")[[1]][1]) 
   possible_locs_win[file.exists(possible_locs_win)]
 }
 
-#' @rdname qgis_detect_windows
-#' @export
-qgis_detect_macos <- function() {
+qgis_detect_macos_paths <- function() {
   if (!is_macos()) {
     abort("Can't use `qgis_detect_macos()` on a non-MacOS platform.")
   }
@@ -49,15 +58,11 @@ qgis_detect_macos <- function() {
   possible_locs_mac[file.exists(possible_locs_mac)]
 }
 
-#' @rdname qgis_detect_windows
-#' @export
 is_macos <- function() {
   (.Platform$OS.type == "unix") &&
     identical(unname(Sys.info()["sysname"]), "Darwin")
 }
 
-#' @rdname qgis_detect_windows
-#' @export
 is_windows <- function() {
   .Platform$OS.type == "windows"
 }
