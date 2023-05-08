@@ -3,23 +3,29 @@
 #' Calls to [qgis_run_algorithm()] can and should contain R objects that
 #' need to be serialized before they are passed to the command line. In
 #' some cases (e.g., sf objects), temporary files need to be written and
-#' cleaned up. The [as_qgis_argument()] and [qgis_clean_argument()] S3
+#' cleaned up. The `as_qgis_argument()` and `qgis_clean_argument()` S3
 #' generics provide hooks for argument values to be serialized correctly.
 #'
 #' @param x An object passed to a QGIS processing algorithm
-#' @param name The name of the input argument
 #' @param value The result of [as_qgis_argument()] after the QGIS processing
 #'   algorithm has been run.
 #' @param spec A `list()` with values for `algorithm`, `name`,
 #'   `description`, and `qgis_type`. See [qgis_argument_spec()] to
 #'   create a blank `spec` for testing.
-#' @param arguments The result of [qgis_sanitize_arguments()].
-#' @param .algorithm_arguments The result of [qgis_get_argument_specs()]
 #' @param .use_json_input,use_json_input TRUE if the arguments will be
 #'   serialized as JSON instead of serialized as a command-line argument.
-#' @inheritParams qgis_run_algorithm
 #' @name as_qgis_argument
 
+
+#' @rdname as_qgis_argument
+#' @keywords internal
+#' @export
+as_qgis_argument <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
+  UseMethod("as_qgis_argument")
+}
+
+
+# @param .algorithm_arguments The result of [qgis_get_argument_specs()]
 #' @keywords internal
 qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_get_argument_specs(algorithm),
                                     .use_json_input = FALSE) {
@@ -140,12 +146,6 @@ qgis_serialize_arguments <- function(arguments, use_json_input = FALSE) {
 qgis_clean_arguments <- function(arguments) {
   lapply(arguments, qgis_clean_argument)
   invisible(NULL)
-}
-
-#' @keywords internal
-#' @export
-as_qgis_argument <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
-  UseMethod("as_qgis_argument")
 }
 
 #' @keywords internal
@@ -279,6 +279,7 @@ as_qgis_argument.numeric <- function(x, spec = qgis_argument_spec(),
   if (use_json_input) x else paste0(x, collapse = ",")
 }
 
+#' @rdname as_qgis_argument
 #' @keywords internal
 #' @export
 qgis_clean_argument <- function(value) {

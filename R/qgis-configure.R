@@ -35,9 +35,9 @@
 #' @param quiet Use `FALSE` to display more information about the command,
 #' possibly useful for debugging.
 #' @param query Use `TRUE` to refresh the cached value.
-#' @param action An action to take if the 'qgis_process' executable could not be
-#'   found.
-#' @param env A [list()] of environment variables. Defaults to [qgis_env()].
+#' @param env A [list()] of environment variables.
+#' Defaults to
+#' `getOption("qgisprocess.env", list(QT_QPA_PLATFORM = "offscreen"))`.
 #' @param path A path to the 'qgis_process' executable. Defaults to [qgis_path()].
 #' @param use_cached_data Use the cached algorithm list and `path` found when
 #'   configuring qgisprocess during the last session. This saves some time
@@ -83,6 +83,8 @@ has_qgis <- function() {
     !is.null(qgisprocess_cache$plugins)
 }
 
+# @param action An action to take if the 'qgis_process' executable could not be
+#   found.
 #' @keywords internal
 assert_qgis <- function(action = abort) {
   if (!has_qgis()) {
