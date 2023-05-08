@@ -182,6 +182,10 @@ qgis_buffer <- qgis_function("native:buffer")
 out <- qgis_buffer(INPUT = random_points, DISTANCE = 50)
 ```
 
+This is basically what package [qgis](https://github.com/JanCaha/r_package_qgis) is doing for each available QGIS function while also providing an R help file for each function.
+Hence, if you prefer running QGIS with callable R functions, check it out.
+
+
 ## Second example
 
 As a second example, let's have a look at how to do raster processing running GRASS in the background.
