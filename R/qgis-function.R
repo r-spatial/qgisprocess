@@ -4,7 +4,7 @@
 #' function based on the argument metadata provided by [qgis_get_argument_specs()].
 #' Unlike [qgis_run_algorithm()], [qgis_function()] sets the default value
 #' of `.quiet` to `TRUE` to make the function more usable within other
-#' R code. Similarly, [qgis_pipe()] wraps [qgis_run_algorithm()], passing
+#' R code. Similarly, [qgis_run_algorithm_p()] wraps [qgis_run_algorithm()], passing
 #' its first argument to the first input to `algorithm`.
 #'
 #' @inheritParams qgis_run_algorithm
@@ -37,7 +37,7 @@
 #' }
 #'
 #' if (has_qgis()) {
-#'   qgis_pipe(
+#'   qgis_run_algorithm_p(
 #'     system.file(
 #'       "longlake/longlake_depth.gpkg",
 #'       package = "qgisprocess"
@@ -117,19 +117,19 @@ qgis_function <- function(algorithm, ...) {
 
 #' @rdname qgis_function
 #' @export
-qgis_pipe <- function(
+qgis_run_algorithm_p <- function(
     .data,
     algorithm,
     ...,
     .select = "OUTPUT",
     .clean = TRUE,
     .quiet = TRUE) {
-  UseMethod("qgis_pipe")
+  UseMethod("qgis_run_algorithm_p")
 }
 
 #' @keywords internal
 #' @export
-qgis_pipe.qgis_result <- function(
+qgis_run_algorithm_p.qgis_result <- function(
     .data,
     algorithm,
     ...,
@@ -157,7 +157,7 @@ qgis_pipe.qgis_result <- function(
 
 #' @keywords internal
 #' @export
-qgis_pipe.default <- function(
+qgis_run_algorithm_p.default <- function(
     .data,
     algorithm,
     ...,
