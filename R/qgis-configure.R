@@ -83,8 +83,7 @@ has_qgis <- function() {
     !is.null(qgisprocess_cache$plugins)
 }
 
-#' @rdname qgis_run
-#' @export
+#' @keywords internal
 assert_qgis <- function(action = abort) {
   if (!has_qgis()) {
     action(
@@ -594,8 +593,7 @@ qgis_using_json_input <- function() {
   }
 }
 
-#' @rdname qgis_run
-#' @export
+#' @keywords internal
 qgis_env <- function() {
   getOption(
     "qgisprocess.env",
