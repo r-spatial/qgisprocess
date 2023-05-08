@@ -44,7 +44,8 @@ Since **qgisprocess** depends on the command line tool `qgis_process`, it alread
 library("qgisprocess")
 ```
 
-In fact, once **qgisprocess** has detected `qgis_process`, it will cache among others the path to the executable, the QGIS version and the list of known algorithms.
+When loading **qgisprocess** for the first time, it will cache among others the path to `qgis_process`, the QGIS version and the list of known algorithms.
+When loading **qgisprocess** in later R sessions, the cache file is read instead for speed-up, on condition that it is still valid.
 Therefore, usually you don't have to do any configuration yourself, unless there's a message telling you to do so.
 
 If you are interested in the details about this process, e.g. how **qgisprocess**  detected `qgis_process`, run `qgis_configure(use_cached_data = TRUE)`.
