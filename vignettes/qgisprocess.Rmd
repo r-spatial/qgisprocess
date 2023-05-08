@@ -239,14 +239,45 @@ plot(r)
 
 An alternative way to combine the rasters is given below.
 
-```{r combine2, message=FALSE}
+```{r combine2, message=FALSE, eval=FALSE}
 r <- lapply(info[nms], \(x) as.numeric(qgis_as_terra(x))) |> 
   rast()
-plot(r)
 ```
 
+Since we have now many terrain attributes at our disposal, let us take the opportunity to add their values to points laying on top of them with the help of the SAGA function `sagang:addrastervaluestopoints`.
 
+```{r addrastertopoints-args}
+qgis_arguments("sagang:addrastervaluestopoints")
+```
 
+The `GRIDS` argument is of type multilayer.
+To pass multiple layers to one argument, you can either repeat the corresponding argument as often as needed ... 
+
+```{r multilayer-repeat}
+rp_tp = qgis_run_algorithm(
+  "sagang:addrastervaluestopoints",
+  SHAPES = random_points,
+  GRIDS = info$aspect[[1]],
+  GRIDS = info$slope[[1]],
+  GRIDS = info$tcurvature[[1]],
+  RESAMPLING = 0)
+```
+
+... or you can pass to it all needed layers in one list.
+
+```{r multilayer-list, eval=FALSE}
+rp_tp = qgis_run_algorithm(
+  "sagang:addrastervaluestopoints",
+  SHAPES = random_points,
+  GRIDS = list(info$aspect[[1]], info$slope[[1]], info$tcurvature[[1]]),
+  RESAMPLING = 0)
+```
+
+To verify that it worked, read in the output.
+
+```{r multilayer-output}
+sf::st_as_sf(rp_tp)
+```
 # Piping
 
 `qgis_process` does not lend itself naturally to piping because its first argument is the name of a geoalgorithm instead of a data object.
@@ -284,6 +315,6 @@ For example, intermediate results remain on disk for the duration of your R sess
 ```{r native pipe}
 out = qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem, 
                          METHOD = 1) |>
-   (\(x) qgis_run_algorithm(algorithm = "sagang:sagawetnessindex",
-                            DEM = x$DEM_PREPROC[1])) ()
+  (\(x) qgis_run_algorithm(algorithm = "sagang:sagawetnessindex",
+                           DEM = x$DEM_PREPROC[1])) ()
 ```
