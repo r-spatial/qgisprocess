@@ -7,8 +7,8 @@
 #' @export
 #'
 #' @examples
-#' if (is_windows()) qgis_detect_windows_paths()
-#' if (is_macos()) qgis_detect_macos_paths()
+#' if (qgisprocess:::is_windows()) qgis_detect_windows_paths()
+#' if (qgisprocess:::is_macos()) qgis_detect_macos_paths()
 #'
 qgis_detect_windows_paths <- function(drive_letter = strsplit(R.home(), ":")[[1]][1]) {
   if (!is_windows()) {

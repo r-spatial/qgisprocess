@@ -308,8 +308,9 @@ qgis_clean_argument.qgis_tempfile_arg <- function(value) {
 #' @return A [list()] with an element for each input argument.
 #'
 #' @examples
-#' qgis_argument_spec()
-#' if (has_qgis()) qgis_argument_spec_by_name("native:filedownloader", "URL")
+#' # These became internal functions!
+#' qgisprocess:::qgis_argument_spec()
+#' if (has_qgis()) qgisprocess:::qgis_argument_spec_by_name("native:filedownloader", "URL")
 #' @name qgis_argument_spec
 
 
