@@ -83,7 +83,7 @@ qgis_outputs <- function(algorithm) {
 #' @export
 qgis_help_json <- function(algorithm) {
   cached <- help_cache_file(algorithm, json = TRUE)
-  if (qgis_use_cached_help() && file.exists(cached)) {
+  if (qgis_using_cached_help() && file.exists(cached)) {
     try(return(jsonlite::fromJSON(readRDS(cached))))
   }
 
@@ -105,7 +105,7 @@ qgis_help_json <- function(algorithm) {
 
 qgis_help_text <- function(algorithm) {
   cached <- help_cache_file(algorithm, json = FALSE)
-  if (qgis_use_cached_help() && file.exists(cached)) {
+  if (qgis_using_cached_help() && file.exists(cached)) {
     try(return(readRDS(cached)))
   }
 
@@ -211,7 +211,7 @@ qgis_parse_help <- function(algorithm) {
   )
 }
 
-qgis_use_cached_help <- function() {
+qgis_using_cached_help <- function() {
   opt <- getOption(
     "qgisprocess.use_cached_help",
     Sys.getenv("R_QGISPROCESS_USE_CACHED_HELP", "true")
