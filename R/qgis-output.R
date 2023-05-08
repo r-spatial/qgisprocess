@@ -4,7 +4,7 @@ qgis_parse_results <- function(algorithm, output) {
     outputs_list <- output_parsed$results
     output_names <- names(outputs_list)
 
-    algorithm_outputs <- qgis_outputs(algorithm)
+    algorithm_outputs <- qgis_get_output_specs(algorithm)
 
     Map(
       qgis_result_output,
@@ -25,7 +25,7 @@ qgis_parse_results <- function(algorithm, output) {
     outputs_list <- lapply(outputs, "[", 2)
     output_names <- vapply(outputs, "[", 1, FUN.VALUE = character(1))
 
-    algorithm_outputs <- qgis_outputs(algorithm)
+    algorithm_outputs <- qgis_get_output_specs(algorithm)
 
     outputs_list <- Map(
       qgis_parse_result_output,

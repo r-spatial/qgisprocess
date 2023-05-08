@@ -6,8 +6,8 @@
 #'
 #' @examples
 #' if (has_qgis()) qgis_show_help("native:filedownloader")
-#' if (has_qgis()) qgis_description("native:filedownloader")
-#' if (has_qgis()) qgis_arguments("native:filedownloader")
+#' if (has_qgis()) qgis_get_description("native:filedownloader")
+#' if (has_qgis()) qgis_get_argument_specs("native:filedownloader")
 #'
 qgis_show_help <- function(algorithm) {
   cat(qgis_help_text(algorithm))
@@ -17,7 +17,7 @@ qgis_show_help <- function(algorithm) {
 
 #' @rdname qgis_show_help
 #' @export
-qgis_description <- function(algorithm) {
+qgis_get_description <- function(algorithm) {
   vapply(
     algorithm,
     function(x) qgis_parse_help(algorithm)$description,
@@ -36,7 +36,7 @@ extract_type_component <- function(param_element, component) {
 
 #' @rdname qgis_show_help
 #' @export
-qgis_arguments <- function(algorithm) {
+qgis_get_argument_specs <- function(algorithm) {
   if (qgis_using_json_output()) {
     help <- qgis_help_json(algorithm)
     out <- tibble::tibble(
@@ -63,7 +63,7 @@ qgis_arguments <- function(algorithm) {
 
 #' @rdname qgis_show_help
 #' @export
-qgis_outputs <- function(algorithm) {
+qgis_get_output_specs <- function(algorithm) {
   if (qgis_using_json_output()) {
     help <- qgis_help_json(algorithm)
     out <- tibble::tibble(

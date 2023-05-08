@@ -15,7 +15,7 @@ test_that("qgis_function() works", {
   expect_identical(parent.env(environment(qgis_buffer)), baseenv())
   expect_true(rlang::is_call(body(qgis_buffer), "qgis_run_algorithm", ns = "qgisprocess"))
 
-  buffer_args <- qgis_arguments("native:buffer")
+  buffer_args <- qgis_get_argument_specs("native:buffer")
   expect_identical(
     names(formals(qgis_buffer)),
     c(

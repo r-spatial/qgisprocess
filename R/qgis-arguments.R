@@ -14,14 +14,14 @@
 #'   `description`, and `qgis_type`. See [qgis_argument_spec()] to
 #'   create a blank `spec` for testing.
 #' @param arguments The result of [qgis_sanitize_arguments()].
-#' @param .algorithm_arguments The result of [qgis_arguments()]
+#' @param .algorithm_arguments The result of [qgis_get_argument_specs()]
 #' @param .use_json_input,use_json_input TRUE if the arguments will be
 #'   serialized as JSON instead of serialized as a command-line argument.
 #' @inheritParams qgis_run_algorithm
 #'
 #' @export
 #'
-qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_arguments(algorithm),
+qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_get_argument_specs(algorithm),
                                     .use_json_input = FALSE) {
   dots <- rlang::list2(...)
   if (length(dots) > 0 && !rlang::is_named(dots)) {
@@ -330,7 +330,7 @@ qgis_argument_spec <- function(algorithm = NA_character_, name = NA_character_,
 #' @rdname qgis_sanitize_arguments
 #' @export
 qgis_argument_spec_by_name <- function(algorithm, name,
-                                       .algorithm_arguments = qgis_arguments(algorithm)) {
+                                       .algorithm_arguments = qgis_get_argument_specs(algorithm)) {
   # These are special-cased at the command-line level, so they don't have
   # types defined in the help file. Here, we create two special types
   # ELLIPSOID and PROJECT_PATH.

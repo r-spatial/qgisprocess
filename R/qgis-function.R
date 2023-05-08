@@ -1,7 +1,7 @@
 #' Create functions from QGIS algorithms
 #'
 #' As opposed to [qgis_run_algorithm()], [qgis_function()] creates a callable
-#' function based on the argument metadata provided by [qgis_arguments()].
+#' function based on the argument metadata provided by [qgis_get_argument_specs()].
 #' Unlike [qgis_run_algorithm()], [qgis_function()] sets the default value
 #' of `.quiet` to `TRUE` to make the function more usable within other
 #' R code. Similarly, [qgis_pipe()] wraps [qgis_run_algorithm()], passing
@@ -51,7 +51,7 @@ qgis_function <- function(algorithm, ...) {
   assert_qgis()
   assert_qgis_algorithm(algorithm)
 
-  args <- qgis_arguments(algorithm)
+  args <- qgis_get_argument_specs(algorithm)
   arg_names <- c(args$name, "PROJECT_PATH", "ELLIPSOID", ".quiet")
 
   # The dots are the default values and are not exposed as
