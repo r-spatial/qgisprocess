@@ -38,7 +38,7 @@ extract_type_component <- function(param_element, component) {
 #' @export
 qgis_arguments <- function(algorithm) {
   if (qgis_use_json_output()) {
-    help <- qgis_help(algorithm)
+    help <- qgis_help_json(algorithm)
     out <- tibble::tibble(
       name = names(help$parameters),
       description = vapply(help$parameters, "[[", character(1), "description"),
@@ -65,7 +65,7 @@ qgis_arguments <- function(algorithm) {
 #' @export
 qgis_outputs <- function(algorithm) {
   if (qgis_use_json_output()) {
-    help <- qgis_help(algorithm)
+    help <- qgis_help_json(algorithm)
     out <- tibble::tibble(
       name = names(help$outputs),
       description = vapply(help$outputs, "[[", character(1), "description"),
@@ -81,7 +81,7 @@ qgis_outputs <- function(algorithm) {
 
 #' @rdname qgis_show_help
 #' @export
-qgis_help <- function(algorithm) {
+qgis_help_json <- function(algorithm) {
   cached <- help_cache_file(algorithm, json = TRUE)
   if (qgis_use_cached_help() && file.exists(cached)) {
     try(return(jsonlite::fromJSON(readRDS(cached))))
