@@ -244,7 +244,7 @@ system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") |>
 ```
 
 If `.data` is a `qgis_result` object, `qgis_pipe()` automatically tries to select an element named `OUTPUT`.
-However, if the output has another name (e.g., `DEM_PREPROC` as in the example below) or if there are multiple output elements to choose from (e.g., `sagang:sagawetnessindex` has four output rasters, check with `qgis_outputs("sagang:sagawetnessindex")`, you can specify the wanted output object via the `.select` argument.
+However, if the output has another name (e.g., `DEM_PREPROC` as in the example below) or if there are multiple output elements to choose from (e.g., `sagang:sagawetnessindex` has four output rasters, check with `qgis_outputs("sagang:sagawetnessindex")`), you can specify the wanted output object via the `.select` argument.
 
 ```{r qgis-pipe}
 dem <- system.file("raster/dem.tif", package = "spDataLarge")
