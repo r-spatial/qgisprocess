@@ -19,15 +19,15 @@
 #' output element if the default `OUTPUT` or `output` element is not available?
 #' Only takes effect if `name` is equal to `OUTPUT` or `output`, but not found.
 #'
-#'
-#' @export
-#'
+#' @name qgis_result
+
+#' @keywords internal
 is_qgis_result <- function(x) {
   inherits(x, "qgis_result")
 }
 
 
-#' @rdname is_qgis_result
+#' @rdname qgis_result
 #' @export
 qgis_clean_result <- function(x) {
   args_chr <- as.character(x$.args[vapply(x$.args, is.character, logical(1))])
@@ -35,6 +35,7 @@ qgis_clean_result <- function(x) {
   invisible(x)
 }
 
+#' @keywords internal
 qgis_leave_only_results <- function(x) {
   assert_that(inherits(x, "qgis_result"))
   output_names <- setdiff(
@@ -45,9 +46,8 @@ qgis_leave_only_results <- function(x) {
 }
 
 
-#' @rdname is_qgis_result
+#' @rdname qgis_result
 #' @export
-#'
 qgis_extract_output_by_name <- function(x, name = "OUTPUT", first = TRUE) {
   assert_that(is.string(name))
   x <- qgis_leave_only_results(x)
@@ -66,14 +66,13 @@ qgis_extract_output_by_name <- function(x, name = "OUTPUT", first = TRUE) {
   }
 }
 
-#' @rdname is_qgis_result
+#' @rdname qgis_result
 #' @export
 qgis_extract_output <- qgis_extract_output_by_name
 
 
-#' @rdname is_qgis_result
+#' @rdname qgis_result
 #' @export
-#'
 qgis_extract_output_by_position <- function(x, which) {
   assert_that(is.number(which))
   x <- qgis_leave_only_results(x)
@@ -85,7 +84,7 @@ qgis_extract_output_by_position <- function(x, which) {
 }
 
 
-#' @rdname is_qgis_result
+#' @rdname qgis_result
 #' @export
 qgis_extract_output_by_class <- function(x, class, single = TRUE) {
   assert_that(is.character(class))
@@ -143,25 +142,25 @@ qgis_check_stdout <- function(x) {
 }
 
 
-#' @rdname is_qgis_result
+#' @rdname qgis_result
 #' @export
 qgis_result_status <- function(x) {
   x$.processx_result$status
 }
 
-#' @rdname is_qgis_result
+#' @rdname qgis_result
 #' @export
 qgis_result_stdout <- function(x) {
   x$.processx_result$stdout
 }
 
-#' @rdname is_qgis_result
+#' @rdname qgis_result
 #' @export
 qgis_result_stderr <- function(x) {
   x$.processx_result$stderr
 }
 
-#' @rdname is_qgis_result
+#' @rdname qgis_result
 #' @export
 qgis_result_args <- function(x) {
   x$.args
