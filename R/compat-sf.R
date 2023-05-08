@@ -1,6 +1,7 @@
-#' Convert sf objects to/from QGIS inputs/outputs
+#' Convert a qgis_result object to an sf object
 #'
-#' @inheritParams as_qgis_argument
+#' @param x A result from [qgis_run_algorithm()].
+#' @param ... Arguments passed to [sf::read_sf()].
 #' @name st_as_sf
 
 

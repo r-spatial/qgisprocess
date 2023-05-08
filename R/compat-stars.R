@@ -1,30 +1,32 @@
-#' Convert raster objects to/from QGIS inputs/outputs
+#' Convert a qgis_result object or one of its elements to a stars object
 #'
-#' @param x A stars or stars_proxy object.
-#' @inheritParams as_qgis_argument
+#' @param .x A result from [qgis_run_algorithm()] or one of the
+#' [qgis_extract_output()] functions.
+#' @param ... Arguments passed to [stars::read_stars()].
 #'
 #' @name st_as_stars
 
 #' @rdname st_as_stars
 # dynamically registered in zzz.R
-st_as_stars.qgis_outputRaster <- function(output, ...) {
-  stars::read_stars(unclass(output), ...)
+st_as_stars.qgis_outputRaster <- function(.x, ...) {
+  stars::read_stars(unclass(.x), ...)
 }
 
 #' @rdname st_as_stars
 # dynamically registered in zzz.R
-st_as_stars.qgis_outputLayer <- function(output, ...) {
-  stars::read_stars(unclass(output), ...)
+st_as_stars.qgis_outputLayer <- function(.x, ...) {
+  stars::read_stars(unclass(.x), ...)
 }
 
 #' @rdname st_as_stars
 # dynamically registered in zzz.R
-st_as_stars.qgis_result <- function(output, ...) {
-  result <- qgis_extract_output_by_class(output, c("qgis_outputRaster", "qgis_outputLayer"))
+st_as_stars.qgis_result <- function(.x, ...) {
+  result <- qgis_extract_output_by_class(.x, c("qgis_outputRaster", "qgis_outputLayer"))
   stars::read_stars(unclass(result), ...)
 }
 
 
+# @param x A stars or stars_proxy object.
 #' @keywords internal
 #' @export
 as_qgis_argument.stars <- function(x, spec = qgis_argument_spec(),
