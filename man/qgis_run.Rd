@@ -3,21 +3,17 @@
 \name{qgis_run}
 \alias{qgis_run}
 \alias{has_qgis}
-\alias{assert_qgis}
 \alias{qgis_configure}
 \alias{qgis_unconfigure}
 \alias{qgis_version}
 \alias{qgis_path}
-\alias{qgis_use_json_output}
-\alias{qgis_use_json_input}
-\alias{qgis_env}
+\alias{qgis_using_json_output}
+\alias{qgis_using_json_input}
 \title{Configure and run 'qgis_process'}
 \usage{
 qgis_run(args = character(), ..., env = qgis_env(), path = qgis_path())
 
 has_qgis()
-
-assert_qgis(action = abort)
 
 qgis_configure(quiet = FALSE, use_cached_data = FALSE)
 
@@ -27,23 +23,20 @@ qgis_version(query = FALSE, quiet = TRUE, debug = FALSE)
 
 qgis_path(query = FALSE, quiet = TRUE)
 
-qgis_use_json_output(query = FALSE, quiet = TRUE)
+qgis_using_json_output(query = FALSE, quiet = TRUE)
 
-qgis_use_json_input()
-
-qgis_env()
+qgis_using_json_input()
 }
 \arguments{
 \item{args}{Command-line arguments}
 
 \item{...}{Passed to \code{\link[processx:run]{processx::run()}}.}
 
-\item{env}{A \code{\link[=list]{list()}} of environment variables. Defaults to \code{\link[=qgis_env]{qgis_env()}}.}
+\item{env}{A \code{\link[=list]{list()}} of environment variables.
+Defaults to
+\code{getOption("qgisprocess.env", list(QT_QPA_PLATFORM = "offscreen"))}.}
 
 \item{path}{A path to the 'qgis_process' executable. Defaults to \code{\link[=qgis_path]{qgis_path()}}.}
-
-\item{action}{An action to take if the 'qgis_process' executable could not be
-found.}
 
 \item{quiet}{Use \code{FALSE} to display more information about the command,
 possibly useful for debugging.}
@@ -80,7 +73,7 @@ to save time.
 Run \code{qgis_configure(use_cached_data = TRUE)} manually to get more details.
 
 Use \code{qgis_algorithms()}, \code{qgis_providers()}, \code{qgis_plugins()},
-\code{qgis_use_json_output()}, \code{qgis_path()} and \code{qgis_version()} to inspect cache
+\code{qgis_using_json_output()}, \code{qgis_path()} and \code{qgis_version()} to inspect cache
 contents.
 
 If the configuration

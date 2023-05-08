@@ -2,11 +2,14 @@
 % Please edit documentation in R/qgis-plugins.R
 \name{qgis_plugins}
 \alias{qgis_plugins}
+\alias{qgis_has_plugin}
 \alias{qgis_enable_plugins}
 \alias{qgis_disable_plugins}
 \title{List, enable or disable QGIS plugins}
 \usage{
 qgis_plugins(which = "all", query = FALSE, quiet = TRUE, ...)
+
+qgis_has_plugin(plugin, query = FALSE, quiet = TRUE)
 
 qgis_enable_plugins(names = NULL, quiet = FALSE)
 
@@ -23,6 +26,8 @@ Must be one of: \code{"all"}, \code{"enabled"}, \code{"disabled"}.}
 possibly useful for debugging.}
 
 \item{...}{Only used by other functions calling this function.}
+
+\item{plugin}{A single plugin name.}
 
 \item{names}{Optional character vector of plugin names.}
 }
@@ -47,6 +52,9 @@ If \code{names} is not provided to \code{qgis_disable_plugins()}, it is assumed 
 \emph{enabled} plugins are to be disabled.
 Note that the 'processing' plugin is ignored, because it is always available
 to 'qgis_process' (not QGIS though).
+
+\code{qgis_has_plugin()} can be used to return a logical representing the
+avvailability of a single plugin.
 }
 \note{
 Only plugins that implement Processing providers are supported.

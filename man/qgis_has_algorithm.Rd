@@ -5,7 +5,6 @@
 \alias{qgis_algorithms}
 \alias{qgis_has_provider}
 \alias{qgis_providers}
-\alias{assert_qgis_algorithm}
 \title{Run algorithms using 'qgis_process'}
 \usage{
 qgis_has_algorithm(algorithm)
@@ -15,8 +14,6 @@ qgis_algorithms(query = FALSE, quiet = TRUE)
 qgis_has_provider(provider, query = FALSE, quiet = TRUE)
 
 qgis_providers()
-
-assert_qgis_algorithm(algorithm)
 }
 \arguments{
 \item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or

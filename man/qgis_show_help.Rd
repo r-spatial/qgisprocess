@@ -2,21 +2,18 @@
 % Please edit documentation in R/qgis-help.R
 \name{qgis_show_help}
 \alias{qgis_show_help}
-\alias{qgis_description}
-\alias{qgis_arguments}
-\alias{qgis_outputs}
-\alias{qgis_help_json}
+\alias{qgis_get_description}
+\alias{qgis_get_argument_specs}
+\alias{qgis_get_output_specs}
 \title{Show algorithm help}
 \usage{
 qgis_show_help(algorithm)
 
-qgis_description(algorithm)
+qgis_get_description(algorithm)
 
-qgis_arguments(algorithm)
+qgis_get_argument_specs(algorithm)
 
-qgis_outputs(algorithm)
-
-qgis_help_json(algorithm)
+qgis_get_output_specs(algorithm)
 }
 \arguments{
 \item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
@@ -27,7 +24,7 @@ Show algorithm help
 }
 \examples{
 if (has_qgis()) qgis_show_help("native:filedownloader")
-if (has_qgis()) qgis_description("native:filedownloader")
-if (has_qgis()) qgis_arguments("native:filedownloader")
+if (has_qgis()) qgis_get_description("native:filedownloader")
+if (has_qgis()) qgis_get_argument_specs("native:filedownloader")
 
 }

@@ -2,17 +2,14 @@
 % Please edit documentation in R/qgis-tmp.R
 \name{qgis_tmp_file}
 \alias{qgis_tmp_file}
-\alias{is_qgis_tmp_file}
 \alias{qgis_tmp_folder}
 \alias{qgis_tmp_vector}
 \alias{qgis_tmp_raster}
 \alias{qgis_tmp_base}
-\alias{qgis_tmp_clean}
+\alias{qgis_clean_tmp}
 \title{Manage temporary files}
 \usage{
 qgis_tmp_file(ext)
-
-is_qgis_tmp_file(x)
 
 qgis_tmp_folder()
 
@@ -22,12 +19,10 @@ qgis_tmp_raster(ext = getOption("qgisprocess.tmp_raster_ext", ".tif"))
 
 qgis_tmp_base()
 
-qgis_tmp_clean()
+qgis_clean_tmp()
 }
 \arguments{
 \item{ext}{The file extension to be used.}
-
-\item{x}{A character vector of file names.}
 }
 \value{
 A character vector indicating the location of a
@@ -38,7 +33,7 @@ These functions create temporary files that can be used
 in calls to \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} or elsewhere. These
 files are created in a special temporary directory
 (\code{\link[=qgis_tmp_base]{qgis_tmp_base()}}) that should be periodically cleaned up
-using \code{\link[=qgis_tmp_clean]{qgis_tmp_clean()}}. You can set your preferred
+using \code{\link[=qgis_clean_tmp]{qgis_clean_tmp()}}. You can set your preferred
 vector and/or raster file extension using
 \code{options(qgisprocess.tmp_vector_ext = "...")} and/or
 \code{options(qgisprocess.tmp_raster_ext = "...")}, respectively.

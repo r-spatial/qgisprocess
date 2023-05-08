@@ -3,19 +3,70 @@
 \name{qgisprocess-deprecated}
 \alias{qgisprocess-deprecated}
 \alias{qgis_output}
+\alias{qgis_result_single}
+\alias{qgis_detect_windows}
+\alias{qgis_detect_macos}
+\alias{qgis_use_json_input}
+\alias{qgis_use_json_output}
+\alias{qgis_description}
+\alias{qgis_arguments}
+\alias{qgis_outputs}
+\alias{qgis_pipe}
+\alias{qgis_tmp_clean}
+\alias{qgis_result_clean}
 \title{Deprecated functions}
 \usage{
 qgis_output(x, which)
+
+qgis_result_single(x, what)
+
+qgis_detect_windows(...)
+
+qgis_detect_macos()
+
+qgis_use_json_input()
+
+qgis_use_json_output(...)
+
+qgis_description(...)
+
+qgis_arguments(...)
+
+qgis_outputs(...)
+
+qgis_pipe(...)
+
+qgis_tmp_clean(...)
+
+qgis_result_clean(...)
 }
 \arguments{
 \item{x}{An object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
 
 \item{which}{The index of an output.}
+
+\item{what}{Character vector of classes.}
+
+\item{...}{Arguments passed to the new function.
+This is done for functions where only the function name changed at
+time of deprecation.}
 }
 \description{
 \itemize{
 \item Instead of \code{qgis_output()}, use \code{\link[=qgis_extract_output]{qgis_extract_output()}} and related
 functions.
+\item Instead of \code{qgis_result_single()}, use \code{\link[=qgis_extract_output]{qgis_extract_output()}} and related
+functions.
+\item Instead of \code{qgis_detect_windows()}, use \code{\link[=qgis_detect_windows_paths]{qgis_detect_windows_paths()}}.
+\item Instead of \code{qgis_detect_macos()}, use \code{\link[=qgis_detect_macos_paths]{qgis_detect_macos_paths()}}.
+\item Instead of \code{qgis_use_json_input()}, use \code{\link[=qgis_using_json_input]{qgis_using_json_input()}}.
+\item Instead of \code{qgis_use_json_output()}, use \code{\link[=qgis_using_json_output]{qgis_using_json_output()}}.
+\item Instead of \code{qgis_description()}, use \code{\link[=qgis_get_description]{qgis_get_description()}}.
+\item Instead of \code{qgis_arguments()}, use \code{\link[=qgis_get_argument_specs]{qgis_get_argument_specs()}}.
+\item Instead of \code{qgis_outputs()}, use \code{\link[=qgis_get_output_specs]{qgis_get_output_specs()}}.
+\item Instead of \code{qgis_pipe()}, use \code{\link[=qgis_run_algorithm_p]{qgis_run_algorithm_p()}}.
+\item Instead of \code{qgis_tmp_clean()}, use \code{\link[=qgis_clean_tmp]{qgis_clean_tmp()}}.
+\item Instead of \code{qgis_result_clean()}, use \code{\link[=qgis_clean_result]{qgis_clean_result()}}.
 }
 }
 \keyword{internal}
