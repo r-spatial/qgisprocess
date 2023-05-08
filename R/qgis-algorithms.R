@@ -63,8 +63,7 @@ qgis_providers <- function() {
   )
 }
 
-#' @rdname qgis_has_algorithm
-#' @export
+#' @keywords internal
 assert_qgis_algorithm <- function(algorithm) {
   if (!is.character(algorithm) || length(algorithm) != 1) {
     abort("`algorithm` must be a character vector of length 1")
