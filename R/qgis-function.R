@@ -4,21 +4,10 @@
 #' function based on the argument metadata provided by [qgis_get_argument_specs()].
 #' Unlike [qgis_run_algorithm()], [qgis_function()] sets the default value
 #' of `.quiet` to `TRUE` to make the function more usable within other
-#' R code. Similarly, [qgis_run_algorithm_p()] wraps [qgis_run_algorithm()], passing
-#' its first argument to the first input to `algorithm`.
+#' R code.
 #'
 #' @inheritParams qgis_run_algorithm
-#' @param .data Passed to the first input of `algorithm`.
-#' If `.data` is a `qgis_result` (the result of a previous processing
-#' step), `.data[[.select]]` is passed instead.
-#' @param .select String.
-#' The name of the element to select from `.data` if the latter is a
-#' `qgis_result`.
-#' Defaults to `"OUTPUT"`.
-#' @param .clean Logical.
-#' Should an incoming `qgis_result` be cleaned (using [qgis_clean_result()])
-#' after processing?
-#' @param ... Default values to set when using [qgis_function()].
+#' @param ... Algorithm arguments.
 #'   These values are evaluated once and immediately, so you shouldn't
 #'   call [qgis_tmp_file()] here.
 #'
@@ -32,17 +21,6 @@
 #'       "longlake/longlake_depth.gpkg",
 #'       package = "qgisprocess"
 #'     ),
-#'     DISTANCE = 10
-#'   )
-#' }
-#'
-#' if (has_qgis()) {
-#'   qgis_run_algorithm_p(
-#'     system.file(
-#'       "longlake/longlake_depth.gpkg",
-#'       package = "qgisprocess"
-#'     ),
-#'     "native:buffer",
 #'     DISTANCE = 10
 #'   )
 #' }
@@ -115,8 +93,47 @@ qgis_function <- function(algorithm, ...) {
   fun
 }
 
-#' @rdname qgis_function
+
+
+
+
+#' Run algorithms using 'qgis_process': pipe-friendly wrapper
+#'
+#' [qgis_run_algorithm_p()] wraps [qgis_run_algorithm()], passing
+#' its first argument to the first input to `algorithm`.
+#' This makes it more convenient in a pipeline (hence '_p' in the name).
+#'
+#' Uses [qgis_function()] under the hood.
+#'
+#' @inheritParams qgis_run_algorithm
+#' @param .data Passed to the first input of `algorithm`.
+#' If `.data` is a `qgis_result` (the result of a previous processing
+#' step), `.data[[.select]]` is passed instead.
+#' @param .select String.
+#' The name of the element to select from `.data` if the latter is a
+#' `qgis_result`.
+#' Defaults to `"OUTPUT"`.
+#' @param .clean Logical.
+#' Should an incoming `qgis_result` be cleaned (using [qgis_clean_result()])
+#' after processing?
+#' @param ... Other algorithm arguments.
+#'   These values are evaluated once and immediately, so you shouldn't
+#'   call [qgis_tmp_file()] here.
+#'
 #' @export
+#'
+#' @examples
+#' if (has_qgis()) {
+#'   system.file(
+#'         "longlake/longlake_depth.gpkg",
+#'         package = "qgisprocess"
+#'       ) |>
+#'     qgis_run_algorithm_p(
+#'       "native:buffer",
+#'       DISTANCE = 10
+#'     )
+#' }
+#'
 qgis_run_algorithm_p <- function(
     .data,
     algorithm,
