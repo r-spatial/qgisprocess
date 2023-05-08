@@ -1,7 +1,8 @@
 #' Convert terra objects to/from QGIS inputs/outputs
 #'
 #' @param x A [terra::rast()].
-#' @param output The result from [qgis_run_algorithm()] or [qgis_output()].
+#' @param output The result from [qgis_run_algorithm()] or [qgis_extract_output_by_name()],
+#' [qgis_extract_output_by_position()] or [qgis_extract_output_by_class()].
 #' @param ... Passed to [terra::rast()].
 #' @inheritParams as_qgis_argument
 #'
@@ -57,7 +58,7 @@ qgis_as_terra.qgis_outputLayer <- function(output, ...) {
 #' @rdname as_qgis_argument.SpatRaster
 #' @export
 qgis_as_terra.qgis_result <- function(output, ...) {
-  result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  result <- qgis_extract_output_by_class(output, c("qgis_outputRaster", "qgis_outputLayer"))
   terra::rast(unclass(result), ...)
 }
 

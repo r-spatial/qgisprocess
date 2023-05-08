@@ -123,8 +123,7 @@ qgis_pipe <- function(
     ...,
     .select = "OUTPUT",
     .clean = TRUE,
-    .quiet = TRUE
-) {
+    .quiet = TRUE) {
   UseMethod("qgis_pipe")
 }
 
@@ -136,8 +135,7 @@ qgis_pipe.qgis_result <- function(
     ...,
     .select = "OUTPUT",
     .clean = TRUE,
-    .quiet = TRUE
-) {
+    .quiet = TRUE) {
   assert_that(is.string(.select))
   withr::with_options(
     list(warning.length = 6e3),
@@ -165,13 +163,10 @@ qgis_pipe.default <- function(
     ...,
     .select = "OUTPUT",
     .clean = TRUE,
-    .quiet = TRUE
-) {
+    .quiet = TRUE) {
   if (stringr::str_detect(class(.data), "^qgis_output")) {
     .data <- unclass(.data)
   }
   fun <- qgis_function(algorithm)
   fun(.data, ..., .quiet = .quiet)
 }
-
-

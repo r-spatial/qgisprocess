@@ -65,7 +65,7 @@ test_that("qgis_pipe() works", {
   expect_equal(sf::st_area(sf::st_as_sf(result)), sf::st_area(sf::st_as_sf(result2)))
 
   result3 <- result |>
-    qgis_output("OUTPUT") |>
+    qgis_extract_output_by_name("OUTPUT") |>
     qgis_pipe("native:subdivide", MAX_NODES = 10)
   expect_s3_class(result3, "qgis_result")
   expect_named(result3, c("OUTPUT", ".algorithm", ".args", ".raw_json_input", ".processx_result"))

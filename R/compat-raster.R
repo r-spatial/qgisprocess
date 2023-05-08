@@ -1,7 +1,8 @@
 #' Convert raster objects to/from QGIS inputs/outputs
 #'
 #' @param x A [raster::raster()] or [raster::brick()].
-#' @param output The result from [qgis_run_algorithm()] or [qgis_output()].
+#' @param output The result from [qgis_run_algorithm()] or [qgis_extract_output_by_name()],
+#' [qgis_extract_output_by_position()] or [qgis_extract_output_by_class()].
 #' @param ... Passed to [raster::raster()] or [raster::brick()].
 #' @inheritParams as_qgis_argument
 #'
@@ -75,14 +76,14 @@ qgis_as_brick.qgis_outputLayer <- function(output, ...) {
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
 qgis_as_raster.qgis_result <- function(output, ...) {
-  result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  result <- qgis_extract_output_by_class(output, c("qgis_outputRaster", "qgis_outputLayer"))
   raster::raster(unclass(result), ...)
 }
 
 #' @rdname as_qgis_argument.RasterLayer
 #' @export
 qgis_as_brick.qgis_result <- function(output, ...) {
-  result <- qgis_result_single(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  result <- qgis_extract_output_by_class(output, c("qgis_outputRaster", "qgis_outputLayer"))
   raster::brick(unclass(result), ...)
 }
 

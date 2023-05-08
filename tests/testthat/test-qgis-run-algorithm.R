@@ -66,7 +66,7 @@ test_that(glue("qgis_run_algorithm accepts multiple input arguments{input}"), {
     LAYERS = v_1, LAYERS = v_2, LAYERS = v_3,
     .quiet = TRUE
   )
-  tmp <- sf::read_sf(qgis_output(out, "OUTPUT"))
+  tmp <- sf::read_sf(qgis_extract_output_by_name(out, "OUTPUT"))
   expect_equal(nrow(tmp), 3)
 })
 

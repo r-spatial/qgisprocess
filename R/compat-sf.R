@@ -20,7 +20,7 @@ as_qgis_argument.sf <- function(x, spec = qgis_argument_spec(),
 
 # dynamically registered in zzz.R
 st_as_sf.qgis_result <- function(x, ...) {
-  result <- qgis_result_single(x, c("qgis_outputVector", "qgis_outputLayer"))
+  result <- qgis_extract_output_by_class(x, c("qgis_outputVector", "qgis_outputLayer"))
 
   if (grepl("\\|layer", result)) {
     result_splitted <- strsplit(result, "\\|layer.*=")[[1]]
