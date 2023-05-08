@@ -167,6 +167,7 @@ qgis_result_args <- function(x) {
   x$.args
 }
 
+#' @keywords internal
 #' @export
 print.qgis_result <- function(x, ...) {
   cat(glue("<Result of `qgis_run_algorithm(\"{ x$.algorithm }\", ...)`>\n\n"))
