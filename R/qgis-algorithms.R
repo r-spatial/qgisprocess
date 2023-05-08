@@ -1,7 +1,7 @@
-#' Run algorithms using 'qgis_process'
+#' Get metadata about algorithms and processing providers
 #'
-#' Run QGIS algorithms.
-#' See the [QGIS docs](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/index.html)
+#' Returns metadata about algorithms and processing providers
+#' See the [QGIS docs](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html)
 #' for a detailed description of the algorithms provided
 #' 'out of the box' on QGIS (versions >= 3.14).
 #'
@@ -19,13 +19,6 @@
 #' if (has_qgis()) qgis_has_provider("native")
 #' if (has_qgis()) qgis_providers()
 #'
-qgis_has_algorithm <- function(algorithm) {
-  assert_qgis()
-  as.character(algorithm) %in% qgis_algorithms()$algorithm
-}
-
-#' @rdname qgis_has_algorithm
-#' @export
 qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
   if (query) {
     qgisprocess_cache$algorithms <- qgis_query_algorithms(quiet = quiet)
@@ -38,14 +31,21 @@ qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
   qgisprocess_cache$algorithms
 }
 
-#' @rdname qgis_has_algorithm
+#' @rdname qgis_algorithms
+#' @export
+qgis_has_algorithm <- function(algorithm) {
+  assert_qgis()
+  as.character(algorithm) %in% qgis_algorithms()$algorithm
+}
+
+#' @rdname qgis_algorithms
 #' @export
 qgis_has_provider <- function(provider, query = FALSE, quiet = TRUE) {
   assert_qgis()
   as.character(provider) %in% unique(qgis_algorithms(query, quiet)$provider)
 }
 
-#' @rdname qgis_has_algorithm
+#' @rdname qgis_algorithms
 #' @export
 qgis_providers <- function() {
   assert_qgis()

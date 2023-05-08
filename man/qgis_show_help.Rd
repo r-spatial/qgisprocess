@@ -5,7 +5,7 @@
 \alias{qgis_get_description}
 \alias{qgis_get_argument_specs}
 \alias{qgis_get_output_specs}
-\title{Show algorithm help}
+\title{Get help and detailed metadata of one algorithm}
 \usage{
 qgis_show_help(algorithm)
 
@@ -20,7 +20,7 @@ qgis_get_output_specs(algorithm)
 a path to a QGIS model file.}
 }
 \description{
-Show algorithm help
+Get help and detailed metadata of one algorithm
 }
 \examples{
 if (has_qgis()) qgis_show_help("native:filedownloader")

@@ -1,4 +1,4 @@
-#' Show algorithm help
+#' Get help and detailed metadata of one algorithm
 #'
 #' @inheritParams qgis_run_algorithm
 #'
