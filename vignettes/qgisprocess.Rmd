@@ -233,7 +233,7 @@ r <- lapply(info[nms], \(x) as.numeric(qgis_as_terra(x))) |>
 plot(r)
 ```
 
-## Piping
+# Piping
 
 `qgis_process` does not lend itself naturally to piping because its first argument is the name of a geoalgorithm instead of a data object.
 `qgis_pipe()` circumvents this by accepting a `.data` object as its first argument, and pipes this data object into the the first argument of a geoalgorithm assuming that the specified geoalgorithm in fact needs a data input object as its first argument.
