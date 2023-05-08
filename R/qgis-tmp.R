@@ -4,7 +4,7 @@
 #' in calls to [qgis_run_algorithm()] or elsewhere. These
 #' files are created in a special temporary directory
 #' ([qgis_tmp_base()]) that should be periodically cleaned up
-#' using [qgis_tmp_clean()]. You can set your preferred
+#' using [qgis_clean_tmp()]. You can set your preferred
 #' vector and/or raster file extension using
 #' `options(qgisprocess.tmp_vector_ext = "...")` and/or
 #' `options(qgisprocess.tmp_raster_ext = "...")`, respectively.
@@ -58,7 +58,7 @@ qgis_tmp_base <- function() {
 
 #' @rdname qgis_tmp_file
 #' @export
-qgis_tmp_clean <- function() {
+qgis_clean_tmp <- function() {
   unlink(qgis_tmp_dir_location, recursive = TRUE)
   dir.create(qgis_tmp_dir_location)
 }

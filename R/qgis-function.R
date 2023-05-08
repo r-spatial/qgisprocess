@@ -16,7 +16,7 @@
 #' `qgis_result`.
 #' Defaults to `"OUTPUT"`.
 #' @param .clean Logical.
-#' Should an incoming `qgis_result` be cleaned (using [qgis_result_clean()])
+#' Should an incoming `qgis_result` be cleaned (using [qgis_clean_result()])
 #' after processing?
 #' @param ... Default values to set when using [qgis_function()].
 #'   These values are evaluated once and immediately, so you shouldn't
@@ -151,7 +151,7 @@ qgis_run_algorithm_p.qgis_result <- function(
   output <- unclass(.data[[.select]])
   fun <- qgis_function(algorithm)
   result <- fun(output, ..., .quiet = .quiet)
-  if (.clean) qgis_result_clean(.data)
+  if (.clean) qgis_clean_result(.data)
   result
 }
 
