@@ -17,7 +17,7 @@
 #' Run `qgis_configure(use_cached_data = TRUE)` manually to get more details.
 #'
 #' Use `qgis_algorithms()`, `qgis_providers()`, `qgis_plugins()`,
-#' `qgis_use_json_output()`, `qgis_path()` and `qgis_version()` to inspect cache
+#' `qgis_using_json_output()`, `qgis_path()` and `qgis_version()` to inspect cache
 #' contents.
 #'
 #' If the configuration
@@ -293,9 +293,9 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           if (!quiet) { # triggers messages
             invisible(qgis_version(query = FALSE, quiet = FALSE))
             invisible(qgis_path(query = FALSE, quiet = FALSE))
-            invisible(qgis_use_json_output(query = FALSE, quiet = FALSE))
+            invisible(qgis_using_json_output(query = FALSE, quiet = FALSE))
             message(
-              ifelse(qgis_use_json_input(), "Using ", "Not using "),
+              ifelse(qgis_using_json_input(), "Using ", "Not using "),
               "JSON for input serialization."
             )
             invisible(qgis_plugins(query = FALSE, quiet = FALSE, msg = FALSE))
@@ -342,10 +342,10 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
 
   version <- qgis_version(query = TRUE, quiet = quiet)
 
-  use_json_output <- qgis_use_json_output(query = TRUE, quiet = quiet)
+  use_json_output <- qgis_using_json_output(query = TRUE, quiet = quiet)
 
   if (!quiet) message(
-    ifelse(qgis_use_json_input(), "Using ", "Not using "),
+    ifelse(qgis_using_json_input(), "Using ", "Not using "),
     "JSON for input serialization."
   )
 
@@ -383,7 +383,7 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
 message_inspect_cache <- function() {
   message(
     "Use qgis_algorithms(), qgis_providers(), qgis_plugins(), ",
-    "qgis_use_json_output(),\nqgis_path() and qgis_version() ",
+    "qgis_using_json_output(),\nqgis_path() and qgis_version() ",
     "to inspect the cache environment."
   )
 }
@@ -545,7 +545,7 @@ qgis_query_path <- function(quiet = FALSE) {
 
 #' @rdname qgis_run
 #' @export
-qgis_use_json_output <- function(query = FALSE, quiet = TRUE) {
+qgis_using_json_output <- function(query = FALSE, quiet = TRUE) {
   if (query) {
     opt <- getOption(
       "qgisprocess.use_json_output",
@@ -577,7 +577,7 @@ qgis_use_json_output <- function(query = FALSE, quiet = TRUE) {
 
 #' @rdname qgis_run
 #' @export
-qgis_use_json_input <- function() {
+qgis_using_json_input <- function() {
   opt <- getOption(
     "qgisprocess.use_json_input",
     Sys.getenv(
@@ -587,7 +587,7 @@ qgis_use_json_input <- function() {
   )
 
   if (identical(opt, "")) {
-    qgis_use_json_output() &&
+    qgis_using_json_output() &&
       (package_version(strsplit(qgis_version(), "-")[[1]][1]) >= "3.23.0")
   } else {
     isTRUE(opt) || identical(opt, "true")

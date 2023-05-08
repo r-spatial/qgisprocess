@@ -83,7 +83,7 @@ assert_qgis_algorithm <- function(algorithm) {
 
 #' @keywords internal
 qgis_query_algorithms <- function(quiet = FALSE) {
-  if (qgis_use_json_output()) {
+  if (qgis_using_json_output()) {
     result <- qgis_run(args = c("list", "--json"), encoding = "UTF-8")
     result_parsed <- jsonlite::fromJSON(result$stdout)
 

@@ -1,6 +1,6 @@
 input <-
   if (has_qgis()) {
-    if (qgis_use_json_input()) " (using JSON input)" else " (NOT using JSON input)"
+    if (qgis_using_json_input()) " (using JSON input)" else " (NOT using JSON input)"
   } else ""
 
 test_that(glue("qgis_run_algorithm() works{input}"), {

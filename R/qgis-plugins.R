@@ -72,7 +72,7 @@ qgis_plugins <- function(
 
 #' @keywords internal
 qgis_query_plugins <- function(quiet = FALSE) {
-  if (qgis_use_json_output()) {
+  if (qgis_using_json_output()) {
     out <- qgis_run(args = c("plugins", "--json"))$stdout
     pluginlist <- jsonlite::fromJSON(out)$plugins
     plugins <- tibble::enframe(pluginlist)

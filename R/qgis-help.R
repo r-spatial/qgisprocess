@@ -37,7 +37,7 @@ extract_type_component <- function(param_element, component) {
 #' @rdname qgis_show_help
 #' @export
 qgis_arguments <- function(algorithm) {
-  if (qgis_use_json_output()) {
+  if (qgis_using_json_output()) {
     help <- qgis_help_json(algorithm)
     out <- tibble::tibble(
       name = names(help$parameters),
@@ -64,7 +64,7 @@ qgis_arguments <- function(algorithm) {
 #' @rdname qgis_show_help
 #' @export
 qgis_outputs <- function(algorithm) {
-  if (qgis_use_json_output()) {
+  if (qgis_using_json_output()) {
     help <- qgis_help_json(algorithm)
     out <- tibble::tibble(
       name = names(help$outputs),

@@ -37,8 +37,8 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
     abort("All ... arguments to `qgis_run_algorithm()` must be named.")
   }
 
-  use_json_input <- !is.null(.raw_json_input) || qgis_use_json_input()
-  use_json_output <- use_json_input || qgis_use_json_output()
+  use_json_input <- !is.null(.raw_json_input) || qgis_using_json_input()
+  use_json_output <- use_json_input || qgis_using_json_output()
 
   if (is.null(.raw_json_input)) {
     # sanitize arguments and make sure they are cleaned up on exit

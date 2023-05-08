@@ -14,8 +14,8 @@ if (has_qgis()) qgis_version()
 
 if (has_qgis()) qgis_version(debug = TRUE)
 
-if (has_qgis()) qgis_use_json_output()
-if (has_qgis()) qgis_use_json_input()
+if (has_qgis()) qgis_using_json_output()
+if (has_qgis()) qgis_using_json_input()
 
 if (has_qgis()) cat(qgis_run()$stdout)
 if (has_qgis()) cat(qgis_run()$stderr)
