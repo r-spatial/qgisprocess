@@ -12,7 +12,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{Basic usage of qgisprocess}
   %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r, include = FALSE}
@@ -44,7 +44,8 @@ Since **qgisprocess** depends on the command line tool `qgis_process`, it alread
 library("qgisprocess")
 ```
 
-In fact, once **qgisprocess** has detected `qgis_process`, it will cache among others the path to the executable, the QGIS version and the list of known algorithms.
+When loading **qgisprocess** for the first time, it will cache among others the path to `qgis_process`, the QGIS version and the list of known algorithms.
+When loading **qgisprocess** in later R sessions, the cache file is read instead for speed-up, on condition that it is still valid.
 Therefore, usually you don't have to do any configuration yourself, unless there's a message telling you to do so.
 
 If you are interested in the details about this process, e.g. how **qgisprocess**  detected `qgis_process`, run `qgis_configure(use_cached_data = TRUE)`.
@@ -232,18 +233,18 @@ r <- lapply(info[nms], \(x) as.numeric(qgis_as_terra(x))) |>
 plot(r)
 ```
 
-## Piping
+# Piping
 
 `qgis_process` does not lend itself naturally to piping because its first argument is the name of a geoalgorithm instead of a data object.
-`qgis_pipe()` circumvents this by accepting a `.data` object as its first argument, and pipes this data object into the first argument of a geoalgorithm assuming that the specified geoalgorithm in fact needs a data input object as its first argument.
+`qgis_pipe()` circumvents this by accepting a `.data` object as its first argument, and pipes this data object into the the first argument of a geoalgorithm assuming that the specified geoalgorithm needs a data input object as its first argument.
 
 ```{r buf-pipe}
 system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") |>
   qgis_pipe("native:buffer", DISTANCE = 50)
 ```
 
-In case of a `qgis_result` object, `qgis_pipe()` automatically tries to select an element named `OUTPUT`.
-However, if the output has another name (e.g., `DEM_PREPROC` as in the example below) or if there are multiple output elements to choose from (e.g., `sagang:sagawetnessindex` has four output rasters, check with `qgis_outputs("sagang:sagawetnessindex")`, you can specify the wanted output object via the `.select` argument.
+If `.data` is a `qgis_result` object, `qgis_pipe()` automatically tries to select an element named `OUTPUT`.
+However, if the output has another name (e.g., `DEM_PREPROC` as in the example below) or if there are multiple output elements to choose from (e.g., `sagang:sagawetnessindex` has four output rasters, check with `qgis_outputs("sagang:sagawetnessindex")`), you can specify the wanted output object via the `.select` argument.
 Please note that we make sure that temporary output raster files, i.e., all output rasters we do not specifically name ourselves, should use SAGA's native raster file format by setting the `qgisprocess.tmp_raster_ext` to `.sdat`.
 Using the default raster output format `.tif` might lead to trouble depending on the installed versions of third-party packages (GDAL, SAGA, etc.). 
 
@@ -261,9 +262,9 @@ qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem,
 
 When piping, `qgis_pipe()` automatically cleans up after you by deleting intermediate results.
 This avoids cluttering your system when running geoalgorithms on large spatial data files.
-To turn of this behavior, set `.clean` to `FALSE`.
+To turn off this behavior, set `.clean` to `FALSE`.
 
-Of course, you can also use the native pipe.
+Of course, you can also pipe to `qgis_run_algorithm()` by manually extracting the `OUTPUT` object and redirecting it to the appropriate input argument of the next processing step.
 This avoids ambiguity and allows for greater flexibility though it might not be as convenient as `qgis_pipe()`.
 For example, intermediate results remain on disk for the duration of your R session.
 
