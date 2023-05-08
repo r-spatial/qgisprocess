@@ -21,12 +21,6 @@
 #'
 #' @name qgis_result
 
-#' @keywords internal
-is_qgis_result <- function(x) {
-  inherits(x, "qgis_result")
-}
-
-
 #' @rdname qgis_result
 #' @export
 qgis_clean_result <- function(x) {
@@ -34,6 +28,12 @@ qgis_clean_result <- function(x) {
   unlink(args_chr[is_qgis_tmp_file(args_chr)], recursive = TRUE)
   invisible(x)
 }
+
+#' @keywords internal
+is_qgis_result <- function(x) {
+  inherits(x, "qgis_result")
+}
+
 
 #' @keywords internal
 qgis_leave_only_results <- function(x) {
