@@ -4,10 +4,22 @@
 #' functions.
 #' - Instead of `qgis_result_single()`, use [qgis_extract_output()] and related
 #' functions.
-#'
+#' - Instead of `qgis_detect_windows()`, use [qgis_detect_windows_paths()].
+#' - Instead of `qgis_detect_macos()`, use [qgis_detect_macos_paths()].
+#' - Instead of `qgis_use_json_input()`, use [qgis_using_json_input()].
+#' - Instead of `qgis_use_json_output()`, use [qgis_using_json_output()].
+#' - Instead of `qgis_description()`, use [qgis_get_description()].
+#' - Instead of `qgis_arguments()`, use [qgis_get_argument_specs()].
+#' - Instead of `qgis_outputs()`, use [qgis_get_output_specs()].
+#' - Instead of `qgis_pipe()`, use [qgis_run_algorithm_p()].
+#' - Instead of `qgis_tmp_clean()`, use [qgis_clean_tmp()].
+#' - Instead of `qgis_result_clean()`, use [qgis_clean_result()].
 #'
 #' @inheritParams is_qgis_result
 #' @param what Character vector of classes.
+#' @param ... Arguments passed to the new function.
+#' This is done for functions where only the function name changed at
+#' time of deprecation.
 #'
 #' @name qgisprocess-deprecated
 
@@ -58,5 +70,95 @@ qgis_result_single <- function(x, what) {
   result
 }
 
+
+
+#' @rdname qgisprocess-deprecated
+#' @export
+#' @keywords internal
+qgis_detect_windows <- function(...) {
+  .Deprecated("qgis_detect_windows_paths")
+  qgis_detect_windows_paths(...)
+}
+
+
+#' @rdname qgisprocess-deprecated
+#' @export
+#' @keywords internal
+qgis_detect_macos <- function() {
+  .Deprecated("qgis_detect_macos_paths")
+  qgis_detect_macos_paths()
+}
+
+
+#' @rdname qgisprocess-deprecated
+#' @export
+#' @keywords internal
+qgis_use_json_input <- function() {
+  .Deprecated("qgis_using_json_input")
+  qgis_using_json_input()
+}
+
+
+#' @rdname qgisprocess-deprecated
+#' @export
+#' @keywords internal
+qgis_use_json_output <- function(...) {
+  .Deprecated("qgis_using_json_output")
+  qgis_using_json_output(...)
+}
+
+
+#' @rdname qgisprocess-deprecated
+#' @export
+#' @keywords internal
+qgis_description <- function(...) {
+  .Deprecated("qgis_get_description")
+  qgis_get_description(...)
+}
+
+
+#' @rdname qgisprocess-deprecated
+#' @export
+#' @keywords internal
+qgis_arguments <- function(...) {
+  .Deprecated("qgis_get_argument_specs")
+  qgis_get_argument_specs(...)
+}
+
+
+#' @rdname qgisprocess-deprecated
+#' @export
+#' @keywords internal
+qgis_outputs <- function(...) {
+  .Deprecated("qgis_get_output_specs")
+  qgis_get_output_specs(...)
+}
+
+
+#' @rdname qgisprocess-deprecated
+#' @export
+#' @keywords internal
+qgis_pipe <- function(...) {
+  .Deprecated("qgis_run_algorithm_p")
+  qgis_run_algorithm_p(...)
+}
+
+
+#' @rdname qgisprocess-deprecated
+#' @export
+#' @keywords internal
+qgis_tmp_clean <- function(...) {
+  .Deprecated("qgis_clean_tmp")
+  qgis_clean_tmp(...)
+}
+
+
+#' @rdname qgisprocess-deprecated
+#' @export
+#' @keywords internal
+qgis_result_clean <- function(...) {
+  .Deprecated("qgis_clean_result")
+  qgis_clean_result(...)
+}
 
 
