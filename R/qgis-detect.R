@@ -49,15 +49,13 @@ qgis_detect_macos_paths <- function() {
   possible_locs_mac[file.exists(possible_locs_mac)]
 }
 
-#' @rdname qgis_detect_windows_paths
-#' @export
+#' @keywords internal
 is_macos <- function() {
   (.Platform$OS.type == "unix") &&
     identical(unname(Sys.info()["sysname"]), "Darwin")
 }
 
-#' @rdname qgis_detect_windows_paths
-#' @export
+#' @keywords internal
 is_windows <- function() {
   .Platform$OS.type == "windows"
 }
