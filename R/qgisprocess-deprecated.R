@@ -71,6 +71,8 @@ qgis_result_single <- function(x, what) {
 }
 
 
+# nocov start
+
 
 #' @rdname qgisprocess-deprecated
 #' @export
@@ -162,3 +164,4 @@ qgis_result_clean <- function(...) {
 }
 
 
+# nocov end
