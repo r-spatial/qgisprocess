@@ -17,6 +17,9 @@
 #' Note that the 'processing' plugin is ignored, because it is always available
 #' to 'qgis_process' (not QGIS though).
 #'
+#' `qgis_has_plugin()` can be used to return a logical representing the
+#' avvailability of a single plugin.
+#'
 #' @note
 #' Only plugins that implement Processing providers are supported.
 #' Installing or removing plugins is not supported.
@@ -26,6 +29,7 @@
 #' status in QGIS (enabled or disabled).
 #' Must be one of: `"all"`, `"enabled"`, `"disabled"`.
 #' @param names Optional character vector of plugin names.
+#' @param plugin A single plugin name.
 #' @param ... Only used by other functions calling this function.
 #' @return
 #' A tibble of plugins and their status.
@@ -119,7 +123,8 @@ message_disabled_plugins <- function(
 
 
 
-#' @keywords internal
+#' @rdname qgis_plugins
+#' @export
 qgis_has_plugin <- function(plugin, query = FALSE, quiet = TRUE) {
   assert_that(is.string(plugin))
   plugin %in% qgis_plugins(query = query, quiet = quiet)$name
