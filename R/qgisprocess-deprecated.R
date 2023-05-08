@@ -15,7 +15,7 @@
 #' - Instead of `qgis_tmp_clean()`, use [qgis_clean_tmp()].
 #' - Instead of `qgis_result_clean()`, use [qgis_clean_result()].
 #'
-#' @inheritParams qgis_result
+#' @inheritParams qgis_extract_output
 #' @param what Character vector of classes.
 #' @param ... Arguments passed to the new function.
 #' This is done for functions where only the function name changed at

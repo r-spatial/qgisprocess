@@ -19,9 +19,9 @@
 #' output element if the default `OUTPUT` or `output` element is not available?
 #' Only takes effect if `name` is equal to `OUTPUT` or `output`, but not found.
 #'
-#' @name qgis_result
+#' @name qgis_extract_output
 
-#' @rdname qgis_result
+#' @rdname qgis_extract_output
 #' @export
 qgis_clean_result <- function(x) {
   args_chr <- as.character(x$.args[vapply(x$.args, is.character, logical(1))])
@@ -46,7 +46,7 @@ qgis_leave_only_results <- function(x) {
 }
 
 
-#' @rdname qgis_result
+#' @rdname qgis_extract_output
 #' @export
 qgis_extract_output_by_name <- function(x, name = "OUTPUT", first = TRUE) {
   assert_that(is.string(name))
@@ -66,12 +66,12 @@ qgis_extract_output_by_name <- function(x, name = "OUTPUT", first = TRUE) {
   }
 }
 
-#' @rdname qgis_result
+#' @rdname qgis_extract_output
 #' @export
 qgis_extract_output <- qgis_extract_output_by_name
 
 
-#' @rdname qgis_result
+#' @rdname qgis_extract_output
 #' @export
 qgis_extract_output_by_position <- function(x, which) {
   assert_that(is.number(which))
@@ -84,7 +84,7 @@ qgis_extract_output_by_position <- function(x, which) {
 }
 
 
-#' @rdname qgis_result
+#' @rdname qgis_extract_output
 #' @export
 qgis_extract_output_by_class <- function(x, class, single = TRUE) {
   assert_that(is.character(class))
@@ -142,25 +142,25 @@ qgis_check_stdout <- function(x) {
 }
 
 
-#' @rdname qgis_result
+#' @rdname qgis_extract_output
 #' @export
 qgis_result_status <- function(x) {
   x$.processx_result$status
 }
 
-#' @rdname qgis_result
+#' @rdname qgis_extract_output
 #' @export
 qgis_result_stdout <- function(x) {
   x$.processx_result$stdout
 }
 
-#' @rdname qgis_result
+#' @rdname qgis_extract_output
 #' @export
 qgis_result_stderr <- function(x) {
   x$.processx_result$stderr
 }
 
-#' @rdname qgis_result
+#' @rdname qgis_extract_output
 #' @export
 qgis_result_args <- function(x) {
   x$.args
