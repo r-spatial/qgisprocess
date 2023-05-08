@@ -26,8 +26,7 @@ qgis_tmp_file <- function(ext) {
   tempfile(tmpdir = qgis_tmp_base(), fileext = ext)
 }
 
-#' @rdname qgis_tmp_file
-#' @export
+#' @keywords internal
 is_qgis_tmp_file <- function(x) {
   startsWith(x, qgis_tmp_base()) & (x != qgis_tmp_base())
 }
