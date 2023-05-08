@@ -54,7 +54,7 @@ Note that the 'processing' plugin is ignored, because it is always available
 to 'qgis_process' (not QGIS though).
 
 \code{qgis_has_plugin()} can be used to return a logical representing the
-avvailability of a single plugin.
+availability of a single plugin.
 }
 \note{
 Only plugins that implement Processing providers are supported.
