@@ -7,12 +7,12 @@
 #' @export
 #'
 #' @examples
-#' if (is_windows()) qgis_detect_windows()
-#' if (is_macos()) qgis_detect_macos()
+#' if (is_windows()) qgis_detect_windows_paths()
+#' if (is_macos()) qgis_detect_macos_paths()
 #'
-qgis_detect_windows <- function(drive_letter = strsplit(R.home(), ":")[[1]][1]) {
+qgis_detect_windows_paths <- function(drive_letter = strsplit(R.home(), ":")[[1]][1]) {
   if (!is_windows()) {
-    abort("Can't use `qgis_detect_windows()` on a non-windows platform.")
+    abort("Can't use `qgis_detect_windows_paths()` on a non-windows platform.")
   }
 
   bat_files <- c(
@@ -34,11 +34,11 @@ qgis_detect_windows <- function(drive_letter = strsplit(R.home(), ":")[[1]][1]) 
   possible_locs_win[file.exists(possible_locs_win)]
 }
 
-#' @rdname qgis_detect_windows
+#' @rdname qgis_detect_windows_paths
 #' @export
-qgis_detect_macos <- function() {
+qgis_detect_macos_paths <- function() {
   if (!is_macos()) {
-    abort("Can't use `qgis_detect_macos()` on a non-MacOS platform.")
+    abort("Can't use `qgis_detect_macos_paths()` on a non-MacOS platform.")
   }
 
   possible_locs_mac <- file.path(
@@ -49,14 +49,14 @@ qgis_detect_macos <- function() {
   possible_locs_mac[file.exists(possible_locs_mac)]
 }
 
-#' @rdname qgis_detect_windows
+#' @rdname qgis_detect_windows_paths
 #' @export
 is_macos <- function() {
   (.Platform$OS.type == "unix") &&
     identical(unname(Sys.info()["sysname"]), "Darwin")
 }
 
-#' @rdname qgis_detect_windows
+#' @rdname qgis_detect_windows_paths
 #' @export
 is_windows <- function() {
   .Platform$OS.type == "windows"
