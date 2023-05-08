@@ -6,8 +6,8 @@ qgis_configure(use_cached_data = TRUE) # triggers reconfiguration if needed
 
 has_qgis()
 
-if (is_macos()) qgis_detect_macos_paths()
-if (is_windows()) qgis_detect_windows_paths()
+if (qgisprocess:::is_macos()) qgis_detect_macos_paths()
+if (qgisprocess:::is_windows()) qgis_detect_windows_paths()
 
 if (has_qgis()) qgis_path()
 if (has_qgis()) qgis_version()
