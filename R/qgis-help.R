@@ -79,8 +79,7 @@ qgis_get_output_specs <- function(algorithm) {
   }
 }
 
-#' @rdname qgis_show_help
-#' @export
+#' @keywords internal
 qgis_help_json <- function(algorithm) {
   cached <- help_cache_file(algorithm, json = TRUE)
   if (qgis_using_cached_help() && file.exists(cached)) {
