@@ -20,7 +20,7 @@ qgis_show_help <- function(algorithm) {
 qgis_description <- function(algorithm) {
   vapply(
     algorithm,
-    function(x) qgis_parsed_help(algorithm)$description,
+    function(x) qgis_parse_help(algorithm)$description,
     character(1)
   )
 }
@@ -53,11 +53,11 @@ qgis_arguments <- function(algorithm) {
     # The order of the parameters is alphabetized in JSON but has a
     # natural ordering in the parsed help text (which we need for backward
     # compatibility)
-    out_legacy <- qgis_parsed_help(algorithm)$arguments
+    out_legacy <- qgis_parse_help(algorithm)$arguments
 
     out[match(out_legacy$name, out$name), ]
   } else {
-    qgis_parsed_help(algorithm)$arguments
+    qgis_parse_help(algorithm)$arguments
   }
 }
 
@@ -75,7 +75,7 @@ qgis_outputs <- function(algorithm) {
     out[] <- lapply(out, unname)
     out
   } else {
-    qgis_parsed_help(algorithm)$outputs
+    qgis_parse_help(algorithm)$outputs
   }
 }
 
@@ -124,7 +124,7 @@ qgis_help_text <- function(algorithm) {
   result$stdout
 }
 
-qgis_parsed_help <- function(algorithm) {
+qgis_parse_help <- function(algorithm) {
   help_text <- trimws(qgis_help_text(algorithm))
 
   sec_description <- stringr::str_match(
