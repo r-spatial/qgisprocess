@@ -78,13 +78,25 @@ Assuming that package loading or `qgis_configure()` ran successfully, we can che
 qgis_version()
 ```
 
-Next, let's list all available providers including available third-party applications: 
+Next, let's check which plugins are at our disposal:
+
+```{r plugins}
+qgis_plugins()
+```
+
+Since we will use GRASS and SAGA later on, let's enable them:
+
+```{r enable-plugins}
+qgis_enable_plugins(c("grassprovider", "processing_saga_nextgen"))
+```
+
+Now, let's list all available providers including available third-party applications: 
 
 ```{r providers}
 qgis_providers()
 ```
 
-This tells us that we can also use the third-party providers GDAL, SAGA and GRASS through the QGIS interface.
+This tells us that we can also use the third-party providers GDAL, GRASS and SAGA through the QGIS interface.
 
 # Basic usage
 
@@ -199,9 +211,9 @@ Now let us calculate the terrain attributes.
 library("terra")
 # attach digital elevation model from Mt. Mongón (Peru)
 dem <- rast(system.file("raster/dem.tif", package = "spDataLarge"))
-
+# if not already done, enable the grass plugin
+# qgis_enable_plugins("grassprovider")
 info <- qgis_run_algorithm(alg = "grass7:r.slope.aspect", elevation = dem)
-                           
 ```
 
 Just printing the `info` object shows which output objects have been made:
@@ -233,6 +245,8 @@ r <- lapply(info[nms], \(x) as.numeric(qgis_as_terra(x))) |>
 plot(r)
 ```
 
+
+
 # Piping
 
 `qgis_process` does not lend itself naturally to piping because its first argument is the name of a geoalgorithm instead of a data object.
@@ -251,7 +265,6 @@ Using the default raster output format `.tif` might lead to trouble depending on
 ```{r qgis-pipe}
 dem <- system.file("raster/dem.tif", package = "spDataLarge")
 # in case you need to enable the SAGA next generation algorithms, run the following lines:
-# qgis_plugins()
 # qgis_enable_plugins("processing_saga_nextgen")
 
 options(qgisprocess.tmp_raster_ext = ".sdat")
