@@ -18,9 +18,9 @@
 #' @param .use_json_input,use_json_input TRUE if the arguments will be
 #'   serialized as JSON instead of serialized as a command-line argument.
 #' @inheritParams qgis_run_algorithm
-#'
-#' @export
-#'
+#' @name as_qgis_argument
+
+#' @keywords internal
 qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_get_argument_specs(algorithm),
                                     .use_json_input = FALSE) {
   dots <- rlang::list2(...)
@@ -103,6 +103,7 @@ unclass_recursive <- function(x) {
 }
 
 
+#' @keywords internal
 # turn sanitized arguments into command-line arguments
 qgis_serialize_arguments <- function(arguments, use_json_input = FALSE) {
   if (use_json_input) {
@@ -135,27 +136,24 @@ qgis_serialize_arguments <- function(arguments, use_json_input = FALSE) {
   }
 }
 
-#' @rdname qgis_sanitize_arguments
-#' @export
+#' @keywords internal
 qgis_clean_arguments <- function(arguments) {
   lapply(arguments, qgis_clean_argument)
   invisible(NULL)
 }
 
-#' @rdname qgis_sanitize_arguments
+#' @keywords internal
 #' @export
 as_qgis_argument <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
   UseMethod("as_qgis_argument")
 }
 
-#' @rdname qgis_sanitize_arguments
-#' @export
+#' @keywords internal
 qgis_default_value <- function() {
   structure(list(), class = "qgis_default_value")
 }
 
-#' @rdname qgis_sanitize_arguments
-#' @export
+#' @keywords internal
 is_qgis_default_value <- function(x) {
   inherits(x, "qgis_default_value")
 }
@@ -170,7 +168,7 @@ is_qgis_default_value <- function(x) {
 #   "execute_sql", "raster_calc_expression", "relief_colors", "color"
 # )
 
-#' @rdname qgis_sanitize_arguments
+#' @keywords internal
 #' @export
 as_qgis_argument.default <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
   abort(
@@ -184,7 +182,7 @@ as_qgis_argument.default <- function(x, spec = qgis_argument_spec(), use_json_in
   )
 }
 
-#' @rdname qgis_sanitize_arguments
+#' @keywords internal
 #' @export
 as_qgis_argument.list <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
   if (use_json_input) {
@@ -194,7 +192,7 @@ as_qgis_argument.list <- function(x, spec = qgis_argument_spec(), use_json_input
   NextMethod()
 }
 
-#' @rdname qgis_sanitize_arguments
+#' @keywords internal
 #' @export
 as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec(),
                                                 use_json_input = FALSE) {
@@ -225,7 +223,7 @@ as_qgis_argument.qgis_default_value <- function(x, spec = qgis_argument_spec(),
   }
 }
 
-#' @rdname qgis_sanitize_arguments
+#' @keywords internal
 #' @export
 as_qgis_argument.NULL <- function(x, spec = qgis_argument_spec(),
                                   use_json_input = FALSE) {
@@ -236,7 +234,7 @@ as_qgis_argument.NULL <- function(x, spec = qgis_argument_spec(),
   qgis_default_value()
 }
 
-#' @rdname qgis_sanitize_arguments
+#' @keywords internal
 #' @export
 as_qgis_argument.character <- function(x, spec = qgis_argument_spec(),
                                        use_json_input = FALSE) {
@@ -267,33 +265,33 @@ as_qgis_argument.character <- function(x, spec = qgis_argument_spec(),
   if (use_json_input) result else paste(result, collapse = ",")
 }
 
-#' @rdname qgis_sanitize_arguments
+#' @keywords internal
 #' @export
 as_qgis_argument.logical <- function(x, spec = qgis_argument_spec(),
                                      use_json_input = FALSE) {
   if (use_json_input) x else paste0(x, collapse = ",")
 }
 
-#' @rdname qgis_sanitize_arguments
+#' @keywords internal
 #' @export
 as_qgis_argument.numeric <- function(x, spec = qgis_argument_spec(),
                                      use_json_input = FALSE) {
   if (use_json_input) x else paste0(x, collapse = ",")
 }
 
-#' @rdname qgis_sanitize_arguments
+#' @keywords internal
 #' @export
 qgis_clean_argument <- function(value) {
   UseMethod("qgis_clean_argument")
 }
 
-#' @rdname qgis_sanitize_arguments
+#' @keywords internal
 #' @export
 qgis_clean_argument.default <- function(value) {
   # by default, do nothing!
 }
 
-#' @rdname qgis_sanitize_arguments
+#' @keywords internal
 #' @export
 qgis_clean_argument.qgis_tempfile_arg <- function(value) {
   unlink(value)
@@ -308,12 +306,14 @@ qgis_clean_argument.qgis_tempfile_arg <- function(value) {
 #' @inheritParams qgis_run_algorithm
 #'
 #' @return A [list()] with an element for each input argument.
-#' @export
 #'
 #' @examples
 #' qgis_argument_spec()
 #' if (has_qgis()) qgis_argument_spec_by_name("native:filedownloader", "URL")
-#'
+#' @name qgis_argument_spec
+
+
+#' @keywords internal
 qgis_argument_spec <- function(algorithm = NA_character_, name = NA_character_,
                                description = NA_character_, qgis_type = NA_character_,
                                available_values = character(0), acceptable_values = character(0)) {
@@ -327,8 +327,7 @@ qgis_argument_spec <- function(algorithm = NA_character_, name = NA_character_,
   )
 }
 
-#' @rdname qgis_sanitize_arguments
-#' @export
+#' @keywords internal
 qgis_argument_spec_by_name <- function(algorithm, name,
                                        .algorithm_arguments = qgis_get_argument_specs(algorithm)) {
   # These are special-cased at the command-line level, so they don't have
@@ -388,23 +387,27 @@ qgis_dict_input <- function(...) {
   structure(dots, class = "qgis_dict_input")
 }
 
+#' @keywords internal
 #' @export
 as_qgis_argument.qgis_list_input <- function(x, spec = qgis_argument_spec(),
                                              use_json_input = FALSE) {
   qgis_list_input(!!!lapply(x, as_qgis_argument, spec = spec, use_json_input = use_json_input))
 }
 
+#' @keywords internal
 #' @export
 as_qgis_argument.qgis_dict_input <- function(x, spec = qgis_argument_spec(),
                                              use_json_input = FALSE) {
   qgis_dict_input(!!!lapply(x, as_qgis_argument, spec = spec, use_json_input = use_json_input))
 }
 
+#' @keywords internal
 #' @export
 qgis_clean_argument.qgis_list_input <- function(value) {
   lapply(value, qgis_clean_argument)
 }
 
+#' @keywords internal
 #' @export
 qgis_clean_argument.qgis_dict_input <- function(value) {
   lapply(value, qgis_clean_argument)

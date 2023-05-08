@@ -3,20 +3,23 @@
 #' @param x A stars or stars_proxy object.
 #' @inheritParams as_qgis_argument
 #'
+#' @name st_as_stars
+
+#' @keywords internal
 #' @export
-#'
 as_qgis_argument.stars <- function(x, spec = qgis_argument_spec(),
                                    use_json_input = FALSE) {
   as_qgis_argument_stars(x, spec, use_json_input)
 }
 
-#' @rdname as_qgis_argument.stars
+#' @keywords internal
 #' @export
 as_qgis_argument.stars_proxy <- function(x, spec = qgis_argument_spec(),
                                          use_json_input = FALSE) {
   as_qgis_argument_stars(x, spec, use_json_input)
 }
 
+#' @keywords internal
 as_qgis_argument_stars <- function(x, spec = qgis_argument_spec(), use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("raster", "layer", "multilayer"))) {
     abort(glue("Can't convert '{ class(x)[1] }' object to QGIS type '{ spec$qgis_type }'"))

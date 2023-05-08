@@ -1,7 +1,9 @@
 #' Convert sf objects to/from QGIS inputs/outputs
 #'
 #' @inheritParams as_qgis_argument
-#'
+#' @name st_as_sf
+
+#' @keywords internal
 #' @export
 as_qgis_argument.sf <- function(x, spec = qgis_argument_spec(),
                                 use_json_input = FALSE) {
@@ -32,7 +34,7 @@ st_as_sf.qgis_result <- function(x, ...) {
 
 
 
-#' @rdname as_qgis_argument.sf
+#' @keywords internal
 #' @export
 as_qgis_argument.crs <- function(x, spec = qgis_argument_spec(),
                                  use_json_input = FALSE) {
@@ -43,7 +45,7 @@ as_qgis_argument.crs <- function(x, spec = qgis_argument_spec(),
   x$Wkt
 }
 
-#' @rdname as_qgis_argument.sf
+#' @keywords internal
 #' @export
 as_qgis_argument.bbox <- function(x, spec = qgis_argument_spec(),
                                   use_json_input = FALSE) {
@@ -58,7 +60,7 @@ as_qgis_argument.bbox <- function(x, spec = qgis_argument_spec(),
   }
 }
 
-#' @rdname as_qgis_argument.sf
+#' @keywords internal
 #' @export
 as_qgis_argument.sfc <- function(x, spec = qgis_argument_spec(),
                                  use_json_input = FALSE) {
@@ -81,7 +83,7 @@ as_qgis_argument.sfc <- function(x, spec = qgis_argument_spec(),
   }
 }
 
-#' @rdname as_qgis_argument.sf
+#' @keywords internal
 #' @export
 as_qgis_argument.POINT <- function(x, spec = qgis_argument_spec(),
                                    use_json_input = FALSE) {
