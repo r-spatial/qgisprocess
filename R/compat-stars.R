@@ -5,6 +5,26 @@
 #'
 #' @name st_as_stars
 
+#' @rdname st_as_stars
+# dynamically registered in zzz.R
+st_as_stars.qgis_outputRaster <- function(output, ...) {
+  stars::read_stars(unclass(output), ...)
+}
+
+#' @rdname st_as_stars
+# dynamically registered in zzz.R
+st_as_stars.qgis_outputLayer <- function(output, ...) {
+  stars::read_stars(unclass(output), ...)
+}
+
+#' @rdname st_as_stars
+# dynamically registered in zzz.R
+st_as_stars.qgis_result <- function(output, ...) {
+  result <- qgis_extract_output_by_class(output, c("qgis_outputRaster", "qgis_outputLayer"))
+  stars::read_stars(unclass(result), ...)
+}
+
+
 #' @keywords internal
 #' @export
 as_qgis_argument.stars <- function(x, spec = qgis_argument_spec(),
@@ -39,18 +59,3 @@ as_qgis_argument_stars <- function(x, spec = qgis_argument_spec(), use_json_inpu
   structure(path, class = "qgis_tempfile_arg")
 }
 
-# dynamically registered in zzz.R
-st_as_stars.qgis_outputRaster <- function(output, ...) {
-  stars::read_stars(unclass(output), ...)
-}
-
-# dynamically registered in zzz.R
-st_as_stars.qgis_outputLayer <- function(output, ...) {
-  stars::read_stars(unclass(output), ...)
-}
-
-# dynamically registered in zzz.R
-st_as_stars.qgis_result <- function(output, ...) {
-  result <- qgis_extract_output_by_class(output, c("qgis_outputRaster", "qgis_outputLayer"))
-  stars::read_stars(unclass(result), ...)
-}

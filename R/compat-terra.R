@@ -1,12 +1,17 @@
 #' Convert terra objects to/from QGIS inputs/outputs
 #'
-#' @param x A [terra::rast()].
 #' @param output The result from [qgis_run_algorithm()] or [qgis_extract_output_by_name()],
 #' [qgis_extract_output_by_position()] or [qgis_extract_output_by_class()].
 #' @param ... Passed to [terra::rast()].
-#' @inheritParams as_qgis_argument
 #' @name qgis_as_terra
 
+#' @rdname qgis_as_terra
+#' @export
+qgis_as_terra <- function(output, ...) {
+  UseMethod("qgis_as_terra")
+}
+
+# @param x A [terra::rast()].
 #' @keywords internal
 #' @export
 as_qgis_argument.SpatRaster <- function(x, spec = qgis_argument_spec(),
@@ -37,12 +42,6 @@ as_qgis_argument_terra <- function(x, spec = qgis_argument_spec(),
   path <- qgis_tmp_raster()
   terra::writeRaster(x, path)
   structure(path, class = "qgis_tempfile_arg")
-}
-
-#' @rdname qgis_as_terra
-#' @export
-qgis_as_terra <- function(output, ...) {
-  UseMethod("qgis_as_terra")
 }
 
 #' @rdname qgis_as_terra

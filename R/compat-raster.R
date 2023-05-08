@@ -1,11 +1,21 @@
 #' Convert raster objects to/from QGIS inputs/outputs
 #'
-#' @param x A [raster::raster()] or [raster::brick()].
 #' @param output The result from [qgis_run_algorithm()] or [qgis_extract_output_by_name()],
 #' [qgis_extract_output_by_position()] or [qgis_extract_output_by_class()].
 #' @param ... Passed to [raster::raster()] or [raster::brick()].
-#' @inheritParams as_qgis_argument
 #' @name qgis_as_raster
+
+#' @rdname qgis_as_raster
+#' @export
+qgis_as_raster <- function(output, ...) {
+  UseMethod("qgis_as_raster")
+}
+
+#' @rdname qgis_as_raster
+#' @export
+qgis_as_brick <- function(output, ...) {
+  UseMethod("qgis_as_brick")
+}
 
 #' @keywords internal
 #' @export
@@ -13,6 +23,7 @@ as_qgis_argument.RasterLayer <- function(x, spec = qgis_argument_spec(), use_jso
   as_qgis_argument_raster(x, spec, use_json_input)
 }
 
+# @param x A [raster::raster()] or [raster::brick()].
 #' @keywords internal
 #' @export
 as_qgis_argument.RasterBrick <- function(x, spec = qgis_argument_spec(),
@@ -37,18 +48,6 @@ as_qgis_argument_raster <- function(x, spec = qgis_argument_spec(), use_json_inp
   path <- qgis_tmp_raster()
   raster::writeRaster(x, path)
   structure(path, class = "qgis_tempfile_arg")
-}
-
-#' @rdname qgis_as_raster
-#' @export
-qgis_as_raster <- function(output, ...) {
-  UseMethod("qgis_as_raster")
-}
-
-#' @rdname qgis_as_raster
-#' @export
-qgis_as_brick <- function(output, ...) {
-  UseMethod("qgis_as_brick")
 }
 
 #' @rdname qgis_as_raster

@@ -3,6 +3,21 @@
 #' @inheritParams as_qgis_argument
 #' @name st_as_sf
 
+
+#' @rdname st_as_sf
+# dynamically registered in zzz.R
+st_as_sf.qgis_result <- function(x, ...) {
+  result <- qgis_extract_output_by_class(x, c("qgis_outputVector", "qgis_outputLayer"))
+
+  if (grepl("\\|layer", result)) {
+    result_splitted <- strsplit(result, "\\|layer.*=")[[1]]
+    sf::read_sf(result_splitted[1], result_splitted[2], ...)
+  } else {
+    sf::read_sf(result, ...)
+  }
+}
+
+
 #' @keywords internal
 #' @export
 as_qgis_argument.sf <- function(x, spec = qgis_argument_spec(),
@@ -19,19 +34,6 @@ as_qgis_argument.sf <- function(x, spec = qgis_argument_spec(),
     structure(path, class = "qgis_tempfile_arg")
   }
 }
-
-# dynamically registered in zzz.R
-st_as_sf.qgis_result <- function(x, ...) {
-  result <- qgis_extract_output_by_class(x, c("qgis_outputVector", "qgis_outputLayer"))
-
-  if (grepl("\\|layer", result)) {
-    result_splitted <- strsplit(result, "\\|layer.*=")[[1]]
-    sf::read_sf(result_splitted[1], result_splitted[2], ...)
-  } else {
-    sf::read_sf(result, ...)
-  }
-}
-
 
 
 #' @keywords internal
