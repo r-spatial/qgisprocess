@@ -12,7 +12,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{Basic usage of qgisprocess}
   %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r, include = FALSE}
