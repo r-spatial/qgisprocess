@@ -1,27 +1,3 @@
----
-title: "Basic usage of qgisprocess"
-author: "Jannes Muenchow & Floris Vanderhaeghe"
-date: "Last updated: yyyy-mm-dd"
-output:
-  html_document: 
-    toc: yes
-    toc_float:
-      collapsed: no
-      smooth_scroll: no
-    toc_depth: 2
-vignette: >
-  %\VignetteIndexEntry{Basic usage of qgisprocess}
-  %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::rmarkdown}
----
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
-
 # Setting up the system
 
 **qgisprocess** is basically a wrapper around the standalone command line tool [`qgis_process`](https://github.com/qgis/QGIS-Documentation/issues/5803).

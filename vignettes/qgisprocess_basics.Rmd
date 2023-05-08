@@ -1,0 +1,31 @@
+---
+title: "Basic usage of qgisprocess"
+author: "Jannes Muenchow & Floris Vanderhaeghe"
+date: "Last updated: yyyy-mm-dd"
+output:
+  html_document: 
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{Basic usage of qgisprocess}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r child=if (has_qgis()) file.path(rprojroot::find_root(rprojroot::is_r_package), "man/vignette_childs/_qgisprocess_basics.Rmd")}
+```
+
+```{r eval=!has_qgis(), echo=FALSE, results="asis"}
+cat("This vignette has been built in absence of a QGIS installation.\n\n")
+cat("Read it online at <https://r-spatial.github.io/qgisprocess/articles/qgisprocess_basics.html>.")
+```
