@@ -297,4 +297,6 @@ out = qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem,
                          METHOD = 1) |>
   (\(x) qgis_run_algorithm(algorithm = "sagang:sagawetnessindex",
                            DEM = x$DEM_PREPROC[1])) ()
+# set the default output raster format to .tif again
+options(qgisprocess.tmp_raster_ext = ".tif")
 ```
