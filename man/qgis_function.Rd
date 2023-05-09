@@ -7,8 +7,8 @@
 qgis_function(algorithm, ...)
 }
 \arguments{
-\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
-a path to a QGIS model file.}
+\item{algorithm}{A qualified algorithm name
+(e.g., "native:filedownloader").}
 
 \item{...}{Algorithm arguments.
 These values are evaluated once and immediately, so you shouldn't

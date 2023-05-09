@@ -1,14 +1,15 @@
 #' Get metadata about algorithms and processing providers
 #'
-#' Returns metadata about algorithms and processing providers
+#' Returns metadata about algorithms and processing providers.
 #' See the [QGIS docs](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html)
 #' for a detailed description of the algorithms provided
-#' 'out of the box' on QGIS (versions >= 3.14).
+#' 'out of the box' on QGIS.
 #'
+#' @param algorithm A qualified algorithm name
+#' (e.g., "native:filedownloader").
 #' @param provider A provider identifier (e.g., "native")
 #' @param quiet Use `FALSE` to display more information about the command,
 #' possibly useful for debugging.
-#' @inheritParams qgis_run_algorithm
 #' @inheritParams qgis_run
 #'
 #' @export

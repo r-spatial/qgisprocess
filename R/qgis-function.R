@@ -6,7 +6,7 @@
 #' of `.quiet` to `TRUE` to make the function more usable within other
 #' R code.
 #'
-#' @inheritParams qgis_run_algorithm
+#' @inheritParams qgis_algorithms
 #' @param ... Algorithm arguments.
 #'   These values are evaluated once and immediately, so you shouldn't
 #'   call [qgis_tmp_file()] here.
@@ -105,7 +105,7 @@ qgis_function <- function(algorithm, ...) {
 #'
 #' Uses [qgis_function()] under the hood.
 #'
-#' @inheritParams qgis_run_algorithm
+#' @inheritParams qgis_algorithms
 #' @param .data Passed to the first input of `algorithm`.
 #' If `.data` is a `qgis_result` (the result of a previous processing
 #' step), `.data[[.select]]` is passed instead.

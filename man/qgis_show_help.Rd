@@ -16,8 +16,8 @@ qgis_get_argument_specs(algorithm)
 qgis_get_output_specs(algorithm)
 }
 \arguments{
-\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
-a path to a QGIS model file.}
+\item{algorithm}{A qualified algorithm name
+(e.g., "native:filedownloader").}
 }
 \description{
 Get help and detailed metadata of one algorithm

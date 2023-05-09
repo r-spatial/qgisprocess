@@ -1,6 +1,6 @@
 #' Get help and detailed metadata of one algorithm
 #'
-#' @inheritParams qgis_run_algorithm
+#' @inheritParams qgis_algorithms
 #'
 #' @export
 #'

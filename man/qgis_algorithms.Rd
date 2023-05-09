@@ -21,16 +21,16 @@ qgis_providers()
 \item{quiet}{Use \code{FALSE} to display more information about the command,
 possibly useful for debugging.}
 
-\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
-a path to a QGIS model file.}
+\item{algorithm}{A qualified algorithm name
+(e.g., "native:filedownloader").}
 
 \item{provider}{A provider identifier (e.g., "native")}
 }
 \description{
-Returns metadata about algorithms and processing providers
+Returns metadata about algorithms and processing providers.
 See the \href{https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html}{QGIS docs}
 for a detailed description of the algorithms provided
-'out of the box' on QGIS (versions >= 3.14).
+'out of the box' on QGIS.
 }
 \examples{
 if (has_qgis()) qgis_has_algorithm("native:filedownloader")

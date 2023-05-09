@@ -18,8 +18,8 @@ qgis_run_algorithm_p(
 If \code{.data} is a \code{qgis_result} (the result of a previous processing
 step), \code{.data[[.select]]} is passed instead.}
 
-\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
-a path to a QGIS model file.}
+\item{algorithm}{A qualified algorithm name
+(e.g., "native:filedownloader").}
 
 \item{...}{Other algorithm arguments.
 These values are evaluated once and immediately, so you shouldn't
@@ -34,8 +34,8 @@ Defaults to \code{"OUTPUT"}.}
 Should an incoming \code{qgis_result} be cleaned (using \code{\link[=qgis_clean_result]{qgis_clean_result()}})
 after processing?}
 
-\item{.quiet}{Use \code{FALSE} to get extra output from processing algorithms.
-This can be useful in debugging.}
+\item{.quiet}{Use \code{FALSE} to display more information about the command,
+possibly useful for debugging.}
 }
 \description{
 \code{\link[=qgis_run_algorithm_p]{qgis_run_algorithm_p()}} wraps \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, passing
