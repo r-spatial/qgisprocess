@@ -34,9 +34,9 @@ qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
 
 #' @rdname qgis_algorithms
 #' @export
-qgis_has_algorithm <- function(algorithm) {
+qgis_has_algorithm <- function(algorithm, query = FALSE, quiet = TRUE) {
   assert_qgis()
-  as.character(algorithm) %in% qgis_algorithms()$algorithm
+  as.character(algorithm) %in% qgis_algorithms(query, quiet)$algorithm
 }
 
 #' @rdname qgis_algorithms
