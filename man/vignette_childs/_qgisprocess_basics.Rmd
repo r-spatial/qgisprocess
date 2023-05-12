@@ -249,7 +249,7 @@ rp_tp = qgis_run_algorithm(
 rp_tp = qgis_run_algorithm(
   "sagang:addrastervaluestopoints",
   SHAPES = random_points,
-  GRIDS = list(info$aspect[[1]], info$slope[[1]], info$tcurvature[[1]]),
+  GRIDS = qgis_list_input(info$aspect[[1]], info$slope[[1]], info$tcurvature[[1]]),
   RESAMPLING = 0)
 ```
 
