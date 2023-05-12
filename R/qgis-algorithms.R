@@ -48,9 +48,9 @@ qgis_has_provider <- function(provider, query = FALSE, quiet = TRUE) {
 
 #' @rdname qgis_algorithms
 #' @export
-qgis_providers <- function() {
+qgis_providers <- function(query = FALSE, quiet = TRUE) {
   assert_qgis()
-  algs <- qgis_algorithms()
+  algs <- qgis_algorithms(query = query, quiet = quiet)
   counted <- stats::aggregate(
     algs[[1]],
     by = list(algs$provider, algs$provider_title),
