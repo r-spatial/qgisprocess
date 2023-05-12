@@ -244,6 +244,7 @@ rp_tp = qgis_run_algorithm(
 ```
 
 ... or you can pass to it all needed layers in one list.
+One could use the `list()` command but it is recommendended to use the `qgis_list_input()` function which is more robust, and therefore will also support non-JSON-input configurations (e.g. QGIS < 3.24).
 
 ```{r multilayer-list, eval=FALSE}
 rp_tp = qgis_run_algorithm(
