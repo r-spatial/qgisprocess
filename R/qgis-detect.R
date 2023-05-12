@@ -1,9 +1,24 @@
-#' Detect QGIS installations with 'qgis_process'
+#' Detect QGIS installations that provide the 'qgis_process' command
+#'
+#' Discovers existing 'qgis_process' executables on the system and returns their
+#' filepath.
+#' Only available for Windows and macOS systems.
+#'
+#' @concept functions to manage and explore QGIS and qgisprocess
+#'
+#' @seealso [qgis_configure()], [qgis_path()]
+#'
+#' @note
+#' These functions do not verify whether the discovered 'qgis_process'
+#' executables successfully run.
+#' You can run `qgis_path(query = TRUE, quiet = FALSE)` to discover and cache
+#' the first 'qgis_process' in the list that works.
 #'
 #' @param drive_letter The drive letter on which to search. By default,
 #'   this is the same drive letter as the R executable.
 #'
-#' @return A character vector of possible paths to the QGIS executable.
+#' @return A character vector of possible paths to the 'qgis_process'
+#' executable.
 #' @export
 #'
 #' @examples

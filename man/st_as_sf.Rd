@@ -15,3 +15,23 @@ st_as_sf.qgis_result(x, ...)
 \description{
 Convert a qgis_result object to an sf object
 }
+\note{
+Just use \code{st_as_sf()} in R scripts, it will use the correct
+method.
+}
+\seealso{
+Other topics about coercing processing output: 
+\code{\link{qgis_as_raster}()},
+\code{\link{qgis_as_terra}()},
+\code{\link{st_as_stars}}
+
+Other topics about accessing or managing processing results: 
+\code{\link{qgis_as_raster}()},
+\code{\link{qgis_as_terra}()},
+\code{\link{qgis_clean_result}()},
+\code{\link{qgis_extract_output}()},
+\code{\link{qgis_result_status}()},
+\code{\link{st_as_stars}}
+}
+\concept{topics about accessing or managing processing results}
+\concept{topics about coercing processing output}

@@ -9,6 +9,8 @@
 #' `options(qgisprocess.tmp_vector_ext = "...")` and/or
 #' `options(qgisprocess.tmp_raster_ext = "...")`, respectively.
 #'
+#' @family topics about programming or debugging utilities
+#'
 #' @param ext The file extension to be used.
 #'
 #' @return A character vector indicating the location of a

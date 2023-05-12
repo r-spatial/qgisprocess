@@ -1,5 +1,11 @@
 #' Convert a qgis_result object or one of its elements to a terra object
 #'
+#' @note Just use `qgis_as_terra()` in R scripts, it will use the correct
+#' method.
+#'
+#' @family topics about coercing processing output
+#' @family topics about accessing or managing processing results
+#'
 #' @inheritParams qgis_as_raster
 #' @param ... Arguments passed to [terra::rast()].
 #' @name qgis_as_terra

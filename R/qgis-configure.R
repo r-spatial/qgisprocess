@@ -1,11 +1,9 @@
-#' Configure and run 'qgis_process'
+#' Configure qgisprocess
 #'
 #' Run `qgis_configure()` to bring the package configuration in line with
 #' QGIS and to save this configuration to a persistent cache.
 #' See the _Details_ section for more information about setting the path of
 #' the 'qgis_process' command line tool.
-#' `qgis_run()` is meant for directly calling this tool, but should normally not
-#' be needed.
 #'
 #' The qgisprocess package is a wapper around the 'qgis_process' command line
 #' tool distributed with QGIS (>=3.14). Several functions use heuristics to
@@ -30,24 +28,18 @@
 #' qgis_process-qgis-dev.bat and is located in Program Files/QGIS*/bin or
 #' OSGeo4W(64)/bin.
 #'
-#' @param ... Passed to [processx::run()].
-#' @param args Command-line arguments
-#' @param quiet Use `FALSE` to display more information about the command,
-#' possibly useful for debugging.
-#' @param query Use `TRUE` to refresh the cached value.
-#' @param env A [list()] of environment variables.
-#' Defaults to
-#' `getOption("qgisprocess.env", list(QT_QPA_PLATFORM = "offscreen"))`.
-#' @param path A path to the 'qgis_process' executable. Defaults to [qgis_path()].
+#' @family topics about configuring QGIS and qgisprocess
+#' @concept functions to manage and explore QGIS and qgisprocess
+#' @seealso [qgis_unconfigure()]
+#' @seealso [qgis_path()], [qgis_version()]
+#'
 #' @param use_cached_data Use the cached algorithm list and `path` found when
 #'   configuring qgisprocess during the last session. This saves some time
 #'   loading the package.
-#' @param debug Logical.
-#' If `TRUE`, also output the version of QGIS, the operating system and all
-#' relevant libraries, as reported by the 'qgis_process' command.
+#' @inheritParams qgis_run
+#' @inheritParams qgis_path
 #'
 #' @return The result of [processx::run()].
-#' @export
 #'
 #' @examples
 #' if (has_qgis()) qgis_path()
@@ -58,48 +50,6 @@
 #' qgis_configure(use_cached_data = TRUE)
 #' qgis_configure()
 #'
-qgis_run <- function(args = character(), ..., env = qgis_env(), path = qgis_path()) {
-  # workaround for running Windows batch files where arguments have spaces
-  # see https://github.com/r-lib/processx/issues/301
-  if (is_windows()) {
-    withr::with_envvar(
-      env,
-      processx::run("cmd.exe", c("/c", "call", path, args), ...),
-    )
-  } else {
-    withr::with_envvar(
-      env,
-      processx::run(path, args, ...),
-    )
-  }
-}
-
-#' @rdname qgis_run
-#' @export
-has_qgis <- function() {
-  !is.null(qgisprocess_cache$path) &&
-    !is.null(qgisprocess_cache$version) &&
-    !is.null(qgisprocess_cache$algorithms) &&
-    !is.null(qgisprocess_cache$plugins)
-}
-
-# @param action An action to take if the 'qgis_process' executable could not be
-#   found.
-#' @keywords internal
-assert_qgis <- function(action = abort) {
-  if (!has_qgis()) {
-    action(
-      paste0(
-        "The QGIS processing utility ('qgis_process') is not installed or could not be found.\n",
-        "Run `qgis_configure()` to configure this location.\n",
-        "If 'qgis_process' is installed, set `options(qgisprocess.path = '/path/to/qgis_process')`\n",
-        "and re-run `qgis_configure()`."
-      )
-    )
-  }
-}
-
-#' @rdname qgis_run
 #' @export
 qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
   tryCatch(
@@ -391,7 +341,26 @@ message_inspect_cache <- function() {
 
 
 
-#' @rdname qgis_run
+
+
+#' @keywords internal
+qgis_env <- function() {
+  getOption(
+    "qgisprocess.env",
+    list(QT_QPA_PLATFORM = "offscreen")
+  )
+}
+
+
+
+
+
+#' Clean the package cache
+#'
+#' Empties the qgisprocess cache environment.
+#'
+#' @family topics about programming or debugging utilities
+#'
 #' @export
 qgis_unconfigure <- function() {
   qgisprocess_cache$path <- NULL
@@ -403,263 +372,8 @@ qgis_unconfigure <- function() {
   invisible(NULL)
 }
 
-#' @rdname qgis_run
-#' @export
-qgis_version <- function(query = FALSE, quiet = TRUE, debug = FALSE) {
-  if (query) qgisprocess_cache$version <- qgis_query_version(quiet = quiet)
-
-  if (!quiet) {
-    message(
-      "QGIS version",
-      ifelse(query, " is now set to: ", ": "),
-      qgisprocess_cache$version
-    )
-  }
-
-  if (debug) {
-    if (package_version(strsplit(qgis_version(), "-")[[1]][1]) < "3.22.0") {
-      warning("'debug = TRUE' is not supported for QGIS versions < 3.22")
-      return(qgisprocess_cache$version)
-    }
-    print(qgisprocess_cache$version)
-    message()
-    message("Versions reported by 'qgis_process':")
-    message("------------------------------------")
-    message(qgis_run(args = "--version")$stdout)
-    return(invisible(qgisprocess_cache$version))
-  }
-
-  qgisprocess_cache$version
-}
-
-#' @rdname qgis_run
-#' @export
-qgis_path <- function(query = FALSE, quiet = TRUE) {
-  if (query) qgisprocess_cache$path <- qgis_query_path(quiet = quiet)
-  if (!quiet) message_path(query = query)
-  qgisprocess_cache$path
-}
 
 
-#' @keywords internal
-message_path <- function(query = FALSE) {
-  pathstring <-
-    if (qgisprocess_cache$path == "qgis_process") {
-      "in the system PATH"
-    } else {
-      glue("at '{qgisprocess_cache$path}'")
-    }
-  message(
-    ifelse(query, "Now using ", "Using "),
-    glue("'qgis_process' {pathstring}.")
-  )
-  message(
-    ">>> If you need another installed QGIS instance, run `qgis_configure()`;\n",
-    "    see `?qgis_configure` if you need to preset the path of 'qgis_process'."
-  )
-}
-
-
-#' @keywords internal
-qgis_query_path <- function(quiet = FALSE) {
-  if (!is.null(getOption("qgisprocess.path"))) {
-    path <- getOption("qgisprocess.path", "qgis_process")
-    if (!quiet) message(glue("Trying getOption('qgisprocess.path'): '{ path }'"))
-    tryCatch(
-      {
-        qgis_run(path = path)
-        if (!quiet) message("Success!")
-        return(path)
-      },
-      error = function(e) {
-        if (!quiet) message(as.character(e))
-      }
-    )
-  } else {
-    if (!quiet) message("getOption('qgisprocess.path') was not found.")
-  }
-
-  if (Sys.getenv("R_QGISPROCESS_PATH", "") != "") {
-    path <- Sys.getenv("R_QGISPROCESS_PATH")
-    if (!quiet) message(glue("Trying Sys.getenv('R_QGISPROCESS_PATH'): '{ path }'"))
-    tryCatch(
-      {
-        qgis_run(path = path)
-        if (!quiet) message("Success!")
-        return(path)
-      },
-      error = function(e) {
-        if (!quiet) message(as.character(e))
-      }
-    )
-  } else {
-    if (!quiet) message("Sys.getenv('R_QGISPROCESS_PATH') was not found.")
-  }
-
-  if (!quiet) message(glue("Trying 'qgis_process' on PATH..."))
-  tryCatch(
-    {
-      qgis_run(path = "qgis_process")
-      if (!quiet) message("Success!")
-      return("qgis_process")
-    },
-    error = function(e) {
-      if (!quiet) message("'qgis_process' is not available on PATH.")
-    }
-  )
-
-  possible_locs <- if (is_macos()) {
-    qgis_detect_macos_paths()
-  } else if (is_windows()) {
-    qgis_detect_windows_paths()
-  }
-
-  if (length(possible_locs) == 0) {
-    abort("No QGIS installation containing 'qgis_process' found!")
-  }
-
-  if (!quiet) {
-    message(
-      sprintf(
-        "Found %s QGIS installation%s containing 'qgis_process':\n %s",
-        length(possible_locs),
-        if (length(possible_locs) == 1) "" else "s",
-        paste(possible_locs, collapse = "\n")
-      )
-    )
-  }
-
-  for (path in possible_locs) {
-    if (!quiet) message(glue("Trying command '{ path }'"))
-    tryCatch(
-      {
-        qgis_run(path = path)
-        if (!quiet) message("Success!")
-        return(path)
-      },
-      error = function(e) {}
-    )
-  }
-
-  abort("QGIS installation found, but all candidate paths failed to execute.")
-}
-
-#' @rdname qgis_run
-#' @export
-qgis_using_json_output <- function(query = FALSE, quiet = TRUE) {
-  if (query) {
-    opt <- getOption(
-      "qgisprocess.use_json_output",
-      Sys.getenv(
-        "R_QGISPROCESS_USE_JSON_OUTPUT",
-        ""
-      )
-    )
-
-    if (identical(opt, "")) {
-      # This doesn't work on the default GHA runner for Ubuntu and
-      # maybe can't be guaranteed to work on Linux. On Linux, we try
-      # to list algorithms with --json and check if the command fails
-      qgisprocess_cache$use_json_output <- is_windows() ||
-        is_macos() ||
-        (qgis_run(c("--json", "list"), error_on_status = FALSE)$status == 0)
-    } else {
-      qgisprocess_cache$use_json_output <- isTRUE(opt) || identical(opt, "true")
-    }
-  }
-
-  if (!quiet) message(
-    ifelse(qgisprocess_cache$use_json_output, "Using ", "Not using "),
-    "JSON for output serialization."
-  )
-
-  qgisprocess_cache$use_json_output
-}
-
-#' @rdname qgis_run
-#' @export
-qgis_using_json_input <- function() {
-  opt <- getOption(
-    "qgisprocess.use_json_input",
-    Sys.getenv(
-      "R_QGISPROCESS_USE_JSON_INPUT",
-      ""
-    )
-  )
-
-  if (identical(opt, "")) {
-    qgis_using_json_output() &&
-      (package_version(strsplit(qgis_version(), "-")[[1]][1]) >= "3.23.0")
-  } else {
-    isTRUE(opt) || identical(opt, "true")
-  }
-}
-
-#' @keywords internal
-qgis_env <- function() {
-  getOption(
-    "qgisprocess.env",
-    list(QT_QPA_PLATFORM = "offscreen")
-  )
-}
-
-#' @keywords internal
-qgis_query_version <- function(quiet = FALSE) {
-  tryCatch(
-    {
-      result <- qgis_run(args = "--version")
-      lines <- readLines(textConnection(result$stdout))
-      match <- stringr::str_match(
-        lines,
-        "QGIS\\s(\\d{1,2}\\.\\d+.*-\\p{L}+)\\s.*\\((.+)\\)"
-      )[, 2:3, drop = TRUE]
-    },
-    error = function(e) {
-      # QGIS < 3.22 does not support '--version'
-      result <- qgis_run(args = character(0))
-      lines <- readLines(textConnection(result$stdout))
-      match <- stringr::str_match(
-        lines,
-        "\\((\\d{1,2}\\.\\d+.*-.+)\\)"
-      )[, 2, drop = TRUE]
-      assign("match", match, envir = parent.env(environment()))
-      assign("lines", lines, envir = parent.env(environment()))
-    }
-  )
-  match <- match[!is.na(match)]
-  if (length(match) == 0L) abort_query_version(lines = lines)
-  if (
-    !stringr::str_detect(match[1], "-[Mm]a(ster|in)$") &&
-      !stringr::str_detect(match[1], "^\\d{1,2}\\.\\d*[13579][\\.-]")
-  ) {
-    return(match[1])
-  } else {
-    if (length(match) < 2L) abort_query_version(lines = lines)
-    if (!stringr::str_detect(match[2], "^[0-9a-f]{7,}$")) {
-      warning("Please consider building the QGIS development version from ",
-        "within the QGIS git repository, in order to have a unique ",
-        "version identifier of QGIS, or propose the people making the ",
-        "QGIS build to do so. ",
-        "Currently the specific version identifier is '",
-        match[2],
-        "'.",
-        call. = TRUE
-      )
-      match[2] <- paste("unclear:", match[2])
-    }
-    return(paste0(match[1], ", development state ", match[2]))
-  }
-}
-
-#' @keywords internal
-abort_query_version <- function(lines) {
-  abort(
-    paste0(
-      "Output did not contain expected version information and was:\n\n",
-      paste(lines, collapse = "\n")
-    )
-  )
-}
 
 
 # environment for cache

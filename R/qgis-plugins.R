@@ -1,14 +1,18 @@
-#' List, enable or disable QGIS plugins
+#' Enable or disable QGIS plugins
 #'
-#' `qgis_plugins()` lists the available plugins that implement Processing
-#' providers.
+#' Processing plugins, installed in QGIS, can be in an 'enabled' or 'disabled'
+#' state in QGIS.
+#' The plugin state can be controlled from R.
 #' `qgis_enable_plugins()` enables plugins while `qgis_disable_plugins()`
 #' does the reverse.
 #'
 #' The cache is immediately updated upon enabling or disabling plugins from R.
 #'
+#' Run [qgis_plugins()] to list the available plugins that implement processing
+#' providers.
+#'
 #' If you installed, removed, enabled or disabled plugins in the QGIS GUI, then
-#' run `qgis_configure()` to make those changes available in R.
+#' run [qgis_configure()] to make those changes available in R.
 #'
 #' If `names` is not provided to `qgis_enable_plugins()`, it is assumed that all
 #' _disabled_ plugins are to be enabled.
@@ -17,23 +21,36 @@
 #' Note that the 'processing' plugin is ignored, because it is always available
 #' to 'qgis_process' (not QGIS though).
 #'
-#' `qgis_has_plugin()` can be used to return a logical representing the
-#' availability of a single plugin.
-#'
 #' @note
-#' Only plugins that implement Processing providers are supported.
+#' Only plugins that implement processing providers are supported.
 #' Installing or removing plugins is not supported.
 #'
-#' @inheritParams qgis_run
-#' @param which String defining which plugins to select, based on their
-#' status in QGIS (enabled or disabled).
-#' Must be one of: `"all"`, `"enabled"`, `"disabled"`.
+#' @seealso [qgis_plugins()]
+#' @family topics about configuring QGIS and qgisprocess
+#' @concept functions to manage and explore QGIS and qgisprocess
+#'
+#' @inheritParams qgis_path
 #' @param names Optional character vector of plugin names.
-#' @param plugin A single plugin name.
-#' @param ... Only used by other functions calling this function.
-#' @return
-#' A tibble of plugins and their status.
+#'
+#' @name qgis_enable_plugins
+
+
+#' @rdname qgis_enable_plugins
 #' @export
+qgis_enable_plugins <- function(names = NULL, quiet = FALSE) {
+  handle_plugins(names = names, quiet = quiet, mode = "enable")
+}
+
+
+#' @rdname qgis_enable_plugins
+#' @export
+qgis_disable_plugins <- function(names = NULL, quiet = FALSE) {
+  handle_plugins(names = names, quiet = quiet, mode = "disable")
+}
+
+
+#' @export
+#' @rdname qgis_algorithms
 qgis_plugins <- function(
     which = "all",
     query = FALSE,
@@ -118,35 +135,6 @@ message_disabled_plugins <- function(
     )
     if (!startup) message(msg) else packageStartupMessage(msg)
   }
-}
-
-
-
-
-#' @rdname qgis_plugins
-#' @export
-qgis_has_plugin <- function(plugin, query = FALSE, quiet = TRUE) {
-  assert_that(is.string(plugin))
-  plugin %in% qgis_plugins(query = query, quiet = quiet)$name
-}
-
-
-
-
-
-#' @rdname qgis_plugins
-#' @export
-qgis_enable_plugins <- function(names = NULL, quiet = FALSE) {
-  handle_plugins(names = names, quiet = quiet, mode = "enable")
-}
-
-
-
-
-#' @rdname qgis_plugins
-#' @export
-qgis_disable_plugins <- function(names = NULL, quiet = FALSE) {
-  handle_plugins(names = names, quiet = quiet, mode = "disable")
 }
 
 

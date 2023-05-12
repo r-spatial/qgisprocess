@@ -14,7 +14,7 @@ qgis_argument_spec(
 )
 }
 \arguments{
-\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
+\item{algorithm}{A qualified algorithm name (e.g., \code{"native:buffer"}) or
 a path to a QGIS model file.}
 
 \item{name, description, qgis_type, available_values, acceptable_values}{Column values of \code{arguments} denoting

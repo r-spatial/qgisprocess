@@ -3,7 +3,7 @@
 \name{qgis_detect_windows_paths}
 \alias{qgis_detect_windows_paths}
 \alias{qgis_detect_macos_paths}
-\title{Detect QGIS installations with 'qgis_process'}
+\title{Detect QGIS installations that provide the 'qgis_process' command}
 \usage{
 qgis_detect_windows_paths(drive_letter = strsplit(R.home(), ":")[[1]][1])
 
@@ -14,13 +14,26 @@ qgis_detect_macos_paths()
 this is the same drive letter as the R executable.}
 }
 \value{
-A character vector of possible paths to the QGIS executable.
+A character vector of possible paths to the 'qgis_process'
+executable.
 }
 \description{
-Detect QGIS installations with 'qgis_process'
+Discovers existing 'qgis_process' executables on the system and returns their
+filepath.
+Only available for Windows and macOS systems.
+}
+\note{
+These functions do not verify whether the discovered 'qgis_process'
+executables successfully run.
+You can run \code{qgis_path(query = TRUE, quiet = FALSE)} to discover and cache
+the first 'qgis_process' in the list that works.
 }
 \examples{
 if (qgisprocess:::is_windows()) qgis_detect_windows_paths()
 if (qgisprocess:::is_macos()) qgis_detect_macos_paths()
 
 }
+\seealso{
+\code{\link[=qgis_configure]{qgis_configure()}}, \code{\link[=qgis_path]{qgis_path()}}
+}
+\concept{functions to manage and explore QGIS and qgisprocess}

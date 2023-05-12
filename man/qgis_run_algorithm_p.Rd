@@ -2,7 +2,7 @@
 % Please edit documentation in R/qgis-function.R
 \name{qgis_run_algorithm_p}
 \alias{qgis_run_algorithm_p}
-\title{Run algorithms using 'qgis_process': pipe-friendly wrapper}
+\title{Run an algorithm using 'qgis_process': pipe-friendly wrapper}
 \usage{
 qgis_run_algorithm_p(
   .data,
@@ -19,7 +19,7 @@ If \code{.data} is a \code{qgis_result} (the result of a previous processing
 step), \code{.data[[.select]]} is passed instead.}
 
 \item{algorithm}{A qualified algorithm name
-(e.g., "native:filedownloader").}
+(e.g., \code{"native:buffer"}).}
 
 \item{...}{Other algorithm arguments.
 These values are evaluated once and immediately, so you shouldn't
@@ -34,12 +34,12 @@ Defaults to \code{"OUTPUT"}.}
 Should an incoming \code{qgis_result} be cleaned (using \code{\link[=qgis_clean_result]{qgis_clean_result()}})
 after processing?}
 
-\item{.quiet}{Use \code{FALSE} to display more information about the command,
-possibly useful for debugging.}
+\item{.quiet}{Use \code{FALSE} to get extra output from 'qgis_process'.
+This can be useful in debugging.}
 }
 \description{
 \code{\link[=qgis_run_algorithm_p]{qgis_run_algorithm_p()}} wraps \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, passing
-its first argument to the first input to \code{algorithm}.
+its first argument to the first argument of the QGIS \code{algorithm}.
 This makes it more convenient in a pipeline (hence '_p' in the name).
 }
 \details{
@@ -58,3 +58,8 @@ if (has_qgis()) {
 }
 
 }
+\seealso{
+Other functions to run one geoprocessing algorithm: 
+\code{\link{qgis_run_algorithm}()}
+}
+\concept{functions to run one geoprocessing algorithm}

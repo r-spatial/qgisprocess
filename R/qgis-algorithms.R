@@ -1,16 +1,25 @@
-#' Get metadata about algorithms and processing providers
+#' List algorithms, processing providers or plugins
 #'
-#' Returns metadata about algorithms and processing providers.
+#' Functions that return metadata about the installed and enabled algorithms or
+#' processing providers, or about the installed plugins that implement
+#' processing providers.
 #' See the [QGIS docs](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html)
 #' for a detailed description of the algorithms provided
 #' 'out of the box' on QGIS.
 #'
-#' @param algorithm A qualified algorithm name
-#' (e.g., "native:filedownloader").
-#' @param provider A provider identifier (e.g., "native")
-#' @param quiet Use `FALSE` to display more information about the command,
-#' possibly useful for debugging.
-#' @inheritParams qgis_run
+#' @family topics about information on algorithms & processing providers
+#' @family topics about reporting the QGIS state
+#' @concept functions to manage and explore QGIS and qgisprocess
+#' @seealso [qgis_enable_plugins()], [qgis_disable_plugins()]
+#'
+#' @param which String defining which plugins to select, based on their
+#' status in QGIS (enabled or disabled).
+#' Must be one of: `"all"`, `"enabled"`, `"disabled"`.
+#' @param ... Only used by other functions calling this function.
+#' @inheritParams qgis_path
+#'
+#' @return
+#' A tibble of algorithms, processing providers or plugins, with metadata.
 #'
 #' @export
 #'
@@ -30,20 +39,6 @@ qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
     "from { nrow(qgis_providers()) } QGIS processing providers."
   ))
   qgisprocess_cache$algorithms
-}
-
-#' @rdname qgis_algorithms
-#' @export
-qgis_has_algorithm <- function(algorithm, query = FALSE, quiet = TRUE) {
-  assert_qgis()
-  as.character(algorithm) %in% qgis_algorithms(query, quiet)$algorithm
-}
-
-#' @rdname qgis_algorithms
-#' @export
-qgis_has_provider <- function(provider, query = FALSE, quiet = TRUE) {
-  assert_qgis()
-  as.character(provider) %in% unique(qgis_algorithms(query, quiet)$provider)
 }
 
 #' @rdname qgis_algorithms

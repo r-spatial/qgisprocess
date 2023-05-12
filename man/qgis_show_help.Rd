@@ -5,7 +5,7 @@
 \alias{qgis_get_description}
 \alias{qgis_get_argument_specs}
 \alias{qgis_get_output_specs}
-\title{Get help and detailed metadata of one algorithm}
+\title{Get detailed information about one algorithm}
 \usage{
 qgis_show_help(algorithm)
 
@@ -17,10 +17,10 @@ qgis_get_output_specs(algorithm)
 }
 \arguments{
 \item{algorithm}{A qualified algorithm name
-(e.g., "native:filedownloader").}
+(e.g., \code{"native:buffer"}).}
 }
 \description{
-Get help and detailed metadata of one algorithm
+Get detailed information about one algorithm
 }
 \examples{
 if (has_qgis()) qgis_show_help("native:filedownloader")
@@ -28,3 +28,8 @@ if (has_qgis()) qgis_get_description("native:filedownloader")
 if (has_qgis()) qgis_get_argument_specs("native:filedownloader")
 
 }
+\seealso{
+Other topics about information on algorithms & processing providers: 
+\code{\link{qgis_algorithms}()}
+}
+\concept{topics about information on algorithms & processing providers}

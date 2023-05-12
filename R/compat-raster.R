@@ -1,5 +1,11 @@
 #' Convert a qgis_result object or one of its elements to a raster object
 #'
+#' @note Just use `qgis_as_raster()` in R scripts, it will use the correct
+#' method.
+#'
+#' @family topics about coercing processing output
+#' @family topics about accessing or managing processing results
+#'
 #' @param output A result from [qgis_run_algorithm()] or one of the
 #' [qgis_extract_output()] functions.
 #' @param ... Arguments passed to [raster::raster()] or [raster::brick()].

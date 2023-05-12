@@ -45,3 +45,11 @@ qgis_tmp_vector()
 qgis_tmp_raster()
 
 }
+\seealso{
+Other topics about programming or debugging utilities: 
+\code{\link{qgis_result_status}()},
+\code{\link{qgis_run}()},
+\code{\link{qgis_unconfigure}()},
+\code{\link{qgis_using_json_input}()}
+}
+\concept{topics about programming or debugging utilities}

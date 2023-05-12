@@ -1,6 +1,9 @@
-#' Get help and detailed metadata of one algorithm
+#' Get detailed information about one algorithm
 #'
-#' @inheritParams qgis_algorithms
+#' @family topics about information on algorithms & processing providers
+#'
+#' @param algorithm A qualified algorithm name
+#' (e.g., `"native:buffer"`).
 #'
 #' @export
 #'

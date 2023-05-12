@@ -24,3 +24,23 @@ qgis_as_terra(output, ...)
 \description{
 Convert a qgis_result object or one of its elements to a terra object
 }
+\note{
+Just use \code{qgis_as_terra()} in R scripts, it will use the correct
+method.
+}
+\seealso{
+Other topics about coercing processing output: 
+\code{\link{qgis_as_raster}()},
+\code{\link{st_as_sf}},
+\code{\link{st_as_stars}}
+
+Other topics about accessing or managing processing results: 
+\code{\link{qgis_as_raster}()},
+\code{\link{qgis_clean_result}()},
+\code{\link{qgis_extract_output}()},
+\code{\link{qgis_result_status}()},
+\code{\link{st_as_sf}},
+\code{\link{st_as_stars}}
+}
+\concept{topics about accessing or managing processing results}
+\concept{topics about coercing processing output}

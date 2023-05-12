@@ -355,10 +355,29 @@ qgis_argument_spec_by_name <- function(algorithm, name,
 }
 
 
-#' Specify lists and dictionary inputs
+#' Prepare a compound input argument
 #'
-#' @param ... Named values for [qgis_dict_input()] or
-#'   unnamed values for [qgis_list_input()].
+#' Some algorithm arguments require a compound object, consisting of
+#' several layers or elements.
+#' These functions apply strict validation rules when generating this object and
+#' are recommended.
+#'
+#' `qgis_list_input()` generates an unnamed list of class `qgis_list_input`.
+#' The use of `qgis_list_input()` instead of list() is _required_ for compound
+#' arguments _in case of no-JSON input_ (see [qgis_using_json_input()]).
+#' Since it applies strict validation rules, it is recommended in all cases
+#' though.
+#'
+#' `qgis_dict_input()` generates an named list of class `qgis_dict_input`.
+#' `qgis_dict_input()` is only supported when the JSON input method applies
+#' (see [qgis_using_json_input()]), where it can be interchanged with a named `list()`.
+#' It can only be used for arguments requiring _named_ lists.
+#' Since it applies strict validation rules, it is recommended above `list()`.
+#'
+#' @concept topics about preparing input values
+#'
+#' @param ... Named values for `qgis_dict_input()` or
+#'   unnamed values for `qgis_list_input()`.
 #'
 #' @return
 #'   - `qgis_list_input()`: An object of class 'qgis_list_input'

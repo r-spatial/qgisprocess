@@ -1,5 +1,11 @@
 #' Convert a qgis_result object to an sf object
 #'
+#' @note Just use `st_as_sf()` in R scripts, it will use the correct
+#' method.
+#'
+#' @family topics about coercing processing output
+#' @family topics about accessing or managing processing results
+#'
 #' @param x A result from [qgis_run_algorithm()].
 #' @param ... Arguments passed to [sf::read_sf()].
 #' @name st_as_sf

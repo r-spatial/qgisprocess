@@ -1,12 +1,9 @@
-#' Create functions from QGIS algorithms
+#' Create a wrapper function that runs one algorithm
 #'
 #' As opposed to [qgis_run_algorithm()], [qgis_function()] creates a callable
 #' function based on the argument metadata provided by [qgis_get_argument_specs()].
-#' Unlike [qgis_run_algorithm()], [qgis_function()] sets the default value
-#' of `.quiet` to `TRUE` to make the function more usable within other
-#' R code.
 #'
-#' @inheritParams qgis_algorithms
+#' @inheritParams qgis_show_help
 #' @param ... Algorithm arguments.
 #'   These values are evaluated once and immediately, so you shouldn't
 #'   call [qgis_tmp_file()] here.
@@ -97,15 +94,18 @@ qgis_function <- function(algorithm, ...) {
 
 
 
-#' Run algorithms using 'qgis_process': pipe-friendly wrapper
+#' Run an algorithm using 'qgis_process': pipe-friendly wrapper
 #'
 #' [qgis_run_algorithm_p()] wraps [qgis_run_algorithm()], passing
-#' its first argument to the first input to `algorithm`.
+#' its first argument to the first argument of the QGIS `algorithm`.
 #' This makes it more convenient in a pipeline (hence '_p' in the name).
 #'
 #' Uses [qgis_function()] under the hood.
 #'
-#' @inheritParams qgis_algorithms
+#' @family functions to run one geoprocessing algorithm
+#'
+#' @inheritParams qgis_show_help
+#' @inheritParams qgis_run_algorithm
 #' @param .data Passed to the first input of `algorithm`.
 #' If `.data` is a `qgis_result` (the result of a previous processing
 #' step), `.data[[.select]]` is passed instead.

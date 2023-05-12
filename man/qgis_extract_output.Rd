@@ -2,18 +2,11 @@
 % Please edit documentation in R/qgis-result.R
 \name{qgis_extract_output}
 \alias{qgis_extract_output}
-\alias{qgis_clean_result}
 \alias{qgis_extract_output_by_name}
 \alias{qgis_extract_output_by_position}
 \alias{qgis_extract_output_by_class}
-\alias{qgis_result_status}
-\alias{qgis_result_stdout}
-\alias{qgis_result_stderr}
-\alias{qgis_result_args}
-\title{Access algorithm results}
+\title{Access processing output}
 \usage{
-qgis_clean_result(x)
-
 qgis_extract_output_by_name(x, name = "OUTPUT", first = TRUE)
 
 qgis_extract_output(x, name = "OUTPUT", first = TRUE)
@@ -21,14 +14,6 @@ qgis_extract_output(x, name = "OUTPUT", first = TRUE)
 qgis_extract_output_by_position(x, which)
 
 qgis_extract_output_by_class(x, class, single = TRUE)
-
-qgis_result_status(x)
-
-qgis_result_stdout(x)
-
-qgis_result_stderr(x)
-
-qgis_result_args(x)
 }
 \arguments{
 \item{x}{An object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
@@ -53,5 +38,23 @@ it inherits a specified class; otherwise falls back
 to the first element that inherits a specified class.}
 }
 \description{
+These functions extract one output element from the result of
+\code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, potentially more than one in the case of
+\code{qgis_extract_output_by_class()}.
+An output element can be extracted based on its name, its position in the
+printed \code{qgis_result} object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, or its
+class.
+
 \code{qgis_extract_output()} is an alias to \code{qgis_extract_output_by_name()}.
 }
+\seealso{
+Other topics about accessing or managing processing results: 
+\code{\link{qgis_as_raster}()},
+\code{\link{qgis_as_terra}()},
+\code{\link{qgis_clean_result}()},
+\code{\link{qgis_result_status}()},
+\code{\link{st_as_sf}},
+\code{\link{st_as_stars}}
+}
+\concept{main functions to access or manage processing results}
+\concept{topics about accessing or managing processing results}
