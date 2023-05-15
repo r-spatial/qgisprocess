@@ -35,9 +35,9 @@ test_that("qgis_plugins(query = FALSE, quiet = FALSE) messages are OK", {
 test_that(glue("qgis_plugins(query = TRUE) works when using JSON output"), {
   skip_if_not(has_qgis())
 
-  if (!qgis_use_json_output()) local_flipped_json_output()
+  if (!qgis_using_json_output()) local_flipped_json_output()
 
-  skip_if_not(qgis_use_json_output(), "Not using JSON output.")
+  skip_if_not(qgis_using_json_output(), "Not using JSON output.")
 
   plugins <- qgis_plugins(query = TRUE)
   expect_correct_plugins_format(plugins)
@@ -47,9 +47,9 @@ test_that(glue("qgis_plugins(query = TRUE) works when using JSON output"), {
 test_that(glue("qgis_plugins(query = TRUE) works when NOT using JSON output"), {
   skip_if_not(has_qgis())
 
-  if (qgis_use_json_output()) local_flipped_json_output()
+  if (qgis_using_json_output()) local_flipped_json_output()
 
-  skip_if_not(!qgis_use_json_output(), "Using JSON output instead of 'not'.")
+  skip_if_not(!qgis_using_json_output(), "Using JSON output instead of 'not'.")
 
   plugins <- qgis_plugins(query = TRUE)
   expect_correct_plugins_format(plugins)

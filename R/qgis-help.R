@@ -1,13 +1,16 @@
-#' Show algorithm help
+#' Get detailed information about one algorithm
 #'
-#' @inheritParams qgis_run_algorithm
+#' @family topics about information on algorithms & processing providers
+#'
+#' @param algorithm A qualified algorithm name
+#' (e.g., `"native:buffer"`).
 #'
 #' @export
 #'
 #' @examples
 #' if (has_qgis()) qgis_show_help("native:filedownloader")
-#' if (has_qgis()) qgis_description("native:filedownloader")
-#' if (has_qgis()) qgis_arguments("native:filedownloader")
+#' if (has_qgis()) qgis_get_description("native:filedownloader")
+#' if (has_qgis()) qgis_get_argument_specs("native:filedownloader")
 #'
 qgis_show_help <- function(algorithm) {
   cat(qgis_help_text(algorithm))
@@ -17,10 +20,10 @@ qgis_show_help <- function(algorithm) {
 
 #' @rdname qgis_show_help
 #' @export
-qgis_description <- function(algorithm) {
+qgis_get_description <- function(algorithm) {
   vapply(
     algorithm,
-    function(x) qgis_parsed_help(algorithm)$description,
+    function(x) qgis_parse_help(algorithm)$description,
     character(1)
   )
 }
@@ -36,9 +39,9 @@ extract_type_component <- function(param_element, component) {
 
 #' @rdname qgis_show_help
 #' @export
-qgis_arguments <- function(algorithm) {
-  if (qgis_use_json_output()) {
-    help <- qgis_help(algorithm)
+qgis_get_argument_specs <- function(algorithm) {
+  if (qgis_using_json_output()) {
+    help <- qgis_help_json(algorithm)
     out <- tibble::tibble(
       name = names(help$parameters),
       description = vapply(help$parameters, "[[", character(1), "description"),
@@ -53,19 +56,19 @@ qgis_arguments <- function(algorithm) {
     # The order of the parameters is alphabetized in JSON but has a
     # natural ordering in the parsed help text (which we need for backward
     # compatibility)
-    out_legacy <- qgis_parsed_help(algorithm)$arguments
+    out_legacy <- qgis_parse_help(algorithm)$arguments
 
     out[match(out_legacy$name, out$name), ]
   } else {
-    qgis_parsed_help(algorithm)$arguments
+    qgis_parse_help(algorithm)$arguments
   }
 }
 
 #' @rdname qgis_show_help
 #' @export
-qgis_outputs <- function(algorithm) {
-  if (qgis_use_json_output()) {
-    help <- qgis_help(algorithm)
+qgis_get_output_specs <- function(algorithm) {
+  if (qgis_using_json_output()) {
+    help <- qgis_help_json(algorithm)
     out <- tibble::tibble(
       name = names(help$outputs),
       description = vapply(help$outputs, "[[", character(1), "description"),
@@ -75,15 +78,14 @@ qgis_outputs <- function(algorithm) {
     out[] <- lapply(out, unname)
     out
   } else {
-    qgis_parsed_help(algorithm)$outputs
+    qgis_parse_help(algorithm)$outputs
   }
 }
 
-#' @rdname qgis_show_help
-#' @export
-qgis_help <- function(algorithm) {
+#' @keywords internal
+qgis_help_json <- function(algorithm) {
   cached <- help_cache_file(algorithm, json = TRUE)
-  if (qgis_use_cached_help() && file.exists(cached)) {
+  if (qgis_using_cached_help() && file.exists(cached)) {
     try(return(jsonlite::fromJSON(readRDS(cached))))
   }
 
@@ -105,7 +107,7 @@ qgis_help <- function(algorithm) {
 
 qgis_help_text <- function(algorithm) {
   cached <- help_cache_file(algorithm, json = FALSE)
-  if (qgis_use_cached_help() && file.exists(cached)) {
+  if (qgis_using_cached_help() && file.exists(cached)) {
     try(return(readRDS(cached)))
   }
 
@@ -124,7 +126,7 @@ qgis_help_text <- function(algorithm) {
   result$stdout
 }
 
-qgis_parsed_help <- function(algorithm) {
+qgis_parse_help <- function(algorithm) {
   help_text <- trimws(qgis_help_text(algorithm))
 
   sec_description <- stringr::str_match(
@@ -211,7 +213,7 @@ qgis_parsed_help <- function(algorithm) {
   )
 }
 
-qgis_use_cached_help <- function() {
+qgis_using_cached_help <- function() {
   opt <- getOption(
     "qgisprocess.use_cached_help",
     Sys.getenv("R_QGISPROCESS_USE_CACHED_HELP", "true")

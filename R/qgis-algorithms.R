@@ -1,15 +1,25 @@
-#' Run algorithms using 'qgis_process'
+#' List algorithms, processing providers or plugins
 #'
-#' Run QGIS algorithms.
-#' See the [QGIS docs](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/index.html)
+#' Functions that return metadata about the installed and enabled algorithms or
+#' processing providers, or about the installed plugins that implement
+#' processing providers.
+#' See the [QGIS docs](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html)
 #' for a detailed description of the algorithms provided
-#' 'out of the box' on QGIS (versions >= 3.14).
+#' 'out of the box' on QGIS.
 #'
-#' @param provider A provider identifier (e.g., "native")
-#' @param quiet Use `FALSE` to display more information about the command,
-#' possibly useful for debugging.
-#' @inheritParams qgis_run_algorithm
-#' @inheritParams qgis_run
+#' @family topics about information on algorithms & processing providers
+#' @family topics about reporting the QGIS state
+#' @concept functions to manage and explore QGIS and qgisprocess
+#' @seealso [qgis_enable_plugins()], [qgis_disable_plugins()]
+#'
+#' @param which String defining which plugins to select, based on their
+#' status in QGIS (enabled or disabled).
+#' Must be one of: `"all"`, `"enabled"`, `"disabled"`.
+#' @param ... Only used by other functions calling this function.
+#' @inheritParams qgis_path
+#'
+#' @return
+#' A tibble of algorithms, processing providers or plugins, with metadata.
 #'
 #' @export
 #'
@@ -19,13 +29,6 @@
 #' if (has_qgis()) qgis_has_provider("native")
 #' if (has_qgis()) qgis_providers()
 #'
-qgis_has_algorithm <- function(algorithm) {
-  assert_qgis()
-  as.character(algorithm) %in% qgis_algorithms()$algorithm
-}
-
-#' @rdname qgis_has_algorithm
-#' @export
 qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
   if (query) {
     qgisprocess_cache$algorithms <- qgis_query_algorithms(quiet = quiet)
@@ -38,18 +41,11 @@ qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
   qgisprocess_cache$algorithms
 }
 
-#' @rdname qgis_has_algorithm
+#' @rdname qgis_algorithms
 #' @export
-qgis_has_provider <- function(provider, query = FALSE, quiet = TRUE) {
+qgis_providers <- function(query = FALSE, quiet = TRUE) {
   assert_qgis()
-  as.character(provider) %in% unique(qgis_algorithms(query, quiet)$provider)
-}
-
-#' @rdname qgis_has_algorithm
-#' @export
-qgis_providers <- function() {
-  assert_qgis()
-  algs <- qgis_algorithms()
+  algs <- qgis_algorithms(query = query, quiet = quiet)
   counted <- stats::aggregate(
     algs[[1]],
     by = list(algs$provider, algs$provider_title),
@@ -63,8 +59,7 @@ qgis_providers <- function() {
   )
 }
 
-#' @rdname qgis_has_algorithm
-#' @export
+#' @keywords internal
 assert_qgis_algorithm <- function(algorithm) {
   if (!is.character(algorithm) || length(algorithm) != 1) {
     abort("`algorithm` must be a character vector of length 1")
@@ -83,7 +78,7 @@ assert_qgis_algorithm <- function(algorithm) {
 
 #' @keywords internal
 qgis_query_algorithms <- function(quiet = FALSE) {
-  if (qgis_use_json_output()) {
+  if (qgis_using_json_output()) {
     result <- qgis_run(args = c("list", "--json"), encoding = "UTF-8")
     result_parsed <- jsonlite::fromJSON(result$stdout)
 

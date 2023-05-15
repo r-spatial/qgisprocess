@@ -29,7 +29,7 @@ test_that("tempfiles can be cleaned up", {
   file <- qgis_tmp_file("")
   file.create(file)
   expect_true(file.exists(file))
-  qgis_tmp_clean()
+  qgis_clean_tmp()
   expect_false(file.exists(file))
   expect_true(dir.exists(qgis_tmp_base()))
 })

@@ -3,15 +3,15 @@
 \name{qgis_list_input}
 \alias{qgis_list_input}
 \alias{qgis_dict_input}
-\title{Specify lists and dictionary inputs}
+\title{Prepare a compound input argument}
 \usage{
 qgis_list_input(...)
 
 qgis_dict_input(...)
 }
 \arguments{
-\item{...}{Named values for \code{\link[=qgis_dict_input]{qgis_dict_input()}} or
-unnamed values for \code{\link[=qgis_list_input]{qgis_list_input()}}.}
+\item{...}{Named values for \code{qgis_dict_input()} or
+unnamed values for \code{qgis_list_input()}.}
 }
 \value{
 \itemize{
@@ -20,10 +20,27 @@ unnamed values for \code{\link[=qgis_list_input]{qgis_list_input()}}.}
 }
 }
 \description{
-Specify lists and dictionary inputs
+Some algorithm arguments require a compound object, consisting of
+several layers or elements.
+These functions apply strict validation rules when generating this object and
+are recommended.
+}
+\details{
+\code{qgis_list_input()} generates an unnamed list of class \code{qgis_list_input}.
+The use of \code{qgis_list_input()} instead of list() is \emph{required} for compound
+arguments \emph{in case of no-JSON input} (see \code{\link[=qgis_using_json_input]{qgis_using_json_input()}}).
+Since it applies strict validation rules, it is recommended in all cases
+though.
+
+\code{qgis_dict_input()} generates an named list of class \code{qgis_dict_input}.
+\code{qgis_dict_input()} is only supported when the JSON input method applies
+(see \code{\link[=qgis_using_json_input]{qgis_using_json_input()}}), where it can be interchanged with a named \code{list()}.
+It can only be used for arguments requiring \emph{named} lists.
+Since it applies strict validation rules, it is recommended above \code{list()}.
 }
 \examples{
 qgis_list_input(1, 2, 3)
 qgis_dict_input(a = 1, b = 2, c = 3)
 
 }
+\concept{topics about preparing input values}

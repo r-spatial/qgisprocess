@@ -12,3 +12,29 @@ navbar:
      icon: fa-github
      href: https://github.com/r-spatial/qgisprocess
      aria-label: GitHub
+
+reference:
+- title: "Discover and learn geoprocessing algorithms"
+- contents:
+  - has_concept("topics about information on algorithms & processing providers")
+- title: "Prepare special input arguments"
+- contents:
+  - has_concept("topics about preparing input values")
+- title: "Run geoprocessing algorithms"
+- contents:
+  - has_concept("functions to run one geoprocessing algorithm")
+  - qgis_function
+- title: "Handle processing results"
+- contents:
+  - qgis_extract_output
+  - qgis_clean_result
+  - has_concept("main functions to access or manage processing results")
+- title: "Coerce processing output"
+- contents:
+  - has_concept("topics about coercing processing output")
+- title: "Explore and manage QGIS and qgisprocess state"
+- contents:
+  - has_concept("functions to manage and explore QGIS and qgisprocess")
+- title: "Programming and debugging"
+- contents:
+  - has_concept("topics about programming or debugging utilities")

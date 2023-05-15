@@ -14,7 +14,7 @@ qgis_argument_spec(
 )
 }
 \arguments{
-\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
+\item{algorithm}{A qualified algorithm name (e.g., \code{"native:buffer"}) or
 a path to a QGIS model file.}
 
 \item{name, description, qgis_type, available_values, acceptable_values}{Column values of \code{arguments} denoting
@@ -27,7 +27,8 @@ A \code{\link[=list]{list()}} with an element for each input argument.
 Specify QGIS argument types
 }
 \examples{
-qgis_argument_spec()
-if (has_qgis()) qgis_argument_spec_by_name("native:filedownloader", "URL")
-
+# These became internal functions!
+qgisprocess:::qgis_argument_spec()
+if (has_qgis()) qgisprocess:::qgis_argument_spec_by_name("native:filedownloader", "URL")
 }
+\keyword{internal}

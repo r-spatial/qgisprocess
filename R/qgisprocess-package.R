@@ -1,3 +1,7 @@
+#' @note
+#' A structured overview of the available functions can be consulted at
+#' <https://r-spatial.github.io/qgisprocess/reference/index.html>.
+#'
 #' @keywords internal
 "_PACKAGE"
 

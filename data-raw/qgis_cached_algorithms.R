@@ -7,12 +7,12 @@
 library(qgisprocess)
 
 algorithms <- qgis_algorithms()
-all_outputs <- lapply(qgis_algorithms()$algorithm, qgis_outputs)
-all_args <- lapply(qgis_algorithms()$algorithm, qgis_arguments)
+all_outputs <- lapply(qgis_algorithms()$algorithm, qgis_get_output_specs)
+all_args <- lapply(qgis_algorithms()$algorithm, qgis_get_argument_specs)
 
 algorithms$outputs <- all_outputs
 algorithms$arguments <- all_args
-algorithms$description <- vapply(algorithms$algorithm, qgis_description, character(1))
+algorithms$description <- vapply(algorithms$algorithm, qgis_get_description, character(1))
 
 alg_outputs <- tidyr::unnest(algorithms[c("algorithm", "outputs")], outputs)
 alg_arguments <- tidyr::unnest(algorithms[c("algorithm", "arguments")], arguments)
