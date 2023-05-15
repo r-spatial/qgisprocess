@@ -114,23 +114,26 @@ And finally run it with `qgis_run_algorithm()`:
 # if needed, first install spDataLarge:
 # remotes::install_github("Nowosad/spDataLarge")
 data("random_points", package = "spDataLarge")
-out <- qgis_run_algorithm("native:buffer", INPUT = random_points, DISTANCE = 50)
+res <- qgis_run_algorithm("native:buffer", INPUT = random_points, DISTANCE = 50)
 ```
 
 As a convenience to the user, `qgis_run_algorithm()` reports all unspecified and automatically chosen arguments.
 If you want to have even more information on what is going on in the background, set `.quiet` to `FALSE`.
-The `out` object is of class `qgis_result` and contains the path to the output object created by `qgis_process` (when not explicitly setting an output object, **qgisprocess** creates it automatically for you), the used algorithm and input arguments as well as an object `.processx_result` which is especially useful if somethings went wrong.
+The `res` object is of class `qgis_result` and contains the path to the output file created by `qgis_process` (when not explicitly setting an output object, **qgisprocess** creates it automatically for you).
+The output filepath be extracted with `qgis_output()`.
+It also contains debugging information about used algorithm, input arguments and messages from the processing step; see `?qgis_result_status` to extract this easily.
 
 For QGIS 3.24 and later, `qgis_run_algorithm()` passes the input arguments to QGIS as a JSON string.
-The JSON input string is also included in the `out` object.
+The JSON input string is also included in the `res` object.
 Moreover, the user can specify input arguments directly as JSON in `qgis_run_algorithm()`.
 That is useful since input parameters can be copied from the QGIS GUI as JSON.
 This will be demonstrated in a separate tutorial.
 
 ```{r inspect}
-# inspect the out object
-class(out)
-str(out)
+# inspect the res object
+class(res)
+names(res)
+res # only prints the output element(s)
 ```
 
 To read in the QGIS output and visualize it, we can run:
@@ -140,9 +143,9 @@ library("sf")
 library("mapview")
 # attach QGIS output
 # either do it "manually":
-buf <- read_sf(out$OUTPUT[1])
+buf <- read_sf(qgis_output(res, "OUTPUT"))
 # or use the st_as_sf.qgis_result method:
-buf <- sf::st_as_sf(out)
+buf <- sf::st_as_sf(res)
 # plot your result
 mapview(buf, col.regions = "blue") + 
   mapview(random_points, col.regions = "red", cex = 3)
@@ -155,7 +158,7 @@ So using our buffer example from above, we could also run:
 # create a function
 qgis_buffer <- qgis_function("native:buffer")
 # run the function
-out <- qgis_buffer(INPUT = random_points, DISTANCE = 50)
+res <- qgis_buffer(INPUT = random_points, DISTANCE = 50)
 ```
 
 This is basically what package [qgis](https://github.com/JanCaha/r_package_qgis) is doing for each available QGIS function while also providing an R help file for each function.
@@ -196,7 +199,7 @@ dem <- rast(system.file("raster/dem.tif", package = "spDataLarge"))
 info <- qgis_run_algorithm(alg = "grass7:r.slope.aspect", elevation = dem)
 ```
 
-Just printing the `info` object shows which output objects have been made:
+Just printing the `info` object shows which output files have been made:
 
 ```{r info}
 info
