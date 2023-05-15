@@ -46,7 +46,7 @@ library(qgisprocess)
 
 ## Example
 
-The following example demonstrates the [buffer](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer) algorithm in action. The passing of [sf](https://r-spatial.github.io/sf) and [raster](https://cran.r-project.org/package=raster) objects is experimentally supported (and will be well-supported in the future!).
+The following example demonstrates the [buffer](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer) algorithm in action. The passing of [sf](https://r-spatial.github.io/sf), [stars](https://r-spatial.github.io/stars), [terra](https://rspatial.github.io/terra) and [raster](https://cran.r-project.org/package=raster) objects is supported.
 
 ```{r buffer}
 input <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
