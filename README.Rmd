@@ -75,9 +75,9 @@ output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
 ```
 
-You can read the help associated with an algorithm using `qgis_show_help()`:
+You can read the help associated with an algorithm using `qgis_show_help()`.
 
-```{r}
+```{r eval=FALSE}
 qgis_show_help("native:buffer")
 ```
 
