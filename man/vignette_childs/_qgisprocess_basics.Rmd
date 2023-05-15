@@ -294,7 +294,7 @@ To turn off this behavior, set `.clean` to `FALSE`.
 
 Of course, you can also pipe to `qgis_run_algorithm()` by manually extracting the `OUTPUT` object and redirecting it to the appropriate input argument of the next processing step.
 This avoids ambiguity and allows for greater flexibility though it might not be as convenient as `qgis_pipe()`.
-For example, intermediate results remain on disk for the duration of your R session.
+For example, intermediate results remain on disk for the duration of your R session, unless you manually call `qgis_clean_result()` on a result object.
 
 ```{r native pipe}
 result <- qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem, 
