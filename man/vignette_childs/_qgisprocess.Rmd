@@ -1,4 +1,4 @@
-For a very short introduction to **qgisprocess**, visit the GitHub landing page at <https://github.com/r-spatial/qgisprocess>.
+For a very short introduction to **qgisprocess**, visit the [homepage](https://r-spatial.github.io/qgisprocess).
 
 Here you will learn about package configuration, about basic usage guided by two examples, and how to pipe results into a next geoprocessing step.
 
