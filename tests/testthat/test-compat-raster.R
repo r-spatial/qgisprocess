@@ -148,5 +148,5 @@ test_that("raster argument coercer for crs works", {
   )
 
   expect_true(file.exists(result$OUTPUT))
-  qgis_result_clean(result)
+  qgis_clean_result(result)
 })

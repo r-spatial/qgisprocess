@@ -1,7 +1,31 @@
-#' Convert sf objects to/from QGIS inputs/outputs
+#' Convert a qgis_result object to an sf object
 #'
-#' @inheritParams as_qgis_argument
+#' @note Just use `st_as_sf()` in R scripts, it will use the correct
+#' method.
 #'
+#' @family topics about coercing processing output
+#' @family topics about accessing or managing processing results
+#'
+#' @param x A result from [qgis_run_algorithm()].
+#' @param ... Arguments passed to [sf::read_sf()].
+#' @name st_as_sf
+
+
+#' @rdname st_as_sf
+# dynamically registered in zzz.R
+st_as_sf.qgis_result <- function(x, ...) {
+  result <- qgis_extract_output_by_class(x, c("qgis_outputVector", "qgis_outputLayer"))
+
+  if (grepl("\\|layer", result)) {
+    result_splitted <- strsplit(result, "\\|layer.*=")[[1]]
+    sf::read_sf(result_splitted[1], result_splitted[2], ...)
+  } else {
+    sf::read_sf(result, ...)
+  }
+}
+
+
+#' @keywords internal
 #' @export
 as_qgis_argument.sf <- function(x, spec = qgis_argument_spec(),
                                 use_json_input = FALSE) {
@@ -18,21 +42,8 @@ as_qgis_argument.sf <- function(x, spec = qgis_argument_spec(),
   }
 }
 
-# dynamically registered in zzz.R
-st_as_sf.qgis_result <- function(x, ...) {
-  result <- qgis_extract_output_by_class(x, c("qgis_outputVector", "qgis_outputLayer"))
 
-  if (grepl("\\|layer", result)) {
-    result_splitted <- strsplit(result, "\\|layer.*=")[[1]]
-    sf::read_sf(result_splitted[1], result_splitted[2], ...)
-  } else {
-    sf::read_sf(result, ...)
-  }
-}
-
-
-
-#' @rdname as_qgis_argument.sf
+#' @keywords internal
 #' @export
 as_qgis_argument.crs <- function(x, spec = qgis_argument_spec(),
                                  use_json_input = FALSE) {
@@ -43,7 +54,7 @@ as_qgis_argument.crs <- function(x, spec = qgis_argument_spec(),
   x$Wkt
 }
 
-#' @rdname as_qgis_argument.sf
+#' @keywords internal
 #' @export
 as_qgis_argument.bbox <- function(x, spec = qgis_argument_spec(),
                                   use_json_input = FALSE) {
@@ -58,7 +69,7 @@ as_qgis_argument.bbox <- function(x, spec = qgis_argument_spec(),
   }
 }
 
-#' @rdname as_qgis_argument.sf
+#' @keywords internal
 #' @export
 as_qgis_argument.sfc <- function(x, spec = qgis_argument_spec(),
                                  use_json_input = FALSE) {
@@ -81,7 +92,7 @@ as_qgis_argument.sfc <- function(x, spec = qgis_argument_spec(),
   }
 }
 
-#' @rdname as_qgis_argument.sf
+#' @keywords internal
 #' @export
 as_qgis_argument.POINT <- function(x, spec = qgis_argument_spec(),
                                    use_json_input = FALSE) {

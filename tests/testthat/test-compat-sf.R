@@ -88,7 +88,7 @@ test_that("sf crs and bbox work", {
   )
 
   expect_true(file.exists(result$OUTPUT))
-  qgis_result_clean(result)
+  qgis_clean_result(result)
 })
 
 test_that("sfc to QGIS point work", {

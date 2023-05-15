@@ -2,7 +2,7 @@
 % Please edit documentation in R/qgis-run-algorithm.R
 \name{qgis_run_algorithm}
 \alias{qgis_run_algorithm}
-\title{Run algorithms using 'qgis_process'}
+\title{Run an algorithm using 'qgis_process'}
 \usage{
 qgis_run_algorithm(
   algorithm,
@@ -14,10 +14,10 @@ qgis_run_algorithm(
 )
 }
 \arguments{
-\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
+\item{algorithm}{A qualified algorithm name (e.g., \code{"native:buffer"}) or
 a path to a QGIS model file.}
 
-\item{...}{Named key-value pairs as arguments for each algorithm. Features of
+\item{...}{Named key-value pairs as arguments for the algorithm. Features of
 \code{\link[rlang:list2]{rlang::list2()}} are supported. These arguments
 are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()}}.}
 
@@ -26,11 +26,11 @@ ellipsoid name for distance calculations.}
 
 \item{.raw_json_input}{The raw JSON to use as input in place of \code{...}.}
 
-\item{.quiet}{Use \code{FALSE} to get extra output from processing algorithms.
+\item{.quiet}{Use \code{FALSE} to get extra output from 'qgis_process'.
 This can be useful in debugging.}
 }
 \description{
-Run QGIS algorithms.
+Runs an algorithm using 'qgis_process'.
 See the \href{https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html}{QGIS docs}
 for a detailed description of the algorithms provided
 'out of the box' on QGIS.
@@ -45,3 +45,8 @@ if (has_qgis()) {
 }
 
 }
+\seealso{
+Other functions to run one geoprocessing algorithm: 
+\code{\link{qgis_run_algorithm_p}()}
+}
+\concept{functions to run one geoprocessing algorithm}
