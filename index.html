@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Provides seamless access to the QGIS &lt;https://qgis.org/&gt;
+<meta name="description" content="Provides seamless access to the QGIS (&lt;https://qgis.org/&gt;)
   processing toolbox using the qgis_process command-line utility.
   Both native and third-party (plugin) processing providers are supported.
   Beside referring data sources from file, also common R-objects like sf, terra
@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Using QGIS Processing Algorithms from R">
-<meta property="og:description" content="Provides seamless access to the QGIS &lt;https://qgis.org/&gt;
+<meta property="og:description" content="Provides seamless access to the QGIS (&lt;https://qgis.org/&gt;)
   processing toolbox using the qgis_process command-line utility.
   Both native and third-party (plugin) processing providers are supported.
   Beside referring data sources from file, also common R-objects like sf, terra
@@ -89,12 +89,12 @@
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-spatial/qgisprocess"</span><span class="op">)</span></span></code></pre></div>
 <p>The qgisprocess package wraps the <code>qgis_process</code> command-line utility, which is available in QGIS &gt;= <a href="https://github.com/qgis/QGIS/releases/tag/final-3_14_16" class="external-link">3.14.16</a>, <a href="https://qgis.org/en/site/getinvolved/development/roadmap.html" class="external-link">released</a> in September 2020. MacOS users will have to install QIGS &gt;= 3.16; download instructions for all platforms are available at <a href="https://download.qgis.org/" class="external-link uri">https://download.qgis.org/</a>. If a recent version of QGIS isn’t available for your OS, you can use one of the <a href="https://github.com/geocompr/docker" class="external-link">Geocomputation with R Docker images</a> with QGIS installed.</p>
-<p>If the automatic configuration fails (or if you have more than one installation and would like to choose which one is used by qgisprocess), you can set <code>options(qgisprocess.path = "path/to/qgis_process")</code>, possibly in your <code>.Rprofile</code> to persist between sessions. You can run <code><a href="reference/qgis_run.html">qgis_configure()</a></code> to print the gritty details!</p>
+<p>If the automatic configuration fails (or if you have more than one installation and would like to choose which one is used by qgisprocess), you can set <code>options(qgisprocess.path = "path/to/qgis_process")</code>, possibly in your <code>.Rprofile</code> to persist between sessions. You can run <code><a href="reference/qgis_configure.html">qgis_configure()</a></code> to print the gritty details!</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/qgisprocess" class="external-link">qgisprocess</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using 'qgis_process' at '/Applications/QGIS.app/Contents/MacOS/bin/qgis_process'.</span></span>
 <span><span class="co">#&gt; Run `qgis_configure()` for details.</span></span>
-<span><span class="fu"><a href="reference/qgis_run.html">qgis_configure</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/qgis_configure.html">qgis_configure</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; getOption('qgisprocess.path') was not found.</span></span>
 <span><span class="co">#&gt; Sys.getenv('R_QGISPROCESS_PATH') was not found.</span></span>
 <span><span class="co">#&gt; Trying 'qgis_process' on PATH</span></span>
@@ -129,7 +129,7 @@
 <span><span class="co">#&gt; List of 1</span></span>
 <span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T//RtmptXCayy/file9b2b462efaa9/file9b2b5212f730.gpkg"</span></span>
 <span></span>
-<span><span class="va">output_sf</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="reference/is_qgis_result.html">qgis_extract_output</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"OUTPUT"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">output_sf</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="reference/qgis_extract_output.html">qgis_extract_output</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"OUTPUT"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">output_sf</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-buffer-1.png" width="100%"></p>
 <p>You can read the help associated with an algorithm using <code><a href="reference/qgis_show_help.html">qgis_show_help()</a></code>:</p>
@@ -207,9 +207,9 @@
 <span><span class="co">#&gt;  Buffered</span></span></code></pre></div>
 <p>It may also be useful to run an algorithm in the QGIS GUI and examine the console ‘Input parameters’ to determine how the various input values are translated to string processing arguments:</p>
 <p><img src="reference/figures/qgis-buffer.png"></p>
-<p>A list of available algorithms can be found using <code><a href="reference/qgis_has_algorithm.html">qgis_algorithms()</a></code>. When using R interactively, it may be useful to use <code>View(qgis_algorithms())</code> to search.</p>
+<p>A list of available algorithms can be found using <code><a href="reference/qgis_algorithms.html">qgis_algorithms()</a></code>. When using R interactively, it may be useful to use <code>View(qgis_algorithms())</code> to search.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/qgis_has_algorithm.html">qgis_algorithms</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/qgis_algorithms.html">qgis_algorithms</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 986 x 5</span></span>
 <span><span class="co">#&gt;    provider provider_title algorithm         algorithm_id    algorithm_title    </span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;          &lt;chr&gt;             &lt;chr&gt;           &lt;chr&gt;              </span></span>

@@ -96,9 +96,9 @@ opens the QGIS expression builder (e.g. in
 <code>native:extractbyexpression</code>), or by a directly integrated
 QGIS expression builder (e.g. in <code>native:fieldcalculator</code>).
 Such arguments are of type <code>expression</code>, as seen in the
-output of <code><a href="../reference/qgis_show_help.html">qgis_arguments()</a></code>.</p>
+output of <code><a href="../reference/qgis_show_help.html">qgis_get_argument_specs()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/qgis_show_help.html">qgis_arguments</a></span><span class="op">(</span><span class="st">"native:fieldcalculator"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"FORMULA"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/qgis_show_help.html">qgis_get_argument_specs</a></span><span class="op">(</span><span class="st">"native:fieldcalculator"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"FORMULA"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 6</span></span></span>
 <span><span class="co">#&gt;   name    description qgis_type default_value available_values acceptable_values</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span></span>
@@ -112,7 +112,7 @@ override</a>’ button. An example is provided by the
 <code>DISTANCE</code> argument of <code>native:buffer</code>, for which
 we query the acceptable values below.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/qgis_show_help.html">qgis_arguments</a></span><span class="op">(</span><span class="st">"native:buffer"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/qgis_show_help.html">qgis_get_argument_specs</a></span><span class="op">(</span><span class="st">"native:buffer"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"DISTANCE"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">acceptable_values</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">acceptable_values</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -157,7 +157,7 @@ depth. We can simply pass the expression as a string:</p>
 <span>  EXPRESSION <span class="op">=</span> <span class="st">'"DEPTH_M" &gt; 1'</span>,</span>
 <span>  .quiet <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using `OUTPUT = qgis_tmp_vector()`</span></span>
 <span><span class="co">#&gt; Using `FAIL_OUTPUT = qgis_tmp_vector()`</span></span>
 <span><span class="co">#&gt; Simple feature collection with 39 features and 2 fields</span></span>
@@ -192,7 +192,7 @@ and add it as an attribute to the points. For that we will use the
 <span>  INPUT <span class="op">=</span> <span class="va">longlake_path</span>,</span>
 <span>  .quiet <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="../reference/is_qgis_result.html">qgis_extract_output</a></span><span class="op">(</span><span class="st">"OUTPUT"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/qgis_extract_output.html">qgis_extract_output</a></span><span class="op">(</span><span class="st">"OUTPUT"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using `OUTPUT = qgis_tmp_vector()`</span></span></code></pre></div>
 <p>Next, build the QGIS expression. Referring to the <code>INPUT</code>
 geometry in <code>native:fieldcalculator</code> is done with the
@@ -232,7 +232,7 @@ approach since QGIS 3.30.0 avoids the need for a QGIS project.</p>
 <span>  FIELD_NAME <span class="op">=</span> <span class="st">"distance"</span>,</span>
 <span>  FORMULA <span class="op">=</span> <span class="va">expr</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using `FIELD_TYPE = "Decimal (double)"`</span></span>
 <span><span class="co">#&gt; Argument `FIELD_LENGTH` is unspecified (using QGIS default value).</span></span>
 <span><span class="co">#&gt; Argument `FIELD_PRECISION` is unspecified (using QGIS default value).</span></span>
@@ -277,7 +277,7 @@ fields (attributes), but you can also omit them.</p>
 <span>  DISTANCE <span class="op">=</span> <span class="st">'expression: "DEPTH_M" * 10'</span>,</span>
 <span>  .quiet <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Argument `SEGMENTS` is unspecified (using QGIS default value).</span></span>
 <span><span class="co">#&gt; Using `END_CAP_STYLE = "Round"`</span></span>
 <span><span class="co">#&gt; Using `JOIN_STYLE = "Round"`</span></span>
@@ -305,7 +305,7 @@ double quotes around the attribute name and <em>without</em> spaces:</p>
 <span>  INPUT <span class="op">=</span> <span class="va">longlake_depth_path</span>,</span>
 <span>  DISTANCE <span class="op">=</span> <span class="st">"field:DEPTH_M"</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

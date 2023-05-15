@@ -3,14 +3,14 @@
 in calls to qgis_run_algorithm() or elsewhere. These
 files are created in a special temporary directory
 (qgis_tmp_base()) that should be periodically cleaned up
-using qgis_tmp_clean(). You can set your preferred
+using qgis_clean_tmp(). You can set your preferred
 vector and/or raster file extension using
 options(qgisprocess.tmp_vector_ext = "...") and/or
 options(qgisprocess.tmp_raster_ext = "..."), respectively.'><title>Manage temporary files — qgis_tmp_file • qgisprocess</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet"><meta property="og:title" content="Manage temporary files — qgis_tmp_file"><meta property="og:description" content='These functions create temporary files that can be used
 in calls to qgis_run_algorithm() or elsewhere. These
 files are created in a special temporary directory
 (qgis_tmp_base()) that should be periodically cleaned up
-using qgis_tmp_clean(). You can set your preferred
+using qgis_clean_tmp(). You can set your preferred
 vector and/or raster file extension using
 options(qgisprocess.tmp_vector_ext = "...") and/or
 options(qgisprocess.tmp_raster_ext = "..."), respectively.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -69,7 +69,7 @@ options(qgisprocess.tmp_raster_ext = "..."), respectively.'><!-- mathjax --><scr
 in calls to <code><a href="qgis_run_algorithm.html">qgis_run_algorithm()</a></code> or elsewhere. These
 files are created in a special temporary directory
 (<code>qgis_tmp_base()</code>) that should be periodically cleaned up
-using <code>qgis_tmp_clean()</code>. You can set your preferred
+using <code>qgis_clean_tmp()</code>. You can set your preferred
 vector and/or raster file extension using
 <code>options(qgisprocess.tmp_vector_ext = "...")</code> and/or
 <code>options(qgisprocess.tmp_raster_ext = "...")</code>, respectively.</p>
@@ -79,8 +79,6 @@ vector and/or raster file extension using
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">qgis_tmp_file</span><span class="op">(</span><span class="va">ext</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">is_qgis_tmp_file</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
 <span><span class="fu">qgis_tmp_folder</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">qgis_tmp_vector</span><span class="op">(</span>ext <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"qgisprocess.tmp_vector_ext"</span>, <span class="st">".gpkg"</span><span class="op">)</span><span class="op">)</span></span>
@@ -89,17 +87,13 @@ vector and/or raster file extension using
 <span></span>
 <span><span class="fu">qgis_tmp_base</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">qgis_tmp_clean</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">qgis_clean_tmp</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>ext</dt>
 <dd><p>The file extension to be used.</p></dd>
-
-
-<dt>x</dt>
-<dd><p>A character vector of file names.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -109,17 +103,25 @@ vector and/or raster file extension using
 <p>A character vector indicating the location of a
 (not yet created) temporary file.</p>
     </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other topics about programming or debugging utilities: 
+<code><a href="qgis_result_status.html">qgis_result_status</a>()</code>,
+<code><a href="qgis_run.html">qgis_run</a>()</code>,
+<code><a href="qgis_unconfigure.html">qgis_unconfigure</a>()</code>,
+<code><a href="qgis_using_json_input.html">qgis_using_json_input</a>()</code></p></div>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">qgis_tmp_base</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpKqLQj3/file29a9969793"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp0wB2gY/file2a785d72a4e3"</span>
 <span class="r-in"><span><span class="fu">qgis_tmp_file</span><span class="op">(</span><span class="st">".csv"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpKqLQj3/file29a9969793/file29a91fc897ae.csv"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp0wB2gY/file2a785d72a4e3/file2a7841d0bd54.csv"</span>
 <span class="r-in"><span><span class="fu">qgis_tmp_vector</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpKqLQj3/file29a9969793/file29a92a662abc.gpkg"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp0wB2gY/file2a785d72a4e3/file2a78173ee29a.gpkg"</span>
 <span class="r-in"><span><span class="fu">qgis_tmp_raster</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpKqLQj3/file29a9969793/file29a92e2e88a7.tif"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp0wB2gY/file2a785d72a4e3/file2a78160ab02f.tif"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

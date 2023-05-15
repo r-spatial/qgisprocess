@@ -22,40 +22,52 @@
     <loc>/index.html</loc>
   </url>
   <url>
-    <loc>/reference/as_qgis_argument.RasterLayer.html</loc>
+    <loc>/reference/as_qgis_argument.html</loc>
   </url>
   <url>
-    <loc>/reference/as_qgis_argument.SpatRaster.html</loc>
-  </url>
-  <url>
-    <loc>/reference/as_qgis_argument.sf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/as_qgis_argument.stars.html</loc>
+    <loc>/reference/has_qgis.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/is_qgis_result.html</loc>
+    <loc>/reference/qgis_algorithms.html</loc>
   </url>
   <url>
     <loc>/reference/qgis_argument_spec.html</loc>
   </url>
   <url>
-    <loc>/reference/qgis_detect_windows.html</loc>
+    <loc>/reference/qgis_as_raster.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qgis_as_terra.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qgis_clean_result.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qgis_configure.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qgis_detect_windows_paths.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qgis_enable_plugins.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qgis_extract_output.html</loc>
   </url>
   <url>
     <loc>/reference/qgis_function.html</loc>
   </url>
   <url>
-    <loc>/reference/qgis_has_algorithm.html</loc>
-  </url>
-  <url>
     <loc>/reference/qgis_list_input.html</loc>
   </url>
   <url>
-    <loc>/reference/qgis_plugins.html</loc>
+    <loc>/reference/qgis_path.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qgis_result_status.html</loc>
   </url>
   <url>
     <loc>/reference/qgis_run.html</loc>
@@ -64,7 +76,7 @@
     <loc>/reference/qgis_run_algorithm.html</loc>
   </url>
   <url>
-    <loc>/reference/qgis_sanitize_arguments.html</loc>
+    <loc>/reference/qgis_run_algorithm_p.html</loc>
   </url>
   <url>
     <loc>/reference/qgis_show_help.html</loc>
@@ -73,9 +85,21 @@
     <loc>/reference/qgis_tmp_file.html</loc>
   </url>
   <url>
+    <loc>/reference/qgis_unconfigure.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qgis_using_json_input.html</loc>
+  </url>
+  <url>
     <loc>/reference/qgisprocess-deprecated.html</loc>
   </url>
   <url>
     <loc>/reference/qgisprocess-package.html</loc>
+  </url>
+  <url>
+    <loc>/reference/st_as_sf.html</loc>
+  </url>
+  <url>
+    <loc>/reference/st_as_stars.html</loc>
   </url>
 </urlset>
