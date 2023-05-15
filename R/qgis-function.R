@@ -3,6 +3,11 @@
 #' As opposed to [qgis_run_algorithm()], [qgis_function()] creates a callable
 #' function based on the argument metadata provided by [qgis_get_argument_specs()].
 #'
+#' The logic of `qgis_function()` has been implemented in R package
+#' [qgis](https://github.com/JanCaha/r_package_qgis).
+#' This package also provides the QGIS documentation of each processing
+#' algorithm as corresponding R function documentation.
+#'
 #' @inheritParams qgis_show_help
 #' @param ... Algorithm arguments.
 #'   These values are evaluated once and immediately, so you shouldn't

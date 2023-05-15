@@ -18,6 +18,12 @@ call \code{\link[=qgis_tmp_file]{qgis_tmp_file()}} here.}
 As opposed to \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, \code{\link[=qgis_function]{qgis_function()}} creates a callable
 function based on the argument metadata provided by \code{\link[=qgis_get_argument_specs]{qgis_get_argument_specs()}}.
 }
+\details{
+The logic of \code{qgis_function()} has been implemented in R package
+\href{https://github.com/JanCaha/r_package_qgis}{qgis}.
+This package also provides the QGIS documentation of each processing
+algorithm as corresponding R function documentation.
+}
 \examples{
 if (has_qgis()) {
   qgis_buffer <- qgis_function("native:buffer")
