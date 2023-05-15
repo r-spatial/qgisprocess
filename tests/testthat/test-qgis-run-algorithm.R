@@ -1,6 +1,6 @@
 input <-
   if (has_qgis()) {
-    if (qgis_use_json_input()) " (using JSON input)" else " (NOT using JSON input)"
+    if (qgis_using_json_input()) " (using JSON input)" else " (NOT using JSON input)"
   } else ""
 
 test_that(glue("qgis_run_algorithm() works{input}"), {
@@ -73,7 +73,7 @@ test_that(glue("qgis_run_algorithm accepts multiple input arguments{input}"), {
 test_that(glue("qgis_run_algorithm runs with qgis:relief, for which the acceptable value of COLORS is NULL{input}"), {
   skip_if_not(has_qgis())
 
-  relief_args <- qgis_arguments("qgis:relief")
+  relief_args <- qgis_get_argument_specs("qgis:relief")
   expect_identical(relief_args["COLORS", ]$acceptable_values, list(NULL))
 
   capture.output({

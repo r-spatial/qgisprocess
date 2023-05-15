@@ -15,7 +15,7 @@ test_that("qgis_function() works", {
   expect_identical(parent.env(environment(qgis_buffer)), baseenv())
   expect_true(rlang::is_call(body(qgis_buffer), "qgis_run_algorithm", ns = "qgisprocess"))
 
-  buffer_args <- qgis_arguments("native:buffer")
+  buffer_args <- qgis_get_argument_specs("native:buffer")
   expect_identical(
     names(formals(qgis_buffer)),
     c(
@@ -37,11 +37,11 @@ test_that("qgis_function() works", {
   expect_s3_class(result, "qgis_result")
 })
 
-test_that("qgis_pipe() works", {
+test_that("qgis_run_algorithm_p() works", {
   skip_if_not(has_qgis())
 
   result <- system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") |>
-    qgis_pipe(
+    qgis_run_algorithm_p(
       "native:buffer",
       DISTANCE = 100,
       DISSOLVE = TRUE,
@@ -55,8 +55,8 @@ test_that("qgis_pipe() works", {
   expect_true(file.exists(result$.args$OUTPUT))
 
   result2 <- result |>
-    qgis_pipe("native:subdivide", MAX_NODES = 10, .clean = FALSE) |>
-    qgis_pipe("native:dissolve", .clean = FALSE)
+    qgis_run_algorithm_p("native:subdivide", MAX_NODES = 10, .clean = FALSE) |>
+    qgis_run_algorithm_p("native:dissolve", .clean = FALSE)
 
   expect_true(file.exists(result$.args$OUTPUT))
 
@@ -66,13 +66,13 @@ test_that("qgis_pipe() works", {
 
   result3 <- result |>
     qgis_extract_output_by_name("OUTPUT") |>
-    qgis_pipe("native:subdivide", MAX_NODES = 10)
+    qgis_run_algorithm_p("native:subdivide", MAX_NODES = 10)
   expect_s3_class(result3, "qgis_result")
   expect_named(result3, c("OUTPUT", ".algorithm", ".args", ".raw_json_input", ".processx_result"))
 
   expect_error(
     result |>
-      qgis_pipe(
+      qgis_run_algorithm_p(
         "native:subdivide",
         MAX_NODES = 10,
         .clean = FALSE,
@@ -82,12 +82,12 @@ test_that("qgis_pipe() works", {
   )
 
   result4 <- result |>
-    qgis_pipe("native:subdivide", MAX_NODES = 10)
+    qgis_run_algorithm_p("native:subdivide", MAX_NODES = 10)
   expect_false(file.exists(result$.args$OUTPUT))
 
   fake_result <- structure(result[".processx_result"], class = "qgis_result")
   expect_error(
-    fake_result |> qgis_pipe("native:subdivide", MAX_NODES = 10),
+    fake_result |> qgis_run_algorithm_p("native:subdivide", MAX_NODES = 10),
     "The qgis_result object misses"
   )
 })

@@ -2,32 +2,34 @@
 % Please edit documentation in R/qgis-help.R
 \name{qgis_show_help}
 \alias{qgis_show_help}
-\alias{qgis_description}
-\alias{qgis_arguments}
-\alias{qgis_outputs}
-\alias{qgis_help}
-\title{Show algorithm help}
+\alias{qgis_get_description}
+\alias{qgis_get_argument_specs}
+\alias{qgis_get_output_specs}
+\title{Get detailed information about one algorithm}
 \usage{
 qgis_show_help(algorithm)
 
-qgis_description(algorithm)
+qgis_get_description(algorithm)
 
-qgis_arguments(algorithm)
+qgis_get_argument_specs(algorithm)
 
-qgis_outputs(algorithm)
-
-qgis_help(algorithm)
+qgis_get_output_specs(algorithm)
 }
 \arguments{
-\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
-a path to a QGIS model file.}
+\item{algorithm}{A qualified algorithm name
+(e.g., \code{"native:buffer"}).}
 }
 \description{
-Show algorithm help
+Get detailed information about one algorithm
 }
 \examples{
 if (has_qgis()) qgis_show_help("native:filedownloader")
-if (has_qgis()) qgis_description("native:filedownloader")
-if (has_qgis()) qgis_arguments("native:filedownloader")
+if (has_qgis()) qgis_get_description("native:filedownloader")
+if (has_qgis()) qgis_get_argument_specs("native:filedownloader")
 
 }
+\seealso{
+Other topics about information on algorithms & processing providers: 
+\code{\link{qgis_algorithms}()}
+}
+\concept{topics about information on algorithms & processing providers}

@@ -1,24 +1,15 @@
-#' Create functions from QGIS algorithms
+#' Create a wrapper function that runs one algorithm
 #'
 #' As opposed to [qgis_run_algorithm()], [qgis_function()] creates a callable
-#' function based on the argument metadata provided by [qgis_arguments()].
-#' Unlike [qgis_run_algorithm()], [qgis_function()] sets the default value
-#' of `.quiet` to `TRUE` to make the function more usable within other
-#' R code. Similarly, [qgis_pipe()] wraps [qgis_run_algorithm()], passing
-#' its first argument to the first input to `algorithm`.
+#' function based on the argument metadata provided by [qgis_get_argument_specs()].
 #'
-#' @inheritParams qgis_run_algorithm
-#' @param .data Passed to the first input of `algorithm`.
-#' If `.data` is a `qgis_result` (the result of a previous processing
-#' step), `.data[[.select]]` is passed instead.
-#' @param .select String.
-#' The name of the element to select from `.data` if the latter is a
-#' `qgis_result`.
-#' Defaults to `"OUTPUT"`.
-#' @param .clean Logical.
-#' Should an incoming `qgis_result` be cleaned (using [qgis_result_clean()])
-#' after processing?
-#' @param ... Default values to set when using [qgis_function()].
+#' The logic of `qgis_function()` has been implemented in R package
+#' [qgis](https://github.com/JanCaha/r_package_qgis).
+#' This package also provides the QGIS documentation of each processing
+#' algorithm as corresponding R function documentation.
+#'
+#' @inheritParams qgis_show_help
+#' @param ... Algorithm arguments.
 #'   These values are evaluated once and immediately, so you shouldn't
 #'   call [qgis_tmp_file()] here.
 #'
@@ -36,22 +27,11 @@
 #'   )
 #' }
 #'
-#' if (has_qgis()) {
-#'   qgis_pipe(
-#'     system.file(
-#'       "longlake/longlake_depth.gpkg",
-#'       package = "qgisprocess"
-#'     ),
-#'     "native:buffer",
-#'     DISTANCE = 10
-#'   )
-#' }
-#'
 qgis_function <- function(algorithm, ...) {
   assert_qgis()
   assert_qgis_algorithm(algorithm)
 
-  args <- qgis_arguments(algorithm)
+  args <- qgis_get_argument_specs(algorithm)
   arg_names <- c(args$name, "PROJECT_PATH", "ELLIPSOID", ".quiet")
 
   # The dots are the default values and are not exposed as
@@ -115,21 +95,63 @@ qgis_function <- function(algorithm, ...) {
   fun
 }
 
-#' @rdname qgis_function
+
+
+
+
+#' Run an algorithm using 'qgis_process': pipe-friendly wrapper
+#'
+#' [qgis_run_algorithm_p()] wraps [qgis_run_algorithm()], passing
+#' its first argument to the first argument of the QGIS `algorithm`.
+#' This makes it more convenient in a pipeline (hence '_p' in the name).
+#'
+#' Uses [qgis_function()] under the hood.
+#'
+#' @family functions to run one geoprocessing algorithm
+#'
+#' @inheritParams qgis_show_help
+#' @inheritParams qgis_run_algorithm
+#' @param .data Passed to the first input of `algorithm`.
+#' If `.data` is a `qgis_result` (the result of a previous processing
+#' step), `.data[[.select]]` is passed instead.
+#' @param .select String.
+#' The name of the element to select from `.data` if the latter is a
+#' `qgis_result`.
+#' Defaults to `"OUTPUT"`.
+#' @param .clean Logical.
+#' Should an incoming `qgis_result` be cleaned (using [qgis_clean_result()])
+#' after processing?
+#' @param ... Other algorithm arguments.
+#'   These values are evaluated once and immediately, so you shouldn't
+#'   call [qgis_tmp_file()] here.
+#'
 #' @export
-qgis_pipe <- function(
+#'
+#' @examples
+#' if (has_qgis()) {
+#'   system.file(
+#'         "longlake/longlake_depth.gpkg",
+#'         package = "qgisprocess"
+#'       ) |>
+#'     qgis_run_algorithm_p(
+#'       "native:buffer",
+#'       DISTANCE = 10
+#'     )
+#' }
+#'
+qgis_run_algorithm_p <- function(
     .data,
     algorithm,
     ...,
     .select = "OUTPUT",
     .clean = TRUE,
     .quiet = TRUE) {
-  UseMethod("qgis_pipe")
+  UseMethod("qgis_run_algorithm_p")
 }
 
 #' @keywords internal
 #' @export
-qgis_pipe.qgis_result <- function(
+qgis_run_algorithm_p.qgis_result <- function(
     .data,
     algorithm,
     ...,
@@ -151,13 +173,13 @@ qgis_pipe.qgis_result <- function(
   output <- unclass(.data[[.select]])
   fun <- qgis_function(algorithm)
   result <- fun(output, ..., .quiet = .quiet)
-  if (.clean) qgis_result_clean(.data)
+  if (.clean) qgis_clean_result(.data)
   result
 }
 
 #' @keywords internal
 #' @export
-qgis_pipe.default <- function(
+qgis_run_algorithm_p.default <- function(
     .data,
     algorithm,
     ...,
