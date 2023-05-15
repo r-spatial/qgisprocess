@@ -237,7 +237,7 @@ The `GRIDS` argument is of type multilayer.
 To pass multiple layers to one argument, you can either repeat the corresponding argument as often as needed ... 
 
 ```{r multilayer-repeat}
-rp_tp = qgis_run_algorithm(
+rp_tp <- qgis_run_algorithm(
   "sagang:addrastervaluestopoints",
   SHAPES = random_points,
   GRIDS = info$aspect[[1]],
@@ -250,7 +250,7 @@ rp_tp = qgis_run_algorithm(
 One could use the `list()` command but it is recommendended to use the `qgis_list_input()` function which is more robust, and therefore will also support non-JSON-input configurations (e.g. QGIS < 3.24).
 
 ```{r multilayer-list, eval=FALSE}
-rp_tp = qgis_run_algorithm(
+rp_tp <- qgis_run_algorithm(
   "sagang:addrastervaluestopoints",
   SHAPES = random_points,
   GRIDS = qgis_list_input(info$aspect[[1]], info$slope[[1]], info$tcurvature[[1]]),
@@ -297,13 +297,14 @@ This avoids ambiguity and allows for greater flexibility though it might not be 
 For example, intermediate results remain on disk for the duration of your R session.
 
 ```{r native pipe}
-out = qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem, 
+res <- qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem, 
                          METHOD = 1) |>
   _$DEM_PREPROC[1] |>
   qgis_run_algorithm(algorithm = "sagang:sagawetnessindex",
                      DEM = _)
+
 # or using an anonymous function
-# out = qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem, 
+# res <- qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem, 
 #                          METHOD = 1) |>
 #   (\(x) qgis_run_algorithm(algorithm = "sagang:sagawetnessindex",
 #                            DEM = x$DEM_PREPROC[1])) ()
