@@ -1,5 +1,5 @@
 ---
-title: "Basic usage of qgisprocess"
+title: "Getting started with qgisprocess"
 author: "Jannes Muenchow & Floris Vanderhaeghe"
 date: "Last updated: yyyy-mm-dd"
 output:
