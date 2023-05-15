@@ -1,3 +1,7 @@
+For a very short introduction to **qgisprocess**, visit the GitHub landing page at <https://github.com/r-spatial/qgisprocess>.
+
+Here you will learn about package configuration, about basic usage guided by two examples, and how to pipe results into a next geoprocessing step.
+
 # Setting up the system
 
 **qgisprocess** is basically a wrapper around the standalone command line tool [`qgis_process`](https://docs.qgis.org/latest/en/docs/user_manual/processing/standalone.html).
