@@ -121,7 +121,7 @@ As a convenience to the user, `qgis_run_algorithm()` reports all unspecified and
 If you want to have even more information on what is going on in the background, set `.quiet` to `FALSE`.
 The `result` object is of class `qgis_result` and contains the path to the output file created by `qgis_process` (when not explicitly setting an output object, **qgisprocess** creates it automatically for you).
 The output filepath be extracted with `qgis_output()`.
-It also contains debugging information about used algorithm, input arguments and messages from the processing step; see `?qgis_result_status` to extract this easily.
+The `result` object also contains debugging information about used algorithm, input arguments and messages from the processing step; see `?qgis_result_status` to extract this easily.
 
 For QGIS 3.24 and later, `qgis_run_algorithm()` passes the input arguments to QGIS as a JSON string.
 The JSON input string is also included in the `result` object.
