@@ -1,6 +1,6 @@
 # Setting up the system
 
-**qgisprocess** is basically a wrapper around the standalone command line tool [`qgis_process`](https://github.com/qgis/QGIS-Documentation/issues/5803).
+**qgisprocess** is basically a wrapper around the standalone command line tool [`qgis_process`](https://docs.qgis.org/latest/en/docs/user_manual/processing/standalone.html).
 Therefore, you need to have installed QGIS on your system as well as third-party providers such as GRASS and SAGA to access and run all geoalgorithms provided through `qgis_process` from within R.
 
 To facilitate using **qgisprocess**, we have created a docker image that already comes with the needed software packages.
