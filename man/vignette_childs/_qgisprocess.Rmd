@@ -287,7 +287,7 @@ Using the default raster output format `.tif` might lead to trouble depending on
 
 ```{r qgis-pipe}
 dem <- system.file("raster/dem.tif", package = "spDataLarge")
-# in case you need to enable the SAGA next generation algorithms, run the following lines:
+# in case you need to enable the SAGA next generation algorithms, run the following line:
 # qgis_enable_plugins("processing_saga_nextgen")
 
 options(qgisprocess.tmp_raster_ext = ".sdat")
