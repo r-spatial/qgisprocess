@@ -70,7 +70,7 @@ qgis_plugins()
 
 Since we will use GRASS and SAGA later on, let's enable them (of course, this implies that you have already installed GRASS and SAGA version > 7 on your system):
 
-```{r enable-plugins}
+```{r enable-plugins, message=FALSE}
 qgis_enable_plugins(c("grassprovider", "processing_saga_nextgen"))
 ```
 
