@@ -20,12 +20,13 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+can_build <- qgisprocess::has_qgis() && qgisprocess::qgis_has_plugin("processing_saga_nextgen")
 ```
 
-```{r child=if (qgisprocess::has_qgis()) file.path(rprojroot::find_root(rprojroot::is_r_package), "man/vignette_childs/_qgisprocess.Rmd")}
+```{r child=if (can_build) file.path(rprojroot::find_root(rprojroot::is_r_package), "man/vignette_childs/_qgisprocess.Rmd")}
 ```
 
-```{r eval=!qgisprocess::has_qgis(), echo=FALSE, results="asis"}
-cat("This vignette has been built in absence of a QGIS installation.\n\n")
+```{r eval=!can_build, echo=FALSE, results="asis"}
+cat("This vignette has been built in absence of a QGIS installation or with a missing QGIS plugin.\n\n")
 cat("Read it online at <https://r-spatial.github.io/qgisprocess/articles/qgisprocess.html>.")
 ```
