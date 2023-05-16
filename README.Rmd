@@ -69,7 +69,7 @@ In addition, it makes the QGIS algorithm documentation available in the correspo
 
 The following example demonstrates the [buffer](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer) algorithm in action. The passing of [sf](https://r-spatial.github.io/sf), [stars](https://r-spatial.github.io/stars), [terra](https://rspatial.github.io/terra) and [raster](https://cran.r-project.org/package=raster) objects is supported.
 
-```{r buffer}
+```{r buffer, out.width='60%'}
 input <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
 
 result <- qgis_run_algorithm(
