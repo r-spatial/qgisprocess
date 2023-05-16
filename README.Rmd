@@ -52,6 +52,8 @@ library(qgisprocess)
 
 ## Functionality
 
+Most functions start with the `qgis_` prefix, so that functions can be found more easily using tab completion.
+
 The main function is `qgis_run_algorithm(algorithm = , ...)`.
 It specifies the geoprocessing algorithm to be called with a `"provider:algorithm"` formatted identifier, e.g. `"native:convexhull"` or `"gdal:hillshade"`, and it passes the algorithm arguments as R function arguments.
 
