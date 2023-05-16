@@ -37,8 +37,8 @@ qgis_as_brick(output, ...)
 Convert a qgis_result object or one of its elements to a raster object
 }
 \note{
-Just use \code{qgis_as_raster()} in R scripts, it will use the correct
-method.
+Just use \code{qgis_as_raster()} and \code{qgis_as_brick()} in R scripts;
+it will use the correct method.
 }
 \seealso{
 Other topics about coercing processing output: 
