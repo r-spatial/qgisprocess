@@ -29,6 +29,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      SAGANGV: 0.0.7
 
     steps:
       - uses: actions/checkout@v3
@@ -41,6 +42,10 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
+      - name: In Linux, dynamically set QGIS_PLUGINPATH environment var (available to next steps)
+        if: runner.os == 'Linux'
+        run: echo "QGIS_PLUGINPATH=$(pwd)" >> $GITHUB_ENV
+
       - name: Install QGIS (Ubuntu Nightly QGIS repo + possibly older GRASS from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu-nightly'
         run: |
@@ -49,6 +54,8 @@ jobs:
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu-nightly `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
+          wget -qO sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
+          unzip -q sagang_plugin.zip
 
       - name: Install QGIS (Ubuntugis QGIS repo + ubuntugis-unstable PPA, which has the current GRASS release)
         if: matrix.config.qgis == 'ubuntugis'
@@ -62,6 +69,8 @@ jobs:
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntugis `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
+          wget -qO sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
+          unzip -q sagang_plugin.zip
 
       - name: Install QGIS (Ubuntu QGIS repo + possibly older GRASS from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu'
@@ -71,6 +80,8 @@ jobs:
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
+          wget -qO sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
+          unzip -q sagang_plugin.zip
 
       - name: Install QGIS (MacOS homebrew)
         if: matrix.config.qgis == 'macos-brew'
