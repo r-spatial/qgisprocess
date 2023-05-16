@@ -58,7 +58,9 @@ The main function is `qgis_run_algorithm(algorithm = , ...)`.
 It specifies the geoprocessing algorithm to be called with a `"provider:algorithm"` formatted identifier, e.g. `"native:convexhull"` or `"gdal:hillshade"`, and it passes the algorithm arguments as R function arguments.
 
 Additional functions are available to discover geoprocessing algorithms, retrieve their documentation, handle processing results, manage QGIS plugins, and more.
+
 A structured overview of functions is available at <https://r-spatial.github.io/qgisprocess/reference/index.html>.
+To get started, read the 'getting started' vignette and use the [cheat sheets](https://r-spatial.github.io/qgisprocess/articles/)!
 
 Note that R package [**qgis**](https://github.com/JanCaha/r_package_qgis) extends on **qgisprocess** by providing a separate R function for each geoprocessing algorithm.
 In addition, it makes the QGIS algorithm documentation available in the corresponding R function documentation.
