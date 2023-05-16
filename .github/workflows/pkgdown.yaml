@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      SAGANGV: 0.0.7
     steps:
       - uses: actions/checkout@v3
 
@@ -23,12 +24,17 @@ jobs:
         with:
           use-public-rspm: true
 
+      - name: Dynamically set QGIS_PLUGINPATH environment var (available to next steps)
+        run: echo "QGIS_PLUGINPATH=$(pwd)" >> $GITHUB_ENV
+
       - name: Install QGIS (Ubuntu)
         run: |
           sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
+          wget -qO sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
+          unzip -q sagang_plugin.zip
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
