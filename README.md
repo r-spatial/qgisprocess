@@ -64,6 +64,9 @@ library(qgisprocess)
 
 ## Functionality
 
+Most functions start with the `qgis_` prefix, so that functions can be
+found more easily using tab completion.
+
 The main function is `qgis_run_algorithm(algorithm = , ...)`. It
 specifies the geoprocessing algorithm to be called with a
 `"provider:algorithm"` formatted identifier, e.g. `"native:convexhull"`
@@ -72,8 +75,12 @@ function arguments.
 
 Additional functions are available to discover geoprocessing algorithms,
 retrieve their documentation, handle processing results, manage QGIS
-plugins, and more. A structured overview of functions is available at
-<https://r-spatial.github.io/qgisprocess/reference/index.html>.
+plugins, and more.
+
+A structured overview of functions is available at
+<https://r-spatial.github.io/qgisprocess/reference/index.html>. To get
+started, read the ‘getting started’ vignette and use the [cheat
+sheets](https://r-spatial.github.io/qgisprocess/articles/)!
 
 Note that R package
 [**qgis**](https://github.com/JanCaha/r_package_qgis) extends on
@@ -110,13 +117,13 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpR7FZ2N/file569824c45a13/file569855b1b3da.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmprcUsAK/file28d1b8fbc46/file28d12728769b.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
 ```
 
-<img src="man/figures/README-buffer-1.png" width="100%" />
+<img src="man/figures/README-buffer-1.png" width="60%" />
 
 You can read the help associated with an algorithm using
 `qgis_show_help()`.
