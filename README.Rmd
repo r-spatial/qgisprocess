@@ -45,7 +45,7 @@ The package is meant to support _current_ QGIS releases, i.e. both the latest an
 Although older QGIS releases are not officially supported, it may work since QGIS 3.16.
 Download instructions for all platforms are available at <https://download.qgis.org/>.
 
-If a recent version of QGIS isn't available for your OS, you can use one of the [Geocomputation with R Docker images](https://github.com/geocompr/docker) with QGIS installed.
+If a recent version of QGIS isn't available for your OS, you can use the [Geocomputation with R Docker image](https://github.com/geocompx/docker/pkgs/container/docker) with QGIS installed (`docker pull ghcr.io/geocompx/docker:qgis`).
 See the vignette on 'getting started' for more information.
 
 ### Package configuration
