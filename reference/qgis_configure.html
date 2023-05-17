@@ -24,7 +24,10 @@ the 'qgis_process' command line tool."><!-- mathjax --><script src="https://cdnj
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="nav-item">
+  <a class="nav-link" href="../articles/qgisprocess.html">Get started</a>
+</li>
+<li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
@@ -154,12 +157,13 @@ OSGeo4W(64)/bin.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3d       QGIS (3D)                       1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> native   QGIS (native c++)             242</span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="has_qgis.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="qgis_algorithms.html">qgis_plugins</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   name          enabled</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> grassprovider FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> otbprovider   FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> processing    TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   name                    enabled</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> grassprovider           FALSE  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> otbprovider             FALSE  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> processing              TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> processing_saga_nextgen FALSE  </span>
 <span class="r-in"><span><span class="fu">qgis_configure</span><span class="op">(</span>use_cached_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking configuration in cache file (~/.cache/R-qgisprocess/cache-0.0.0.9000.rds)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking cached QGIS version with version reported by 'qgis_process' ...</span>
@@ -167,8 +171,9 @@ OSGeo4W(64)/bin.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking cached QGIS plugins (and state) with those reported by 'qgis_process' ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> QGIS plugins match! (1 processing provider plugin(s) enabled)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> &gt;&gt;&gt; Run `qgis_enable_plugins()` to enable 2 disabled plugin(s) and</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     access their algorithms: grassprovider, otbprovider</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> &gt;&gt;&gt; Run `qgis_enable_plugins()` to enable 3 disabled plugin(s) and</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     access their algorithms: grassprovider, otbprovider,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     processing_saga_nextgen</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Restoring configuration from '~/.cache/R-qgisprocess/cache-0.0.0.9000.rds'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> QGIS version: 3.30.2-'s-Hertogenbosch</span>
@@ -177,7 +182,7 @@ OSGeo4W(64)/bin.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     see `?qgis_configure` if you need to preset the path of 'qgis_process'.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using JSON for output serialization.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using JSON for input serialization.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 out of 3 available processing provider plugins are enabled.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 out of 4 available processing provider plugins are enabled.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Having access to 349 algorithms from 4 QGIS processing providers.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Use qgis_algorithms(), qgis_providers(), qgis_plugins(), qgis_using_json_output(),</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> qgis_path() and qgis_version() to inspect the cache environment.</span>
@@ -193,11 +198,12 @@ OSGeo4W(64)/bin.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> QGIS version is now set to: 3.30.2-'s-Hertogenbosch</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using JSON for output serialization.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using JSON for input serialization.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 out of 3 available processing provider plugins are enabled.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 out of 4 available processing provider plugins are enabled.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> You now have access to 349 algorithms from 4 QGIS processing providers.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> &gt;&gt;&gt; Run `qgis_enable_plugins()` to enable 2 disabled plugin(s) and</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     access their algorithms: grassprovider, otbprovider</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> &gt;&gt;&gt; Run `qgis_enable_plugins()` to enable 3 disabled plugin(s) and</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     access their algorithms: grassprovider, otbprovider,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     processing_saga_nextgen</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Saving configuration to '~/.cache/R-qgisprocess/cache-0.0.0.9000.rds'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Use qgis_algorithms(), qgis_providers(), qgis_plugins(), qgis_using_json_output(),</span>
@@ -210,7 +216,7 @@ OSGeo4W(64)/bin.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Dewey Dunnington, Floris Vanderhaeghe, Jan Caha.</p>
+  <p></p><p>Developed by Dewey Dunnington, Floris Vanderhaeghe, Jan Caha, Jannes Muenchow.</p>
 </div>
 
 <div class="pkgdown-footer-right">
