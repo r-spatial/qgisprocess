@@ -17,6 +17,11 @@ Authors@R: c(
              role = c("aut"),
              email = "jan.caha@outlook.com",
              comment = c(ORCID = "0000-0003-0165-0606")),
+      person(given = "Jannes",
+             family = "Muenchow",
+             role = c("aut"),
+             email = "malnamalja@gmx.de",
+             comment = c(ORCID = "0000-0001-7834-4717")),
       person(given = "Antony",
              family = "Barja",
              role = c("ctb"),
@@ -66,10 +71,14 @@ Suggests:
     raster,
     stars,
     terra,
+    mapview,
     knitr,
     rmarkdown,
+    rprojroot,
     stringi,
-    rprojroot
+    spDataLarge
+Remotes:
+    Nowosad/spDataLarge
 SystemRequirements: QGIS latest or long-term release (>= 3.28). Older QGIS 
   releases are not officially supported, but may work since QGIS 3.16.
 VignetteBuilder: knitr

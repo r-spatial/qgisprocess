@@ -27,6 +27,7 @@ Authors:
 \itemize{
   \item Dewey Dunnington \email{dewey@fishandwhistle.net} (\href{https://orcid.org/0000-0002-9415-4582}{ORCID})
   \item Jan Caha \email{jan.caha@outlook.com} (\href{https://orcid.org/0000-0003-0165-0606}{ORCID})
+  \item Jannes Muenchow \email{malnamalja@gmx.de} (\href{https://orcid.org/0000-0001-7834-4717}{ORCID})
 }
 
 Other contributors:

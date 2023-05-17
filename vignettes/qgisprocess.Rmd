@@ -1,0 +1,34 @@
+---
+title: "Getting started with qgisprocess"
+author: "Jannes Muenchow & Floris Vanderhaeghe"
+date: "Last updated: 2023-05-15"
+output:
+  html_document: 
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{Basic usage of qgisprocess}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+can_build <- qgisprocess::has_qgis() &&
+  all(qgisprocess::qgis_has_plugin(c("grassprovider", 
+                                     "processing_saga_nextgen")))
+```
+
+```{r child=if (can_build) file.path(rprojroot::find_root(rprojroot::is_r_package), "man/vignette_childs/_qgisprocess.Rmd")}
+```
+
+```{r eval=!can_build, echo=FALSE, results="asis"}
+cat("This vignette has been built in absence of a QGIS installation or with a missing QGIS plugin.\n\n")
+cat("Read it online at <https://r-spatial.github.io/qgisprocess/articles/qgisprocess.html>.")
+```
