@@ -61,6 +61,8 @@ It specifies the geoprocessing algorithm to be called with a `"provider:algorith
 
 Additional functions are available to discover geoprocessing algorithms, retrieve their documentation, handle processing results, manage QGIS plugins, and more.
 
+The passing of [sf](https://r-spatial.github.io/sf), [stars](https://r-spatial.github.io/stars), [terra](https://rspatial.github.io/terra) and [raster](https://cran.r-project.org/package=raster) objects is supported.
+
 A structured overview of functions is available at <https://r-spatial.github.io/qgisprocess/reference/index.html>.
 To get started, read the 'getting started' vignette and use the [cheat sheets](https://r-spatial.github.io/qgisprocess/articles/)!
 
@@ -69,7 +71,7 @@ In addition, it makes the QGIS algorithm documentation available in the correspo
 
 ## Example
 
-The following example demonstrates the [buffer](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer) algorithm in action. The passing of [sf](https://r-spatial.github.io/sf), [stars](https://r-spatial.github.io/stars), [terra](https://rspatial.github.io/terra) and [raster](https://cran.r-project.org/package=raster) objects is supported.
+The following example demonstrates the [buffer](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer) algorithm in action.
 
 ```{r buffer, out.width='60%'}
 input <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
