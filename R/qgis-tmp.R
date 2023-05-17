@@ -4,13 +4,14 @@
 #' in calls to [qgis_run_algorithm()] or elsewhere. These
 #' files are created in a special temporary directory
 #' ([qgis_tmp_base()]) that should be periodically cleaned up
-#' using [qgis_tmp_clean()]. You can set your preferred
+#' using [qgis_clean_tmp()]. You can set your preferred
 #' vector and/or raster file extension using
 #' `options(qgisprocess.tmp_vector_ext = "...")` and/or
 #' `options(qgisprocess.tmp_raster_ext = "...")`, respectively.
 #'
+#' @family topics about programming or debugging utilities
+#'
 #' @param ext The file extension to be used.
-#' @param x A character vector of file names.
 #'
 #' @return A character vector indicating the location of a
 #'   (not yet created) temporary file.
@@ -26,8 +27,8 @@ qgis_tmp_file <- function(ext) {
   tempfile(tmpdir = qgis_tmp_base(), fileext = ext)
 }
 
-#' @rdname qgis_tmp_file
-#' @export
+# @param x A character vector of file names.
+#' @keywords internal
 is_qgis_tmp_file <- function(x) {
   startsWith(x, qgis_tmp_base()) & (x != qgis_tmp_base())
 }
@@ -58,7 +59,7 @@ qgis_tmp_base <- function() {
 
 #' @rdname qgis_tmp_file
 #' @export
-qgis_tmp_clean <- function() {
+qgis_clean_tmp <- function() {
   unlink(qgis_tmp_dir_location, recursive = TRUE)
   dir.create(qgis_tmp_dir_location)
 }

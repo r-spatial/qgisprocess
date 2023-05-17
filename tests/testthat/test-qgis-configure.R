@@ -130,7 +130,7 @@ test_that("qgis_configure() works OK if cache conditions unmet", {
         version = qgis_version(),
         algorithms = qgis_algorithms(),
         plugins = qgis_plugins(),
-        use_json_output = qgis_use_json_output()
+        use_json_output = qgis_using_json_output()
       ),
       cache_data_file
     )
@@ -159,7 +159,7 @@ test_that("qgis_configure() works OK if cache conditions unmet", {
       version = qgis_version(),
       algorithms = "0",
       plugins = qgis_plugins(),
-      use_json_output = qgis_use_json_output()
+      use_json_output = qgis_using_json_output()
     ),
     cache_data_file
   )
@@ -174,7 +174,7 @@ test_that("qgis_configure() works OK if cache conditions unmet", {
       version = qgis_version(),
       algorithms = qgis_algorithms(),
       plugins = qgis_plugins(),
-      use_json_output = qgis_use_json_output()
+      use_json_output = qgis_using_json_output()
     ),
     cache_data_file
   )
@@ -190,7 +190,7 @@ test_that("qgis_configure() works OK if cache conditions unmet", {
       version = "3.9999.9-Brussels",
       algorithms = qgis_algorithms(),
       plugins = qgis_plugins(),
-      use_json_output = qgis_use_json_output()
+      use_json_output = qgis_using_json_output()
     ),
     cache_data_file
   )
@@ -206,7 +206,7 @@ test_that("qgis_configure() works OK if cache conditions unmet", {
       version = qgis_version(),
       algorithms = qgis_algorithms(),
       plugins = data.frame(name = "XXX", enabled = FALSE),
-      use_json_output = qgis_use_json_output()
+      use_json_output = qgis_using_json_output()
     ),
     cache_data_file
   )

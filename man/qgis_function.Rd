@@ -2,51 +2,27 @@
 % Please edit documentation in R/qgis-function.R
 \name{qgis_function}
 \alias{qgis_function}
-\alias{qgis_pipe}
-\title{Create functions from QGIS algorithms}
+\title{Create a wrapper function that runs one algorithm}
 \usage{
 qgis_function(algorithm, ...)
-
-qgis_pipe(
-  .data,
-  algorithm,
-  ...,
-  .select = "OUTPUT",
-  .clean = TRUE,
-  .quiet = TRUE
-)
 }
 \arguments{
-\item{algorithm}{A qualified algorithm name (e.g., "native:filedownloader") or
-a path to a QGIS model file.}
+\item{algorithm}{A qualified algorithm name
+(e.g., \code{"native:buffer"}).}
 
-\item{...}{Default values to set when using \code{\link[=qgis_function]{qgis_function()}}.
+\item{...}{Algorithm arguments.
 These values are evaluated once and immediately, so you shouldn't
 call \code{\link[=qgis_tmp_file]{qgis_tmp_file()}} here.}
-
-\item{.data}{Passed to the first input of \code{algorithm}.
-If \code{.data} is a \code{qgis_result} (the result of a previous processing
-step), \code{.data[[.select]]} is passed instead.}
-
-\item{.select}{String.
-The name of the element to select from \code{.data} if the latter is a
-\code{qgis_result}.
-Defaults to \code{"OUTPUT"}.}
-
-\item{.clean}{Logical.
-Should an incoming \code{qgis_result} be cleaned (using \code{\link[=qgis_result_clean]{qgis_result_clean()}})
-after processing?}
-
-\item{.quiet}{Use \code{FALSE} to get extra output from processing algorithms.
-This can be useful in debugging.}
 }
 \description{
 As opposed to \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, \code{\link[=qgis_function]{qgis_function()}} creates a callable
-function based on the argument metadata provided by \code{\link[=qgis_arguments]{qgis_arguments()}}.
-Unlike \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, \code{\link[=qgis_function]{qgis_function()}} sets the default value
-of \code{.quiet} to \code{TRUE} to make the function more usable within other
-R code. Similarly, \code{\link[=qgis_pipe]{qgis_pipe()}} wraps \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, passing
-its first argument to the first input to \code{algorithm}.
+function based on the argument metadata provided by \code{\link[=qgis_get_argument_specs]{qgis_get_argument_specs()}}.
+}
+\details{
+The logic of \code{qgis_function()} has been implemented in R package
+\href{https://github.com/JanCaha/r_package_qgis}{qgis}.
+This package also provides the QGIS documentation of each processing
+algorithm as corresponding R function documentation.
 }
 \examples{
 if (has_qgis()) {
@@ -56,17 +32,6 @@ if (has_qgis()) {
       "longlake/longlake_depth.gpkg",
       package = "qgisprocess"
     ),
-    DISTANCE = 10
-  )
-}
-
-if (has_qgis()) {
-  qgis_pipe(
-    system.file(
-      "longlake/longlake_depth.gpkg",
-      package = "qgisprocess"
-    ),
-    "native:buffer",
     DISTANCE = 10
   )
 }

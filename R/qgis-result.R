@@ -1,7 +1,17 @@
-#' Access algorithm results
+#' Access processing output
+#'
+#' @description
+#' These functions extract one output element from the result of
+#' [qgis_run_algorithm()], potentially more than one in the case of
+#' `qgis_extract_output_by_class()`.
+#' An output element can be extracted based on its name, its position in the
+#' printed `qgis_result` object returned by [qgis_run_algorithm()], or its
+#' class.
 #'
 #' `qgis_extract_output()` is an alias to `qgis_extract_output_by_name()`.
 #'
+#' @concept main functions to access or manage processing results
+#' @family topics about accessing or managing processing results
 #'
 #' @param x An object returned by [qgis_run_algorithm()].
 #' @param which The index of an output.
@@ -19,35 +29,10 @@
 #' output element if the default `OUTPUT` or `output` element is not available?
 #' Only takes effect if `name` is equal to `OUTPUT` or `output`, but not found.
 #'
-#'
+#' @name qgis_extract_output
+
+#' @rdname qgis_extract_output
 #' @export
-#'
-is_qgis_result <- function(x) {
-  inherits(x, "qgis_result")
-}
-
-
-#' @rdname is_qgis_result
-#' @export
-qgis_result_clean <- function(x) {
-  args_chr <- as.character(x$.args[vapply(x$.args, is.character, logical(1))])
-  unlink(args_chr[is_qgis_tmp_file(args_chr)], recursive = TRUE)
-  invisible(x)
-}
-
-qgis_leave_only_results <- function(x) {
-  assert_that(inherits(x, "qgis_result"))
-  output_names <- setdiff(
-    names(x),
-    c(".algorithm", ".args", ".processx_result", ".raw_json_input")
-  )
-  x[output_names]
-}
-
-
-#' @rdname is_qgis_result
-#' @export
-#'
 qgis_extract_output_by_name <- function(x, name = "OUTPUT", first = TRUE) {
   assert_that(is.string(name))
   x <- qgis_leave_only_results(x)
@@ -66,14 +51,28 @@ qgis_extract_output_by_name <- function(x, name = "OUTPUT", first = TRUE) {
   }
 }
 
-#' @rdname is_qgis_result
+
+
+#' @rdname qgis_extract_output
 #' @export
 qgis_extract_output <- qgis_extract_output_by_name
 
 
-#' @rdname is_qgis_result
+
+#' @keywords internal
+qgis_leave_only_results <- function(x) {
+  assert_that(inherits(x, "qgis_result"))
+  output_names <- setdiff(
+    names(x),
+    c(".algorithm", ".args", ".processx_result", ".raw_json_input")
+  )
+  x[output_names]
+}
+
+
+
+#' @rdname qgis_extract_output
 #' @export
-#'
 qgis_extract_output_by_position <- function(x, which) {
   assert_that(is.number(which))
   x <- qgis_leave_only_results(x)
@@ -85,7 +84,7 @@ qgis_extract_output_by_position <- function(x, which) {
 }
 
 
-#' @rdname is_qgis_result
+#' @rdname qgis_extract_output
 #' @export
 qgis_extract_output_by_class <- function(x, class, single = TRUE) {
   assert_that(is.character(class))
@@ -130,6 +129,65 @@ qgis_error_output_does_not_exist <- function(x, which) {
 }
 
 
+
+#' Clean processing results
+#'
+#' Deletes any temporary files that are defined in a
+#' `qgis_result` object.
+#' These may comprise both input and output files.
+#'
+#' @concept main functions to access or manage processing results
+#' @family topics about accessing or managing processing results
+#'
+#' @inheritParams qgis_extract_output
+#'
+#' @export
+qgis_clean_result <- function(x) {
+  args_chr <- as.character(x$.args[vapply(x$.args, is.character, logical(1))])
+  unlink(args_chr[is_qgis_tmp_file(args_chr)], recursive = TRUE)
+  invisible(x)
+}
+
+
+#' Access processing results: extra tools
+#'
+#' A `qgis_result` object is a list that, next to the output elements,
+#' also contains other elements that can be useful in scripting.
+#' Several of these can be extracted with convenience functions:
+#' the exit status of the process, standard output and standard error of
+#' 'qgis_process', arguments passed to 'qgis_process'.
+#'
+#' @family topics about programming or debugging utilities
+#' @family topics about accessing or managing processing results
+#'
+#' @inheritParams qgis_extract_output
+#'
+#' @name qgis_result_status
+
+#' @rdname qgis_result_status
+#' @export
+qgis_result_status <- function(x) {
+  x$.processx_result$status
+}
+
+#' @rdname qgis_result_status
+#' @export
+qgis_result_stdout <- function(x) {
+  x$.processx_result$stdout
+}
+
+#' @rdname qgis_result_status
+#' @export
+qgis_result_stderr <- function(x) {
+  x$.processx_result$stderr
+}
+
+#' @rdname qgis_result_status
+#' @export
+qgis_result_args <- function(x) {
+  x$.args
+}
+
 #' @keywords internal
 qgis_check_stdout <- function(x) {
   if (qgis_result_status(x) == 0L && qgis_result_stdout(x) == "") {
@@ -143,30 +201,13 @@ qgis_check_stdout <- function(x) {
 }
 
 
-#' @rdname is_qgis_result
-#' @export
-qgis_result_status <- function(x) {
-  x$.processx_result$status
+#' @keywords internal
+is_qgis_result <- function(x) {
+  inherits(x, "qgis_result")
 }
 
-#' @rdname is_qgis_result
-#' @export
-qgis_result_stdout <- function(x) {
-  x$.processx_result$stdout
-}
 
-#' @rdname is_qgis_result
-#' @export
-qgis_result_stderr <- function(x) {
-  x$.processx_result$stderr
-}
-
-#' @rdname is_qgis_result
-#' @export
-qgis_result_args <- function(x) {
-  x$.args
-}
-
+#' @keywords internal
 #' @export
 print.qgis_result <- function(x, ...) {
   cat(glue("<Result of `qgis_run_algorithm(\"{ x$.algorithm }\", ...)`>\n\n"))

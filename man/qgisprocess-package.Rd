@@ -6,7 +6,11 @@
 \alias{qgisprocess-package}
 \title{qgisprocess: Using QGIS Processing Algorithms from R}
 \description{
-Provides seamless access to the QGIS \url{https://qgis.org/} processing toolbox using the standalone 'qgis_process' command-line utility. Both native and third-party (plugin) processing providers are supported. Beside referring data sources from file, also common R-objects like sf, terra and stars objects are supported.
+Provides seamless access to the QGIS (\url{https://qgis.org/}) processing toolbox using the standalone 'qgis_process' command-line utility. Both native and third-party (plugin) processing providers are supported. Beside referring data sources from file, also common R-objects like sf, terra and stars objects are supported.
+}
+\note{
+A structured overview of the available functions can be consulted at
+\url{https://r-spatial.github.io/qgisprocess/reference/index.html}.
 }
 \seealso{
 Useful links:

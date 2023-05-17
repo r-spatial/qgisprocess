@@ -1,18 +1,20 @@
-#' Run algorithms using 'qgis_process'
+#' Run an algorithm using 'qgis_process'
 #'
-#' Run QGIS algorithms.
+#' Runs an algorithm using 'qgis_process'.
 #' See the [QGIS docs](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html)
 #' for a detailed description of the algorithms provided
 #' 'out of the box' on QGIS.
 #'
-#' @param algorithm A qualified algorithm name (e.g., "native:filedownloader") or
+#' @family functions to run one geoprocessing algorithm
+#'
+#' @param algorithm A qualified algorithm name (e.g., `"native:buffer"`) or
 #'   a path to a QGIS model file.
 #' @param PROJECT_PATH,ELLIPSOID Global values for QGIS project file and
 #'   ellipsoid name for distance calculations.
-#' @param ... Named key-value pairs as arguments for each algorithm. Features of
+#' @param ... Named key-value pairs as arguments for the algorithm. Features of
 #'   [rlang::list2()] are supported. These arguments
 #'   are converted to strings using [as_qgis_argument()].
-#' @param .quiet Use `FALSE` to get extra output from processing algorithms.
+#' @param .quiet Use `FALSE` to get extra output from 'qgis_process'.
 #' This can be useful in debugging.
 #' @param .raw_json_input The raw JSON to use as input in place of `...`.
 #'
@@ -37,8 +39,8 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
     abort("All ... arguments to `qgis_run_algorithm()` must be named.")
   }
 
-  use_json_input <- !is.null(.raw_json_input) || qgis_use_json_input()
-  use_json_output <- use_json_input || qgis_use_json_output()
+  use_json_input <- !is.null(.raw_json_input) || qgis_using_json_input()
+  use_json_output <- use_json_input || qgis_using_json_output()
 
   if (is.null(.raw_json_input)) {
     # sanitize arguments and make sure they are cleaned up on exit

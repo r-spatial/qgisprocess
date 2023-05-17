@@ -40,7 +40,7 @@ test_that("qgis_result_*() functions work", {
   )
 
   expect_true(all(file.exists(tmp_gpkg, tmp_gpkg2)))
-  qgis_result_clean(result)
+  qgis_clean_result(result)
   expect_false(any(file.exists(tmp_gpkg, tmp_gpkg2)))
 
   expect_s3_class(result, "qgis_result")
