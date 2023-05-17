@@ -33,8 +33,12 @@ You can install the development version from
 remotes::install_github("r-spatial/qgisprocess")
 ```
 
-The **qgisprocess** package wraps the `qgis_process` command-line
-utility, which is available in QGIS \>= 3.16.
+## Installation of QGIS
+
+The **qgisprocess** package wraps the [standalone `qgis_process`
+command-line
+utility](https://docs.qgis.org/latest/en/docs/user_manual/processing/standalone.html),
+which is available in QGIS \>= 3.16.
 
 The package is meant to support *current* QGIS releases, i.e. both the
 latest and the long-term release. Although older QGIS releases are not
@@ -77,6 +81,12 @@ Additional functions are available to discover geoprocessing algorithms,
 retrieve their documentation, handle processing results, manage QGIS
 plugins, and more.
 
+The passing of [sf](https://r-spatial.github.io/sf),
+[stars](https://r-spatial.github.io/stars),
+[terra](https://rspatial.github.io/terra) and
+[raster](https://cran.r-project.org/package=raster) objects is
+supported.
+
 A structured overview of functions is available at
 <https://r-spatial.github.io/qgisprocess/reference/index.html>. To get
 started, read the ‘getting started’ vignette and use the [cheat
@@ -92,12 +102,7 @@ documentation available in the corresponding R function documentation.
 
 The following example demonstrates the
 [buffer](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer)
-algorithm in action. The passing of
-[sf](https://r-spatial.github.io/sf),
-[stars](https://r-spatial.github.io/stars),
-[terra](https://rspatial.github.io/terra) and
-[raster](https://cran.r-project.org/package=raster) objects is
-supported.
+algorithm in action.
 
 ``` r
 input <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
@@ -117,7 +122,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmprcUsAK/file28d1b8fbc46/file28d12728769b.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpG3VNrH/file375351fc758f/file37537d6eb73.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
