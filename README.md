@@ -47,9 +47,10 @@ latest and the long-term release. Although older QGIS releases are not
 officially supported, it may work since QGIS 3.16. Download instructions
 for all platforms are available at <https://download.qgis.org/>.
 
-If a recent version of QGIS isn’t available for your OS, you can use one
-of the [Geocomputation with R Docker
-images](https://github.com/geocompr/docker) with QGIS installed. See the
+If a recent version of QGIS isn’t available for your OS, you can use the
+[Geocomputation with R Docker
+image](https://github.com/geocompx/docker/pkgs/container/docker) with
+QGIS installed (`docker pull ghcr.io/geocompx/docker:qgis`). See the
 vignette on ‘getting started’ for more information.
 
 ### Package configuration
@@ -57,10 +58,11 @@ vignette on ‘getting started’ for more information.
 If the automatic configuration fails (or if you have more than one
 installation and would like to choose which one is used by
 **qgisprocess**), you can set
-`options(qgisprocess.path = "path/to/qgis_process")`, possibly in your
-`.Rprofile` to persist between sessions. You can run `qgis_configure()`
-to reconfigure, or just `qgis_configure(use_cached_data = TRUE)` to see
-the gritty details!
+`options(qgisprocess.path = "path/to/qgis_process")`. Specify the
+`qgisprocess.path` option in your `.Rprofile`, to make your choices
+persistent between sessions. You can run `qgis_configure()` to
+reconfigure, or just `qgis_configure(use_cached_data = TRUE)` to see the
+gritty details!
 
 ``` r
 library(qgisprocess)
@@ -81,15 +83,15 @@ specifies the geoprocessing algorithm to be called with a
 or `"gdal:hillshade"`, and it passes the algorithm arguments as R
 function arguments.
 
-Additional functions are available to discover geoprocessing algorithms,
-retrieve their documentation, handle processing results, manage QGIS
-plugins, and more.
+Additional functions are provided to discover available geoprocessing
+algorithms, retrieve their documentation, handle processing results,
+manage QGIS plugins, and more.
 
-The passing of [sf](https://r-spatial.github.io/sf),
+Spatial layers can be passed to `qgis_run_algorithm()` as file paths but
+also as [sf](https://r-spatial.github.io/sf),
 [stars](https://r-spatial.github.io/stars),
-[terra](https://rspatial.github.io/terra) and
-[raster](https://cran.r-project.org/package=raster) objects is
-supported.
+[terra](https://rspatial.github.io/terra) or
+[raster](https://cran.r-project.org/package=raster) objects.
 
 A structured overview of functions is available at
 <https://r-spatial.github.io/qgisprocess/reference/index.html>. To get
@@ -126,7 +128,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpmSiMPa/file40a34e4b488b/file40a35f438fa4.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpsCZuzJ/file7d1b75a4d4eb/file7d1b1ab3935f.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
