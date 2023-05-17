@@ -28,6 +28,8 @@ The goal of **qgisprocess** is to provide an R interface to the popular and open
 
 ## Installation
 
+### qgisprocess
+
 You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
@@ -35,7 +37,7 @@ You can install the development version from [GitHub](https://github.com/) with:
 remotes::install_github("r-spatial/qgisprocess")
 ```
 
-## Installation of QGIS
+### QGIS
 
 The **qgisprocess** package wraps the [standalone `qgis_process` command-line utility](https://docs.qgis.org/latest/en/docs/user_manual/processing/standalone.html), which is available in QGIS >= 3.16.
 
@@ -45,6 +47,8 @@ Download instructions for all platforms are available at <https://download.qgis.
 
 If a recent version of QGIS isn't available for your OS, you can use one of the [Geocomputation with R Docker images](https://github.com/geocompr/docker) with QGIS installed.
 See the vignette on 'getting started' for more information.
+
+### Package configuration
 
 If the automatic configuration fails (or if you have more than one installation and would like to choose which one is used by **qgisprocess**), you can set `options(qgisprocess.path = "path/to/qgis_process")`, possibly in your `.Rprofile` to persist between sessions. You can run `qgis_configure()` to reconfigure, or just `qgis_configure(use_cached_data = TRUE)` to see the gritty details!
 

@@ -25,6 +25,8 @@ package.
 
 ## Installation
 
+### qgisprocess
+
 You can install the development version from
 [GitHub](https://github.com/) with:
 
@@ -33,7 +35,7 @@ You can install the development version from
 remotes::install_github("r-spatial/qgisprocess")
 ```
 
-## Installation of QGIS
+### QGIS
 
 The **qgisprocess** package wraps the [standalone `qgis_process`
 command-line
@@ -49,6 +51,8 @@ If a recent version of QGIS isn’t available for your OS, you can use one
 of the [Geocomputation with R Docker
 images](https://github.com/geocompr/docker) with QGIS installed. See the
 vignette on ‘getting started’ for more information.
+
+### Package configuration
 
 If the automatic configuration fails (or if you have more than one
 installation and would like to choose which one is used by
@@ -122,7 +126,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpG3VNrH/file375351fc758f/file37537d6eb73.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpmSiMPa/file40a34e4b488b/file40a35f438fa4.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
