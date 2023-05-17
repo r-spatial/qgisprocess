@@ -65,7 +65,7 @@ It specifies the geoprocessing algorithm to be called with a `"provider:algorith
 
 Additional functions are provided to discover available geoprocessing algorithms, retrieve their documentation, handle processing results, manage QGIS plugins, and more.
 
-`qgis_run_algorithm()` accepts as spatial input a file path to a spatial object stored on disk but also [sf](https://r-spatial.github.io/sf), [stars](https://r-spatial.github.io/stars), [terra](https://rspatial.github.io/terra) and [raster](https://cran.r-project.org/package=raster) objects.
+Spatial layers can be passed to `qgis_run_algorithm()` as file paths but also as [sf](https://r-spatial.github.io/sf), [stars](https://r-spatial.github.io/stars), [terra](https://rspatial.github.io/terra) or [raster](https://cran.r-project.org/package=raster) objects.
 
 A structured overview of functions is available at <https://r-spatial.github.io/qgisprocess/reference/index.html>.
 To get started, read the 'getting started' vignette and use the [cheat sheets](https://r-spatial.github.io/qgisprocess/articles/)!
