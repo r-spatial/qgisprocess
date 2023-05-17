@@ -35,7 +35,9 @@ You can install the development version from [GitHub](https://github.com/) with:
 remotes::install_github("r-spatial/qgisprocess")
 ```
 
-The **qgisprocess** package wraps the `qgis_process` command-line utility, which is available in QGIS >= 3.16.
+## Installation of QGIS
+
+The **qgisprocess** package wraps the [standalone `qgis_process` command-line utility](https://docs.qgis.org/latest/en/docs/user_manual/processing/standalone.html), which is available in QGIS >= 3.16.
 
 The package is meant to support _current_ QGIS releases, i.e. both the latest and the long-term release.
 Although older QGIS releases are not officially supported, it may work since QGIS 3.16.
