@@ -63,7 +63,7 @@ Most functions start with the `qgis_` prefix, so that functions can be found mor
 The main function is `qgis_run_algorithm(algorithm = , ...)`.
 It specifies the geoprocessing algorithm to be called with a `"provider:algorithm"` formatted identifier, e.g. `"native:convexhull"` or `"gdal:hillshade"`, and it passes the algorithm arguments as R function arguments.
 
-Additional functions are available to discover available geoprocessing algorithms, retrieve their documentation, handle processing results, manage QGIS plugins, and more.
+Additional functions are provided to discover available geoprocessing algorithms, retrieve their documentation, handle processing results, manage QGIS plugins, and more.
 
 `qgis_run_algorithm()` accepts as spatial input a file path to a spatial object stored on disk but also [sf](https://r-spatial.github.io/sf), [stars](https://r-spatial.github.io/stars), [terra](https://rspatial.github.io/terra) and [raster](https://cran.r-project.org/package=raster) objects.
 
