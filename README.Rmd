@@ -24,9 +24,11 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/r-spatial/qgisprocess/branch/main/graph/badge.svg)](https://codecov.io/gh/r-spatial/qgisprocess?branch=main)
 <!-- badges: end -->
 
-The goal of `qgisprocess` is to provide an R interface to the popular and open source desktop geographic information system (GIS) program [QGIS](https://qgis.org/en/site/). The package is a re-implementation of functionality provided by the archived [RQGIS](https://cran.r-project.org/package=RQGIS) package, which was partially revived in the [RQGIS3](https://github.com/r-spatial/RQGIS3) package.
+The goal of **qgisprocess** is to provide an R interface to the popular and open source desktop geographic information system (GIS) program [QGIS](https://qgis.org/en/site/). The package is a re-implementation of functionality provided by the archived [RQGIS](https://cran.r-project.org/package=RQGIS) package, which was partially revived in the [RQGIS3](https://github.com/r-spatial/RQGIS3) package.
 
 ## Installation
+
+### qgisprocess
 
 You can install the development version from [GitHub](https://github.com/) with:
 
@@ -35,39 +37,65 @@ You can install the development version from [GitHub](https://github.com/) with:
 remotes::install_github("r-spatial/qgisprocess")
 ```
 
-The qgisprocess package wraps the `qgis_process` command-line utility, which is available in QGIS >= [3.14.16](https://github.com/qgis/QGIS/releases/tag/final-3_14_16), [released](https://qgis.org/en/site/getinvolved/development/roadmap.html) in September 2020. MacOS users will have to install QIGS >= 3.16; download instructions for all platforms are available at <https://download.qgis.org/>. If a recent version of QGIS isn't available for your OS, you can use one of the [Geocomputation with R Docker images](https://github.com/geocompr/docker) with QGIS installed.
+### QGIS
 
-If the automatic configuration fails (or if you have more than one installation and would like to choose which one is used by qgisprocess), you can set `options(qgisprocess.path = "path/to/qgis_process")`, possibly in your `.Rprofile` to persist between sessions. You can run `qgis_configure()` to print the gritty details!
+The **qgisprocess** package wraps the [standalone `qgis_process` command-line utility](https://docs.qgis.org/latest/en/docs/user_manual/processing/standalone.html), which is available in QGIS >= 3.16.
+
+The package is meant to support _current_ QGIS releases, i.e. both the latest and the long-term release.
+Although older QGIS releases are not officially supported, it may work since QGIS 3.16.
+Download instructions for all platforms are available at <https://download.qgis.org/>.
+
+If a recent version of QGIS isn't available for your OS, you can use the [Geocomputation with R Docker image](https://github.com/geocompx/docker/pkgs/container/docker) with QGIS installed (`docker pull ghcr.io/geocompx/docker:qgis`).
+See the vignette on 'getting started' for more information.
+
+### Package configuration
+
+If the automatic configuration fails (or if you have more than one installation and would like to choose which one is used by **qgisprocess**), you can set `options(qgisprocess.path = "path/to/qgis_process")`. Specify the `qgisprocess.path` option in your `.Rprofile`, to make your choices persistent between sessions. You can run `qgis_configure()` to reconfigure, or just `qgis_configure(use_cached_data = TRUE)` to see the gritty details!
 
 ```{r}
 library(qgisprocess)
-qgis_configure()
 ```
+
+## Functionality
+
+Most functions start with the `qgis_` prefix, so that functions can be found more easily using tab completion.
+
+The main function is `qgis_run_algorithm(algorithm = , ...)`.
+It specifies the geoprocessing algorithm to be called with a `"provider:algorithm"` formatted identifier, e.g. `"native:convexhull"` or `"gdal:hillshade"`, and it passes the algorithm arguments as R function arguments.
+
+Additional functions are provided to discover available geoprocessing algorithms, retrieve their documentation, handle processing results, manage QGIS plugins, and more.
+
+Spatial layers can be passed to `qgis_run_algorithm()` as file paths but also as [sf](https://r-spatial.github.io/sf), [stars](https://r-spatial.github.io/stars), [terra](https://rspatial.github.io/terra) or [raster](https://cran.r-project.org/package=raster) objects.
+
+A structured overview of functions is available at <https://r-spatial.github.io/qgisprocess/reference/index.html>.
+To get started, read the 'getting started' vignette and use the [cheat sheets](https://r-spatial.github.io/qgisprocess/articles/)!
+
+Note that R package [**qgis**](https://github.com/JanCaha/r_package_qgis) extends on **qgisprocess** by providing a separate R function for each geoprocessing algorithm.
+In addition, it makes the QGIS algorithm documentation available in the corresponding R function documentation.
 
 ## Example
 
-The following example demonstrates the [buffer](https://docs.qgis.org/testing/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer) algorithm in action. The passing of [sf](https://r-spatial.github.io/sf) and [raster](https://cran.r-project.org/package=raster) objects is experimentally supported (and will be well-supported in the future!).
+The following example demonstrates the [buffer](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer) algorithm in action.
 
-```{r buffer}
+```{r buffer, out.width='60%'}
 input <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
 
 result <- qgis_run_algorithm(
   "native:buffer",
   INPUT = input,
   DISTANCE = 1,
-  DISSOLVE = TRUE,
-  .quiet = TRUE
+  DISSOLVE = TRUE
 )
 
 result
 
-output_sf <- sf::read_sf(qgis_extract_output(result, "OUTPUT"))
+output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
 ```
 
-You can read the help associated with an algorithm using `qgis_show_help()`:
+You can read the help associated with an algorithm using `qgis_show_help()`.
 
-```{r}
+```{r eval=FALSE}
 qgis_show_help("native:buffer")
 ```
 
