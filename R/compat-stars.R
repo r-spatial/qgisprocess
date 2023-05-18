@@ -66,4 +66,3 @@ as_qgis_argument_stars <- function(x, spec = qgis_argument_spec(), use_json_inpu
   stars::write_stars(x, path)
   structure(path, class = "qgis_tempfile_arg")
 }
-

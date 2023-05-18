@@ -39,6 +39,4 @@ test_that("qgis_result_single() works", {
     qgis_result_single(result),
     result$OUTPUT
   )
-
 })
-

@@ -189,20 +189,20 @@ qgis_query_version <- function(quiet = FALSE) {
   if (length(match) == 0L) abort_query_version(lines = lines)
   if (
     !stringr::str_detect(match[1], "-[Mm]a(ster|in)$") &&
-    !stringr::str_detect(match[1], "^\\d{1,2}\\.\\d*[13579][\\.-]")
+      !stringr::str_detect(match[1], "^\\d{1,2}\\.\\d*[13579][\\.-]")
   ) {
     return(match[1])
   } else {
     if (length(match) < 2L) abort_query_version(lines = lines)
     if (!stringr::str_detect(match[2], "^[0-9a-f]{7,}$")) {
       warning("Please consider building the QGIS development version from ",
-              "within the QGIS git repository, in order to have a unique ",
-              "version identifier of QGIS, or propose the people making the ",
-              "QGIS build to do so. ",
-              "Currently the specific version identifier is '",
-              match[2],
-              "'.",
-              call. = TRUE
+        "within the QGIS git repository, in order to have a unique ",
+        "version identifier of QGIS, or propose the people making the ",
+        "QGIS build to do so. ",
+        "Currently the specific version identifier is '",
+        match[2],
+        "'.",
+        call. = TRUE
       )
       match[2] <- paste("unclear:", match[2])
     }
@@ -303,4 +303,3 @@ qgis_using_json_output <- function(query = FALSE, quiet = TRUE) {
 
   qgisprocess_cache$use_json_output
 }
-

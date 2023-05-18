@@ -21,8 +21,10 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 can_build <- qgisprocess::has_qgis() &&
-  all(qgisprocess::qgis_has_plugin(c("grassprovider", 
-                                     "processing_saga_nextgen")))
+  all(qgisprocess::qgis_has_plugin(c(
+    "grassprovider",
+    "processing_saga_nextgen"
+  )))
 ```
 
 ```{r child=if (can_build) file.path(rprojroot::find_root(rprojroot::is_r_package), "man/vignette_childs/_qgisprocess.Rmd")}

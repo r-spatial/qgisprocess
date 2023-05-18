@@ -73,11 +73,3 @@ qgis_has_algorithm <- function(algorithm, query = FALSE, quiet = TRUE) {
   assert_qgis()
   as.character(algorithm) %in% qgis_algorithms(query, quiet)$algorithm
 }
-
-
-
-
-
-
-
-

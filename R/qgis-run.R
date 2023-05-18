@@ -34,8 +34,3 @@ qgis_run <- function(args = character(), ..., env = qgis_env(), path = qgis_path
     )
   }
 }
-
-
-
-
-

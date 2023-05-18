@@ -48,9 +48,9 @@ Uses \code{\link[=qgis_function]{qgis_function()}} under the hood.
 \examples{
 if (has_qgis()) {
   system.file(
-        "longlake/longlake_depth.gpkg",
-        package = "qgisprocess"
-      ) |>
+    "longlake/longlake_depth.gpkg",
+    package = "qgisprocess"
+  ) |>
     qgis_run_algorithm_p(
       "native:buffer",
       DISTANCE = 10
