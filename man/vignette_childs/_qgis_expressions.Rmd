@@ -41,8 +41,7 @@ We can simply pass the expression as a string:
 qgis_run_algorithm(
   "native:extractbyexpression",
   INPUT = longlake_depth_path,
-  EXPRESSION = '"DEPTH_M" > 1',
-  .quiet = TRUE
+  EXPRESSION = '"DEPTH_M" > 1'
 ) |>
   st_as_sf()
 ```
@@ -57,8 +56,7 @@ We first create the lake border:
 ```{r}
 lake_border_path <- qgis_run_algorithm(
   "native:polygonstolines", 
-  INPUT = longlake_path,
-  .quiet = TRUE
+  INPUT = longlake_path
 ) |> 
   qgis_extract_output("OUTPUT")
 ```
@@ -115,8 +113,7 @@ Let's try:
 buffer <- qgis_run_algorithm(
   "native:buffer",
   INPUT = longlake_depth_path,
-  DISTANCE = 'expression: "DEPTH_M" * 10',
-  .quiet = TRUE
+  DISTANCE = 'expression: "DEPTH_M" * 10'
 ) |> 
   st_as_sf()
 ```
