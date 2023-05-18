@@ -157,8 +157,7 @@ depth. We can simply pass the expression as a string:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/qgis_run_algorithm.html">qgis_run_algorithm</a></span><span class="op">(</span></span>
 <span>  <span class="st">"native:extractbyexpression"</span>,</span>
 <span>  INPUT <span class="op">=</span> <span class="va">longlake_depth_path</span>,</span>
-<span>  EXPRESSION <span class="op">=</span> <span class="st">'"DEPTH_M" &gt; 1'</span>,</span>
-<span>  .quiet <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  EXPRESSION <span class="op">=</span> <span class="st">'"DEPTH_M" &gt; 1'</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using `OUTPUT = qgis_tmp_vector()`</span></span>
@@ -192,8 +191,7 @@ and add it as an attribute to the points. For that we will use the
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lake_border_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/qgis_run_algorithm.html">qgis_run_algorithm</a></span><span class="op">(</span></span>
 <span>  <span class="st">"native:polygonstolines"</span>, </span>
-<span>  INPUT <span class="op">=</span> <span class="va">longlake_path</span>,</span>
-<span>  .quiet <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  INPUT <span class="op">=</span> <span class="va">longlake_path</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/qgis_extract_output.html">qgis_extract_output</a></span><span class="op">(</span><span class="st">"OUTPUT"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using `OUTPUT = qgis_tmp_vector()`</span></span></code></pre></div>
@@ -277,8 +275,7 @@ fields (attributes), but you can also omit them.</p>
 <code class="sourceCode R"><span><span class="va">buffer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/qgis_run_algorithm.html">qgis_run_algorithm</a></span><span class="op">(</span></span>
 <span>  <span class="st">"native:buffer"</span>,</span>
 <span>  INPUT <span class="op">=</span> <span class="va">longlake_depth_path</span>,</span>
-<span>  DISTANCE <span class="op">=</span> <span class="st">'expression: "DEPTH_M" * 10'</span>,</span>
-<span>  .quiet <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  DISTANCE <span class="op">=</span> <span class="st">'expression: "DEPTH_M" * 10'</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Argument `SEGMENTS` is unspecified (using QGIS default value).</span></span>
