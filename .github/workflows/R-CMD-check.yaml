@@ -48,7 +48,7 @@ jobs:
           mkdir extra_plugins
           echo "QGIS_PLUGINPATH=$(pwd)/extra_plugins" >> $GITHUB_ENV
 
-      - name: Install QGIS (Ubuntu Nightly QGIS repo + possibly older GRASS from Ubuntu repo)
+      - name: Install QGIS development version for Ubuntu (using an often outdated GRASS release from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu-nightly'
         run: |
           # Setup QGIS from Ubuntu Nightly
@@ -59,7 +59,7 @@ jobs:
           wget -qO sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
           unzip -q sagang_plugin.zip -d extra_plugins
 
-      - name: Install QGIS (Ubuntugis QGIS repo + ubuntugis-unstable PPA, which has the current GRASS release)
+      - name: Install upcoming QGIS point release (= latest release in < 1 month) for Ubuntugis (ubuntugis-unstable PPA, with current GRASS release)
         if: matrix.config.qgis == 'ubuntugis'
         run: |
           # Setup QGIS from Ubuntugis
@@ -74,7 +74,7 @@ jobs:
           wget -qO sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
           unzip -q sagang_plugin.zip -d extra_plugins
 
-      - name: Install QGIS (Ubuntu QGIS repo + possibly older GRASS from Ubuntu repo)
+      - name: Install latest QGIS release for Ubuntu (using an often outdated GRASS release from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu'
         run: |
           # Setup QGIS from Ubuntu
