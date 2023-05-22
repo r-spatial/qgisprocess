@@ -8,7 +8,7 @@ test_that("qgis_version() works", {
 test_that("qgis_version(debug = TRUE) works", {
   skip_if_not(has_qgis())
   skip_if(
-    package_version(strsplit(qgis_version(), "-")[[1]][1]) < "3.22.0",
+    package_version(qgis_version(full = FALSE)) < "3.22.0",
     "QGIS version is older than 3.22.0"
   )
 
