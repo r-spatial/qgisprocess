@@ -14,6 +14,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+can_build <- qgisprocess::has_qgis() &&
+  package_version(qgisprocess::qgis_version(full = FALSE)) >= "3.30.0"
 ```
 
 ```{r setup, message=FALSE}
@@ -21,11 +23,11 @@ library(qgisprocess)
 library(sf)
 ```
 
-```{r child=if (has_qgis()) file.path(rprojroot::find_root(rprojroot::is_r_package), "man/vignette_childs/_qgis_expressions.Rmd")}
+```{r child=if (can_build) file.path(rprojroot::find_root(rprojroot::is_r_package), "man/vignette_childs/_qgis_expressions.Rmd")}
 ```
 
-```{r eval=!has_qgis(), echo=FALSE, results="asis"}
-cat("This vignette has been built in absence of a QGIS installation.\n\n")
+```{r eval=!can_build, echo=FALSE, results="asis"}
+cat("This vignette has been built in absence of a QGIS installation with version >= 3.30.0.\n\n")
 cat("Read it online at <https://r-spatial.github.io/qgisprocess/articles/qgis_expressions.html>.")
 ```
 
