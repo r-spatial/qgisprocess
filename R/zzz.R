@@ -36,7 +36,10 @@
       "The 'qgis_process' command-line utility was either not found or\n",
       "did not fulfil the needs to build the package cache.\n",
       "Please run `qgis_configure()` to fix this and rebuild the cache.\n",
-      "See its documentation if you need to preset the path of qgis_process."
+      "See its documentation if you need to preset the path of qgis_process.\n",
+      "If the problem persists, make sure that you correctly installed QGIS\n",
+      "for your operating system using the instructions at\n",
+      "https://download.qgis.org."
     )
   }
 }
