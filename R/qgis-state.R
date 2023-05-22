@@ -7,6 +7,10 @@
 #' @concept functions to manage and explore QGIS and qgisprocess
 #' @seealso [qgis_configure()]
 #'
+#' @param full Logical.
+#' If `FALSE`, only return the `"x.y.z"` version string instead of the full
+#' version string that includes the name.
+#' Defaults to `TRUE`; ignored if `debug = TRUE`.
 #' @param debug Logical.
 #' If `TRUE`, also output the version of QGIS, the operating system and all
 #' relevant libraries, as reported by the 'qgis_process' command.
@@ -133,7 +137,7 @@ qgis_query_path <- function(quiet = FALSE) {
 
 #' @rdname qgis_path
 #' @export
-qgis_version <- function(query = FALSE, quiet = TRUE, debug = FALSE) {
+qgis_version <- function(query = FALSE, quiet = TRUE, full = TRUE, debug = FALSE) {
   if (query) qgisprocess_cache$version <- qgis_query_version(quiet = quiet)
 
   if (!quiet) {
@@ -144,8 +148,10 @@ qgis_version <- function(query = FALSE, quiet = TRUE, debug = FALSE) {
     )
   }
 
+  if (!full || debug) short <- strsplit(qgisprocess_cache$version, "-")[[1]][1]
+
   if (debug) {
-    if (package_version(strsplit(qgis_version(), "-")[[1]][1]) < "3.22.0") {
+    if (package_version(short) < "3.22.0") {
       warning("'debug = TRUE' is not supported for QGIS versions < 3.22")
       return(qgisprocess_cache$version)
     }
@@ -157,7 +163,7 @@ qgis_version <- function(query = FALSE, quiet = TRUE, debug = FALSE) {
     return(invisible(qgisprocess_cache$version))
   }
 
-  qgisprocess_cache$version
+  if (full) qgisprocess_cache$version else short
 }
 
 
