@@ -64,7 +64,7 @@ qgis_version() returns the QGIS version."><!-- mathjax --><script src="https://c
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">qgis_path</span><span class="op">(</span>query <span class="op">=</span> <span class="cn">FALSE</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">qgis_version</span><span class="op">(</span>query <span class="op">=</span> <span class="cn">FALSE</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span>, debug <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">qgis_version</span><span class="op">(</span>query <span class="op">=</span> <span class="cn">FALSE</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span>, full <span class="op">=</span> <span class="cn">TRUE</span>, debug <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -76,6 +76,13 @@ qgis_version() returns the QGIS version."><!-- mathjax --><script src="https://c
 <dt>quiet</dt>
 <dd><p>Use <code>FALSE</code> to display more information,
 possibly useful for debugging.</p></dd>
+
+
+<dt>full</dt>
+<dd><p>Logical.
+If <code>FALSE</code>, only return the <code>"x.y.z"</code> version string instead of the full
+version string that includes the name.
+Defaults to <code>TRUE</code>; ignored if <code>debug = TRUE</code>.</p></dd>
 
 
 <dt>debug</dt>
