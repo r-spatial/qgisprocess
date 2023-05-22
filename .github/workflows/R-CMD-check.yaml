@@ -46,8 +46,8 @@ jobs:
       - name: In Linux, dynamically set QGIS_PLUGINPATH environment var (available to next steps)
         if: runner.os == 'Linux'
         run: |
-          mkdir extra_plugins
-          echo "QGIS_PLUGINPATH=$(pwd)/extra_plugins" >> $GITHUB_ENV
+          mkdir ../extra_plugins
+          echo "QGIS_PLUGINPATH=$(pwd)/../extra_plugins" >> $GITHUB_ENV
 
       - name: Install QGIS development version for Ubuntu (using an often outdated GRASS release from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu-nightly'
@@ -57,8 +57,8 @@ jobs:
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu-nightly `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
-          wget -qO sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
-          unzip -q sagang_plugin.zip -d extra_plugins
+          wget -qO ../sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
+          unzip -q ../sagang_plugin.zip -d ../extra_plugins
 
       - name: Install upcoming QGIS point release (= latest release in < 1 month) for Ubuntugis (ubuntugis-unstable PPA, with current GRASS release)
         if: matrix.config.qgis == 'ubuntugis'
@@ -72,8 +72,8 @@ jobs:
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntugis-nightly-release `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
-          wget -qO sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
-          unzip -q sagang_plugin.zip -d extra_plugins
+          wget -qO ../sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
+          unzip -q ../sagang_plugin.zip -d ../extra_plugins
 
       - name: Install latest QGIS release for Ubuntu (using an often outdated GRASS release from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu'
@@ -83,8 +83,8 @@ jobs:
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
-          wget -qO sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
-          unzip -q sagang_plugin.zip -d extra_plugins
+          wget -qO ../sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
+          unzip -q ../sagang_plugin.zip -d ../extra_plugins
 
       - name: Install QGIS LTR (long-term release) for Ubuntu (using an often outdated GRASS release from Ubuntu repo)
         if: matrix.config.qgis == 'ubuntu-ltr'
@@ -94,8 +94,8 @@ jobs:
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu-ltr `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
-          wget -qO sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
-          unzip -q sagang_plugin.zip -d extra_plugins
+          wget -qO ../sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
+          unzip -q ../sagang_plugin.zip -d ../extra_plugins
 
       - name: Install QGIS (MacOS homebrew)
         if: matrix.config.qgis == 'macos-brew'
