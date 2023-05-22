@@ -25,6 +25,7 @@ jobs:
           - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'release', r-pkg-cache: 'v0'}
           - {os: ubuntu-22.04, qgis: 'ubuntugis', r: 'release', r-pkg-cache: 'v1'}
           - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', r-pkg-cache: 'v0'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu-ltr', r: 'release', r-pkg-cache: 'v0'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -80,6 +81,17 @@ jobs:
           # Setup QGIS from Ubuntu
           sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
+          sudo apt-get update
+          sudo apt-get install -y qgis qgis-plugin-grass saga
+          wget -qO sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
+          unzip -q sagang_plugin.zip -d extra_plugins
+
+      - name: Install QGIS LTR (long-term release) for Ubuntu (using an often outdated GRASS release from Ubuntu repo)
+        if: matrix.config.qgis == 'ubuntu-ltr'
+        run: |
+          # Setup QGIS from Ubuntu
+          sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
+          sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu-ltr `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
           wget -qO sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
