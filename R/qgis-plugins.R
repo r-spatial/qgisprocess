@@ -123,10 +123,12 @@ message_disabled_plugins <- function(
     startup = FALSE) {
   if (!identical(sum(plugins$enabled), nrow(plugins))) {
     if (prepend_newline && !startup) message()
+    n_dis <- sum(!plugins$enabled)
     msg <- glue(
       'Run `qgis_enable_plugins()` to enable ',
-      '{ sum(!plugins$enabled) } disabled ',
-      'plugin(s) and access their algorithms: ',
+      '{n_dis} disabled ',
+      'plugin{ ifelse(n_dis > 1, "s", "") } ',
+      'and access { ifelse(n_dis > 1, "their", "its") } algorithms: ',
       '{ paste(plugins$name[!plugins$enabled], collapse = ", ") }'
     )
     msg <- paste0(
