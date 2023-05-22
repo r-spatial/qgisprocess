@@ -32,7 +32,9 @@
     message_disabled_plugins(qgisprocess_cache$plugins, startup = TRUE)
   } else {
     packageStartupMessage(
-      "The 'qgis_process' command-line utility was not found.\n",
+      "\n>>> PROBLEM encountered: couldn't build package cache! <<<\n",
+      "The 'qgis_process' command-line utility was either not found or\n",
+      "did not fulfil the needs to build the package cache.\n",
       "Please run `qgis_configure()` to fix this and rebuild the cache.\n",
       "See its documentation if you need to preset the path of qgis_process."
     )
