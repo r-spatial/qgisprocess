@@ -7,13 +7,18 @@
 \usage{
 qgis_path(query = FALSE, quiet = TRUE)
 
-qgis_version(query = FALSE, quiet = TRUE, debug = FALSE)
+qgis_version(query = FALSE, quiet = TRUE, full = TRUE, debug = FALSE)
 }
 \arguments{
 \item{query}{Use \code{TRUE} to refresh the cached value.}
 
 \item{quiet}{Use \code{FALSE} to display more information,
 possibly useful for debugging.}
+
+\item{full}{Logical.
+If \code{FALSE}, only return the \code{"x.y.z"} version string instead of the full
+version string that includes the name.
+Defaults to \code{TRUE}; ignored if \code{debug = TRUE}.}
 
 \item{debug}{Logical.
 If \code{TRUE}, also output the version of QGIS, the operating system and all

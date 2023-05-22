@@ -26,8 +26,8 @@ jobs:
 
       - name: Dynamically set QGIS_PLUGINPATH environment var (available to next steps)
         run: |
-          mkdir extra_plugins
-          echo "QGIS_PLUGINPATH=$(pwd)/extra_plugins" >> $GITHUB_ENV
+          mkdir ../extra_plugins
+          echo "QGIS_PLUGINPATH=$(pwd)/../extra_plugins" >> $GITHUB_ENV
 
       - name: Install QGIS (Ubuntu)
         run: |
@@ -35,8 +35,8 @@ jobs:
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
           sudo apt-get install -y qgis qgis-plugin-grass saga
-          wget -qO sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
-          unzip -q sagang_plugin.zip -d extra_plugins
+          wget -qO ../sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
+          unzip -q ../sagang_plugin.zip -d ../extra_plugins
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
