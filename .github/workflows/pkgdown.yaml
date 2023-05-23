@@ -26,11 +26,13 @@ jobs:
 
       - name: Dynamically set QGIS_PLUGINPATH environment var (available to next steps)
         run: |
+          # Dynamically set QGIS_PLUGINPATH environment var (available to next steps)
           mkdir ../extra_plugins
           echo "QGIS_PLUGINPATH=$(pwd)/../extra_plugins" >> $GITHUB_ENV
 
-      - name: Install QGIS (Ubuntu)
+      - name: Install QGIS, GRASS, SAGA and the SAGA NextGen plugin (Ubuntu)
         run: |
+          # Install QGIS, GRASS, SAGA and the SAGA NextGen plugin (Ubuntu)
           sudo wget -qO /etc/apt/keyrings/qgis-archive-keyring.gpg https://download.qgis.org/downloads/qgis-archive-keyring.gpg
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
           sudo apt-get update
