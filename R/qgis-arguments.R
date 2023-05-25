@@ -279,6 +279,62 @@ as_qgis_argument.numeric <- function(x, spec = qgis_argument_spec(),
   if (use_json_input) x else paste0(x, collapse = ",")
 }
 
+#' @keywords internal
+#' @export
+as_qgis_argument.qgis_outputVector <- function(x, spec = qgis_argument_spec(),
+                                     use_json_input = FALSE) {
+  as_qgis_argument(unclass(x), spec, use_json_input)
+}
+
+#' @keywords internal
+#' @export
+as_qgis_argument.qgis_outputRaster <- function(x, spec = qgis_argument_spec(),
+                                     use_json_input = FALSE) {
+  as_qgis_argument(unclass(x), spec, use_json_input)
+}
+
+#' @keywords internal
+#' @export
+as_qgis_argument.qgis_outputLayer <- function(x, spec = qgis_argument_spec(),
+                                         use_json_input = FALSE) {
+  as_qgis_argument(unclass(x), spec, use_json_input)
+}
+
+#' @keywords internal
+#' @export
+as_qgis_argument.qgis_outputMultilayer <- function(x, spec = qgis_argument_spec(),
+                                             use_json_input = FALSE) {
+  as_qgis_argument(unclass(x), spec, use_json_input)
+}
+
+#' @keywords internal
+#' @export
+as_qgis_argument.qgis_outputString <- function(x, spec = qgis_argument_spec(),
+                                     use_json_input = FALSE) {
+  as_qgis_argument(unclass(x), spec, use_json_input)
+}
+
+#' @keywords internal
+#' @export
+as_qgis_argument.qgis_outputNumber <- function(x, spec = qgis_argument_spec(),
+                                             use_json_input = FALSE) {
+  as_qgis_argument(unclass(x), spec, use_json_input)
+}
+
+#' @keywords internal
+#' @export
+as_qgis_argument.qgis_outputFile <- function(x, spec = qgis_argument_spec(),
+                                     use_json_input = FALSE) {
+  as_qgis_argument(unclass(x), spec, use_json_input)
+}
+
+#' @keywords internal
+#' @export
+as_qgis_argument.qgis_outputFolder <- function(x, spec = qgis_argument_spec(),
+                                             use_json_input = FALSE) {
+  as_qgis_argument(unclass(x), spec, use_json_input)
+}
+
 #' @rdname as_qgis_argument
 #' @keywords internal
 #' @export
