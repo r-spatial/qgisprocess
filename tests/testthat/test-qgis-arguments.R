@@ -120,6 +120,25 @@ test_that("argument coercers work", {
     as_qgis_argument(qgis_dict_input(a = 1, b = 2)),
     qgis_dict_input(a = "1", b = "2")
   )
+
+  output_object <- structure("/some/file/path", class = "qgis_outputVector")
+  expect_identical(as_qgis_argument(output_object), "/some/file/path")
+  output_object <- structure("/some/file/path", class = "qgis_outputRaster")
+  expect_identical(as_qgis_argument(output_object), "/some/file/path")
+  output_object <- structure("/some/file/path", class = "qgis_outputLayer")
+  expect_identical(as_qgis_argument(output_object), "/some/file/path")
+  output_object <- structure("/some/path", class = "qgis_outputMultilayer")
+  expect_identical(as_qgis_argument(output_object), "/some/path")
+  output_object <- structure("abcd", class = "qgis_outputString")
+  expect_identical(as_qgis_argument(output_object), "abcd")
+  output_object <- structure("1234", class = "qgis_outputNumber")
+  expect_identical(as_qgis_argument(output_object), "1234")
+  output_object <- structure(1234, class = "qgis_outputNumber")
+  expect_identical(as_qgis_argument(output_object), "1234")
+  output_object <- structure("/some/file/path", class = "qgis_outputFile")
+  expect_identical(as_qgis_argument(output_object), "/some/file/path")
+  output_object <- structure("/some/path", class = "qgis_outputFolder")
+  expect_identical(as_qgis_argument(output_object), "/some/path")
 })
 
 test_that("character -> enum works", {
