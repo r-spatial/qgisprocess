@@ -66,9 +66,24 @@ as_qgis_argument_terra <- function(x, spec = qgis_argument_spec(),
   }
 
   if (!identical(sources, "") && length(sources) == 1) {
+    accepted_ext <- c("grd", "asc", "sdat", "rst", "nc", "tif", "tiff", "gtiff", "envi", "bil", "img")
     file_ext <- stringr::str_to_lower(tools::file_ext(sources))
-    if (file_ext %in% c("grd", "asc", "sdat", "rst", "nc", "tif", "tiff", "gtiff", "envi", "bil", "img")) {
-      return(sources)
+    if (file_ext %in% accepted_ext) {
+      names_match <- identical(names(x), names(terra::rast(sources)))
+      if (names_match) {
+        return(sources)
+      } else if (terra::nlyr(x) > 1L) {
+        message(glue(
+          "Rewriting the multi-band SpatRaster object as a temporary file before passing to QGIS, since ",
+          "its bands (order, selection) differ from those in the source file '{ sources }'."
+        ))
+      } else {
+        message(glue(
+          "Rewriting the '{ names(x) }' band of '{ sources }' as a temporary file, otherwise ",
+          "QGIS may use another or all bands of the source file if ",
+          "passing its filepath."
+        ))
+      }
     }
   }
 
