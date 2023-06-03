@@ -40,7 +40,7 @@ qgis_as_terra.qgis_result <- function(output, ...) {
 #' @export
 as_qgis_argument.SpatRaster <- function(x, spec = qgis_argument_spec(),
                                         use_json_input = FALSE) {
-  as_qgis_argument_terra(x, spec)
+  as_qgis_argument_terra(x, spec, use_json_input)
 }
 
 #' @keywords internal
