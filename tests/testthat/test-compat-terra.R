@@ -23,6 +23,27 @@ test_that("terra argument coercers work", {
     as_qgis_argument(obj, qgis_argument_spec(qgis_type = "layer")),
     if (is.character(sources)) sources else sources$source
   )
+
+  expect_warning(
+    as_qgis_argument(obj, qgis_argument_spec(qgis_type = "multilayer")),
+    "extract the bands"
+  )
+
+  # check behaviour in case of band selection or reordering
+  obj1 <- obj$longlake_2
+  res <- expect_message(
+    as_qgis_argument(obj1, qgis_argument_spec(qgis_type = "layer")),
+    "Rewriting"
+  )
+  expect_s3_class(res, "qgis_tempfile_arg")
+
+  obj2 <- obj[[3:1]]
+  res <- expect_message(
+    as_qgis_argument(obj2, qgis_argument_spec(qgis_type = "layer")),
+    "Rewriting"
+  )
+  expect_s3_class(res, "qgis_tempfile_arg")
+
 })
 
 test_that("terra result coercers work", {
