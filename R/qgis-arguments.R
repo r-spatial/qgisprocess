@@ -424,7 +424,7 @@ qgis_argument_spec_by_name <- function(algorithm, name,
 #' Since it applies strict validation rules, it is recommended in all cases
 #' though.
 #'
-#' `qgis_dict_input()` generates an named list of class `qgis_dict_input`.
+#' `qgis_dict_input()` generates a named list of class `qgis_dict_input`.
 #' `qgis_dict_input()` is only supported when the JSON input method applies
 #' (see [qgis_using_json_input()]), where it can be interchanged with a named `list()`.
 #' It can only be used for arguments requiring _named_ lists.
