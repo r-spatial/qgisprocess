@@ -54,8 +54,8 @@ test_that("qgis_serialize_arguments() outputs correct JSON strings", {
     TEXT_FORMAT = 0,
     OUTPUT = "output.pdf",
     PROJECT_PATH = "test.qgs",
-    AGGREGATES = list(
-      list(
+    AGGREGATES = qgis_list_input(
+      qgis_dict_input(
         aggregate = "first_value",
         delimiter = ",",
         input = '"admin"',
@@ -64,7 +64,7 @@ test_that("qgis_serialize_arguments() outputs correct JSON strings", {
         precision = 0,
         type = 10
       ),
-      list(
+      qgis_dict_input(
         aggregate = "concatenate",
         delimiter = ",",
         input = '"name"',
