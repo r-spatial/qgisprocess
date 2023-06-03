@@ -110,6 +110,11 @@ test_that("qgis_serialize_arguments() outputs correct JSON strings", {
 })
 
 test_that("argument coercers work", {
+  # Note that as_qgis_argument() uses argument use_json_input = FALSE by default.
+  # The TRUE state (JSON input) is quite trivial in most methods where the
+  # distinction is made, i.e. change nothing.
+  # In other cases (especially the spatial object coercers) there is no
+  # distinction at all.
   expect_error(as_qgis_argument(list()), "Don't know how to convert object of type")
   expect_identical(as_qgis_argument("chr value"), "chr value")
   expect_identical(as_qgis_argument(1), "1")
