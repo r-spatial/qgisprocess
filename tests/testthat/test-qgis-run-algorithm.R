@@ -87,6 +87,19 @@ test_that(glue("qgis_run_algorithm() accepts a qgis_list_input argument{input}")
   expect_equal(nrow(tmp), 3)
 })
 
+test_that(glue("qgis_run_algorithm works when passing a numeric vector to a range input type{input}"), {
+  skip_if_not(has_qgis())
+  skip_if_not_installed("terra")
+
+  obj <- terra::rast(system.file("longlake/longlake_depth.tif", package = "qgisprocess"))
+  out <- qgis_run_algorithm("grass7:r.rescale", input = obj, to = c(0, 1))
+  tmp <- qgis_as_terra(out)
+  expect_identical(max(terra::values(tmp), na.rm = TRUE), 1L)
+  out2 <- qgis_run_algorithm("grass7:r.rescale", input = obj, to = "0,1")
+  tmp2 <- qgis_as_terra(out2)
+  expect_identical(terra::values(tmp), terra::values(tmp2))
+})
+
 test_that(glue("qgis_run_algorithm() runs with qgis:relief, for which the acceptable value of COLORS is NULL{input}"), {
   skip_if_not(has_qgis())
 
