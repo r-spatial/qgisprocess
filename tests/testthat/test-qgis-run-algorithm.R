@@ -51,7 +51,7 @@ test_that(glue("qgis_run_algorithm() ignores unknown inputs{input}"), {
   )
 })
 
-test_that(glue("qgis_run_algorithm accepts multiple input arguments{input}"), {
+test_that(glue("qgis_run_algorithm() accepts multiple input arguments{input}"), {
   skip_if_not(has_qgis())
   skip_if_not_installed("sf")
 
@@ -69,7 +69,7 @@ test_that(glue("qgis_run_algorithm accepts multiple input arguments{input}"), {
   expect_equal(nrow(tmp), 3)
 })
 
-test_that(glue("qgis_run_algorithm accepts a qgis_list_input argument{input}"), {
+test_that(glue("qgis_run_algorithm() accepts a qgis_list_input argument{input}"), {
   skip_if_not(has_qgis())
   skip_if_not_installed("sf")
 
@@ -87,7 +87,7 @@ test_that(glue("qgis_run_algorithm accepts a qgis_list_input argument{input}"), 
   expect_equal(nrow(tmp), 3)
 })
 
-test_that(glue("qgis_run_algorithm runs with qgis:relief, for which the acceptable value of COLORS is NULL{input}"), {
+test_that(glue("qgis_run_algorithm() runs with qgis:relief, for which the acceptable value of COLORS is NULL{input}"), {
   skip_if_not(has_qgis())
 
   relief_args <- qgis_get_argument_specs("qgis:relief")
@@ -110,7 +110,7 @@ test_that(glue("qgis_run_algorithm runs with qgis:relief, for which the acceptab
 })
 
 
-test_that(glue("qgis_run_algorithm succeeds when it needs a QGIS project{input}"), {
+test_that(glue("qgis_run_algorithm() succeeds when it needs a QGIS project{input}"), {
   skip_if_not(has_qgis())
   # Until Issue #68 is resolved (native:printlayouttopdf segfaults on MacOS):
   skip_on_os("mac")
