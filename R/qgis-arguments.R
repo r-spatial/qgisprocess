@@ -235,11 +235,24 @@ as_qgis_argument.NULL <- function(x, spec = qgis_argument_spec(),
 }
 
 #' @keywords internal
+create_rgba_string <- function(col) {
+  assert_that(length(col) == 1L)
+  rgbmatrix <- col2rgb(col, alpha = TRUE)
+  unclass(glue(
+    "rgba({ rgbmatrix['red', ] }, ",
+    "{ rgbmatrix['green', ] }, ",
+    "{ rgbmatrix['blue', ] }, ",
+    "{ round(rgbmatrix['alpha', ] / 255, 2) })"
+  ))
+}
+
+#' @keywords internal
 #' @export
 as_qgis_argument.character <- function(x, spec = qgis_argument_spec(),
                                        use_json_input = FALSE) {
   result <- switch(as.character(spec$qgis_type),
     field = if (use_json_input) x else paste0(x, collapse = ";"),
+    color = if (grepl("^\\s*rgba\\(", x)) x else create_rgba_string(x),
     enum = {
       x_int <- match(x, spec$available_values)
       invalid_values <- x[is.na(x_int)]
