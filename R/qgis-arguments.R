@@ -299,6 +299,20 @@ as_qgis_argument.numeric <- function(x, spec = qgis_argument_spec(),
 
 #' @keywords internal
 #' @export
+as_qgis_argument.data.frame <- function(x, spec = qgis_argument_spec(),
+                                        use_json_input = FALSE) {
+  # !is.na() is solely wrt unit tests that don't specify qgis_type
+  if (!is.na(spec$qgis_type) && spec$qgis_type == "matrix") {
+    x <- as.matrix(x)
+    result <- as_qgis_argument(x, spec = spec, use_json_input = use_json_input)
+    return(result)
+  }
+
+  NextMethod()
+}
+
+#' @keywords internal
+#' @export
 as_qgis_argument.qgis_outputVector <- function(x, spec = qgis_argument_spec(),
                                      use_json_input = FALSE) {
   as_qgis_argument(unclass(x), spec, use_json_input)
