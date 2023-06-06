@@ -262,6 +262,8 @@ as_qgis_argument.character <- function(x, spec = qgis_argument_spec(),
     x
   )
 
+  if (!is.null(dim(result)) && max(dim(x)) > 1L && !use_json_input) NextMethod()
+
   if (use_json_input) result else paste(result, collapse = ",")
 }
 
@@ -274,8 +276,24 @@ as_qgis_argument.logical <- function(x, spec = qgis_argument_spec(),
 
 #' @keywords internal
 #' @export
+as_qgis_argument.matrix <- function(x, spec = qgis_argument_spec(),
+                                    use_json_input = FALSE) {
+  # !is.na() is solely wrt unit tests that don't specify qgis_type
+  if (!is.na(spec$qgis_type) && spec$qgis_type == "matrix") {
+      if (is.numeric(x)) x <- base::as.numeric(t(x)) else {
+        x <- as.character(t(x))
+      }
+    } else if (!use_json_input) {
+      NextMethod()
+    }
+  if (use_json_input) x else paste0(x, collapse = ",")
+}
+
+#' @keywords internal
+#' @export
 as_qgis_argument.numeric <- function(x, spec = qgis_argument_spec(),
                                      use_json_input = FALSE) {
+  if (!is.null(dim(x)) && max(dim(x)) > 1L && !use_json_input) NextMethod()
   if (use_json_input) x else paste0(x, collapse = ",")
 }
 
