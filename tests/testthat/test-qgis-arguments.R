@@ -181,6 +181,27 @@ test_that("argument coercers work", {
     "Don't know how to convert"
   )
 
+  expect_identical(
+    as_qgis_argument("pink1", qgis_argument_spec(qgis_type = "color")),
+    "rgba(255, 181, 197, 1)"
+  )
+  expect_identical(
+    as_qgis_argument(
+      rgb(0.1, 0.4, 0.3, 0.5),
+      qgis_argument_spec(qgis_type = "color")
+      ),
+    "rgba(26, 102, 77, 0.5)"
+  )
+  expect_identical(
+    as_qgis_argument("#1A664D80", qgis_argument_spec(qgis_type = "color")),
+    "rgba(26, 102, 77, 0.5)"
+  )
+  expect_error(
+    as_qgis_argument("color1", qgis_argument_spec(qgis_type = "color")),
+    "invalid color name"
+  )
+
+
 
   output_object <- structure("/some/file/path", class = "qgis_outputVector")
   expect_identical(as_qgis_argument(output_object), "/some/file/path")
