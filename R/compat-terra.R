@@ -75,7 +75,7 @@ as_qgis_argument_terra <- function(x, spec = qgis_argument_spec(),
       } else if (terra::nlyr(x) > 1L) {
         message(glue(
           "Rewriting the multi-band SpatRaster object as a temporary file before passing to QGIS, since ",
-          "its bands (order, selection) differ from those in the source file '{ sources }'."
+          "its bands (names, order, selection) differ from those in the source file '{ sources }'."
         ))
       } else {
         message(glue(
