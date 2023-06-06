@@ -125,6 +125,62 @@ test_that("argument coercers work", {
     as_qgis_argument(qgis_dict_input(a = 1, b = 2)),
     qgis_dict_input(a = "1", b = "2")
   )
+  expect_identical(
+    as_qgis_argument(c(1:4), qgis_argument_spec(qgis_type = "matrix")),
+    "1,2,3,4"
+    )
+  expect_identical(
+    as_qgis_argument(
+      matrix(1:4, ncol = 2, byrow = TRUE),
+      qgis_argument_spec(qgis_type = "matrix")
+      ),
+    "1,2,3,4"
+  )
+  expect_identical(
+    as_qgis_argument(
+      matrix(1:4, ncol = 2, byrow = TRUE),
+      qgis_argument_spec(qgis_type = "matrix")
+    ),
+    "1,2,3,4"
+  )
+  expect_identical(
+    as_qgis_argument(
+      matrix(letters[1:4], ncol = 2, byrow = TRUE),
+      qgis_argument_spec(qgis_type = "matrix")
+    ),
+    "a,b,c,d"
+  )
+  expect_identical(
+    as_qgis_argument(
+      data.frame(min = c(1, 3), max = c(2, 4)),
+      qgis_argument_spec(qgis_type = "matrix")
+    ),
+    "1,2,3,4"
+  )
+  expect_identical(
+    as_qgis_argument(
+      data.frame(min = c("a", "c"), max = c("b", "d")),
+      qgis_argument_spec(qgis_type = "matrix")
+    ),
+    "a,b,c,d"
+  )
+  expect_error(
+    as_qgis_argument(matrix(1:4, ncol = 2, byrow = TRUE)),
+    "Don't know how to convert"
+  )
+  expect_error(
+    as_qgis_argument(matrix(letters[1:4], ncol = 2, byrow = TRUE)),
+    "Don't know how to convert"
+  )
+  expect_error(
+    as_qgis_argument(data.frame(min = c(1, 3), max = c(2, 4))),
+    "Don't know how to convert"
+  )
+  expect_error(
+    as_qgis_argument(data.frame(min = c("a", "c"), max = c("b", "d"))),
+    "Don't know how to convert"
+  )
+
 
   output_object <- structure("/some/file/path", class = "qgis_outputVector")
   expect_identical(as_qgis_argument(output_object), "/some/file/path")
