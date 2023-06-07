@@ -9,7 +9,7 @@ qgis_get_argument_specs("native:fieldcalculator") |> subset(name == "FORMULA")
 ```
 
 Secondly, one can use expressions for _data-defined_ overriding.
-This means that an algorithm argument that is usually a fixed (numeric or boolean) value can _also_ take on the value of another field or the result of an expression.
+This means that an algorithm argument that is usually a fixed value (numeric, distance, boolean, string or color) can _also_ take on the value of another field or the result of an expression.
 In the QGIS processing dialog, such arguments have a '[data-defined override](https://docs.qgis.org/latest/en/docs/user_manual/introduction/general_tools.html#data-defined)' button.
 An example is provided by the `DISTANCE` argument of `native:buffer`, for which we query the acceptable values below.
 
