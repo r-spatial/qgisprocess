@@ -294,7 +294,7 @@ as_qgis_argument.matrix <- function(x, spec = qgis_argument_spec(),
   # !is.na() is solely wrt unit tests that don't specify qgis_type
   if (!is.na(spec$qgis_type) && spec$qgis_type == "matrix") {
       if (is.numeric(x)) x <- base::as.numeric(t(x)) else {
-        x <- as.character(t(x))
+        x <- trimws(as.character(t(x)))
       }
     } else if (!use_json_input) {
       NextMethod()
