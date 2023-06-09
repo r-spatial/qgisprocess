@@ -16,10 +16,11 @@ test_that("raster argument coercers work", {
 
   # also check rasters with embedded files
   obj <- raster::raster(system.file("longlake/longlake.tif", package = "qgisprocess"))
-  expect_identical(
+  res <- expect_message(
     as_qgis_argument(obj, qgis_argument_spec(qgis_type = "layer")),
-    obj@file@name
+    "Rewriting"
   )
+  expect_s3_class(res, "qgis_tempfile_arg")
 
   # check RasterBrick
   obj <- raster::brick(system.file("longlake/longlake.tif", package = "qgisprocess"))
@@ -27,6 +28,27 @@ test_that("raster argument coercers work", {
     as_qgis_argument(obj, qgis_argument_spec(qgis_type = "layer")),
     obj@file@name
   )
+
+  expect_warning(
+    as_qgis_argument(obj, qgis_argument_spec(qgis_type = "multilayer")),
+    "extract the bands"
+  )
+
+  # check behaviour in case of band selection or renaming
+  obj1 <- obj$longlake_2
+  res <- expect_message(
+    as_qgis_argument(obj1, qgis_argument_spec(qgis_type = "layer")),
+    "Rewriting"
+  )
+  expect_s3_class(res, "qgis_tempfile_arg")
+
+  names(obj) <- letters[1:3]
+  res <- expect_message(
+    as_qgis_argument(obj, qgis_argument_spec(qgis_type = "layer")),
+    "Rewriting"
+  )
+  expect_s3_class(res, "qgis_tempfile_arg")
+
 })
 
 test_that("raster result coercers work", {
