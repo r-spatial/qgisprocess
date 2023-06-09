@@ -237,7 +237,7 @@ as_qgis_argument.NULL <- function(x, spec = qgis_argument_spec(),
 #' @keywords internal
 create_rgba_string <- function(col) {
   assert_that(length(col) == 1L)
-  rgbmatrix <- col2rgb(col, alpha = TRUE)
+  rgbmatrix <- grDevices::col2rgb(col, alpha = TRUE)
   unclass(glue(
     "rgba({ rgbmatrix['red', ] }, ",
     "{ rgbmatrix['green', ] }, ",
@@ -309,7 +309,7 @@ as_qgis_argument.matrix <- function(x, spec = qgis_argument_spec(),
                     )
                   )
       x <- trimws(x)
-      rgbcols <- t(col2rgb(x[, "col"], alpha = FALSE))
+      rgbcols <- t(grDevices::col2rgb(x[, "col"], alpha = FALSE))
       x <- cbind(x[, 1:2], rgbcols)
       x <- apply(x, 1, function(x) paste(x, collapse = ", "))
       x <- paste(x, collapse = ";")
