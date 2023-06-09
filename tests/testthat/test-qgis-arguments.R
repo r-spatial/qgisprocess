@@ -201,6 +201,33 @@ test_that("argument coercers work", {
     "invalid color name"
   )
 
+  reliefcols <- data.frame(
+    min = c(0, 500),
+    max = c(500, 1000),
+    col = c("red", "#457812")
+  )
+  expect_identical(
+    as_qgis_argument(
+      reliefcols,
+      qgis_argument_spec(qgis_type = "relief_colors")
+    ),
+    "0, 500, 255, 0, 0;500, 1000, 69, 120, 18"
+  )
+  expect_identical(
+    as_qgis_argument(
+      as.matrix(reliefcols),
+      qgis_argument_spec(qgis_type = "relief_colors")
+    ),
+    "0, 500, 255, 0, 0;500, 1000, 69, 120, 18"
+  )
+  expect_error(
+    as_qgis_argument(
+      reliefcols[, 1:2],
+      qgis_argument_spec(qgis_type = "relief_colors")
+    ),
+    "expects a matrix or dataframe with 3 columns"
+  )
+
 
 
   output_object <- structure("/some/file/path", class = "qgis_outputVector")
