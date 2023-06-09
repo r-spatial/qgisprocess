@@ -292,10 +292,27 @@ as_qgis_argument.logical <- function(x, spec = qgis_argument_spec(),
 as_qgis_argument.matrix <- function(x, spec = qgis_argument_spec(),
                                     use_json_input = FALSE) {
   # !is.na() is solely wrt unit tests that don't specify qgis_type
-  if (!is.na(spec$qgis_type) && spec$qgis_type == "matrix") {
+  if (is.na(spec$qgis_type) && !use_json_input) {
+    NextMethod()
+    } else if (spec$qgis_type == "matrix") {
       if (is.numeric(x)) x <- base::as.numeric(t(x)) else {
         x <- trimws(as.character(t(x)))
       }
+    } else if (spec$qgis_type == "relief_colors") {
+      assert_that(ncol(x) == 3L,
+                  msg = paste(
+                    "QGIS argument type 'relief_colors' expects a matrix or",
+                    "dataframe with 3 columns, representing minimum value,",
+                    "maximum value, and R color string (that col2rgb()",
+                    "understands), respectively. Its rows represent the",
+                    "different ranges with their own color."
+                    )
+                  )
+      x <- trimws(x)
+      rgbcols <- t(col2rgb(x[, "col"], alpha = FALSE))
+      x <- cbind(x[, 1:2], rgbcols)
+      x <- apply(x, 1, function(x) paste(x, collapse = ", "))
+      x <- paste(x, collapse = ";")
     } else if (!use_json_input) {
       NextMethod()
     }
@@ -315,7 +332,8 @@ as_qgis_argument.numeric <- function(x, spec = qgis_argument_spec(),
 as_qgis_argument.data.frame <- function(x, spec = qgis_argument_spec(),
                                         use_json_input = FALSE) {
   # !is.na() is solely wrt unit tests that don't specify qgis_type
-  if (!is.na(spec$qgis_type) && spec$qgis_type == "matrix") {
+  if (!is.na(spec$qgis_type) &&
+      spec$qgis_type %in% c("matrix", "relief_colors")) {
     x <- as.matrix(x)
     result <- as_qgis_argument(x, spec = spec, use_json_input = use_json_input)
     return(result)
