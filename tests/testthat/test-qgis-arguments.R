@@ -180,6 +180,13 @@ test_that("argument coercers work", {
     as_qgis_argument(data.frame(min = c("a", "c"), max = c("b", "d"))),
     "Don't know how to convert"
   )
+  expect_error(
+    as_qgis_argument(
+      matrix(1:4, ncol = 2, byrow = TRUE),
+      qgis_argument_spec(qgis_type = "distance")
+      ),
+    "Don't know how to convert"
+  )
 
   expect_identical(
     as_qgis_argument("pink1", qgis_argument_spec(qgis_type = "color")),
