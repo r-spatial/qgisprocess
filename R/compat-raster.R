@@ -81,6 +81,15 @@ as_qgis_argument_raster <- function(x, spec = qgis_argument_spec(), use_json_inp
     abort(glue("Can't convert '{ class(x)[1] }' object to QGIS type '{ spec$qgis_type }'"))
   }
 
+  if (raster::nlayers(x) > 1L && spec$qgis_type == "multilayer") {
+    warning("You passed a multiband RasterBrick object as one of the layers for a multilayer argument.\n",
+            "It is expected that only the first band will be used by QGIS!\n",
+            "If you need each band to be processed, you need to extract the bands and pass them as ",
+            "separate layers to the algorithm (either by repeating the argument, or by wrapping ",
+            "in qgis_list_input()).",
+            call. = FALSE)
+  }
+
   # try to use a filename if present
   if (x@file@name != "") {
     file_ext <- stringr::str_to_lower(tools::file_ext(x@file@name))
