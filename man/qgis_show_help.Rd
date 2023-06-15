@@ -30,6 +30,7 @@ if (has_qgis()) qgis_get_argument_specs("native:filedownloader")
 }
 \seealso{
 Other topics about information on algorithms & processing providers: 
-\code{\link{qgis_algorithms}()}
+\code{\link{qgis_algorithms}()},
+\code{\link{qgis_search_algorithms}()}
 }
 \concept{topics about information on algorithms & processing providers}

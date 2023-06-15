@@ -197,3 +197,84 @@ qgis_query_algorithms <- function(quiet = FALSE) {
     algorithms[!is.na(algorithms$algorithm_id), ]
   }
 }
+
+
+
+#' Search geoprocessing algorithms
+#'
+#' Searches for algorithms using a regular expression.
+#' In its simplest form
+#' that is just a string that must match part of a character value.
+#'
+#' When using multiple arguments in combination, only the algorithms are
+#' returned that fulfill all conditions.
+#'
+#' All regular expressions that [stringr::str_detect()] can handle, are
+#' accepted.
+#' Have a look at [stringi::search_regex()] to get a nice overview.
+#'
+#' @family topics about information on algorithms & processing providers
+#' @concept functions to manage and explore QGIS and qgisprocess
+#'
+#' @param algorithm Regular expression to match the `algorithm` or
+#' `algorithm_title` value from the output of [qgis_algorithms()].
+#' @param provider Regular expression to match the `provider` or
+#' `provider_title` value from the output of [qgis_algorithms()].
+#' @param group Regular expression to match the `group` value
+#' from the output of [qgis_algorithms()].
+#'
+#' @return A tibble.
+#'
+#' @examples
+#' if (has_qgis()) {
+#'   qgis_search_algorithms(
+#'     algorithm = "point.*line",
+#'     provider = "^native$"
+#'   )
+#' }
+#'
+#'
+#' @export
+qgis_search_algorithms <- function(
+    algorithm = NULL,
+    provider = NULL,
+    group = NULL
+) {
+  assert_that(
+    !is.null(algorithm) || !is.null(provider) || !is.null(group),
+    msg = "You must provide at least one of the arguments."
+    )
+  result <- qgis_algorithms(query = FALSE, quiet = TRUE)
+  assert_that(inherits(result, "data.frame"))
+  assert_that(
+    nrow(result) > 0L,
+    msg = "qgis_algorithms() returns an empty dataframe; no searching done."
+  )
+  result <- result[, c(
+    "provider",
+    "provider_title",
+    "group",
+    "algorithm",
+    "algorithm_title"
+  )]
+  if (!is.null(algorithm)) {
+    assert_that(is.string(algorithm))
+    result <- result[
+      stringr::str_detect(result$algorithm, algorithm) |
+        stringr::str_detect(result$algorithm_title, algorithm),
+      ]
+  }
+  if (!is.null(provider)) {
+    assert_that(is.string(provider))
+    result <- result[
+      stringr::str_detect(result$provider, provider) |
+        stringr::str_detect(result$provider_title, provider),
+    ]
+  }
+  if (!is.null(group)) {
+    assert_that(is.string(group))
+    result <- result[stringr::str_detect(result$group, group), ]
+  }
+  result
+  }
+

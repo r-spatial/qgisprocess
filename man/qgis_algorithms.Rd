@@ -46,6 +46,7 @@ if (has_qgis()) qgis_providers()
 \code{\link[=qgis_enable_plugins]{qgis_enable_plugins()}}, \code{\link[=qgis_disable_plugins]{qgis_disable_plugins()}}
 
 Other topics about information on algorithms & processing providers: 
+\code{\link{qgis_search_algorithms}()},
 \code{\link{qgis_show_help}()}
 
 Other topics about reporting the QGIS state: 
