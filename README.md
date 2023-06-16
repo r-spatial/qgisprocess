@@ -12,7 +12,7 @@ status](https://github.com/r-spatial/qgisprocess/workflows/R-CMD-check/badge.svg
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Codecov test
-coverage](https://codecov.io/gh/r-spatial/qgisprocess/branch/main/graph/badge.svg)](https://codecov.io/gh/r-spatial/qgisprocess?branch=main)
+coverage](https://codecov.io/gh/r-spatial/qgisprocess/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-spatial/qgisprocess/tree/main)
 <!-- badges: end -->
 
 The goal of **qgisprocess** is to provide an R interface to the popular
