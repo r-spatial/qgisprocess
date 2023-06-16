@@ -43,7 +43,7 @@ Description: Provides seamless access to the QGIS (<https://qgis.org/>)
   Both native and third-party (plugin) processing providers are supported.
   Beside referring data sources from file, also common R-objects like sf, terra
   and stars objects are supported.
-License: GPL-3
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
