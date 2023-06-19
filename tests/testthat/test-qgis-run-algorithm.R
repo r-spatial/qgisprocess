@@ -101,6 +101,44 @@ test_that(glue("qgis_run_algorithm() works when passing a numeric vector to a ra
   expect_identical(terra::values(tmp), terra::values(tmp2))
 })
 
+test_that(glue("qgis_run_algorithm() supports the matrix input type{input}"), {
+  skip_if_not(has_qgis())
+  skip_if_not_installed("terra")
+
+  path <- system.file("longlake/longlake.tif", package = "qgisprocess")
+  vec <- c(25, 100, 1, 101, 175, 2, 176, 255, 3)
+  mat <- matrix(vec, ncol = 3, byrow = TRUE)
+  df <- data.frame(min = mat[, 1], max = mat[, 2], val = mat[, 3])
+
+  res_vec <- qgis_run_algorithm("native:reclassifybytable",
+                                INPUT_RASTER = path,
+                                RASTER_BAND = 1,
+                                TABLE = vec,
+                                RANGE_BOUNDARIES = 2)
+  res_mat <- qgis_run_algorithm("native:reclassifybytable",
+                                INPUT_RASTER = path,
+                                RASTER_BAND = 1,
+                                TABLE = mat,
+                                RANGE_BOUNDARIES = 2)
+  res_df <- qgis_run_algorithm("native:reclassifybytable",
+                               INPUT_RASTER = path,
+                               RASTER_BAND = 1,
+                               TABLE = df,
+                               RANGE_BOUNDARIES = 2)
+
+  expect_s3_class(res_vec$OUTPUT, "qgis_outputRaster")
+  expect_s3_class(res_mat$OUTPUT, "qgis_outputRaster")
+  expect_s3_class(res_df$OUTPUT, "qgis_outputRaster")
+  vals_vec <- terra::values(qgis_as_terra(res_vec))
+  vals_mat <- terra::values(qgis_as_terra(res_mat))
+  vals_df <- terra::values(qgis_as_terra(res_df))
+  attr(vals_vec, "dimnames") <- NULL
+  attr(vals_mat, "dimnames") <- NULL
+  attr(vals_df, "dimnames") <- NULL
+  expect_identical(vals_vec, vals_mat)
+  expect_identical(vals_vec, vals_df)
+})
+
 test_that(glue("qgis_run_algorithm() runs with qgis:relief, for which the acceptable value of COLORS is NULL{input}"), {
   skip_if_not(has_qgis())
 
