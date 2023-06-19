@@ -87,7 +87,7 @@ test_that(glue("qgis_run_algorithm() accepts a qgis_list_input argument{input}")
   expect_equal(nrow(tmp), 3)
 })
 
-test_that(glue("qgis_run_algorithm works when passing a numeric vector to a range input type{input}"), {
+test_that(glue("qgis_run_algorithm() works when passing a numeric vector to a range input type{input}"), {
   skip_if_not(has_qgis())
   skip_if_not_installed("terra")
   skip_if(!("GRASS" %in% qgis_providers()$provider_title), "GRASS is not available")
