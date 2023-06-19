@@ -157,6 +157,31 @@ test_that(glue("qgis_run_algorithm() runs with qgis:relief, for which the accept
   expect_s3_class(result$FREQUENCY_DISTRIBUTION, "qgis_outputFile")
   expect_true(file.exists(result$OUTPUT))
   expect_true(file.exists(result$FREQUENCY_DISTRIBUTION))
+
+  mat <- matrix(
+    c(-0.5, 0, 170, 0, 0, 0, 0.5, 85, 255, 255, 0.5, 1, 0, 255, 0, 1, 2.5, 85, 85, 255),
+    ncol = 5,
+    byrow = TRUE,
+    dimnames = list(NULL, c("min", "max", "r", "g", "b"))
+  )
+  df <- as.data.frame(mat)
+  df$col <- rgb(df$r, df$g, df$b, alpha = 255, maxColorValue = 255)
+  df <- df[, c("min", "max", "col")]
+
+  res_df <- qgis_run_algorithm(
+    "qgis:relief",
+    INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess"),
+    Z_FACTOR = 1,
+    AUTO_COLORS = FALSE,
+    COLORS = df
+  )
+
+  expect_s3_class(res_df$OUTPUT, "qgis_outputRaster")
+  vals_string <- terra::values(qgis_as_terra(result))
+  vals_df <- terra::values(qgis_as_terra(res_df))
+  attr(vals_string, "dimnames") <- NULL
+  attr(vals_df, "dimnames") <- NULL
+  expect_identical(vals_string, vals_df)
 })
 
 
