@@ -214,3 +214,56 @@ test_that(glue("qgis_run_algorithm() succeeds when it needs a QGIS project{input
   expect_identical(tmp_pdf, as.character(result$OUTPUT))
   unlink(tmp_pdf)
 })
+
+
+
+test_that(glue("qgis_run_algorithm() succeeds when it uses an aggregates input argument{input}"), {
+  skip_if_not(has_qgis())
+  skip_if_not(qgis_using_json_input())
+
+  # preparing a layer of multiple polygons and some attributes
+  ll_res <- qgis_run_algorithm(
+    "native:subdivide",
+    INPUT = system.file("longlake/longlake.gpkg", package = "qgisprocess"),
+    MAX_NODES = 40
+      )
+  ll <- sf::st_as_sf(ll_res)
+  ll <- sf::st_cast(sf::st_set_agr(ll, "constant"), "POLYGON")
+  skip_if_not(nrow(ll) == 25L, "Intermediate result does not have the expected 25 polygons")
+  depth_vals <- c("very deep", "deep", "shallow", "very shallow", "dry")
+  ll$depth <- rep(depth_vals, 5)
+  ll$name <- letters[1:25]
+
+  result <- qgis_run_algorithm(
+    "native:aggregate",
+    AGGREGATES = qgis_list_input(
+      qgis_dict_input(
+        aggregate = "first_value",
+        delimiter = ",",
+        input = '"depth"',
+        length = 20,
+        name = "depth",
+        precision = 0,
+        type = 10
+      ),
+      qgis_dict_input(
+        aggregate = "concatenate",
+        delimiter = ",",
+        input = '"name"',
+        length = 20,
+        name = "name",
+        precision = 0,
+        type = 10
+      )
+    ),
+    INPUT = ll,
+    GROUP_BY = "depth"
+  )
+
+  expect_s3_class(result$OUTPUT, "qgis_outputVector")
+
+  ll_res <- sf::st_as_sf(result)
+
+  expect_identical(ll_res$depth, depth_vals)
+  expect_identical(ll_res$name[1], "a,f,k,p,u")
+})
