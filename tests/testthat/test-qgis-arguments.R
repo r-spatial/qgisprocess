@@ -54,8 +54,8 @@ test_that("qgis_serialize_arguments() outputs correct JSON strings", {
     TEXT_FORMAT = 0,
     OUTPUT = "output.pdf",
     PROJECT_PATH = "test.qgs",
-    AGGREGATES = list(
-      list(
+    AGGREGATES = qgis_list_input(
+      qgis_dict_input(
         aggregate = "first_value",
         delimiter = ",",
         input = '"admin"',
@@ -64,7 +64,7 @@ test_that("qgis_serialize_arguments() outputs correct JSON strings", {
         precision = 0,
         type = 10
       ),
-      list(
+      qgis_dict_input(
         aggregate = "concatenate",
         delimiter = ",",
         input = '"name"',
@@ -110,6 +110,11 @@ test_that("qgis_serialize_arguments() outputs correct JSON strings", {
 })
 
 test_that("argument coercers work", {
+  # Note that as_qgis_argument() uses argument use_json_input = FALSE by default.
+  # The TRUE state (JSON input) is quite trivial in most methods where the
+  # distinction is made, i.e. change nothing.
+  # In other cases (especially the spatial object coercers) there is no
+  # distinction at all.
   expect_error(as_qgis_argument(list()), "Don't know how to convert object of type")
   expect_identical(as_qgis_argument("chr value"), "chr value")
   expect_identical(as_qgis_argument(1), "1")
@@ -120,6 +125,136 @@ test_that("argument coercers work", {
     as_qgis_argument(qgis_dict_input(a = 1, b = 2)),
     qgis_dict_input(a = "1", b = "2")
   )
+  expect_identical(
+    as_qgis_argument(c(1:4), qgis_argument_spec(qgis_type = "matrix")),
+    "1,2,3,4"
+    )
+  expect_identical(
+    as_qgis_argument(
+      matrix(1:4, ncol = 2, byrow = TRUE),
+      qgis_argument_spec(qgis_type = "matrix")
+      ),
+    "1,2,3,4"
+  )
+  expect_identical(
+    as_qgis_argument(
+      matrix(1:4, ncol = 2, byrow = TRUE),
+      qgis_argument_spec(qgis_type = "matrix")
+    ),
+    "1,2,3,4"
+  )
+  expect_identical(
+    as_qgis_argument(
+      matrix(letters[1:4], ncol = 2, byrow = TRUE),
+      qgis_argument_spec(qgis_type = "matrix")
+    ),
+    "a,b,c,d"
+  )
+  expect_identical(
+    as_qgis_argument(
+      data.frame(min = c(1, 3), max = c(2, 4)),
+      qgis_argument_spec(qgis_type = "matrix")
+    ),
+    "1,2,3,4"
+  )
+  expect_identical(
+    as_qgis_argument(
+      data.frame(min = c("a", "c"), max = c("b", "d")),
+      qgis_argument_spec(qgis_type = "matrix")
+    ),
+    "a,b,c,d"
+  )
+  expect_error(
+    as_qgis_argument(matrix(1:4, ncol = 2, byrow = TRUE)),
+    "Don't know how to convert"
+  )
+  expect_error(
+    as_qgis_argument(matrix(letters[1:4], ncol = 2, byrow = TRUE)),
+    "Don't know how to convert"
+  )
+  expect_error(
+    as_qgis_argument(data.frame(min = c(1, 3), max = c(2, 4))),
+    "Don't know how to convert"
+  )
+  expect_error(
+    as_qgis_argument(data.frame(min = c("a", "c"), max = c("b", "d"))),
+    "Don't know how to convert"
+  )
+  expect_error(
+    as_qgis_argument(
+      matrix(1:4, ncol = 2, byrow = TRUE),
+      qgis_argument_spec(qgis_type = "distance")
+      ),
+    "Don't know how to convert"
+  )
+
+  expect_identical(
+    as_qgis_argument("pink1", qgis_argument_spec(qgis_type = "color")),
+    "rgba(255, 181, 197, 1)"
+  )
+  expect_identical(
+    as_qgis_argument(
+      rgb(0.1, 0.4, 0.3, 0.5),
+      qgis_argument_spec(qgis_type = "color")
+      ),
+    "rgba(26, 102, 77, 0.5)"
+  )
+  expect_identical(
+    as_qgis_argument("#1A664D80", qgis_argument_spec(qgis_type = "color")),
+    "rgba(26, 102, 77, 0.5)"
+  )
+  expect_error(
+    as_qgis_argument("color1", qgis_argument_spec(qgis_type = "color")),
+    "invalid color name"
+  )
+
+  reliefcols <- data.frame(
+    min = c(0, 500),
+    max = c(500, 1000),
+    col = c("red", "#457812")
+  )
+  expect_identical(
+    as_qgis_argument(
+      reliefcols,
+      qgis_argument_spec(qgis_type = "relief_colors")
+    ),
+    "0, 500, 255, 0, 0;500, 1000, 69, 120, 18"
+  )
+  expect_identical(
+    as_qgis_argument(
+      as.matrix(reliefcols),
+      qgis_argument_spec(qgis_type = "relief_colors")
+    ),
+    "0, 500, 255, 0, 0;500, 1000, 69, 120, 18"
+  )
+  expect_error(
+    as_qgis_argument(
+      reliefcols[, 1:2],
+      qgis_argument_spec(qgis_type = "relief_colors")
+    ),
+    "expects a matrix or dataframe with 3 columns"
+  )
+
+
+
+  output_object <- structure("/some/file/path", class = "qgis_outputVector")
+  expect_identical(as_qgis_argument(output_object), "/some/file/path")
+  output_object <- structure("/some/file/path", class = "qgis_outputRaster")
+  expect_identical(as_qgis_argument(output_object), "/some/file/path")
+  output_object <- structure("/some/file/path", class = "qgis_outputLayer")
+  expect_identical(as_qgis_argument(output_object), "/some/file/path")
+  output_object <- structure("/some/path", class = "qgis_outputMultilayer")
+  expect_identical(as_qgis_argument(output_object), "/some/path")
+  output_object <- structure("abcd", class = "qgis_outputString")
+  expect_identical(as_qgis_argument(output_object), "abcd")
+  output_object <- structure("1234", class = "qgis_outputNumber")
+  expect_identical(as_qgis_argument(output_object), "1234")
+  output_object <- structure(1234, class = "qgis_outputNumber")
+  expect_identical(as_qgis_argument(output_object), "1234")
+  output_object <- structure("/some/file/path", class = "qgis_outputFile")
+  expect_identical(as_qgis_argument(output_object), "/some/file/path")
+  output_object <- structure("/some/path", class = "qgis_outputFolder")
+  expect_identical(as_qgis_argument(output_object), "/some/path")
 })
 
 test_that("character -> enum works", {

@@ -53,15 +53,58 @@ as_qgis_argument_stars <- function(x, spec = qgis_argument_spec(), use_json_inpu
     abort(glue("Can't convert '{ class(x)[1] }' object to QGIS type '{ spec$qgis_type }'"))
   }
 
+  if (!is.na(dim(x)["band"]) &&
+      dim(x)["band"] > 1L &&
+      spec$qgis_type == "multilayer") {
+    warning("You passed a multiband stars object as one of the layers for a multilayer argument.\n",
+            "It is expected that only the first band will be used by QGIS!\n",
+            "If you need each band to be processed, you need to extract the bands and pass them as ",
+            "separate layers to the algorithm (either by repeating the argument, or by wrapping ",
+            "in qgis_list_input()).",
+            call. = FALSE)
+  }
+
   # try to use a filename if present
   if (inherits(x, "stars_proxy") && (length(x) == 1)) {
     file <- unclass(x)[[1]]
+    accepted_ext <- c("grd", "asc", "sdat", "rst", "nc", "tif", "tiff", "gtiff", "envi", "bil", "img")
     file_ext <- stringr::str_to_lower(tools::file_ext(file))
-    if (file_ext %in% c("grd", "asc", "sdat", "rst", "nc", "tif", "tiff", "gtiff", "envi", "bil", "img")) {
-      return(file)
+    if (file_ext %in% accepted_ext) {
+      # single-band case that normally originates from single-band data source:
+      if (is.na(dim(x)["band"])) {
+        if (is.na(dim(stars::read_stars(file, proxy = TRUE))["band"]) ||
+            dim(stars::read_stars(file, proxy = TRUE))["band"] == 1L) {
+          return(file)
+        # non-matching bands:
+        } else {
+          message(glue(
+            "Rewriting the single-band stars object as a temporary file before passing to QGIS, since ",
+            "the number of bands is larger in the source file '{ file }'."
+          ))
+          return(write_stars_as_tempfile_arg(x))
+        }
+      }
+      # we can only check for total band number; they have no names in stars
+      nrbands_match <- identical(
+        dim(x)["band"],
+        dim(stars::read_stars(file, proxy = TRUE))["band"]
+        )
+      if (nrbands_match) {
+        return(file)
+      } else {
+        message(glue(
+          "Rewriting the stars object as a temporary file before passing to QGIS, since ",
+          "the number of bands differs from those in the source file '{ file }'."
+        ))
+        return(write_stars_as_tempfile_arg(x))
+      }
     }
   }
+  write_stars_as_tempfile_arg(x)
+}
 
+#' @keywords internal
+write_stars_as_tempfile_arg <- function(x) {
   path <- qgis_tmp_raster()
   stars::write_stars(x, path)
   structure(path, class = "qgis_tempfile_arg")

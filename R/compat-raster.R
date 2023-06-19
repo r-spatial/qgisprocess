@@ -81,11 +81,36 @@ as_qgis_argument_raster <- function(x, spec = qgis_argument_spec(), use_json_inp
     abort(glue("Can't convert '{ class(x)[1] }' object to QGIS type '{ spec$qgis_type }'"))
   }
 
+  if (raster::nlayers(x) > 1L && spec$qgis_type == "multilayer") {
+    warning("You passed a multiband RasterBrick object as one of the layers for a multilayer argument.\n",
+            "It is expected that only the first band will be used by QGIS!\n",
+            "If you need each band to be processed, you need to extract the bands and pass them as ",
+            "separate layers to the algorithm (either by repeating the argument, or by wrapping ",
+            "in qgis_list_input()).",
+            call. = FALSE)
+  }
+
   # try to use a filename if present
-  if (x@file@name != "") {
-    file_ext <- stringr::str_to_lower(tools::file_ext(x@file@name))
-    if (file_ext %in% c("grd", "asc", "sdat", "rst", "nc", "tif", "tiff", "gtiff", "envi", "bil", "img")) {
-      return(x@file@name)
+  file <- raster::filename(x)
+  if (file != "") {
+    accepted_ext <- c("grd", "asc", "sdat", "rst", "nc", "tif", "tiff", "gtiff", "envi", "bil", "img")
+    file_ext <- stringr::str_to_lower(tools::file_ext(file))
+    if (file_ext %in% accepted_ext) {
+      names_match <- identical(names(x), names(raster::brick(file)))
+      if (names_match) {
+        return(file)
+      } else if (raster::nlayers(x) > 1L) {
+        message(glue(
+          "Rewriting the multi-band RasterBrick object as a temporary file before passing to QGIS, since ",
+          "its bands (names, order, selection) differ from those in the source file '{ file }'."
+        ))
+      } else {
+        message(glue(
+          "Rewriting the '{ names(x) }' band of '{ file }' as a temporary file, otherwise ",
+          "QGIS may use another or all bands of the source file if ",
+          "passing its filepath."
+        ))
+      }
     }
   }
 

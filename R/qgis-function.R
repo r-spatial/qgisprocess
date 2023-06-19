@@ -170,9 +170,8 @@ qgis_run_algorithm_p.qgis_result <- function(
       )
     )
   )
-  output <- unclass(.data[[.select]])
   fun <- qgis_function(algorithm)
-  result <- fun(output, ..., .quiet = .quiet)
+  result <- fun(.data[[.select]], ..., .quiet = .quiet)
   if (.clean) qgis_clean_result(.data)
   result
 }
@@ -186,9 +185,6 @@ qgis_run_algorithm_p.default <- function(
     .select = "OUTPUT",
     .clean = TRUE,
     .quiet = TRUE) {
-  if (stringr::str_detect(class(.data), "^qgis_output")) {
-    .data <- unclass(.data)
-  }
   fun <- qgis_function(algorithm)
   fun(.data, ..., .quiet = .quiet)
 }
