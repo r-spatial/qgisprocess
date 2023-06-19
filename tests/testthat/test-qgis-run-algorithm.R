@@ -107,15 +107,13 @@ test_that(glue("qgis_run_algorithm() runs with qgis:relief, for which the accept
   relief_args <- qgis_get_argument_specs("qgis:relief")
   expect_identical(relief_args["COLORS", ]$acceptable_values, list(NULL))
 
-  capture.output({
-    result <- qgis_run_algorithm(
-      "qgis:relief",
-      INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess"),
-      Z_FACTOR = 1,
-      AUTO_COLORS = FALSE,
-      COLORS = "-0.5, 0, 170, 0, 0; 0, 0.5, 85, 255, 255; 0.5, 1, 0, 255, 0; 1, 2.5, 85, 85, 255"
-    )
-  })
+  result <- qgis_run_algorithm(
+    "qgis:relief",
+    INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess"),
+    Z_FACTOR = 1,
+    AUTO_COLORS = FALSE,
+    COLORS = "-0.5, 0, 170, 0, 0; 0, 0.5, 85, 255, 255; 0.5, 1, 0, 255, 0; 1, 2.5, 85, 85, 255"
+  )
 
   expect_s3_class(result$OUTPUT, "qgis_outputRaster")
   expect_s3_class(result$FREQUENCY_DISTRIBUTION, "qgis_outputFile")
@@ -142,14 +140,12 @@ test_that(glue("qgis_run_algorithm() succeeds when it needs a QGIS project{input
 
   tmp_pdf <- qgis_tmp_file(".pdf")
 
-  capture.output({
-    result <- qgis_run_algorithm(
-      "native:printlayouttopdf",
-      LAYOUT = "Layout 1",
-      OUTPUT = tmp_pdf,
-      PROJECT_PATH = system.file("extdata/longlake.qgs", package = "qgisprocess")
-    )
-  })
+  result <- qgis_run_algorithm(
+    "native:printlayouttopdf",
+    LAYOUT = "Layout 1",
+    OUTPUT = tmp_pdf,
+    PROJECT_PATH = system.file("extdata/longlake.qgs", package = "qgisprocess")
+  )
 
   expect_true(file.exists(tmp_pdf))
   expect_identical(tmp_pdf, as.character(result$OUTPUT))
