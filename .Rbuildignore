@@ -7,5 +7,6 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^misc/algorithms$
 ^codecov\.yml$
 ^LICENSE\.md$

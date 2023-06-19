@@ -17,6 +17,6 @@ algorithms$description <- vapply(algorithms$algorithm, qgis_get_description, cha
 alg_outputs <- tidyr::unnest(algorithms[c("algorithm", "outputs")], outputs)
 alg_arguments <- tidyr::unnest(algorithms[c("algorithm", "arguments")], arguments)
 
-readr::write_csv(qgis_algorithms(), "inst/algorithms/algorithms.csv")
-readr::write_csv(alg_outputs, "inst/algorithms/outputs.csv")
-readr::write_csv(alg_arguments, "inst/algorithms/arguments.csv")
+readr::write_csv(qgis_algorithms(), "misc/algorithms/algorithms.csv")
+readr::write_csv(alg_outputs, "misc/algorithms/outputs.csv")
+readr::write_csv(alg_arguments, "misc/algorithms/arguments.csv")
