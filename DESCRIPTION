@@ -76,8 +76,7 @@ Suggests:
     rprojroot,
     stringi,
     spDataLarge
-Remotes:
-    Nowosad/spDataLarge
+Additional_repositories: https://geocompr.r-universe.dev
 SystemRequirements: QGIS latest or long-term release (>= 3.28). Older QGIS 
   releases are not officially supported, but may work since QGIS 3.16.
 VignetteBuilder: knitr
