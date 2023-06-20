@@ -10,7 +10,7 @@
 [![R build
 status](https://github.com/r-spatial/qgisprocess/workflows/R-CMD-check/badge.svg)](https://github.com/r-spatial/qgisprocess/actions)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test
 coverage](https://codecov.io/gh/r-spatial/qgisprocess/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-spatial/qgisprocess/tree/main)
 <!-- badges: end -->
@@ -88,9 +88,9 @@ algorithms, retrieve their documentation, handle processing results,
 manage QGIS plugins, and more.
 
 Spatial layers can be passed to `qgis_run_algorithm()` as file paths but
-also as [sf](https://r-spatial.github.io/sf),
-[stars](https://r-spatial.github.io/stars),
-[terra](https://rspatial.github.io/terra) or
+also as [sf](https://r-spatial.github.io/sf/),
+[stars](https://r-spatial.github.io/stars/),
+[terra](https://rspatial.github.io/terra/) or
 [raster](https://cran.r-project.org/package=raster) objects.
 
 A structured overview of functions is available at
