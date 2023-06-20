@@ -29,6 +29,18 @@
 #' output element if the default `OUTPUT` or `output` element is not available?
 #' Only takes effect if `name` is equal to `OUTPUT` or `output`, but not found.
 #'
+#' @return A `qgis_output*` object.
+#'
+#' @examples
+#' if (has_qgis()) {
+#'   result <- qgis_run_algorithm(
+#'     "native:buffer",
+#'     INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'     DISTANCE = 10
+#'   )
+#'   qgis_extract_output(result)
+#' }
+#'
 #' @name qgis_extract_output
 
 #' @rdname qgis_extract_output

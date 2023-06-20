@@ -37,6 +37,9 @@ The \code{OUTPUT} or \code{output} element is taken if available and on conditio
 it inherits a specified class; otherwise falls back
 to the first element that inherits a specified class.}
 }
+\value{
+A \verb{qgis_output*} object.
+}
 \description{
 These functions extract one output element from the result of
 \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, potentially more than one in the case of
@@ -46,6 +49,17 @@ printed \code{qgis_result} object returned by \code{\link[=qgis_run_algorithm]{q
 class.
 
 \code{qgis_extract_output()} is an alias to \code{qgis_extract_output_by_name()}.
+}
+\examples{
+if (has_qgis()) {
+  result <- qgis_run_algorithm(
+    "native:buffer",
+    INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+    DISTANCE = 10
+  )
+  qgis_extract_output(result)
+}
+
 }
 \seealso{
 Other topics about accessing or managing processing results: 
