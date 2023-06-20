@@ -3,7 +3,7 @@
 #' `qgis_run()` offers full access to 'qgis_process'.
 #' Run `cat(qgis_run("--help")$stdout)` to get the command's help.
 #'
-#' @return
+#' @returns
 #' A [processx::run()] return value, i.e. a list with `status`, `stdout`,
 #'  `stderr` and `timeout` elements.
 #'

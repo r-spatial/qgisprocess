@@ -425,7 +425,7 @@ qgis_clean_argument.qgis_tempfile_arg <- function(value) {
 #'   the argument name, description, and acceptable values.
 #' @inheritParams qgis_run_algorithm
 #'
-#' @return A [list()] with an element for each input argument.
+#' @returns A [list()] with an element for each input argument.
 #'
 #' @examples
 #' # These became internal functions!
@@ -498,7 +498,7 @@ qgis_argument_spec_by_name <- function(algorithm, name,
 #' @param ... Named values for `qgis_dict_input()` or
 #'   unnamed values for `qgis_list_input()`.
 #'
-#' @return
+#' @returns
 #'   - `qgis_list_input()`: An object of class 'qgis_list_input'
 #'   - `qgis_dict_input()`: An object of class 'qgis_dict_input'
 #' @export

@@ -39,7 +39,7 @@
 #' @inheritParams qgis_run
 #' @inheritParams qgis_path
 #'
-#' @return The result of [processx::run()].
+#' @returns The result of [processx::run()].
 #'
 #' @examples
 #' if (has_qgis()) qgis_path()

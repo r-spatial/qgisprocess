@@ -13,7 +13,7 @@
 #'
 #' @param ext The file extension to be used.
 #'
-#' @return A character vector indicating the location of a
+#' @returns A character vector indicating the location of a
 #'   (not yet created) temporary file.
 #' @export
 #'

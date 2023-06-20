@@ -29,7 +29,7 @@
 #' output element if the default `OUTPUT` or `output` element is not available?
 #' Only takes effect if `name` is equal to `OUTPUT` or `output`, but not found.
 #'
-#' @return A `qgis_output*` object.
+#' @returns A `qgis_output*` object.
 #'
 #' @examples
 #' if (has_qgis()) {

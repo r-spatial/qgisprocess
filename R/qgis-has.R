@@ -11,7 +11,7 @@
 #' @note
 #' Only plugins that implement processing providers are supported.
 #'
-#' @return A logical, with length 1 in case of `has_qgis()`.
+#' @returns A logical, with length 1 in case of `has_qgis()`.
 #'
 #' @family topics about reporting the QGIS state
 #' @concept functions to manage and explore QGIS and qgisprocess

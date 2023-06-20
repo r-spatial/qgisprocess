@@ -18,7 +18,7 @@
 #' @param ... Only used by other functions calling this function.
 #' @inheritParams qgis_path
 #'
-#' @return
+#' @returns
 #' A tibble of algorithms, processing providers or plugins, with metadata.
 #'
 #' @export
@@ -223,7 +223,7 @@ qgis_query_algorithms <- function(quiet = FALSE) {
 #' @param group Regular expression to match the `group` value
 #' from the output of [qgis_algorithms()].
 #'
-#' @return A tibble.
+#' @returns A tibble.
 #'
 #' @examples
 #' if (has_qgis()) {
