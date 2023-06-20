@@ -23,6 +23,7 @@ jobs:
           - {os: macOS-latest, qgis: 'macos-brew', r: 'release', r-pkg-cache: 'v0'}
           - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release', r-pkg-cache: 'v0'}
           - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'release', r-pkg-cache: 'v0'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'devel', r-pkg-cache: 'v2'}
           - {os: ubuntu-22.04, qgis: 'ubuntugis', r: 'release', r-pkg-cache: 'v1'}
           - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', r-pkg-cache: 'v0'}
           - {os: ubuntu-22.04, qgis: 'ubuntu-ltr', r: 'release', r-pkg-cache: 'v0'}
