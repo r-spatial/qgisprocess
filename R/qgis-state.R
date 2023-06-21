@@ -261,13 +261,19 @@ abort_query_version <- function(lines) {
 #' `qgis_using_json_output(query = TRUE)` is needed for these settings to take
 #' effect if the package was loaded already.
 #'
-#'
 #' @inheritParams qgis_path
-#'
 #'
 #' @family topics about programming or debugging utilities
 #' @family topics about reporting the QGIS state
 #' @concept functions to manage and explore QGIS and qgisprocess
+#'
+#' @returns A logical of length 1.
+#'
+#' @examples
+#' if (has_qgis()) {
+#'   qgis_using_json_input()
+#'   qgis_using_json_output()
+#' }
 #'
 #' @export
 qgis_using_json_input <- function() {
