@@ -46,6 +46,16 @@ They are vectorized.
 \note{
 Only plugins that implement processing providers are supported.
 }
+\examples{
+has_qgis()
+if (has_qgis()) {
+  qgis_has_algorithm("native:filedownloader")
+  qgis_has_provider("native")
+  qgis_has_plugin(c("grassprovider", "processing_saga_nextgen"))
+}
+
+
+}
 \seealso{
 Other topics about reporting the QGIS state: 
 \code{\link{qgis_algorithms}()},

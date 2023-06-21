@@ -25,6 +25,15 @@
 #' Can be a vector of names.
 #' @inheritParams qgis_path
 #'
+#' @examples
+#' has_qgis()
+#' if (has_qgis()) {
+#'   qgis_has_algorithm("native:filedownloader")
+#'   qgis_has_provider("native")
+#'   qgis_has_plugin(c("grassprovider", "processing_saga_nextgen"))
+#' }
+#'
+#'
 #' @name has_qgis
 
 #' @rdname has_qgis
