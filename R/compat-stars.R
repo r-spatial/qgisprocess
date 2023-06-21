@@ -6,9 +6,8 @@
 #' @family topics about coercing processing output
 #' @family topics about accessing or managing processing results
 #'
-#' @param .x A result from [qgis_run_algorithm()] or one of the
-#' [qgis_extract_output()] functions.
 #' @param ... Arguments passed to [stars::read_stars()].
+#' @inheritParams qgis_as_raster
 #'
 #' @returns A `stars` or a `stars_proxy` object.
 #'
@@ -33,20 +32,20 @@
 
 #' @rdname st_as_stars
 # dynamically registered in zzz.R
-st_as_stars.qgis_outputRaster <- function(.x, ...) {
-  stars::read_stars(unclass(.x), ...)
+st_as_stars.qgis_outputRaster <- function(x, ...) {
+  stars::read_stars(unclass(x), ...)
 }
 
 #' @rdname st_as_stars
 # dynamically registered in zzz.R
-st_as_stars.qgis_outputLayer <- function(.x, ...) {
-  stars::read_stars(unclass(.x), ...)
+st_as_stars.qgis_outputLayer <- function(x, ...) {
+  stars::read_stars(unclass(x), ...)
 }
 
 #' @rdname st_as_stars
 # dynamically registered in zzz.R
-st_as_stars.qgis_result <- function(.x, ...) {
-  result <- qgis_extract_output_by_class(.x, c("qgis_outputRaster", "qgis_outputLayer"))
+st_as_stars.qgis_result <- function(x, ...) {
+  result <- qgis_extract_output_by_class(x, c("qgis_outputRaster", "qgis_outputLayer"))
   stars::read_stars(unclass(result), ...)
 }
 

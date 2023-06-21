@@ -9,12 +9,13 @@
 \usage{
 st_as_sf.qgis_result(x, ...)
 
-st_as_sf.qgis_outputVector(output, ...)
+st_as_sf.qgis_outputVector(x, ...)
 
-st_as_sf.qgis_outputLayer(output, ...)
+st_as_sf.qgis_outputLayer(x, ...)
 }
 \arguments{
-\item{x}{A result from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
+\item{x}{A \code{qgis_result} object from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} or a
+\verb{qgis_output*} object from one of the \code{\link[=qgis_extract_output]{qgis_extract_output()}} functions.}
 
 \item{...}{Arguments passed to \code{\link[sf:st_read]{sf::read_sf()}}.}
 }

@@ -7,15 +7,15 @@
 \alias{st_as_stars.qgis_result}
 \title{Convert a qgis_result object or one of its elements to a stars object}
 \usage{
-st_as_stars.qgis_outputRaster(.x, ...)
+st_as_stars.qgis_outputRaster(x, ...)
 
-st_as_stars.qgis_outputLayer(.x, ...)
+st_as_stars.qgis_outputLayer(x, ...)
 
-st_as_stars.qgis_result(.x, ...)
+st_as_stars.qgis_result(x, ...)
 }
 \arguments{
-\item{.x}{A result from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} or one of the
-\code{\link[=qgis_extract_output]{qgis_extract_output()}} functions.}
+\item{x}{A \code{qgis_result} object from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} or a
+\verb{qgis_output*} object from one of the \code{\link[=qgis_extract_output]{qgis_extract_output()}} functions.}
 
 \item{...}{Arguments passed to \code{\link[stars:read_stars]{stars::read_stars()}}.}
 }

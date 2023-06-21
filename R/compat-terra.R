@@ -6,8 +6,8 @@
 #' @family topics about coercing processing output
 #' @family topics about accessing or managing processing results
 #'
-#' @inheritParams qgis_as_raster
 #' @param ... Arguments passed to [terra::rast()].
+#' @inheritParams qgis_as_raster
 #'
 #' @returns A `SpatRaster` or a `SpatVector` object.
 #'
@@ -31,26 +31,26 @@
 
 #' @rdname qgis_as_terra
 #' @export
-qgis_as_terra <- function(output, ...) {
+qgis_as_terra <- function(x, ...) {
   UseMethod("qgis_as_terra")
 }
 
 #' @rdname qgis_as_terra
 #' @export
-qgis_as_terra.qgis_outputRaster <- function(output, ...) {
-  terra::rast(unclass(output), ...)
+qgis_as_terra.qgis_outputRaster <- function(x, ...) {
+  terra::rast(unclass(x), ...)
 }
 
 #' @rdname qgis_as_terra
 #' @export
-qgis_as_terra.qgis_outputLayer <- function(output, ...) {
-  terra::rast(unclass(output), ...)
+qgis_as_terra.qgis_outputLayer <- function(x, ...) {
+  terra::rast(unclass(x), ...)
 }
 
 #' @rdname qgis_as_terra
 #' @export
-qgis_as_terra.qgis_result <- function(output, ...) {
-  result <- qgis_extract_output_by_class(output, c("qgis_outputRaster", "qgis_outputLayer"))
+qgis_as_terra.qgis_result <- function(x, ...) {
+  result <- qgis_extract_output_by_class(x, c("qgis_outputRaster", "qgis_outputLayer"))
   terra::rast(unclass(result), ...)
 }
 

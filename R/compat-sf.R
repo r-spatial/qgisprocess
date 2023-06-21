@@ -6,8 +6,8 @@
 #' @family topics about coercing processing output
 #' @family topics about accessing or managing processing results
 #'
-#' @param x A result from [qgis_run_algorithm()].
 #' @param ... Arguments passed to [sf::read_sf()].
+#' @inheritParams qgis_as_raster
 #'
 #' @returns An `sf` object.
 #'
@@ -41,23 +41,23 @@ st_as_sf.qgis_result <- function(x, ...) {
 
 #' @rdname st_as_sf
 # dynamically registered in zzz.R
-st_as_sf.qgis_outputVector <- function(output, ...) {
-  if (grepl("\\|layer", output)) {
-    output_splitted <- strsplit(output, "\\|layer.*=")[[1]]
+st_as_sf.qgis_outputVector <- function(x, ...) {
+  if (grepl("\\|layer", x)) {
+    output_splitted <- strsplit(x, "\\|layer.*=")[[1]]
     sf::read_sf(output_splitted[1], output_splitted[2], ...)
   } else {
-    sf::read_sf(output, ...)
+    sf::read_sf(x, ...)
   }
 }
 
 #' @rdname st_as_sf
 # dynamically registered in zzz.R
-st_as_sf.qgis_outputLayer <- function(output, ...) {
-  if (grepl("\\|layer", output)) {
-    output_splitted <- strsplit(output, "\\|layer.*=")[[1]]
+st_as_sf.qgis_outputLayer <- function(x, ...) {
+  if (grepl("\\|layer", x)) {
+    output_splitted <- strsplit(x, "\\|layer.*=")[[1]]
     sf::read_sf(output_splitted[1], output_splitted[2], ...)
   } else {
-    sf::read_sf(output, ...)
+    sf::read_sf(x, ...)
   }
 }
 
