@@ -13,7 +13,7 @@
 #' @concept main functions to access or manage processing results
 #' @family topics about accessing or managing processing results
 #'
-#' @param x An object returned by [qgis_run_algorithm()].
+#' @param x A `qgis_result` object returned by [qgis_run_algorithm()].
 #' @param which The index of an output.
 #' @param name The name of an output.
 #' @param class Character vector of classes.

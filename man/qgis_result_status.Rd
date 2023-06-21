@@ -16,7 +16,7 @@ qgis_result_stderr(x)
 qgis_result_args(x)
 }
 \arguments{
-\item{x}{An object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
+\item{x}{A \code{qgis_result} object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
 }
 \description{
 A \code{qgis_result} object is a list that, next to the output elements,

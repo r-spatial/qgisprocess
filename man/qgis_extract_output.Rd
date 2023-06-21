@@ -16,7 +16,7 @@ qgis_extract_output_by_position(x, which)
 qgis_extract_output_by_class(x, class, single = TRUE)
 }
 \arguments{
-\item{x}{An object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
+\item{x}{A \code{qgis_result} object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
 
 \item{name}{The name of an output.}
 

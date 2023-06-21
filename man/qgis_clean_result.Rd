@@ -7,7 +7,7 @@
 qgis_clean_result(x)
 }
 \arguments{
-\item{x}{An object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
+\item{x}{A \code{qgis_result} object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
 }
 \description{
 Deletes any temporary files that are defined in a
