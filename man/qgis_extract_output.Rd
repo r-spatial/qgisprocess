@@ -57,6 +57,15 @@ if (has_qgis()) {
     INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
     DISTANCE = 10
   )
+
+  # the print() method of a qgis_result only prints its output elements:
+  result
+
+  # nevertheless, more elements are included:
+  length(result)
+  names(result)
+
+  # extract the output element 'OUTPUT':
   qgis_extract_output(result)
 }
 
