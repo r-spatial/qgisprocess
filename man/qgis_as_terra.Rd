@@ -39,7 +39,7 @@ if (has_qgis()) {
   )
 
   # most direct approach, autoselecting a `qgis_outputRaster` type
-  # output from the `result` object and converting to RasterLayer:
+  # output from the `result` object and reading as SpatRaster:
   qgis_as_terra(result)
 
   # if you need more control, extract the needed output element first:

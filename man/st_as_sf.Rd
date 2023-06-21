@@ -37,7 +37,7 @@ if (has_qgis()) {
   )
 
   # most direct approach, autoselecting a `qgis_outputVector` type
-  # output from the `result` object and converting to RasterLayer:
+  # output from the `result` object and reading as sf object:
   sf::st_as_sf(result)
 
   # if you need more control, extract the needed output element first:
