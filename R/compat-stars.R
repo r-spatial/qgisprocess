@@ -10,6 +10,25 @@
 #' [qgis_extract_output()] functions.
 #' @param ... Arguments passed to [stars::read_stars()].
 #'
+#' @returns A `stars` or a `stars_proxy` object.
+#'
+#' @examples
+#' if (has_qgis()) {
+#'   result <- qgis_run_algorithm(
+#'     "native:slope",
+#'     INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")
+#'   )
+#'
+#'   # most direct approach, autoselecting a `qgis_outputRaster` type
+#'   # output from the `result` object and reading as stars or stars_proxy:
+#'   stars::st_as_stars(result)
+#'   stars::st_as_stars(result, proxy = TRUE)
+#'
+#'   # if you need more control, extract the needed output element first:
+#'   output_raster <- qgis_extract_output(result, "OUTPUT")
+#'   stars::st_as_stars(output_raster)
+#' }
+#'
 #' @name st_as_stars
 
 #' @rdname st_as_stars
