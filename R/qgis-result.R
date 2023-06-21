@@ -162,6 +162,22 @@ qgis_error_output_does_not_exist <- function(x, which) {
 #'
 #' @inheritParams qgis_extract_output
 #'
+#' @returns The `qgis_result` object passed to the function is returned
+#' invisibly.
+#'
+#' @examples
+#' if (has_qgis()) {
+#'   result <- qgis_run_algorithm(
+#'     "native:buffer",
+#'     INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'     DISTANCE = 10
+#'   )
+#'
+#'   file.exists(qgis_extract_output(result))
+#'   qgis_clean_result(result)
+#'   file.exists(qgis_extract_output(result))
+#' }
+#'
 #' @export
 qgis_clean_result <- function(x) {
   args_chr <- as.character(x$.args[vapply(x$.args, is.character, logical(1))])
