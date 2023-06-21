@@ -8,22 +8,58 @@
 #'
 #' @param x A result from [qgis_run_algorithm()].
 #' @param ... Arguments passed to [sf::read_sf()].
+#'
+#' @returns An `sf` object.
+#'
+#' @examples
+#' if (has_qgis()) {
+#'   result <- qgis_run_algorithm(
+#'     "native:buffer",
+#'     INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'     DISTANCE = 10
+#'   )
+#'
+#'   # most direct approach, autoselecting a `qgis_outputVector` type
+#'   # output from the `result` object and converting to RasterLayer:
+#'   sf::st_as_sf(result)
+#'
+#'   # if you need more control, extract the needed output element first:
+#'   output_vector <- qgis_extract_output(result, "OUTPUT")
+#'   sf::st_as_sf(output_vector)
+#' }
+#'
 #' @name st_as_sf
 
 
 #' @rdname st_as_sf
 # dynamically registered in zzz.R
 st_as_sf.qgis_result <- function(x, ...) {
-  result <- qgis_extract_output_by_class(x, c("qgis_outputVector", "qgis_outputLayer"))
+  output <- qgis_extract_output_by_class(x, c("qgis_outputVector", "qgis_outputLayer"))
+  sf::st_as_sf(output, ...)
+}
 
-  if (grepl("\\|layer", result)) {
-    result_splitted <- strsplit(result, "\\|layer.*=")[[1]]
-    sf::read_sf(result_splitted[1], result_splitted[2], ...)
+
+#' @rdname st_as_sf
+# dynamically registered in zzz.R
+st_as_sf.qgis_outputVector <- function(output, ...) {
+  if (grepl("\\|layer", output)) {
+    output_splitted <- strsplit(output, "\\|layer.*=")[[1]]
+    sf::read_sf(output_splitted[1], output_splitted[2], ...)
   } else {
-    sf::read_sf(result, ...)
+    sf::read_sf(output, ...)
   }
 }
 
+#' @rdname st_as_sf
+# dynamically registered in zzz.R
+st_as_sf.qgis_outputLayer <- function(output, ...) {
+  if (grepl("\\|layer", output)) {
+    output_splitted <- strsplit(output, "\\|layer.*=")[[1]]
+    sf::read_sf(output_splitted[1], output_splitted[2], ...)
+  } else {
+    sf::read_sf(output, ...)
+  }
+}
 
 #' @keywords internal
 #' @export
