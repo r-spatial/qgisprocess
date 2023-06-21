@@ -32,6 +32,13 @@
 #' @inheritParams qgis_path
 #' @param names Optional character vector of plugin names.
 #'
+#' @returns A tibble of plugins, invisibly.
+#'
+#' @examples
+#' if (has_qgis()) {
+#'   qgis_enable_plugins("name_of_plugin")
+#' }
+#'
 #' @name qgis_enable_plugins
 
 
