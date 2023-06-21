@@ -40,6 +40,8 @@ if (has_qgis()) qgis_has_algorithm("native:filedownloader")
 if (has_qgis()) qgis_algorithms()
 if (has_qgis()) qgis_has_provider("native")
 if (has_qgis()) qgis_providers()
+if (has_qgis()) qgis_plugins(quiet = FALSE)
+if (has_qgis()) qgis_plugins(which = "disabled")
 
 }
 \seealso{
