@@ -14,6 +14,9 @@ qgis_function(algorithm, ...)
 These values are evaluated once and immediately, so you shouldn't
 call \code{\link[=qgis_tmp_file]{qgis_tmp_file()}} here.}
 }
+\value{
+A function.
+}
 \description{
 As opposed to \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, \code{\link[=qgis_function]{qgis_function()}} creates a callable
 function based on the argument metadata provided by \code{\link[=qgis_get_argument_specs]{qgis_get_argument_specs()}}.

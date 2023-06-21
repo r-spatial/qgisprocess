@@ -13,7 +13,7 @@
 #'   These values are evaluated once and immediately, so you shouldn't
 #'   call [qgis_tmp_file()] here.
 #'
-#' @export
+#' @returns A function.
 #'
 #' @examples
 #' if (has_qgis()) {
@@ -27,6 +27,7 @@
 #'   )
 #' }
 #'
+#' @export
 qgis_function <- function(algorithm, ...) {
   assert_qgis()
   assert_qgis_algorithm(algorithm)
