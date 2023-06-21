@@ -14,7 +14,7 @@ test_that("sf argument coercers work", {
   unlink(tmp_file)
 })
 
-test_that("sf objects can be extracted from a qgis_result", {
+test_that("sf result coercers work", {
   skip_if_not_installed("sf")
   skip_if_not(has_qgis())
 
@@ -39,6 +39,15 @@ test_that("sf objects can be extracted from a qgis_result", {
   expect_s3_class(result_sf, "sf")
 
   result_sf_alt <- sf::st_as_sf(result_alt)
+  expect_identical(result_sf, result_sf_alt)
+
+  output <- qgis_extract_output(result)
+  output_alt <- qgis_extract_output(result_alt)
+
+  result_sf <- sf::st_as_sf(output)
+  expect_s3_class(result_sf, "sf")
+
+  result_sf_alt <- sf::st_as_sf(output_alt)
   expect_identical(result_sf, result_sf_alt)
 
   result$OUTPUT <- NULL
