@@ -361,6 +361,13 @@ qgis_env <- function() {
 #'
 #' @family topics about programming or debugging utilities
 #'
+#' @returns `NULL`, invisibly.
+#'
+#' @examples
+#' if (FALSE) {
+#'   qgis_unconfigure()
+#' }
+#'
 #' @export
 qgis_unconfigure <- function() {
   qgisprocess_cache$path <- NULL
