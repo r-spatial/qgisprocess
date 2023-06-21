@@ -18,7 +18,7 @@
 #' This can be useful in debugging.
 #' @param .raw_json_input The raw JSON to use as input in place of `...`.
 #'
-#' @export
+#' @returns A `qgis_result` object.
 #'
 #' @examples
 #' if (has_qgis()) {
@@ -29,6 +29,7 @@
 #'   )
 #' }
 #'
+#' @export
 qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = NULL,
                                .raw_json_input = NULL, .quiet = TRUE) {
   assert_qgis()

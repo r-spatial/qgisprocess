@@ -29,6 +29,9 @@ ellipsoid name for distance calculations.}
 \item{.quiet}{Use \code{FALSE} to get extra output from 'qgis_process'.
 This can be useful in debugging.}
 }
+\value{
+A \code{qgis_result} object.
+}
 \description{
 Runs an algorithm using 'qgis_process'.
 See the \href{https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html}{QGIS docs}
