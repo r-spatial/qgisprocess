@@ -199,6 +199,26 @@ qgis_clean_result <- function(x) {
 #'
 #' @inheritParams qgis_extract_output
 #'
+#' @returns
+#' - A number in case of `qgis_result_status()`.
+#' - A string in case of `qgis_result_stdout()` and `qgis_result_stderr()`.
+#' - A list in case of `qgis_result_args()`.
+#'
+#' @examples
+#' if (has_qgis()) {
+#'   result <- qgis_run_algorithm(
+#'     "native:buffer",
+#'     INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'     DISTANCE = 10
+#'   )
+#'
+#'   qgis_result_status(result)
+#'   stdout <-  qgis_result_stdout(result)
+#'   cat(substr(stdout, 1, 335))
+#'   qgis_result_stderr(result)
+#'   qgis_result_args(result)
+#' }
+#'
 #' @name qgis_result_status
 
 #' @rdname qgis_result_status
