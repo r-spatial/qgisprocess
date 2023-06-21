@@ -24,9 +24,22 @@ Defaults to \code{TRUE}; ignored if \code{debug = TRUE}.}
 If \code{TRUE}, also output the version of QGIS, the operating system and all
 relevant libraries, as reported by the 'qgis_process' command.}
 }
+\value{
+A string.
+}
 \description{
 \code{qgis_path()} returns the filepath of the 'qgis_process' command, while
 \code{qgis_version()} returns the QGIS version.
+}
+\examples{
+if (has_qgis()) {
+  qgis_path()
+  qgis_path(quiet = FALSE)
+  qgis_version()
+  qgis_version(full = FALSE)
+  qgis_version(debug = TRUE)
+}
+
 }
 \seealso{
 \code{\link[=qgis_configure]{qgis_configure()}}

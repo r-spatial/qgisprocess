@@ -18,6 +18,16 @@
 #' possibly useful for debugging.
 #' @param query Use `TRUE` to refresh the cached value.
 #'
+#' @returns A string.
+#'
+#' @examples
+#' if (has_qgis()) {
+#'   qgis_path()
+#'   qgis_path(quiet = FALSE)
+#'   qgis_version()
+#'   qgis_version(full = FALSE)
+#'   qgis_version(debug = TRUE)
+#' }
 #'
 #' @name qgis_path
 
