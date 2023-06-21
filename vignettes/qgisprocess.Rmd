@@ -24,13 +24,14 @@ can_build <- qgisprocess::has_qgis() &&
   all(qgisprocess::qgis_has_plugin(c(
     "grassprovider",
     "processing_saga_nextgen"
-  )))
+  ))) &&
+  requireNamespace("spDataLarge", quietly = TRUE)
 ```
 
 ```{r child=if (can_build) file.path(rprojroot::find_root(rprojroot::is_r_package), "man/vignette_childs/_qgisprocess.Rmd")}
 ```
 
 ```{r eval=!can_build, echo=FALSE, results="asis"}
-cat("This vignette has been built in absence of a QGIS installation or with a missing QGIS plugin.\n\n")
+cat("This vignette has been built in absence of a QGIS installation, with a missing QGIS plugin, or in absence of the spDataLarge package.\n\n")
 cat("Read it online at <https://r-spatial.github.io/qgisprocess/articles/qgisprocess.html>.")
 ```
