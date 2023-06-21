@@ -125,7 +125,8 @@ qgis_function <- function(algorithm, ...) {
 #'   These values are evaluated once and immediately, so you shouldn't
 #'   call [qgis_tmp_file()] here.
 #'
-#' @export
+#'
+#' @returns A `qgis_result` object.
 #'
 #' @examples
 #' if (has_qgis()) {
@@ -139,6 +140,7 @@ qgis_function <- function(algorithm, ...) {
 #'     )
 #' }
 #'
+#' @export
 qgis_run_algorithm_p <- function(
     .data,
     algorithm,

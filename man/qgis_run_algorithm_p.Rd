@@ -37,6 +37,9 @@ after processing?}
 \item{.quiet}{Use \code{FALSE} to get extra output from 'qgis_process'.
 This can be useful in debugging.}
 }
+\value{
+A \code{qgis_result} object.
+}
 \description{
 \code{\link[=qgis_run_algorithm_p]{qgis_run_algorithm_p()}} wraps \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, passing
 its first argument to the first argument of the QGIS \code{algorithm}.
