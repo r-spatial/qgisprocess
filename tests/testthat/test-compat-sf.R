@@ -18,6 +18,7 @@ test_that("sf result coercers work", {
 
   result <- buffer_longlake(OUTPUT = qgis_tmp_vector())
   result_alt <- buffer_longlake(OUTPUT = "ogr:dbname=llbuffer.gpkg table=llbuffer")
+  on.exit(unlink("llbuffer.gpkg"))
 
   result_sf <- sf::st_as_sf(result)
   expect_s3_class(result_sf, "sf")
@@ -35,7 +36,6 @@ test_that("sf result coercers work", {
   expect_identical(result_sf, result_sf_alt)
 
   result$OUTPUT <- NULL
-  unlink("llbuffer.gpkg")
   expect_error(sf::st_as_sf(result), "Can't extract object.")
 })
 
