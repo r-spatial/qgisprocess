@@ -33,12 +33,32 @@ qgis_as_brick(output, ...)
 
 \item{...}{Arguments passed to \code{\link[raster:raster]{raster::raster()}} or \code{\link[raster:brick]{raster::brick()}}.}
 }
+\value{
+A \code{RasterLayer} or a \code{RasterBrick} object.
+}
 \description{
 Convert a qgis_result object or one of its elements to a raster object
 }
 \note{
 Just use \code{qgis_as_raster()} and \code{qgis_as_brick()} in R scripts;
 it will use the correct method.
+}
+\examples{
+if (has_qgis()) {
+  result <- qgis_run_algorithm(
+    "native:slope",
+    INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")
+  )
+
+  # most direct approach, autoselecting a `qgis_outputRaster` type
+  # output from the `result` object and converting to RasterLayer:
+  qgis_as_raster(result)
+
+  # if you need more control, extract the needed output element first:
+  output_raster <- qgis_extract_output(result, "OUTPUT")
+  qgis_as_raster(output_raster)
+}
+
 }
 \seealso{
 Other topics about coercing processing output: 
