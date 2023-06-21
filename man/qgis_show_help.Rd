@@ -30,9 +30,12 @@ qgis_get_output_specs(algorithm)
 Get detailed information about one algorithm
 }
 \examples{
-if (has_qgis()) qgis_show_help("native:filedownloader")
-if (has_qgis()) qgis_get_description("native:filedownloader")
-if (has_qgis()) qgis_get_argument_specs("native:filedownloader")
+if (has_qgis()) {
+  qgis_get_description("native:filedownloader")
+  qgis_get_argument_specs("native:filedownloader")
+  qgis_get_output_specs("native:filedownloader")
+  qgis_show_help("native:filedownloader")
+}
 
 }
 \seealso{

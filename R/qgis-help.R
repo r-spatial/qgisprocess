@@ -11,9 +11,12 @@
 #' - `qgis_show_help()`: the algorithm name, invisibly.
 #'
 #' @examples
-#' if (has_qgis()) qgis_show_help("native:filedownloader")
-#' if (has_qgis()) qgis_get_description("native:filedownloader")
-#' if (has_qgis()) qgis_get_argument_specs("native:filedownloader")
+#' if (has_qgis()) {
+#'   qgis_get_description("native:filedownloader")
+#'   qgis_get_argument_specs("native:filedownloader")
+#'   qgis_get_output_specs("native:filedownloader")
+#'   qgis_show_help("native:filedownloader")
+#' }
 #'
 #' @export
 qgis_show_help <- function(algorithm) {
