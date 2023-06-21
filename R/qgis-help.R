@@ -5,13 +5,17 @@
 #' @param algorithm A qualified algorithm name
 #' (e.g., `"native:buffer"`).
 #'
-#' @export
+#' @returns
+#' - `qgis_get_description()`: a string.
+#' - `qgis_get_argument_specs()`, `qgis_get_output_specs()`: a tibble.
+#' - `qgis_show_help()`: the algorithm name, invisibly.
 #'
 #' @examples
 #' if (has_qgis()) qgis_show_help("native:filedownloader")
 #' if (has_qgis()) qgis_get_description("native:filedownloader")
 #' if (has_qgis()) qgis_get_argument_specs("native:filedownloader")
 #'
+#' @export
 qgis_show_help <- function(algorithm) {
   cat(qgis_help_text(algorithm))
   cat("\n")
