@@ -253,9 +253,9 @@ To pass multiple layers to one argument, you can either repeat the corresponding
 rp_tp <- qgis_run_algorithm(
   "sagang:addrastervaluestopoints",
   SHAPES = random_points,
-  GRIDS = info$aspect[[1]],
-  GRIDS = info$slope[[1]],
-  GRIDS = info$tcurvature[[1]],
+  GRIDS = qgis_extract_output(info, "aspect"),
+  GRIDS = qgis_extract_output(info, "slope"),
+  GRIDS = qgis_extract_output(info, "tcurvature"),
   RESAMPLING = 0)
 ```
 
@@ -266,7 +266,11 @@ One could use the `list()` command but it is recommendended to use the `qgis_lis
 rp_tp <- qgis_run_algorithm(
   "sagang:addrastervaluestopoints",
   SHAPES = random_points,
-  GRIDS = qgis_list_input(info$aspect[[1]], info$slope[[1]], info$tcurvature[[1]]),
+  GRIDS = qgis_list_input(
+    qgis_extract_output(info, "aspect"),
+    qgis_extract_output(info, "slope"),
+    qgis_extract_output(info, "tcurvature")
+  ),
   RESAMPLING = 0)
 ```
 
@@ -312,7 +316,7 @@ For example, intermediate results remain on disk for the duration of your R sess
 ```{r native pipe}
 result <- qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem, 
                          METHOD = 1) |>
-  _$DEM_PREPROC[1] |>
+  qgis_extract_output("DEM_PREPROC") |>
   qgis_run_algorithm(algorithm = "sagang:sagawetnessindex",
                      DEM = _)
 
