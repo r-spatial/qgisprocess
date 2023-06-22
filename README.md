@@ -149,9 +149,28 @@ are translated to string processing arguments:
 
 ![](man/figures/qgis-buffer.png)
 
-A list of available algorithms can be found using `qgis_algorithms()`.
-When using R interactively, it may be useful to use
-`View(qgis_algorithms())` to search.
+You can search for algorithms with `qgis_search_algorithms()` (string
+matching with regex).
+
+``` r
+qgis_search_algorithms(algorithm = "buffer", group = "[Vv]ector")
+#> # A tibble: 11 × 5
+#>    provider provider_title    group                algorithm     algorithm_title
+#>    <chr>    <chr>             <chr>                <chr>         <chr>          
+#>  1 gdal     GDAL              Vector geoprocessing gdal:bufferv… Buffer vectors 
+#>  2 gdal     GDAL              Vector geoprocessing gdal:oneside… One side buffer
+#>  3 grass7   GRASS             Vector (v.*)         grass7:v.buf… v.buffer       
+#>  4 native   QGIS (native c++) Vector geometry      native:buffer Buffer         
+#>  5 native   QGIS (native c++) Vector geometry      native:buffe… Variable width…
+#>  6 native   QGIS (native c++) Vector geometry      native:multi… Multi-ring buf…
+#>  7 native   QGIS (native c++) Vector geometry      native:singl… Single sided b…
+#>  8 native   QGIS (native c++) Vector geometry      native:taper… Tapered buffers
+#>  9 native   QGIS (native c++) Vector geometry      native:wedge… Create wedge b…
+#> 10 qgis     QGIS              Vector geometry      qgis:variabl… Variable dista…
+#> 11 sagang   SAGA Next Gen     Vector general       sagang:shape… Shapes buffer
+```
+
+A full list of available algorithms is returned by `qgis_algorithms()`.
 
 ``` r
 qgis_algorithms()

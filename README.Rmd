@@ -103,7 +103,13 @@ It may also be useful to run an algorithm in the QGIS GUI and examine the consol
 
 ![](man/figures/qgis-buffer.png)
 
-A list of available algorithms can be found using `qgis_algorithms()`. When using R interactively, it may be useful to use `View(qgis_algorithms())` to search.
+You can search for algorithms with `qgis_search_algorithms()` (string matching with regex).
+
+```{r}
+qgis_search_algorithms(algorithm = "buffer", group = "[Vv]ector")
+```
+
+A full list of available algorithms is returned by `qgis_algorithms()`.
 
 ```{r}
 qgis_algorithms()
