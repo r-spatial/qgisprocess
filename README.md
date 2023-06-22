@@ -15,8 +15,9 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 coverage](https://codecov.io/gh/r-spatial/qgisprocess/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-spatial/qgisprocess/tree/main)
 <!-- badges: end -->
 
-The goal of **qgisprocess** is to provide an R interface to the popular
-and open source desktop geographic information system (GIS) program
+The goal of **qgisprocess** is to provide an R interface to the
+geoprocessing algorithms of the popular and open source desktop
+geographic information system (GIS) program
 [QGIS](https://qgis.org/en/site/). The package is a re-implementation of
 functionality provided by the archived
 [RQGIS](https://cran.r-project.org/package=RQGIS) package, which was
