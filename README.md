@@ -16,10 +16,9 @@ coverage](https://codecov.io/gh/r-spatial/qgisprocess/branch/main/graph/badge.sv
 <!-- badges: end -->
 
 The goal of **qgisprocess** is to provide an R interface to the
-geoprocessing algorithms of the popular and open source desktop
-geographic information system (GIS) program
-[QGIS](https://qgis.org/en/site/). The package is a re-implementation of
-functionality provided by the archived
+geoprocessing algorithms of [QGIS](https://qgis.org/en/site/), a popular
+and open source desktop geographic information system (GIS) program. The
+package is a re-implementation of functionality provided by the archived
 [RQGIS](https://cran.r-project.org/package=RQGIS) package, which was
 partially revived in the [RQGIS3](https://github.com/r-spatial/RQGIS3)
 package.
