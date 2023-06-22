@@ -68,7 +68,11 @@ Next, let's check which plugins are at our disposal:
 qgis_plugins()
 ```
 
-Since we will use GRASS and SAGA later on, let's enable them (of course, this implies that you have already installed GRASS and SAGA version > 7 on your system):
+Since we will use GRASS and SAGA later on, you must have GRASS and SAGA version > 7 installed on your system.
+You also need to install the third-party plugin 'SAGA Next Generation' in the QGIS GUI.
+The GRASS provider plugin is already built-in in QGIS.
+
+Then, let's enable both plugins:
 
 ```{r enable-plugins, message=FALSE}
 qgis_enable_plugins(c("grassprovider", "processing_saga_nextgen"))
@@ -236,7 +240,7 @@ r <- lapply(info[nms], \(x) as.numeric(qgis_as_terra(x))) |>
   rast()
 ```
 
-Since we have now many terrain attributes at our disposal, let us take the opportunity to add their values to points laying on top of them with the help of the SAGA function `sagang:addrastervaluestopoints`.
+Since we have now many terrain attributes at our disposal, let us take the opportunity to add their values to points laying on top of them with the help of the SAGA algorithm `sagang:addrastervaluestopoints`.
 
 ```{r addrastertopoints-args}
 qgis_get_argument_specs("sagang:addrastervaluestopoints")
