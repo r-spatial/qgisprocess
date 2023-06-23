@@ -20,14 +20,12 @@
 #'
 #' @returns A `qgis_result` object.
 #'
-#' @examples
-#' if (has_qgis()) {
-#'   qgis_run_algorithm(
-#'     "native:buffer",
-#'     INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
-#'     DISTANCE = 10
-#'   )
-#' }
+#' @examplesIf has_qgis()
+#' qgis_run_algorithm(
+#'   "native:buffer",
+#'   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'   DISTANCE = 10
+#' )
 #'
 #' @export
 qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = NULL,

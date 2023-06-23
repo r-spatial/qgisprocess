@@ -20,14 +20,12 @@
 #'
 #' @returns A string.
 #'
-#' @examples
-#' if (has_qgis()) {
-#'   qgis_path()
-#'   qgis_path(quiet = FALSE)
-#'   qgis_version()
-#'   qgis_version(full = FALSE)
-#'   qgis_version(debug = TRUE)
-#' }
+#' @examplesIf has_qgis()
+#' qgis_path()
+#' qgis_path(quiet = FALSE)
+#' qgis_version()
+#' qgis_version(full = FALSE)
+#' qgis_version(debug = TRUE)
 #'
 #' @name qgis_path
 
@@ -269,11 +267,9 @@ abort_query_version <- function(lines) {
 #'
 #' @returns A logical of length 1.
 #'
-#' @examples
-#' if (has_qgis()) {
-#'   qgis_using_json_input()
-#'   qgis_using_json_output()
-#' }
+#' @examplesIf has_qgis()
+#' qgis_using_json_input()
+#  qgis_using_json_output()
 #'
 #' @export
 qgis_using_json_input <- function() {

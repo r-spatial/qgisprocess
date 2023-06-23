@@ -48,11 +48,9 @@ Only plugins that implement processing providers are supported.
 }
 \examples{
 has_qgis()
-if (has_qgis()) {
-  qgis_has_algorithm("native:filedownloader")
-  qgis_has_provider("native")
-  qgis_has_plugin(c("grassprovider", "processing_saga_nextgen"))
-}
+if (has_qgis()) qgis_has_algorithm("native:filedownloader")
+if (has_qgis()) qgis_has_provider("native")
+if (has_qgis()) qgis_has_plugin(c("grassprovider", "processing_saga_nextgen"))
 
 
 }

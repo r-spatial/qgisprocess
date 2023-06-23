@@ -32,14 +32,13 @@ A string.
 \code{qgis_version()} returns the QGIS version.
 }
 \examples{
-if (has_qgis()) {
-  qgis_path()
-  qgis_path(quiet = FALSE)
-  qgis_version()
-  qgis_version(full = FALSE)
-  qgis_version(debug = TRUE)
-}
-
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+qgis_path()
+qgis_path(quiet = FALSE)
+qgis_version()
+qgis_version(full = FALSE)
+qgis_version(debug = TRUE)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=qgis_configure]{qgis_configure()}}

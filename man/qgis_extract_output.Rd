@@ -51,24 +51,23 @@ class.
 \code{qgis_extract_output()} is an alias to \code{qgis_extract_output_by_name()}.
 }
 \examples{
-if (has_qgis()) {
-  result <- qgis_run_algorithm(
-    "native:buffer",
-    INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
-    DISTANCE = 10
-  )
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+result <- qgis_run_algorithm(
+  "native:buffer",
+  INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+  DISTANCE = 10
+)
 
-  # the print() method of a qgis_result only prints its output elements:
-  result
+# the print() method of a qgis_result only prints its output elements:
+result
 
-  # nevertheless, more elements are included:
-  length(result)
-  names(result)
+# nevertheless, more elements are included:
+length(result)
+names(result)
 
-  # extract the output element 'OUTPUT':
-  qgis_extract_output(result)
-}
-
+# extract the output element 'OUTPUT':
+qgis_extract_output(result)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other topics about accessing or managing processing results: 

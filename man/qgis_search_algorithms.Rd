@@ -33,14 +33,13 @@ accepted.
 Have a look at \code{\link[stringi:about_search_regex]{stringi::search_regex()}} to get a nice overview.
 }
 \examples{
-if (has_qgis()) {
-  qgis_search_algorithms(
-    algorithm = "point.*line",
-    provider = "^native$"
-  )
-}
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+qgis_search_algorithms(
+  algorithm = "point.*line",
+  provider = "^native$"
+)
 
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other topics about information on algorithms & processing providers: 

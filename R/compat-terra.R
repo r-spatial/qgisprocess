@@ -11,21 +11,19 @@
 #'
 #' @returns A `SpatRaster` or a `SpatVector` object.
 #'
-#' @examples
-#' if (has_qgis()) {
-#'   result <- qgis_run_algorithm(
-#'     "native:slope",
-#'     INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")
-#'   )
+#' @examplesIf has_qgis()
+#' result <- qgis_run_algorithm(
+#'   "native:slope",
+#'   INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")
+#' )
 #'
-#'   # most direct approach, autoselecting a `qgis_outputRaster` type
-#'   # output from the `result` object and reading as SpatRaster:
-#'   qgis_as_terra(result)
+#' # most direct approach, autoselecting a `qgis_outputRaster` type
+#' # output from the `result` object and reading as SpatRaster:
+#' qgis_as_terra(result)
 #'
-#'   # if you need more control, extract the needed output element first:
-#'   output_raster <- qgis_extract_output(result, "OUTPUT")
-#'   qgis_as_terra(output_raster)
-#' }
+#' # if you need more control, extract the needed output element first:
+#' output_raster <- qgis_extract_output(result, "OUTPUT")
+#' qgis_as_terra(output_raster)
 #'
 #' @name qgis_as_terra
 

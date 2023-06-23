@@ -30,22 +30,21 @@ Just use \code{st_as_stars()} in R scripts, it will use the correct
 method.
 }
 \examples{
-if (has_qgis()) {
-  result <- qgis_run_algorithm(
-    "native:slope",
-    INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")
-  )
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+result <- qgis_run_algorithm(
+  "native:slope",
+  INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")
+)
 
-  # most direct approach, autoselecting a `qgis_outputRaster` type
-  # output from the `result` object and reading as stars or stars_proxy:
-  stars::st_as_stars(result)
-  stars::st_as_stars(result, proxy = TRUE)
+# most direct approach, autoselecting a `qgis_outputRaster` type
+# output from the `result` object and reading as stars or stars_proxy:
+stars::st_as_stars(result)
+stars::st_as_stars(result, proxy = TRUE)
 
-  # if you need more control, extract the needed output element first:
-  output_raster <- qgis_extract_output(result, "OUTPUT")
-  stars::st_as_stars(output_raster)
-}
-
+# if you need more control, extract the needed output element first:
+output_raster <- qgis_extract_output(result, "OUTPUT")
+stars::st_as_stars(output_raster)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other topics about coercing processing output: 

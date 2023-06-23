@@ -12,21 +12,19 @@
 #'
 #' @returns A `RasterLayer` or a `RasterBrick` object.
 #'
-#' @examples
-#' if (has_qgis()) {
-#'   result <- qgis_run_algorithm(
-#'     "native:slope",
-#'     INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")
-#'   )
+#' @examplesIf has_qgis()
+#' result <- qgis_run_algorithm(
+#'   "native:slope",
+#'   INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")
+#' )
 #'
-#'   # most direct approach, autoselecting a `qgis_outputRaster` type
-#'   # output from the `result` object and reading as RasterLayer:
-#'   qgis_as_raster(result)
+#' # most direct approach, autoselecting a `qgis_outputRaster` type
+#' # output from the `result` object and reading as RasterLayer:
+#' qgis_as_raster(result)
 #'
-#'   # if you need more control, extract the needed output element first:
-#'   output_raster <- qgis_extract_output(result, "OUTPUT")
-#'   qgis_as_raster(output_raster)
-#' }
+#' # if you need more control, extract the needed output element first:
+#' output_raster <- qgis_extract_output(result, "OUTPUT")
+#' qgis_as_raster(output_raster)
 #'
 #' @name qgis_as_raster
 

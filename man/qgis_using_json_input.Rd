@@ -41,11 +41,9 @@ Since the JSON output method is cached by the package,
 effect if the package was loaded already.
 }
 \examples{
-if (has_qgis()) {
-  qgis_using_json_input()
-  qgis_using_json_output()
-}
-
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+qgis_using_json_input()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other topics about programming or debugging utilities: 

@@ -11,22 +11,20 @@
 #'
 #' @returns An `sf` object.
 #'
-#' @examples
-#' if (has_qgis()) {
-#'   result <- qgis_run_algorithm(
-#'     "native:buffer",
-#'     INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
-#'     DISTANCE = 10
-#'   )
+#' @examplesIf has_qgis()
+#' result <- qgis_run_algorithm(
+#'   "native:buffer",
+#'   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'   DISTANCE = 10
+#' )
 #'
-#'   # most direct approach, autoselecting a `qgis_outputVector` type
-#'   # output from the `result` object and reading as sf object:
-#'   sf::st_as_sf(result)
+#' # most direct approach, autoselecting a `qgis_outputVector` type
+#' # output from the `result` object and reading as sf object:
+#' sf::st_as_sf(result)
 #'
-#'   # if you need more control, extract the needed output element first:
-#'   output_vector <- qgis_extract_output(result, "OUTPUT")
-#'   sf::st_as_sf(output_vector)
-#' }
+#' # if you need more control, extract the needed output element first:
+#' output_vector <- qgis_extract_output(result, "OUTPUT")
+#' sf::st_as_sf(output_vector)
 #'
 #' @name st_as_sf
 

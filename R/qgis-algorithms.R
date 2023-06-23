@@ -23,13 +23,11 @@
 #'
 #' @export
 #'
-#' @examples
-#' if (has_qgis()) {
-#'   qgis_algorithms()
-#'   qgis_providers()
-#'   qgis_plugins(quiet = FALSE)
-#'   qgis_plugins(which = "disabled")
-#' }
+#' @examplesIf has_qgis()
+#' qgis_algorithms()
+#' qgis_providers()
+#' qgis_plugins(quiet = FALSE)
+#' qgis_plugins(which = "disabled")
 #'
 qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
   if (query) {
@@ -227,13 +225,11 @@ qgis_query_algorithms <- function(quiet = FALSE) {
 #'
 #' @returns A tibble.
 #'
-#' @examples
-#' if (has_qgis()) {
-#'   qgis_search_algorithms(
-#'     algorithm = "point.*line",
-#'     provider = "^native$"
-#'   )
-#' }
+#' @examplesIf has_qgis()
+#' qgis_search_algorithms(
+#'   algorithm = "point.*line",
+#'   provider = "^native$"
+#' )
 #'
 #'
 #' @export

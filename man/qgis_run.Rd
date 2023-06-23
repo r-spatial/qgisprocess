@@ -27,11 +27,10 @@ A \code{\link[processx:run]{processx::run()}} return value, i.e. a list with \co
 Run \code{cat(qgis_run("--help")$stdout)} to get the command's help.
 }
 \examples{
-if (has_qgis()) {
-  processx_list <- qgis_run(args = "--help")
-  cat(processx_list$stdout)
-}
-
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+processx_list <- qgis_run(args = "--help")
+cat(processx_list$stdout)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other topics about programming or debugging utilities: 

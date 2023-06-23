@@ -39,14 +39,13 @@ for a detailed description of the algorithms provided
 'out of the box' on QGIS.
 }
 \examples{
-if (has_qgis()) {
-  qgis_run_algorithm(
-    "native:buffer",
-    INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
-    DISTANCE = 10
-  )
-}
-
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+qgis_run_algorithm(
+  "native:buffer",
+  INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+  DISTANCE = 10
+)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other functions to run one geoprocessing algorithm: 

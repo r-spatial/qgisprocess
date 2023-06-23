@@ -28,15 +28,14 @@ This package also provides the QGIS documentation of each processing
 algorithm as corresponding R function documentation.
 }
 \examples{
-if (has_qgis()) {
-  qgis_buffer <- qgis_function("native:buffer")
-  qgis_buffer(
-    system.file(
-      "longlake/longlake_depth.gpkg",
-      package = "qgisprocess"
-    ),
-    DISTANCE = 10
-  )
-}
-
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+qgis_buffer <- qgis_function("native:buffer")
+qgis_buffer(
+  system.file(
+    "longlake/longlake_depth.gpkg",
+    package = "qgisprocess"
+  ),
+  DISTANCE = 10
+)
+\dontshow{\}) # examplesIf}
 }

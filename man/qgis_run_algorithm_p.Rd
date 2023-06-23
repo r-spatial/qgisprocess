@@ -49,17 +49,16 @@ This makes it more convenient in a pipeline (hence '_p' in the name).
 Uses \code{\link[=qgis_function]{qgis_function()}} under the hood.
 }
 \examples{
-if (has_qgis()) {
-  system.file(
-    "longlake/longlake_depth.gpkg",
-    package = "qgisprocess"
-  ) |>
-    qgis_run_algorithm_p(
-      "native:buffer",
-      DISTANCE = 10
-    )
-}
-
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+system.file(
+  "longlake/longlake_depth.gpkg",
+  package = "qgisprocess"
+) |>
+  qgis_run_algorithm_p(
+    "native:buffer",
+    DISTANCE = 10
+  )
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other functions to run one geoprocessing algorithm: 

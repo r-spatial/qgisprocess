@@ -15,17 +15,15 @@
 #'
 #' @returns A function.
 #'
-#' @examples
-#' if (has_qgis()) {
-#'   qgis_buffer <- qgis_function("native:buffer")
-#'   qgis_buffer(
-#'     system.file(
-#'       "longlake/longlake_depth.gpkg",
-#'       package = "qgisprocess"
-#'     ),
-#'     DISTANCE = 10
-#'   )
-#' }
+#' @examplesIf has_qgis()
+#' qgis_buffer <- qgis_function("native:buffer")
+#' qgis_buffer(
+#'   system.file(
+#'     "longlake/longlake_depth.gpkg",
+#'     package = "qgisprocess"
+#'   ),
+#'   DISTANCE = 10
+#' )
 #'
 #' @export
 qgis_function <- function(algorithm, ...) {
@@ -129,17 +127,15 @@ qgis_function <- function(algorithm, ...) {
 #'
 #' @returns A `qgis_result` object.
 #'
-#' @examples
-#' if (has_qgis()) {
-#'   system.file(
-#'     "longlake/longlake_depth.gpkg",
-#'     package = "qgisprocess"
-#'   ) |>
-#'     qgis_run_algorithm_p(
-#'       "native:buffer",
-#'       DISTANCE = 10
-#'     )
-#' }
+#' @examplesIf has_qgis()
+#' system.file(
+#'   "longlake/longlake_depth.gpkg",
+#'   package = "qgisprocess"
+#' ) |>
+#'   qgis_run_algorithm_p(
+#'     "native:buffer",
+#'     DISTANCE = 10
+#'   )
 #'
 #' @export
 qgis_run_algorithm_p <- function(

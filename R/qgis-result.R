@@ -31,24 +31,22 @@
 #'
 #' @returns A `qgis_output*` object.
 #'
-#' @examples
-#' if (has_qgis()) {
-#'   result <- qgis_run_algorithm(
-#'     "native:buffer",
-#'     INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
-#'     DISTANCE = 10
-#'   )
+#' @examplesIf has_qgis()
+#' result <- qgis_run_algorithm(
+#'   "native:buffer",
+#'   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'   DISTANCE = 10
+#' )
 #'
-#'   # the print() method of a qgis_result only prints its output elements:
-#'   result
+#' # the print() method of a qgis_result only prints its output elements:
+#' result
 #'
-#'   # nevertheless, more elements are included:
-#'   length(result)
-#'   names(result)
+#' # nevertheless, more elements are included:
+#' length(result)
+#' names(result)
 #'
-#'   # extract the output element 'OUTPUT':
-#'   qgis_extract_output(result)
-#' }
+#' # extract the output element 'OUTPUT':
+#' qgis_extract_output(result)
 #'
 #' @name qgis_extract_output
 
@@ -165,18 +163,16 @@ qgis_error_output_does_not_exist <- function(x, which) {
 #' @returns The `qgis_result` object passed to the function is returned
 #' invisibly.
 #'
-#' @examples
-#' if (has_qgis()) {
-#'   result <- qgis_run_algorithm(
-#'     "native:buffer",
-#'     INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
-#'     DISTANCE = 10
-#'   )
+#' @examplesIf has_qgis()
+#' result <- qgis_run_algorithm(
+#'   "native:buffer",
+#'   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'   DISTANCE = 10
+#' )
 #'
-#'   file.exists(qgis_extract_output(result))
-#'   qgis_clean_result(result)
-#'   file.exists(qgis_extract_output(result))
-#' }
+#' file.exists(qgis_extract_output(result))
+#' qgis_clean_result(result)
+#' file.exists(qgis_extract_output(result))
 #'
 #' @export
 qgis_clean_result <- function(x) {
@@ -204,20 +200,18 @@ qgis_clean_result <- function(x) {
 #' - A string in case of `qgis_result_stdout()` and `qgis_result_stderr()`.
 #' - A list in case of `qgis_result_args()`.
 #'
-#' @examples
-#' if (has_qgis()) {
-#'   result <- qgis_run_algorithm(
-#'     "native:buffer",
-#'     INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
-#'     DISTANCE = 10
-#'   )
+#' @examplesIf has_qgis()
+#' result <- qgis_run_algorithm(
+#'   "native:buffer",
+#'   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'   DISTANCE = 10
+#' )
 #'
-#'   qgis_result_status(result)
-#'   stdout <-  qgis_result_stdout(result)
-#'   cat(substr(stdout, 1, 335))
-#'   qgis_result_stderr(result)
-#'   qgis_result_args(result)
-#' }
+#' qgis_result_status(result)
+#' stdout <-  qgis_result_stdout(result)
+#' cat(substr(stdout, 1, 335))
+#' qgis_result_stderr(result)
+#' qgis_result_args(result)
 #'
 #' @name qgis_result_status
 

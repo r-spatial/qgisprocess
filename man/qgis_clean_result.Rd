@@ -19,18 +19,17 @@ Deletes any temporary files that are defined in a
 These may comprise both input and output files.
 }
 \examples{
-if (has_qgis()) {
-  result <- qgis_run_algorithm(
-    "native:buffer",
-    INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
-    DISTANCE = 10
-  )
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+result <- qgis_run_algorithm(
+  "native:buffer",
+  INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+  DISTANCE = 10
+)
 
-  file.exists(qgis_extract_output(result))
-  qgis_clean_result(result)
-  file.exists(qgis_extract_output(result))
-}
-
+file.exists(qgis_extract_output(result))
+qgis_clean_result(result)
+file.exists(qgis_extract_output(result))
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other topics about accessing or managing processing results: 
