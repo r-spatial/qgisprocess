@@ -70,14 +70,15 @@ as_qgis_argument_stars <- function(x, spec = qgis_argument_spec(), use_json_inpu
   }
 
   if (!is.na(dim(x)["band"]) &&
-      dim(x)["band"] > 1L &&
-      spec$qgis_type == "multilayer") {
+    dim(x)["band"] > 1L &&
+    spec$qgis_type == "multilayer") {
     warning("You passed a multiband stars object as one of the layers for a multilayer argument.\n",
-            "It is expected that only the first band will be used by QGIS!\n",
-            "If you need each band to be processed, you need to extract the bands and pass them as ",
-            "separate layers to the algorithm (either by repeating the argument, or by wrapping ",
-            "in qgis_list_input()).",
-            call. = FALSE)
+      "It is expected that only the first band will be used by QGIS!\n",
+      "If you need each band to be processed, you need to extract the bands and pass them as ",
+      "separate layers to the algorithm (either by repeating the argument, or by wrapping ",
+      "in qgis_list_input()).",
+      call. = FALSE
+    )
   }
 
   # try to use a filename if present
@@ -89,9 +90,9 @@ as_qgis_argument_stars <- function(x, spec = qgis_argument_spec(), use_json_inpu
       # single-band case that normally originates from single-band data source:
       if (is.na(dim(x)["band"])) {
         if (is.na(dim(stars::read_stars(file, proxy = TRUE))["band"]) ||
-            dim(stars::read_stars(file, proxy = TRUE))["band"] == 1L) {
+          dim(stars::read_stars(file, proxy = TRUE))["band"] == 1L) {
           return(file)
-        # non-matching bands:
+          # non-matching bands:
         } else {
           message(glue(
             "Rewriting the single-band stars object as a temporary file before passing to QGIS, since ",
@@ -104,7 +105,7 @@ as_qgis_argument_stars <- function(x, spec = qgis_argument_spec(), use_json_inpu
       nrbands_match <- identical(
         dim(x)["band"],
         dim(stars::read_stars(file, proxy = TRUE))["band"]
-        )
+      )
       if (nrbands_match) {
         return(file)
       } else {

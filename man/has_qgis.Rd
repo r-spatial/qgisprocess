@@ -52,7 +52,6 @@ if (has_qgis()) qgis_has_algorithm("native:filedownloader")
 if (has_qgis()) qgis_has_provider("native")
 if (has_qgis()) qgis_has_plugin(c("grassprovider", "processing_saga_nextgen"))
 
-
 }
 \seealso{
 Other topics about reporting the QGIS state: 

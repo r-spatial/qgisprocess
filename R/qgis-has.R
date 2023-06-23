@@ -31,7 +31,6 @@
 #' if (has_qgis()) qgis_has_provider("native")
 #' if (has_qgis()) qgis_has_plugin(c("grassprovider", "processing_saga_nextgen"))
 #'
-#'
 #' @name has_qgis
 
 #' @rdname has_qgis

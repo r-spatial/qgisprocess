@@ -69,11 +69,12 @@ as_qgis_argument_terra <- function(x, spec = qgis_argument_spec(),
 
   if (terra::nlyr(x) > 1L && spec$qgis_type == "multilayer") {
     warning("You passed a multiband SpatRaster object as one of the layers for a multilayer argument.\n",
-            "It is expected that only the first band will be used by QGIS!\n",
-            "If you need each band to be processed, you need to extract the bands and pass them as ",
-            "separate layers to the algorithm (either by repeating the argument, or by wrapping ",
-            "in qgis_list_input()).",
-            call. = FALSE)
+      "It is expected that only the first band will be used by QGIS!\n",
+      "If you need each band to be processed, you need to extract the bands and pass them as ",
+      "separate layers to the algorithm (either by repeating the argument, or by wrapping ",
+      "in qgis_list_input()).",
+      call. = FALSE
+    )
   }
 
   # try to use a filename if present (behaviour changed around terra 1.5.12)

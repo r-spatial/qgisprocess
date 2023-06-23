@@ -231,17 +231,15 @@ qgis_query_algorithms <- function(quiet = FALSE) {
 #'   provider = "^native$"
 #' )
 #'
-#'
 #' @export
 qgis_search_algorithms <- function(
     algorithm = NULL,
     provider = NULL,
-    group = NULL
-) {
+    group = NULL) {
   assert_that(
     !is.null(algorithm) || !is.null(provider) || !is.null(group),
     msg = "You must provide at least one of the arguments."
-    )
+  )
   result <- qgis_algorithms(query = FALSE, quiet = TRUE)
   assert_that(inherits(result, "data.frame"))
   assert_that(
@@ -260,7 +258,7 @@ qgis_search_algorithms <- function(
     result <- result[
       stringr::str_detect(result$algorithm, algorithm) |
         stringr::str_detect(result$algorithm_title, algorithm),
-      ]
+    ]
   }
   if (!is.null(provider)) {
     assert_that(is.string(provider))
@@ -274,5 +272,4 @@ qgis_search_algorithms <- function(
     result <- result[stringr::str_detect(result$group, group), ]
   }
   result
-  }
-
+}

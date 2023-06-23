@@ -41,7 +41,7 @@ result <- qgis_run_algorithm(
 )
 
 qgis_result_status(result)
-stdout <-  qgis_result_stdout(result)
+stdout <- qgis_result_stdout(result)
 cat(substr(stdout, 1, 335))
 qgis_result_stderr(result)
 qgis_result_args(result)

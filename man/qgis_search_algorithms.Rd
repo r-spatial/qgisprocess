@@ -38,7 +38,6 @@ qgis_search_algorithms(
   algorithm = "point.*line",
   provider = "^native$"
 )
-
 \dontshow{\}) # examplesIf}
 }
 \seealso{
