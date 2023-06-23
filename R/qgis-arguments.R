@@ -14,6 +14,43 @@
 #'   create a blank `spec` for testing.
 #' @param .use_json_input,use_json_input TRUE if the arguments will be
 #'   serialized as JSON instead of serialized as a command-line argument.
+#'
+#' @examples
+#' if (has_qgis()) {
+#'   as_qgis_argument(
+#'     c("a", "b"),
+#'     spec = qgis_argument_spec(qgis_type = "range"),
+#'     use_json_input = FALSE
+#'   )
+#'   as_qgis_argument(
+#'     c(1, 2),
+#'     spec = qgis_argument_spec(qgis_type = "range"),
+#'     use_json_input = FALSE
+#'   )
+#'   as_qgis_argument(
+#'     c("a", "b"),
+#'     spec = qgis_argument_spec(qgis_type = "range"),
+#'     use_json_input = TRUE
+#'   )
+#'   as_qgis_argument(
+#'     c(1, 2),
+#'     spec = qgis_argument_spec(qgis_type = "range"),
+#'     use_json_input = TRUE
+#'   )
+#'   mat <- matrix(1:12, ncol = 3)
+#'   mat
+#'   as_qgis_argument(
+#'     mat,
+#'     spec = qgis_argument_spec(qgis_type = "matrix"),
+#'     use_json_input = FALSE
+#'   )
+#'   as_qgis_argument(
+#'     mat,
+#'     spec = qgis_argument_spec(qgis_type = "matrix"),
+#'     use_json_input = TRUE
+#'   )
+#' }
+#'
 #' @name as_qgis_argument
 
 
