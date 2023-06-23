@@ -18,34 +18,34 @@
 #' @examplesIf has_qgis()
 #' as_qgis_argument(
 #'   c("a", "b"),
-#'   spec = qgis_argument_spec(qgis_type = "range"),
+#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
 #'   use_json_input = FALSE
 #' )
 #' as_qgis_argument(
 #'   c(1, 2),
-#'   spec = qgis_argument_spec(qgis_type = "range"),
+#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
 #'   use_json_input = FALSE
 #' )
 #' as_qgis_argument(
 #'   c("a", "b"),
-#'   spec = qgis_argument_spec(qgis_type = "range"),
+#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
 #'   use_json_input = TRUE
 #' )
 #' as_qgis_argument(
 #'   c(1, 2),
-#'   spec = qgis_argument_spec(qgis_type = "range"),
+#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
 #'   use_json_input = TRUE
 #' )
 #' mat <- matrix(1:12, ncol = 3)
 #' mat
 #' as_qgis_argument(
 #'   mat,
-#'   spec = qgis_argument_spec(qgis_type = "matrix"),
+#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "matrix"),
 #'   use_json_input = FALSE
 #' )
 #' as_qgis_argument(
 #'   mat,
-#'   spec = qgis_argument_spec(qgis_type = "matrix"),
+#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "matrix"),
 #'   use_json_input = TRUE
 #' )
 #'
