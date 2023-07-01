@@ -60,7 +60,7 @@ Imports:
     jsonlite,
     rappdirs,
     stats
-URL: https://github.com/r-spatial/qgisprocess
+URL: https://r-spatial.github.io/qgisprocess, https://github.com/r-spatial/qgisprocess
 BugReports: https://github.com/r-spatial/qgisprocess/issues
 Suggests: 
     dplyr,
