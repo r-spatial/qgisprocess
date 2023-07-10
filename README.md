@@ -201,7 +201,7 @@ qgis_algorithms()
 ## Code of Conduct
 
 Please note that the qgisprocess project is released with a [Contributor
-Code of Conduct](CODE_OF_CONDUCT.html). By contributing to this project,
+Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
 you agree to abide by its terms.
 
 ## Further reading
