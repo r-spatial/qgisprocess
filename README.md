@@ -7,6 +7,8 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/qgisprocess)](https://CRAN.R-project.org/package=qgisprocess)
 [![R build
 status](https://github.com/r-spatial/qgisprocess/workflows/R-CMD-check/badge.svg)](https://github.com/r-spatial/qgisprocess/actions)
 [![Lifecycle:
