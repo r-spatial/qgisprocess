@@ -1,0 +1,12 @@
+citHeader("To cite `qgisprocess` in publications please use:")
+# begin checklist entry
+bibentry(
+  bibtype = "Manual",
+  title = "qgisprocess: Using QGIS processing algorithms from R. Version 0.0.0.9000",
+  author = c( author = c(person(given = "Dewey", family = "Dunnington"), person(given = "Floris", family = "Vanderhaeghe"), person(given = "Jan", family = "Caha"), person(given = "Jannes", family = "Muenchow"))),
+  year = 2023,
+  url = "https://r-spatial.github.io/qgisprocess",
+  textVersion = "Dunnington, Dewey; Vanderhaeghe, Floris; Caha, Jan; Muenchow, Jannes (2023) qgisprocess: using QGIS processing algorithms from R. Version 0.0.0.9000. https://github.com/r-spatial/qgisprocess/",
+  keywords = "R; package; QGIS",
+)
+# end checklist entry

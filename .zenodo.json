@@ -1,0 +1,62 @@
+{
+  "title": "R package qgisprocess: using QGIS processing algorithms from R",
+  "version": "0.0.0.9000",
+  "license": "GPL-3.0-or-later",
+  "upload_type": "software",
+  "description": "<p>R package that provides seamless access to the QGIS (https://qgis.org/en/site/) processing toolbox using the standalone ‘qgis_process’ command-line utility. Both native and third-party (plugin) processing providers are supported. Beside referring data sources from file, also common R-objects like sf, terra and stars objects are supported. URL: <a href=\"https://r-spatial.github.io/qgisprocess\">https://r-spatial.github.io/qgisprocess</a>.<\/p>",
+  "keywords": [
+    "R",
+    "package",
+    "QGIS"
+  ],
+  "access_right": "open",
+  "language": "eng",
+  "creators": [
+    {
+      "name": "Dunnington, Dewey",
+      "affiliation": "Voltron Data",
+      "orcid": "0000-0002-9415-4582"
+    },
+    {
+      "name": "Vanderhaeghe, Floris",
+      "affiliation": "Research Institute for Nature and Forest",
+      "orcid": "0000-0002-6378-6229"
+    },
+    {
+      "name": "Caha, Jan",
+      "orcid": "0000-0003-0165-0606"
+    },
+    {
+      "name": "Muenchow, Jannes",
+      "orcid": "0000-0001-7834-4717"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Vanderhaeghe, Floris",
+      "affiliation": "Research Institute for Nature and Forest",
+      "orcid": "0000-0002-6378-6229",
+      "type": "ContactPerson"
+    },
+    {
+      "name": "Barja, Antony",
+      "orcid": "0000-0001-5921-2858",
+      "type": "ProjectMember"
+    },
+    {
+      "name": "Lovelace, Robin",
+      "orcid": "0000-0001-5679-6536",
+      "type": "ProjectMember"
+    },
+    {
+      "name": "Nowosad, Jakub",
+      "orcid": "0000-0002-1057-3721",
+      "type": "ProjectMember"
+    }
+  ],
+  "communities": [
+    {
+      "identifier": "inbo"
+    }
+  ]
+}

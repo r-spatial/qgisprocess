@@ -3,9 +3,9 @@ Title: Using QGIS Processing Algorithms from R
 Version: 0.0.0.9000
 Authors@R: c(
     person("Dewey", "Dunnington", , "dewey@fishandwhistle.net", role = "aut",
-           comment = c(ORCID = "0000-0002-9415-4582")),
+           comment = c(ORCID = "0000-0002-9415-4582", affiliation = "Voltron Data")),
     person("Floris", "Vanderhaeghe", , "floris.vanderhaeghe@inbo.be", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-6378-6229")),
+           comment = c(ORCID = "0000-0002-6378-6229", affiliation = "Research Institute for Nature and Forest")),
     person("Jan", "Caha", , "jan.caha@outlook.com", role = "aut",
            comment = c(ORCID = "0000-0003-0165-0606")),
     person("Jannes", "Muenchow", , "malnamalja@gmx.de", role = "aut",
@@ -17,7 +17,7 @@ Authors@R: c(
     person("Jakub", "Nowosad", , "nowosad.jakub@gmail.com", role = "ctb",
            comment = c(ORCID = "0000-0002-1057-3721"))
   )
-Description: Provides seamless access to the QGIS
+Description: R package that provides seamless access to the QGIS
     (<https://qgis.org/en/site/>) processing toolbox using the standalone
     'qgis_process' command-line utility.  Both native and third-party
     (plugin) processing providers are supported.  Beside referring data
@@ -56,6 +56,8 @@ Suggests:
 VignetteBuilder: 
     knitr
 Additional_repositories: https://geocompr.r-universe.dev
+Config/checklist/communities: inbo
+Config/checklist/keywords: R; package; QGIS
 Encoding: UTF-8
 Language: en-GB
 LazyData: true
