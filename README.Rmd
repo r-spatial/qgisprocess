@@ -116,6 +116,9 @@ A full list of available algorithms is returned by `qgis_algorithms()`.
 qgis_algorithms()
 ```
 
+## Code of Conduct
+
+Please note that the qgisprocess project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
 ## Further reading
 
