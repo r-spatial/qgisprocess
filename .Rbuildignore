@@ -1,5 +1,6 @@
 ^.*\.Rproj$
 ^CITATION\.cff$
+^CODE_OF_CONDUCT\.md$
 ^Dockerfile$
 ^LICENSE.md$
 ^LICENSE\.md$
@@ -18,4 +19,3 @@
 ^misc/algorithms$
 ^pkgdown$
 ^qgisprocess\.Rproj$
-^CODE_OF_CONDUCT\.md$
