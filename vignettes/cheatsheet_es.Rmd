@@ -11,7 +11,7 @@ vignette: >
 
 _¡Tenga en cuenta que solo la hoja de trucos en inglés está actualizada actualmente!_
 
-Haga clic en la hoja de trucos para ampliar. -- [Descargar como PDF](https://github.com/ambarja/cheatsheet-qgisprocess/raw/main/cheatsheet/es/qgisprocess_es.pdf).
+Haga clic en la hoja de trucos para ampliar. -- [Descargar como PDF](https://github.com/ambarja/cheatsheet-qgisprocess/raw/main/pdf/spanish/qgisprocess_es.pdf).
 
 [![](img/qgisprocess_es.png){width="150%"}](img/qgisprocess_es.png)
 

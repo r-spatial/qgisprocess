@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Click the cheatsheet to enlarge. -- [Download as PDF](https://github.com/ambarja/cheatsheet-qgisprocess/raw/main/cheatsheet/en/qgisprocess_en.pdf).
+Click the cheatsheet to enlarge. -- [Download as PDF](https://github.com/ambarja/cheatsheet-qgisprocess/raw/main/pdf/english/qgisprocess_en.pdf).
 
 [![](img/qgisprocess_en.png){width="150%"}](img/qgisprocess_en.png)
 
