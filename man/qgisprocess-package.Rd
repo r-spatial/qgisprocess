@@ -15,7 +15,7 @@ A structured overview of the available functions can be consulted at
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://r-spatial.github.io/qgisprocess}
+  \item \url{https://r-spatial.github.io/qgisprocess/}
   \item \url{https://github.com/r-spatial/qgisprocess}
   \item Report bugs at \url{https://github.com/r-spatial/qgisprocess/issues}
 }

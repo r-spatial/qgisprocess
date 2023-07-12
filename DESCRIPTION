@@ -24,7 +24,7 @@ Description: The R package qgisprocess provides seamless access to the
     referring data sources from file, also common R-objects like sf, terra
     and stars objects are supported.
 License: GPL (>= 3)
-URL: https://r-spatial.github.io/qgisprocess,
+URL: https://r-spatial.github.io/qgisprocess/,
     https://github.com/r-spatial/qgisprocess
 BugReports: https://github.com/r-spatial/qgisprocess/issues
 Imports: 
