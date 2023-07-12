@@ -6,7 +6,7 @@
 \alias{qgisprocess-package}
 \title{qgisprocess: Using QGIS Processing Algorithms from R}
 \description{
-Provides seamless access to the QGIS (\url{https://qgis.org/en/site/}) processing toolbox using the standalone 'qgis_process' command-line utility. Both native and third-party (plugin) processing providers are supported. Beside referring data sources from file, also common R-objects like sf, terra and stars objects are supported.
+The R package qgisprocess provides seamless access to the QGIS (\url{https://qgis.org/en/site/}) processing toolbox using the standalone 'qgis_process' command-line utility. Both native and third-party (plugin) processing providers are supported. Beside referring data sources from file, also common R-objects like sf, terra and stars objects are supported.
 }
 \note{
 A structured overview of the available functions can be consulted at
@@ -15,17 +15,18 @@ A structured overview of the available functions can be consulted at
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://r-spatial.github.io/qgisprocess}
   \item \url{https://github.com/r-spatial/qgisprocess}
   \item Report bugs at \url{https://github.com/r-spatial/qgisprocess/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Floris Vanderhaeghe \email{floris.vanderhaeghe@inbo.be} (\href{https://orcid.org/0000-0002-6378-6229}{ORCID})
+\strong{Maintainer}: Floris Vanderhaeghe \email{floris.vanderhaeghe@inbo.be} (\href{https://orcid.org/0000-0002-6378-6229}{ORCID}) (Research Institute for Nature and Forest (INBO))
 
 Authors:
 \itemize{
-  \item Dewey Dunnington \email{dewey@fishandwhistle.net} (\href{https://orcid.org/0000-0002-9415-4582}{ORCID})
+  \item Dewey Dunnington \email{dewey@fishandwhistle.net} (\href{https://orcid.org/0000-0002-9415-4582}{ORCID}) (Voltron Data)
   \item Jan Caha \email{jan.caha@outlook.com} (\href{https://orcid.org/0000-0003-0165-0606}{ORCID})
   \item Jannes Muenchow \email{malnamalja@gmx.de} (\href{https://orcid.org/0000-0001-7834-4717}{ORCID})
 }
