@@ -1,6 +1,6 @@
-comment:
-  behavior: default
-
+comment: false
+github_checks:
+  annotations: true
 coverage:
   precision: 1
   round: down
