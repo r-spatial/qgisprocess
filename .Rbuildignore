@@ -14,6 +14,7 @@
 ^_pkgdown\.yml$
 ^checklist.yml$
 ^codecov\.yml$
+^cran-comments\.md$
 ^data-raw$
 ^docs$
 ^man-roxygen$
