@@ -129,7 +129,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpnNx7yr/file4c746ef72bf5/file4c747f5c8d0.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpNlzHP9/file5205cdcdfb3/file5205383e426e.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
@@ -208,7 +208,7 @@ you agree to abide by its terms.
   - A
     [paper](https://journal.r-project.org/archive/2017/RJ-2017-067/index.html)
     on the original RQGIS package published in the R Journal
-  - A [discussion](https://github.com/r-spatial/discuss/issues/41)
+  - A [discussion](https://github.com/r-spatial/discuss/issues/41) about
     options for running QGIS from R that led to this package
   - The [pull request](https://github.com/qgis/QGIS/pull/34617) in the
     QGIS repo that led to the development of the `qgis_process`
