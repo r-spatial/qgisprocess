@@ -129,7 +129,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpNlzHP9/file5205cdcdfb3/file5205383e426e.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpSFJycz/file85fc747b14a0/file85fc58d4dbf.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
@@ -200,8 +200,9 @@ qgis_algorithms()
 ## Code of Conduct
 
 Please note that the qgisprocess project is released with a [Contributor
-Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
-you agree to abide by its terms.
+Code of
+Conduct](https://r-spatial.github.io/qgisprocess/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
 
 ## Further reading
 
