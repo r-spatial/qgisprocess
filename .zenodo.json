@@ -52,8 +52,12 @@
       "name": "Nowosad, Jakub",
       "orcid": "0000-0002-1057-3721",
       "type": "ProjectMember"
+    },
+     {
+      "name": "Research Institute for Nature and Forest (INBO)",
+      "type": "RightsHolder"
     }
-  ],
+ ],
   "communities": [
     {
       "identifier": "inbo"

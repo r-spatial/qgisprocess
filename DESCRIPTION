@@ -15,7 +15,9 @@ Authors@R: c(
     person("Robin", "Lovelace", , "rob00x@gmail.com", role = "ctb",
            comment = c(ORCID = "0000-0001-5679-6536")),
     person("Jakub", "Nowosad", , "nowosad.jakub@gmail.com", role = "ctb",
-           comment = c(ORCID = "0000-0002-1057-3721"))
+           comment = c(ORCID = "0000-0002-1057-3721")),
+    person("Research Institute for Nature and Forest (INBO)", role = c("cph", "fnd"), 
+           comment = "https://www.inbo.be/en/")
   )
 Description: Provides seamless access to the 'QGIS'
     (<https://qgis.org/en/site/>) processing toolbox using the standalone

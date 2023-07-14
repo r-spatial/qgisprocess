@@ -36,6 +36,7 @@ Other contributors:
   \item Antony Barja \email{antony.barja8@gmail.com} (\href{https://orcid.org/0000-0001-5921-2858}{ORCID}) [contributor]
   \item Robin Lovelace \email{rob00x@gmail.com} (\href{https://orcid.org/0000-0001-5679-6536}{ORCID}) [contributor]
   \item Jakub Nowosad \email{nowosad.jakub@gmail.com} (\href{https://orcid.org/0000-0002-1057-3721}{ORCID}) [contributor]
+  \item Research Institute for Nature and Forest (INBO) (https://www.inbo.be/en/) [copyright holder, funder]
 }
 
 }
