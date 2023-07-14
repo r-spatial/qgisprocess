@@ -1,7 +1,7 @@
 #' Run an algorithm using 'qgis_process'
 #'
 #' Runs an algorithm using 'qgis_process'.
-#' See the [QGIS docs](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html)
+#' See the [QGIS docs](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/)
 #' for a detailed description of the algorithms provided
 #' 'out of the box' on QGIS.
 #'

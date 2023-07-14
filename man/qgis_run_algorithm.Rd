@@ -34,7 +34,7 @@ A \code{qgis_result} object.
 }
 \description{
 Runs an algorithm using 'qgis_process'.
-See the \href{https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html}{QGIS docs}
+See the \href{https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/}{QGIS docs}
 for a detailed description of the algorithms provided
 'out of the box' on QGIS.
 }
