@@ -4,9 +4,9 @@
 \name{qgisprocess-package}
 \alias{qgisprocess}
 \alias{qgisprocess-package}
-\title{qgisprocess: Using QGIS Processing Algorithms from R}
+\title{qgisprocess: Use 'QGIS' Processing Algorithms}
 \description{
-The R package qgisprocess provides seamless access to the QGIS (\url{https://qgis.org/en/site/}) processing toolbox using the standalone 'qgis_process' command-line utility. Both native and third-party (plugin) processing providers are supported. Beside referring data sources from file, also common R-objects like sf, terra and stars objects are supported.
+Provides seamless access to the 'QGIS' (\url{https://qgis.org/en/site/}) processing toolbox using the standalone 'qgis_process' command-line utility. Both native and third-party (plugin) processing providers are supported. Beside referring data sources from file, also common objects from 'sf', 'terra' and 'stars' are supported. The native processing algorithms are documented at \url{https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/}.
 }
 \note{
 A structured overview of the available functions can be consulted at
