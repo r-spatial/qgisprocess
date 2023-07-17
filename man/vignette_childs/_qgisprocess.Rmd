@@ -226,7 +226,7 @@ nms <- qgis_get_output_specs("grass7:r.slope.aspect")$name
 # read in the output rasters 
 r <- info[nms] |>
   unlist() |>
-  terra::rast() |>
+  rast() |>
   as.numeric()
 names(r) <- nms
 # plot the output
