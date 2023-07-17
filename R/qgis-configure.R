@@ -73,6 +73,8 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
       # here, since packagestartupmessages in .onLoad are not good practice and
       # trigger a note during R CMD check. Same applies to the Success! message
       # further down.
+      # Note: more messages have been turned into startupmessages since CRAN
+      # wants to be able to suppress them.
       if (use_cached_data && quiet) {
         packageStartupMessage(
           "Attempting to load the cache ... ",
@@ -94,8 +96,8 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
               %in% names(cached_data)
             )
           ) {
-            if (quiet) message()
-            message(
+            if (quiet) packageStartupMessage()
+            packageStartupMessage(
               "The cache does not contain all required elements.\n",
               "Will try to reconfigure qgisprocess and build new cache ..."
             )
@@ -111,8 +113,8 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           )
 
           if (!identical(option_path, "") && !identical(option_path, cached_data$path)) {
-            if (quiet) message()
-            message(glue(
+            if (quiet) packageStartupMessage()
+            packageStartupMessage(glue(
               "The user's qgisprocess.path option or the R_QGISPROCESS_PATH environment ",
               "variable specify a different qgis_process path ({option_path}) ",
               "than the cache did ({cached_data$path}).\n",
@@ -131,8 +133,8 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
               inherits(cached_data$plugins, "data.frame")
 
           if (!condition) {
-            if (quiet) message()
-            message(
+            if (quiet) packageStartupMessage()
+            packageStartupMessage(
               "The cache does not contain all required data.\n",
               "Will try to reconfigure qgisprocess and build new cache ..."
             )
@@ -171,8 +173,8 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           qgisprocess_cache$path <- NULL
 
           if (!identical(qversion, cached_data$version)) {
-            if (quiet) message()
-            message(glue(
+            if (quiet) packageStartupMessage()
+            packageStartupMessage(glue(
               "QGIS version change detected:\n",
               "- in the qgisprocess cache it was: {cached_data$version}\n",
               "- while '{cached_data$path}' is at {qversion}\n",
@@ -198,17 +200,17 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           qgisprocess_cache$use_json_output <- NULL
 
           if (!identical(qplugins, cached_data$plugins)) {
-            if (quiet) message()
-            message(
+            if (quiet) packageStartupMessage()
+            packageStartupMessage(
               "Change detected in (enabled) QGIS processing provider plugins!\n",
               "- in the qgisprocess cache it was:"
             )
             print(cached_data$plugins)
-            message(glue(
+            packageStartupMessage(glue(
               "- while '{cached_data$path}' currently returns:"
             ))
             print(qplugins)
-            message(
+            packageStartupMessage(
               "Hence rebuilding cache to reflect this change ..."
             )
             qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
@@ -261,7 +263,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
       }
 
       if (use_cached_data && !file.exists(cache_data_file)) {
-        message(
+        packageStartupMessage(
           "No cache found.\n",
           "Will try to reconfigure qgisprocess and build new cache ..."
         )
