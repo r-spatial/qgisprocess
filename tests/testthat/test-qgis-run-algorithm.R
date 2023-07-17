@@ -144,6 +144,7 @@ test_that(glue("qgis_run_algorithm() supports the matrix input type{input}"), {
 
 test_that(glue("qgis_run_algorithm() runs with qgis:relief, for which the acceptable value of COLORS is NULL{input}"), {
   skip_if_not(has_qgis())
+  skip_if_not_installed("terra")
 
   relief_args <- qgis_get_argument_specs("qgis:relief")
   expect_identical(relief_args["COLORS", ]$acceptable_values, list(NULL))
@@ -222,6 +223,7 @@ test_that(glue("qgis_run_algorithm() succeeds when it needs a QGIS project{input
 
 test_that(glue("qgis_run_algorithm() succeeds when it uses an aggregates input argument{input}"), {
   skip_if_not(has_qgis())
+  skip_if_not_installed("sf")
   skip_if_not(qgis_using_json_input())
 
   # preparing a layer of multiple polygons and some attributes
