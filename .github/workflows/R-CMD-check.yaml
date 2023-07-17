@@ -121,7 +121,7 @@ jobs:
 
       - name: Query R dependencies and report available versions
         id: query
-        if: dep == ''
+        if: matrix.config.dep == ''
         run: |
           # Query R dependencies and report available versions
           cat("::group::Install pak\n")
@@ -142,7 +142,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Restore (or define new) R package cache
-        if: dep == ''
+        if: matrix.config.dep == ''
         uses: actions/cache@v3
         with:
           path: |
@@ -151,7 +151,7 @@ jobs:
           key: ${{ matrix.config.os }}-${{ steps.query.outputs.r-version }}-${{ matrix.config.r-pkg-cache }}-${{ hashFiles('.github/depends.Rds') }}
 
       - name: Install missing package dependencies
-        if: dep == ''
+        if: matrix.config.dep == ''
         run: |
           # Install missing package dependencies
           cat("::group::Install\n")
@@ -194,7 +194,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Install hard R dependencies only
-        if: dep == 'hard '
+        if: matrix.config.dep == 'hard '
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           dependencies: '"hard"'
@@ -207,11 +207,11 @@ jobs:
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
-        if: dep == ''
+        if: matrix.config.dep == ''
 
       # run with CMD check because installing QGIS is expensive
       - name: Test Coverage
-        if: matrix.config.qgis == 'ubuntu' && dep == ''
+        if: matrix.config.qgis == 'ubuntu' && matrix.config.dep == ''
         run: |
           # Setup code coverage with Codecov
           covr::codecov(quiet = FALSE)
