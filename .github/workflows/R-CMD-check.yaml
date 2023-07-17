@@ -193,7 +193,7 @@ jobs:
           cat("::endgroup::\n")
         shell: Rscript {0}
 
-      - name: Install hard R dependencies only
+      - name: Install hard R pkg dependencies only
         if: matrix.config.dep == 'hard '
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
