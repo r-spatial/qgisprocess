@@ -207,7 +207,6 @@ jobs:
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
-        if: matrix.config.dep == ''
 
       # run with CMD check because installing QGIS is expensive
       - name: Test Coverage
