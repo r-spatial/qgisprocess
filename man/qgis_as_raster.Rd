@@ -44,7 +44,7 @@ Just use \code{qgis_as_raster()} and \code{qgis_as_brick()} in R scripts;
 it will use the correct method.
 }
 \examples{
-\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis() && requireNamespace("raster", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 result <- qgis_run_algorithm(
   "native:slope",
   INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")

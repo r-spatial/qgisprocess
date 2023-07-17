@@ -11,7 +11,7 @@
 #'
 #' @returns A `SpatRaster` or a `SpatVector` object.
 #'
-#' @examplesIf has_qgis()
+#' @examplesIf has_qgis() && requireNamespace("terra", quietly = TRUE)
 #' result <- qgis_run_algorithm(
 #'   "native:slope",
 #'   INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")

@@ -30,7 +30,7 @@ Just use \code{st_as_sf()} in R scripts, it will use the correct
 method.
 }
 \examples{
-\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis() && requireNamespace("sf", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 result <- qgis_run_algorithm(
   "native:buffer",
   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),

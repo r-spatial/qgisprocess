@@ -12,7 +12,7 @@
 #'
 #' @returns A `RasterLayer` or a `RasterBrick` object.
 #'
-#' @examplesIf has_qgis()
+#' @examplesIf has_qgis() && requireNamespace("raster", quietly = TRUE)
 #' result <- qgis_run_algorithm(
 #'   "native:slope",
 #'   INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")

@@ -11,7 +11,7 @@
 #'
 #' @returns An `sf` object.
 #'
-#' @examplesIf has_qgis()
+#' @examplesIf has_qgis() && requireNamespace("sf", quietly = TRUE)
 #' result <- qgis_run_algorithm(
 #'   "native:buffer",
 #'   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
