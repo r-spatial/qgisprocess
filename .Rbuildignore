@@ -1,3 +1,5 @@
+^renv$
+^renv\.lock$
 ^.*\.Rproj$
 ^CITATION\.cff$
 ^CODE_OF_CONDUCT\.md$
