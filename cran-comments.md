@@ -1,8 +1,15 @@
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 2 notes
 
 * This is a new release.
+
+* Package suggested but not available for checking: 'spDataLarge'
+
+  The 'spDataLarge' package is available from the
+  https://geocompr.r-universe.dev repository, which is included in the
+  Additional_repositories field of DESCRIPTION. The package is used in a
+  vignette.
 
 ## DESCRIPTION file: no references to package methods exist
 
