@@ -7,8 +7,6 @@
 
 <!-- badges: start -->
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/qgisprocess)](https://CRAN.R-project.org/package=qgisprocess)
 [![R-CMD-check](https://github.com/r-spatial/qgisprocess/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-spatial/qgisprocess/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
