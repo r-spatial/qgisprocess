@@ -32,6 +32,9 @@
     <a class="dropdown-item" href="../articles/qgis_expressions.html">How to use QGIS expressions in qgisprocess?</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -59,29 +62,35 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">qgis_as_terra</span><span class="op">(</span><span class="va">output</span>, <span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">qgis_as_terra</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for qgis_outputRaster</span></span>
-<span><span class="fu">qgis_as_terra</span><span class="op">(</span><span class="va">output</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">qgis_as_terra</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for qgis_outputLayer</span></span>
-<span><span class="fu">qgis_as_terra</span><span class="op">(</span><span class="va">output</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">qgis_as_terra</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for qgis_result</span></span>
-<span><span class="fu">qgis_as_terra</span><span class="op">(</span><span class="va">output</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">qgis_as_terra</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>output</dt>
-<dd><p>A result from <code><a href="qgis_run_algorithm.html">qgis_run_algorithm()</a></code> or one of the
-<code><a href="qgis_extract_output.html">qgis_extract_output()</a></code> functions.</p></dd>
+    <dl><dt>x</dt>
+<dd><p>A <code>qgis_result</code> object from <code><a href="qgis_run_algorithm.html">qgis_run_algorithm()</a></code> or a
+<code>qgis_output*</code> object from one of the <code><a href="qgis_extract_output.html">qgis_extract_output()</a></code> functions.</p></dd>
 
 
 <dt>...</dt>
 <dd><p>Arguments passed to <code><a href="https://rdrr.io/pkg/terra/man/rast.html" class="external-link">terra::rast()</a></code>.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A <code>SpatRaster</code> or a <code>SpatVector</code> object.</p>
+    </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>Just use <code>qgis_as_terra()</code> in R scripts, it will use the correct
@@ -102,12 +111,44 @@ method.</p>
 <code><a href="st_as_stars.html">st_as_stars</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="qgis_run_algorithm.html">qgis_run_algorithm</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"native:slope"</span>,</span></span>
+<span class="r-in"><span>  INPUT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"longlake/longlake_depth.tif"</span>, package <span class="op">=</span> <span class="st">"qgisprocess"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Argument `Z_FACTOR` is unspecified (using QGIS default value).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using `OUTPUT = qgis_tmp_raster()`</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># most direct approach, autoselecting a `qgis_outputRaster` type</span></span></span>
+<span class="r-in"><span><span class="co"># output from the `result` object and reading as SpatRaster:</span></span></span>
+<span class="r-in"><span><span class="fu">qgis_as_terra</span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatRaster </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dimensions  : 100, 100, 1  (nrow, ncol, nlyr)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> resolution  : 18.27273, 15.53535  (x, y)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> extent      : 409939.9, 411767.1, 5083307, 5084861  (xmin, xmax, ymin, ymax)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> coord. ref. : NAD83 / UTM zone 20N (EPSG:26920) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> source      : file307d5bb36231.tif </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> name        : file307d5bb36231 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># if you need more control, extract the needed output element first:</span></span></span>
+<span class="r-in"><span><span class="va">output_raster</span> <span class="op">&lt;-</span> <span class="fu"><a href="qgis_extract_output.html">qgis_extract_output</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"OUTPUT"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">qgis_as_terra</span><span class="op">(</span><span class="va">output_raster</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatRaster </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dimensions  : 100, 100, 1  (nrow, ncol, nlyr)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> resolution  : 18.27273, 15.53535  (x, y)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> extent      : 409939.9, 411767.1, 5083307, 5084861  (xmin, xmax, ymin, ymax)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> coord. ref. : NAD83 / UTM zone 20N (EPSG:26920) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> source      : file307d5bb36231.tif </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> name        : file307d5bb36231 </span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Dewey Dunnington, Floris Vanderhaeghe, Jan Caha, Jannes Muenchow.</p>
+  <p></p><p>Developed by Dewey Dunnington, Floris Vanderhaeghe, Jan Caha, Jannes Muenchow, Research Institute for Nature and Forest (INBO).</p>
 </div>
 
 <div class="pkgdown-footer-right">

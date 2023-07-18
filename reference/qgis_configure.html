@@ -38,6 +38,9 @@ the 'qgis_process' command line tool."><!-- mathjax --><script src="https://cdnj
     <a class="dropdown-item" href="../articles/qgis_expressions.html">How to use QGIS expressions in qgisprocess?</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -123,48 +126,7 @@ OSGeo4W(64)/bin.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="has_qgis.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="qgis_path.html">qgis_path</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "qgis_process"</span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="has_qgis.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="qgis_path.html">qgis_version</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "3.32.0-Lima"</span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="has_qgis.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="qgis_algorithms.html">qgis_algorithms</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 350 × 24</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    provider provider_title algorithm                algorithm_id algorithm_title</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 3d       QGIS (3D)      3d:tessellate            tessellate   Tessellate     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> gdal     GDAL           gdal:aspect              aspect       Aspect         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> gdal     GDAL           gdal:assignprojection    assignproje… Assign project…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> gdal     GDAL           gdal:buffervectors       buffervecto… Buffer vectors </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> gdal     GDAL           gdal:buildvirtualraster  buildvirtua… Build virtual …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> gdal     GDAL           gdal:buildvirtualvector  buildvirtua… Build virtual …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> gdal     GDAL           gdal:cliprasterbyextent  cliprasterb… Clip raster by…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> gdal     GDAL           gdal:cliprasterbymaskla… cliprasterb… Clip raster by…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> gdal     GDAL           gdal:clipvectorbyextent  clipvectorb… Clip vector by…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> gdal     GDAL           gdal:clipvectorbypolygon clipvectorb… Clip vector by…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 340 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 19 more variables: provider_can_be_activated &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   provider_is_active &lt;lgl&gt;, provider_long_name &lt;chr&gt;, provider_version &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   provider_warning &lt;chr&gt;, can_cancel &lt;lgl&gt;, deprecated &lt;lgl&gt;, group &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   has_known_issues &lt;lgl&gt;, help_url &lt;chr&gt;, requires_matching_crs &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   short_description &lt;chr&gt;, tags &lt;list&gt;, default_raster_file_extension &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   default_vector_file_extension &lt;chr&gt;, …</span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="has_qgis.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="qgis_algorithms.html">qgis_providers</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   provider provider_title    algorithm_count</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> gdal     GDAL                           56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> qgis     QGIS                           50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3d       QGIS (3D)                       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> native   QGIS (native c++)             243</span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="has_qgis.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="qgis_algorithms.html">qgis_plugins</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   name                    enabled</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> grassprovider           FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> otbprovider             FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> processing              TRUE   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> processing_saga_nextgen FALSE  </span>
-<span class="r-in"><span><span class="fu">qgis_configure</span><span class="op">(</span>use_cached_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">qgis_configure</span><span class="op">(</span>use_cached_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking configuration in cache file (~/.cache/R-qgisprocess/cache-0.0.0.9000.rds)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking cached QGIS version with version reported by 'qgis_process' ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> QGIS versions match! (3.32.0-Lima)</span>
@@ -186,28 +148,9 @@ OSGeo4W(64)/bin.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Having access to 350 algorithms from 4 QGIS processing providers.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Use qgis_algorithms(), qgis_providers(), qgis_plugins(), qgis_using_json_output(),</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> qgis_path() and qgis_version() to inspect the cache environment.</span>
-<span class="r-in"><span><span class="fu">qgis_configure</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> getOption('qgisprocess.path') was not found.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Sys.getenv('R_QGISPROCESS_PATH') was not found.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Trying 'qgis_process' on PATH...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Success!</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Now using 'qgis_process' in the system PATH.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> &gt;&gt;&gt; If you need another installed QGIS instance, run `qgis_configure()`;</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     see `?qgis_configure` if you need to preset the path of 'qgis_process'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> QGIS version is now set to: 3.32.0-Lima</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using JSON for output serialization.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using JSON for input serialization.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 out of 4 available processing provider plugins are enabled.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> You now have access to 350 algorithms from 4 QGIS processing providers.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> &gt;&gt;&gt; Run `qgis_enable_plugins()` to enable 3 disabled plugins and access</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     their algorithms: grassprovider, otbprovider,</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     processing_saga_nextgen</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving configuration to '~/.cache/R-qgisprocess/cache-0.0.0.9000.rds'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Use qgis_algorithms(), qgis_providers(), qgis_plugins(), qgis_using_json_output(),</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> qgis_path() and qgis_version() to inspect the cache environment.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Not run in the examples:</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">qgis_configure</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -216,7 +159,7 @@ OSGeo4W(64)/bin.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Dewey Dunnington, Floris Vanderhaeghe, Jan Caha, Jannes Muenchow.</p>
+  <p></p><p>Developed by Dewey Dunnington, Floris Vanderhaeghe, Jan Caha, Jannes Muenchow, Research Institute for Nature and Forest (INBO).</p>
 </div>
 
 <div class="pkgdown-footer-right">

@@ -40,6 +40,9 @@ the exit status of the process, standard output and standard error of
     <a class="dropdown-item" href="../articles/qgis_expressions.html">How to use QGIS expressions in qgisprocess?</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -83,9 +86,17 @@ the exit status of the process, standard output and standard error of
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
-<dd><p>An object returned by <code><a href="qgis_run_algorithm.html">qgis_run_algorithm()</a></code>.</p></dd>
+<dd><p>A <code>qgis_result</code> object returned by <code><a href="qgis_run_algorithm.html">qgis_run_algorithm()</a></code>.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<ul><li><p>A number in case of <code>qgis_result_status()</code>.</p></li>
+<li><p>A string in case of <code>qgis_result_stdout()</code> and <code>qgis_result_stderr()</code>.</p></li>
+<li><p>A list in case of <code>qgis_result_args()</code>.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other topics about programming or debugging utilities: 
@@ -102,12 +113,66 @@ the exit status of the process, standard output and standard error of
 <code><a href="st_as_stars.html">st_as_stars</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="qgis_run_algorithm.html">qgis_run_algorithm</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"native:buffer"</span>,</span></span>
+<span class="r-in"><span>  INPUT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"longlake/longlake_depth.gpkg"</span>, package <span class="op">=</span> <span class="st">"qgisprocess"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  DISTANCE <span class="op">=</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Argument `SEGMENTS` is unspecified (using QGIS default value).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using `END_CAP_STYLE = "Round"`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using `JOIN_STYLE = "Round"`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Argument `MITER_LIMIT` is unspecified (using QGIS default value).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Argument `DISSOLVE` is unspecified (using QGIS default value).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Argument `SEPARATE_DISJOINT` is unspecified (using QGIS default value).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using `OUTPUT = qgis_tmp_vector()`</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">qgis_result_status</span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
+<span class="r-in"><span><span class="va">stdout</span> <span class="op">&lt;-</span> <span class="fu">qgis_result_stdout</span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr</a></span><span class="op">(</span><span class="va">stdout</span>, <span class="fl">1</span>, <span class="fl">335</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   "algorithm_details": {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     "can_cancel": true,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     "deprecated": false,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     "group": "Vector geometry",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     "has_known_issues": false,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     "help_url": null,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     "id": "native:buffer",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     "name": "Buffer",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     "requires_matching_crs": false,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     "short_description": null,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     "tags": [</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       "buffer",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       "grow",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       "fixed",</span>
+<span class="r-in"><span><span class="fu">qgis_result_stderr</span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
+<span class="r-in"><span><span class="fu">qgis_result_args</span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $INPUT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/home/runner/work/_temp/Library/qgisprocess/longlake/longlake_depth.gpkg"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $DISTANCE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $END_CAP_STYLE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $JOIN_STYLE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $OUTPUT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpL1Pzvy/file307ddb0fc65/file307d3c5c1da9.gpkg"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Dewey Dunnington, Floris Vanderhaeghe, Jan Caha, Jannes Muenchow.</p>
+  <p></p><p>Developed by Dewey Dunnington, Floris Vanderhaeghe, Jan Caha, Jannes Muenchow, Research Institute for Nature and Forest (INBO).</p>
 </div>
 
 <div class="pkgdown-footer-right">

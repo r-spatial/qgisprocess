@@ -38,6 +38,9 @@ for a detailed description of the algorithms provided
     <a class="dropdown-item" href="../articles/qgis_expressions.html">How to use QGIS expressions in qgisprocess?</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -61,7 +64,7 @@ for a detailed description of the algorithms provided
 
     <div class="ref-description section level2">
     <p>Runs an algorithm using 'qgis_process'.
-See the <a href="https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html" class="external-link">QGIS docs</a>
+See the <a href="https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/" class="external-link">QGIS docs</a>
 for a detailed description of the algorithms provided
 'out of the box' on QGIS.</p>
     </div>
@@ -106,6 +109,12 @@ This can be useful in debugging.</p></dd>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A <code>qgis_result</code> object.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other functions to run one geoprocessing algorithm: 
 <code><a href="qgis_run_algorithm_p.html">qgis_run_algorithm_p</a>()</code></p></div>
@@ -113,13 +122,11 @@ This can be useful in debugging.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="has_qgis.html">has_qgis</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu">qgis_run_algorithm</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="st">"native:buffer"</span>,</span></span>
-<span class="r-in"><span>    INPUT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"longlake/longlake_depth.gpkg"</span>, package <span class="op">=</span> <span class="st">"qgisprocess"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    DISTANCE <span class="op">=</span> <span class="fl">10</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">qgis_run_algorithm</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"native:buffer"</span>,</span></span>
+<span class="r-in"><span>  INPUT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"longlake/longlake_depth.gpkg"</span>, package <span class="op">=</span> <span class="st">"qgisprocess"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  DISTANCE <span class="op">=</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Argument `SEGMENTS` is unspecified (using QGIS default value).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using `END_CAP_STYLE = "Round"`</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using `JOIN_STYLE = "Round"`</span>
@@ -129,8 +136,7 @@ This can be useful in debugging.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using `OUTPUT = qgis_tmp_vector()`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmpw9tous/file30ea331fe7c/file30ea5c26641c.gpkg"</span>
-<span class="r-in"><span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpL1Pzvy/file307ddb0fc65/file307d15132334.gpkg"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -138,7 +144,7 @@ This can be useful in debugging.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Dewey Dunnington, Floris Vanderhaeghe, Jan Caha, Jannes Muenchow.</p>
+  <p></p><p>Developed by Dewey Dunnington, Floris Vanderhaeghe, Jan Caha, Jannes Muenchow, Research Institute for Nature and Forest (INBO).</p>
 </div>
 
 <div class="pkgdown-footer-right">
