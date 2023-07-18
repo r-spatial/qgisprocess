@@ -14,7 +14,7 @@ name: R-CMD-check
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
-    name: ${{ matrix.config.os }} (${{ matrix.config.dep }}${{ matrix.config.r }}, ${{ matrix.config.qgis }})
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }}${{ matrix.config.dep }}, ${{ matrix.config.qgis }})
     strategy:
       fail-fast: false
       matrix:
@@ -27,7 +27,7 @@ jobs:
           - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'devel', dep: '', r-pkg-cache: 'v2'}
           - {os: ubuntu-22.04, qgis: 'ubuntugis', r: 'release', dep: '', r-pkg-cache: 'v1'}
           - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', dep: '', r-pkg-cache: 'v0'}
-          - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', dep: 'hard ', r-pkg-cache: 'v3'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', dep: ' [hard-deps]', r-pkg-cache: 'v3'}
           - {os: ubuntu-22.04, qgis: 'ubuntu-ltr', r: 'release', dep: '', r-pkg-cache: 'v0'}
 
     env:
@@ -193,7 +193,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Install hard R pkg dependencies only
-        if: matrix.config.dep == 'hard '
+        if: matrix.config.dep == ' [hard-deps]'
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           dependencies: '"hard"'
