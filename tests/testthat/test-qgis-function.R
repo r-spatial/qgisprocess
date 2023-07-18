@@ -39,6 +39,7 @@ test_that("qgis_function() works", {
 
 test_that("qgis_run_algorithm_p() works", {
   skip_if_not(has_qgis())
+  skip_if_not_installed("sf")
 
   result <- system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") |>
     qgis_run_algorithm_p(

@@ -13,7 +13,7 @@ _¡Tenga en cuenta que solo la hoja de trucos en inglés está actualizada actua
 
 Haga clic en la hoja de trucos para ampliar. -- [Descargar como PDF](https://github.com/ambarja/cheatsheet-qgisprocess/raw/main/pdf/spanish/qgisprocess_es.pdf).
 
-[![](img/qgisprocess_es.png){width="150%"}](img/qgisprocess_es.png)
+[![](img/qgisprocess_es.png){width="150%"}](https://r-spatial.github.io/qgisprocess/articles/img/qgisprocess_es.png)
 
 \
 ¿Tienes una idea de mejorar o ves algún tipo de error? Haga un 'issue' en la hoja de trucos del <button type="button" class="btn btn-warning" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">

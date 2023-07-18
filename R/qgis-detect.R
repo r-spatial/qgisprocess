@@ -17,7 +17,7 @@
 #' @param drive_letter The drive letter on which to search. By default,
 #'   this is the same drive letter as the R executable.
 #'
-#' @return A character vector of possible paths to the 'qgis_process'
+#' @returns A character vector of possible paths to the 'qgis_process'
 #' executable.
 #' @export
 #'

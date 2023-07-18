@@ -48,7 +48,6 @@ test_that("raster argument coercers work", {
     "Rewriting"
   )
   expect_s3_class(res, "qgis_tempfile_arg")
-
 })
 
 test_that("raster result coercers work", {

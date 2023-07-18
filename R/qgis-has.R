@@ -11,7 +11,7 @@
 #' @note
 #' Only plugins that implement processing providers are supported.
 #'
-#' @return A logical, with length 1 in case of `has_qgis()`.
+#' @returns A logical, with length 1 in case of `has_qgis()`.
 #'
 #' @family topics about reporting the QGIS state
 #' @concept functions to manage and explore QGIS and qgisprocess
@@ -24,6 +24,12 @@
 #' @param plugin A plugin name (e.g., `"native"`).
 #' Can be a vector of names.
 #' @inheritParams qgis_path
+#'
+#' @examples
+#' has_qgis()
+#' if (has_qgis()) qgis_has_algorithm("native:filedownloader")
+#' if (has_qgis()) qgis_has_provider("native")
+#' if (has_qgis()) qgis_has_plugin(c("grassprovider", "processing_saga_nextgen"))
 #'
 #' @name has_qgis
 

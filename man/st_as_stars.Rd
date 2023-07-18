@@ -7,17 +7,20 @@
 \alias{st_as_stars.qgis_result}
 \title{Convert a qgis_result object or one of its elements to a stars object}
 \usage{
-st_as_stars.qgis_outputRaster(.x, ...)
+st_as_stars.qgis_outputRaster(x, ...)
 
-st_as_stars.qgis_outputLayer(.x, ...)
+st_as_stars.qgis_outputLayer(x, ...)
 
-st_as_stars.qgis_result(.x, ...)
+st_as_stars.qgis_result(x, ...)
 }
 \arguments{
-\item{.x}{A result from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} or one of the
-\code{\link[=qgis_extract_output]{qgis_extract_output()}} functions.}
+\item{x}{A \code{qgis_result} object from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} or a
+\verb{qgis_output*} object from one of the \code{\link[=qgis_extract_output]{qgis_extract_output()}} functions.}
 
 \item{...}{Arguments passed to \code{\link[stars:read_stars]{stars::read_stars()}}.}
+}
+\value{
+A \code{stars} or a \code{stars_proxy} object.
 }
 \description{
 Convert a qgis_result object or one of its elements to a stars object
@@ -25,6 +28,23 @@ Convert a qgis_result object or one of its elements to a stars object
 \note{
 Just use \code{st_as_stars()} in R scripts, it will use the correct
 method.
+}
+\examples{
+\dontshow{if (has_qgis() && requireNamespace("stars", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+result <- qgis_run_algorithm(
+  "native:slope",
+  INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")
+)
+
+# most direct approach, autoselecting a `qgis_outputRaster` type
+# output from the `result` object and reading as stars or stars_proxy:
+stars::st_as_stars(result)
+stars::st_as_stars(result, proxy = TRUE)
+
+# if you need more control, extract the needed output element first:
+output_raster <- qgis_extract_output(result, "OUTPUT")
+stars::st_as_stars(output_raster)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other topics about coercing processing output: 

@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it using these metadata.
+title: "R package qgisprocess: use QGIS processing algorithms"
+authors:
+- given-names: Dewey
+  family-names: Dunnington
+  affiliation: Voltron Data
+  orcid: 0000-0002-9415-4582
+- given-names: Floris
+  family-names: Vanderhaeghe
+  affiliation: Research Institute for Nature and Forest (INBO)
+  orcid: 0000-0002-6378-6229
+- given-names: Jan
+  family-names: Caha
+  orcid: 0000-0003-0165-0606
+- given-names: Jannes
+  family-names: Muenchow
+  orcid: 0000-0001-7834-4717
+keywords:
+- R
+- package
+- QGIS
+contact:
+- given-names: Floris
+  family-names: Vanderhaeghe
+  affiliation: Research Institute for Nature and Forest (INBO)
+  orcid: 0000-0002-6378-6229
+doi: ~
+license: GPL-3.0-or-later
+repository-code: https://github.com/r-spatial/qgisprocess/
+type: software
+abstract: R package 'qgisprocess' provides seamless access
+  to the 'QGIS' (https://qgis.org/en/site/) processing
+  toolbox using the standalone 'qgisprocess' command-line utility. Both native and
+  third-party (plugin) processing providers are supported. Beside referring data sources
+  from file, also common objects from 'sf', 'terra' and 'stars' are supported. The
+  native processing algorithms are documented at https://docs.qgis.org/latest/en/docs/usermanual/processing_algs/.
+identifiers:
+- type: url
+  value: https://r-spatial.github.io/qgisprocess/
+version: 0.0.0.9000

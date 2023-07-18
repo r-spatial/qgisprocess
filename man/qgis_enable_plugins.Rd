@@ -15,6 +15,9 @@ qgis_disable_plugins(names = NULL, quiet = FALSE)
 \item{quiet}{Use \code{FALSE} to display more information,
 possibly useful for debugging.}
 }
+\value{
+A tibble of plugins, invisibly.
+}
 \description{
 Processing plugins, installed in QGIS, can be in an 'enabled' or 'disabled'
 state in QGIS.
@@ -41,6 +44,11 @@ to 'qgis_process' (not QGIS though).
 \note{
 Only plugins that implement processing providers are supported.
 Installing or removing plugins is not supported.
+}
+\examples{
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+qgis_enable_plugins("name_of_plugin")
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=qgis_plugins]{qgis_plugins()}}

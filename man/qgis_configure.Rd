@@ -48,13 +48,10 @@ qgis_process-qgis-dev.bat and is located in Program Files/QGIS*/bin or
 OSGeo4W(64)/bin.
 }
 \examples{
-if (has_qgis()) qgis_path()
-if (has_qgis()) qgis_version()
-if (has_qgis()) qgis_algorithms()
-if (has_qgis()) qgis_providers()
-if (has_qgis()) qgis_plugins()
 qgis_configure(use_cached_data = TRUE)
-qgis_configure()
+
+# Not run in the examples:
+if (FALSE) qgis_configure()
 
 }
 \seealso{

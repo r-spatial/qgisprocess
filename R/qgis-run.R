@@ -3,7 +3,7 @@
 #' `qgis_run()` offers full access to 'qgis_process'.
 #' Run `cat(qgis_run("--help")$stdout)` to get the command's help.
 #'
-#' @return
+#' @returns
 #' A [processx::run()] return value, i.e. a list with `status`, `stdout`,
 #'  `stderr` and `timeout` elements.
 #'
@@ -17,6 +17,10 @@
 #'
 #' @family topics about programming or debugging utilities
 #' @family topics about configuring QGIS and qgisprocess
+#'
+#' @examplesIf has_qgis()
+#' processx_list <- qgis_run(args = "--help")
+#' cat(processx_list$stdout)
 #'
 #' @export
 qgis_run <- function(args = character(), ..., env = qgis_env(), path = qgis_path()) {

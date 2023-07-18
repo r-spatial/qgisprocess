@@ -128,12 +128,12 @@ test_that("argument coercers work", {
   expect_identical(
     as_qgis_argument(c(1:4), qgis_argument_spec(qgis_type = "matrix")),
     "1,2,3,4"
-    )
+  )
   expect_identical(
     as_qgis_argument(
       matrix(1:4, ncol = 2, byrow = TRUE),
       qgis_argument_spec(qgis_type = "matrix")
-      ),
+    ),
     "1,2,3,4"
   )
   expect_identical(
@@ -184,7 +184,7 @@ test_that("argument coercers work", {
     as_qgis_argument(
       matrix(1:4, ncol = 2, byrow = TRUE),
       qgis_argument_spec(qgis_type = "distance")
-      ),
+    ),
     "Don't know how to convert"
   )
 
@@ -196,7 +196,7 @@ test_that("argument coercers work", {
     as_qgis_argument(
       rgb(0.1, 0.4, 0.3, 0.5),
       qgis_argument_spec(qgis_type = "color")
-      ),
+    ),
     "rgba(26, 102, 77, 0.5)"
   )
   expect_identical(

@@ -45,7 +45,6 @@ test_that("stars argument coercers work", {
     "Rewriting"
   )
   expect_s3_class(res, "qgis_tempfile_arg")
-
 })
 
 

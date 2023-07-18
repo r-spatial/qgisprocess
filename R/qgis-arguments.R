@@ -14,6 +14,41 @@
 #'   create a blank `spec` for testing.
 #' @param .use_json_input,use_json_input TRUE if the arguments will be
 #'   serialized as JSON instead of serialized as a command-line argument.
+#'
+#' @examplesIf has_qgis()
+#' qgisprocess:::as_qgis_argument(
+#'   c("a", "b"),
+#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+#'   use_json_input = FALSE
+#' )
+#' qgisprocess:::as_qgis_argument(
+#'   c(1, 2),
+#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+#'   use_json_input = FALSE
+#' )
+#' qgisprocess:::as_qgis_argument(
+#'   c("a", "b"),
+#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+#'   use_json_input = TRUE
+#' )
+#' qgisprocess:::as_qgis_argument(
+#'   c(1, 2),
+#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+#'   use_json_input = TRUE
+#' )
+#' mat <- matrix(1:12, ncol = 3)
+#' mat
+#' qgisprocess:::as_qgis_argument(
+#'   mat,
+#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "matrix"),
+#'   use_json_input = FALSE
+#' )
+#' qgisprocess:::as_qgis_argument(
+#'   mat,
+#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "matrix"),
+#'   use_json_input = TRUE
+#' )
+#'
 #' @name as_qgis_argument
 
 
@@ -294,28 +329,28 @@ as_qgis_argument.matrix <- function(x, spec = qgis_argument_spec(),
   # !is.na() is solely wrt unit tests that don't specify qgis_type
   if (is.na(spec$qgis_type) && !use_json_input) {
     NextMethod()
-    } else if (spec$qgis_type == "matrix") {
-      if (is.numeric(x)) x <- base::as.numeric(t(x)) else {
-        x <- trimws(as.character(t(x)))
-      }
-    } else if (spec$qgis_type == "relief_colors") {
-      assert_that(ncol(x) == 3L,
-                  msg = paste(
-                    "QGIS argument type 'relief_colors' expects a matrix or",
-                    "dataframe with 3 columns, representing minimum value,",
-                    "maximum value, and R color string (that col2rgb()",
-                    "understands), respectively. Its rows represent the",
-                    "different ranges with their own color."
-                    )
-                  )
-      x <- trimws(x)
-      rgbcols <- t(grDevices::col2rgb(x[, "col"], alpha = FALSE))
-      x <- cbind(x[, 1:2], rgbcols)
-      x <- apply(x, 1, function(x) paste(x, collapse = ", "))
-      x <- paste(x, collapse = ";")
-    } else if (!use_json_input) {
-      NextMethod()
+  } else if (spec$qgis_type == "matrix") {
+    if (is.numeric(x)) x <- base::as.numeric(t(x)) else {
+      x <- trimws(as.character(t(x)))
     }
+  } else if (spec$qgis_type == "relief_colors") {
+    assert_that(ncol(x) == 3L,
+      msg = paste(
+        "QGIS argument type 'relief_colors' expects a matrix or",
+        "dataframe with 3 columns, representing minimum value,",
+        "maximum value, and R color string (that col2rgb()",
+        "understands), respectively. Its rows represent the",
+        "different ranges with their own color."
+      )
+    )
+    x <- trimws(x)
+    rgbcols <- t(grDevices::col2rgb(x[, "col"], alpha = FALSE))
+    x <- cbind(x[, 1:2], rgbcols)
+    x <- apply(x, 1, function(x) paste(x, collapse = ", "))
+    x <- paste(x, collapse = ";")
+  } else if (!use_json_input) {
+    NextMethod()
+  }
   if (use_json_input) x else paste0(x, collapse = ",")
 }
 
@@ -333,7 +368,7 @@ as_qgis_argument.data.frame <- function(x, spec = qgis_argument_spec(),
                                         use_json_input = FALSE) {
   # !is.na() is solely wrt unit tests that don't specify qgis_type
   if (!is.na(spec$qgis_type) &&
-      spec$qgis_type %in% c("matrix", "relief_colors")) {
+    spec$qgis_type %in% c("matrix", "relief_colors")) {
     x <- as.matrix(x)
     result <- as_qgis_argument(x, spec = spec, use_json_input = use_json_input)
     return(result)
@@ -345,56 +380,56 @@ as_qgis_argument.data.frame <- function(x, spec = qgis_argument_spec(),
 #' @keywords internal
 #' @export
 as_qgis_argument.qgis_outputVector <- function(x, spec = qgis_argument_spec(),
-                                     use_json_input = FALSE) {
+                                               use_json_input = FALSE) {
   as_qgis_argument(unclass(x), spec, use_json_input)
 }
 
 #' @keywords internal
 #' @export
 as_qgis_argument.qgis_outputRaster <- function(x, spec = qgis_argument_spec(),
-                                     use_json_input = FALSE) {
+                                               use_json_input = FALSE) {
   as_qgis_argument(unclass(x), spec, use_json_input)
 }
 
 #' @keywords internal
 #' @export
 as_qgis_argument.qgis_outputLayer <- function(x, spec = qgis_argument_spec(),
-                                         use_json_input = FALSE) {
+                                              use_json_input = FALSE) {
   as_qgis_argument(unclass(x), spec, use_json_input)
 }
 
 #' @keywords internal
 #' @export
 as_qgis_argument.qgis_outputMultilayer <- function(x, spec = qgis_argument_spec(),
-                                             use_json_input = FALSE) {
+                                                   use_json_input = FALSE) {
   as_qgis_argument(unclass(x), spec, use_json_input)
 }
 
 #' @keywords internal
 #' @export
 as_qgis_argument.qgis_outputString <- function(x, spec = qgis_argument_spec(),
-                                     use_json_input = FALSE) {
+                                               use_json_input = FALSE) {
   as_qgis_argument(unclass(x), spec, use_json_input)
 }
 
 #' @keywords internal
 #' @export
 as_qgis_argument.qgis_outputNumber <- function(x, spec = qgis_argument_spec(),
-                                             use_json_input = FALSE) {
+                                               use_json_input = FALSE) {
   as_qgis_argument(unclass(x), spec, use_json_input)
 }
 
 #' @keywords internal
 #' @export
 as_qgis_argument.qgis_outputFile <- function(x, spec = qgis_argument_spec(),
-                                     use_json_input = FALSE) {
+                                             use_json_input = FALSE) {
   as_qgis_argument(unclass(x), spec, use_json_input)
 }
 
 #' @keywords internal
 #' @export
 as_qgis_argument.qgis_outputFolder <- function(x, spec = qgis_argument_spec(),
-                                             use_json_input = FALSE) {
+                                               use_json_input = FALSE) {
   as_qgis_argument(unclass(x), spec, use_json_input)
 }
 
@@ -425,7 +460,7 @@ qgis_clean_argument.qgis_tempfile_arg <- function(value) {
 #'   the argument name, description, and acceptable values.
 #' @inheritParams qgis_run_algorithm
 #'
-#' @return A [list()] with an element for each input argument.
+#' @returns A [list()] with an element for each input argument.
 #'
 #' @examples
 #' # These became internal functions!
@@ -498,7 +533,7 @@ qgis_argument_spec_by_name <- function(algorithm, name,
 #' @param ... Named values for `qgis_dict_input()` or
 #'   unnamed values for `qgis_list_input()`.
 #'
-#' @return
+#' @returns
 #'   - `qgis_list_input()`: An object of class 'qgis_list_input'
 #'   - `qgis_dict_input()`: An object of class 'qgis_dict_input'
 #' @export

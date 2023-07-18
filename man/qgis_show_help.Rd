@@ -19,14 +19,23 @@ qgis_get_output_specs(algorithm)
 \item{algorithm}{A qualified algorithm name
 (e.g., \code{"native:buffer"}).}
 }
+\value{
+\itemize{
+\item \code{qgis_get_description()}: a string.
+\item \code{qgis_get_argument_specs()}, \code{qgis_get_output_specs()}: a tibble.
+\item \code{qgis_show_help()}: the algorithm name, invisibly.
+}
+}
 \description{
 Get detailed information about one algorithm
 }
 \examples{
-if (has_qgis()) qgis_show_help("native:filedownloader")
-if (has_qgis()) qgis_get_description("native:filedownloader")
-if (has_qgis()) qgis_get_argument_specs("native:filedownloader")
-
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+qgis_get_description("native:filedownloader")
+qgis_get_argument_specs("native:filedownloader")
+qgis_get_output_specs("native:filedownloader")
+qgis_show_help("native:filedownloader")
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other topics about information on algorithms & processing providers: 

@@ -16,7 +16,14 @@ qgis_result_stderr(x)
 qgis_result_args(x)
 }
 \arguments{
-\item{x}{An object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
+\item{x}{A \code{qgis_result} object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
+}
+\value{
+\itemize{
+\item A number in case of \code{qgis_result_status()}.
+\item A string in case of \code{qgis_result_stdout()} and \code{qgis_result_stderr()}.
+\item A list in case of \code{qgis_result_args()}.
+}
 }
 \description{
 A \code{qgis_result} object is a list that, next to the output elements,
@@ -24,6 +31,21 @@ also contains other elements that can be useful in scripting.
 Several of these can be extracted with convenience functions:
 the exit status of the process, standard output and standard error of
 'qgis_process', arguments passed to 'qgis_process'.
+}
+\examples{
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+result <- qgis_run_algorithm(
+  "native:buffer",
+  INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+  DISTANCE = 10
+)
+
+qgis_result_status(result)
+stdout <- qgis_result_stdout(result)
+cat(substr(stdout, 1, 335))
+qgis_result_stderr(result)
+qgis_result_args(result)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other topics about programming or debugging utilities: 

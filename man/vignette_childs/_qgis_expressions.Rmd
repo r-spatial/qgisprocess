@@ -1,3 +1,8 @@
+```{r setup, message=FALSE}
+library(qgisprocess)
+library(sf)
+```
+
 # Introduction
 
 Many QGIS processing algorithms provide the possibility to use [QGIS expressions](https://docs.qgis.org/latest/en/docs/user_manual/expressions/index.html).

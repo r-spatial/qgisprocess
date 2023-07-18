@@ -7,12 +7,29 @@
 qgis_clean_result(x)
 }
 \arguments{
-\item{x}{An object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
+\item{x}{A \code{qgis_result} object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
+}
+\value{
+The \code{qgis_result} object passed to the function is returned
+invisibly.
 }
 \description{
 Deletes any temporary files that are defined in a
 \code{qgis_result} object.
 These may comprise both input and output files.
+}
+\examples{
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+result <- qgis_run_algorithm(
+  "native:buffer",
+  INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+  DISTANCE = 10
+)
+
+file.exists(qgis_extract_output(result))
+qgis_clean_result(result)
+file.exists(qgis_extract_output(result))
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other topics about accessing or managing processing results: 

@@ -41,7 +41,7 @@ qgis_tmp_clean(...)
 qgis_result_clean(...)
 }
 \arguments{
-\item{x}{An object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
+\item{x}{A \code{qgis_result} object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
 
 \item{which}{The index of an output.}
 

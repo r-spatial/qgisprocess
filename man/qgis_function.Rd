@@ -14,6 +14,9 @@ qgis_function(algorithm, ...)
 These values are evaluated once and immediately, so you shouldn't
 call \code{\link[=qgis_tmp_file]{qgis_tmp_file()}} here.}
 }
+\value{
+A function.
+}
 \description{
 As opposed to \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, \code{\link[=qgis_function]{qgis_function()}} creates a callable
 function based on the argument metadata provided by \code{\link[=qgis_get_argument_specs]{qgis_get_argument_specs()}}.
@@ -25,15 +28,14 @@ This package also provides the QGIS documentation of each processing
 algorithm as corresponding R function documentation.
 }
 \examples{
-if (has_qgis()) {
-  qgis_buffer <- qgis_function("native:buffer")
-  qgis_buffer(
-    system.file(
-      "longlake/longlake_depth.gpkg",
-      package = "qgisprocess"
-    ),
-    DISTANCE = 10
-  )
-}
-
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+qgis_buffer <- qgis_function("native:buffer")
+qgis_buffer(
+  system.file(
+    "longlake/longlake_depth.gpkg",
+    package = "qgisprocess"
+  ),
+  DISTANCE = 10
+)
+\dontshow{\}) # examplesIf}
 }

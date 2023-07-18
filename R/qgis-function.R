@@ -13,20 +13,19 @@
 #'   These values are evaluated once and immediately, so you shouldn't
 #'   call [qgis_tmp_file()] here.
 #'
+#' @returns A function.
+#'
+#' @examplesIf has_qgis()
+#' qgis_buffer <- qgis_function("native:buffer")
+#' qgis_buffer(
+#'   system.file(
+#'     "longlake/longlake_depth.gpkg",
+#'     package = "qgisprocess"
+#'   ),
+#'   DISTANCE = 10
+#' )
+#'
 #' @export
-#'
-#' @examples
-#' if (has_qgis()) {
-#'   qgis_buffer <- qgis_function("native:buffer")
-#'   qgis_buffer(
-#'     system.file(
-#'       "longlake/longlake_depth.gpkg",
-#'       package = "qgisprocess"
-#'     ),
-#'     DISTANCE = 10
-#'   )
-#' }
-#'
 qgis_function <- function(algorithm, ...) {
   assert_qgis()
   assert_qgis_algorithm(algorithm)
@@ -125,20 +124,20 @@ qgis_function <- function(algorithm, ...) {
 #'   These values are evaluated once and immediately, so you shouldn't
 #'   call [qgis_tmp_file()] here.
 #'
+#'
+#' @returns A `qgis_result` object.
+#'
+#' @examplesIf has_qgis()
+#' system.file(
+#'   "longlake/longlake_depth.gpkg",
+#'   package = "qgisprocess"
+#' ) |>
+#'   qgis_run_algorithm_p(
+#'     "native:buffer",
+#'     DISTANCE = 10
+#'   )
+#'
 #' @export
-#'
-#' @examples
-#' if (has_qgis()) {
-#'   system.file(
-#'     "longlake/longlake_depth.gpkg",
-#'     package = "qgisprocess"
-#'   ) |>
-#'     qgis_run_algorithm_p(
-#'       "native:buffer",
-#'       DISTANCE = 10
-#'     )
-#' }
-#'
 qgis_run_algorithm_p <- function(
     .data,
     algorithm,

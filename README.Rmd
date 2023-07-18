@@ -19,12 +19,13 @@ knitr::opts_chunk$set(
 <img src="man/figures/qgisprocess.svg" align="right" hspace="10" vspace="0" width="20%">
 
 <!-- badges: start -->
-[![R build status](https://github.com/r-spatial/qgisprocess/workflows/R-CMD-check/badge.svg)](https://github.com/r-spatial/qgisprocess/actions)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![R-CMD-check](https://github.com/r-spatial/qgisprocess/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-spatial/qgisprocess/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test coverage](https://codecov.io/gh/r-spatial/qgisprocess/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-spatial/qgisprocess/tree/main)
 <!-- badges: end -->
 
-The goal of **qgisprocess** is to provide an R interface to the popular and open source desktop geographic information system (GIS) program [QGIS](https://qgis.org/en/site/). The package is a re-implementation of functionality provided by the archived [RQGIS](https://cran.r-project.org/package=RQGIS) package, which was partially revived in the [RQGIS3](https://github.com/r-spatial/RQGIS3) package.
+The goal of **qgisprocess** is to provide an R interface to the geoprocessing algorithms of [QGIS](https://qgis.org/en/site/), a popular and open source desktop geographic information system (GIS) program.
+The package is a re-implementation of functionality provided by the archived [RQGIS](https://cran.r-project.org/package=RQGIS) package, which was partially revived in the [RQGIS3](https://github.com/r-spatial/RQGIS3) package.
 
 ## Installation
 
@@ -65,7 +66,7 @@ It specifies the geoprocessing algorithm to be called with a `"provider:algorith
 
 Additional functions are provided to discover available geoprocessing algorithms, retrieve their documentation, handle processing results, manage QGIS plugins, and more.
 
-Spatial layers can be passed to `qgis_run_algorithm()` as file paths but also as [sf](https://r-spatial.github.io/sf), [stars](https://r-spatial.github.io/stars), [terra](https://rspatial.github.io/terra) or [raster](https://cran.r-project.org/package=raster) objects.
+Spatial layers can be passed to `qgis_run_algorithm()` as file paths but also as [sf](https://r-spatial.github.io/sf/), [stars](https://r-spatial.github.io/stars/), [terra](https://rspatial.github.io/terra/) or [raster](https://cran.r-project.org/package=raster) objects.
 
 A structured overview of functions is available at <https://r-spatial.github.io/qgisprocess/reference/index.html>.
 To get started, read the 'getting started' vignette and use the [cheat sheets](https://r-spatial.github.io/qgisprocess/articles/)!
@@ -103,15 +104,24 @@ It may also be useful to run an algorithm in the QGIS GUI and examine the consol
 
 ![](man/figures/qgis-buffer.png)
 
-A list of available algorithms can be found using `qgis_algorithms()`. When using R interactively, it may be useful to use `View(qgis_algorithms())` to search.
+You can search for algorithms with `qgis_search_algorithms()` (string matching with regex).
+
+```{r}
+qgis_search_algorithms(algorithm = "buffer", group = "[Vv]ector")
+```
+
+A full list of available algorithms is returned by `qgis_algorithms()`.
 
 ```{r}
 qgis_algorithms()
 ```
 
+## Code of Conduct
+
+Please note that the qgisprocess project is released with a [Contributor Code of Conduct](https://r-spatial.github.io/qgisprocess/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
 ## Further reading
 
 - A [paper](https://journal.r-project.org/archive/2017/RJ-2017-067/index.html) on the original RQGIS package published in the R Journal
-- A [discussion](https://github.com/r-spatial/discuss/issues/41) options for running QGIS from R that led to this package
+- A [discussion](https://github.com/r-spatial/discuss/issues/41) about options for running QGIS from R that led to this package
 - The [pull request](https://github.com/qgis/QGIS/pull/34617) in the QGIS repo that led to the development of the `qgis_process` command-line utility 

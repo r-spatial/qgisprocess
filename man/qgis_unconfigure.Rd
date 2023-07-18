@@ -6,8 +6,17 @@
 \usage{
 qgis_unconfigure()
 }
+\value{
+\code{NULL}, invisibly.
+}
 \description{
 Empties the qgisprocess cache environment.
+}
+\examples{
+if (FALSE) {
+  qgis_unconfigure()
+}
+
 }
 \seealso{
 Other topics about programming or debugging utilities: 

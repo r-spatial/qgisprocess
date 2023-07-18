@@ -111,20 +111,23 @@ test_that(glue("qgis_run_algorithm() supports the matrix input type{input}"), {
   df <- data.frame(min = mat[, 1], max = mat[, 2], val = mat[, 3])
 
   res_vec <- qgis_run_algorithm("native:reclassifybytable",
-                                INPUT_RASTER = path,
-                                RASTER_BAND = 1,
-                                TABLE = vec,
-                                RANGE_BOUNDARIES = 2)
+    INPUT_RASTER = path,
+    RASTER_BAND = 1,
+    TABLE = vec,
+    RANGE_BOUNDARIES = 2
+  )
   res_mat <- qgis_run_algorithm("native:reclassifybytable",
-                                INPUT_RASTER = path,
-                                RASTER_BAND = 1,
-                                TABLE = mat,
-                                RANGE_BOUNDARIES = 2)
+    INPUT_RASTER = path,
+    RASTER_BAND = 1,
+    TABLE = mat,
+    RANGE_BOUNDARIES = 2
+  )
   res_df <- qgis_run_algorithm("native:reclassifybytable",
-                               INPUT_RASTER = path,
-                               RASTER_BAND = 1,
-                               TABLE = df,
-                               RANGE_BOUNDARIES = 2)
+    INPUT_RASTER = path,
+    RASTER_BAND = 1,
+    TABLE = df,
+    RANGE_BOUNDARIES = 2
+  )
 
   expect_s3_class(res_vec$OUTPUT, "qgis_outputRaster")
   expect_s3_class(res_mat$OUTPUT, "qgis_outputRaster")
@@ -141,6 +144,7 @@ test_that(glue("qgis_run_algorithm() supports the matrix input type{input}"), {
 
 test_that(glue("qgis_run_algorithm() runs with qgis:relief, for which the acceptable value of COLORS is NULL{input}"), {
   skip_if_not(has_qgis())
+  skip_if_not_installed("terra")
 
   relief_args <- qgis_get_argument_specs("qgis:relief")
   expect_identical(relief_args["COLORS", ]$acceptable_values, list(NULL))
@@ -219,6 +223,7 @@ test_that(glue("qgis_run_algorithm() succeeds when it needs a QGIS project{input
 
 test_that(glue("qgis_run_algorithm() succeeds when it uses an aggregates input argument{input}"), {
   skip_if_not(has_qgis())
+  skip_if_not_installed("sf")
   skip_if_not(qgis_using_json_input())
 
   # preparing a layer of multiple polygons and some attributes
@@ -226,7 +231,7 @@ test_that(glue("qgis_run_algorithm() succeeds when it uses an aggregates input a
     "native:subdivide",
     INPUT = system.file("longlake/longlake.gpkg", package = "qgisprocess"),
     MAX_NODES = 40
-      )
+  )
   ll <- sf::st_as_sf(ll_res)
   ll <- sf::st_cast(sf::st_set_agr(ll, "constant"), "POLYGON")
   skip_if_not(nrow(ll) == 25L, "Intermediate result does not have the expected 25 polygons")

@@ -18,16 +18,16 @@
 #' @param ... Only used by other functions calling this function.
 #' @inheritParams qgis_path
 #'
-#' @return
+#' @returns
 #' A tibble of algorithms, processing providers or plugins, with metadata.
 #'
 #' @export
 #'
-#' @examples
-#' if (has_qgis()) qgis_has_algorithm("native:filedownloader")
-#' if (has_qgis()) qgis_algorithms()
-#' if (has_qgis()) qgis_has_provider("native")
-#' if (has_qgis()) qgis_providers()
+#' @examplesIf has_qgis()
+#' qgis_algorithms()
+#' qgis_providers()
+#' qgis_plugins(quiet = FALSE)
+#' qgis_plugins(which = "disabled")
 #'
 qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
   if (query) {
@@ -223,27 +223,23 @@ qgis_query_algorithms <- function(quiet = FALSE) {
 #' @param group Regular expression to match the `group` value
 #' from the output of [qgis_algorithms()].
 #'
-#' @return A tibble.
+#' @returns A tibble.
 #'
-#' @examples
-#' if (has_qgis()) {
-#'   qgis_search_algorithms(
-#'     algorithm = "point.*line",
-#'     provider = "^native$"
-#'   )
-#' }
-#'
+#' @examplesIf has_qgis()
+#' qgis_search_algorithms(
+#'   algorithm = "point.*line",
+#'   provider = "^native$"
+#' )
 #'
 #' @export
 qgis_search_algorithms <- function(
     algorithm = NULL,
     provider = NULL,
-    group = NULL
-) {
+    group = NULL) {
   assert_that(
     !is.null(algorithm) || !is.null(provider) || !is.null(group),
     msg = "You must provide at least one of the arguments."
-    )
+  )
   result <- qgis_algorithms(query = FALSE, quiet = TRUE)
   assert_that(inherits(result, "data.frame"))
   assert_that(
@@ -262,7 +258,7 @@ qgis_search_algorithms <- function(
     result <- result[
       stringr::str_detect(result$algorithm, algorithm) |
         stringr::str_detect(result$algorithm_title, algorithm),
-      ]
+    ]
   }
   if (!is.null(provider)) {
     assert_that(is.string(provider))
@@ -276,5 +272,4 @@ qgis_search_algorithms <- function(
     result <- result[stringr::str_detect(result$group, group), ]
   }
   result
-  }
-
+}

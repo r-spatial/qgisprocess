@@ -15,19 +15,15 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 can_build <- qgisprocess::has_qgis() &&
-  package_version(qgisprocess::qgis_version(full = FALSE)) >= "3.30.0"
-```
-
-```{r setup, message=FALSE}
-library(qgisprocess)
-library(sf)
+  package_version(qgisprocess::qgis_version(full = FALSE)) >= "3.30.0" &&
+  requireNamespace("sf", quietly = TRUE)
 ```
 
 ```{r child=if (can_build) file.path(rprojroot::find_root(rprojroot::is_r_package), "man/vignette_childs/_qgis_expressions.Rmd")}
 ```
 
 ```{r eval=!can_build, echo=FALSE, results="asis"}
-cat("This vignette has been built in absence of a QGIS installation with version >= 3.30.0.\n\n")
+cat("This vignette has been built in absence of a QGIS installation with version >= 3.30.0, or in absence of the sf package.\n\n")
 cat("Read it online at <https://r-spatial.github.io/qgisprocess/articles/qgis_expressions.html>.")
 ```
 

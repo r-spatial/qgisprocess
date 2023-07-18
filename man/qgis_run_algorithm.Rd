@@ -29,21 +29,23 @@ ellipsoid name for distance calculations.}
 \item{.quiet}{Use \code{FALSE} to get extra output from 'qgis_process'.
 This can be useful in debugging.}
 }
+\value{
+A \code{qgis_result} object.
+}
 \description{
 Runs an algorithm using 'qgis_process'.
-See the \href{https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html}{QGIS docs}
+See the \href{https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/}{QGIS docs}
 for a detailed description of the algorithms provided
 'out of the box' on QGIS.
 }
 \examples{
-if (has_qgis()) {
-  qgis_run_algorithm(
-    "native:buffer",
-    INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
-    DISTANCE = 10
-  )
-}
-
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+qgis_run_algorithm(
+  "native:buffer",
+  INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+  DISTANCE = 10
+)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other functions to run one geoprocessing algorithm: 

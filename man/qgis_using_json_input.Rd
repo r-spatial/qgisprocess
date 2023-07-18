@@ -15,6 +15,9 @@ qgis_using_json_output(query = FALSE, quiet = TRUE)
 \item{quiet}{Use \code{FALSE} to display more information,
 possibly useful for debugging.}
 }
+\value{
+A logical of length 1.
+}
 \description{
 Returns a logical that reveals whether the JSON input and output methods are
 used, respectively.
@@ -36,6 +39,11 @@ environment variables \code{R_QGISPROCESS_USE_JSON_INPUT} or
 Since the JSON output method is cached by the package,
 \code{qgis_using_json_output(query = TRUE)} is needed for these settings to take
 effect if the package was loaded already.
+}
+\examples{
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+qgis_using_json_input()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other topics about programming or debugging utilities: 

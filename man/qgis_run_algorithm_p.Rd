@@ -37,6 +37,9 @@ after processing?}
 \item{.quiet}{Use \code{FALSE} to get extra output from 'qgis_process'.
 This can be useful in debugging.}
 }
+\value{
+A \code{qgis_result} object.
+}
 \description{
 \code{\link[=qgis_run_algorithm_p]{qgis_run_algorithm_p()}} wraps \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, passing
 its first argument to the first argument of the QGIS \code{algorithm}.
@@ -46,17 +49,16 @@ This makes it more convenient in a pipeline (hence '_p' in the name).
 Uses \code{\link[=qgis_function]{qgis_function()}} under the hood.
 }
 \examples{
-if (has_qgis()) {
-  system.file(
-    "longlake/longlake_depth.gpkg",
-    package = "qgisprocess"
-  ) |>
-    qgis_run_algorithm_p(
-      "native:buffer",
-      DISTANCE = 10
-    )
-}
-
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+system.file(
+  "longlake/longlake_depth.gpkg",
+  package = "qgisprocess"
+) |>
+  qgis_run_algorithm_p(
+    "native:buffer",
+    DISTANCE = 10
+  )
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other functions to run one geoprocessing algorithm: 

@@ -1,4 +1,4 @@
-For a very short introduction to **qgisprocess**, visit the [homepage](https://r-spatial.github.io/qgisprocess).
+For a very short introduction to **qgisprocess**, visit the [homepage](https://r-spatial.github.io/qgisprocess/).
 
 Here you will learn about package configuration, about basic usage illustrated by two examples, and how to pipe results into a next geoprocessing step.
 
@@ -68,7 +68,11 @@ Next, let's check which plugins are at our disposal:
 qgis_plugins()
 ```
 
-Since we will use GRASS and SAGA later on, let's enable them (of course, this implies that you have already installed GRASS and SAGA version > 7 on your system):
+Since we will use GRASS and SAGA later on, you must have GRASS and SAGA version > 7 installed on your system.
+You also need to install the third-party plugin 'SAGA Next Generation' in the QGIS GUI.
+The GRASS provider plugin is already built-in in QGIS.
+
+Then, let's enable both plugins:
 
 ```{r enable-plugins, message=FALSE}
 qgis_enable_plugins(c("grassprovider", "processing_saga_nextgen"))
@@ -222,7 +226,7 @@ nms <- qgis_get_output_specs("grass7:r.slope.aspect")$name
 # read in the output rasters 
 r <- info[nms] |>
   unlist() |>
-  terra::rast() |>
+  rast() |>
   as.numeric()
 names(r) <- nms
 # plot the output
@@ -236,7 +240,7 @@ r <- lapply(info[nms], \(x) as.numeric(qgis_as_terra(x))) |>
   rast()
 ```
 
-Since we have now many terrain attributes at our disposal, let us take the opportunity to add their values to points laying on top of them with the help of the SAGA function `sagang:addrastervaluestopoints`.
+Since we have now many terrain attributes at our disposal, let us take the opportunity to add their values to points laying on top of them with the help of the SAGA algorithm `sagang:addrastervaluestopoints`.
 
 ```{r addrastertopoints-args}
 qgis_get_argument_specs("sagang:addrastervaluestopoints")
@@ -249,9 +253,9 @@ To pass multiple layers to one argument, you can either repeat the corresponding
 rp_tp <- qgis_run_algorithm(
   "sagang:addrastervaluestopoints",
   SHAPES = random_points,
-  GRIDS = info$aspect[[1]],
-  GRIDS = info$slope[[1]],
-  GRIDS = info$tcurvature[[1]],
+  GRIDS = qgis_extract_output(info, "aspect"),
+  GRIDS = qgis_extract_output(info, "slope"),
+  GRIDS = qgis_extract_output(info, "tcurvature"),
   RESAMPLING = 0)
 ```
 
@@ -262,7 +266,11 @@ One could use the `list()` command but it is recommendended to use the `qgis_lis
 rp_tp <- qgis_run_algorithm(
   "sagang:addrastervaluestopoints",
   SHAPES = random_points,
-  GRIDS = qgis_list_input(info$aspect[[1]], info$slope[[1]], info$tcurvature[[1]]),
+  GRIDS = qgis_list_input(
+    qgis_extract_output(info, "aspect"),
+    qgis_extract_output(info, "slope"),
+    qgis_extract_output(info, "tcurvature")
+  ),
   RESAMPLING = 0)
 ```
 
@@ -308,7 +316,7 @@ For example, intermediate results remain on disk for the duration of your R sess
 ```{r native pipe}
 result <- qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem, 
                          METHOD = 1) |>
-  _$DEM_PREPROC[1] |>
+  qgis_extract_output("DEM_PREPROC") |>
   qgis_run_algorithm(algorithm = "sagang:sagawetnessindex",
                      DEM = _)
 

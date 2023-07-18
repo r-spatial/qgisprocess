@@ -18,6 +18,14 @@
 #' possibly useful for debugging.
 #' @param query Use `TRUE` to refresh the cached value.
 #'
+#' @returns A string.
+#'
+#' @examplesIf has_qgis()
+#' qgis_path()
+#' qgis_path(quiet = FALSE)
+#' qgis_version()
+#' qgis_version(full = FALSE)
+#' qgis_version(debug = TRUE)
 #'
 #' @name qgis_path
 
@@ -251,13 +259,17 @@ abort_query_version <- function(lines) {
 #' `qgis_using_json_output(query = TRUE)` is needed for these settings to take
 #' effect if the package was loaded already.
 #'
-#'
 #' @inheritParams qgis_path
-#'
 #'
 #' @family topics about programming or debugging utilities
 #' @family topics about reporting the QGIS state
 #' @concept functions to manage and explore QGIS and qgisprocess
+#'
+#' @returns A logical of length 1.
+#'
+#' @examplesIf has_qgis()
+#' qgis_using_json_input()
+#  qgis_using_json_output()
 #'
 #' @export
 qgis_using_json_input <- function() {

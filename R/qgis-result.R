@@ -13,7 +13,7 @@
 #' @concept main functions to access or manage processing results
 #' @family topics about accessing or managing processing results
 #'
-#' @param x An object returned by [qgis_run_algorithm()].
+#' @param x A `qgis_result` object returned by [qgis_run_algorithm()].
 #' @param which The index of an output.
 #' @param name The name of an output.
 #' @param class Character vector of classes.
@@ -28,6 +28,25 @@
 #' Should `qgis_extract_output_by_name()` fall back to the first
 #' output element if the default `OUTPUT` or `output` element is not available?
 #' Only takes effect if `name` is equal to `OUTPUT` or `output`, but not found.
+#'
+#' @returns A `qgis_output*` object.
+#'
+#' @examplesIf has_qgis()
+#' result <- qgis_run_algorithm(
+#'   "native:buffer",
+#'   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'   DISTANCE = 10
+#' )
+#'
+#' # the print() method of a qgis_result only prints its output elements:
+#' result
+#'
+#' # nevertheless, more elements are included:
+#' length(result)
+#' names(result)
+#'
+#' # extract the output element 'OUTPUT':
+#' qgis_extract_output(result)
 #'
 #' @name qgis_extract_output
 
@@ -141,6 +160,20 @@ qgis_error_output_does_not_exist <- function(x, which) {
 #'
 #' @inheritParams qgis_extract_output
 #'
+#' @returns The `qgis_result` object passed to the function is returned
+#' invisibly.
+#'
+#' @examplesIf has_qgis()
+#' result <- qgis_run_algorithm(
+#'   "native:buffer",
+#'   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'   DISTANCE = 10
+#' )
+#'
+#' file.exists(qgis_extract_output(result))
+#' qgis_clean_result(result)
+#' file.exists(qgis_extract_output(result))
+#'
 #' @export
 qgis_clean_result <- function(x) {
   args_chr <- as.character(x$.args[vapply(x$.args, is.character, logical(1))])
@@ -161,6 +194,24 @@ qgis_clean_result <- function(x) {
 #' @family topics about accessing or managing processing results
 #'
 #' @inheritParams qgis_extract_output
+#'
+#' @returns
+#' - A number in case of `qgis_result_status()`.
+#' - A string in case of `qgis_result_stdout()` and `qgis_result_stderr()`.
+#' - A list in case of `qgis_result_args()`.
+#'
+#' @examplesIf has_qgis()
+#' result <- qgis_run_algorithm(
+#'   "native:buffer",
+#'   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'   DISTANCE = 10
+#' )
+#'
+#' qgis_result_status(result)
+#' stdout <- qgis_result_stdout(result)
+#' cat(substr(stdout, 1, 335))
+#' qgis_result_stderr(result)
+#' qgis_result_args(result)
 #'
 #' @name qgis_result_status
 

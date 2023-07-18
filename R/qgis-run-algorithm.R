@@ -1,7 +1,7 @@
 #' Run an algorithm using 'qgis_process'
 #'
 #' Runs an algorithm using 'qgis_process'.
-#' See the [QGIS docs](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/index.html)
+#' See the [QGIS docs](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/)
 #' for a detailed description of the algorithms provided
 #' 'out of the box' on QGIS.
 #'
@@ -18,17 +18,16 @@
 #' This can be useful in debugging.
 #' @param .raw_json_input The raw JSON to use as input in place of `...`.
 #'
+#' @returns A `qgis_result` object.
+#'
+#' @examplesIf has_qgis()
+#' qgis_run_algorithm(
+#'   "native:buffer",
+#'   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+#'   DISTANCE = 10
+#' )
+#'
 #' @export
-#'
-#' @examples
-#' if (has_qgis()) {
-#'   qgis_run_algorithm(
-#'     "native:buffer",
-#'     INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
-#'     DISTANCE = 10
-#'   )
-#' }
-#'
 qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = NULL,
                                .raw_json_input = NULL, .quiet = TRUE) {
   assert_qgis()

@@ -14,18 +14,21 @@ name: R-CMD-check
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }}, ${{ matrix.config.qgis }})
+    name: ${{ matrix.config.os }} (${{ matrix.config.dep }}${{ matrix.config.r }}, ${{ matrix.config.qgis }})
     strategy:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest, qgis: 'none', r: 'release', r-pkg-cache: 'v0'}
-          - {os: macOS-latest, qgis: 'macos-brew', r: 'release', r-pkg-cache: 'v0'}
-          - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release', r-pkg-cache: 'v0'}
-          - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'release', r-pkg-cache: 'v0'}
-          - {os: ubuntu-22.04, qgis: 'ubuntugis', r: 'release', r-pkg-cache: 'v1'}
-          - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', r-pkg-cache: 'v0'}
-          - {os: ubuntu-22.04, qgis: 'ubuntu-ltr', r: 'release', r-pkg-cache: 'v0'}
+          - {os: macOS-latest, qgis: 'none', r: 'release', dep: '', r-pkg-cache: 'v0'}
+          - {os: macOS-latest, qgis: 'macos-brew', r: 'release', dep: '', r-pkg-cache: 'v0'}
+          - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release', dep: '', r-pkg-cache: 'v0'}
+          - {os: windows-latest, qgis: 'windows-chocolatey', r: 'devel', dep: '', r-pkg-cache: 'v2'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'release', dep: '', r-pkg-cache: 'v0'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'devel', dep: '', r-pkg-cache: 'v2'}
+          - {os: ubuntu-22.04, qgis: 'ubuntugis', r: 'release', dep: '', r-pkg-cache: 'v1'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', dep: '', r-pkg-cache: 'v0'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', dep: 'hard ', r-pkg-cache: 'v3'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu-ltr', r: 'release', dep: '', r-pkg-cache: 'v0'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -42,6 +45,7 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
+          extra-repositories: https://geocompr.r-universe.dev
 
       - name: Prepare Ubuntu for installing QGIS (common code)
         if: runner.os == 'Linux'
@@ -116,13 +120,14 @@ jobs:
 
       - name: Query R dependencies and report available versions
         id: query
+        if: matrix.config.dep == ''
         run: |
           # Query R dependencies and report available versions
           cat("::group::Install pak\n")
           install.packages("pak", repos = "https://r-lib.github.io/p/pak/stable/")
           cat("::endgroup::\n")
           cat("::group::Create minimal data frame with pkg deps and store them\n")
-          depends <- pak::pkg_deps(c("deps::.", "any::sessioninfo", "any::rcmdcheck"), dependencies = c("Config/Needs/check", "all"))[, c("ref", "version")]
+          depends <- pak::pkg_deps(c("deps::.", "any::sessioninfo", "any::rcmdcheck", "any::covr"), dependencies = c("Config/Needs/check", "all"))[, c("ref", "version")]
           depends <- depends[depends$ref != "deps::.", ]
           saveRDS(depends, ".github/depends.Rds")
           cat("::endgroup::\n")
@@ -136,6 +141,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Restore (or define new) R package cache
+        if: matrix.config.dep == ''
         uses: actions/cache@v3
         with:
           path: |
@@ -144,10 +150,11 @@ jobs:
           key: ${{ matrix.config.os }}-${{ steps.query.outputs.r-version }}-${{ matrix.config.r-pkg-cache }}-${{ hashFiles('.github/depends.Rds') }}
 
       - name: Install missing package dependencies
+        if: matrix.config.dep == ''
         run: |
           # Install missing package dependencies
           cat("::group::Install\n")
-          pak::pkg_install(c("deps::.", "any::sessioninfo", "any::rcmdcheck"), upgrade = FALSE, dependencies = c("Config/Needs/check", "all"))
+          pak::pkg_install(c("deps::.", "any::sessioninfo", "any::rcmdcheck", "any::covr"), upgrade = FALSE, dependencies = c("Config/Needs/check", "all"))
           # This is based on the minimum needed version, not the hash of what is available at RSPM
           cat("::endgroup::\n")
           cat("::group::Session info\n")
@@ -185,14 +192,26 @@ jobs:
           cat("::endgroup::\n")
         shell: Rscript {0}
 
+      - name: Install hard R pkg dependencies only
+        if: matrix.config.dep == 'hard '
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          dependencies: '"hard"'
+          cache: false
+          extra-packages: |
+            any::rcmdcheck
+            any::testthat
+            any::knitr
+            any::rmarkdown
+          needs: check
+
       - uses: r-lib/actions/check-r-package@v2
 
       # run with CMD check because installing QGIS is expensive
       - name: Test Coverage
-        if: matrix.config.qgis == 'ubuntu'
+        if: matrix.config.qgis == 'ubuntu' && matrix.config.dep == ''
         run: |
           # Setup code coverage with Codecov
-          install.packages("covr")
           covr::codecov(quiet = FALSE)
         shell: Rscript {0}
 

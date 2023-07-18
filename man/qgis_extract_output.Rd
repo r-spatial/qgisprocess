@@ -16,7 +16,7 @@ qgis_extract_output_by_position(x, which)
 qgis_extract_output_by_class(x, class, single = TRUE)
 }
 \arguments{
-\item{x}{An object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
+\item{x}{A \code{qgis_result} object returned by \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
 
 \item{name}{The name of an output.}
 
@@ -37,6 +37,9 @@ The \code{OUTPUT} or \code{output} element is taken if available and on conditio
 it inherits a specified class; otherwise falls back
 to the first element that inherits a specified class.}
 }
+\value{
+A \verb{qgis_output*} object.
+}
 \description{
 These functions extract one output element from the result of
 \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, potentially more than one in the case of
@@ -46,6 +49,25 @@ printed \code{qgis_result} object returned by \code{\link[=qgis_run_algorithm]{q
 class.
 
 \code{qgis_extract_output()} is an alias to \code{qgis_extract_output_by_name()}.
+}
+\examples{
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+result <- qgis_run_algorithm(
+  "native:buffer",
+  INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+  DISTANCE = 10
+)
+
+# the print() method of a qgis_result only prints its output elements:
+result
+
+# nevertheless, more elements are included:
+length(result)
+names(result)
+
+# extract the output element 'OUTPUT':
+qgis_extract_output(result)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other topics about accessing or managing processing results: 

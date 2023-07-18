@@ -3,14 +3,24 @@
 \name{st_as_sf}
 \alias{st_as_sf}
 \alias{st_as_sf.qgis_result}
+\alias{st_as_sf.qgis_outputVector}
+\alias{st_as_sf.qgis_outputLayer}
 \title{Convert a qgis_result object to an sf object}
 \usage{
 st_as_sf.qgis_result(x, ...)
+
+st_as_sf.qgis_outputVector(x, ...)
+
+st_as_sf.qgis_outputLayer(x, ...)
 }
 \arguments{
-\item{x}{A result from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}.}
+\item{x}{A \code{qgis_result} object from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} or a
+\verb{qgis_output*} object from one of the \code{\link[=qgis_extract_output]{qgis_extract_output()}} functions.}
 
 \item{...}{Arguments passed to \code{\link[sf:st_read]{sf::read_sf()}}.}
+}
+\value{
+An \code{sf} object.
 }
 \description{
 Convert a qgis_result object to an sf object
@@ -18,6 +28,23 @@ Convert a qgis_result object to an sf object
 \note{
 Just use \code{st_as_sf()} in R scripts, it will use the correct
 method.
+}
+\examples{
+\dontshow{if (has_qgis() && requireNamespace("sf", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+result <- qgis_run_algorithm(
+  "native:buffer",
+  INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
+  DISTANCE = 10
+)
+
+# most direct approach, autoselecting a `qgis_outputVector` type
+# output from the `result` object and reading as sf object:
+sf::st_as_sf(result)
+
+# if you need more control, extract the needed output element first:
+output_vector <- qgis_extract_output(result, "OUTPUT")
+sf::st_as_sf(output_vector)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other topics about coercing processing output: 

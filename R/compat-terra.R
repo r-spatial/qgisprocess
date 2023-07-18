@@ -6,32 +6,49 @@
 #' @family topics about coercing processing output
 #' @family topics about accessing or managing processing results
 #'
-#' @inheritParams qgis_as_raster
 #' @param ... Arguments passed to [terra::rast()].
+#' @inheritParams qgis_as_raster
+#'
+#' @returns A `SpatRaster` or a `SpatVector` object.
+#'
+#' @examplesIf has_qgis() && requireNamespace("terra", quietly = TRUE)
+#' result <- qgis_run_algorithm(
+#'   "native:slope",
+#'   INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")
+#' )
+#'
+#' # most direct approach, autoselecting a `qgis_outputRaster` type
+#' # output from the `result` object and reading as SpatRaster:
+#' qgis_as_terra(result)
+#'
+#' # if you need more control, extract the needed output element first:
+#' output_raster <- qgis_extract_output(result, "OUTPUT")
+#' qgis_as_terra(output_raster)
+#'
 #' @name qgis_as_terra
 
 #' @rdname qgis_as_terra
 #' @export
-qgis_as_terra <- function(output, ...) {
+qgis_as_terra <- function(x, ...) {
   UseMethod("qgis_as_terra")
 }
 
 #' @rdname qgis_as_terra
 #' @export
-qgis_as_terra.qgis_outputRaster <- function(output, ...) {
-  terra::rast(unclass(output), ...)
+qgis_as_terra.qgis_outputRaster <- function(x, ...) {
+  terra::rast(unclass(x), ...)
 }
 
 #' @rdname qgis_as_terra
 #' @export
-qgis_as_terra.qgis_outputLayer <- function(output, ...) {
-  terra::rast(unclass(output), ...)
+qgis_as_terra.qgis_outputLayer <- function(x, ...) {
+  terra::rast(unclass(x), ...)
 }
 
 #' @rdname qgis_as_terra
 #' @export
-qgis_as_terra.qgis_result <- function(output, ...) {
-  result <- qgis_extract_output_by_class(output, c("qgis_outputRaster", "qgis_outputLayer"))
+qgis_as_terra.qgis_result <- function(x, ...) {
+  result <- qgis_extract_output_by_class(x, c("qgis_outputRaster", "qgis_outputLayer"))
   terra::rast(unclass(result), ...)
 }
 
@@ -52,11 +69,12 @@ as_qgis_argument_terra <- function(x, spec = qgis_argument_spec(),
 
   if (terra::nlyr(x) > 1L && spec$qgis_type == "multilayer") {
     warning("You passed a multiband SpatRaster object as one of the layers for a multilayer argument.\n",
-            "It is expected that only the first band will be used by QGIS!\n",
-            "If you need each band to be processed, you need to extract the bands and pass them as ",
-            "separate layers to the algorithm (either by repeating the argument, or by wrapping ",
-            "in qgis_list_input()).",
-            call. = FALSE)
+      "It is expected that only the first band will be used by QGIS!\n",
+      "If you need each band to be processed, you need to extract the bands and pass them as ",
+      "separate layers to the algorithm (either by repeating the argument, or by wrapping ",
+      "in qgis_list_input()).",
+      call. = FALSE
+    )
   }
 
   # try to use a filename if present (behaviour changed around terra 1.5.12)

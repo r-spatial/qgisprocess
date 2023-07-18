@@ -36,11 +36,12 @@ for a detailed description of the algorithms provided
 'out of the box' on QGIS.
 }
 \examples{
-if (has_qgis()) qgis_has_algorithm("native:filedownloader")
-if (has_qgis()) qgis_algorithms()
-if (has_qgis()) qgis_has_provider("native")
-if (has_qgis()) qgis_providers()
-
+\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+qgis_algorithms()
+qgis_providers()
+qgis_plugins(quiet = FALSE)
+qgis_plugins(which = "disabled")
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=qgis_enable_plugins]{qgis_enable_plugins()}}, \code{\link[=qgis_disable_plugins]{qgis_disable_plugins()}}

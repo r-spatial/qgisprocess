@@ -43,7 +43,6 @@ test_that("terra argument coercers work", {
     "Rewriting"
   )
   expect_s3_class(res, "qgis_tempfile_arg")
-
 })
 
 test_that("terra result coercers work", {
