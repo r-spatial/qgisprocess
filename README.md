@@ -26,8 +26,13 @@ package.
 
 ### qgisprocess
 
-You can install the development version from
-[GitHub](https://github.com/) with:
+To install the latest CRAN release, just run:
+
+``` r
+install.packages("qgisprocess")
+```
+
+You can install the development version from GitHub with:
 
 ``` r
 # install.packages("remotes")
@@ -43,8 +48,9 @@ which is available in QGIS \>= 3.16.
 
 The package is meant to support *current* QGIS releases, i.e. both the
 latest and the long-term release. Although older QGIS releases are not
-officially supported, it may work since QGIS 3.16. Download instructions
-for all platforms are available at <https://download.qgis.org/>.
+officially supported, it may work since QGIS 3.16. Installation
+instructions for all platforms are available at
+<https://download.qgis.org/>.
 
 If a recent version of QGIS isn’t available for your OS, you can use the
 [Geocomputation with R Docker
@@ -54,20 +60,22 @@ vignette on ‘getting started’ for more information.
 
 ### Package configuration
 
-If the automatic configuration fails (or if you have more than one
-installation and would like to choose which one is used by
-**qgisprocess**), you can set `options(qgisprocess.path =
-"path/to/qgis_process")`. Specify the `qgisprocess.path` option in your
-`.Rprofile`, to make your choices persistent between sessions. You can
-run `qgis_configure()` to reconfigure, or just
-`qgis_configure(use_cached_data = TRUE)` to see the gritty details\!
+If the automatic configuration fails (or if you have more than one QGIS
+installation and would like to choose which one is used), you can set
+`options(qgisprocess.path = "path/to/qgis_process")`. Specify the
+`qgisprocess.path` option in your `.Rprofile`, to make your choices
+persistent between sessions. You can run `qgis_configure()` to
+reconfigure the package, or just `qgis_configure(use_cached_data =
+TRUE)` to see the gritty details\!
 
 ``` r
 library(qgisprocess)
 #> Attempting to load the cache ... Success!
 #> QGIS version: 3.32.0-Lima
-#> Having access to 1868 algorithms from 13 QGIS processing providers.
+#> Having access to 1322 algorithms from 12 QGIS processing providers.
 #> Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.
+#> >>> Run `qgis_enable_plugins()` to enable 1 disabled plugin and access
+#>     its algorithms: wbt_for_qgis
 ```
 
 ## Functionality
@@ -102,7 +110,7 @@ Note that R package
 geoprocessing algorithm. In addition, it makes the QGIS algorithm
 documentation available in the corresponding R function documentation.
 
-## Example
+### Example
 
 The following example demonstrates the
 [buffer](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer)
@@ -127,13 +135,15 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpSFJycz/file85fc747b14a0/file85fc58d4dbf.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmphdPa6Q/filea3a3282be9fa/filea3a36e501b76.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
 ```
 
 <img src="man/figures/README-buffer-1.png" width="60%" />
+
+### Some tips
 
 You can read the help associated with an algorithm using
 `qgis_show_help()`.
@@ -142,11 +152,15 @@ You can read the help associated with an algorithm using
 qgis_show_help("native:buffer")
 ```
 
-It may also be useful to run an algorithm in the QGIS GUI and examine
-the console ‘Input parameters’ to determine how the various input values
-are translated to string processing arguments:
+It may also be useful to run an algorithm in the QGIS GUI to determine
+how the various input values are translated to string processing
+arguments. This can be done using the ‘Advanced’ dropdown, by copying
+either the `qgis_process` command string or the JSON string:
 
-![](man/figures/qgis-buffer.png)
+![](man/figures/copy_as_json.png)
+
+Note that the JSON string can be passed directly to
+`qgis_run_algorithm()`\!
 
 You can search for algorithms with `qgis_search_algorithms()` (string
 matching with regex).
@@ -173,7 +187,7 @@ A full list of available algorithms is returned by `qgis_algorithms()`.
 
 ``` r
 qgis_algorithms()
-#> # A tibble: 1,868 × 24
+#> # A tibble: 1,322 × 24
 #>    provider         provider_title    algorithm     algorithm_id algorithm_title
 #>    <chr>            <chr>             <chr>         <chr>        <chr>          
 #>  1 3d               QGIS (3D)         3d:tessellate tessellate   Tessellate     
@@ -186,7 +200,7 @@ qgis_algorithms()
 #>  8 gdal             GDAL              gdal:assignp… assignproje… Assign project…
 #>  9 gdal             GDAL              gdal:bufferv… buffervecto… Buffer vectors 
 #> 10 gdal             GDAL              gdal:buildvi… buildvirtua… Build virtual …
-#> # ℹ 1,858 more rows
+#> # ℹ 1,312 more rows
 #> # ℹ 19 more variables: provider_can_be_activated <lgl>,
 #> #   provider_is_active <lgl>, provider_long_name <chr>, provider_version <chr>,
 #> #   provider_warning <chr>, can_cancel <lgl>, deprecated <lgl>, group <chr>,
@@ -202,7 +216,18 @@ Code of
 Conduct](https://r-spatial.github.io/qgisprocess/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
 
-## Further reading
+## More information
+
+### Presentations
+
+  - FOSS4G 2023:
+    [slides](https://florisvdh.github.io/foss4g-2023-qgisprocess/) (talk
+    follows later)
+  - FOSS4G 2021:
+    [slides](https://dewey.dunnington.ca/slides/qgisprocess2021/) &
+    [talk](https://www.youtube.com/watch?v=iA0OQ2Icn6Y&t=1912s)
+
+### Further reading
 
   - A
     [paper](https://journal.r-project.org/archive/2017/RJ-2017-067/index.html)
