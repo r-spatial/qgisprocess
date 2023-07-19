@@ -129,8 +129,15 @@ qgis_algorithms()
 
 Please note that the qgisprocess project is released with a [Contributor Code of Conduct](https://r-spatial.github.io/qgisprocess/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
-## Further reading
+## More information
+
+### Presentations
+
+- FOSS4G 2023: [slides](https://florisvdh.github.io/foss4g-2023-qgisprocess/) (talk follows later)
+- FOSS4G 2021: [slides](https://dewey.dunnington.ca/slides/qgisprocess2021/) & [talk](https://www.youtube.com/watch?v=iA0OQ2Icn6Y&t=1912s)
+
+### Further reading
 
 - A [paper](https://journal.r-project.org/archive/2017/RJ-2017-067/index.html) on the original RQGIS package published in the R Journal
 - A [discussion](https://github.com/r-spatial/discuss/issues/41) about options for running QGIS from R that led to this package
-- The [pull request](https://github.com/qgis/QGIS/pull/34617) in the QGIS repo that led to the development of the `qgis_process` command-line utility 
+- The [pull request](https://github.com/qgis/QGIS/pull/34617) in the QGIS repo that led to the development of the `qgis_process` command-line utility
