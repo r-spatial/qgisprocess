@@ -31,6 +31,12 @@ The package is a re-implementation of functionality provided by the archived [RQ
 
 ### qgisprocess
 
+To install the latest CRAN release, just run:
+
+```{r eval=FALSE}
+install.packages("qgisprocess")
+```
+
 You can install the development version from GitHub with:
 
 ```{r eval=FALSE}
