@@ -31,9 +31,9 @@ The package is a re-implementation of functionality provided by the archived [RQ
 
 ### qgisprocess
 
-You can install the development version from [GitHub](https://github.com/) with:
+You can install the development version from GitHub with:
 
-``` r
+```{r eval=FALSE}
 # install.packages("remotes")
 remotes::install_github("r-spatial/qgisprocess")
 ```
@@ -44,14 +44,16 @@ The **qgisprocess** package wraps the [standalone `qgis_process` command-line ut
 
 The package is meant to support _current_ QGIS releases, i.e. both the latest and the long-term release.
 Although older QGIS releases are not officially supported, it may work since QGIS 3.16.
-Download instructions for all platforms are available at <https://download.qgis.org/>.
+Installation instructions for all platforms are available at <https://download.qgis.org/>.
 
 If a recent version of QGIS isn't available for your OS, you can use the [Geocomputation with R Docker image](https://github.com/geocompx/docker/pkgs/container/docker) with QGIS installed (`docker pull ghcr.io/geocompx/docker:qgis`).
 See the vignette on 'getting started' for more information.
 
 ### Package configuration
 
-If the automatic configuration fails (or if you have more than one installation and would like to choose which one is used by **qgisprocess**), you can set `options(qgisprocess.path = "path/to/qgis_process")`. Specify the `qgisprocess.path` option in your `.Rprofile`, to make your choices persistent between sessions. You can run `qgis_configure()` to reconfigure, or just `qgis_configure(use_cached_data = TRUE)` to see the gritty details!
+If the automatic configuration fails (or if you have more than one QGIS installation and would like to choose which one is used), you can set `options(qgisprocess.path = "path/to/qgis_process")`.
+Specify the `qgisprocess.path` option in your `.Rprofile`, to make your choices persistent between sessions.
+You can run `qgis_configure()` to reconfigure the package, or just `qgis_configure(use_cached_data = TRUE)` to see the gritty details!
 
 ```{r}
 library(qgisprocess)
@@ -74,7 +76,7 @@ To get started, read the 'getting started' vignette and use the [cheat sheets](h
 Note that R package [**qgis**](https://github.com/JanCaha/r_package_qgis) extends on **qgisprocess** by providing a separate R function for each geoprocessing algorithm.
 In addition, it makes the QGIS algorithm documentation available in the corresponding R function documentation.
 
-## Example
+### Example
 
 The following example demonstrates the [buffer](https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html#buffer) algorithm in action.
 
@@ -93,6 +95,8 @@ result
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
 ```
+
+### Some tips
 
 You can read the help associated with an algorithm using `qgis_show_help()`.
 
