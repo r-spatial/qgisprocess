@@ -65,8 +65,8 @@ installation and would like to choose which one is used), you can set
 `options(qgisprocess.path = "path/to/qgis_process")`. Specify the
 `qgisprocess.path` option in your `.Rprofile`, to make your choices
 persistent between sessions. You can run `qgis_configure()` to
-reconfigure the package, or just `qgis_configure(use_cached_data =
-TRUE)` to see the gritty details\!
+reconfigure the package, or just
+`qgis_configure(use_cached_data = TRUE)` to see the gritty details!
 
 ``` r
 library(qgisprocess)
@@ -102,7 +102,7 @@ also as [sf](https://r-spatial.github.io/sf/),
 A structured overview of functions is available at
 <https://r-spatial.github.io/qgisprocess/reference/index.html>. To get
 started, read the ‘getting started’ vignette and use the [cheat
-sheets](https://r-spatial.github.io/qgisprocess/articles/)\!
+sheets](https://r-spatial.github.io/qgisprocess/articles/)!
 
 Note that R package
 [**qgis**](https://github.com/JanCaha/r_package_qgis) extends on
@@ -135,7 +135,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmphdPa6Q/filea3a3282be9fa/filea3a36e501b76.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmp0gJMR0/file32ef39abfe4a/file32ef2cc9f9f7.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
@@ -157,10 +157,10 @@ how the various input values are translated to string processing
 arguments. This can be done using the ‘Advanced’ dropdown, by copying
 either the `qgis_process` command string or the JSON string:
 
-![](man/figures/copy_as_json.png)
+<img src="man/figures/copy_as_json.png" style="width:80.0%" />
 
 Note that the JSON string can be passed directly to
-`qgis_run_algorithm()`\!
+`qgis_run_algorithm()`!
 
 You can search for algorithms with `qgis_search_algorithms()` (string
 matching with regex).
@@ -220,20 +220,20 @@ By contributing to this project, you agree to abide by its terms.
 
 ### Presentations
 
-  - FOSS4G 2023:
-    [slides](https://florisvdh.github.io/foss4g-2023-qgisprocess/) (talk
-    follows later)
-  - FOSS4G 2021:
-    [slides](https://dewey.dunnington.ca/slides/qgisprocess2021/) &
-    [talk](https://www.youtube.com/watch?v=iA0OQ2Icn6Y&t=1912s)
+- FOSS4G 2023:
+  [slides](https://florisvdh.github.io/foss4g-2023-qgisprocess/) (talk
+  follows later)
+- FOSS4G 2021:
+  [slides](https://dewey.dunnington.ca/slides/qgisprocess2021/) &
+  [talk](https://www.youtube.com/watch?v=iA0OQ2Icn6Y&t=1912s)
 
 ### Further reading
 
-  - A
-    [paper](https://journal.r-project.org/archive/2017/RJ-2017-067/index.html)
-    on the original RQGIS package published in the R Journal
-  - A [discussion](https://github.com/r-spatial/discuss/issues/41) about
-    options for running QGIS from R that led to this package
-  - The [pull request](https://github.com/qgis/QGIS/pull/34617) in the
-    QGIS repo that led to the development of the `qgis_process`
-    command-line utility
+- A
+  [paper](https://journal.r-project.org/archive/2017/RJ-2017-067/index.html)
+  on the original RQGIS package published in the R Journal
+- A [discussion](https://github.com/r-spatial/discuss/issues/41) about
+  options for running QGIS from R that led to this package
+- The [pull request](https://github.com/qgis/QGIS/pull/34617) in the
+  QGIS repo that led to the development of the `qgis_process`
+  command-line utility
