@@ -20,6 +20,6 @@
 ^data-raw$
 ^docs$
 ^man-roxygen$
-^misc/algorithms$
+^misc$
 ^pkgdown$
 ^qgisprocess\.Rproj$
