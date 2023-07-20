@@ -129,7 +129,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmp0gJMR0/file32ef39abfe4a/file32ef2cc9f9f7.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpkR84kn/file356e3e588016/file356e6add2fc1.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
@@ -151,7 +151,7 @@ how the various input values are translated to string processing
 arguments. This can be done using the ‘Advanced’ dropdown, by copying
 either the `qgis_process` command string or the JSON string:
 
-<img src="man/figures/copy_as_json.png" style="width:80.0%" />
+![](man/figures/copy_as_json.png)
 
 Note that the JSON string can be passed directly to
 `qgis_run_algorithm()`!
