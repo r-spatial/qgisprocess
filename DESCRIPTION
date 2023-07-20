@@ -63,7 +63,6 @@ Config/checklist/communities: inbo
 Config/checklist/keywords: R; package; QGIS
 Encoding: UTF-8
 Language: en-GB
-LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 SystemRequirements: 'QGIS' latest or long-term release (>= 3.28). Older
