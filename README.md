@@ -72,10 +72,8 @@ reconfigure the package, or just
 library(qgisprocess)
 #> Attempting to load the cache ... Success!
 #> QGIS version: 3.32.0-Lima
-#> Having access to 1322 algorithms from 12 QGIS processing providers.
+#> Having access to 1868 algorithms from 13 QGIS processing providers.
 #> Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.
-#> >>> Run `qgis_enable_plugins()` to enable 1 disabled plugin and access
-#>     its algorithms: wbt_for_qgis
 ```
 
 ## Functionality
@@ -135,7 +133,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpkR84kn/file356e3e588016/file356e6add2fc1.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmp2l3PUR/filedb554ca93555/filedb55b758604.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
@@ -187,7 +185,7 @@ A full list of available algorithms is returned by `qgis_algorithms()`.
 
 ``` r
 qgis_algorithms()
-#> # A tibble: 1,322 × 24
+#> # A tibble: 1,868 × 24
 #>    provider         provider_title    algorithm     algorithm_id algorithm_title
 #>    <chr>            <chr>             <chr>         <chr>        <chr>          
 #>  1 3d               QGIS (3D)         3d:tessellate tessellate   Tessellate     
@@ -200,7 +198,7 @@ qgis_algorithms()
 #>  8 gdal             GDAL              gdal:assignp… assignproje… Assign project…
 #>  9 gdal             GDAL              gdal:bufferv… buffervecto… Buffer vectors 
 #> 10 gdal             GDAL              gdal:buildvi… buildvirtua… Build virtual …
-#> # ℹ 1,312 more rows
+#> # ℹ 1,858 more rows
 #> # ℹ 19 more variables: provider_can_be_activated <lgl>,
 #> #   provider_is_active <lgl>, provider_long_name <chr>, provider_version <chr>,
 #> #   provider_warning <chr>, can_cancel <lgl>, deprecated <lgl>, group <chr>,
