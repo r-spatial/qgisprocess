@@ -15,6 +15,21 @@
 #' @param .use_json_input,use_json_input TRUE if the arguments will be
 #'   serialized as JSON instead of serialized as a command-line argument.
 #'
+#' @returns
+#' The returned object class and form depends on the class and form of `x` and
+#' on the targeted `qgis_type`.
+#'
+#' If `x` is a `qgis_list_input` or a `qgis_dict_input` object, the same class
+#' is returned but with `as_qgis_argument()` applied to each element.
+#'
+#' In all other cases, the outcome can depend on the value of `use_json_input`
+#' and this also holds for the elements of `qgis_list_input` and
+#' `qgis_dict_input` objects:
+#'
+#' - if `use_json_input = FALSE`: a string.
+#' - if `use_json_input = TRUE`: various classes can be returned that will be
+#' correctly serialized as JSON.
+#'
 #' @examplesIf has_qgis()
 #' qgisprocess:::as_qgis_argument(
 #'   c("a", "b"),
