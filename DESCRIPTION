@@ -16,7 +16,7 @@ Authors@R: c(
            comment = c(ORCID = "0000-0001-5679-6536")),
     person("Jakub", "Nowosad", , "nowosad.jakub@gmail.com", role = "ctb",
            comment = c(ORCID = "0000-0002-1057-3721")),
-    person("Research Institute for Nature and Forest (INBO)", role = c("cph", "fnd"), 
+    person("Research Institute for Nature and Forest (INBO)", role = c("cph", "fnd"),
            comment = "https://www.inbo.be/en/")
   )
 Description: Provides seamless access to the 'QGIS'
@@ -63,7 +63,6 @@ Config/checklist/communities: inbo
 Config/checklist/keywords: R; package; QGIS
 Encoding: UTF-8
 Language: en-GB
-LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 SystemRequirements: 'QGIS' latest or long-term release (>= 3.28). Older

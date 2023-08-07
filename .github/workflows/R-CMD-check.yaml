@@ -14,7 +14,7 @@ name: R-CMD-check
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
-    name: ${{ matrix.config.os }} (${{ matrix.config.dep }}${{ matrix.config.r }}, ${{ matrix.config.qgis }})
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }}${{ matrix.config.dep }}, ${{ matrix.config.qgis }})
     strategy:
       fail-fast: false
       matrix:
@@ -27,7 +27,7 @@ jobs:
           - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'devel', dep: '', r-pkg-cache: 'v2'}
           - {os: ubuntu-22.04, qgis: 'ubuntugis', r: 'release', dep: '', r-pkg-cache: 'v1'}
           - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', dep: '', r-pkg-cache: 'v0'}
-          - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', dep: 'hard ', r-pkg-cache: 'v3'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', dep: ' [hard-deps]', r-pkg-cache: 'v3'}
           - {os: ubuntu-22.04, qgis: 'ubuntu-ltr', r: 'release', dep: '', r-pkg-cache: 'v0'}
 
     env:
@@ -127,7 +127,7 @@ jobs:
           install.packages("pak", repos = "https://r-lib.github.io/p/pak/stable/")
           cat("::endgroup::\n")
           cat("::group::Create minimal data frame with pkg deps and store them\n")
-          depends <- pak::pkg_deps(c("deps::.", "any::sessioninfo", "any::rcmdcheck", "any::covr"), dependencies = c("Config/Needs/check", "all"))[, c("ref", "version")]
+          depends <- pak::pkg_deps(c("deps::.", "any::sessioninfo", "any::rcmdcheck", "any::covr", "any::commonmark", "any::xml2"), dependencies = c("Config/Needs/check", "all"))[, c("ref", "version")]
           depends <- depends[depends$ref != "deps::.", ]
           saveRDS(depends, ".github/depends.Rds")
           cat("::endgroup::\n")
@@ -154,7 +154,7 @@ jobs:
         run: |
           # Install missing package dependencies
           cat("::group::Install\n")
-          pak::pkg_install(c("deps::.", "any::sessioninfo", "any::rcmdcheck", "any::covr"), upgrade = FALSE, dependencies = c("Config/Needs/check", "all"))
+          pak::pkg_install(c("deps::.", "any::sessioninfo", "any::rcmdcheck", "any::covr", "any::commonmark", "any::xml2"), upgrade = FALSE, dependencies = c("Config/Needs/check", "all"))
           # This is based on the minimum needed version, not the hash of what is available at RSPM
           cat("::endgroup::\n")
           cat("::group::Session info\n")
@@ -193,7 +193,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Install hard R pkg dependencies only
-        if: matrix.config.dep == 'hard '
+        if: matrix.config.dep == ' [hard-deps]'
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           dependencies: '"hard"'

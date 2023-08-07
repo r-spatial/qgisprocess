@@ -4,7 +4,7 @@
     "Repositories": [
       {
         "Name": "RSPM",
-        "URL": "https://packagemanager.rstudio.com/all/latest"
+        "URL": "https://packagemanager.posit.co/cran/__linux__/jammy/latest"
       },
       {
         "Name": "CRAN",

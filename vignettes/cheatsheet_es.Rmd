@@ -2,7 +2,7 @@
 title: "Cheat Sheet (español)"
 output: rmarkdown::html_vignette
 author: "Antony Barja & Valeria Llactayo"
-date: "2023-02-23"
+date: "2023-07-20"
 vignette: >
   %\VignetteIndexEntry{Cheat Sheet (español)}
   %\VignetteEngine{knitr::rmarkdown}
