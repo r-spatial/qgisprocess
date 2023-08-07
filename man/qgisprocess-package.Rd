@@ -6,7 +6,7 @@
 \alias{qgisprocess-package}
 \title{qgisprocess: Use 'QGIS' Processing Algorithms}
 \description{
-Provides seamless access to the 'QGIS' (\url{https://qgis.org/en/site/}) processing toolbox using the standalone 'qgis_process' command-line utility. Both native and third-party (plugin) processing providers are supported. Beside referring data sources from file, also common objects from 'sf', 'terra' and 'stars' are supported. The native processing algorithms are documented at \url{https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/}.
+Provides seamless access to the 'QGIS' (\url{https://qgis.org/en/site/}) processing toolbox using the standalone 'qgis_process' command-line utility. Both native and third-party (plugin) processing providers are supported. Beside referring data sources from file, also common objects from 'sf', 'terra' and 'stars' are supported. The native processing algorithms are documented by QGIS.org (2023) \url{https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/}.
 }
 \note{
 A structured overview of the available functions can be consulted at
