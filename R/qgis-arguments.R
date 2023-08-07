@@ -31,36 +31,36 @@
 #' correctly serialized as JSON.
 #'
 #' @examplesIf has_qgis()
-#' qgisprocess:::as_qgis_argument(
+#' qgisprocess::as_qgis_argument(
 #'   c("a", "b"),
-#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+#'   spec = list(qgis_type = "range"),
 #'   use_json_input = FALSE
 #' )
-#' qgisprocess:::as_qgis_argument(
+#' qgisprocess::as_qgis_argument(
 #'   c(1, 2),
-#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+#'   spec = list(qgis_type = "range"),
 #'   use_json_input = FALSE
 #' )
-#' qgisprocess:::as_qgis_argument(
+#' qgisprocess::as_qgis_argument(
 #'   c("a", "b"),
-#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+#'   spec = list(qgis_type = "range"),
 #'   use_json_input = TRUE
 #' )
-#' qgisprocess:::as_qgis_argument(
+#' qgisprocess::as_qgis_argument(
 #'   c(1, 2),
-#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+#'   spec = list(qgis_type = "range"),
 #'   use_json_input = TRUE
 #' )
 #' mat <- matrix(1:12, ncol = 3)
 #' mat
-#' qgisprocess:::as_qgis_argument(
+#' qgisprocess::as_qgis_argument(
 #'   mat,
-#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "matrix"),
+#'   spec = list(qgis_type = "matrix"),
 #'   use_json_input = FALSE
 #' )
-#' qgisprocess:::as_qgis_argument(
+#' qgisprocess::as_qgis_argument(
 #'   mat,
-#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "matrix"),
+#'   spec = list(qgis_type = "matrix"),
 #'   use_json_input = TRUE
 #' )
 #'
