@@ -26,9 +26,7 @@ A \code{\link[=list]{list()}} with an element for each input argument.
 \description{
 Specify QGIS argument types
 }
-\examples{
-# These became internal functions!
-qgisprocess:::qgis_argument_spec()
-if (has_qgis()) qgisprocess:::qgis_argument_spec_by_name("native:filedownloader", "URL")
+\note{
+This is an internal function.
 }
 \keyword{internal}

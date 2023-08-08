@@ -475,12 +475,11 @@ qgis_clean_argument.qgis_tempfile_arg <- function(value) {
 #'   the argument name, description, and acceptable values.
 #' @inheritParams qgis_run_algorithm
 #'
+#' @note
+#' This is an internal function.
+#'
 #' @returns A [list()] with an element for each input argument.
 #'
-#' @examples
-#' # These became internal functions!
-#' qgisprocess:::qgis_argument_spec()
-#' if (has_qgis()) qgisprocess:::qgis_argument_spec_by_name("native:filedownloader", "URL")
 #' @name qgis_argument_spec
 
 
