@@ -17,8 +17,9 @@ test_that("sf result coercers work", {
   }
 
   result <- buffer_longlake(OUTPUT = qgis_tmp_vector())
-  result_alt <- buffer_longlake(OUTPUT = "ogr:dbname=llbuffer.gpkg table=llbuffer")
-  on.exit(unlink("llbuffer.gpkg"))
+  result_alt <- buffer_longlake(
+    OUTPUT = glue::glue("ogr:dbname={qgis_tmp_vector()} table=llbuffer")
+  )
 
   # test coercing of qgis_result
   result_sf <- sf::st_as_sf(result)
