@@ -54,15 +54,17 @@ qgis_tmp_raster <- function(ext = getOption("qgisprocess.tmp_raster_ext", ".tif"
 #' @rdname qgis_tmp_file
 #' @export
 qgis_tmp_base <- function() {
-  qgis_tmp_dir_location
+  qgisprocess_internal_obj$qgis_tmp_dir_location
 }
 
 #' @rdname qgis_tmp_file
 #' @export
 qgis_clean_tmp <- function() {
-  unlink(qgis_tmp_dir_location, recursive = TRUE)
-  dir.create(qgis_tmp_dir_location)
+  unlink(qgisprocess_internal_obj$qgis_tmp_dir_location, recursive = TRUE)
+  dir.create(qgisprocess_internal_obj$qgis_tmp_dir_location)
 }
 
-# set at load time in zzz.R
-qgis_tmp_dir_location <- NULL
+# Create environment to store temporary directory path of qgisprocess.
+# Its value is set at load time in zzz.R
+qgisprocess_internal_obj <- new.env(parent = emptyenv())
+qgisprocess_internal_obj$qgis_tmp_dir_location <- NULL
