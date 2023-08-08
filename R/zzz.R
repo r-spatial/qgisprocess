@@ -13,6 +13,9 @@
   # create package temporary directory
   qgisprocess_internal_obj$qgis_tmp_dir_location <- tempfile()
   dir.create(qgisprocess_internal_obj$qgis_tmp_dir_location)
+
+  # delete old cache files if caching was successful
+  if (has_qgis()) delete_old_cachefiles(quiet = FALSE, startup = TRUE)
 }
 
 .onUnload <- function(...) {
