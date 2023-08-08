@@ -53,12 +53,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
     {
       qgis_unconfigure()
 
-      version <- as.character(utils::packageVersion("qgisprocess"))
-
-      cache_data_file <- file.path(
-        rappdirs::user_cache_dir("R-qgisprocess"),
-        glue("cache-{version}.rds")
-      )
+      cache_data_file <- cache_data_file()
 
       # Practically all code of this function now consists of handling
       # use_cached_data = TRUE. This includes cases where qgis_reconfigure() must
@@ -77,7 +72,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
       # wants to be able to suppress them.
       if (use_cached_data && quiet) {
         packageStartupMessage(
-          "Attempting to load the cache ... ",
+          "Attempting to load the package cache ... ",
           appendLF = FALSE
         )
       }
@@ -377,16 +372,3 @@ qgis_unconfigure <- function() {
   qgisprocess_cache$use_json_output <- NULL
   invisible(NULL)
 }
-
-
-
-
-
-# environment for cache
-qgisprocess_cache <- new.env(parent = emptyenv())
-qgisprocess_cache$path <- NULL
-qgisprocess_cache$version <- NULL
-qgisprocess_cache$algorithms <- NULL
-qgisprocess_cache$plugins <- NULL
-qgisprocess_cache$use_json_output <- NULL
-qgisprocess_cache$loaded_from <- NULL
