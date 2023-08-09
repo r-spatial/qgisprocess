@@ -1,0 +1,31 @@
+## Resubmission
+
+This is a resubmission, addressing the CRAN review comments received at Thu Jul 20 2023 18:43:38 UTC. Thank you for reviewing our package.
+
+Following changes have been made, in order to address each comment:
+
+- Properly cite the QGIS URL in the Description field of DESCRIPTION.
+- Add `\value` section to `as_qgis_argument.Rd` and `qgisprocess-deprecated.Rd`.
+- Avoid the use of `:::` in examples.
+- Drop examples in the documentation of unexported functions. This was only the case in `qgis_argument_spec.Rd`.
+- With relation to writing in the user's home filespace:
+  - In `tests/testthat/test-compat-sf.R` one test wrote a temporary file (deleted on exit) outside the R temporary directory. This has been fixed.
+  - The package stores cache files and tries to do this in an appropriate, OS-dependent directory.
+    - In order to also support R < 4.0, we use a different (OS dependent) cache directory than the ones offered by `tools::R_user_dir()`, which first appeared in R 4.0. We still adhere to the XDG Base Directory Specification, using `rappdirs::user_cache_dir("R-qgisprocess")` as a cache directory.
+    - Contrary to the previous submission, this cache directory is now actively managed. Cache files older than 90 days are removed at package loading by default (this can be changed by setting the appropriate option or environment variable). Consequently the cache directory will typically remain under 1 MB.
+- Use `SuppressWarnings()` in `tests/testthat/test-qgisprocess-deprecated.R` instead of `withr::local_options(warn = -1)`.
+- Drop the `<<-` symbol in `.onLoad()` and use a separate environment to store the object.
+
+
+## R CMD check results
+
+0 errors | 0 warnings | 2 notes
+
+* This is a new release.
+
+* Package suggested but not available for checking: 'spDataLarge'
+
+  The 'spDataLarge' package is available from the
+  https://geocompr.r-universe.dev repository, which is included in the
+  Additional_repositories field of DESCRIPTION. The package is used in a
+  vignette.
