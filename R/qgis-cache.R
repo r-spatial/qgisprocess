@@ -1,6 +1,6 @@
 #' @keywords internal
 qgis_cache_dir <- function() {
-  rappdirs::user_cache_dir("R-qgisprocess")
+  normalizePath(rappdirs::user_cache_dir("R-qgisprocess"))
 }
 
 #' @keywords internal
@@ -10,7 +10,6 @@ qgis_pkgcache_file <- function() {
     qgis_cache_dir(),
     glue("cache-{version}.rds")
   )
-  normalizePath(cache_path)
 }
 
 #' Delete old cache files
