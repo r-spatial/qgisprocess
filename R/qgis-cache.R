@@ -1,5 +1,5 @@
 #' @keywords internal
-cache_data_file <- function() {
+qgis_pkgcache_file <- function() {
   version <- as.character(utils::packageVersion("qgisprocess"))
   cache_path <- file.path(
     rappdirs::user_cache_dir("R-qgisprocess"),
@@ -58,7 +58,7 @@ delete_old_cachefiles <- function(
   if (nrow(files_to_delete) == 0L) return(invisible(NULL))
 
   # Don't delete current package cache file (regardless of age)
-  files_to_delete <- files_to_delete[files_to_delete$name != cache_data_file(), ]
+  files_to_delete <- files_to_delete[files_to_delete$name != qgis_pkgcache_file(), ]
 
   success <- FALSE
   tryCatch(

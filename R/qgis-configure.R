@@ -53,7 +53,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
     {
       qgis_unconfigure()
 
-      cache_data_file <- cache_data_file()
+      cache_data_file <- qgis_pkgcache_file()
 
       # Practically all code of this function now consists of handling
       # use_cached_data = TRUE. This includes cases where qgis_reconfigure() must
