@@ -1,8 +1,13 @@
 #' @keywords internal
+qgis_cache_dir <- function() {
+  rappdirs::user_cache_dir("R-qgisprocess")
+}
+
+#' @keywords internal
 qgis_pkgcache_file <- function() {
   version <- as.character(utils::packageVersion("qgisprocess"))
   cache_path <- file.path(
-    rappdirs::user_cache_dir("R-qgisprocess"),
+    qgis_cache_dir(),
     glue("cache-{version}.rds")
   )
   normalizePath(cache_path)
@@ -40,7 +45,7 @@ delete_old_cachefiles <- function(
     age_days <- as.integer(opt)
   }
   files <- tibble::tibble(name = list.files(
-    rappdirs::user_cache_dir("R-qgisprocess"),
+    qgis_cache_dir(),
     full.names = TRUE
   ))
   today <- Sys.Date()
