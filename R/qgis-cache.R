@@ -30,7 +30,7 @@ qgis_pkgcache_file <- function() {
 #' `R_QGISPROCESS_CACHEFILES_DAYS_KEEP`.
 #'
 #' @keywords internal
-delete_old_cachefiles <- function(
+qgis_delete_old_cachefiles <- function(
     type = "all",
     age_days = NULL,
     quiet = FALSE,
