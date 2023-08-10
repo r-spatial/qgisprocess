@@ -101,30 +101,50 @@ algorithm has been run.</p></dd>
 serialized as JSON instead of serialized as a command-line argument.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>The returned object class and form depends on the class and form of <code>x</code> and
+on the targeted <code>qgis_type</code>.</p>
+
+
+<p>If <code>x</code> is a <code>qgis_list_input</code> or a <code>qgis_dict_input</code> object, the same class
+is returned but with <code>as_qgis_argument()</code> applied to each element.</p>
+
+
+<p>In all other cases, the outcome can depend on the value of <code>use_json_input</code></p>
+
+
+<p>and this also holds for the elements of <code>qgis_list_input</code> and
+<code>qgis_dict_input</code> objects:</p><ul><li><p>if <code>use_json_input = FALSE</code>: a string.</p></li>
+<li><p>if <code>use_json_input = TRUE</code>: various classes can be returned that will be
+correctly serialized as JSON.</p></li>
+</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">qgisprocess</span><span class="fu">:::</span><span class="fu">as_qgis_argument</span><span class="op">(</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">qgisprocess</span><span class="fu">::</span><span class="fu">as_qgis_argument</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  spec <span class="op">=</span> <span class="fu">qgisprocess</span><span class="fu">:::</span><span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span>qgis_type <span class="op">=</span> <span class="st">"range"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  spec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>qgis_type <span class="op">=</span> <span class="st">"range"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  use_json_input <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a,b"</span>
-<span class="r-in"><span><span class="fu">qgisprocess</span><span class="fu">:::</span><span class="fu">as_qgis_argument</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="fu">qgisprocess</span><span class="fu">::</span><span class="fu">as_qgis_argument</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  spec <span class="op">=</span> <span class="fu">qgisprocess</span><span class="fu">:::</span><span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span>qgis_type <span class="op">=</span> <span class="st">"range"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  spec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>qgis_type <span class="op">=</span> <span class="st">"range"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  use_json_input <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1,2"</span>
-<span class="r-in"><span><span class="fu">qgisprocess</span><span class="fu">:::</span><span class="fu">as_qgis_argument</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="fu">qgisprocess</span><span class="fu">::</span><span class="fu">as_qgis_argument</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  spec <span class="op">=</span> <span class="fu">qgisprocess</span><span class="fu">:::</span><span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span>qgis_type <span class="op">=</span> <span class="st">"range"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  spec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>qgis_type <span class="op">=</span> <span class="st">"range"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  use_json_input <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a" "b"</span>
-<span class="r-in"><span><span class="fu">qgisprocess</span><span class="fu">:::</span><span class="fu">as_qgis_argument</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="fu">qgisprocess</span><span class="fu">::</span><span class="fu">as_qgis_argument</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  spec <span class="op">=</span> <span class="fu">qgisprocess</span><span class="fu">:::</span><span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span>qgis_type <span class="op">=</span> <span class="st">"range"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  spec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>qgis_type <span class="op">=</span> <span class="st">"range"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  use_json_input <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2</span>
@@ -135,15 +155,15 @@ serialized as JSON instead of serialized as a command-line argument.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    2    6   10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,]    3    7   11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,]    4    8   12</span>
-<span class="r-in"><span><span class="fu">qgisprocess</span><span class="fu">:::</span><span class="fu">as_qgis_argument</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="fu">qgisprocess</span><span class="fu">::</span><span class="fu">as_qgis_argument</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">mat</span>,</span></span>
-<span class="r-in"><span>  spec <span class="op">=</span> <span class="fu">qgisprocess</span><span class="fu">:::</span><span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span>qgis_type <span class="op">=</span> <span class="st">"matrix"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  spec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>qgis_type <span class="op">=</span> <span class="st">"matrix"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  use_json_input <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1,5,9,2,6,10,3,7,11,4,8,12"</span>
-<span class="r-in"><span><span class="fu">qgisprocess</span><span class="fu">:::</span><span class="fu">as_qgis_argument</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="fu">qgisprocess</span><span class="fu">::</span><span class="fu">as_qgis_argument</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">mat</span>,</span></span>
-<span class="r-in"><span>  spec <span class="op">=</span> <span class="fu">qgisprocess</span><span class="fu">:::</span><span class="fu"><a href="qgis_argument_spec.html">qgis_argument_spec</a></span><span class="op">(</span>qgis_type <span class="op">=</span> <span class="st">"matrix"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  spec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>qgis_type <span class="op">=</span> <span class="st">"matrix"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  use_json_input <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  5  9  2  6 10  3  7 11  4  8 12</span>

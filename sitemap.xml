@@ -64,6 +64,9 @@
     <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_configure.html</loc>
   </url>
   <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_delete_old_cachefiles.html</loc>
+  </url>
+  <url>
     <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_detect_windows_paths.html</loc>
   </url>
   <url>
