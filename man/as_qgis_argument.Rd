@@ -22,6 +22,22 @@ algorithm has been run.}
 \item{.use_json_input, use_json_input}{TRUE if the arguments will be
 serialized as JSON instead of serialized as a command-line argument.}
 }
+\value{
+The returned object class and form depends on the class and form of \code{x} and
+on the targeted \code{qgis_type}.
+
+If \code{x} is a \code{qgis_list_input} or a \code{qgis_dict_input} object, the same class
+is returned but with \code{as_qgis_argument()} applied to each element.
+
+In all other cases, the outcome can depend on the value of \code{use_json_input}
+and this also holds for the elements of \code{qgis_list_input} and
+\code{qgis_dict_input} objects:
+\itemize{
+\item if \code{use_json_input = FALSE}: a string.
+\item if \code{use_json_input = TRUE}: various classes can be returned that will be
+correctly serialized as JSON.
+}
+}
 \description{
 Calls to \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} can and should contain R objects that
 need to be serialized before they are passed to the command line. In
@@ -31,36 +47,36 @@ generics provide hooks for argument values to be serialized correctly.
 }
 \examples{
 \dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-qgisprocess:::as_qgis_argument(
+qgisprocess::as_qgis_argument(
   c("a", "b"),
-  spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+  spec = list(qgis_type = "range"),
   use_json_input = FALSE
 )
-qgisprocess:::as_qgis_argument(
+qgisprocess::as_qgis_argument(
   c(1, 2),
-  spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+  spec = list(qgis_type = "range"),
   use_json_input = FALSE
 )
-qgisprocess:::as_qgis_argument(
+qgisprocess::as_qgis_argument(
   c("a", "b"),
-  spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+  spec = list(qgis_type = "range"),
   use_json_input = TRUE
 )
-qgisprocess:::as_qgis_argument(
+qgisprocess::as_qgis_argument(
   c(1, 2),
-  spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+  spec = list(qgis_type = "range"),
   use_json_input = TRUE
 )
 mat <- matrix(1:12, ncol = 3)
 mat
-qgisprocess:::as_qgis_argument(
+qgisprocess::as_qgis_argument(
   mat,
-  spec = qgisprocess:::qgis_argument_spec(qgis_type = "matrix"),
+  spec = list(qgis_type = "matrix"),
   use_json_input = FALSE
 )
-qgisprocess:::as_qgis_argument(
+qgisprocess::as_qgis_argument(
   mat,
-  spec = qgisprocess:::qgis_argument_spec(qgis_type = "matrix"),
+  spec = list(qgis_type = "matrix"),
   use_json_input = TRUE
 )
 \dontshow{\}) # examplesIf}

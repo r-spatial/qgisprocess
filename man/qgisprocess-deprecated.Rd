@@ -51,6 +51,9 @@ qgis_result_clean(...)
 This is done for functions where only the function name changed at
 time of deprecation.}
 }
+\value{
+A value as described in the documentation of the corresponding new function.
+}
 \description{
 \itemize{
 \item Instead of \code{qgis_output()}, use \code{\link[=qgis_extract_output]{qgis_extract_output()}} and related

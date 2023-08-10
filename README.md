@@ -70,7 +70,7 @@ reconfigure the package, or just
 
 ``` r
 library(qgisprocess)
-#> Attempting to load the cache ... Success!
+#> Attempting to load the package cache ... Success!
 #> QGIS version: 3.32.1-Lima
 #> Having access to 1868 algorithms from 13 QGIS processing providers.
 #> Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.
@@ -133,7 +133,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmpa6e2YY/filef0682906ee2c/filef068207b6fe4.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpYOeeXA/file9c8d1ec488d8/file9c8d3db16d1d.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))

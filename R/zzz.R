@@ -11,13 +11,16 @@
   vctrs::s3_register("stars::st_as_stars", "qgis_outputRaster")
 
   # create package temporary directory
-  qgis_tmp_dir_location <<- tempfile()
-  dir.create(qgis_tmp_dir_location)
+  qgisprocess_internal_obj$qgis_tmp_dir_location <- tempfile()
+  dir.create(qgisprocess_internal_obj$qgis_tmp_dir_location)
+
+  # delete old cache files if caching was successful
+  if (has_qgis()) qgis_delete_old_cachefiles(quiet = FALSE, startup = TRUE)
 }
 
 .onUnload <- function(...) {
   # cleanup package temporary directory
-  unlink(qgis_tmp_dir_location, recursive = TRUE)
+  unlink(qgisprocess_internal_obj$qgis_tmp_dir_location, recursive = TRUE)
 }
 
 .onAttach <- function(...) {

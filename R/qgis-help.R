@@ -240,7 +240,7 @@ help_cache_file <- function(algorithm, json) {
   alg <- gsub(":", "_", algorithm)
 
   file.path(
-    rappdirs::user_cache_dir("R-qgisprocess"),
+    qgis_cache_dir(),
     glue("help-{ alg }-{ hash }.rds")
   )
 }
