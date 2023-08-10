@@ -38,7 +38,7 @@ qgis_delete_old_cachefiles <- function(
   if (!dir.exists(qgis_cache_dir())) {
     if (!quiet) {
       msg <- "Tried to purge old cache files, but no cache directory available."
-      if (!startup) message(msg) else packageStartupMessage(msg)
+      if (!startup) message(msg) else packageStartupMessage("  \U2139 ", msg)
     }
     return(invisible(NULL))
   }
@@ -88,10 +88,13 @@ qgis_delete_old_cachefiles <- function(
   )
   if (success && !quiet) {
     msg <- glue(
-      "Deleted { nrow(files_to_delete) } cache files (type: { type }) ",
-      "older than { age_days } days."
+      "Deleted { nrow(files_to_delete) } cache file",
+      "{ ifelse(nrow(files_to_delete) > 1, 's', '') }",
+      " older than { age_days } days ",
+      "(pkgcaches: { sum(files_to_delete$package_cache) } | ",
+      "helpfiles: { sum(!files_to_delete$package_cache) })."
     )
-    if (!startup) message(msg) else packageStartupMessage(msg)
+    if (!startup) message(msg) else packageStartupMessage("  \U2139 ", msg)
   }
   return(invisible(NULL))
 }
