@@ -21,6 +21,9 @@
 #' This is done for functions where only the function name changed at
 #' time of deprecation.
 #'
+#' @returns
+#' A value as described in the documentation of the corresponding new function.
+#'
 #' @name qgisprocess-deprecated
 
 #' @rdname qgisprocess-deprecated

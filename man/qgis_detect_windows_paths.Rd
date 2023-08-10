@@ -29,8 +29,8 @@ You can run \code{qgis_path(query = TRUE, quiet = FALSE)} to discover and cache
 the first 'qgis_process' in the list that works.
 }
 \examples{
-if (qgisprocess:::is_windows()) qgis_detect_windows_paths()
-if (qgisprocess:::is_macos()) qgis_detect_macos_paths()
+if (.Platform$OS.type == "windows") qgis_detect_windows_paths()
+if (Sys.info()["sysname"] == "Darwin") qgis_detect_macos_paths()
 
 }
 \seealso{

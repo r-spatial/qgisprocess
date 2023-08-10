@@ -15,37 +15,52 @@
 #' @param .use_json_input,use_json_input TRUE if the arguments will be
 #'   serialized as JSON instead of serialized as a command-line argument.
 #'
+#' @returns
+#' The returned object class and form depends on the class and form of `x` and
+#' on the targeted `qgis_type`.
+#'
+#' If `x` is a `qgis_list_input` or a `qgis_dict_input` object, the same class
+#' is returned but with `as_qgis_argument()` applied to each element.
+#'
+#' In all other cases, the outcome can depend on the value of `use_json_input`
+#' and this also holds for the elements of `qgis_list_input` and
+#' `qgis_dict_input` objects:
+#'
+#' - if `use_json_input = FALSE`: a string.
+#' - if `use_json_input = TRUE`: various classes can be returned that will be
+#' correctly serialized as JSON.
+#'
 #' @examplesIf has_qgis()
-#' qgisprocess:::as_qgis_argument(
+#' qgisprocess::as_qgis_argument(
 #'   c("a", "b"),
-#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+#'   spec = list(qgis_type = "range"),
 #'   use_json_input = FALSE
 #' )
-#' qgisprocess:::as_qgis_argument(
+#' qgisprocess::as_qgis_argument(
 #'   c(1, 2),
-#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+#'   spec = list(qgis_type = "range"),
 #'   use_json_input = FALSE
 #' )
-#' qgisprocess:::as_qgis_argument(
+#' qgisprocess::as_qgis_argument(
 #'   c("a", "b"),
-#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+#'   spec = list(qgis_type = "range"),
 #'   use_json_input = TRUE
 #' )
-#' qgisprocess:::as_qgis_argument(
+#' qgisprocess::as_qgis_argument(
 #'   c(1, 2),
-#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "range"),
+#'   spec = list(qgis_type = "range"),
 #'   use_json_input = TRUE
 #' )
 #' mat <- matrix(1:12, ncol = 3)
 #' mat
-#' qgisprocess:::as_qgis_argument(
+#' qgisprocess::as_qgis_argument(
 #'   mat,
-#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "matrix"),
+#'   spec = list(qgis_type = "matrix"),
 #'   use_json_input = FALSE
 #' )
-#' qgisprocess:::as_qgis_argument(
+#' qgisprocess::as_qgis_argument(
 #'   mat,
-#'   spec = qgisprocess:::qgis_argument_spec(qgis_type = "matrix"),
+#'   spec = list(qgis_type = "matrix"),
 #'   use_json_input = TRUE
 #' )
 #'
@@ -460,12 +475,11 @@ qgis_clean_argument.qgis_tempfile_arg <- function(value) {
 #'   the argument name, description, and acceptable values.
 #' @inheritParams qgis_run_algorithm
 #'
+#' @note
+#' This is an internal function.
+#'
 #' @returns A [list()] with an element for each input argument.
 #'
-#' @examples
-#' # These became internal functions!
-#' qgisprocess:::qgis_argument_spec()
-#' if (has_qgis()) qgisprocess:::qgis_argument_spec_by_name("native:filedownloader", "URL")
 #' @name qgis_argument_spec
 
 
