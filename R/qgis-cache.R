@@ -67,10 +67,18 @@ qgis_delete_old_cachefiles <- function(
     files_to_delete <- files[files$age > age_days & !files$package_cache, ]
   }
 
-  if (nrow(files_to_delete) == 0L) return(invisible(NULL))
 
   # Don't delete current package cache file (regardless of age)
   files_to_delete <- files_to_delete[files_to_delete$name != qgis_pkgcache_file(), ]
+
+  if (nrow(files_to_delete) == 0L) {
+    if (!quiet && !startup) {
+      message(
+        glue("No purging done: no cache files older than {age_days} days.")
+      )
+    }
+    return(invisible(NULL))
+  }
 
   success <- FALSE
   tryCatch(
