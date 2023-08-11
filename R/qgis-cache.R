@@ -1,6 +1,6 @@
 #' @keywords internal
 qgis_cache_dir <- function() {
-  normalizePath(rappdirs::user_cache_dir("R-qgisprocess"))
+  normalizePath(rappdirs::user_cache_dir("R-qgisprocess"), mustWork = FALSE)
 }
 
 #' @keywords internal
@@ -34,7 +34,6 @@ qgis_delete_old_cachefiles <- function(
     age_days = NULL,
     quiet = FALSE,
     startup = FALSE) {
-
   if (!dir.exists(qgis_cache_dir())) {
     if (!quiet) {
       msg <- "Tried to purge old cache files, but no cache directory available."
