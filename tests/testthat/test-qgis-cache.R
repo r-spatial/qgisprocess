@@ -9,7 +9,7 @@ test_that("qgis_pkgcache_file() works", {
 test_that("qgis_delete_old_cachefiles() works", {
   if (!dir.exists(qgis_cache_dir())) {
     withr::local_file(qgis_cache_dir())
-    dir.create(qgis_cache_dir())
+    dir.create(qgis_cache_dir(), recursive = TRUE)
   }
 
   oldfiles <- file.path(
