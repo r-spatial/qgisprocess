@@ -16,11 +16,11 @@ qgis_clean_argument(value)
 \code{description}, and \code{qgis_type}. See \code{\link[=qgis_argument_spec]{qgis_argument_spec()}} to
 create a blank \code{spec} for testing.}
 
+\item{use_json_input}{TRUE if the arguments will be
+serialized as JSON instead of serialized as a command-line argument.}
+
 \item{value}{The result of \code{\link[=as_qgis_argument]{as_qgis_argument()}} after the QGIS processing
 algorithm has been run.}
-
-\item{.use_json_input, use_json_input}{TRUE if the arguments will be
-serialized as JSON instead of serialized as a command-line argument.}
 }
 \value{
 The returned object class and form depends on the class and form of \code{x} and

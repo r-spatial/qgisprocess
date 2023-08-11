@@ -12,7 +12,7 @@
 #' @param spec A `list()` with values for `algorithm`, `name`,
 #'   `description`, and `qgis_type`. See [qgis_argument_spec()] to
 #'   create a blank `spec` for testing.
-#' @param .use_json_input,use_json_input TRUE if the arguments will be
+#' @param use_json_input TRUE if the arguments will be
 #'   serialized as JSON instead of serialized as a command-line argument.
 #'
 #' @returns
@@ -75,6 +75,8 @@ as_qgis_argument <- function(x, spec = qgis_argument_spec(), use_json_input = FA
 }
 
 
+# @param .use_json_input TRUE if the arguments will be
+# serialized as JSON instead of serialized as a command-line argument.
 # @param .algorithm_arguments The result of [qgis_get_argument_specs()]
 #' @keywords internal
 qgis_sanitize_arguments <- function(algorithm, ..., .algorithm_arguments = qgis_get_argument_specs(algorithm),
