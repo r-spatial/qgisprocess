@@ -19,7 +19,9 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest, qgis: 'none', r: 'release', dep: '', r-pkg-cache: 'v0'}
+          - {os: macOS-latest, qgis: 'none', r: 'release', dep: '', r-pkg-cache: 'v11'}
+          - {os: windows-latest, qgis: 'none', r: 'devel', dep: '', r-pkg-cache: 'v11'}
+          - {os: ubuntu-22.04, qgis: 'none', r: 'release', dep: '', r-pkg-cache: 'v11'}
           - {os: macOS-latest, qgis: 'macos-brew', r: 'release', dep: '', r-pkg-cache: 'v0'}
           - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release', dep: '', r-pkg-cache: 'v0'}
           - {os: windows-latest, qgis: 'windows-chocolatey', r: 'devel', dep: '', r-pkg-cache: 'v2'}
@@ -48,7 +50,7 @@ jobs:
           extra-repositories: https://geocompr.r-universe.dev
 
       - name: Prepare Ubuntu for installing QGIS (common code)
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && matrix.config.qgis != 'none'
         run: |
           # Prepare Ubuntu for installing QGIS (common code)
           echo "::group::Dynamically set QGIS_PLUGINPATH environment var (available to next steps)"
@@ -88,7 +90,7 @@ jobs:
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu-ltr `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
 
       - name: Install QGIS, GRASS, SAGA and the SAGA NextGen plugin (Ubuntu) from preset repos
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && matrix.config.qgis != 'none'
         run: |
           # Install QGIS, GRASS, SAGA and the SAGA NextGen plugin (Ubuntu) from preset repos
           sudo apt-get update
