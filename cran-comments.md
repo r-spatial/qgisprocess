@@ -17,6 +17,20 @@ Following changes have been made, in order to address each comment:
 - Use `SuppressWarnings()` in `tests/testthat/test-qgisprocess-deprecated.R` instead of `withr::local_options(warn = -1)`.
 - Drop the `<<-` symbol in `.onLoad()` and use a separate environment to store the object.
 
+In addition, a previous attempt today (Aug 11) to resubmit the package gave the following WARNING in CRAN's pre-test on `r-devel-linux-x86_64-debian-gcc` on win-builder (strangely not seen on other systems):
+
+```
+* checking Rd \usage sections ... WARNING
+Documented arguments not in \usage in documentation object ‘as_qgis_argument’:
+  ‘.use_json_input’
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+```
+
+> This has been solved by omitting this obsolete argument.
+
 
 ## R CMD check results
 
