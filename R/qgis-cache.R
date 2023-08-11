@@ -34,7 +34,6 @@ qgis_delete_old_cachefiles <- function(
     age_days = NULL,
     quiet = FALSE,
     startup = FALSE) {
-
   if (!dir.exists(qgis_cache_dir())) {
     if (!quiet) {
       msg <- "Tried to purge old cache files, but no cache directory available."

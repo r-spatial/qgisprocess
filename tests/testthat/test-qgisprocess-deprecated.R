@@ -16,7 +16,6 @@ test_that("qgis_output() works", {
 test_that("qgis_result_single() works", {
   skip_if_not(has_qgis())
   suppressWarnings({
-
     tmp_gpkg <- qgis_tmp_vector(".gpkg")
     tmp_gpkg2 <- qgis_tmp_vector(".gpkg")
 
