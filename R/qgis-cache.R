@@ -1,6 +1,6 @@
 #' @keywords internal
 qgis_cache_dir <- function() {
-  normalizePath(rappdirs::user_cache_dir("R-qgisprocess"))
+  normalizePath(rappdirs::user_cache_dir("R-qgisprocess"), mustWork = FALSE)
 }
 
 #' @keywords internal
