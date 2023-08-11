@@ -4,7 +4,7 @@ This is a resubmission, addressing the CRAN review comments received at Thu Jul 
 
 Following changes have been made, in order to address each comment:
 
-- Properly cite the QGIS URL in the Description field of DESCRIPTION.
+- Properly cite the QGIS URL in the Description field of DESCRIPTION, using 'QGIS.org' as author following advice in <https://qgis.org/en/site/getinvolved/faq/index.html#how-to-cite-qgis>.
 - Add `\value` section to `as_qgis_argument.Rd` and `qgisprocess-deprecated.Rd`.
 - Avoid the use of `:::` in examples.
 - Drop examples in the documentation of unexported functions. This was only the case in `qgis_argument_spec.Rd`.
@@ -22,11 +22,32 @@ Following changes have been made, in order to address each comment:
 
 0 errors | 0 warnings | 2 notes
 
-* This is a new release.
+* checking CRAN incoming feasibility ... [11s] NOTE
 
-* Package suggested but not available for checking: 'spDataLarge'
+  Maintainer: 'Floris Vanderhaeghe <floris.vanderhaeghe@inbo.be>'
+  
+  New submission
+  
+  Possibly misspelled words in DESCRIPTION:
+    QGIS (27:71)
+    
+  >  This is a false positive, triggered by inserting author 'QGIS.org' as
+  advised in <https://qgis.org/en/site/getinvolved/faq/index.html#how-to-cite-qgis>.
+  See also first bullet under 'Resubmission' above.
+  
+  Suggests or Enhances not in mainstream repositories:
+    spDataLarge
+  Availability using Additional_repositories specification:
+    spDataLarge   yes   https://geocompr.r-universe.dev
+    
+  > See below.
+  
+* checking package dependencies ... NOTE
 
-  The 'spDataLarge' package is available from the
-  https://geocompr.r-universe.dev repository, which is included in the
+  Package suggested but not available for checking: 'spDataLarge'
+  
+  > Relates to incoming feasibility note. The 'spDataLarge' package is available
+  from the https://geocompr.r-universe.dev repository, which is included in the
   Additional_repositories field of DESCRIPTION. The package is used in a
   vignette.
+  
