@@ -20,6 +20,8 @@ jobs:
       matrix:
         config:
           - {os: macOS-latest, qgis: 'none', r: 'release', dep: '', r-pkg-cache: 'v0'}
+          - {os: windows-latest, qgis: 'none', r: 'devel', dep: '', r-pkg-cache: 'v2'}
+          - {os: ubuntu-22.04, qgis: 'none', r: 'release', dep: '', r-pkg-cache: 'v0'}
           - {os: macOS-latest, qgis: 'macos-brew', r: 'release', dep: '', r-pkg-cache: 'v0'}
           - {os: windows-latest, qgis: 'windows-chocolatey', r: 'release', dep: '', r-pkg-cache: 'v0'}
           - {os: windows-latest, qgis: 'windows-chocolatey', r: 'devel', dep: '', r-pkg-cache: 'v2'}
