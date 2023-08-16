@@ -45,6 +45,8 @@ it will use the correct method.
 }
 \examples{
 \dontshow{if (has_qgis() && requireNamespace("raster", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
+# not running below examples in R CMD check to save time
 result <- qgis_run_algorithm(
   "native:slope",
   INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")
@@ -57,6 +59,7 @@ qgis_as_raster(result)
 # if you need more control, extract the needed output element first:
 output_raster <- qgis_extract_output(result, "OUTPUT")
 qgis_as_raster(output_raster)
+}
 \dontshow{\}) # examplesIf}
 }
 \seealso{

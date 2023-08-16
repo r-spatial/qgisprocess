@@ -32,9 +32,12 @@ Get detailed information about one algorithm
 \examples{
 \dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 qgis_get_description("native:filedownloader")
+\donttest{
+# not running below examples in R CMD check to save time
 qgis_get_argument_specs("native:filedownloader")
 qgis_get_output_specs("native:filedownloader")
 qgis_show_help("native:filedownloader")
+}
 \dontshow{\}) # examplesIf}
 }
 \seealso{
