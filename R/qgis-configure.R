@@ -44,8 +44,11 @@
 #' @examples
 #' qgis_configure(use_cached_data = TRUE)
 #'
-#' # Not run in the examples:
-#' if (FALSE) qgis_configure()
+#' \dontrun{
+#' # package reconfiguration
+#' # (not run in example() as it rewrites the package cache file)
+#' qgis_configure()
+#' }
 #'
 #' @export
 qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
@@ -358,9 +361,13 @@ qgis_env <- function() {
 #' @returns `NULL`, invisibly.
 #'
 #' @examples
-#' if (FALSE) {
-#'   qgis_unconfigure()
+#' \dontrun{
+#' # not running this function in example() as it clears the cache environment.
+#' qgis_unconfigure()
 #' }
+#'
+#' # undoing qgis_unconfigure() by repopulating the cache environment from file:
+#' qgis_configure(use_cached_data = TRUE)
 #'
 #' @export
 qgis_unconfigure <- function() {
