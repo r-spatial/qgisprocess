@@ -19,7 +19,10 @@ qgis_unconfigure()
 }
 
 # undoing qgis_unconfigure() by repopulating the cache environment from file:
+\donttest{
+# not running in R CMD check to save time
 qgis_configure(use_cached_data = TRUE)
+}
 
 }
 \seealso{

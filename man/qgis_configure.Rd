@@ -48,7 +48,10 @@ qgis_process-qgis-dev.bat and is located in Program Files/QGIS*/bin or
 OSGeo4W(64)/bin.
 }
 \examples{
+\donttest{
+# not running in R CMD check to save time
 qgis_configure(use_cached_data = TRUE)
+}
 
 \dontrun{
 # package reconfiguration
