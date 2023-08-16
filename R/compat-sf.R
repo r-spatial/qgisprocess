@@ -15,6 +15,8 @@
 #' @returns An `sf` object.
 #'
 #' @examplesIf has_qgis() && requireNamespace("sf", quietly = TRUE)
+#' \donttest{
+#' # not running below examples in R CMD check to save time
 #' result <- qgis_run_algorithm(
 #'   "native:buffer",
 #'   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
@@ -28,6 +30,7 @@
 #' # if you need more control, extract the needed output element first:
 #' output_vector <- qgis_extract_output(result, "OUTPUT")
 #' sf::st_as_sf(output_vector)
+#' }
 #'
 #' @name st_as_sf
 

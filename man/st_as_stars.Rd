@@ -34,6 +34,8 @@ method.
 }
 \examples{
 \dontshow{if (has_qgis() && requireNamespace("stars", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
+# not running below examples in R CMD check to save time
 result <- qgis_run_algorithm(
   "native:slope",
   INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")
@@ -47,6 +49,7 @@ stars::st_as_stars(result, proxy = TRUE)
 # if you need more control, extract the needed output element first:
 output_raster <- qgis_extract_output(result, "OUTPUT")
 stars::st_as_stars(output_raster)
+}
 \dontshow{\}) # examplesIf}
 }
 \seealso{
