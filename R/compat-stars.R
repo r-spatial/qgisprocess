@@ -35,19 +35,19 @@
 #' @name st_as_stars
 
 #' @rdname st_as_stars
-# dynamically registered in zzz.R
+#' @exportS3Method stars::st_as_stars
 st_as_stars.qgis_outputRaster <- function(x, ...) {
   stars::read_stars(unclass(x), ...)
 }
 
 #' @rdname st_as_stars
-# dynamically registered in zzz.R
+#' @exportS3Method stars::st_as_stars
 st_as_stars.qgis_outputLayer <- function(x, ...) {
   stars::read_stars(unclass(x), ...)
 }
 
 #' @rdname st_as_stars
-# dynamically registered in zzz.R
+#' @exportS3Method stars::st_as_stars
 st_as_stars.qgis_result <- function(x, ...) {
   result <- qgis_extract_output_by_class(x, c("qgis_outputRaster", "qgis_outputLayer"))
   stars::read_stars(unclass(result), ...)

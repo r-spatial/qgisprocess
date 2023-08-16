@@ -36,7 +36,7 @@
 
 
 #' @rdname st_as_sf
-# dynamically registered in zzz.R
+#' @exportS3Method sf::st_as_sf
 st_as_sf.qgis_result <- function(x, ...) {
   output <- qgis_extract_output_by_class(x, c("qgis_outputVector", "qgis_outputLayer"))
   sf::st_as_sf(output, ...)
@@ -44,7 +44,7 @@ st_as_sf.qgis_result <- function(x, ...) {
 
 
 #' @rdname st_as_sf
-# dynamically registered in zzz.R
+#' @exportS3Method sf::st_as_sf
 st_as_sf.qgis_outputVector <- function(x, ...) {
   if (grepl("\\|layer", x)) {
     output_splitted <- strsplit(x, "\\|layer.*=")[[1]]
@@ -55,7 +55,7 @@ st_as_sf.qgis_outputVector <- function(x, ...) {
 }
 
 #' @rdname st_as_sf
-# dynamically registered in zzz.R
+#' @exportS3Method sf::st_as_sf
 st_as_sf.qgis_outputLayer <- function(x, ...) {
   if (grepl("\\|layer", x)) {
     output_splitted <- strsplit(x, "\\|layer.*=")[[1]]

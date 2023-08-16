@@ -3,13 +3,6 @@
 .onLoad <- function(...) {
   qgis_configure(quiet = TRUE, use_cached_data = TRUE)
 
-  vctrs::s3_register("sf::st_as_sf", "qgis_result")
-  vctrs::s3_register("sf::st_as_sf", "qgis_outputVector")
-  vctrs::s3_register("sf::st_as_sf", "qgis_outputLayer")
-  vctrs::s3_register("stars::st_as_stars", "qgis_result")
-  vctrs::s3_register("stars::st_as_stars", "qgis_outputLayer")
-  vctrs::s3_register("stars::st_as_stars", "qgis_outputRaster")
-
   # create package temporary directory
   qgisprocess_internal_obj$qgis_tmp_dir_location <- tempfile()
   dir.create(qgisprocess_internal_obj$qgis_tmp_dir_location)
