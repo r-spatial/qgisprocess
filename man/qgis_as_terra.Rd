@@ -27,10 +27,6 @@ A \code{SpatRaster} or a \code{SpatVector} object.
 \description{
 Convert a qgis_result object or one of its elements to a terra object
 }
-\note{
-Just use \code{qgis_as_terra()} in R scripts, it will use the correct
-method.
-}
 \examples{
 \dontshow{if (has_qgis() && requireNamespace("terra", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
