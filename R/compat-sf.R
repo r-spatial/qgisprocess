@@ -1,4 +1,7 @@
-#' Convert a qgis_result object to an sf object
+#' Convert a qgis_result object or one of its elements to an sf object
+#'
+#' @details
+#' The sf package must be loaded explicitly to use these methods.
 #'
 #' @note Just use `st_as_sf()` in R scripts, it will use the correct
 #' method.

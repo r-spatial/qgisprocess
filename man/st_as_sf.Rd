@@ -5,7 +5,7 @@
 \alias{st_as_sf.qgis_result}
 \alias{st_as_sf.qgis_outputVector}
 \alias{st_as_sf.qgis_outputLayer}
-\title{Convert a qgis_result object to an sf object}
+\title{Convert a qgis_result object or one of its elements to an sf object}
 \usage{
 st_as_sf.qgis_result(x, ...)
 
@@ -23,7 +23,10 @@ st_as_sf.qgis_outputLayer(x, ...)
 An \code{sf} object.
 }
 \description{
-Convert a qgis_result object to an sf object
+Convert a qgis_result object or one of its elements to an sf object
+}
+\details{
+The sf package must be loaded explicitly to use these methods.
 }
 \note{
 Just use \code{st_as_sf()} in R scripts, it will use the correct

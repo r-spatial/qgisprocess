@@ -1,5 +1,8 @@
 #' Convert a qgis_result object or one of its elements to a stars object
 #'
+#' @details
+#' The stars package must be loaded explicitly to use these methods.
+#'
 #' @note Just use `st_as_stars()` in R scripts, it will use the correct
 #' method.
 #'
