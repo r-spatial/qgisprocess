@@ -13,8 +13,15 @@ qgis_unconfigure()
 Empties the qgisprocess cache environment.
 }
 \examples{
-if (FALSE) {
-  qgis_unconfigure()
+\dontrun{
+# not running this function in example() as it clears the cache environment.
+qgis_unconfigure()
+}
+
+# undoing qgis_unconfigure() by repopulating the cache environment from file:
+\donttest{
+# not running in R CMD check to save time
+qgis_configure(use_cached_data = TRUE)
 }
 
 }

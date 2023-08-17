@@ -1,4 +1,7 @@
-#' Convert a qgis_result object to an sf object
+#' Convert a qgis_result object or one of its elements to an sf object
+#'
+#' @details
+#' The sf package must be loaded explicitly to use these methods.
 #'
 #' @note Just use `st_as_sf()` in R scripts, it will use the correct
 #' method.
@@ -12,6 +15,8 @@
 #' @returns An `sf` object.
 #'
 #' @examplesIf has_qgis() && requireNamespace("sf", quietly = TRUE)
+#' \donttest{
+#' # not running below examples in R CMD check to save time
 #' result <- qgis_run_algorithm(
 #'   "native:buffer",
 #'   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
@@ -25,12 +30,13 @@
 #' # if you need more control, extract the needed output element first:
 #' output_vector <- qgis_extract_output(result, "OUTPUT")
 #' sf::st_as_sf(output_vector)
+#' }
 #'
 #' @name st_as_sf
 
 
 #' @rdname st_as_sf
-# dynamically registered in zzz.R
+#' @exportS3Method sf::st_as_sf
 st_as_sf.qgis_result <- function(x, ...) {
   output <- qgis_extract_output_by_class(x, c("qgis_outputVector", "qgis_outputLayer"))
   sf::st_as_sf(output, ...)
@@ -38,7 +44,7 @@ st_as_sf.qgis_result <- function(x, ...) {
 
 
 #' @rdname st_as_sf
-# dynamically registered in zzz.R
+#' @exportS3Method sf::st_as_sf
 st_as_sf.qgis_outputVector <- function(x, ...) {
   if (grepl("\\|layer", x)) {
     output_splitted <- strsplit(x, "\\|layer.*=")[[1]]
@@ -49,7 +55,7 @@ st_as_sf.qgis_outputVector <- function(x, ...) {
 }
 
 #' @rdname st_as_sf
-# dynamically registered in zzz.R
+#' @exportS3Method sf::st_as_sf
 st_as_sf.qgis_outputLayer <- function(x, ...) {
   if (grepl("\\|layer", x)) {
     output_splitted <- strsplit(x, "\\|layer.*=")[[1]]

@@ -1,8 +1,5 @@
 #' Convert a qgis_result object or one of its elements to a raster object
 #'
-#' @note Just use `qgis_as_raster()` and `qgis_as_brick()` in R scripts;
-#' it will use the correct method.
-#'
 #' @family topics about coercing processing output
 #' @family topics about accessing or managing processing results
 #'
@@ -13,6 +10,8 @@
 #' @returns A `RasterLayer` or a `RasterBrick` object.
 #'
 #' @examplesIf has_qgis() && requireNamespace("raster", quietly = TRUE)
+#' \donttest{
+#' # not running below examples in R CMD check to save time
 #' result <- qgis_run_algorithm(
 #'   "native:slope",
 #'   INPUT = system.file("longlake/longlake_depth.tif", package = "qgisprocess")
@@ -25,6 +24,7 @@
 #' # if you need more control, extract the needed output element first:
 #' output_raster <- qgis_extract_output(result, "OUTPUT")
 #' qgis_as_raster(output_raster)
+#' }
 #'
 #' @name qgis_as_raster
 

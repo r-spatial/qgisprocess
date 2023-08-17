@@ -291,7 +291,7 @@ system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") |>
 
 If `.data` is a `qgis_result` object, `qgis_run_algorithm_p()` automatically tries to select an element named `OUTPUT`.
 However, if the output has another name (e.g., `DEM_PREPROC` as in the example below) or if there are multiple output elements to choose from (e.g., `sagang:sagawetnessindex` has four output rasters, check with `qgis_outputs("sagang:sagawetnessindex")`), you can specify the wanted output object via the `.select` argument.
-Please note that we make sure that temporary output raster files, i.e., all output rasters we do not specifically name ourselves, should use SAGA's native raster file format by setting the `qgisprocess.tmp_raster_ext` to `.sdat`.
+Please note that we make sure that temporary output raster files, i.e., all output rasters we do not specifically name ourselves, should use SAGA's native raster file format by setting the `qgisprocess.tmp_raster_ext` option to `.sdat`.
 Using the default raster output format `.tif` might lead to trouble depending on the installed versions of third-party packages (GDAL, SAGA, etc.). 
 
 ```{r qgis-pipe}
@@ -299,7 +299,7 @@ dem <- system.file("raster/dem.tif", package = "spDataLarge")
 # in case you need to enable the SAGA next generation algorithms, run the following line:
 # qgis_enable_plugins("processing_saga_nextgen")
 
-options(qgisprocess.tmp_raster_ext = ".sdat")
+oldopt <- options(qgisprocess.tmp_raster_ext = ".sdat")
 qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem,
                    METHOD = 1) |>
   qgis_run_algorithm_p("sagang:sagawetnessindex", .select = "DEM_PREPROC")
@@ -327,5 +327,5 @@ result <- qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem,
 #                            DEM = x$DEM_PREPROC[1])) ()
 
 # set the default output raster format to .tif again
-options(qgisprocess.tmp_raster_ext = ".tif")
+options(oldopt)
 ```
