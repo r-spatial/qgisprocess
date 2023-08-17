@@ -7,6 +7,9 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/qgisprocess)](https://CRAN.R-project.org/package=qgisprocess)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8260794.svg)](https://doi.org/10.5281/zenodo.8260794)
 [![R-CMD-check](https://github.com/r-spatial/qgisprocess/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-spatial/qgisprocess/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -133,7 +136,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpYOeeXA/file9c8d1ec488d8/file9c8d3db16d1d.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpX60EOv/file2d652e33f3c4/file2d6572d31d21.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))

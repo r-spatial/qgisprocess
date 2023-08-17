@@ -19,6 +19,8 @@ knitr::opts_chunk$set(
 <img src="man/figures/qgisprocess.svg" align="right" hspace="10" vspace="0" width="20%">
 
 <!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/qgisprocess)](https://CRAN.R-project.org/package=qgisprocess)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8260794.svg)](https://doi.org/10.5281/zenodo.8260794)
 [![R-CMD-check](https://github.com/r-spatial/qgisprocess/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-spatial/qgisprocess/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test coverage](https://codecov.io/gh/r-spatial/qgisprocess/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-spatial/qgisprocess/tree/main)
