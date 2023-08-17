@@ -1,35 +1,16 @@
 ## Resubmission
 
-This is a resubmission, addressing the CRAN review comments received at Thu Jul 20 2023 18:43:38 UTC. Thank you for reviewing our package.
+This is a resubmission, addressing the CRAN review comments received at Tue Aug 15 2023 06:20:29 UTC. Thank you for the continued review of our package.
 
 Following changes have been made, in order to address each comment:
 
-- Properly cite the QGIS URL in the Description field of DESCRIPTION, using 'QGIS.org' as author following advice in <https://qgis.org/en/site/getinvolved/faq/index.html#how-to-cite-qgis>.
-- Add `\value` section to `as_qgis_argument.Rd` and `qgisprocess-deprecated.Rd`.
-- Avoid the use of `:::` in examples.
-- Drop examples in the documentation of unexported functions. This was only the case in `qgis_argument_spec.Rd`.
-- With relation to writing in the user's home filespace:
-  - In `tests/testthat/test-compat-sf.R` one test wrote a temporary file (deleted on exit) outside the R temporary directory. This has been fixed.
-  - Several functions write output files. Their default filepath is a subdirectory of R's temporary directory (`tempdir()`), so this required no further changes.
-  - The package stores cache files and tries to do this in an appropriate, OS-dependent directory.
-    - In order to also support **R < 4.0**, we use a different (OS dependent) cache directory than the ones offered by `tools::R_user_dir()`, which first appeared in R 4.0. We still adhere to the XDG Base Directory Specification, using `rappdirs::user_cache_dir("R-qgisprocess")` as a cache directory.
-    - Contrary to the previous submission, this cache directory is now actively managed. Cache files older than 90 days are removed at package loading by default (this can be changed by setting the appropriate option or environment variable). Consequently the cache directory size will typically remain under 1 MB.
-- Use `SuppressWarnings()` in `tests/testthat/test-qgisprocess-deprecated.R` instead of `withr::local_options(warn = -1)`.
-- Drop the `<<-` symbol in `.onLoad()` and use a separate environment to store the object.
-
-In addition, a previous attempt today (Aug 11) to resubmit the package gave the following WARNING in CRAN's pre-test on `r-devel-linux-x86_64-debian-gcc` on win-builder (strangely not seen on other systems):
-
-```
-* checking Rd \usage sections ... WARNING
-Documented arguments not in \usage in documentation object ‘as_qgis_argument’:
-  ‘.use_json_input’
-
-Functions with \usage entries need to have the appropriate \alias
-entries, and all their arguments documented.
-The \usage entries must correspond to syntactically valid R code.
-```
-
-> This has been solved by omitting this obsolete argument.
+- In order to keep the examples for the S3 methods of generics `sf::st_as_sf` and `stars::st_as_stars` and in order to keep sf and stars in `Suggested`, we now make use of R's ability to do delayed registration of generics in suggested packages in `NAMESPACE`. Since the feature needs R >= 3.6.0, this requirement has been added in `Depends`. Before, these S3 methods were registered dynamically using `vctrs::s3_register()` but not exported.
+  - Note: the given output in the CRAN review appears incorrect: in `st_as_sf.Rd` there is no `qgis_detect_macos_paths()`; in `st_as_stars.Rd` there is no `qgis_enable_plugins()` (explains why I had not understood earlier). However these two Rd-files were indeed involved.
+- With relation to examples:
+  - Example code that should not be run by `example()` has been wrapped by `\dontrun{}`. It has been taken care of to also keep executed example code in these cases.
+  - Several examples have been wrapped in `\donttest{}` in order to avoid lengthy execution of examples in `R CMD check`. These example blocks were selected based on reports by `R CMD check` in our GitHub Actions workflow on several platforms.
+    - Nonetheless, the lengthy execution times are not due to complex or long examples, but due to the nature of the package. For example, `qgis_configure(use_cached_data = TRUE)` makes several requests to QGIS to validate the cache file, which takes several seconds. Also, several other examples need to execute a simple processing step in QGIS, using simple data, but the interaction with QGIS and sometimes the QGIS processing itself takes several seconds.
+- The graphical parameters (`par()`) have been reset in the 'qgis_expressions' vignette. Likewise, the `options()` statement in the 'qgisprocess' vignette has been reset in a more general manner, using `oldopt <- options(...); options(oldopt)` instead of an `options()` statement that manually sets back the old value.
 
 
 ## R CMD check results
@@ -47,7 +28,6 @@ The \usage entries must correspond to syntactically valid R code.
     
   >  This is a false positive, triggered by inserting author 'QGIS.org' as
   advised in <https://qgis.org/en/site/getinvolved/faq/index.html#how-to-cite-qgis>.
-  See also first bullet under 'Resubmission' above.
   
   Suggests or Enhances not in mainstream repositories:
     spDataLarge
