@@ -132,9 +132,10 @@ st_geometry_type(buffer) |> as.character() |> table()
 Plot the result:
 
 ```{r}
-par(mar = rep(0.1, 4))
+oldpar <- par(mar = rep(0.1, 4))
 plot(read_sf(lake_border_path) |> st_geometry())
 plot(buffer[, "DEPTH_M"], add = TRUE)
+par(oldpar)
 ```
 
 If you just want to refer to the value of another attribute, then you can also use the `field:` prefix instead, _without_ double quotes around the attribute name and _without_ spaces:

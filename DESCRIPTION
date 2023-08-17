@@ -30,6 +30,7 @@ License: GPL (>= 3)
 URL: https://r-spatial.github.io/qgisprocess/,
     https://github.com/r-spatial/qgisprocess
 BugReports: https://github.com/r-spatial/qgisprocess/issues
+Depends: R (>= 3.6.0)
 Imports: 
     assertthat,
     glue,

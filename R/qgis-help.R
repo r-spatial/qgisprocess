@@ -12,9 +12,12 @@
 #'
 #' @examplesIf has_qgis()
 #' qgis_get_description("native:filedownloader")
+#' \donttest{
+#' # not running below examples in R CMD check to save time
 #' qgis_get_argument_specs("native:filedownloader")
 #' qgis_get_output_specs("native:filedownloader")
 #' qgis_show_help("native:filedownloader")
+#' }
 #'
 #' @export
 qgis_show_help <- function(algorithm) {

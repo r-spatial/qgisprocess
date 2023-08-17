@@ -5,7 +5,7 @@
 \alias{st_as_sf.qgis_result}
 \alias{st_as_sf.qgis_outputVector}
 \alias{st_as_sf.qgis_outputLayer}
-\title{Convert a qgis_result object to an sf object}
+\title{Convert a qgis_result object or one of its elements to an sf object}
 \usage{
 st_as_sf.qgis_result(x, ...)
 
@@ -23,7 +23,10 @@ st_as_sf.qgis_outputLayer(x, ...)
 An \code{sf} object.
 }
 \description{
-Convert a qgis_result object to an sf object
+Convert a qgis_result object or one of its elements to an sf object
+}
+\details{
+The sf package must be loaded explicitly to use these methods.
 }
 \note{
 Just use \code{st_as_sf()} in R scripts, it will use the correct
@@ -31,6 +34,8 @@ method.
 }
 \examples{
 \dontshow{if (has_qgis() && requireNamespace("sf", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
+# not running below examples in R CMD check to save time
 result <- qgis_run_algorithm(
   "native:buffer",
   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),
@@ -44,6 +49,7 @@ sf::st_as_sf(result)
 # if you need more control, extract the needed output element first:
 output_vector <- qgis_extract_output(result, "OUTPUT")
 sf::st_as_sf(output_vector)
+}
 \dontshow{\}) # examplesIf}
 }
 \seealso{
