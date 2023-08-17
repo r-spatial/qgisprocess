@@ -81,7 +81,7 @@
                         <h4 data-toc-skip class="author">Floris
 Vanderhaeghe &amp; Jannes Muenchow</h4>
             
-            <h4 data-toc-skip class="date">Last updated: 2023-04-24</h4>
+            <h4 data-toc-skip class="date">Last updated: 2023-08-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-spatial/qgisprocess/blob/HEAD/vignettes/qgis_expressions.Rmd" class="external-link"><code>vignettes/qgis_expressions.Rmd</code></a></small>
       <div class="d-none name"><code>qgis_expressions.Rmd</code></div>
@@ -296,14 +296,16 @@ fields (attributes), but you can also omit them.</p>
 <span><span class="co">#&gt;           64</span></span></code></pre></div>
 <p>Plot the result:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">oldpar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="va">lake_border_path</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">buffer</span><span class="op">[</span>, <span class="st">"DEPTH_M"</span><span class="op">]</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="qgis_expressions_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">oldpar</span><span class="op">)</span></span></code></pre></div>
 <p>If you just want to refer to the value of another attribute, then you
 can also use the <code>field:</code> prefix instead, <em>without</em>
 double quotes around the attribute name and <em>without</em> spaces:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/qgis_run_algorithm.html">qgis_run_algorithm</a></span><span class="op">(</span></span>
 <span>  <span class="st">"native:buffer"</span>,</span>
 <span>  INPUT <span class="op">=</span> <span class="va">longlake_depth_path</span>,</span>

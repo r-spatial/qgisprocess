@@ -83,8 +83,36 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu">qgis_unconfigure</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># not running this function in example() as it clears the cache environment.</span></span></span>
+<span class="r-in"><span><span class="fu">qgis_unconfigure</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># undoing qgis_unconfigure() by repopulating the cache environment from file:</span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># not running in R CMD check to save time</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="qgis_configure.html">qgis_configure</a></span><span class="op">(</span>use_cached_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Checking configuration in cache file (/home/runner/.cache/R-qgisprocess/cache-0.0.0.9000.rds)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Checking cached QGIS version with version reported by 'qgis_process' ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> QGIS versions match! (3.32.1-Lima)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Checking cached QGIS plugins (and state) with those reported by 'qgis_process' ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> QGIS plugins match! (1 processing provider plugin(s) enabled)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> &gt;&gt;&gt; Run `qgis_enable_plugins()` to enable 3 disabled plugins and access</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     their algorithms: grassprovider, otbprovider,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     processing_saga_nextgen</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Restoring configuration from '/home/runner/.cache/R-qgisprocess/cache-0.0.0.9000.rds'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> QGIS version: 3.32.1-Lima</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using 'qgis_process' in the system PATH.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> &gt;&gt;&gt; If you need another installed QGIS instance, run `qgis_configure()`;</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     see `?qgis_configure` if you need to preset the path of 'qgis_process'.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using JSON for output serialization.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using JSON for input serialization.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 out of 4 available processing provider plugins are enabled.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Having access to 350 algorithms from 4 QGIS processing providers.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Use qgis_algorithms(), qgis_providers(), qgis_plugins(), qgis_using_json_output(),</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> qgis_path() and qgis_version() to inspect the cache environment.</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
