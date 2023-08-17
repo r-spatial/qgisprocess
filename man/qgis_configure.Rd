@@ -24,7 +24,7 @@ See the \emph{Details} section for more information about setting the path of
 the 'qgis_process' command line tool.
 }
 \details{
-The qgisprocess package is a wapper around the 'qgis_process' command line
+The qgisprocess package is a wrapper around the 'qgis_process' command line
 tool distributed with QGIS (>=3.14). Several functions use heuristics to
 detect the location of the 'qgis_process' executable.
 
