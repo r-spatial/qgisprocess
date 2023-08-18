@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="index.html">qgisprocess</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -156,7 +156,7 @@
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 1</span></span>
-<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpYOeeXA/file9c8d1ec488d8/file9c8d3db16d1d.gpkg"</span></span>
+<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpX60EOv/file2d652e33f3c4/file2d6572d31d21.gpkg"</span></span>
 <span></span>
 <span><span class="va">output_sf</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">output_sf</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -288,6 +288,8 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://CRAN.R-project.org/package=qgisprocess" class="external-link"><img src="https://www.r-pkg.org/badges/version/qgisprocess" alt="CRAN status"></a></li>
+<li><a href="https://doi.org/10.5281/zenodo.8260794" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8260794.svg" alt="DOI"></a></li>
 <li><a href="https://github.com/r-spatial/qgisprocess/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/r-spatial/qgisprocess/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://app.codecov.io/gh/r-spatial/qgisprocess/tree/main" class="external-link"><img src="https://codecov.io/gh/r-spatial/qgisprocess/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
