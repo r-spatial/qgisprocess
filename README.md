@@ -26,6 +26,12 @@ package.
 
 ### qgisprocess
 
+To install the latest CRAN release, just run:
+
+``` r
+install.packages("qgisprocess")
+```
+
 You can install the development version from GitHub with:
 
 ``` r
@@ -127,7 +133,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmp5D0cmJ/file88a98353c92/file88a96bb96596.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpYOeeXA/file9c8d1ec488d8/file9c8d3db16d1d.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
