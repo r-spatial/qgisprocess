@@ -32,6 +32,11 @@ h1,h2,h3 {
 
 .text-muted {
     --bs-text-opacity: 1;
+    color: #7f9624 !important;
+}
+
+.nav-text {
+    --bs-text-opacity: 1;
     color: #f0e64a !important;
 }
 
