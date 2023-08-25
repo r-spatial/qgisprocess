@@ -2,14 +2,12 @@
 title: "Cheat Sheet (español)"
 output: rmarkdown::html_vignette
 author: "Antony Barja & Valeria Llactayo"
-date: "2023-07-20"
+date: "2023-08-25"
 vignette: >
   %\VignetteIndexEntry{Cheat Sheet (español)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
-_¡Tenga en cuenta que solo la hoja de trucos en inglés está actualizada actualmente!_
 
 Haga clic en la hoja de trucos para ampliar. -- [Descargar como PDF](https://github.com/ambarja/cheatsheet-qgisprocess/raw/main/pdf/spanish/qgisprocess_es.pdf).
 
