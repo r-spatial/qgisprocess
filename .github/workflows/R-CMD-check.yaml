@@ -129,7 +129,15 @@ jobs:
           install.packages("pak", repos = "https://r-lib.github.io/p/pak/stable/")
           cat("::endgroup::\n")
           cat("::group::Create minimal data frame with pkg deps and store them\n")
-          depends <- pak::pkg_deps(c("deps::.", "any::sessioninfo", "any::rcmdcheck", "any::covr", "any::commonmark", "any::xml2"), dependencies = c("Config/Needs/check", "all"))[, c("ref", "version")]
+          depends <- rbind(
+            pak::pkg_deps("deps::.", dependencies = c("Config/Needs/check", "all")),
+            pak::pkg_deps("any::sessioninfo", dependencies = c("Config/Needs/check", "all")),
+            pak::pkg_deps("any::rcmdcheck", dependencies = c("Config/Needs/check", "all")),
+            pak::pkg_deps("any::covr", dependencies = c("Config/Needs/check", "all")),
+            pak::pkg_deps("any::commonmark", dependencies = c("Config/Needs/check", "all")),
+            pak::pkg_deps("any::xml2", dependencies = c("Config/Needs/check", "all"))
+          )[, c("ref", "version")]
+          depends <- depends[!duplicated(depends), ]
           depends <- depends[depends$ref != "deps::.", ]
           saveRDS(depends, ".github/depends.Rds")
           cat("::endgroup::\n")
