@@ -108,16 +108,19 @@ as_qgis_argument_stars <- function(x, spec = qgis_argument_spec(), use_json_inpu
         }
       }
       # we can only check for total band number; they have no names in stars
+      stars_ok <- utils::packageVersion("stars") >= as.package_version("0.6-0")
       nrbands_match <- identical(
         dim(x)["band"],
         dim(stars::read_stars(file, proxy = TRUE))["band"]
-      )
+      ) && # stars < 0.6-0 has different implementation of band selection in stars_proxy
+        (stars_ok || is.null(attr(x, "call_list")) || dim(x)["band"] == 1L)
       if (nrbands_match) {
         return(file)
       } else {
         message(glue(
           "Rewriting the stars object as a temporary file before passing to QGIS, since ",
-          "the number of bands differs from those in the source file '{ file }'."
+          "the number of bands { ifelse(stars_ok, 'differs', 'may differ') } ",
+          "from those in the source file '{ file }'."
         ))
         return(write_stars_as_tempfile_arg(x))
       }
