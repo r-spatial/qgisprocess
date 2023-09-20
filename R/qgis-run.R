@@ -43,7 +43,7 @@ qgis_run <- function(args = character(), ..., env = qgis_env(), path = qgis_path
   } else {
     withr::with_envvar(
       env,
-      processx::run(path, args, ...),
+      processx::run(path, args, ...)
     )
   }
 }
