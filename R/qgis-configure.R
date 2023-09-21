@@ -291,7 +291,21 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
   path <- qgis_path(query = TRUE, quiet = quiet)
   if (!quiet) message()
 
-  version <- qgis_version(query = TRUE, quiet = quiet)
+  tryCatch(
+    {
+      version <- qgis_version(query = TRUE, quiet = quiet)
+    },
+    error = function(e) {
+      message(glue(
+        "\nATTENTION: the QGIS version could not be queried. ",
+        "You will loose some functionality.\n",
+        "You may want to (re)run `qgis_configure()`; see its documentation.\n",
+        "Error message was:\n",
+        e$stderr,
+        "\n"
+      ))
+    }
+  )
 
   use_json_output <- qgis_using_json_output(query = TRUE, quiet = quiet)
 
@@ -300,32 +314,64 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
     "JSON for input serialization."
   )
 
-  plugins <- qgis_plugins(query = TRUE, quiet = quiet, msg = FALSE)
-
-  algorithms <- qgis_algorithms(query = TRUE, quiet = quiet)
-
-  if (!quiet) message_disabled_plugins(plugins, prepend_newline = TRUE)
-
-  if (!quiet) message(glue("\n\nSaving configuration to '{cache_data_file}'"))
-
-  try({
-    if (!dir.exists(dirname(cache_data_file))) {
-      dir.create(dirname(cache_data_file), recursive = TRUE)
+  tryCatch(
+    {
+      plugins <- qgis_plugins(query = TRUE, quiet = quiet, msg = FALSE)
+    },
+    error = function(e) {
+      message(glue(
+        "\nATTENTION: the QGIS plugins could not be queried. ",
+        "You will loose some functionality.\n",
+        "You may want to (re)run `qgis_configure()`; see its documentation.\n",
+        "Error message was:\n",
+        e$stderr,
+        "\n"
+      ))
     }
+  )
 
-    saveRDS(
-      list(
-        path = path,
-        version = version,
-        algorithms = algorithms,
-        plugins = plugins,
-        use_json_output = use_json_output
-      ),
-      cache_data_file
-    )
-  })
+  tryCatch(
+    {
+      algorithms <- qgis_algorithms(query = TRUE, quiet = quiet)
+    },
+    error = function(e) {
+      message(glue(
+        "\nATTENTION: the QGIS algorithms could not be queried. ",
+        "You will loose some functionality.\n",
+        "You may want to (re)run `qgis_configure()`; see its documentation.\n",
+        "Error message was:\n",
+        e$stderr,
+        "\n"
+      ))
+    }
+  )
 
-  if (!quiet) message_inspect_cache()
+  if (!quiet && exists("plugins")) message_disabled_plugins(plugins, prepend_newline = TRUE)
+
+  if (has_qgis()) {
+    if (!quiet) message(glue("\n\nSaving configuration to '{cache_data_file}'"))
+
+    try({
+      if (!dir.exists(dirname(cache_data_file))) {
+        dir.create(dirname(cache_data_file), recursive = TRUE)
+      }
+
+      saveRDS(
+        list(
+          path = path,
+          version = version,
+          algorithms = algorithms,
+          plugins = plugins,
+          use_json_output = use_json_output
+        ),
+        cache_data_file
+      )
+    })
+
+    if (!quiet) message_inspect_cache()
+  } else {
+    message(config_problem_msg)
+  }
 }
 
 
