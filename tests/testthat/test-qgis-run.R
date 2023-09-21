@@ -4,8 +4,8 @@ test_that("qgis_run() has a successful fallback if path is NULL", {
   qgisprocess_cache$path <- NULL
   qgisprocess_cache$version <- NULL
 
-  expect_message({v <- qgis_version(query = TRUE)}, "on the fly")
-  expect_length(v, 1L)
+  expect_message(qgis_run(), "on the fly")
+  expect_length(qgis_version(), 1L)
 
   # both qgis_version(query = TRUE) and qgis_path(query = TRUE) restore
   # the cache values:
