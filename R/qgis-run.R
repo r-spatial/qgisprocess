@@ -26,10 +26,10 @@
 qgis_run <- function(args = character(), ..., env = qgis_env(), path = qgis_path()) {
   if (is.null(path)) {
     message(
-      "'qgis_process' path is not present in the package cache.\n",
-      "The package is not well configured; some functionality may not work.\n",
+      "The filepath of 'qgis_process' is not present in the package cache, ",
+      "so the package is not well configured.\n",
       "Restart R and reload the package; run `qgis_configure()` if needed.\n",
-      "For now, will try to fix it on the fly.\n"
+      "For now, will try to fix it on the fly, but some functionality may not work.\n"
     )
     path <- qgis_path(query = TRUE, quiet = FALSE)
   }
