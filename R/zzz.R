@@ -41,7 +41,7 @@ config_problem_msg <- paste0(
   "See its documentation if you need to preset the path of qgis_process.\n",
   "If the problem persists, make sure that you correctly installed QGIS\n",
   "for your operating system using the instructions at\n",
-  "https://download.qgis.org."
+  "<https://download.qgis.org>."
 )
 
 # nocov end
