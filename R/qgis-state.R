@@ -283,6 +283,7 @@ qgis_using_json_input <- function() {
 
   if (identical(opt, "")) {
     qgis_using_json_output() &&
+      !is.null(qgis_version()) &&
       (package_version(qgis_version(full = FALSE)) >= "3.23.0")
   } else {
     isTRUE(opt) || identical(opt, "true")

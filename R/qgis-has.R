@@ -49,10 +49,10 @@ assert_qgis <- function(action = abort) {
   if (!has_qgis()) {
     action(
       paste0(
-        "The QGIS processing utility ('qgis_process') is not installed or could not be found.\n",
-        "Run `qgis_configure()` to configure this location.\n",
-        "If 'qgis_process' is installed, set `options(qgisprocess.path = '/path/to/qgis_process')`\n",
-        "and re-run `qgis_configure()`."
+        "The 'qgis_process' command-line utility was either not found or\n",
+        "did not fulfil the needs to build the package cache.\n",
+        "Please run `qgis_configure()` to fix this and rebuild the cache.\n",
+        "See its documentation if you need to preset the path of qgis_process."
       )
     )
   }

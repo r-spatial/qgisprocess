@@ -24,6 +24,19 @@
 #'
 #' @export
 qgis_run <- function(args = character(), ..., env = qgis_env(), path = qgis_path()) {
+  if (is.null(path)) {
+    message(
+      "The filepath of 'qgis_process' is not present in the package cache, ",
+      "so the package is not well configured.\n",
+      "Restart R and reload the package; run `qgis_configure()` if needed.\n",
+      "For now, will try to fix it on the fly, but some functionality may not work.\n"
+    )
+    path <- qgis_path(query = TRUE, quiet = FALSE)
+    # typically the version will also be missing, so fixing that as well:
+    if (is.null(qgisprocess_cache$version)) {
+      invisible(qgis_version(query = TRUE, quiet = FALSE))
+    }
+  }
   # workaround for running Windows batch files where arguments have spaces
   # see https://github.com/r-lib/processx/issues/301
   if (is_windows()) {
@@ -34,7 +47,7 @@ qgis_run <- function(args = character(), ..., env = qgis_env(), path = qgis_path
   } else {
     withr::with_envvar(
       env,
-      processx::run(path, args, ...),
+      processx::run(path, args, ...)
     )
   }
 }
