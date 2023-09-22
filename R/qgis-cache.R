@@ -88,8 +88,7 @@ qgis_delete_old_cachefiles <- function(
     error = function(e) {
       message(glue(
         "Cache files older than {age_days} days could not be deleted. ",
-        "Error message was: ",
-        e$stderr
+        "Error message was:\n{e}"
       ))
     }
   )
