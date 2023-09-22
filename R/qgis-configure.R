@@ -369,7 +369,7 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
     })
 
     if (!quiet) message_inspect_cache()
-  } else {
+  } else if (!quiet) {
     message(config_problem_msg)
   }
 }
