@@ -79,6 +79,14 @@ assert_qgis_algorithm <- function(algorithm) {
 qgis_query_algorithms <- function(quiet = FALSE) {
   if (qgis_using_json_output()) {
     result <- qgis_run(args = c("list", "--json"), encoding = "UTF-8")
+    if (nchar(result$stderr) > 0L) {
+      message(
+        "\nStandard error message emitted by the 'qgis_process' command ",
+        "(non-fatal at this stage):\n",
+        result$stderr,
+        "\n"
+      )
+    }
     result_parsed <- jsonlite::fromJSON(result$stdout)
 
     providers_ptype <- tibble::tibble(
