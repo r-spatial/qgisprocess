@@ -35,7 +35,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
-      SAGANGV: 0.0.7
+      SAGANGV: 1.0.0
 
     steps:
       - uses: actions/checkout@v3

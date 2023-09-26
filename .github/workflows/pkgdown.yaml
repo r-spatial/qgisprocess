@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      SAGANGV: 0.0.7
+      SAGANGV: 1.0.0
     steps:
       - uses: actions/checkout@v3
 
