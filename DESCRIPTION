@@ -1,6 +1,6 @@
 Package: qgisprocess
 Title: Use 'QGIS' Processing Algorithms
-Version: 0.1.0.9177
+Version: 0.1.0.9178
 Authors@R: c(
     person("Dewey", "Dunnington", , "dewey@fishandwhistle.net", role = "aut",
            comment = c(ORCID = "0000-0002-9415-4582", affiliation = "Voltron Data")),
