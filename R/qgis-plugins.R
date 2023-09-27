@@ -192,7 +192,7 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
   if (mode == "enable") for (p in names) enable_plugin(p, quiet = quiet)
   if (mode == "disable") for (p in names) disable_plugin(p, quiet = quiet)
 
-  if (!quiet) message("\nRebuilding cache to reflect these changes ...\n")
+  if (!quiet) message("\nRebuilding cache to reflect current plugin state ...\n")
   qgis_configure(use_cached_data = FALSE, quiet = quiet)
 
   invisible(qgis_plugins())
