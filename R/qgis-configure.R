@@ -301,7 +301,8 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
         "You will loose some functionality.\n",
         "You may want to run `qgis_version(query = TRUE)` followed by ",
         "`qgis_configure()`; see its documentation.\n",
-        "Error message was:\n{e}\n"
+        "Error message was:\n\n{e}\n",
+        ifelse("stderr" %in% names(e) && nchar(e$stderr) > 0, e$stderr, "")
       ))
     }
   )
@@ -322,7 +323,8 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
         "\n\nATTENTION: the QGIS plugins could not be queried. ",
         "You will loose some functionality.\n",
         "You may want to (re)run `qgis_configure()`; see its documentation.\n",
-        "Error message was:\n{e}\n"
+        "Error message was:\n\n{e}\n",
+        ifelse("stderr" %in% names(e) && nchar(e$stderr) > 0, e$stderr, "")
       ))
     }
   )
@@ -336,7 +338,8 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
         "\n\nATTENTION: the QGIS algorithms could not be queried. ",
         "You will loose some functionality.\n",
         "You may want to (re)run `qgis_configure()`; see its documentation.\n",
-        "Error message was:\n{e}\n"
+        "Error message was:\n\n{e}\n",
+        ifelse("stderr" %in% names(e) && nchar(e$stderr) > 0, e$stderr, "")
       ))
     }
   )

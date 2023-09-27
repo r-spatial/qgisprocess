@@ -209,7 +209,8 @@ enable_plugin <- function(name, quiet = FALSE) {
     },
     error = function(e) {
       message(glue(
-        "'{name}' was not successfully enabled. Error message was:\n{e}"
+        "'{name}' was not successfully enabled. Error message was:\n\n{e}\n",
+        ifelse("stderr" %in% names(e) && nchar(e$stderr) > 0, e$stderr, "")
       ))
     }
   )
@@ -226,7 +227,8 @@ disable_plugin <- function(name, quiet = FALSE) {
     },
     error = function(e) {
       message(glue(
-        "'{name}' was not successfully disabled. Error message was:\n{e}"
+        "'{name}' was not successfully disabled. Error message was:\n\n{e}\n",
+        ifelse("stderr" %in% names(e) && nchar(e$stderr) > 0, e$stderr, "")
       ))
     }
   )
