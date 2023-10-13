@@ -222,11 +222,11 @@ By contributing to this project, you agree to abide by its terms.
 ### Presentations
 
 - FOSS4G 2023:
-  [slides](https://florisvdh.github.io/foss4g-2023-qgisprocess/) (talk
-  follows later)
+  [slides](https://florisvdh.github.io/foss4g-2023-qgisprocess/) &
+  [video](https://www.youtube.com/watch?v=Qt5DzWThWqI)
 - FOSS4G 2021:
   [slides](https://dewey.dunnington.ca/slides/qgisprocess2021/) &
-  [talk](https://www.youtube.com/watch?v=iA0OQ2Icn6Y&t=1912s)
+  [video](https://www.youtube.com/watch?v=iA0OQ2Icn6Y&t=1912s)
 
 ### Further reading
 

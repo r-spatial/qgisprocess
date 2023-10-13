@@ -139,8 +139,8 @@ Please note that the qgisprocess project is released with a [Contributor Code of
 
 ### Presentations
 
-- FOSS4G 2023: [slides](https://florisvdh.github.io/foss4g-2023-qgisprocess/) (talk follows later)
-- FOSS4G 2021: [slides](https://dewey.dunnington.ca/slides/qgisprocess2021/) & [talk](https://www.youtube.com/watch?v=iA0OQ2Icn6Y&t=1912s)
+- FOSS4G 2023: [slides](https://florisvdh.github.io/foss4g-2023-qgisprocess/) & [video](https://www.youtube.com/watch?v=Qt5DzWThWqI)
+- FOSS4G 2021: [slides](https://dewey.dunnington.ca/slides/qgisprocess2021/) & [video](https://www.youtube.com/watch?v=iA0OQ2Icn6Y&t=1912s)
 
 ### Further reading
 
