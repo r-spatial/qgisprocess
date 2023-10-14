@@ -81,8 +81,7 @@ qgis_query_algorithms <- function(quiet = FALSE) {
     result <- qgis_run(args = c("list", "--json"), encoding = "UTF-8")
     if (nchar(result$stderr) > 0L) {
       message(
-        "\nStandard error message emitted by the 'qgis_process' command ",
-        "(non-fatal at this stage):\n",
+        "\nStandard error message from 'qgis_process':\n",
         result$stderr,
         "\n"
       )
