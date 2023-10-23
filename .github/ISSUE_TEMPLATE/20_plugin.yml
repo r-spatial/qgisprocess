@@ -1,0 +1,88 @@
+name: Processing provider or QGIS plugin problem in R
+description: "Unexpected behaviour from `qgis_plugins(query = TRUE)` or when running a plugin-provided algorithm."
+labels: [null]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thanks for taking the time to fill out this bug report!
+        [Styling with Markdown](https://docs.github.com/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) is supported.
+  - type: markdown
+    attributes:
+      value: |
+        #### Important note
+
+        If you encounter an issue with a specific QGIS plugin in R, then **please** check whether the problem also exists in the QGIS Desktop (GUI).
+        If that is the case, then you should _not_ report the problem here, but at the plugin's bug tracking URL (issues) that you should lookup at <https://plugins.qgis.org/>. There you should formulate the problem as you encounter it in QGIS Desktop (not R).
+
+        If the plugin _only_ misbehaves in R, and not in QGIS Desktop, then please proceed below!
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks and questions
+      description: >
+        Please consider the following information carefully.
+        Some may already solve your problem, or will provide us hints to help you.
+      options:
+        - label: To avoid duplication, I have checked [existing open issues](https://github.com/r-spatial/qgisprocess/issues).
+        - label: I use a currently supported QGIS version, i.e. shown _**green**_ in the [QGIS release schedule](https://www.qgis.org/en/site/getinvolved/development/roadmap.html#release-schedule).
+        - label: In QGIS Desktop, I have updated all QGIS plugins to their current version (_Plugins > Manage and Install Plugins..._).
+        - label: I get a standard error message from `qgis_plugins(query = TRUE)`.
+  - type: dropdown
+    id: disabling
+    attributes:
+      label: Does disabling the problematic plugin(s) makes the warning or error disappear?
+      description: If "no", then consider reporting your problem in [the general issue template]() as it appears not to be linked to a plugin.
+      options:
+        - -- choose --
+        - Yes.
+        - No.
+        - "Not applicable: the problem only arises when using algorithms provided by the plugin."
+      default: 0
+    validations:
+      required: false
+  - type: textarea
+    id: report
+    attributes:
+      label: Description of the observed problem
+      description: >
+        Please also include complete R code and output.
+        Put code blocks between triple backtick (\`\`\`) lines.
+    validations:
+      required: true
+  - type: textarea
+    id: version
+    attributes:
+      label: Backend versions
+      description: >
+        Please provide the output of `qgis_version(query = TRUE, debug = TRUE)`.
+        Put this code block between triple backtick (\`\`\`) lines.
+    validations:
+      required: true
+  - type: textarea
+    id: plugins
+    attributes:
+      label: QGIS plugin state
+      description: >
+        Please provide the output of `qgis_plugins(query = TRUE)`.
+        Put this code block between triple backtick (\`\`\`) lines.
+    validations:
+      required: true
+  - type: textarea
+    id: sessioninfo
+    attributes:
+      label: R session info
+      description: >
+        Please provide the output of `sessionInfo()` or (preferably)
+        `sessioninfo::session_info()`.
+        Put this code block between triple backtick (\`\`\`) lines.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Any other information you deem relevant, e.g. the way you have installed QGIS, or things that you tried already.
+    validations:
+      required: false
+

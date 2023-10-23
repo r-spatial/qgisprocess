@@ -1,0 +1,73 @@
+name: Package does not load successfully
+description: "`library(qgisprocess)` gives an error and I am stuck."
+labels: [null]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thanks for taking the time to fill out this bug report!
+        [Styling with Markdown](https://docs.github.com/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) is supported.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Things to check beforehand
+      description: >
+        Please consider the following tips carefully.
+        They may already solve your problem.
+      options:
+        - label: To avoid duplication, I have checked [existing issues](https://github.com/r-spatial/qgisprocess/issues?q=is%3Aissue).
+        - label: I use a currently supported QGIS version, i.e. shown _**green**_ in the [QGIS release schedule](https://www.qgis.org/en/site/getinvolved/development/roadmap.html#release-schedule).
+  - type: dropdown
+    id: plugins
+    attributes:
+      label: Are QGIS plugins the cause?
+      description: Does the R package load successfully after **disabling** all QGIS plugins in QGIS Desktop and restarting R? (_Plugins > Manage and Install Plugins..._)
+      options:
+        - -- choose --
+        - The R package loads successfully after disabling all QGIS plugins.
+        - The problem remains with all plugins disabled.
+      default: 0
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: >
+        If indeed plugins are at play, please try to narrow down the cause by
+        enabling plugins one by one, each time restarting R and loading
+        {qgisprocess}, and report back below about which plugin(s) causes the
+        issue.
+  - type: textarea
+    id: report
+    attributes:
+      label: Description of the observed problem
+      description: >
+        Please also include complete R code and output.
+        Put code blocks between triple backtick (\`\`\`) lines.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: QGIS version
+      description: What version of QGIS are you running?
+      placeholder: e.g. 3.28.1
+    validations:
+      required: true
+  - type: textarea
+    id: sessioninfo
+    attributes:
+      label: R session info
+      description: >
+        Please provide the output of `sessionInfo()` or (preferably)
+        `sessioninfo::session_info()`.
+        Put this code block between triple backtick (\`\`\`) lines.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Any other information you deem relevant, e.g. the way you have installed QGIS, or things that you tried already.
+    validations:
+      required: false
+
