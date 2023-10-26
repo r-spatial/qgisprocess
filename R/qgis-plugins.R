@@ -99,13 +99,28 @@ qgis_plugins <- function(
 #' @keywords internal
 qgis_query_plugins <- function(quiet = FALSE) {
   if (qgis_using_json_output()) {
-    out <- qgis_run(args = c("plugins", "--json"))$stdout
-    pluginlist <- jsonlite::fromJSON(out)$plugins
+    result <- qgis_run(args = c("plugins", "--json"))
+    if (nchar(result$stderr) > 0L) {
+      message(
+        "\nStandard error message from 'qgis_process':\n",
+        result$stderr,
+        "\n"
+      )
+    }
+    pluginlist <- jsonlite::fromJSON(result$stdout)$plugins
     plugins <- tibble::enframe(pluginlist)
     plugins$value <- unlist(plugins$value, use.names = FALSE)
     colnames(plugins) <- c("name", "enabled")
   } else {
-    lines <- readLines(textConnection(qgis_run("plugins")$stdout))
+    result <- qgis_run("plugins")
+    if (nchar(result$stderr) > 0L) {
+      message(
+        "\nStandard error message from 'qgis_process':\n",
+        result$stderr,
+        "\n"
+      )
+    }
+    lines <- readLines(textConnection(result$stdout))
     pluginvec <- stringr::str_extract(lines, "^\\*?\\s+\\w+")
     pluginvec <- pluginvec[!is.na(pluginvec)]
     plugins <- tibble::tibble(
