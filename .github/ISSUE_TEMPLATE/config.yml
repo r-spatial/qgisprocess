@@ -1,0 +1,21 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Need help with setup of QGIS plugins?
+    url: https://docs.qgis.org/latest/en/docs/user_manual/plugins/plugins.html
+    about: You first need to setup QGIS plugins outside of R, in order to access them from R.
+  - name: Need help with setup of external processing providers?
+    url: https://docs.qgis.org/latest/en/docs/user_manual/processing/3rdParty.html
+    about: You first need to setup external processing providers outside of R, in order to use them from R.
+  - name: Looking for the QGIS documentation?
+    url: https://qgis.org/en/docs/index.html
+    about: Learn about the QGIS processing framework, the QGIS GUI and more.
+  - name: Need further QGIS support?
+    url: https://qgis.org/en/site/forusers/support.html
+    about: For all QGIS questions or problems unrelated to the R-package {qgisprocess}.
+  - name: Question about using R-package {qgisprocess}?
+    url: https://gis.stackexchange.com/search?tab=newest&q=qgisprocess
+    about: >
+      Questions about using {qgisprocess} should not be posted in the GitHub
+      repo, but in a support forum like https://gis.stackexchange.com or
+      https://stackoverflow.com.
+      GitHub issues are for bug reports and suggestions for new features.

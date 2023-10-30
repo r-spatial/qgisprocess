@@ -1,0 +1,20 @@
+name: Feature request
+description: "Suggest an idea for a new feature."
+labels: [null]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        [Styling with Markdown](https://docs.github.com/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) is supported.
+  - type: textarea
+    id: request
+    attributes:
+      label: Description of the requested feature
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+    validations:
+      required: false

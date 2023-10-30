@@ -1,0 +1,95 @@
+name: Report another problem with R-package {qgisprocess}
+description: "Report other unexpected behaviour here."
+labels: [null]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thanks for taking the time to fill out this bug report!
+        [Styling with Markdown](https://docs.github.com/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) is supported.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Things to check beforehand
+      description: >
+        Please consider the following tips carefully.
+        They may already solve your problem.
+      options:
+        - label: To avoid duplication, I have checked [existing issues](https://github.com/r-spatial/qgisprocess/issues?q=is%3Aissue).
+        - label: I use a currently supported QGIS version, i.e. shown _**green**_ in the [QGIS release schedule](https://www.qgis.org/en/site/getinvolved/development/roadmap.html#release-schedule).
+  - type: dropdown
+    id: plugins
+    attributes:
+      label: Are QGIS plugins the cause?
+      description: Does your code run successfully after **disabling** all QGIS plugins in QGIS Desktop and restarting R? (_Plugins > Manage and Install Plugins..._)
+      options:
+        - -- choose --
+        - The code runs successfully after disabling all QGIS plugins.
+        - The problem remains with all plugins disabled.
+      default: 0
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: >
+        If indeed plugins are at play, please try to narrow down the cause by
+        enabling plugins one by one, each time restarting R and rerunning your
+        code, and report back below about which plugin(s) causes the
+        issue.
+  - type: textarea
+    id: report
+    attributes:
+      label: Description of the observed problem
+    validations:
+      required: true
+  - type: textarea
+    id: reprex
+    attributes:
+      label: Minimal reproducible example
+      description: >
+        Please provide a minimal reproducible example (MRE).
+        An MRE demonstrates where the problem lies and often helps to solve it.
+        Please read what constitutes an MRE
+        [at Stack Overflow](https://stackoverflow.com/help/minimal-reproducible-example).
+        Put the code block between triple backtick (\`\`\`) lines.
+        The easiest is to copy R code in your clipboard, run
+        `reprex::reprex(session_info = TRUE)` (it updates your clipboard) and
+        paste your clipboard below.
+    validations:
+      required: false
+  - type: textarea
+    id: version
+    attributes:
+      label: Backend versions
+      description: >
+        Please provide the output of `qgis_version(query = TRUE, debug = TRUE)`.
+        Put this code block between triple backtick (\`\`\`) lines.
+    validations:
+      required: true
+  - type: textarea
+    id: plugins2
+    attributes:
+      label: QGIS plugin state
+      description: >
+        Please provide the output of `qgis_plugins(query = TRUE)`.
+        Put this code block between triple backtick (\`\`\`) lines.
+    validations:
+      required: true
+  - type: textarea
+    id: sessioninfo
+    attributes:
+      label: R session info
+      description: >
+        Please provide the output of `sessionInfo()` or (preferably)
+        `sessioninfo::session_info()`.
+        Put this code block between triple backtick (\`\`\`) lines.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Any other information you deem relevant, e.g. the way you have installed QGIS, or things that you tried already.
+    validations:
+      required: false
+
