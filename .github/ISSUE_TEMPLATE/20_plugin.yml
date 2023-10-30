@@ -32,7 +32,7 @@ body:
     id: disabling
     attributes:
       label: Does disabling the problematic plugin(s) makes the warning or error disappear?
-      description: If "no", then consider reporting your problem in [the general issue template]() as it appears not to be linked to a plugin.
+      description: If "no", then consider reporting your problem in [the general issue template](https://github.com/r-spatial/qgisprocess/issues/new?template=30_other.yml) as it appears not to be linked to a plugin.
       options:
         - -- choose --
         - Yes.
