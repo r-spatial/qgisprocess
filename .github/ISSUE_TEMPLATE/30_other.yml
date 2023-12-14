@@ -54,7 +54,9 @@ body:
         Put the code block between triple backtick (\`\`\`) lines.
         The easiest is to copy R code in your clipboard, run
         `reprex::reprex(session_info = TRUE)` (it updates your clipboard) and
-        paste your clipboard below.
+        paste your clipboard below (examples and more info:
+        {[reprex](https://reprex.tidyverse.org)} homepage and
+        [R4DS book](https://r4ds.hadley.nz/workflow-help#making-a-reprex)).
     validations:
       required: false
   - type: textarea
