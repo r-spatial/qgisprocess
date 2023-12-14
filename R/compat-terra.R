@@ -52,17 +52,12 @@ qgis_as_terra.qgis_result <- function(x, ...) {
   terra::rast(unclass(result), ...)
 }
 
+
 # @param x A [terra::rast()].
 #' @keywords internal
 #' @export
 as_qgis_argument.SpatRaster <- function(x, spec = qgis_argument_spec(),
                                         use_json_input = FALSE) {
-  as_qgis_argument_terra(x, spec, use_json_input)
-}
-
-#' @keywords internal
-as_qgis_argument_terra <- function(x, spec = qgis_argument_spec(),
-                                   use_json_input = FALSE) {
   if (!isTRUE(spec$qgis_type %in% c("raster", "layer", "multilayer"))) {
     abort(glue("Can't convert '{ class(x)[1] }' object to QGIS type '{ spec$qgis_type }'"))
   }
@@ -83,7 +78,7 @@ as_qgis_argument_terra <- function(x, spec = qgis_argument_spec(),
     sources <- sources$source
   }
 
-  if (!identical(sources, "") && length(sources) == 1) {
+  if (!identical(sources, "") && identical(length(sources), 1L)) {
     accepted_ext <- c("grd", "asc", "sdat", "rst", "nc", "tif", "tiff", "gtiff", "envi", "bil", "img")
     file_ext <- stringr::str_to_lower(tools::file_ext(sources))
     if (file_ext %in% accepted_ext) {
