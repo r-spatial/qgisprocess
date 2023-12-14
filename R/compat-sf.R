@@ -46,17 +46,17 @@ st_as_sf.qgis_result <- function(x, ...) {
 #' @rdname st_as_sf
 #' @exportS3Method sf::st_as_sf
 st_as_sf.qgis_outputVector <- function(x, ...) {
-  if (grepl("\\|layer", x)) {
-    output_splitted <- strsplit(x, "\\|layer.*=")[[1]]
-    sf::read_sf(output_splitted[1], output_splitted[2], ...)
-  } else {
-    sf::read_sf(x, ...)
-  }
+  qgis_as_sf(x, ...)
 }
 
 #' @rdname st_as_sf
 #' @exportS3Method sf::st_as_sf
 st_as_sf.qgis_outputLayer <- function(x, ...) {
+  qgis_as_sf(x, ...)
+}
+
+#' @keywords internal
+qgis_as_sf <- function(x, ...) {
   if (grepl("\\|layer", x)) {
     output_splitted <- strsplit(x, "\\|layer.*=")[[1]]
     sf::read_sf(output_splitted[1], output_splitted[2], ...)
