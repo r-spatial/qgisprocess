@@ -1,12 +1,20 @@
 #' Convert a qgis_result object or one of its elements to a terra object
 #'
+#' This function performs coercion to one of the terra classes
+#' `SpatRaster`, `SpatVector` or `SpatVectorProxy` (add `proxy = TRUE` for the
+#' latter).
+#' The distinction between `SpatRaster` and `SpatVector` is based on the
+#' output type.
+#'
 #' @family topics about coercing processing output
 #' @family topics about accessing or managing processing results
 #'
-#' @param ... Arguments passed to [terra::rast()].
+#' @param ... Arguments passed to [terra::rast()] or [terra::vect()], depending
+#' on the output type of `x` (or one of its elements, if `x` is a
+#' `qgis_result`).
 #' @inheritParams qgis_as_raster
 #'
-#' @returns A `SpatRaster` or a `SpatVector` object.
+#' @returns A `SpatRaster`, `SpatVector` or `SpatVectorProxy` object.
 #'
 #' @examplesIf has_qgis() && requireNamespace("terra", quietly = TRUE)
 #' \donttest{
@@ -23,6 +31,20 @@
 #' # if you need more control, extract the needed output element first:
 #' output_raster <- qgis_extract_output(result, "OUTPUT")
 #' qgis_as_terra(output_raster)
+#'
+#' # Same holds for coercion to SpatVector
+#' result2 <- qgis_run_algorithm(
+#'   "native:buffer",
+#'   INPUT = system.file("longlake/longlake.gpkg", package = "qgisprocess"),
+#'   DISTANCE = 100
+#' )
+#'
+#' qgis_as_terra(result2)
+#' output_vector <- qgis_extract_output(result2, "OUTPUT")
+#' qgis_as_terra(output_vector)
+#'
+#' # SpatVectorProxy:
+#' qgis_as_terra(result2, proxy = TRUE)
 #' }
 #'
 #' @name qgis_as_terra
@@ -42,14 +64,44 @@ qgis_as_terra.qgis_outputRaster <- function(x, ...) {
 #' @rdname qgis_as_terra
 #' @export
 qgis_as_terra.qgis_outputLayer <- function(x, ...) {
-  terra::rast(unclass(x), ...)
+  tryCatch(
+    terra::rast(unclass(x), ...),
+    error = function(e) {
+      qgis_as_spatvector(x, ...)
+    },
+    warning = function(w) {
+      if (!grepl("not recognized as a supported file format", w)) {
+        warning(w)
+      }
+      qgis_as_spatvector(x, ...)
+    }
+  )
+}
+
+#' @rdname qgis_as_terra
+#' @export
+qgis_as_terra.qgis_outputVector <- function(x, ...) {
+  qgis_as_spatvector(x, ...)
 }
 
 #' @rdname qgis_as_terra
 #' @export
 qgis_as_terra.qgis_result <- function(x, ...) {
-  result <- qgis_extract_output_by_class(x, c("qgis_outputRaster", "qgis_outputLayer"))
-  terra::rast(unclass(result), ...)
+      result <- qgis_extract_output_by_class(
+        x,
+        c("qgis_outputRaster", "qgis_outputVector", "qgis_outputLayer")
+      )
+      qgis_as_terra(result, ...)
+}
+
+#' @keywords internal
+qgis_as_spatvector <- function(x, ...) {
+  if (grepl("\\|layer", unclass(x))) {
+    output_splitted <- strsplit(unclass(x), "\\|layer.*=")[[1]]
+    terra::vect(output_splitted[1], output_splitted[2], ...)
+  } else {
+    terra::vect(unclass(x), ...)
+  }
 }
 
 
@@ -111,6 +163,102 @@ as_qgis_argument.SpatRaster <- function(x, spec = qgis_argument_spec(),
   terra::writeRaster(x, path)
   structure(path, class = "qgis_tempfile_arg")
 }
+
+
+
+#' @keywords internal
+#' @export
+as_qgis_argument.SpatVector <- function(x, spec = qgis_argument_spec(),
+                                        use_json_input = FALSE) {
+  as_qgis_argument_terra_vector(x, spec, use_json_input)
+}
+
+
+#' @keywords internal
+#' @export
+as_qgis_argument.SpatVectorProxy <- function(x, spec = qgis_argument_spec(),
+                                             use_json_input = FALSE) {
+  as_qgis_argument_terra_vector(x, spec, use_json_input)
+}
+
+
+#' @keywords internal
+as_qgis_argument_terra_vector <- function(x,
+                                          spec = qgis_argument_spec(),
+                                          use_json_input = FALSE) {
+  class <- class(x)[1]
+
+  if (!isTRUE(spec$qgis_type %in% c("source", "layer", "vector", "multilayer", "point"))) {
+    abort(glue("Can't convert '{ class }' object to QGIS type '{ spec$qgis_type }'"))
+  }
+
+  # try to use a filename if present
+  sources <- terra::sources(x)
+  if (!is.character(sources)) {
+    sources <- sources$source
+  }
+  if (
+    !identical(sources, "") &&
+    identical(length(sources), 1L) &&
+    !identical(spec$qgis_type, "point")
+  ) {
+    # rewrite if attribute names differ from source:
+    if (grepl("::", sources)) {
+      chunks <- strsplit(sources, "::")[[1]]
+      proxy <- terra::vect(chunks[1], chunks[2], proxy = TRUE)
+      source_names <- names(proxy)
+    } else {
+      proxy <- terra::vect(sources, proxy = TRUE)
+      source_names <- names(proxy)
+    }
+    if (!identical(names(x), source_names)) {
+      message(glue(
+        "Rewriting the {class} object as a temporary file before passing to QGIS, since ",
+        "its attribute names (including order, selection) differ from those in the source file '{ sources }'."
+      ))
+      # rewrite if CRS differs (terra source reference is kept if CRS is reset,
+      # not if data is transformed):
+    } else if (!identical(terra::crs(x), terra::crs(proxy))) {
+      message(glue(
+        "Rewriting the {class} object as a temporary file before passing to QGIS, since ",
+        "its CRS has been set to another value than that in the source file '{ sources }'."
+      ))
+    } else {
+      return(sub("::", "|layername=", sources))
+    }
+  }
+
+  if (identical(spec$qgis_type, "point")) {
+    assert_that(
+      identical(terra::geomtype(x), "points"), # is.points() not defined for proxy
+      identical(nrow(x), 1),
+      msg = glue(
+        "QGIS argument type 'point' can take a {class} object, but it must ",
+        "have exactly one row and the geometry must be a point."
+      )
+    )
+    crs_code <- as.character(terra::crs(x, describe = TRUE)[, c("authority", "code")])
+    if (inherits(x, "SpatVectorProxy")) {
+      x <- terra::query(x, n = 1)
+    }
+    coord <- terra::geom(x)[1, c("x", "y")]
+    if (!any(is.na(crs_code))) {
+      return(glue("{coord[1]},{coord[2]}[{crs_code[1]}:{crs_code[2]}]"))
+    } else {
+      return(glue("{coord[1]},{coord[2]}"))
+    }
+  }
+
+  # (re)write to file
+  if (inherits(x, "SpatVectorProxy")) {
+    x <- terra::query(x)
+  }
+  path <- qgis_tmp_vector()
+  terra::writeVector(x, path)
+  structure(path, class = "qgis_tempfile_arg")
+}
+
+
 
 #' @keywords internal
 #' @export
