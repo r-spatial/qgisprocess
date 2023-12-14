@@ -1,0 +1,20 @@
+name: Documentation idea
+description: "Report a documentation shortcoming or suggest a documentation improvement."
+labels: [null]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thanks for helping to improve the documentation!
+        [Styling with Markdown](https://docs.github.com/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) is supported.
+
+
+        If it's clear to you what should be changed or added and you know how to do this, then you're welcome to make a pull request instead of an issue!
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Finding or suggestion regarding package documentation
+      description: >
+        If you want to add code, put it between triple backtick (\`\`\`) lines.
+    validations:
+      required: true
