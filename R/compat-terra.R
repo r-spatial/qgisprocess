@@ -82,9 +82,16 @@ as_qgis_argument.SpatRaster <- function(x, spec = qgis_argument_spec(),
     accepted_ext <- c("grd", "asc", "sdat", "rst", "nc", "tif", "tiff", "gtiff", "envi", "bil", "img")
     file_ext <- stringr::str_to_lower(tools::file_ext(sources))
     if (file_ext %in% accepted_ext) {
-      names_match <- identical(names(x), names(terra::rast(sources)))
-      if (names_match) {
+      reread <- terra::rast(sources)
+      names_match <- identical(names(x), names(reread))
+      crs_match <- identical(terra::crs(x), terra::crs(reread))
+      if (names_match && crs_match) {
         return(sources)
+      } else if (!crs_match) {
+        message(glue(
+          "Rewriting the SpatRaster object as a temporary file before passing to QGIS, since ",
+          "its CRS has been set to another value than that in the source file '{ sources }'."
+        ))
       } else if (terra::nlyr(x) > 1L) {
         message(glue(
           "Rewriting the multi-band SpatRaster object as a temporary file before passing to QGIS, since ",
