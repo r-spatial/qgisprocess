@@ -177,6 +177,8 @@ qgis_version <- function(query = FALSE, quiet = TRUE, full = TRUE, debug = FALSE
     }
     print(qgisprocess_cache$version)
     message()
+    message("Using qgisprocess ", getNamespaceVersion("qgisprocess"))
+    message()
     message("Versions reported by 'qgis_process':")
     message("------------------------------------")
     message(qgis_run(args = "--version")$stdout)
