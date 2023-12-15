@@ -1,4 +1,4 @@
-test_that("terra argument coercers work", {
+test_that("terra argument coercers work for rasters", {
   skip_if_not_installed("terra")
 
   obj <- terra::rast(vals = 1:64800)
@@ -14,13 +14,26 @@ test_that("terra argument coercers work", {
   expect_s3_class(tmp_file, "qgis_tempfile_arg")
   unlink(tmp_file)
 
-  # also check rasters with embedded files
-  obj <- terra::rast(system.file("longlake/longlake.tif", package = "qgisprocess"))
+  tmp_file <- expect_match(
+    as_qgis_argument(obj, qgis_argument_spec(qgis_type = "raster")),
+    "\\.tif$"
+  )
+  expect_s3_class(tmp_file, "qgis_tempfile_arg")
+  unlink(tmp_file)
+})
 
-  # behaviour changed in a terra update
+test_that("terra argument coercers work for SpatRaster referring to a file", {
+  skip_if_not_installed("terra")
+
+  obj <- terra::rast(system.file("longlake/longlake.tif", package = "qgisprocess"))
   sources <- terra::sources(obj)
   expect_identical(
     as_qgis_argument(obj, qgis_argument_spec(qgis_type = "layer")),
+    if (is.character(sources)) sources else sources$source
+  )
+
+  expect_identical(
+    as_qgis_argument(obj, qgis_argument_spec(qgis_type = "raster")),
     if (is.character(sources)) sources else sources$source
   )
 
@@ -28,6 +41,15 @@ test_that("terra argument coercers work", {
     as_qgis_argument(obj, qgis_argument_spec(qgis_type = "multilayer")),
     "extract the bands"
   )
+
+  # check effect of resetting CRS
+  obj2 <- obj
+  terra::crs(obj2) <- NA
+  res <- expect_message(
+    as_qgis_argument(obj2, qgis_argument_spec(qgis_type = "raster")),
+    "Rewriting.*since its CRS has been set to another value"
+  )
+  expect_s3_class(res, "qgis_tempfile_arg")
 
   # check behaviour in case of band selection or reordering
   obj1 <- obj$longlake_2
