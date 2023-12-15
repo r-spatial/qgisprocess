@@ -66,6 +66,8 @@ Encoding: UTF-8
 Language: en-GB
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-SystemRequirements: 'QGIS' latest or long-term release (>= 3.28). Older
+SystemRequirements: 'QGIS' latest or long-term release, currently supported
+    according to the 'QGIS' release schedule
+    (<https://www.qgis.org/en/site/getinvolved/development/roadmap.html>). Older
     'QGIS' releases are not officially supported, but may work since
     'QGIS' 3.16.
