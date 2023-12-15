@@ -39,8 +39,8 @@ qgis_detect_windows_paths <- function(drive_letter = strsplit(R.home(), ":")[[1]
   posssible_locs_win_df <- expand.grid(
     qgis = c(
       list.files(glue("{ drive_letter }:/Program Files"), "QGIS*", full.names = TRUE),
-      file.path(glue("{ drive_letter }:/"), "OSGeo4W64"),
-      file.path(glue("{ drive_letter }:/"), "OSGeo4W")
+      file.path(glue("{ drive_letter }:"), "OSGeo4W64"),
+      file.path(glue("{ drive_letter }:"), "OSGeo4W")
     ),
     file = file.path("bin", bat_files)
   )
