@@ -78,12 +78,22 @@ This selects the type of cache files to delete.</p></dd>
 
 
 <dt>age_days</dt>
-<dd><p>A number that expresses a cache file's age in days that must
-be exceeded for it to be deleted, with age referring to its last
-modification date.
+<dd><p>A number that expresses a cache file's age that must
+be exceeded for it to be deleted, with age defined as days elapsed since the
+file's last modification date.
 The default value of 90 days can also be changed with the option
 <code>qgisprocess.cachefiles_days_keep</code> or the  environment variable
 <code>R_QGISPROCESS_CACHEFILES_DAYS_KEEP</code>.</p></dd>
+
+
+<dt>quiet</dt>
+<dd><p>Use <code>FALSE</code> to display more information,
+possibly useful for debugging.</p></dd>
+
+
+<dt>startup</dt>
+<dd><p>Logical.
+Is this command being run while loading the package?</p></dd>
 
 </dl></div>
     <div class="section level2">
