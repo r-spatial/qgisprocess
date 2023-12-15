@@ -406,10 +406,15 @@ test_that("terra result coercers to SpatVector work", {
 
 
 
-test_that("terra argument coercer for extent works", {
+test_that("terra argument coercer for SpatExtent works", {
   skip_if_not_installed("terra")
 
   obj <- terra::rast(system.file("longlake/longlake.tif", package = "qgisprocess"))
+
+  expect_error(
+    as_qgis_argument(terra::ext(obj)),
+    "Can't convert"
+  )
 
   bbox_representation <- expect_match(
     as_qgis_argument(terra::ext(obj), qgis_argument_spec(qgis_type = "extent")),
