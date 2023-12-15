@@ -87,11 +87,11 @@ qgis_as_terra.qgis_outputVector <- function(x, ...) {
 #' @rdname qgis_as_terra
 #' @export
 qgis_as_terra.qgis_result <- function(x, ...) {
-      result <- qgis_extract_output_by_class(
-        x,
-        c("qgis_outputRaster", "qgis_outputVector", "qgis_outputLayer")
-      )
-      qgis_as_terra(result, ...)
+  result <- qgis_extract_output_by_class(
+    x,
+    c("qgis_outputRaster", "qgis_outputVector", "qgis_outputLayer")
+  )
+  qgis_as_terra(result, ...)
 }
 
 #' @keywords internal
@@ -199,8 +199,8 @@ as_qgis_argument_terra_vector <- function(x,
   }
   if (
     !identical(sources, "") &&
-    identical(length(sources), 1L) &&
-    !identical(spec$qgis_type, "point")
+      identical(length(sources), 1L) &&
+      !identical(spec$qgis_type, "point")
   ) {
     # rewrite if attribute names differ from source:
     if (grepl("::", sources)) {

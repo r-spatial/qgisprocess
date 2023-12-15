@@ -163,7 +163,6 @@ test_that("terra argument coercers work for SpatVector referring to a file", {
     "Rewriting.*since its attribute names"
   )
   expect_s3_class(res, "qgis_tempfile_arg")
-
 })
 
 test_that("terra argument coercers work for a SpatVector referring to a layer in a multi-layer file", {
@@ -393,8 +392,8 @@ test_that("terra result coercers to SpatVector work", {
       structure(
         list(OUTPUT = structure(
           paste0(tmp_file, "|layername=layer2"),
-          class = "qgis_outputVector")
-        ),
+          class = "qgis_outputVector"
+        )),
         class = "qgis_result"
       )
     ),
