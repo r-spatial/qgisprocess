@@ -2,6 +2,8 @@
 
 - Solve a CRAN check error on `r-oldrel-macos-x86_64`, by adding support for {stars} 0.5-5 (#175).
 - Allow half-configured states with abundant messages, so that remaining functionality can be used in debugging or even for some real stuff (#177).
+- Add vector support for {terra} (#184).
+This makes it possible to use SpatVector(Proxy) objects as input arguments, and to coerce processing results to SpatVector(Proxy).
 
 # qgisprocess 0.1.0
 
