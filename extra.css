@@ -30,6 +30,10 @@ h1,h2,h3 {
     color: white;
 }
 
+.navbar-brand {
+    color:white;
+}
+
 .text-muted {
     --bs-text-opacity: 1;
     color: #7f9624 !important;
