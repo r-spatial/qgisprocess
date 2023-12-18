@@ -5,6 +5,50 @@
 #' for a detailed description of the algorithms provided
 #' 'out of the box' on QGIS.
 #'
+#' `qgis_run_algorithm()` accepts various R objects as algorithm arguments.
+#' Examples include an R matrix or data frame for the
+#' argument type 'matrix', R colors for the argument type 'color',
+#' sf or terra (SpatVector) objects for the argument type 'vector' and
+#' raster/terra/stars objects for the argument type 'raster', but there are many
+#' more.
+#' `qgis_run_algorithm()` preprocesses the provided objects into the format that
+#' QGIS expects for a given argument.
+#'
+#' For data objects in R that already exist as a stored file, it is best to
+#' instead provide the file path in order to prevent a superfluous file writing
+#' step from R, as QGIS expects a file path.
+#' However terra and stars objects can contain the file path as metadata: in
+#' these cases this path is retrieved from the R object and passed to QGIS;
+#' potential pitfalls are taken care of.
+#'
+#' Providing R objects that cannot be converted to the applicable argument type
+#' will lead to an error.
+#'
+#' @section Running QGIS models and Python scripts:
+#' QGIS models and Python scripts can be added to the Processing Toolbox in the
+#' QGIS GUI, by pointing at their corresponding file.
+#' This will put the model or script below the provider 'Models' or
+#' 'Scripts', respectively.
+#' Next, it is necessary to run [qgis_configure()] in R in order to make the
+#' model or script available to qgisprocess (even reloading the package won't
+#' detect it, since these providers have dynamic content, not tied to a
+#' plugin or to a QGIS version).
+#' You can check the outcome with [qgis_providers()] and
+#' [qgis_search_algorithms()].
+#' Now, just as with other algorithms, you can provide the `model:<name>` or
+#' `script:<name>` identifier to the `algorithm` argument of
+#' `qgis_run_algorithm()`.
+#'
+#' As the output argument name of a QGIS model can have an R-unfriendly
+#' syntax, you may need to take the JSON parameter string from the QGIS
+#' processing dialog and feed the JSON string to the `.raw_json_input` argument
+#' of `qgis_run_algorithm()` instead of providing separate arguments.
+#'
+#' Although the 'qgis_process' backend also supports replacing the 'algorithm'
+#' parameter by the file path of a model file or a Python script, it is not
+#' planned to implement this in qgisprocess, as it would bypass argument
+#' preprocessing in R (including checks).
+#'
 #' @family functions to run one geoprocessing algorithm
 #'
 #' @param algorithm A qualified algorithm name (e.g., `"native:buffer"`) or
