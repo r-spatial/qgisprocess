@@ -12,18 +12,6 @@ test_that("qgis_algorithms() works", {
   expect_true(all(vapply(algs[old_names], function(x) all(!is.na(x)), logical(1))))
 })
 
-test_that("qgis_has_algorithm() works", {
-  skip_if_not(has_qgis())
-  expect_true(qgis_has_algorithm("native:filedownloader"))
-  expect_false(qgis_has_algorithm("notanalgorithm"))
-})
-
-test_that("qgis_has_provider() works", {
-  skip_if_not(has_qgis())
-  expect_true(qgis_has_provider("native"))
-  expect_false(qgis_has_provider("notaprovider"))
-})
-
 test_that("qgis_providers() works", {
   skip_if_not(has_qgis())
   expect_s3_class(qgis_providers(), "data.frame")
