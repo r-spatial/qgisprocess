@@ -15,4 +15,3 @@ test_that("qgis_has_plugin() works", {
   expect_true(qgis_has_plugin("processing"))
   expect_false(qgis_has_plugin("notaplugin"))
 })
-

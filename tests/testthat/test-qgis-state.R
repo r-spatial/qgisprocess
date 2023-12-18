@@ -49,4 +49,3 @@ test_that("qgis_query_version() works for development versions of QGIS", {
     expect_warning(qgis_query_version(), "version identifier")
   }
 })
-
