@@ -1,7 +1,9 @@
 ---
 title: "Getting started with qgisprocess"
 author: "Jannes Muenchow & Floris Vanderhaeghe"
-date: "Last updated: 2023-08-16"
+date: |
+  | Last update: 2023-08-16
+  | Last run: `r Sys.Date()`
 output:
   html_document: 
     toc: yes
