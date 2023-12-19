@@ -46,7 +46,8 @@ qgis_detect_windows_paths <- function(drive_letter = strsplit(R.home(), ":")[[1]
   )
 
   possible_locs_win <- file.path(posssible_locs_win_df$qgis, posssible_locs_win_df$file)
-  possible_locs_win[file.exists(possible_locs_win)]
+  possible_locs_win <- possible_locs_win[file.exists(possible_locs_win)]
+  sort_paths(possible_locs_win)
 }
 
 #' @rdname qgis_detect_windows_paths
@@ -61,7 +62,8 @@ qgis_detect_macos_paths <- function() {
     "Contents/MacOS/bin/qgis_process"
   )
 
-  possible_locs_mac[file.exists(possible_locs_mac)]
+  possible_locs_mac <- possible_locs_mac[file.exists(possible_locs_mac)]
+  sort_paths(possible_locs_mac)
 }
 
 #' @keywords internal
@@ -74,3 +76,25 @@ is_macos <- function() {
 is_windows <- function() {
   .Platform$OS.type == "windows"
 }
+
+#' @keywords internal
+sort_paths <- function(x) {
+  assert_that(is.character(x))
+  extracted <- extract_version_from_paths(x)
+  indexes_version <- order(
+    as.package_version(extracted[!is.na(extracted)]),
+    decreasing = TRUE
+  )
+  indexes <- c(
+    which(!is.na(extracted))[indexes_version],
+    which(is.na(extracted))
+  )
+  x[indexes]
+}
+
+#' @keywords internal
+extract_version_from_paths <- function(x) {
+  stringr::str_extract(x, "\\d{1,2}\\.\\d+(?:\\.\\d+)?(?=/)")
+}
+
+
