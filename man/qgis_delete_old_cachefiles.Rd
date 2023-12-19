@@ -36,4 +36,7 @@ Note that a currently used package cache file will never be deleted.
 
 This function is called when loading the package.
 }
+\note{
+This is an internal function.
+}
 \keyword{internal}

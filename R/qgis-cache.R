@@ -31,6 +31,9 @@ qgis_pkgcache_file <- function() {
 #' Is this command being run while loading the package?
 #' @inheritParams qgis_path
 #'
+#' @note
+#' This is an internal function.
+#'
 #' @keywords internal
 qgis_delete_old_cachefiles <- function(
     type = "all",
