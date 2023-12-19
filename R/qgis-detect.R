@@ -96,5 +96,3 @@ sort_paths <- function(x) {
 extract_version_from_paths <- function(x) {
   stringr::str_extract(x, "\\d{1,2}\\.\\d+(?:\\.\\d+)?(?=/)")
 }
-
-
