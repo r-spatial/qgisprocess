@@ -106,10 +106,22 @@ plot(sf::st_geometry(output_sf))
 
 ### Some tips
 
+You can search for algorithms with `qgis_search_algorithms()` (string matching with regex).
+
+```{r}
+qgis_search_algorithms(algorithm = "buffer", group = "[Vv]ector")
+```
+
 You can read the help associated with an algorithm using `qgis_show_help()`.
 
 ```{r eval=FALSE}
 qgis_show_help("native:buffer")
+```
+
+A full list of available algorithms is returned by `qgis_algorithms()`.
+
+```{r}
+qgis_algorithms()
 ```
 
 It may also be useful to run an algorithm in the QGIS GUI to determine how the various input values are translated to string processing arguments.
@@ -118,18 +130,6 @@ This can be done using the 'Advanced' dropdown, by copying either the `qgis_proc
 ![](man/figures/copy_as_json.png)
 
 Note that the JSON string can be passed directly to `qgis_run_algorithm()`!
-
-You can search for algorithms with `qgis_search_algorithms()` (string matching with regex).
-
-```{r}
-qgis_search_algorithms(algorithm = "buffer", group = "[Vv]ector")
-```
-
-A full list of available algorithms is returned by `qgis_algorithms()`.
-
-```{r}
-qgis_algorithms()
-```
 
 ## Code of Conduct
 
