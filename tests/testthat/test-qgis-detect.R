@@ -15,6 +15,7 @@ test_that("qgis_detect_windows_paths() works", {
 })
 
 test_that("extract_version_from_paths() works", {
+  expect_identical(extract_version_from_paths(character()), character())
   path <- "/QGIS 3.28.6/bin/qgis_process-qgis-ltr.bat"
   expect_identical(extract_version_from_paths(path), "3.28.6")
   paths <- c(
@@ -32,6 +33,7 @@ test_that("extract_version_from_paths() works", {
 })
 
 test_that("sort_paths() works", {
+  expect_identical(sort_paths(character()), character())
   paths <-
     c(
       "C:/OSGeo4W64/bin/qgis_process-qgis.bat",
