@@ -1,7 +1,9 @@
 ---
 title: "How to use QGIS expressions in qgisprocess?"
 author: "Floris Vanderhaeghe & Jannes Muenchow"
-date: "Last updated: 2023-08-16"
+date: |
+  | Last update: 2023-08-16
+  | Last run: `r Sys.Date()`
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{How to use QGIS expressions in qgisprocess?}

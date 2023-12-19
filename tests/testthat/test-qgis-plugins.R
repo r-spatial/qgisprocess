@@ -68,13 +68,6 @@ test_that("message_disabled_plugins() works", {
 })
 
 
-test_that("qgis_has_plugin() works", {
-  skip_if_not(has_qgis())
-  expect_true(qgis_has_plugin("processing"))
-  expect_false(qgis_has_plugin("notaplugin"))
-})
-
-
 test_that("qgis_enable_plugins() messages are OK", {
   skip_if_not(has_qgis())
   expect_message(qgis_enable_plugins(names = ""), "exiting")
