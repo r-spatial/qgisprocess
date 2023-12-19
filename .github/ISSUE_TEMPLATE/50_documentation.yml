@@ -1,6 +1,6 @@
 name: Documentation idea
 description: "Report a documentation shortcoming or suggest a documentation improvement."
-labels: [null]
+labels: ["documentation"]
 body:
   - type: markdown
     attributes:
