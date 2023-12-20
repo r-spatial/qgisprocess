@@ -14,6 +14,16 @@ test_that("qgis_detect_windows_paths() works", {
   }
 })
 
+test_that("qgis_detect_paths() works", {
+  if (is_windows()) {
+    expect_identical(qgis_detect_paths(), qgis_detect_windows_paths())
+  } else if (is_macos()) {
+    expect_identical(qgis_detect_paths(), qgis_detect_macos_paths())
+  } else {
+    expect_error(qgis_detect_paths(), "only")
+  }
+})
+
 test_that("extract_version_from_paths() works", {
   expect_identical(extract_version_from_paths(character()), character())
   path <- "/QGIS 3.28.6/bin/qgis_process-qgis-ltr.bat"
