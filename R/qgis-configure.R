@@ -158,6 +158,70 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
             return(invisible(has_qgis()))
           }
 
+          # CACHE CONDITION: the path element does not contradict the
+          # environment variable/option to automatically switch to a newer
+          # available QGIS version
+          if (is_windows() || is_macos()) {
+            opt <- getOption(
+              "qgisprocess.detect_newer_qgis",
+              Sys.getenv("R_QGISPROCESS_DETECT_NEWER_QGIS")
+            )
+            assert_that(
+              assertthat::is.flag(opt) ||
+                (assertthat::is.string(opt) && opt %in% c("", "TRUE", "FALSE", "true", "false")),
+              msg = "Option 'qgisprocess.detect_newer_qgis' must be 'TRUE' or 'FALSE'."
+            )
+            if (identical(opt, "")) opt <- NA
+            opt || grepl("TRUE|true", opt)
+
+            first_qgis <- qgis_detect_paths()[1]
+            newer_available <- !is.na(extract_version_from_paths(first_qgis)) &&
+              !identical(cached_data$path, first_qgis)
+
+            if (isTRUE(opt) && isTRUE(newer_available) && interactive()) {
+              packageStartupMessage()
+              packageStartupMessage(glue(
+                "A newer QGIS installation seems to be available: ",
+                "{extract_version_from_paths(first_qgis)}."
+              ))
+              answer <- ""
+              while (!grepl("^[Yy](?:[Ee][Ss])?$|^[Nn](?:[Oo])?$", answer)) {
+                answer <- readline("Do you want to try it and rebuild the cache? (y/n) ")
+              }
+              if (grepl("^[Yy]", answer)) {
+                newer_ok <- FALSE
+                tryCatch(
+                  {
+                    qgis_run(path = first_qgis)
+                    newer_ok <- TRUE
+                  },
+                  error = function(e) {
+                    packageStartupMessage(
+                      glue(
+                        "'{first_qgis}' does not work as expected.\n",
+                        "So will not try it further."
+                      )
+                    )
+                  }
+                )
+                if (newer_ok) {
+                  packageStartupMessage(
+                    "Will try to reconfigure qgisprocess and build new cache ..."
+                  )
+                  qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+                  return(invisible(has_qgis()))
+                }
+              } else if (!quiet) {
+                packageStartupMessage(
+                  "\nNOTE: if you don't want to autodetect QGIS version updates ",
+                  "in the future, unset the qgisprocess.detect_newer_qgis ",
+                  "option or the R_QGISPROCESS_DETECT_NEWER_QGIS environment ",
+                  "variable."
+                )
+              }
+            }
+          }
+
           # CACHE CONDITION: the cached QGIS version equals the one reported by
           # qgis_process
 
