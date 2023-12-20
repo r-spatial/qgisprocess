@@ -2,8 +2,6 @@
 
 0 errors | 0 warnings | 2 notes
 
-* This is a new release.
-
 * checking CRAN incoming feasibility ... [12s] NOTE
 
   Maintainer: 'Floris Vanderhaeghe <floris.vanderhaeghe@inbo.be>'
