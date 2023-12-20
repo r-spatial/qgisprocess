@@ -1,8 +1,10 @@
-#' Detect QGIS installations that provide the 'qgis_process' command
+#' Detect QGIS installations with 'qgis_process' on Windows and macOS
 #'
 #' Discovers existing 'qgis_process' executables on the system and returns their
 #' filepath.
 #' Only available for Windows and macOS systems.
+#' `qgis_detect_paths()` is a shortcut to `qgis_detect_windows_paths()` on
+#' Windows and `qgis_detect_macos_paths()` on macOS.
 #'
 #' @concept functions to manage and explore QGIS and qgisprocess
 #'
@@ -16,15 +18,33 @@
 #'
 #' @param drive_letter The drive letter on which to search. By default,
 #'   this is the same drive letter as the R executable.
+#'   Only applicable to Windows.
 #'
 #' @returns A character vector of possible paths to the 'qgis_process'
 #' executable.
 #' @export
 #'
 #' @examples
-#' if (.Platform$OS.type == "windows") qgis_detect_windows_paths()
-#' if (Sys.info()["sysname"] == "Darwin") qgis_detect_macos_paths()
-#'
+#' if (.Platform$OS.type == "windows") {
+#'   qgis_detect_paths()
+#'   identical(qgis_detect_windows_paths(), qgis_detect_paths())
+#' }
+#' if (Sys.info()["sysname"] == "Darwin") {
+#'   qgis_detect_paths()
+#'   identical(qgis_detect_macos_paths(), qgis_detect_paths())
+#' }
+qgis_detect_paths <- function(drive_letter = strsplit(R.home(), ":")[[1]][1]) {
+  if (is_windows()) {
+    qgis_detect_windows_paths(drive_letter = drive_letter)
+  } else if (is_macos()) {
+    qgis_detect_macos_paths()
+  } else {
+    abort("Can use `qgis_detect_paths()` on Windows and macOS only.")
+  }
+}
+
+#' @rdname qgis_detect_paths
+#' @export
 qgis_detect_windows_paths <- function(drive_letter = strsplit(R.home(), ":")[[1]][1]) {
   if (!is_windows()) {
     abort("Can't use `qgis_detect_windows_paths()` on a non-windows platform.")
@@ -50,7 +70,7 @@ qgis_detect_windows_paths <- function(drive_letter = strsplit(R.home(), ":")[[1]
   sort_paths(possible_locs_win)
 }
 
-#' @rdname qgis_detect_windows_paths
+#' @rdname qgis_detect_paths
 #' @export
 qgis_detect_macos_paths <- function() {
   if (!is_macos()) {
