@@ -145,22 +145,18 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
           # CACHE CONDITION: qgis_process is indeed available in the cached path
 
-          tryCatch(
-            {
-              qgis_run(path = cached_data$path)
-            },
-            error = function(e) {
-              if (quiet) message()
-              abort(
-                glue(
-                  "'{cached_data$path}' (cached path) is not available anymore.\n",
-                  "Will try to reconfigure qgisprocess and build new cache ..."
-                )
+          outcome <- try(qgis_run(path = cached_data$path), silent = TRUE)
+          if (inherits(outcome, "try-error")) {
+            if (quiet) packageStartupMessage()
+            packageStartupMessage(
+              glue(
+                "'{cached_data$path}' (cached path) is not available anymore.\n",
+                "Will try to reconfigure qgisprocess and build new cache ..."
               )
-              qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
-              return(invisible(has_qgis()))
-            }
-          )
+            )
+            qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+            return(invisible(has_qgis()))
+          }
 
           # CACHE CONDITION: the cached QGIS version equals the one reported by
           # qgis_process

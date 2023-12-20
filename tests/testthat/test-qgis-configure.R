@@ -131,11 +131,10 @@ test_that("qgis_configure() works OK if cache conditions unmet", {
     ),
     cache_data_file
   )
-  msg <- paste(capture.output(
+  expect_message(
     qgis_configure(use_cached_data = TRUE),
-    type = "message"
-  ), collapse = "\n")
-  expect_true(stringr::str_detect(msg, "is not available anymore"))
+    "is not available anymore"
+  )
 
   saveRDS(
     list(
