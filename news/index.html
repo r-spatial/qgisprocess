@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">qgisprocess</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.91812</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,15 +56,15 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="qgisprocess-development-version">qgisprocess (development version)<a class="anchor" aria-label="anchor" href="#qgisprocess-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.2.0" id="qgisprocess-020">qgisprocess 0.2.0<a class="anchor" aria-label="anchor" href="#qgisprocess-020"></a></h2><p class="text-muted">CRAN release: 2023-12-21</p>
 <div class="section level3">
-<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="new-features-0-2-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-2-0"></a></h3>
 <ul><li>Add vector support for <a href="https://rspatial.org/" class="external-link">terra</a> (<a href="https://github.com/r-spatial/qgisprocess/issues/184" class="external-link">#184</a>). This makes it possible to use <code>SpatVector</code> or <code>SpatVectorProxy</code> objects as input arguments, and to coerce processing results to <code>SpatVector</code> or <code>SpatVectorProxy</code>.</li>
 <li>
 <code><a href="../reference/qgis_detect_paths.html">qgis_detect_windows_paths()</a></code> and <code><a href="../reference/qgis_detect_paths.html">qgis_detect_macos_paths()</a></code> put paths at the top that contain a QGIS version string and these paths are sorted according to decreasing QGIS version (<a href="https://github.com/r-spatial/qgisprocess/issues/189" class="external-link">#189</a>). This lets <code><a href="../reference/qgis_configure.html">qgis_configure()</a></code> select the newest QGIS version among <code>qgis_process</code> file paths that have a version string. Furthermore, a wrapper <code><a href="../reference/qgis_detect_paths.html">qgis_detect_paths()</a></code> has been added that works on both Windows and macOS (<a href="https://github.com/r-spatial/qgisprocess/issues/192" class="external-link">#192</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="minor-changes-development-version">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-development-version"></a></h3>
+<h3 id="minor-changes-0-2-0">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-0-2-0"></a></h3>
 <ul><li>Allow half-configured states with abundant messages, so that remaining functionality can be used in debugging or even for some real stuff (<a href="https://github.com/r-spatial/qgisprocess/issues/177" class="external-link">#177</a>).</li>
 <li>
 <code><a href="../reference/qgis_run_algorithm.html">qgis_run_algorithm()</a></code> documentation gains a section on QGIS models and scripts (<a href="https://github.com/r-spatial/qgisprocess/commit/8a20669ea50b4b9c14194dd864ed119e137732a9" class="external-link">8a20669</a>).</li>
