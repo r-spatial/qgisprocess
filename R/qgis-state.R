@@ -268,11 +268,16 @@ abort_query_version <- function(lines) {
 #' The settings can be overruled with the options
 #' `qgisprocess.use_json_input` or `qgisprocess.use_json_output`, and with the
 #' environment variables `R_QGISPROCESS_USE_JSON_INPUT` or
-#' `R_QGISPROCESS_USE_JSON_OUTPUT.`
-#' Since the JSON output method is cached by the package,
-#' `qgis_using_json_output(query = TRUE)` is needed for these settings to take
-#' effect if the package was loaded already.
+#' `R_QGISPROCESS_USE_JSON_OUTPUT`.
+#' The JSON output method is cached by the package.
 #'
+#' @param query Logical.
+#' Should the outcome update the cached value, in case of
+#' a missing 'use json output' setting by the user
+#' (`qgisprocess.use_json_input` option or `R_QGISPROCESS_USE_JSON_OUTPUT`
+#' environment variable)?
+#' If such user setting _is_ present, the outcome will always update
+#' the cached value.
 #' @inheritParams qgis_path
 #'
 #' @family topics about programming or debugging utilities
@@ -320,25 +325,28 @@ qgis_using_json_input <- function() {
 #' @rdname qgis_using_json_input
 #' @export
 qgis_using_json_output <- function(query = FALSE, quiet = TRUE) {
-  if (query) {
-    opt <- getOption(
-      "qgisprocess.use_json_output",
-      Sys.getenv(
-        "R_QGISPROCESS_USE_JSON_OUTPUT",
-        ""
-      )
+  opt <- getOption(
+    "qgisprocess.use_json_output",
+    Sys.getenv(
+      "R_QGISPROCESS_USE_JSON_OUTPUT",
+      ""
     )
+  )
 
-    if (identical(opt, "")) {
-      # This doesn't work on the default GHA runner for Ubuntu and
-      # maybe can't be guaranteed to work on Linux. On Linux, we try
-      # to list algorithms with --json and check if the command fails
-      qgisprocess_cache$use_json_output <- is_windows() ||
-        is_macos() ||
-        (qgis_run(c("--json", "list"), error_on_status = FALSE)$status == 0)
-    } else {
-      qgisprocess_cache$use_json_output <- isTRUE(opt) || identical(opt, "true")
-    }
+  if (query && identical(opt, "")) {
+    # This doesn't work on the default GHA runner for Ubuntu and
+    # maybe can't be guaranteed to work on Linux. On Linux, we try
+    # to list algorithms with --json and check if the command fails
+    qgisprocess_cache$use_json_output <- is_windows() ||
+      is_macos() ||
+      (qgis_run(c("--json", "list"), error_on_status = FALSE)$status == 0)
+  }
+
+  if (!identical(opt, "")) {
+    # resolving conflicts with explicit JSON INput setting:
+    qgisprocess_cache$use_json_output <- resolve_explicit_json_output(
+      json_output_setting = opt
+    )
   }
 
   if (!quiet) message(
@@ -348,3 +356,57 @@ qgis_using_json_output <- function(query = FALSE, quiet = TRUE) {
 
   qgisprocess_cache$use_json_output
 }
+
+
+
+
+
+#' Handle an explicitly set 'use_json_output'
+#'
+#' The `qgisprocess.use_json_output` option or the
+#' `R_QGISPROCESS_USE_JSON_OUTPUT` environment variable
+#' can be set explicitly by the user. The function determines whether the user
+#' setting can be accepted, depending on the presence of an explicit user
+#' setting of the `qgisprocess.use_json_input` option or the
+#' `R_QGISPROCESS_USE_JSON_INPUT` environment variable.
+#'
+#' This helper already assumes that `qgisprocess.use_json_output` or
+#' `R_QGISPROCESS_USE_JSON_OUTPUT` have an
+#' explicit setting; the empty case is not being handled here!
+#'
+#' This function intercepts the potential conflict of json_input being
+#' explicitly set as `TRUE` and json_output being explicitly set as `FALSE`.
+#' In such case, the result will still be set as `TRUE` on condition that
+#' the json_input setting is valid (see [qgis_usingjson_input()]).
+#'
+#' @keywords internal
+resolve_explicit_json_output <- function(json_output_setting) {
+  json_output_is_set <- isTRUE(json_output_setting) ||
+    identical(json_output_setting, "true") ||
+    identical(json_output_setting, "TRUE")
+  # with JSON INput EXPLICITLY set as TRUE, always use JSON output if the
+  # version requirement is met (it is how 'qgis_process run' works, so
+  # better do that throughout the package)
+  opt_json_input <- getOption(
+    "qgisprocess.use_json_input",
+    Sys.getenv(
+      "R_QGISPROCESS_USE_JSON_INPUT",
+      ""
+    )
+  )
+  json_input_is_acceptably_set <- (isTRUE(opt_json_input) ||
+                                     identical(opt_json_input, "true") ||
+                                     identical(opt_json_input, "TRUE")) &&
+    !is.null(qgis_version()) &&
+    package_version(qgis_version(full = FALSE)) >= "3.23.0"
+  if (isTRUE(json_input_is_acceptably_set) && isFALSE(json_output_is_set)) {
+    message(
+      "Conflicting user settings: 'use JSON output' was set to FALSE, ",
+      "but 'use JSON input' is set to TRUE (and granted).\n",
+      "Will use JSON output!"
+    )
+  }
+  isTRUE(json_input_is_acceptably_set) || isTRUE(json_output_is_set)
+}
+
+

@@ -10,7 +10,13 @@ qgis_using_json_input()
 qgis_using_json_output(query = FALSE, quiet = TRUE)
 }
 \arguments{
-\item{query}{Use \code{TRUE} to refresh the cached value.}
+\item{query}{Logical.
+Should the outcome update the cached value, in case of
+a missing 'use json output' setting by the user
+(\code{qgisprocess.use_json_input} option or \code{R_QGISPROCESS_USE_JSON_OUTPUT}
+environment variable)?
+If such user setting \emph{is} present, the outcome will always update
+the cached value.}
 
 \item{quiet}{Use \code{FALSE} to display more information,
 possibly useful for debugging.}
@@ -35,10 +41,8 @@ Likewise, JSON output is the default output format requested from
 The settings can be overruled with the options
 \code{qgisprocess.use_json_input} or \code{qgisprocess.use_json_output}, and with the
 environment variables \code{R_QGISPROCESS_USE_JSON_INPUT} or
-\code{R_QGISPROCESS_USE_JSON_OUTPUT.}
-Since the JSON output method is cached by the package,
-\code{qgis_using_json_output(query = TRUE)} is needed for these settings to take
-effect if the package was loaded already.
+\code{R_QGISPROCESS_USE_JSON_OUTPUT}.
+The JSON output method is cached by the package.
 }
 \examples{
 \dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
