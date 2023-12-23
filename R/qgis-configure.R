@@ -143,6 +143,53 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
             return(invisible(has_qgis()))
           }
 
+          # CACHE CONDITION: the use_json_output element does not contradict the environment
+          # variable/option for the output method (JSON vs legacy)
+
+            # contrary to qgis_using_json_output(), qgis_using_json_input()
+            # always queries the state of it corresponding option AND, if that's
+            # not available, of qgis_using_json_output(), and it is NOT cached.
+            # So it always works in a realtime manner.
+
+            # qgis_using_json_output() on the other hand takes its value from
+            # the cache by default, and the latter will only be updated by
+            # qgis_reconfigure() (called by qgis_configure() by default, but not
+            # on package loading since then we then let it use the cache). But
+            # since we want library(qgisprocess) to take into account
+            # pre-existing settings for the JSON output, we must reconfigure if
+            # it is not consistent.
+
+            # There is good reason to cache 'use_json_output'. The output of
+            # qgis_algorithms() is different when populating it with or without
+            # the --json flag.
+
+          opt <- getOption(
+            "qgisprocess.use_json_output",
+            Sys.getenv(
+              "R_QGISPROCESS_USE_JSON_OUTPUT",
+              ""
+            )
+          )
+
+          if (
+            !identical(opt, "") &&
+            # resolving conflicts with explicit JSON INput setting:
+            !identical(
+              resolve_explicit_json_output(json_output_setting = opt),
+              cached_data$use_json_output
+            )
+          ) {
+            if (quiet) packageStartupMessage()
+            packageStartupMessage(glue(
+              "The outcome of user settings for using JSON input/output ",
+              "contradict the 'use_json_output' cache value ",
+              "({cached_data$use_json_output}).\n",
+              "Hence rebuilding cache to reflect this change ..."
+            ))
+            qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+            return(invisible(has_qgis()))
+          }
+
           # CACHE CONDITION: qgis_process is indeed available in the cached path
 
           outcome <- try(qgis_run(path = cached_data$path), silent = TRUE)
