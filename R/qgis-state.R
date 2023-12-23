@@ -300,7 +300,19 @@ qgis_using_json_input <- function() {
       !is.null(qgis_version()) &&
       (package_version(qgis_version(full = FALSE)) >= "3.23.0")
   } else {
-    isTRUE(opt) || identical(opt, "true")
+    json_input_is_set <- isTRUE(opt) || identical(opt, "true") || identical(opt, "TRUE")
+    if (
+      isTRUE(json_input_is_set) &&
+      !is.null(qgis_version()) &&
+      package_version(qgis_version(full = FALSE)) < "3.23.0"
+    ) {
+      warning(glue(
+        "QGIS version {qgis_version(full = FALSE)} doen't support JSON input. ",
+        "Please use a currently supported QGIS version."
+      ))
+      return(FALSE)
+    }
+    json_input_is_set
   }
 }
 
