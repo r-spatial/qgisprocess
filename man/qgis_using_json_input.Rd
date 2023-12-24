@@ -12,11 +12,12 @@ qgis_using_json_output(query = FALSE, quiet = TRUE)
 \arguments{
 \item{query}{Logical.
 Should the outcome update the cached value, in case of
-a missing 'use json output' setting by the user
+a missing 'json output' setting by the user
 (\code{qgisprocess.use_json_input} option or \code{R_QGISPROCESS_USE_JSON_OUTPUT}
 environment variable)?
 If such user setting \emph{is} present, the outcome will always update
-the cached value.}
+the cached value, on condition that there is no conflict with an explicit
+'json input' setting.}
 
 \item{quiet}{Use \code{FALSE} to display more information,
 possibly useful for debugging.}

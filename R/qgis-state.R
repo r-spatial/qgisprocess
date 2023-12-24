@@ -273,11 +273,12 @@ abort_query_version <- function(lines) {
 #'
 #' @param query Logical.
 #' Should the outcome update the cached value, in case of
-#' a missing 'use json output' setting by the user
+#' a missing 'json output' setting by the user
 #' (`qgisprocess.use_json_input` option or `R_QGISPROCESS_USE_JSON_OUTPUT`
 #' environment variable)?
 #' If such user setting _is_ present, the outcome will always update
-#' the cached value.
+#' the cached value, on condition that there is no conflict with an explicit
+#' 'json input' setting.
 #' @inheritParams qgis_path
 #'
 #' @family topics about programming or debugging utilities
