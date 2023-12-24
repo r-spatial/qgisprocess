@@ -307,9 +307,11 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
           qgisprocess_cache$path <- cached_data$path
           qgisprocess_cache$use_json_output <- cached_data$use_json_output
+          qgisprocess_cache$version <- cached_data$version
           qplugins <- qgis_query_plugins(quiet = quiet)
           qgisprocess_cache$path <- NULL
           qgisprocess_cache$use_json_output <- NULL
+          qgisprocess_cache$version <- NULL
 
           if (!identical(qplugins, cached_data$plugins)) {
             if (quiet) packageStartupMessage()
