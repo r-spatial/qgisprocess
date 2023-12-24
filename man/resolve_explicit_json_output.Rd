@@ -4,7 +4,7 @@
 \alias{resolve_explicit_json_output}
 \title{Handle an explicitly set 'use_json_output'}
 \usage{
-resolve_explicit_json_output(json_output_setting)
+resolve_explicit_json_output(json_output_setting, qgis_version)
 }
 \description{
 The \code{qgisprocess.use_json_output} option or the
