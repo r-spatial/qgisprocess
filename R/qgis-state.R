@@ -321,16 +321,20 @@ qgis_using_json_input <- function() {
 qgis_using_json_output <- function(query = FALSE, quiet = TRUE) {
   opt <- readopt_json_output()
 
-  if (query && identical(opt, "")) {
-    # This doesn't work on the default GHA runner for Ubuntu and
-    # maybe can't be guaranteed to work on Linux. On Linux, we try
-    # to list algorithms with --json and check if the command fails
-    qgisprocess_cache$use_json_output <- is_windows() ||
-      is_macos() ||
-      (qgis_run(c("--json", "list"), error_on_status = FALSE)$status == 0)
-  }
-
-  if (!identical(opt, "")) {
+  if (identical(opt, "")) {
+    if (query) {
+      # This doesn't work on the default GHA runner for Ubuntu and
+      # maybe can't be guaranteed to work on Linux. On Linux, we try
+      # to list algorithms with --json and check if the command fails
+      qgisprocess_cache$use_json_output <- is_windows() ||
+        is_macos() ||
+        (qgis_run(c("--json", "list"), error_on_status = FALSE)$status == 0)
+    } else if (json_input_set_and_acceptable(qgis_version(full = FALSE))) {
+      # never allow a pre-existing cache value 'FALSE' to survive if JSON INput
+      # is EXPLICITLY and ACCEPTABLY set as TRUE
+      qgisprocess_cache$use_json_output <- TRUE
+    }
+  } else {
     # resolving conflicts with explicit JSON INput setting:
     qgisprocess_cache$use_json_output <- resolve_explicit_json_output(
       json_output_setting = opt,
