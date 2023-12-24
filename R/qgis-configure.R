@@ -163,13 +163,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
             # qgis_algorithms() is different when populating it with or without
             # the --json flag.
 
-          opt <- getOption(
-            "qgisprocess.use_json_output",
-            Sys.getenv(
-              "R_QGISPROCESS_USE_JSON_OUTPUT",
-              ""
-            )
-          )
+          opt <- readopt_json_output()
 
           if (
             !identical(opt, "") &&

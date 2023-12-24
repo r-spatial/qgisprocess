@@ -292,13 +292,7 @@ abort_query_version <- function(lines) {
 #'
 #' @export
 qgis_using_json_input <- function() {
-  opt <- getOption(
-    "qgisprocess.use_json_input",
-    Sys.getenv(
-      "R_QGISPROCESS_USE_JSON_INPUT",
-      ""
-    )
-  )
+  opt <- readopt_json_input()
 
   if (identical(opt, "")) {
     qgis_using_json_output() &&
@@ -325,13 +319,7 @@ qgis_using_json_input <- function() {
 #' @rdname qgis_using_json_input
 #' @export
 qgis_using_json_output <- function(query = FALSE, quiet = TRUE) {
-  opt <- getOption(
-    "qgisprocess.use_json_output",
-    Sys.getenv(
-      "R_QGISPROCESS_USE_JSON_OUTPUT",
-      ""
-    )
-  )
+  opt <- readopt_json_output()
 
   if (query && identical(opt, "")) {
     # This doesn't work on the default GHA runner for Ubuntu and
@@ -359,6 +347,31 @@ qgis_using_json_output <- function(query = FALSE, quiet = TRUE) {
 
 
 
+#' @keywords internal
+readopt_json_input <- function() {
+  readopt("qgisprocess.use_json_input", "R_QGISPROCESS_USE_JSON_INPUT")
+}
+
+
+
+#' @keywords internal
+readopt_json_output <- function() {
+  readopt("qgisprocess.use_json_output", "R_QGISPROCESS_USE_JSON_OUTPUT")
+}
+
+
+
+
+#' @keywords internal
+readopt <- function(option_name, envvar_name) {
+  getOption(
+    option_name,
+    Sys.getenv(
+      envvar_name,
+      ""
+    )
+  )
+}
 
 
 #' Handle an explicitly set 'use_json_output'
@@ -387,13 +400,7 @@ resolve_explicit_json_output <- function(json_output_setting) {
   # with JSON INput EXPLICITLY set as TRUE, always use JSON output if the
   # version requirement is met (it is how 'qgis_process run' works, so
   # better do that throughout the package)
-  opt_json_input <- getOption(
-    "qgisprocess.use_json_input",
-    Sys.getenv(
-      "R_QGISPROCESS_USE_JSON_INPUT",
-      ""
-    )
-  )
+  opt_json_input <- readopt_json_input()
   json_input_is_acceptably_set <- (isTRUE(opt_json_input) ||
                                      identical(opt_json_input, "true") ||
                                      identical(opt_json_input, "TRUE")) &&
