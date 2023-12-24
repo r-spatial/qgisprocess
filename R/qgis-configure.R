@@ -248,7 +248,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           if (!quiet) message(glue("QGIS versions match! ({qversion})"))
 
           # CACHE CONDITION: the use_json_output element does not contradict the environment
-          # variable/option for the output method (JSON vs legacy)
+          # variable/option for the output or input method (JSON vs legacy)
 
             # contrary to qgis_using_json_output(), qgis_using_json_input()
             # always queries the state of it corresponding option AND, if that's
@@ -268,13 +268,23 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
             # the --json flag.
 
           opt <- readopt_json_output()
+          qversion_short <- strsplit(qversion, "-")[[1]][1]
 
           if (
+            ( ## conflict with explicit json_output AND json_input setting?
             !identical(opt, "") &&
             # resolving conflicts with explicit JSON INput setting:
             !identical(
-              resolve_explicit_json_output(json_output_setting = opt),
+              resolve_explicit_json_output(
+                json_output_setting = opt,
+                qgis_version = qversion_short
+              ),
               cached_data$use_json_output
+            )) ||
+            ( ## conflict with explicit json_INput set as TRUE?
+              identical(opt, "") &&
+              json_input_set_and_acceptable(qversion_short) &&
+              isFALSE(cached_data$use_json_output)
             )
           ) {
             if (quiet) packageStartupMessage()
