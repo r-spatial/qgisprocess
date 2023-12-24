@@ -333,7 +333,8 @@ qgis_using_json_output <- function(query = FALSE, quiet = TRUE) {
   if (!identical(opt, "")) {
     # resolving conflicts with explicit JSON INput setting:
     qgisprocess_cache$use_json_output <- resolve_explicit_json_output(
-      json_output_setting = opt
+      json_output_setting = opt,
+      qgis_version(full = FALSE)
     )
   }
 
@@ -393,27 +394,39 @@ readopt <- function(option_name, envvar_name) {
 #' the json_input setting is valid (see [qgis_usingjson_input()]).
 #'
 #' @keywords internal
-resolve_explicit_json_output <- function(json_output_setting) {
+resolve_explicit_json_output <- function(json_output_setting, qgis_version) {
   json_output_is_set <- isTRUE(json_output_setting) ||
     identical(json_output_setting, "true") ||
     identical(json_output_setting, "TRUE")
   # with JSON INput EXPLICITLY set as TRUE, always use JSON output if the
   # version requirement is met (it is how 'qgis_process run' works, so
   # better do that throughout the package)
-  opt_json_input <- readopt_json_input()
-  json_input_is_acceptably_set <- (isTRUE(opt_json_input) ||
-                                     identical(opt_json_input, "true") ||
-                                     identical(opt_json_input, "TRUE")) &&
-    !is.null(qgis_version()) &&
-    package_version(qgis_version(full = FALSE)) >= "3.23.0"
-  if (isTRUE(json_input_is_acceptably_set) && isFALSE(json_output_is_set)) {
+  json_input_is_acceptably_set <- json_input_set_and_acceptable(qgis_version)
+  if (json_input_is_acceptably_set && !json_output_is_set) {
     message(
       "Conflicting user settings: 'use JSON output' was set to FALSE, ",
       "but 'use JSON input' is set to TRUE (and granted).\n",
       "Will use JSON output!"
     )
   }
-  isTRUE(json_input_is_acceptably_set) || isTRUE(json_output_is_set)
+  json_input_is_acceptably_set || json_output_is_set
 }
+
+
+
+
+
+
+
+#' @keywords internal
+json_input_set_and_acceptable <- function(qgis_version) {
+  opt_json_input <- readopt_json_input()
+  (isTRUE(opt_json_input) ||
+      identical(opt_json_input, "true") ||
+      identical(opt_json_input, "TRUE")) &&
+    !is.null(qgis_version) &&
+    package_version(qgis_version) >= "3.23.0"
+}
+
 
 
