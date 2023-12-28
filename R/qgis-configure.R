@@ -482,7 +482,7 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
 message_inspect_cache <- function() {
   message(
     "Use qgis_algorithms(), qgis_providers(), qgis_plugins(), ",
-    "qgis_using_json_output(),\nqgis_path() and qgis_version() ",
+    "qgis_path() and\nqgis_version() ",
     "to inspect the cache environment."
   )
 }
