@@ -250,18 +250,9 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           # CACHE CONDITION: the use_json_output element does not contradict the environment
           # variable/option for the output or input method (JSON vs legacy)
 
-            # contrary to qgis_using_json_output(), qgis_using_json_input()
-            # always queries the state of it corresponding option AND, if that's
-            # not available, of qgis_using_json_output(), and it is NOT cached.
-            # So it always works in a realtime manner.
-
-            # qgis_using_json_output() on the other hand takes its value from
-            # the cache by default, and the latter will only be updated by
-            # qgis_reconfigure() (called by qgis_configure() by default, but not
-            # on package loading since then we then let it use the cache). But
-            # since we want library(qgisprocess) to take into account
+            # Since we want library(qgisprocess) to take into account
             # pre-existing settings for the JSON output, we must reconfigure if
-            # it is not consistent.
+            # it is not consistent with  qgis_using_json_output().
 
             # There is good reason to cache 'use_json_output': the output of
             # qgis_algorithms() is different when populating it with or without
