@@ -307,7 +307,7 @@ qgis_using_json_input <- function() {
       package_version(qgis_version(full = FALSE)) < "3.23.0"
     ) {
       warning(glue(
-        "QGIS version {qgis_version(full = FALSE)} doen't support JSON input. ",
+        "QGIS version {qgis_version(full = FALSE)} doesn't support JSON input. ",
         "Please use a currently supported QGIS version."
       ))
       return(FALSE)
