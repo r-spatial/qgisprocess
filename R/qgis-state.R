@@ -408,7 +408,7 @@ resolve_explicit_json_output <- function(json_output_setting, qgis_version) {
   # better do that throughout the package)
   json_input_is_acceptably_set <- json_input_set_and_acceptable(qgis_version)
   if (json_input_is_acceptably_set && !json_output_is_set) {
-    message(
+    warning(
       "Conflicting user settings: 'use JSON output' was set to FALSE, ",
       "but 'use JSON input' is set to TRUE (and granted).\n",
       "Will use JSON output!"
