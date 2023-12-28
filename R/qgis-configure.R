@@ -254,9 +254,9 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
             # pre-existing settings for the JSON output, we must reconfigure if
             # it is not consistent with  qgis_using_json_output().
 
-            # There is good reason to cache 'use_json_output': the output of
-            # qgis_algorithms() is different when populating it with or without
-            # the --json flag.
+            # There is good reason to cache 'use_json_output': the value of
+            # qgis_algorithms() and qgis_plugins() is different when populating
+            # it with or without the --json flag.
 
           opt <- readopt_json_output()
           qversion_short <- strsplit(qversion, "-")[[1]][1]
