@@ -396,7 +396,7 @@ readopt <- function(option_name, envvar_name) {
 #' This function intercepts the potential conflict of json_input being
 #' explicitly set as `TRUE` and json_output being explicitly set as `FALSE`.
 #' In such case, the result will still be set as `TRUE` on condition that
-#' the json_input setting is valid (see [qgis_usingjson_input()]).
+#' the json_input setting is valid (see [qgis_using_json_input()]).
 #'
 #' @keywords internal
 resolve_explicit_json_output <- function(json_output_setting, qgis_version) {

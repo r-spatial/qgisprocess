@@ -22,6 +22,6 @@ explicit setting; the empty case is not being handled here!
 This function intercepts the potential conflict of json_input being
 explicitly set as \code{TRUE} and json_output being explicitly set as \code{FALSE}.
 In such case, the result will still be set as \code{TRUE} on condition that
-the json_input setting is valid (see \code{\link[=qgis_usingjson_input]{qgis_usingjson_input()}}).
+the json_input setting is valid (see \code{\link[=qgis_using_json_input]{qgis_using_json_input()}}).
 }
 \keyword{internal}
