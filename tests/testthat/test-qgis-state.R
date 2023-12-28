@@ -74,7 +74,7 @@ test_that("qgis_using_json_*() is determined by the QGIS version by default", {
   expect_true(qgis_using_json_output(query = TRUE)) # assuming the 'true' QGIS supports --json
 
   local_mocked_bindings(
-    qgis_run = function(...) list(status = 1)    # mimicking no support for --json
+    qgis_run = function(...) list(status = 1) # mimicking no support for --json
   )
 
   expect_false(qgis_using_json_input())

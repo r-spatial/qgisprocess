@@ -216,7 +216,7 @@ test_that("qgis_configure() works OK if cache condition 'use_json_output' unmet"
 
   withr::local_options(list(
     qgisprocess.use_json_output = NULL,
-    qgisprocess.use_json_input = TRUE  # expectations below need JSON input to be supported!
+    qgisprocess.use_json_input = TRUE # expectations below need JSON input to be supported!
   ))
   saveRDS(
     list(

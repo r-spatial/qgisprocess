@@ -303,8 +303,8 @@ qgis_using_json_input <- function() {
     json_input_is_set <- isTRUE(opt) || identical(opt, "true") || identical(opt, "TRUE")
     if (
       json_input_is_set &&
-      !is.null(qgis_version()) &&
-      package_version(qgis_version(full = FALSE)) < "3.23.0"
+        !is.null(qgis_version()) &&
+        package_version(qgis_version(full = FALSE)) < "3.23.0"
     ) {
       warning(glue(
         "QGIS version {qgis_version(full = FALSE)} doesn't support JSON input. ",
@@ -427,11 +427,8 @@ resolve_explicit_json_output <- function(json_output_setting, qgis_version) {
 json_input_set_and_acceptable <- function(qgis_version) {
   opt_json_input <- readopt_json_input()
   (isTRUE(opt_json_input) ||
-      identical(opt_json_input, "true") ||
-      identical(opt_json_input, "TRUE")) &&
+    identical(opt_json_input, "true") ||
+    identical(opt_json_input, "TRUE")) &&
     !is.null(qgis_version) &&
     package_version(qgis_version) >= "3.23.0"
 }
-
-
-
