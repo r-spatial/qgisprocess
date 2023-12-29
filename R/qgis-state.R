@@ -264,15 +264,38 @@ abort_query_version <- function(lines) {
 #'
 #' Likewise, JSON output is the default output format requested from
 #' 'qgis_process'.
+#' Using the JSON input method of 'qgis_process' automatically implies
+#' using the JSON output method; when _not_ using the JSON input method it is
+#' possible (but not the default) to also not use the JSON output method.
 #'
-#' The settings can be overruled with the options
+#' The defaults can be overruled with the options
 #' `qgisprocess.use_json_input` or `qgisprocess.use_json_output`, and with the
 #' environment variables `R_QGISPROCESS_USE_JSON_INPUT` or
-#' `R_QGISPROCESS_USE_JSON_OUTPUT.`
-#' Since the JSON output method is cached by the package,
-#' `qgis_using_json_output(query = TRUE)` is needed for these settings to take
-#' effect if the package was loaded already.
+#' `R_QGISPROCESS_USE_JSON_OUTPUT`.
 #'
+#' The returned JSON output method is always
+#' cached during the current session by `qgis_using_json_output()`.
+#' Given that `qgis_using_json_output()` is called by various functions
+#' in the package, having a user setting 'use_json_output' in place (see above)
+#' will have effect during subsequent usage of the package.
+#' To cache the value between sessions, [qgis_configure()] needs to be called
+#' to update the value stored in the persistent package cache file.
+#'
+#' The JSON input method is not cached but simply determined on the fly, based
+#' on QGIS version, the JSON output method and the user setting if present.
+#'
+#' There is good reason for having 'use_json_output' in the persistent package
+#' cache: the values of [qgis_algorithms()] and [qgis_plugins()] are different
+#' with or without the JSON output method, and are also stored in the cache.
+#'
+#' @param query Logical.
+#' Should the outcome of `qgis_using_json_output()` ignore the cached value?
+#' The argument has effect on condition that no user setting 'use_json_output'
+#' is in place (see Details).
+#' - If set as `TRUE`, the function simply returns `TRUE` and the cached value
+#' for the current session is set as `TRUE`.
+#' - If set as `FALSE` (default), the function returns the cached value on
+#' condition that it does not conflict with a 'use_json_**in**put' user setting.
 #' @inheritParams qgis_path
 #'
 #' @family topics about programming or debugging utilities
@@ -283,24 +306,30 @@ abort_query_version <- function(lines) {
 #'
 #' @examplesIf has_qgis()
 #' qgis_using_json_input()
-#  qgis_using_json_output()
+#' qgis_using_json_output()
 #'
 #' @export
 qgis_using_json_input <- function() {
-  opt <- getOption(
-    "qgisprocess.use_json_input",
-    Sys.getenv(
-      "R_QGISPROCESS_USE_JSON_INPUT",
-      ""
-    )
-  )
+  opt <- readopt_json_input()
 
   if (identical(opt, "")) {
     qgis_using_json_output() &&
       !is.null(qgis_version()) &&
       (package_version(qgis_version(full = FALSE)) >= "3.23.0")
   } else {
-    isTRUE(opt) || identical(opt, "true")
+    json_input_is_set <- isTRUE(opt) || identical(opt, "true") || identical(opt, "TRUE")
+    if (
+      json_input_is_set &&
+        !is.null(qgis_version()) &&
+        package_version(qgis_version(full = FALSE)) < "3.23.0"
+    ) {
+      warning(glue(
+        "QGIS version {qgis_version(full = FALSE)} doesn't support JSON input. ",
+        "Please use a currently supported QGIS version."
+      ))
+      return(FALSE)
+    }
+    json_input_is_set
   }
 }
 
@@ -308,25 +337,25 @@ qgis_using_json_input <- function() {
 #' @rdname qgis_using_json_input
 #' @export
 qgis_using_json_output <- function(query = FALSE, quiet = TRUE) {
-  if (query) {
-    opt <- getOption(
-      "qgisprocess.use_json_output",
-      Sys.getenv(
-        "R_QGISPROCESS_USE_JSON_OUTPUT",
-        ""
-      )
-    )
+  opt <- readopt_json_output()
 
-    if (identical(opt, "")) {
-      # This doesn't work on the default GHA runner for Ubuntu and
-      # maybe can't be guaranteed to work on Linux. On Linux, we try
-      # to list algorithms with --json and check if the command fails
-      qgisprocess_cache$use_json_output <- is_windows() ||
-        is_macos() ||
-        (qgis_run(c("--json", "list"), error_on_status = FALSE)$status == 0)
-    } else {
-      qgisprocess_cache$use_json_output <- isTRUE(opt) || identical(opt, "true")
-    }
+  if (identical(opt, "")) {
+    if (
+      # query is kept in order to, when set as FALSE (the default), consistently
+      # return 'FALSE' if that is the value stored in the cache file
+      query ||
+        # never allow a pre-existing cache value 'FALSE' to survive if JSON INput
+        # is EXPLICITLY and ACCEPTABLY set as TRUE
+        json_input_set_and_acceptable(qgis_version(full = FALSE))
+    ) {
+      qgisprocess_cache$use_json_output <- TRUE
+    } # no 'else return(qgisprocess_cache$use_json_output)' here since we want to get at the message
+  } else { # explicit JSON output setting!
+    # resolving conflicts with explicit JSON INput setting:
+    qgisprocess_cache$use_json_output <- resolve_explicit_json_output(
+      json_output_setting = opt,
+      qgis_version(full = FALSE)
+    )
   }
 
   if (!quiet) message(
@@ -335,4 +364,111 @@ qgis_using_json_output <- function(query = FALSE, quiet = TRUE) {
   )
 
   qgisprocess_cache$use_json_output
+}
+
+
+
+#' @keywords internal
+readopt_json_input <- function() {
+  readopt("qgisprocess.use_json_input", "R_QGISPROCESS_USE_JSON_INPUT")
+}
+
+
+
+#' @keywords internal
+readopt_json_output <- function() {
+  readopt("qgisprocess.use_json_output", "R_QGISPROCESS_USE_JSON_OUTPUT")
+}
+
+
+
+
+#' @keywords internal
+readopt <- function(option_name, envvar_name) {
+  getOption(
+    option_name,
+    Sys.getenv(
+      envvar_name,
+      ""
+    )
+  )
+}
+
+
+#' Handle an explicitly set 'use_json_output'
+#'
+#' The `qgisprocess.use_json_output` option or the
+#' `R_QGISPROCESS_USE_JSON_OUTPUT` environment variable
+#' can be set explicitly by the user. The function determines whether the user
+#' setting can be accepted, depending on the presence of an explicit user
+#' setting of the `qgisprocess.use_json_input` option or the
+#' `R_QGISPROCESS_USE_JSON_INPUT` environment variable.
+#'
+#' This helper already assumes that `qgisprocess.use_json_output` or
+#' `R_QGISPROCESS_USE_JSON_OUTPUT` have an
+#' explicit setting; the empty case is not being handled here!
+#'
+#' This function intercepts the potential conflict of json_input being
+#' explicitly set as `TRUE` and json_output being explicitly set as `FALSE`.
+#' In such case, the result will still be set as `TRUE` on condition that
+#' the json_input setting is valid (see [qgis_using_json_input()]).
+#'
+#' @noRd
+#' @keywords internal
+resolve_explicit_json_output <- function(json_output_setting, qgis_version) {
+  json_output_is_set <- isTRUE(json_output_setting) ||
+    identical(json_output_setting, "true") ||
+    identical(json_output_setting, "TRUE")
+  # with JSON INput EXPLICITLY set as TRUE, always use JSON output if the
+  # version requirement is met (it is how 'qgis_process run' works, so
+  # better do that throughout the package)
+  json_input_is_acceptably_set <- json_input_set_and_acceptable(qgis_version)
+  if (json_input_is_acceptably_set && !json_output_is_set) {
+    warning(
+      "Conflicting user settings: 'use JSON output' was set to FALSE, ",
+      "but 'use JSON input' is set to TRUE (and granted).\n",
+      "Will use JSON output!"
+    )
+  }
+  json_input_is_acceptably_set || json_output_is_set
+}
+
+
+
+
+
+
+
+#' @keywords internal
+json_input_set_and_acceptable <- function(qgis_version) {
+  opt_json_input <- readopt_json_input()
+  (isTRUE(opt_json_input) ||
+    identical(opt_json_input, "true") ||
+    identical(opt_json_input, "TRUE")) &&
+    !is.null(qgis_version) &&
+    package_version(qgis_version) >= "3.23.0"
+}
+
+
+
+
+#' JSON state debugging while developing
+#'
+#' @noRd
+#' @keywords internal
+debug_json <- function() {
+  assert_qgis()
+  cache_data_file <- qgis_pkgcache_file()
+  assert_that(file.exists(cache_data_file))
+  cached_data <- readRDS(cache_data_file)
+  glue(
+    "cached_data$use_json_output = {cached_data$use_json_output}\n",
+    "qgisprocess_cache$use_json_output = {qgisprocess_cache$use_json_output}\n",
+    "readopt_json_input() = {readopt_json_input()}\n",
+    "readopt_json_output() = {readopt_json_output()}\n",
+    "qgis_using_json_input() = {qgis_using_json_input()}\n",
+    "qgis_using_json_output() = {qgis_using_json_output()}\n",
+    "qgisprocess_cache$use_json_output = {qgisprocess_cache$use_json_output}\n",
+    "cached_data$use_json_output = {cached_data$use_json_output}"
+  )
 }

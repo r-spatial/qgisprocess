@@ -247,6 +247,48 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
           if (!quiet) message(glue("QGIS versions match! ({qversion})"))
 
+          # CACHE CONDITION: the use_json_output element does not contradict the environment
+          # variable/option for the output or input method (JSON vs legacy)
+
+          # Since we want library(qgisprocess) to take into account
+          # pre-existing settings for the JSON output, we must reconfigure if
+          # it is not consistent with  qgis_using_json_output().
+
+          # There is good reason to cache 'use_json_output': the value of
+          # qgis_algorithms() and qgis_plugins() is different when populating
+          # it with or without the --json flag.
+
+          opt <- readopt_json_output()
+          qversion_short <- strsplit(qversion, "-")[[1]][1]
+
+          if (
+            ( ## conflict with explicit json_output AND json_input setting?
+              !identical(opt, "") &&
+                # resolving conflicts with explicit JSON INput setting:
+                !identical(
+                  resolve_explicit_json_output(
+                    json_output_setting = opt,
+                    qgis_version = qversion_short
+                  ),
+                  cached_data$use_json_output
+                )) ||
+              ( ## conflict with explicit json_INput set as TRUE?
+                identical(opt, "") &&
+                  json_input_set_and_acceptable(qversion_short) &&
+                  isFALSE(cached_data$use_json_output)
+              )
+          ) {
+            if (quiet) packageStartupMessage()
+            packageStartupMessage(glue(
+              "The outcome of user settings for using JSON input/output ",
+              "contradict the 'use_json_output' cache value ",
+              "({cached_data$use_json_output}).\n",
+              "Hence rebuilding cache to reflect this change ..."
+            ))
+            qgis_reconfigure(cache_data_file = cache_data_file, quiet = quiet)
+            return(invisible(has_qgis()))
+          }
+
           # CACHE CONDITION: the cached QGIS plugins equal the ones reported by
           # qgis_process, including their state
 
@@ -256,9 +298,11 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
           qgisprocess_cache$path <- cached_data$path
           qgisprocess_cache$use_json_output <- cached_data$use_json_output
+          qgisprocess_cache$version <- cached_data$version
           qplugins <- qgis_query_plugins(quiet = quiet)
           qgisprocess_cache$path <- NULL
           qgisprocess_cache$use_json_output <- NULL
+          qgisprocess_cache$version <- NULL
 
           if (!identical(qplugins, cached_data$plugins)) {
             if (quiet) packageStartupMessage()
@@ -438,7 +482,7 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
 message_inspect_cache <- function() {
   message(
     "Use qgis_algorithms(), qgis_providers(), qgis_plugins(), ",
-    "qgis_using_json_output(),\nqgis_path() and qgis_version() ",
+    "qgis_path() and\nqgis_version() ",
     "to inspect the cache environment."
   )
 }

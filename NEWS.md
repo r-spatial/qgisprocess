@@ -1,5 +1,7 @@
 # qgisprocess (development version)
 
+- More consistent and intuitive handling of JSON input / output user settings (#195, #196; see ?`qgis_using_json_output()`).
+
 # qgisprocess 0.2.0
 
 ## New features

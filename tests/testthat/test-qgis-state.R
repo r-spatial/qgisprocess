@@ -49,3 +49,100 @@ test_that("qgis_query_version() works for development versions of QGIS", {
     expect_warning(qgis_query_version(), "version identifier")
   }
 })
+
+
+
+
+test_that("qgis_using_json_*() is determined by the QGIS version by default", {
+  skip_if_not(has_qgis())
+  original <- qgisprocess_cache$use_json_output
+
+  local_mocked_bindings(
+    qgis_version = function(...) "3.34.0" # supports JSON input
+  )
+
+  expect_true(qgis_using_json_input())
+  expect_true(qgis_using_json_output())
+  expect_message(qgis_using_json_output(quiet = FALSE), "Using JSON for output")
+
+  local_mocked_bindings(
+    qgis_version = function(...) "3.22.0" # does not support JSON input
+  )
+
+  expect_false(qgis_using_json_input())
+  expect_true(qgis_using_json_output())
+  expect_true(qgis_using_json_output(query = TRUE))
+
+  qgisprocess_cache$use_json_output <- original
+})
+
+
+
+test_that("qgis_using_json_*() can be driven by user settings", {
+  original <- qgisprocess_cache$use_json_output
+
+  # use_json_input TRUE is validated against the QGIS version. If accepted,
+  # qgis_using_json_output() takes its value
+  withr::local_options(list(
+    qgisprocess.use_json_input = TRUE
+  ))
+  local_mocked_bindings(
+    qgis_version = function(...) "3.34.0" # supports JSON input
+  )
+  expect_true(qgis_using_json_input())
+  expect_true(qgis_using_json_output())
+
+  local_mocked_bindings(
+    qgis_version = function(...) "3.22.0" # does not support JSON input
+  )
+  expect_warning(qgis_using_json_input(), "doesn't support JSON input")
+  suppressWarnings(expect_false(qgis_using_json_input()))
+  expect_true(qgis_using_json_output())
+
+  # use_json_output FALSE can be honored if use_json_input is NOT acceptably set as TRUE
+  withr::local_options(list(
+    qgisprocess.use_json_output = FALSE
+  ))
+  suppressWarnings(expect_false(qgis_using_json_input()))
+  expect_false(qgis_using_json_output())
+  expect_message(qgis_using_json_output(quiet = FALSE), "Not using JSON for output")
+
+  # use_json_output FALSE cannot be honored if use_json_input is acceptably set as TRUE
+  local_mocked_bindings(
+    qgis_version = function(...) "3.34.0" # supports JSON input
+  )
+  expect_warning(qgis_using_json_output(), "Conflicting user settings")
+  suppressWarnings(expect_true(qgis_using_json_output()))
+  expect_true(qgis_using_json_input())
+
+  # if use_json_input is unset, qgis_using_json_input() takes the value from json_output
+  withr::local_options(list(
+    qgisprocess.use_json_input = NULL
+  ))
+  expect_false(qgis_using_json_output())
+  expect_false(qgis_using_json_input())
+
+  withr::local_options(list(
+    qgisprocess.use_json_output = TRUE
+  ))
+  expect_true(qgis_using_json_input())
+  expect_true(qgis_using_json_output())
+
+  # use_json_input FALSE only affects qgis_using_json_input()
+  withr::local_options(list(
+    qgisprocess.use_json_input = FALSE
+  ))
+  expect_false(qgis_using_json_input())
+  expect_true(qgis_using_json_output())
+
+  qgisprocess_cache$use_json_output <- original
+})
+
+
+
+
+test_that("Internal function debug_json() works", {
+  skip_if_not(has_qgis())
+  expect_no_error(debug_json())
+  expect_s3_class(debug_json(), "glue")
+})

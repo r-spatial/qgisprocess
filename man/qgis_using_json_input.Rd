@@ -10,7 +10,16 @@ qgis_using_json_input()
 qgis_using_json_output(query = FALSE, quiet = TRUE)
 }
 \arguments{
-\item{query}{Use \code{TRUE} to refresh the cached value.}
+\item{query}{Logical.
+Should the outcome of \code{qgis_using_json_output()} ignore the cached value?
+The argument has effect on condition that no user setting 'use_json_output'
+is in place (see Details).
+\itemize{
+\item If set as \code{TRUE}, the function simply returns \code{TRUE} and the cached value
+for the current session is set as \code{TRUE}.
+\item If set as \code{FALSE} (default), the function returns the cached value on
+condition that it does not conflict with a 'use_json_\strong{in}put' user setting.
+}}
 
 \item{quiet}{Use \code{FALSE} to display more information,
 possibly useful for debugging.}
@@ -31,18 +40,34 @@ require a more complex input argument, e.g. a list of lists (see
 
 Likewise, JSON output is the default output format requested from
 'qgis_process'.
+Using the JSON input method of 'qgis_process' automatically implies
+using the JSON output method; when \emph{not} using the JSON input method it is
+possible (but not the default) to also not use the JSON output method.
 
-The settings can be overruled with the options
+The defaults can be overruled with the options
 \code{qgisprocess.use_json_input} or \code{qgisprocess.use_json_output}, and with the
 environment variables \code{R_QGISPROCESS_USE_JSON_INPUT} or
-\code{R_QGISPROCESS_USE_JSON_OUTPUT.}
-Since the JSON output method is cached by the package,
-\code{qgis_using_json_output(query = TRUE)} is needed for these settings to take
-effect if the package was loaded already.
+\code{R_QGISPROCESS_USE_JSON_OUTPUT}.
+
+The returned JSON output method is always
+cached during the current session by \code{qgis_using_json_output()}.
+Given that \code{qgis_using_json_output()} is called by various functions
+in the package, having a user setting 'use_json_output' in place (see above)
+will have effect during subsequent usage of the package.
+To cache the value between sessions, \code{\link[=qgis_configure]{qgis_configure()}} needs to be called
+to update the value stored in the persistent package cache file.
+
+The JSON input method is not cached but simply determined on the fly, based
+on QGIS version, the JSON output method and the user setting if present.
+
+There is good reason for having 'use_json_output' in the persistent package
+cache: the values of \code{\link[=qgis_algorithms]{qgis_algorithms()}} and \code{\link[=qgis_plugins]{qgis_plugins()}} are different
+with or without the JSON output method, and are also stored in the cache.
 }
 \examples{
 \dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 qgis_using_json_input()
+qgis_using_json_output()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
