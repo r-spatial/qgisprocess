@@ -453,7 +453,9 @@ json_input_set_and_acceptable <- function(qgis_version) {
 #' @noRd
 #' @keywords internal
 debug_json <- function() {
+  assert_qgis()
   cache_data_file <- qgis_pkgcache_file()
+  assert_that(file.exists(cache_data_file))
   cached_data <- readRDS(cache_data_file)
   glue(
     "cached_data$use_json_output = {cached_data$use_json_output}\n",

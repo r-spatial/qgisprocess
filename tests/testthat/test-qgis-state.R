@@ -142,6 +142,7 @@ test_that("qgis_using_json_*() can be driven by user settings", {
 
 
 test_that("Internal function debug_json() works", {
+  skip_if_not(has_qgis())
   expect_no_error(debug_json())
   expect_s3_class(debug_json(), "glue")
 })
