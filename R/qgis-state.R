@@ -409,6 +409,7 @@ readopt <- function(option_name, envvar_name) {
 #' In such case, the result will still be set as `TRUE` on condition that
 #' the json_input setting is valid (see [qgis_using_json_input()]).
 #'
+#' @noRd
 #' @keywords internal
 resolve_explicit_json_output <- function(json_output_setting, qgis_version) {
   json_output_is_set <- isTRUE(json_output_setting) ||
