@@ -12,7 +12,7 @@ used, respectively."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/a
     
     <a class="navbar-brand me-2" href="../index.html">qgisprocess</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,14 @@ used, respectively.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>query</dt>
-<dd><p>Use <code>TRUE</code> to refresh the cached value.</p></dd>
+<dd><p>Logical.
+Should the outcome of <code>qgis_using_json_output()</code> ignore the cached value?
+The argument has effect on condition that no user setting 'use_json_output'
+is in place (see Details).</p><ul><li><p>If set as <code>TRUE</code>, the function simply returns <code>TRUE</code> and the cached value
+for the current session is set as <code>TRUE</code>.</p></li>
+<li><p>If set as <code>FALSE</code> (default), the function returns the cached value on
+condition that it does not conflict with a 'use_json_<strong>in</strong>put' user setting.</p></li>
+</ul></dd>
 
 
 <dt>quiet</dt>
@@ -95,14 +102,26 @@ It allows for more complex input argument types in certain algorithms that
 require a more complex input argument, e.g. a list of lists (see
 <code><a href="qgis_list_input.html">qgis_list_input()</a></code>).</p>
 <p>Likewise, JSON output is the default output format requested from
-'qgis_process'.</p>
-<p>The settings can be overruled with the options
+'qgis_process'.
+Using the JSON input method of 'qgis_process' automatically implies
+using the JSON output method; when <em>not</em> using the JSON input method it is
+possible (but not the default) to also not use the JSON output method.</p>
+<p>The defaults can be overruled with the options
 <code>qgisprocess.use_json_input</code> or <code>qgisprocess.use_json_output</code>, and with the
 environment variables <code>R_QGISPROCESS_USE_JSON_INPUT</code> or
-<code>R_QGISPROCESS_USE_JSON_OUTPUT.</code>
-Since the JSON output method is cached by the package,
-<code>qgis_using_json_output(query = TRUE)</code> is needed for these settings to take
-effect if the package was loaded already.</p>
+<code>R_QGISPROCESS_USE_JSON_OUTPUT</code>.</p>
+<p>The returned JSON output method is always
+cached during the current session by <code>qgis_using_json_output()</code>.
+Given that <code>qgis_using_json_output()</code> is called by various functions
+in the package, having a user setting 'use_json_output' in place (see above)
+will have effect during subsequent usage of the package.
+To cache the value between sessions, <code><a href="qgis_configure.html">qgis_configure()</a></code> needs to be called
+to update the value stored in the persistent package cache file.</p>
+<p>The JSON input method is not cached but simply determined on the fly, based
+on QGIS version, the JSON output method and the user setting if present.</p>
+<p>There is good reason for having 'use_json_output' in the persistent package
+cache: the values of <code><a href="qgis_algorithms.html">qgis_algorithms()</a></code> and <code><a href="qgis_algorithms.html">qgis_plugins()</a></code> are different
+with or without the JSON output method, and are also stored in the cache.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -120,6 +139,8 @@ effect if the package was loaded already.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">qgis_using_json_input</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="fu">qgis_using_json_output</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 </code></pre></div>
     </div>
