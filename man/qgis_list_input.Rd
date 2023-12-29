@@ -37,6 +37,10 @@ though.
 (see \code{\link[=qgis_using_json_input]{qgis_using_json_input()}}), where it can be interchanged with a named \code{list()}.
 It can only be used for arguments requiring \emph{named} lists.
 Since it applies strict validation rules, it is recommended above \code{list()}.
+
+Some QGIS argument types that need a compount object are the \code{multilayer},
+\code{aggregates}, \code{fields_mapping}, \code{tininputlayers} and
+\code{vectortilewriterlayers} argument types.
 }
 \examples{
 qgis_list_input(1, 2, 3)

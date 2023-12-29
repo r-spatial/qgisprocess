@@ -544,6 +544,10 @@ qgis_argument_spec_by_name <- function(algorithm, name,
 #' It can only be used for arguments requiring _named_ lists.
 #' Since it applies strict validation rules, it is recommended above `list()`.
 #'
+#' Some QGIS argument types that need a compount object are the `multilayer`,
+#' `aggregates`, `fields_mapping`, `tininputlayers` and
+#' `vectortilewriterlayers` argument types.
+#'
 #' @concept topics about preparing input values
 #'
 #' @param ... Named values for `qgis_dict_input()` or
