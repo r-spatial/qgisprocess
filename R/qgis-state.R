@@ -258,7 +258,7 @@ abort_query_version <- function(lines) {
 #'
 #' Since QGIS 3.24 the JSON input method of 'qgis_process' is used by default
 #' when calling the command.
-#' It allows for more complex input argument types in certain algorithms that
+#' It allows to use certain algorithms that
 #' require a more complex input argument, e.g. a list of lists (see
 #' [qgis_list_input()]).
 #'
