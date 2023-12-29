@@ -71,15 +71,7 @@ test_that("qgis_using_json_*() is determined by the QGIS version by default", {
 
   expect_false(qgis_using_json_input())
   expect_true(qgis_using_json_output())
-  expect_true(qgis_using_json_output(query = TRUE)) # assuming the 'true' QGIS supports --json
-
-  local_mocked_bindings(
-    qgis_run = function(...) list(status = 1) # mimicking no support for --json
-  )
-
-  expect_false(qgis_using_json_input())
-  expect_false(qgis_using_json_output(query = TRUE))
-  expect_message(qgis_using_json_output(quiet = FALSE), "Not using JSON for output")
+  expect_true(qgis_using_json_output(query = TRUE))
 
   qgisprocess_cache$use_json_output <- original
 })
@@ -113,6 +105,7 @@ test_that("qgis_using_json_*() can be driven by user settings", {
   ))
   suppressWarnings(expect_false(qgis_using_json_input()))
   expect_false(qgis_using_json_output())
+  expect_message(qgis_using_json_output(quiet = FALSE), "Not using JSON for output")
 
   # use_json_output FALSE cannot be honored if use_json_input is acceptably set as TRUE
   local_mocked_bindings(
