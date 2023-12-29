@@ -264,21 +264,34 @@ abort_query_version <- function(lines) {
 #'
 #' Likewise, JSON output is the default output format requested from
 #' 'qgis_process'.
+#' Using the JSON input method of 'qgis_process' automatically implies
+#' using the JSON output method; when _not_ using the JSON input method it is
+#' possible (but not the default) to also not use the JSON output method.
 #'
-#' The settings can be overruled with the options
+#' The defaults can be overruled with the options
 #' `qgisprocess.use_json_input` or `qgisprocess.use_json_output`, and with the
 #' environment variables `R_QGISPROCESS_USE_JSON_INPUT` or
 #' `R_QGISPROCESS_USE_JSON_OUTPUT`.
-#' The JSON output method is cached by the package.
+#'
+#' The JSON output method returned is always
+#' cached for the current session by `qgis_using_json_output()`.
+#' Given that `qgis_using_json_output()` is called by various functions
+#' in the package, having a user setting 'use_json_output' in place (see above)
+#' will have effect during subsequent use of the package.
+#' To cache the value between sessions, [qgis_configure()] needs to be called
+#' (stores the value in a cache file).
+#'
+#' The JSON input method is not cached but simply determined on the fly, based
+#' on QGIS version, the JSON output method and the user setting if present.
 #'
 #' @param query Logical.
-#' Should the outcome update the cached value, in case of
-#' a missing 'json output' setting by the user
-#' (`qgisprocess.use_json_input` option or `R_QGISPROCESS_USE_JSON_OUTPUT`
-#' environment variable)?
-#' If such user setting _is_ present, the outcome will always update
-#' the cached value, on condition that there is no conflict with an explicit
-#' 'json input' setting.
+#' Should the outcome of `qgis_using_json_output()` ignore the cached value?
+#' If set as `TRUE` and no user setting 'use_json_output' is in place (see
+#' Details), the function returns `TRUE` and the cached value for the
+#' current session is set as `TRUE`.
+#' If set as `FALSE`, the function returns the cached value if no user setting
+#' 'use_json_output' is in place _and_ on condition the cached value does not
+#' conflict with a 'use_json_input' user setting.
 #' @inheritParams qgis_path
 #'
 #' @family topics about programming or debugging utilities
