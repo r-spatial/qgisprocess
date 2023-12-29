@@ -443,3 +443,25 @@ json_input_set_and_acceptable <- function(qgis_version) {
     !is.null(qgis_version) &&
     package_version(qgis_version) >= "3.23.0"
 }
+
+
+
+
+#' JSON state debugging while developing
+#'
+#' @noRd
+#' @keywords internal
+debug_json <- function() {
+  cache_data_file <- qgis_pkgcache_file()
+  cached_data <- readRDS(cache_data_file)
+  glue(
+    "cached_data$use_json_output = {cached_data$use_json_output}\n",
+    "qgisprocess_cache$use_json_output = {qgisprocess_cache$use_json_output}\n",
+    "readopt_json_input() = {readopt_json_input()}\n",
+    "readopt_json_output() = {readopt_json_output()}\n",
+    "qgis_using_json_input() = {qgis_using_json_input()}\n",
+    "qgis_using_json_output() = {qgis_using_json_output()}\n",
+    "qgisprocess_cache$use_json_output = {qgisprocess_cache$use_json_output}\n",
+    "cached_data$use_json_output = {cached_data$use_json_output}"
+  )
+}
