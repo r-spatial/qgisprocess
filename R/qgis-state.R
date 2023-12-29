@@ -306,7 +306,7 @@ abort_query_version <- function(lines) {
 #'
 #' @examplesIf has_qgis()
 #' qgis_using_json_input()
-#  qgis_using_json_output()
+#' qgis_using_json_output()
 #'
 #' @export
 qgis_using_json_input <- function() {

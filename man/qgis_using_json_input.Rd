@@ -67,6 +67,7 @@ with or without the JSON output method, and are also stored in the cache.
 \examples{
 \dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 qgis_using_json_input()
+qgis_using_json_output()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
