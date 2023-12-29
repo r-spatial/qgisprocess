@@ -194,7 +194,9 @@ test_that("qgis_configure() works OK if cache condition 'use_json_output' unmet"
     )
   )
 
+  # user setting 'use_json_output' FALSE will trigger reconfiguration if cached value was TRUE
   withr::local_options(list(
+    qgisprocess.use_json_input = NULL,
     qgisprocess.use_json_output = FALSE
   ))
   saveRDS(
@@ -214,8 +216,29 @@ test_that("qgis_configure() works OK if cache condition 'use_json_output' unmet"
   expect_false(qgis_using_json_output())
   expect_false(qgis_using_json_input())
 
+  # absence of user settings will honor the previously set cached value FALSE
   withr::local_options(list(
-    qgisprocess.use_json_output = NULL,
+    qgisprocess.use_json_output = NULL
+  ))
+  saveRDS(
+    list(
+      path = qgis_path(),
+      version = qgis_version(),
+      algorithms = qgis_algorithms(),
+      plugins = qgis_plugins(),
+      use_json_output = FALSE
+    ),
+    cache_data_file
+  )
+  expect_no_message(
+    capture.output(qgis_configure(use_cached_data = TRUE)),
+    message = "contradict the 'use_json_output' cache value"
+  )
+  expect_false(qgis_using_json_output())
+  expect_false(qgis_using_json_input())
+
+  # user setting 'use_json_input' TRUE will trigger reconfiguration if cached value was FALSE
+  withr::local_options(list(
     qgisprocess.use_json_input = TRUE # expectations below need JSON input to be supported!
   ))
   saveRDS(
