@@ -171,14 +171,15 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
                 (assertthat::is.string(opt) && opt %in% c("", "TRUE", "FALSE", "true", "false")),
               msg = "Option 'qgisprocess.detect_newer_qgis' must be 'TRUE' or 'FALSE'."
             )
-            if (identical(opt, "")) opt <- NA
-            opt || grepl("TRUE|true", opt)
+            opt <- isTRUE(opt) ||
+              identical(opt, "true") ||
+              identical(opt, "TRUE")
 
             first_qgis <- qgis_detect_paths()[1]
             newer_available <- !is.na(extract_version_from_paths(first_qgis)) &&
               !identical(cached_data$path, first_qgis)
 
-            if (isTRUE(opt) && isTRUE(newer_available) && interactive()) {
+            if (opt && isTRUE(newer_available) && interactive()) {
               packageStartupMessage()
               packageStartupMessage(glue(
                 "A newer QGIS installation seems to be available: ",
