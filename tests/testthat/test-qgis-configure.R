@@ -307,7 +307,7 @@ test_that("qgis_configure() works OK with qgisprocess.detect_newer_qgis option o
     cache_data_file
   )
   expect_message(
-    capture.output(qgis_configure(use_cached_data = TRUE)),
+    capture.output(qgis_configure(use_cached_data = TRUE), type = "message"),
     "A newer QGIS installation seems to be"
   )
 
@@ -324,7 +324,7 @@ test_that("qgis_configure() works OK with qgisprocess.detect_newer_qgis option o
     cache_data_file
   )
   expect_message(
-    capture.output(qgis_configure(use_cached_data = TRUE)),
+    capture.output(qgis_configure(use_cached_data = TRUE), type = "message"),
     "if you don't want to autodetect QGIS version updates"
   )
 
@@ -341,7 +341,7 @@ test_that("qgis_configure() works OK with qgisprocess.detect_newer_qgis option o
     cache_data_file
   )
   expect_no_message(
-    capture.output(qgis_configure(use_cached_data = TRUE)),
+    capture.output(qgis_configure(use_cached_data = TRUE), type = "message"),
     message = "A newer QGIS installation seems to be"
   )
 
@@ -361,7 +361,7 @@ test_that("qgis_configure() works OK with qgisprocess.detect_newer_qgis option o
     cache_data_file
   )
   expect_no_message(
-    capture.output(qgis_configure(use_cached_data = TRUE)),
+    capture.output(qgis_configure(use_cached_data = TRUE), type = "message"),
     message = "A newer QGIS installation seems to be"
   )
 
@@ -382,7 +382,7 @@ test_that("qgis_configure() works OK with qgisprocess.detect_newer_qgis option o
     cache_data_file
   )
   expect_no_message(
-    capture.output(qgis_configure(use_cached_data = TRUE)),
+    capture.output(qgis_configure(use_cached_data = TRUE), type = "message"),
     message = "A newer QGIS installation seems to be"
   )
 })
