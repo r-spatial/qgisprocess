@@ -317,7 +317,7 @@ qgis_using_json_input <- function() {
       !is.null(qgis_version()) &&
       (package_version(qgis_version(full = FALSE)) >= "3.23.0")
   } else {
-    json_input_is_set <- isTRUE(opt) || identical(opt, "true") || identical(opt, "TRUE")
+    json_input_is_set <- resolve_flag_opt(opt)
     if (
       json_input_is_set &&
         !is.null(qgis_version()) &&
@@ -465,9 +465,7 @@ resolve_flag_opt <- function(
 #' @noRd
 #' @keywords internal
 resolve_explicit_json_output <- function(json_output_setting, qgis_version) {
-  json_output_is_set <- isTRUE(json_output_setting) ||
-    identical(json_output_setting, "true") ||
-    identical(json_output_setting, "TRUE")
+  json_output_is_set <- resolve_flag_opt(json_output_setting)
   # with JSON INput EXPLICITLY set as TRUE, always use JSON output if the
   # version requirement is met (it is how 'qgis_process run' works, so
   # better do that throughout the package)
@@ -491,9 +489,7 @@ resolve_explicit_json_output <- function(json_output_setting, qgis_version) {
 #' @keywords internal
 json_input_set_and_acceptable <- function(qgis_version) {
   opt_json_input <- readopt_json_input()
-  (isTRUE(opt_json_input) ||
-    identical(opt_json_input, "true") ||
-    identical(opt_json_input, "TRUE")) &&
+  resolve_flag_opt(opt_json_input) &&
     !is.null(qgis_version) &&
     package_version(qgis_version) >= "3.23.0"
 }

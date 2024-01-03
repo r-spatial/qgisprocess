@@ -162,19 +162,10 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
           # environment variable/option to automatically switch to a newer
           # available QGIS version
           if (is_windows() || is_macos()) {
-            opt <- getOption(
-              "qgisprocess.detect_newer_qgis",
-              Sys.getenv("R_QGISPROCESS_DETECT_NEWER_QGIS")
+            opt <- resolve_flag_opt(
+              option_name = "qgisprocess.detect_newer_qgis",
+              envvar_name = "R_QGISPROCESS_DETECT_NEWER_QGIS"
             )
-            assert_that(
-              assertthat::is.flag(opt) ||
-                (assertthat::is.string(opt) && opt %in% c("", "TRUE", "FALSE", "true", "false")),
-              msg = "Option 'qgisprocess.detect_newer_qgis' must be 'TRUE' or 'FALSE'."
-            )
-            opt <- isTRUE(opt) ||
-              identical(opt, "true") ||
-              identical(opt, "TRUE")
-
             first_qgis <- qgis_detect_paths()[1]
             newer_available <- !is.na(extract_version_from_paths(first_qgis)) &&
               !identical(cached_data$path, first_qgis)
