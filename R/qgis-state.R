@@ -395,6 +395,55 @@ readopt <- function(option_name, envvar_name) {
 }
 
 
+
+#' Resolve a boolean option or environmental variable to TRUE, FALSE or (optionally) NA
+#'
+#' @param value A result as obtained by [readopt()].
+#' @param keep_NA Return NA if option and env var are empty?
+#' (i.e. `NULL` and `""` respectively).
+#' The default (`FALSE`) will return `FALSE`.
+#'
+#' @noRd
+#'
+#' @keywords internal
+resolve_flag_opt <- function(
+    value = readopt(option_name, envvar_name),
+    option_name = NULL,
+    envvar_name = NULL,
+    keep_NA = FALSE
+    ) {
+  if (missing(value)) {
+    assert_that(
+      !missing(option_name),
+      !missing(envvar_name),
+      msg = paste(
+        "Both 'option_name' and 'envvar_name' must be provided if",
+        "'value' is missing."
+      )
+    )
+  }
+  if (!missing(option_name)) assert_that(is.string(option_name))
+  if (!missing(envvar_name)) assert_that(is.string(envvar_name))
+  assert_that(is.flag(keep_NA))
+  opt <- value
+  assert_that(
+    is.flag(opt) ||
+      (is.string(opt) && opt %in% c("", "TRUE", "FALSE", "true", "false")),
+    msg = glue("Option '{option_name %||% \"\"}' must be 'TRUE' or 'FALSE'.")
+  )
+  if (keep_NA) {
+    if (identical(opt, "")) opt <- NA
+    is.logical(opt) && length(opt) == 1 && opt
+  } else {
+    isTRUE(opt)
+  } ||
+    identical(opt, "true") ||
+    identical(opt, "TRUE")
+}
+
+
+
+
 #' Handle an explicitly set 'use_json_output'
 #'
 #' The `qgisprocess.use_json_output` option or the
