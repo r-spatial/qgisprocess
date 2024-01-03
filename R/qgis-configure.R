@@ -145,8 +145,9 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 
           # CACHE CONDITION: qgis_process is indeed available in the cached path
 
+          testopt <- getOption("qgisprocess.test_skip_path_availability_check")
           outcome <- try(qgis_run(path = cached_data$path), silent = TRUE)
-          if (inherits(outcome, "try-error")) {
+          if (inherits(outcome, "try-error") && !isTRUE(testopt)) {
             if (quiet) packageStartupMessage()
             packageStartupMessage(
               glue(
@@ -170,7 +171,7 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
             newer_available <- !is.na(extract_version_from_paths(first_qgis)) &&
               !identical(cached_data$path, first_qgis)
 
-            if (opt && isTRUE(newer_available) && interactive()) {
+            if (opt && isTRUE(newer_available) && rlang::is_interactive()) {
               packageStartupMessage()
               packageStartupMessage(glue(
                 "A newer QGIS installation seems to be available: ",
@@ -178,7 +179,8 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
               ))
               answer <- ""
               while (!grepl("^[Yy](?:[Ee][Ss])?$|^[Nn](?:[Oo])?$", answer)) {
-                answer <- readline("Do you want to try it and rebuild the cache? (y/n) ")
+                answer <- getOption("qgisprocess.test_try_new_qgis") %||%
+                  readline("Do you want to try it and rebuild the cache? (y/n) ")
               }
               if (grepl("^[Yy]", answer)) {
                 newer_ok <- FALSE
