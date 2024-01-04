@@ -317,7 +317,7 @@ qgis_using_json_input <- function() {
       !is.null(qgis_version()) &&
       (package_version(qgis_version(full = FALSE)) >= "3.23.0")
   } else {
-    json_input_is_set <- isTRUE(opt) || identical(opt, "true") || identical(opt, "TRUE")
+    json_input_is_set <- resolve_flag_opt(opt)
     if (
       json_input_is_set &&
         !is.null(qgis_version()) &&
@@ -395,6 +395,55 @@ readopt <- function(option_name, envvar_name) {
 }
 
 
+
+#' Resolve a boolean option or environmental variable to TRUE, FALSE or (optionally) NA
+#'
+#' @param value A result as obtained by [readopt()].
+#' @param keep_NA Return NA if option and env var are empty?
+#' (i.e. `NULL` and `""` respectively).
+#' The default (`FALSE`) will return `FALSE`.
+#'
+#' @noRd
+#'
+#' @keywords internal
+resolve_flag_opt <- function(
+    value = readopt(option_name, envvar_name),
+    option_name = NULL,
+    envvar_name = NULL,
+    keep_NA = FALSE
+    ) {
+  if (missing(value)) {
+    assert_that(
+      !missing(option_name),
+      !missing(envvar_name),
+      msg = paste(
+        "Both 'option_name' and 'envvar_name' must be provided if",
+        "'value' is missing."
+      )
+    )
+  }
+  if (!missing(option_name)) assert_that(is.string(option_name))
+  if (!missing(envvar_name)) assert_that(is.string(envvar_name))
+  assert_that(is.flag(keep_NA))
+  opt <- value
+  assert_that(
+    is.flag(opt) ||
+      (is.string(opt) && opt %in% c("", "TRUE", "FALSE", "true", "false")),
+    msg = glue("Option '{option_name %||% \"\"}' must be 'TRUE' or 'FALSE'.")
+  )
+  if (keep_NA) {
+    if (identical(opt, "")) opt <- NA
+    is.logical(opt) && length(opt) == 1 && opt
+  } else {
+    isTRUE(opt)
+  } ||
+    identical(opt, "true") ||
+    identical(opt, "TRUE")
+}
+
+
+
+
 #' Handle an explicitly set 'use_json_output'
 #'
 #' The `qgisprocess.use_json_output` option or the
@@ -416,9 +465,7 @@ readopt <- function(option_name, envvar_name) {
 #' @noRd
 #' @keywords internal
 resolve_explicit_json_output <- function(json_output_setting, qgis_version) {
-  json_output_is_set <- isTRUE(json_output_setting) ||
-    identical(json_output_setting, "true") ||
-    identical(json_output_setting, "TRUE")
+  json_output_is_set <- resolve_flag_opt(json_output_setting)
   # with JSON INput EXPLICITLY set as TRUE, always use JSON output if the
   # version requirement is met (it is how 'qgis_process run' works, so
   # better do that throughout the package)
@@ -442,9 +489,7 @@ resolve_explicit_json_output <- function(json_output_setting, qgis_version) {
 #' @keywords internal
 json_input_set_and_acceptable <- function(qgis_version) {
   opt_json_input <- readopt_json_input()
-  (isTRUE(opt_json_input) ||
-    identical(opt_json_input, "true") ||
-    identical(opt_json_input, "TRUE")) &&
+  resolve_flag_opt(opt_json_input) &&
     !is.null(qgis_version) &&
     package_version(qgis_version) >= "3.23.0"
 }

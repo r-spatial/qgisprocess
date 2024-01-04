@@ -146,3 +146,62 @@ test_that("Internal function debug_json() works", {
   expect_no_error(debug_json())
   expect_s3_class(debug_json(), "glue")
 })
+
+
+
+
+
+
+test_that("Internal function resolve_flag_opt() works", {
+  expect_true(resolve_flag_opt(TRUE))
+  expect_true(resolve_flag_opt("TRUE"))
+  expect_true(resolve_flag_opt("true"))
+  expect_false(resolve_flag_opt(""))
+  expect_false(resolve_flag_opt(FALSE))
+  expect_false(resolve_flag_opt("FALSE"))
+  expect_false(resolve_flag_opt("false"))
+  expect_identical(resolve_flag_opt("", keep_NA = TRUE), NA)
+  expect_identical(resolve_flag_opt(NA, keep_NA = TRUE), NA)
+  expect_error(resolve_flag_opt(NULL, keep_NA = TRUE), "must be")
+  expect_error(resolve_flag_opt("maybe"), "must be")
+  expect_error(resolve_flag_opt(c(TRUE, TRUE)), "must be")
+
+  expect_false(resolve_flag_opt(option_name = "test_option", envvar_name = "TEST_VAR"))
+  expect_identical(
+    resolve_flag_opt(
+      option_name = "test_option",
+      envvar_name = "TEST_VAR",
+      keep_NA = TRUE
+    ),
+    NA
+  )
+
+  expect_error(resolve_flag_opt(option_name = "test_option"), "Both")
+  expect_error(resolve_flag_opt(envvar_name = "TEST_VAR"), "Both")
+
+  withr::local_options(test_option = TRUE)
+  expect_true(resolve_flag_opt(option_name = "test_option", envvar_name = "TEST_VAR"))
+  expect_error(resolve_flag_opt(option_name = "test_option"), "Both")
+  withr::local_options(test_option = "TRUE")
+  expect_true(resolve_flag_opt(option_name = "test_option", envvar_name = "TEST_VAR"))
+  withr::local_options(test_option = FALSE)
+  expect_false(resolve_flag_opt(option_name = "test_option", envvar_name = "TEST_VAR"))
+  withr::local_options(test_option = "FALSE")
+  expect_false(resolve_flag_opt(option_name = "test_option", envvar_name = "TEST_VAR"))
+  withr::local_options(test_option = 3)
+  expect_error(resolve_flag_opt(option_name = "test_option", envvar_name = "TEST_VAR"))
+  withr::local_options(test_option = NULL)
+  expect_false(resolve_flag_opt(option_name = "test_option", envvar_name = "TEST_VAR"))
+
+  withr::local_envvar(TEST_VAR = "TRUE")
+  expect_true(resolve_flag_opt(option_name = "test_option", envvar_name = "TEST_VAR"))
+  expect_error(resolve_flag_opt(envvar_name = "TEST_VAR"), "Both")
+  withr::local_envvar(TEST_VAR = "true")
+  expect_true(resolve_flag_opt(option_name = "test_option", envvar_name = "TEST_VAR"))
+  withr::local_envvar(TEST_VAR = "FALSE")
+  expect_false(resolve_flag_opt(option_name = "test_option", envvar_name = "TEST_VAR"))
+  withr::local_envvar(TEST_VAR = "false")
+  expect_false(resolve_flag_opt(option_name = "test_option", envvar_name = "TEST_VAR"))
+  withr::local_envvar(TEST_VAR = "3")
+  expect_error(resolve_flag_opt(option_name = "test_option", envvar_name = "TEST_VAR"))
+})

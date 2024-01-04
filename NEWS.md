@@ -1,6 +1,7 @@
 # qgisprocess (development version)
 
 - More consistent and intuitive handling of JSON input / output user settings (#195, #196; see `?qgis_using_json_output`).
+- Fix bug in support for environment variable `R_QGISPROCESS_DETECT_NEWER_QGIS` (#197).
 
 # qgisprocess 0.2.0
 

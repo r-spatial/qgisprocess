@@ -262,6 +262,134 @@ test_that("qgis_configure() works OK if cache condition 'use_json_output' unmet"
 
 
 
+test_that("qgis_configure() works OK with qgisprocess.detect_newer_qgis option or envvar", {
+  skip_if_not(has_qgis())
+  skip_if_not(is_windows() || is_macos())
+  version <- as.character(utils::packageVersion("qgisprocess"))
+  cache_data_file <- file.path(
+    rappdirs::user_cache_dir("R-qgisprocess"),
+    glue("cache-{version}.rds")
+  )
+  rlang::local_interactive()
+  withr::local_options(list(
+    qgisprocess.test_skip_path_availability_check = TRUE,
+    qgisprocess.detect_newer_qgis = TRUE
+  ))
+  local_mocked_bindings(
+    qgis_detect_paths = function(...) c(
+      "C:/Program Files/QGIS 3.30.0/bin/qgis_process-qgis-ltr.bat",
+      "C:/Program Files/QGIS 3.28.6/bin/qgis_process-qgis-ltr.bat"
+    )
+  )
+  withr::defer(
+    saveRDS(
+      list(
+        path = qgis_path(),
+        version = qgis_version(),
+        algorithms = qgis_algorithms(),
+        plugins = qgis_plugins(),
+        use_json_output = qgis_using_json_output()
+      ),
+      cache_data_file
+    )
+  )
+
+  # answering 'yes' triggers reconfiguration with newer version
+  withr::local_options(qgisprocess.test_try_new_qgis = "yes")
+  saveRDS(
+    list(
+      path = "C:/Program Files/QGIS 3.28.6/bin/qgis_process-qgis-ltr.bat",
+      version = "3.28.6-xxx",
+      algorithms = qgis_algorithms(),
+      plugins = qgis_plugins(),
+      use_json_output = qgis_using_json_output()
+    ),
+    cache_data_file
+  )
+  expect_message(
+    capture.output(qgis_configure(use_cached_data = TRUE), type = "message"),
+    "A newer QGIS installation seems to be"
+  )
+
+  # answering 'no' triggers another message
+  withr::local_options(qgisprocess.test_try_new_qgis = "no")
+  saveRDS(
+    list(
+      path = "C:/Program Files/QGIS 3.28.6/bin/qgis_process-qgis-ltr.bat",
+      version = "3.28.6-xxx",
+      algorithms = qgis_algorithms(),
+      plugins = qgis_plugins(),
+      use_json_output = qgis_using_json_output()
+    ),
+    cache_data_file
+  )
+  expect_message(
+    capture.output(qgis_configure(use_cached_data = TRUE), type = "message"),
+    "if you don't want to autodetect QGIS version updates"
+  )
+
+  # with newest version in place: not offering to switch
+  withr::local_options(qgisprocess.test_try_new_qgis = "yes")
+  saveRDS(
+    list(
+      path = "C:/Program Files/QGIS 3.30.0/bin/qgis_process-qgis-ltr.bat",
+      version = "3.30.0-xxx",
+      algorithms = qgis_algorithms(),
+      plugins = qgis_plugins(),
+      use_json_output = qgis_using_json_output()
+    ),
+    cache_data_file
+  )
+  expect_no_message(
+    capture.output(qgis_configure(use_cached_data = TRUE), type = "message"),
+    message = "A newer QGIS installation seems to be"
+  )
+
+  # without the option: not offering to switch
+  withr::local_options(list(
+    qgisprocess.detect_newer_qgis = NULL,
+    qgisprocess.test_try_new_qgis = "yes"
+  ))
+  saveRDS(
+    list(
+      path = "C:/Program Files/QGIS 3.28.6/bin/qgis_process-qgis-ltr.bat",
+      version = "3.28.6-xxx",
+      algorithms = qgis_algorithms(),
+      plugins = qgis_plugins(),
+      use_json_output = qgis_using_json_output()
+    ),
+    cache_data_file
+  )
+  expect_no_message(
+    capture.output(qgis_configure(use_cached_data = TRUE), type = "message"),
+    message = "A newer QGIS installation seems to be"
+  )
+
+  # when not interactive: not offering to switch
+  rlang::local_interactive(value = FALSE)
+  withr::local_options(list(
+    qgisprocess.detect_newer_qgis = TRUE,
+    qgisprocess.test_try_new_qgis = "yes"
+  ))
+  saveRDS(
+    list(
+      path = "C:/Program Files/QGIS 3.28.6/bin/qgis_process-qgis-ltr.bat",
+      version = "3.28.6-xxx",
+      algorithms = qgis_algorithms(),
+      plugins = qgis_plugins(),
+      use_json_output = qgis_using_json_output()
+    ),
+    cache_data_file
+  )
+  expect_no_message(
+    capture.output(qgis_configure(use_cached_data = TRUE), type = "message"),
+    message = "A newer QGIS installation seems to be"
+  )
+})
+
+
+
+
 test_that("abort_query_version() works", {
   lines <- c("aa", "bb")
   expect_error(

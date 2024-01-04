@@ -227,7 +227,7 @@ qgis_using_cached_help <- function() {
     Sys.getenv("R_QGISPROCESS_USE_CACHED_HELP", "true")
   )
 
-  isTRUE(opt) || identical(opt, "true") || identical(opt, "TRUE")
+  resolve_flag_opt(opt)
 }
 
 help_cache_file <- function(algorithm, json) {
