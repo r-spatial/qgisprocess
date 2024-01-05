@@ -70,9 +70,28 @@ assert_qgis_algorithm <- function(algorithm) {
     )
   }
 
+  check_algorithm_deprecation(algorithm)
+
   invisible(algorithm)
 }
 
+
+#' @keywords internal
+check_algorithm_deprecation <- function(algorithm) {
+  algs <- qgis_algorithms()
+  if ("deprecated" %in% colnames(algs)) {
+    deprecated_algs <- algs$algorithm[algs$deprecated]
+    if (algorithm %in% deprecated_algs) {
+      warning(
+        glue(
+          "Algorithm '{ algorithm }' is deprecated and may be removed in a later ",
+          "QGIS version!\nCurrently using QGIS { qgis_version() }."
+        ),
+        call. = FALSE
+      )
+    }
+  }
+}
 
 
 #' @keywords internal
