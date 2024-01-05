@@ -242,11 +242,19 @@ test_that("terra argument coercers work for SpatVectorProxy", {
     tmp_file
   )
   obj <- terra::vect(tmp_file, proxy = TRUE)
-  expect_match(
-    as_qgis_argument(obj, qgis_argument_spec(qgis_type = "point")),
-    "^[\\de\\+]+,[\\de\\+]+\\[\\w+:\\d+\\]$",
-    perl = TRUE
-  )
+  if (getRversion() < "4.3" && is_macos()) {
+    expect_match(
+      as_qgis_argument(obj, qgis_argument_spec(qgis_type = "point")),
+      "^[\\de\\+]+,[\\de\\+]+(?:\\[\\w+:\\d+\\])?$",
+      perl = TRUE
+    )
+  } else {
+    expect_match(
+      as_qgis_argument(obj, qgis_argument_spec(qgis_type = "point")),
+      "^[\\de\\+]+,[\\de\\+]+\\[\\w+:\\d+\\]$",
+      perl = TRUE
+    )
+  }
 })
 
 test_that("terra argument coercers work for a SpatVectorProxy referring to a layer in a multi-layer file", {
