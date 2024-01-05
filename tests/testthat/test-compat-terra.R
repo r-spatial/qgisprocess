@@ -102,11 +102,19 @@ test_that("terra argument coercers work for locally created SpatVector", {
     "exactly one row and the geometry must be a point"
   )
 
-  expect_match(
-    as_qgis_argument(obj[1, ], qgis_argument_spec(qgis_type = "point")),
-    "^[\\de\\+]+,[\\de\\+]+\\[\\w+:\\d+\\]$",
-    perl = TRUE
-  )
+  if (getRversion() < "4.3" && is_macos()) {
+    expect_match(
+      as_qgis_argument(obj[1, ], qgis_argument_spec(qgis_type = "point")),
+      "^[\\de\\+]+,[\\de\\+]+(?:\\[\\w+:\\d+\\])?$",
+      perl = TRUE
+    )
+  } else {
+    expect_match(
+      as_qgis_argument(obj[1, ], qgis_argument_spec(qgis_type = "point")),
+      "^[\\de\\+]+,[\\de\\+]+\\[\\w+:\\d+\\]$",
+      perl = TRUE
+    )
+  }
 
   terra::crs(obj) <- NA
   expect_match(
