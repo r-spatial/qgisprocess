@@ -410,8 +410,7 @@ resolve_flag_opt <- function(
     value = readopt(option_name, envvar_name),
     option_name = NULL,
     envvar_name = NULL,
-    keep_NA = FALSE
-    ) {
+    keep_NA = FALSE) {
   if (missing(value)) {
     assert_that(
       !missing(option_name),
