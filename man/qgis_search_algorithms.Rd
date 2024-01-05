@@ -4,7 +4,12 @@
 \alias{qgis_search_algorithms}
 \title{Search geoprocessing algorithms}
 \usage{
-qgis_search_algorithms(algorithm = NULL, provider = NULL, group = NULL)
+qgis_search_algorithms(
+  algorithm = NULL,
+  provider = NULL,
+  group = NULL,
+  include_deprecated = FALSE
+)
 }
 \arguments{
 \item{algorithm}{Regular expression to match the \code{algorithm} or
@@ -15,6 +20,8 @@ qgis_search_algorithms(algorithm = NULL, provider = NULL, group = NULL)
 
 \item{group}{Regular expression to match the \code{group} value
 from the output of \code{\link[=qgis_algorithms]{qgis_algorithms()}}.}
+
+\item{include_deprecated}{Logical. Should deprecated algorithms be included?}
 }
 \value{
 A tibble.

@@ -271,6 +271,7 @@ qgis_query_algorithms <- function(quiet = FALSE) {
 #' `provider_title` value from the output of [qgis_algorithms()].
 #' @param group Regular expression to match the `group` value
 #' from the output of [qgis_algorithms()].
+#' @inheritParams qgis_algorithms
 #'
 #' @returns A tibble.
 #'
@@ -284,12 +285,17 @@ qgis_query_algorithms <- function(quiet = FALSE) {
 qgis_search_algorithms <- function(
     algorithm = NULL,
     provider = NULL,
-    group = NULL) {
+    group = NULL,
+    include_deprecated = FALSE) {
   assert_that(
     !is.null(algorithm) || !is.null(provider) || !is.null(group),
     msg = "You must provide at least one of the arguments."
   )
-  result <- qgis_algorithms(query = FALSE, quiet = TRUE)
+  result <- qgis_algorithms(
+    query = FALSE,
+    quiet = TRUE,
+    include_deprecated = include_deprecated
+  )
   assert_that(inherits(result, "data.frame"))
   assert_that(
     nrow(result) > 0L,
