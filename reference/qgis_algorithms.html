@@ -20,7 +20,7 @@ for a detailed description of the algorithms provided
     
     <a class="navbar-brand me-2" href="../index.html">qgisprocess</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9003</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,9 +77,9 @@ for a detailed description of the algorithms provided
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">qgis_algorithms</span><span class="op">(</span>query <span class="op">=</span> <span class="cn">FALSE</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">qgis_algorithms</span><span class="op">(</span>query <span class="op">=</span> <span class="cn">FALSE</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span>, include_deprecated <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">qgis_providers</span><span class="op">(</span>query <span class="op">=</span> <span class="cn">FALSE</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">qgis_providers</span><span class="op">(</span>query <span class="op">=</span> <span class="cn">FALSE</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span>, include_deprecated <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">qgis_plugins</span><span class="op">(</span>which <span class="op">=</span> <span class="st">"all"</span>, query <span class="op">=</span> <span class="cn">FALSE</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -93,6 +93,10 @@ for a detailed description of the algorithms provided
 <dt>quiet</dt>
 <dd><p>Use <code>FALSE</code> to display more information,
 possibly useful for debugging.</p></dd>
+
+
+<dt>include_deprecated</dt>
+<dd><p>Logical. Should deprecated algorithms be included?</p></dd>
 
 
 <dt>which</dt>
@@ -110,6 +114,12 @@ Must be one of: <code>"all"</code>, <code>"enabled"</code>, <code>"disabled"</co
     
 
 <p>A tibble of algorithms, processing providers or plugins, with metadata.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>The <code>include_deprecated</code> argument in <code>qgis_algorithms()</code> does not affect the
+cached value. The latter always includes deprecated algorithms if these are
+returned by 'qgis_process' (this requires the JSON output method).</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -140,6 +150,27 @@ Must be one of: <code>"all"</code>, <code>"enabled"</code>, <code>"disabled"</co
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> gdal     GDAL           gdal:clipvectorbyextent  clipvectorb… Clip vector by…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> gdal     GDAL           gdal:clipvectorbypolygon clipvectorb… Clip vector by…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 349 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 19 more variables: provider_can_be_activated &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   provider_is_active &lt;lgl&gt;, provider_long_name &lt;chr&gt;, provider_version &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   provider_warning &lt;chr&gt;, can_cancel &lt;lgl&gt;, deprecated &lt;lgl&gt;, group &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   has_known_issues &lt;lgl&gt;, help_url &lt;chr&gt;, requires_matching_crs &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   short_description &lt;chr&gt;, tags &lt;list&gt;, default_raster_file_extension &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   default_vector_file_extension &lt;chr&gt;, …</span></span>
+<span class="r-in"><span><span class="fu">qgis_algorithms</span><span class="op">(</span>include_deprecated <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 338 × 24</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    provider provider_title algorithm                algorithm_id algorithm_title</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 3d       QGIS (3D)      3d:tessellate            tessellate   Tessellate     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> gdal     GDAL           gdal:aspect              aspect       Aspect         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> gdal     GDAL           gdal:assignprojection    assignproje… Assign project…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> gdal     GDAL           gdal:buffervectors       buffervecto… Buffer vectors </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> gdal     GDAL           gdal:buildvirtualraster  buildvirtua… Build virtual …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> gdal     GDAL           gdal:buildvirtualvector  buildvirtua… Build virtual …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> gdal     GDAL           gdal:cliprasterbyextent  cliprasterb… Clip raster by…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> gdal     GDAL           gdal:cliprasterbymaskla… cliprasterb… Clip raster by…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> gdal     GDAL           gdal:clipvectorbyextent  clipvectorb… Clip vector by…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> gdal     GDAL           gdal:clipvectorbypolygon clipvectorb… Clip vector by…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 328 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 19 more variables: provider_can_be_activated &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   provider_is_active &lt;lgl&gt;, provider_long_name &lt;chr&gt;, provider_version &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   provider_warning &lt;chr&gt;, can_cancel &lt;lgl&gt;, deprecated &lt;lgl&gt;, group &lt;chr&gt;,</span></span>
