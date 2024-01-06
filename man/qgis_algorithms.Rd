@@ -6,9 +6,9 @@
 \alias{qgis_plugins}
 \title{List algorithms, processing providers or plugins}
 \usage{
-qgis_algorithms(query = FALSE, quiet = TRUE)
+qgis_algorithms(query = FALSE, quiet = TRUE, include_deprecated = TRUE)
 
-qgis_providers(query = FALSE, quiet = TRUE)
+qgis_providers(query = FALSE, quiet = TRUE, include_deprecated = TRUE)
 
 qgis_plugins(which = "all", query = FALSE, quiet = TRUE, ...)
 }
@@ -17,6 +17,8 @@ qgis_plugins(which = "all", query = FALSE, quiet = TRUE, ...)
 
 \item{quiet}{Use \code{FALSE} to display more information,
 possibly useful for debugging.}
+
+\item{include_deprecated}{Logical. Should deprecated algorithms be included?}
 
 \item{which}{String defining which plugins to select, based on their
 status in QGIS (enabled or disabled).
@@ -35,9 +37,15 @@ See the \href{https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/q
 for a detailed description of the algorithms provided
 'out of the box' on QGIS.
 }
+\details{
+The \code{include_deprecated} argument in \code{qgis_algorithms()} does not affect the
+cached value. The latter always includes deprecated algorithms if these are
+returned by 'qgis_process' (this requires the JSON output method).
+}
 \examples{
 \dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 qgis_algorithms()
+qgis_algorithms(include_deprecated = FALSE)
 qgis_providers()
 qgis_plugins(quiet = FALSE)
 qgis_plugins(which = "disabled")

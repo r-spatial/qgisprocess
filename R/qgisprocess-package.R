@@ -13,6 +13,7 @@
 #' @importFrom assertthat
 #' assert_that
 #' is.flag
+#' noNA
 #' is.string
 #' is.number
 ## usethis namespace: end

@@ -7,6 +7,10 @@
 #' for a detailed description of the algorithms provided
 #' 'out of the box' on QGIS.
 #'
+#' The `include_deprecated` argument in `qgis_algorithms()` does not affect the
+#' cached value. The latter always includes deprecated algorithms if these are
+#' returned by 'qgis_process' (this requires the JSON output method).
+#'
 #' @family topics about information on algorithms & processing providers
 #' @family topics about reporting the QGIS state
 #' @concept functions to manage and explore QGIS and qgisprocess
@@ -16,6 +20,7 @@
 #' status in QGIS (enabled or disabled).
 #' Must be one of: `"all"`, `"enabled"`, `"disabled"`.
 #' @param ... Only used by other functions calling this function.
+#' @param include_deprecated Logical. Should deprecated algorithms be included?
 #' @inheritParams qgis_path
 #'
 #' @returns
@@ -25,11 +30,18 @@
 #'
 #' @examplesIf has_qgis()
 #' qgis_algorithms()
+#' qgis_algorithms(include_deprecated = FALSE)
 #' qgis_providers()
 #' qgis_plugins(quiet = FALSE)
 #' qgis_plugins(which = "disabled")
 #'
-qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
+qgis_algorithms <- function(
+    query = FALSE,
+    quiet = TRUE,
+    include_deprecated = TRUE) {
+  assert_that(is.flag(query), noNA(query))
+  assert_that(is.flag(quiet), noNA(quiet))
+  assert_that(is.flag(include_deprecated), noNA(include_deprecated))
   if (query) {
     qgisprocess_cache$algorithms <- qgis_query_algorithms(quiet = quiet)
   }
@@ -38,13 +50,25 @@ qgis_algorithms <- function(query = FALSE, quiet = TRUE) {
     "access to { nrow(qgisprocess_cache$algorithms) } algorithms ",
     "from { nrow(qgis_providers()) } QGIS processing providers."
   ))
-  qgisprocess_cache$algorithms
+  algs <- qgisprocess_cache$algorithms
+  if (!include_deprecated && "deprecated" %in% colnames(algs)) {
+    algs[!algs$deprecated, ]
+  } else {
+    algs
+  }
 }
 
 #' @rdname qgis_algorithms
 #' @export
-qgis_providers <- function(query = FALSE, quiet = TRUE) {
-  algs <- qgis_algorithms(query = query, quiet = quiet)
+qgis_providers <- function(
+    query = FALSE,
+    quiet = TRUE,
+    include_deprecated = TRUE) {
+  algs <- qgis_algorithms(
+    query = query,
+    quiet = quiet,
+    include_deprecated = include_deprecated
+  )
   counted <- stats::aggregate(
     algs[[1]],
     by = list(algs$provider, algs$provider_title),
@@ -70,9 +94,28 @@ assert_qgis_algorithm <- function(algorithm) {
     )
   }
 
+  check_algorithm_deprecation(algorithm)
+
   invisible(algorithm)
 }
 
+
+#' @keywords internal
+check_algorithm_deprecation <- function(algorithm) {
+  algs <- qgis_algorithms()
+  if ("deprecated" %in% colnames(algs)) {
+    deprecated_algs <- algs$algorithm[algs$deprecated]
+    if (algorithm %in% deprecated_algs) {
+      warning(
+        glue(
+          "Algorithm '{ algorithm }' is deprecated and may be removed in a later ",
+          "QGIS version!\nCurrently using QGIS { qgis_version() }."
+        ),
+        call. = FALSE
+      )
+    }
+  }
+}
 
 
 #' @keywords internal
@@ -228,6 +271,7 @@ qgis_query_algorithms <- function(quiet = FALSE) {
 #' `provider_title` value from the output of [qgis_algorithms()].
 #' @param group Regular expression to match the `group` value
 #' from the output of [qgis_algorithms()].
+#' @inheritParams qgis_algorithms
 #'
 #' @returns A tibble.
 #'
@@ -241,12 +285,17 @@ qgis_query_algorithms <- function(quiet = FALSE) {
 qgis_search_algorithms <- function(
     algorithm = NULL,
     provider = NULL,
-    group = NULL) {
+    group = NULL,
+    include_deprecated = FALSE) {
   assert_that(
     !is.null(algorithm) || !is.null(provider) || !is.null(group),
     msg = "You must provide at least one of the arguments."
   )
-  result <- qgis_algorithms(query = FALSE, quiet = TRUE)
+  result <- qgis_algorithms(
+    query = FALSE,
+    quiet = TRUE,
+    include_deprecated = include_deprecated
+  )
   assert_that(inherits(result, "data.frame"))
   assert_that(
     nrow(result) > 0L,

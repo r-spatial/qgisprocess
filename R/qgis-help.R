@@ -94,6 +94,7 @@ qgis_get_output_specs <- function(algorithm) {
 qgis_help_json <- function(algorithm) {
   cached <- help_cache_file(algorithm, json = TRUE)
   if (qgis_using_cached_help() && file.exists(cached)) {
+    check_algorithm_deprecation(algorithm)
     try(return(jsonlite::fromJSON(readRDS(cached))))
   }
 
@@ -116,6 +117,7 @@ qgis_help_json <- function(algorithm) {
 qgis_help_text <- function(algorithm) {
   cached <- help_cache_file(algorithm, json = FALSE)
   if (qgis_using_cached_help() && file.exists(cached)) {
+    check_algorithm_deprecation(algorithm)
     try(return(readRDS(cached)))
   }
 
