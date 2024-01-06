@@ -29,6 +29,22 @@ test_that("Internal function assert_qgis_algorithm() works", {
   expect_identical(assert_qgis_algorithm("native:filedownloader"), "native:filedownloader")
 })
 
+test_that("Internal function check_algorithm_deprecation() works", {
+  skip_if_not(has_qgis())
+  algs <- qgis_algorithms()
+  skip_if_not(
+    "deprecated" %in% colnames(algs) && sum(algs$deprecated) > 0,
+    paste(
+      "There are no deprecated algorithms available.",
+      "Unless using no-JSON output, rewrite this test to simulate deprecated algorithms."
+    )
+  )
+  alg_deprecated <- sample(algs$algorithm[algs$deprecated], 1)
+  alg_non_deprecated <- sample(algs$algorithm[!algs$deprecated], 1)
+  expect_warning(check_algorithm_deprecation(alg_deprecated))
+  expect_no_warning(check_algorithm_deprecation(alg_non_deprecated))
+})
+
 test_that("qgis_search_algorithms() works", {
   skip_if_not(has_qgis())
   expect_error(qgis_search_algorithms(), "at least one of the arguments")
