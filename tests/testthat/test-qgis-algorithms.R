@@ -4,6 +4,7 @@ test_that("qgis_algorithms() works", {
   expect_true(tibble::is_tibble(algs))
   expect_gt(nrow(algs), 200)
   expect_gt(ncol(algs), 20)
+  expect_gte(nrow(algs), nrow(qgis_algorithms(include_deprecated = FALSE)))
   old_names <- c(
     "provider", "provider_title", "algorithm",
     "algorithm_id", "algorithm_title"
