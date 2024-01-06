@@ -23,7 +23,7 @@ test_that("qgis_providers() works", {
   )
 })
 
-test_that("assert_qgis_algorithm() works", {
+test_that("Internal function assert_qgis_algorithm() works", {
   skip_if_not(has_qgis())
   expect_error(assert_qgis_algorithm("notanalgorithm"))
   expect_identical(assert_qgis_algorithm("native:filedownloader"), "native:filedownloader")
