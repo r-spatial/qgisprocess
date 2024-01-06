@@ -63,4 +63,7 @@ test_that("qgis_search_algorithms() works", {
   expect_gt(nrow(res1), 0L)
   res2 <- qgis_search_algorithms(algorithm = "point.*line")
   expect_gt(nrow(res2), nrow(res1))
+  res3 <- qgis_search_algorithms(algorithm = "raster")
+  res4 <- qgis_search_algorithms(algorithm = "raster", include_deprecated = TRUE)
+  expect_gte(nrow(res4), nrow(res3))
 })
