@@ -243,6 +243,7 @@ test_that("terra argument coercers work for SpatVectorProxy", {
 })
 
 test_that("terra argument coercer for SpatVectorProxy works for qgis_type 'point'", {
+  skip_if_not_installed("terra")
   tmp_file <- qgis_tmp_vector()
   withr::local_file(tmp_file)
   terra::writeVector(
