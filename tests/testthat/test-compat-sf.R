@@ -145,7 +145,7 @@ test_that("sfc to QGIS point work", {
   expect_s3_class(point_representation, "character")
 })
 
-test_that("sfc to QGIS point rasises issues", {
+test_that("sfc to QGIS point raises issues", {
   skip_if_not_installed("sf")
   skip_if( # false positive in r-universe R-oldrel on macOS (specific to https://github.com/r-universe/inbo)
     inherits(try(sf::st_crs("EPSG:5514"), silent = TRUE), "try-error"),
@@ -173,7 +173,7 @@ test_that("sfc to QGIS point rasises issues", {
   )
 })
 
-test_that("sf to QGIS point rasises issues", {
+test_that("sf to QGIS point raises issues", {
   skip_if_not_installed("sf")
 
   suppressWarnings(
