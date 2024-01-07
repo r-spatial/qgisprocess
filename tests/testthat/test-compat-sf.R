@@ -85,7 +85,7 @@ test_that("sf bbox work", {
   skip_if_not_installed("sf")
   sf_obj <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
   skip_if( # false positive in r-universe R-oldrel on macOS (specific to https://github.com/r-universe/inbo)
-    !identical(sf::st_crs(sf_obj)$epsg, 4267) ||
+    !identical(sf::st_crs(sf_obj)$epsg, 4267L) ||
       inherits(try(sf::st_crs("EPSG:4267")), "try-error"),
     "sf not properly working with EPSG in this setup"
   )
