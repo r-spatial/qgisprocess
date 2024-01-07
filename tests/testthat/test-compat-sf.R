@@ -86,7 +86,7 @@ test_that("sf bbox work", {
   sf_obj <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
   skip_if( # false positive in r-universe R-oldrel on macOS (specific to https://github.com/r-universe/inbo)
     !identical(sf::st_crs(sf_obj)$epsg, 4267L) ||
-      inherits(try(sf::st_crs("EPSG:4267")), "try-error"),
+      inherits(try(sf::st_crs("EPSG:4267"), silent = TRUE), "try-error"),
     "sf not properly working with EPSG in this setup"
   )
 
@@ -122,7 +122,7 @@ test_that("sf crs and bbox work", {
 test_that("sfc to QGIS point work", {
   skip_if_not_installed("sf")
   skip_if( # false positive in r-universe R-oldrel on macOS (specific to https://github.com/r-universe/inbo)
-    inherits(try(sf::st_crs("EPSG:5514")), "try-error"),
+    inherits(try(sf::st_crs("EPSG:5514"), silent = TRUE), "try-error"),
     "sf not properly working with EPSG in this setup"
   )
 
@@ -148,7 +148,7 @@ test_that("sfc to QGIS point work", {
 test_that("sfc to QGIS point rasises issues", {
   skip_if_not_installed("sf")
   skip_if( # false positive in r-universe R-oldrel on macOS (specific to https://github.com/r-universe/inbo)
-    inherits(try(sf::st_crs("EPSG:5514")), "try-error"),
+    inherits(try(sf::st_crs("EPSG:5514"), silent = TRUE), "try-error"),
     "sf not properly working with EPSG in this setup"
   )
 
@@ -214,7 +214,7 @@ test_that("POINT to QGIS point work", {
 test_that("sf to QGIS point work", {
   skip_if_not_installed("sf")
   skip_if( # false positive in r-universe R-oldrel on macOS (specific to https://github.com/r-universe/inbo)
-    inherits(try(sf::st_crs("EPSG:32019")), "try-error"),
+    inherits(try(sf::st_crs("EPSG:32019"), silent = TRUE), "try-error"),
     "sf not properly working with EPSG in this setup"
   )
 
