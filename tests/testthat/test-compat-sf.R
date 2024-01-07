@@ -84,6 +84,11 @@ test_that("sf crs work", {
 test_that("sf bbox work", {
   skip_if_not_installed("sf")
   sf_obj <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
+  skip_if( # false positive in r-universe R-oldrel on macOS (specific to https://github.com/r-universe/inbo)
+    !identical(sf::st_crs(sf_obj)$epsg, 4267) ||
+      inherits(try(sf::st_crs("EPSG:4267")), "try-error"),
+    "sf not properly working with EPSG in this setup"
+  )
 
   bbox_representation <- expect_match(
     as_qgis_argument(sf::st_bbox(sf_obj), qgis_argument_spec(qgis_type = "extent")),
@@ -116,6 +121,10 @@ test_that("sf crs and bbox work", {
 
 test_that("sfc to QGIS point work", {
   skip_if_not_installed("sf")
+  skip_if( # false positive in r-universe R-oldrel on macOS (specific to https://github.com/r-universe/inbo)
+    inherits(try(sf::st_crs("EPSG:5514")), "try-error"),
+    "sf not properly working with EPSG in this setup"
+  )
 
   point <- sf::st_sfc(sf::st_point(c(1, 2)), crs = sf::st_crs("EPSG:5514"))
 
@@ -138,6 +147,10 @@ test_that("sfc to QGIS point work", {
 
 test_that("sfc to QGIS point rasises issues", {
   skip_if_not_installed("sf")
+  skip_if( # false positive in r-universe R-oldrel on macOS (specific to https://github.com/r-universe/inbo)
+    inherits(try(sf::st_crs("EPSG:5514")), "try-error"),
+    "sf not properly working with EPSG in this setup"
+  )
 
   points <- sf::st_sfc(list(sf::st_point(c(1, 2)), sf::st_point(c(1, 2))), crs = sf::st_crs("EPSG:5514"))
 
@@ -188,6 +201,10 @@ test_that("sf to QGIS point rasises issues", {
 
 test_that("POINT to QGIS point work", {
   skip_if_not_installed("sf")
+  skip_if( # false positive in r-universe R-oldrel on macOS (specific to https://github.com/r-universe/inbo)
+    inherits(try(sf::st_crs("EPSG:32019")), "try-error"),
+    "sf not properly working with EPSG in this setup"
+  )
 
   point <- sf::st_point(c(1, 2))
 
