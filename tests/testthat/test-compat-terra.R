@@ -78,6 +78,15 @@ test_that("terra argument coercers work for locally created SpatVector", {
     x = c("POINT (7e5 7e5)", "POINT (6e5 6.5e5)"),
     crs = "EPSG:3812"
   )
+
+  skip_if_not( # false positive in r-universe R-oldrel on macOS (specific to https://github.com/r-universe/r-spatial)
+    identical(
+      as.character(terra::crs(obj[1, ], describe = TRUE)[, c("authority", "code")]),
+      c("EPSG", "3812")
+    ),
+    "terra not properly working with EPSG in this setup"
+  )
+
   expect_error(
     as_qgis_argument(obj),
     "Can't convert 'SpatVector' object"
@@ -102,19 +111,11 @@ test_that("terra argument coercers work for locally created SpatVector", {
     "exactly one row and the geometry must be a point"
   )
 
-  if (getRversion() < "4.3" && is_macos()) {
-    expect_match(
-      as_qgis_argument(obj[1, ], qgis_argument_spec(qgis_type = "point")),
-      "^[\\de\\+]+,[\\de\\+]+(?:\\[\\w+:\\d+\\])?$",
-      perl = TRUE
-    )
-  } else {
-    expect_match(
-      as_qgis_argument(obj[1, ], qgis_argument_spec(qgis_type = "point")),
-      "^[\\de\\+]+,[\\de\\+]+\\[\\w+:\\d+\\]$",
-      perl = TRUE
-    )
-  }
+  expect_match(
+    as_qgis_argument(obj[1, ], qgis_argument_spec(qgis_type = "point")),
+    "^[\\de\\+]+,[\\de\\+]+\\[\\w+:\\d+\\]$",
+    perl = TRUE
+  )
 
   terra::crs(obj) <- NA
   expect_match(
@@ -239,7 +240,9 @@ test_that("terra argument coercers work for SpatVectorProxy", {
     "exactly one row and the geometry must be a point"
   )
 
-  # check behaviour for qgis_type = "point"
+})
+
+test_that("terra argument coercer for SpatVectorProxy works for qgis_type 'point'", {
   tmp_file <- qgis_tmp_vector()
   withr::local_file(tmp_file)
   terra::writeVector(
@@ -250,19 +253,20 @@ test_that("terra argument coercers work for SpatVectorProxy", {
     tmp_file
   )
   obj <- terra::vect(tmp_file, proxy = TRUE)
-  if (getRversion() < "4.3" && is_macos()) {
-    expect_match(
-      as_qgis_argument(obj, qgis_argument_spec(qgis_type = "point")),
-      "^[\\de\\+]+,[\\de\\+]+(?:\\[\\w+:\\d+\\])?$",
-      perl = TRUE
-    )
-  } else {
-    expect_match(
-      as_qgis_argument(obj, qgis_argument_spec(qgis_type = "point")),
-      "^[\\de\\+]+,[\\de\\+]+\\[\\w+:\\d+\\]$",
-      perl = TRUE
-    )
-  }
+
+  skip_if_not( # false positive in r-universe R-oldrel on macOS (specific to https://github.com/r-universe/r-spatial)
+    identical(
+      as.character(terra::crs(obj, describe = TRUE)[, c("authority", "code")]),
+      c("EPSG", "3812")
+    ),
+    "terra not properly working with EPSG in this setup"
+  )
+
+  expect_match(
+    as_qgis_argument(obj, qgis_argument_spec(qgis_type = "point")),
+    "^[\\de\\+]+,[\\de\\+]+\\[\\w+:\\d+\\]$",
+    perl = TRUE
+  )
 })
 
 test_that("terra argument coercers work for a SpatVectorProxy referring to a layer in a multi-layer file", {
