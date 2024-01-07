@@ -19,18 +19,18 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest, qgis: 'none', r: 'oldrel', dep: '', r-pkg-cache: 'v11'}
-          - {os: macOS-latest, qgis: 'none', r: 'release', dep: '', r-pkg-cache: 'v11'}
-          - {os: windows-latest, qgis: 'none', r: 'oldrel', dep: '', r-pkg-cache: 'v11'}
-          - {os: windows-latest, qgis: 'none', r: 'release', dep: '', r-pkg-cache: 'v11'}
-          - {os: windows-latest, qgis: 'none', r: 'devel', dep: '', r-pkg-cache: 'v11'}
-          - {os: ubuntu-22.04, qgis: 'none', r: 'release', dep: '', r-pkg-cache: 'v11'}
+          - {os: macOS-latest, qgis: 'none', r: 'oldrel', dep: '', r-pkg-cache: 'v0'}
+          - {os: macOS-latest, qgis: 'none', r: 'release', dep: '', r-pkg-cache: 'v0'}
+          - {os: windows-latest, qgis: 'none', r: 'oldrel', dep: '', r-pkg-cache: 'v0'}
+          - {os: windows-latest, qgis: 'none', r: 'release', dep: '', r-pkg-cache: 'v0'}
+          - {os: windows-latest, qgis: 'none', r: 'devel', dep: '', r-pkg-cache: 'v0'}
+          - {os: ubuntu-22.04, qgis: 'none', r: 'release', dep: '', r-pkg-cache: 'v0'}
           - {os: macOS-latest, qgis: 'macos-brew', r: 'release', dep: '', r-pkg-cache: 'v0'}
           - {os: windows-latest, qgis: 'chocolatey', r: 'release', dep: '', r-pkg-cache: 'v0'}
           - {os: windows-latest, qgis: 'chocolatey-ltr', r: 'release', dep: '', r-pkg-cache: 'v0'}
-          - {os: windows-latest, qgis: 'chocolatey', r: 'devel', dep: '', r-pkg-cache: 'v2'}
+          - {os: windows-latest, qgis: 'chocolatey', r: 'devel', dep: '', r-pkg-cache: 'v0'}
           - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'release', dep: '', r-pkg-cache: 'v0'}
-          - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'devel', dep: '', r-pkg-cache: 'v2'}
+          - {os: ubuntu-22.04, qgis: 'ubuntu-nightly', r: 'devel', dep: '', r-pkg-cache: 'v0'}
           - {os: ubuntu-22.04, qgis: 'ubuntugis', r: 'release', dep: '', r-pkg-cache: 'v1'}
           - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', dep: '', r-pkg-cache: 'v0'}
           - {os: ubuntu-22.04, qgis: 'ubuntu', r: 'release', dep: ' [hard-deps]', r-pkg-cache: 'v3'}
