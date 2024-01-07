@@ -201,11 +201,6 @@ test_that("sf to QGIS point rasises issues", {
 
 test_that("POINT to QGIS point work", {
   skip_if_not_installed("sf")
-  skip_if( # false positive in r-universe R-oldrel on macOS (specific to https://github.com/r-universe/inbo)
-    inherits(try(sf::st_crs("EPSG:32019")), "try-error"),
-    "sf not properly working with EPSG in this setup"
-  )
-
   point <- sf::st_point(c(1, 2))
 
   point_representation <- expect_match(
@@ -218,6 +213,10 @@ test_that("POINT to QGIS point work", {
 
 test_that("sf to QGIS point work", {
   skip_if_not_installed("sf")
+  skip_if( # false positive in r-universe R-oldrel on macOS (specific to https://github.com/r-universe/inbo)
+    inherits(try(sf::st_crs("EPSG:32019")), "try-error"),
+    "sf not properly working with EPSG in this setup"
+  )
 
   data <- sf::read_sf(system.file("shape/nc.shp", package = "sf"))
   data <- sf::st_transform(data, sf::st_crs("EPSG:32019"))
