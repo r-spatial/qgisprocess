@@ -11,13 +11,15 @@ qgis_show_help(algorithm)
 
 qgis_get_description(algorithm)
 
-qgis_get_argument_specs(algorithm)
+qgis_get_argument_specs(algorithm, ...)
 
-qgis_get_output_specs(algorithm)
+qgis_get_output_specs(algorithm, ...)
 }
 \arguments{
 \item{algorithm}{A qualified algorithm name
 (e.g., \code{"native:buffer"}).}
+
+\item{...}{For internal use only.}
 }
 \value{
 \itemize{

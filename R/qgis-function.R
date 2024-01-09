@@ -30,7 +30,7 @@ qgis_function <- function(algorithm, ...) {
   assert_qgis()
   assert_qgis_algorithm(algorithm)
 
-  args <- qgis_get_argument_specs(algorithm)
+  args <- qgis_get_argument_specs(algorithm, check_deprecation = FALSE)
   arg_names <- c(args$name, "PROJECT_PATH", "ELLIPSOID", ".quiet")
 
   # The dots are the default values and are not exposed as

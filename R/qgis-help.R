@@ -4,6 +4,7 @@
 #'
 #' @param algorithm A qualified algorithm name
 #' (e.g., `"native:buffer"`).
+#' @param ... For internal use only.
 #'
 #' @returns
 #' - `qgis_get_description()`: a string.
@@ -47,9 +48,9 @@ extract_type_component <- function(param_element, component) {
 
 #' @rdname qgis_show_help
 #' @export
-qgis_get_argument_specs <- function(algorithm) {
+qgis_get_argument_specs <- function(algorithm, ...) {
   if (qgis_using_json_output()) {
-    help <- qgis_help_json(algorithm)
+    help <- qgis_help_json(algorithm, ...)
     out <- tibble::tibble(
       name = names(help$parameters),
       description = vapply(help$parameters, "[[", character(1), "description"),
@@ -64,19 +65,20 @@ qgis_get_argument_specs <- function(algorithm) {
     # The order of the parameters is alphabetized in JSON but has a
     # natural ordering in the parsed help text (which we need for backward
     # compatibility)
-    out_legacy <- qgis_parse_help(algorithm)$arguments
+    # Setting 'check_deprecation = FALSE' to avoid repetition of same warning
+    out_legacy <- qgis_parse_help(algorithm, check_deprecation = FALSE)$arguments
 
     out[match(out_legacy$name, out$name), ]
   } else {
-    qgis_parse_help(algorithm)$arguments
+    qgis_parse_help(algorithm, ...)$arguments
   }
 }
 
 #' @rdname qgis_show_help
 #' @export
-qgis_get_output_specs <- function(algorithm) {
+qgis_get_output_specs <- function(algorithm, ...) {
   if (qgis_using_json_output()) {
-    help <- qgis_help_json(algorithm)
+    help <- qgis_help_json(algorithm, ...)
     out <- tibble::tibble(
       name = names(help$outputs),
       description = vapply(help$outputs, "[[", character(1), "description"),
@@ -86,20 +88,20 @@ qgis_get_output_specs <- function(algorithm) {
     out[] <- lapply(out, unname)
     out
   } else {
-    qgis_parse_help(algorithm)$outputs
+    qgis_parse_help(algorithm, ...)$outputs
   }
 }
 
 #' @keywords internal
-qgis_help_json <- function(algorithm) {
+qgis_help_json <- function(algorithm, check_deprecation = TRUE) {
   cached <- help_cache_file(algorithm, json = TRUE)
   if (qgis_using_cached_help() && file.exists(cached)) {
-    check_algorithm_deprecation(algorithm)
+    check_algorithm_deprecation(algorithm, skip = !check_deprecation)
     try(return(jsonlite::fromJSON(readRDS(cached))))
   }
 
   assert_qgis()
-  assert_qgis_algorithm(algorithm)
+  assert_qgis_algorithm(algorithm, check_deprecation = check_deprecation)
 
   result <- qgis_run(
     args = c("--json", "help", algorithm),
@@ -114,15 +116,15 @@ qgis_help_json <- function(algorithm) {
   jsonlite::fromJSON(result$stdout)
 }
 
-qgis_help_text <- function(algorithm) {
+qgis_help_text <- function(algorithm, check_deprecation = TRUE) {
   cached <- help_cache_file(algorithm, json = FALSE)
   if (qgis_using_cached_help() && file.exists(cached)) {
-    check_algorithm_deprecation(algorithm)
+    check_algorithm_deprecation(algorithm, skip = !check_deprecation)
     try(return(readRDS(cached)))
   }
 
   assert_qgis()
-  assert_qgis_algorithm(algorithm)
+  assert_qgis_algorithm(algorithm, check_deprecation = check_deprecation)
 
   result <- qgis_run(
     args = c("help", algorithm)
@@ -136,8 +138,8 @@ qgis_help_text <- function(algorithm) {
   result$stdout
 }
 
-qgis_parse_help <- function(algorithm) {
-  help_text <- trimws(qgis_help_text(algorithm))
+qgis_parse_help <- function(algorithm, check_deprecation = TRUE) {
+  help_text <- trimws(qgis_help_text(algorithm, check_deprecation = check_deprecation))
 
   sec_description <- stringr::str_match(
     help_text,

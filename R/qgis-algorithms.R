@@ -83,7 +83,7 @@ qgis_providers <- function(
 }
 
 #' @keywords internal
-assert_qgis_algorithm <- function(algorithm) {
+assert_qgis_algorithm <- function(algorithm, check_deprecation = TRUE) {
   if (!is.character(algorithm) || length(algorithm) != 1) {
     abort("`algorithm` must be a character vector of length 1")
   } else if (!qgis_has_algorithm(algorithm)) {
@@ -94,14 +94,15 @@ assert_qgis_algorithm <- function(algorithm) {
     )
   }
 
-  check_algorithm_deprecation(algorithm)
+  check_algorithm_deprecation(algorithm, skip = !check_deprecation)
 
   invisible(algorithm)
 }
 
 
 #' @keywords internal
-check_algorithm_deprecation <- function(algorithm) {
+check_algorithm_deprecation <- function(algorithm, skip = FALSE) {
+  if (skip) return(invisible(NULL))
   algs <- qgis_algorithms()
   if ("deprecated" %in% colnames(algs)) {
     deprecated_algs <- algs$algorithm[algs$deprecated]
