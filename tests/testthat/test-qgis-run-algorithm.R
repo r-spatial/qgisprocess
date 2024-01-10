@@ -272,3 +272,29 @@ test_that(glue("qgis_run_algorithm() succeeds when it uses an aggregates input a
   expect_identical(ll_res$depth, depth_vals)
   expect_identical(ll_res$name[1], "a,f,k,p,u")
 })
+
+test_that("qgis_run_algorithm() yields a warning with a deprecated algorithm", {
+  skip_if_not(has_qgis())
+  skip_if_not(qgis_using_json_output())
+  algs <- qgis_algorithms()
+  skip_if_not(
+    "deprecated" %in% colnames(algs) && sum(algs$deprecated) > 0,
+    "There are no deprecated algorithms available."
+  )
+  skip_if_not(
+    "native:raisewarning" %in% algs$algorithm[algs$deprecated],
+    "'native:raisewarning' is not an available deprecated algorithm."
+  )
+  local_edition(3) # if more than one warning pops up, it should be apparent from
+                   # testthat output (only the first warning is swallowed in the
+                   # third edition of testthat)
+
+  suppressMessages(
+    expect_warning(
+      qgis_run_algorithm(
+        "native:raisewarning",
+        MESSAGE = "Some text than won't come back though."
+      )
+    )
+  )
+})

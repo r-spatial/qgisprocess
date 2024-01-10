@@ -70,3 +70,32 @@ test_that("algorithms with no outputs have zero-row qgis_get_output_specs()", {
   skip_if_not(has_qgis())
   expect_identical(nrow(qgis_get_output_specs("native:spatialiteexecutesql")), 0L)
 })
+
+test_that("Help functions & qgis_function() yield a warning with deprecated algorithms only", {
+  skip_if_not(has_qgis())
+  skip_if_not(qgis_using_json_output())
+  algs <- qgis_algorithms()
+  skip_if_not(
+    "deprecated" %in% colnames(algs) && sum(algs$deprecated) > 0,
+    paste(
+      "There are no deprecated algorithms available.",
+      "Rewrite this test to simulate deprecated algorithms."
+    )
+  )
+  local_edition(3) # if more than one warning pops up, it should be apparent from
+                   # testthat output (only the first warning is swallowed in the
+                   # third edition of testthat)
+
+  alg_deprecated <- sample(algs$algorithm[algs$deprecated], 1)
+  alg_non_deprecated <- sample(algs$algorithm[!algs$deprecated], 1)
+  expect_warning(capture.output(qgis_show_help(alg_deprecated)))
+  expect_no_warning(capture.output(qgis_show_help(alg_non_deprecated)))
+  expect_warning(qgis_get_description(alg_deprecated))
+  expect_no_warning(qgis_get_description(alg_non_deprecated))
+  expect_warning(qgis_get_argument_specs(alg_deprecated))
+  expect_no_warning(qgis_get_argument_specs(alg_non_deprecated))
+  expect_warning(qgis_get_output_specs(alg_deprecated))
+  expect_no_warning(qgis_get_output_specs(alg_non_deprecated))
+  expect_warning(qgis_function(alg_deprecated))
+  expect_no_warning(qgis_function(alg_non_deprecated))
+})
