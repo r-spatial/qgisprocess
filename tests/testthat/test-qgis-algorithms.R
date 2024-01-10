@@ -32,6 +32,7 @@ test_that("Internal function assert_qgis_algorithm() works", {
 
 test_that("Internal function check_algorithm_deprecation() works", {
   skip_if_not(has_qgis())
+  skip_if_not(qgis_using_json_output())
   algs <- qgis_algorithms()
   skip_if_not(
     "deprecated" %in% colnames(algs) && sum(algs$deprecated) > 0,
