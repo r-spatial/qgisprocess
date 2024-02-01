@@ -1,6 +1,6 @@
 Package: qgisprocess
 Title: Use 'QGIS' Processing Algorithms
-Version: 0.2.0.9003
+Version: 0.2.0.9004
 Authors@R: c(
     person("Dewey", "Dunnington", , "dewey@fishandwhistle.net", role = "aut",
            comment = c(ORCID = "0000-0002-9415-4582", affiliation = "Voltron Data")),
@@ -65,7 +65,7 @@ Config/checklist/keywords: R; package; QGIS
 Encoding: UTF-8
 Language: en-GB
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 SystemRequirements: 'QGIS' latest or long-term release, currently supported
     according to the 'QGIS' release schedule
     (<https://www.qgis.org/en/site/getinvolved/development/roadmap.html>). Older

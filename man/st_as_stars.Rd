@@ -7,11 +7,11 @@
 \alias{st_as_stars.qgis_result}
 \title{Convert a qgis_result object or one of its elements to a stars object}
 \usage{
-st_as_stars.qgis_outputRaster(x, ...)
+\method{st_as_stars}{qgis_outputRaster}(x, ...)
 
-st_as_stars.qgis_outputLayer(x, ...)
+\method{st_as_stars}{qgis_outputLayer}(x, ...)
 
-st_as_stars.qgis_result(x, ...)
+\method{st_as_stars}{qgis_result}(x, ...)
 }
 \arguments{
 \item{x}{A \code{qgis_result} object from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} or a

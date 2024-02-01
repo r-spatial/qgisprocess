@@ -155,14 +155,18 @@ test_that("terra argument coercers work for SpatVector referring to a file", {
     "exactly one row and the geometry must be a point"
   )
 
-  # check effect of resetting CRS
-  obj2 <- obj
-  terra::crs(obj2) <- NA
-  res <- expect_message(
-    as_qgis_argument(obj2, qgis_argument_spec(qgis_type = "vector")),
-    "Rewriting.*since its CRS has been set to another value"
-  )
-  expect_s3_class(res, "qgis_tempfile_arg")
+  if (packageVersion("terra") <= "1.7.65") {
+    # check effect of resetting CRS
+    # In terra > 1.7-65, the source is dropped from the object
+    # when CRS is reset, so no CRS comparison will be attempted.
+    obj2 <- obj
+    terra::crs(obj2) <- NA
+    res <- expect_message(
+      as_qgis_argument(obj2, qgis_argument_spec(qgis_type = "vector")),
+      "Rewriting.*since its CRS has been set to another value"
+    )
+    expect_s3_class(res, "qgis_tempfile_arg")
+  }
 
   # check effect of changed attribute names
   obj2 <- obj

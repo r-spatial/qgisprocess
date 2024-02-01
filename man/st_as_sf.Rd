@@ -7,11 +7,11 @@
 \alias{st_as_sf.qgis_outputLayer}
 \title{Convert a qgis_result object or one of its elements to an sf object}
 \usage{
-st_as_sf.qgis_result(x, ...)
+\method{st_as_sf}{qgis_result}(x, ...)
 
-st_as_sf.qgis_outputVector(x, ...)
+\method{st_as_sf}{qgis_outputVector}(x, ...)
 
-st_as_sf.qgis_outputLayer(x, ...)
+\method{st_as_sf}{qgis_outputLayer}(x, ...)
 }
 \arguments{
 \item{x}{A \code{qgis_result} object from \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}} or a

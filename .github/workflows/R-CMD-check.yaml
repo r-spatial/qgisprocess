@@ -42,7 +42,7 @@ jobs:
       SAGANGV: 0.0.7
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -119,13 +119,13 @@ jobs:
 
       - name: Install QGIS (Windows chocolatey)
         if: matrix.config.qgis == 'chocolatey'
-        uses: crazy-max/ghaction-chocolatey@v2
+        uses: crazy-max/ghaction-chocolatey@v3
         with:
           args: install qgis
 
       - name: Install QGIS LTR (Windows chocolatey)
         if: matrix.config.qgis == 'chocolatey-ltr'
-        uses: crazy-max/ghaction-chocolatey@v2
+        uses: crazy-max/ghaction-chocolatey@v3
         with:
           args: install qgis-ltr
 
@@ -161,7 +161,7 @@ jobs:
 
       - name: Restore (or define new) R package cache
         if: matrix.config.dep == ''
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ${{ env.R_LIBS_USER }}/*
