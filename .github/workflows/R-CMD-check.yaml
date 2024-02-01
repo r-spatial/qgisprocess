@@ -119,13 +119,13 @@ jobs:
 
       - name: Install QGIS (Windows chocolatey)
         if: matrix.config.qgis == 'chocolatey'
-        uses: crazy-max/ghaction-chocolatey@v2
+        uses: crazy-max/ghaction-chocolatey@v3
         with:
           args: install qgis
 
       - name: Install QGIS LTR (Windows chocolatey)
         if: matrix.config.qgis == 'chocolatey-ltr'
-        uses: crazy-max/ghaction-chocolatey@v2
+        uses: crazy-max/ghaction-chocolatey@v3
         with:
           args: install qgis-ltr
 
