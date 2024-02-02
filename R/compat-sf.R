@@ -3,9 +3,6 @@
 #' @details
 #' The sf package must be loaded explicitly to use these methods.
 #'
-#' @note Just use `st_as_sf()` in R scripts, it will use the correct
-#' method.
-#'
 #' @family topics about coercing processing output
 #' @family topics about accessing or managing processing results
 #'
