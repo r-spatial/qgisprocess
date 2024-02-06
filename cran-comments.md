@@ -1,8 +1,12 @@
+## This version includes a change at CRAN’s request
+
+This version includes a fix to solve the ERRORs in the CRAN check results page at <https://cran.r-project.org/web/checks/check_results_qgisprocess.html> (as consulted 6 Feb 2024). A unit test for 'terra' compatibility failed. It was the unit test itself that needed updating in order to comply with current 'terra' behaviour.
+
 ## R CMD check results
 
 0 errors | 0 warnings | 2 notes
 
-* checking CRAN incoming feasibility ... [12s] NOTE
+* checking CRAN incoming feasibility ... [11s] NOTE
 
   Maintainer: 'Floris Vanderhaeghe <floris.vanderhaeghe@inbo.be>'
   
