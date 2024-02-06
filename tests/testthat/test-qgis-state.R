@@ -17,7 +17,7 @@ test_that("qgis_version(debug = TRUE) works", {
       qgis_version(debug = TRUE),
       glue("Using.+{getNamespaceVersion('qgisprocess')}")
     )
-    expect_message(qgis_version(debug = TRUE), "PROJ version")
+    expect_message(qgis_version(debug = TRUE), "Python version")
     expect_message(qgis_version(debug = TRUE), "EPSG ")
   })
 })
