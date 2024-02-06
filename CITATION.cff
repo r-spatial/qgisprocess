@@ -39,4 +39,4 @@ abstract: R package 'qgisprocess' provides seamless access
 identifiers:
 - type: url
   value: https://r-spatial.github.io/qgisprocess/
-version: 0.2.0
+version: 0.3.0
