@@ -243,7 +243,6 @@ test_that("terra argument coercers work for SpatVectorProxy", {
     as_qgis_argument(obj, qgis_argument_spec(qgis_type = "point")),
     "exactly one row and the geometry must be a point"
   )
-
 })
 
 test_that("terra argument coercer for SpatVectorProxy works for qgis_type 'point'", {
