@@ -57,9 +57,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="qgisprocess-development-version">qgisprocess (development version)<a class="anchor" aria-label="anchor" href="#qgisprocess-development-version"></a></h2>
-<ul><li>More consistent and intuitive handling of JSON input / output user settings (<a href="https://github.com/r-spatial/qgisprocess/issues/195" class="external-link">#195</a>, <a href="https://github.com/r-spatial/qgisprocess/issues/196" class="external-link">#196</a>; see <code><a href="../reference/qgis_using_json_input.html">?qgis_using_json_output</a></code>).</li>
-<li>Fix bug in support for environment variable <code>R_QGISPROCESS_DETECT_NEWER_QGIS</code> (<a href="https://github.com/r-spatial/qgisprocess/issues/197" class="external-link">#197</a>).</li>
-<li>QGIS or third-party providers can expose deprecated algorithms that may be removed from future versions. <a href="https://r-spatial.github.io/qgisprocess/">qgisprocess</a> now handles these algorithms explicitly (<a href="https://github.com/r-spatial/qgisprocess/issues/198" class="external-link">#198</a>):
+<div class="section level3">
+<h3 id="enhancements-development-version">Enhancements<a class="anchor" aria-label="anchor" href="#enhancements-development-version"></a></h3>
+<ul><li>QGIS or third-party providers can expose deprecated algorithms that may be removed from future versions. <a href="https://r-spatial.github.io/qgisprocess/">qgisprocess</a> now handles these algorithms explicitly (<a href="https://github.com/r-spatial/qgisprocess/issues/198" class="external-link">#198</a>):
 <ul><li>
 <code><a href="../reference/qgis_run_algorithm.html">qgis_run_algorithm()</a></code> and other functions (such as <code><a href="../reference/qgis_show_help.html">qgis_show_help()</a></code> and <code><a href="../reference/qgis_show_help.html">qgis_get_description()</a></code>) will warn if a deprecated algorithm is passed (issues <a href="https://github.com/r-spatial/qgisprocess/issues/193" class="external-link">#193</a>, <a href="https://github.com/r-spatial/qgisprocess/issues/194" class="external-link">#194</a>).</li>
 <li>
@@ -67,7 +67,14 @@
 <li>
 <code><a href="../reference/qgis_algorithms.html">qgis_algorithms()</a></code> can <em>optionally</em> restrict its results to non-deprecated algorithms (set the <code>include_deprecated</code> argument to <code>FALSE</code>). By default they are included, just as before.</li>
 </ul></li>
+<li>More consistent and intuitive handling of JSON input / output user settings (<a href="https://github.com/r-spatial/qgisprocess/issues/195" class="external-link">#195</a>, <a href="https://github.com/r-spatial/qgisprocess/issues/196" class="external-link">#196</a>; see <code><a href="../reference/qgis_using_json_input.html">?qgis_using_json_output</a></code>).</li>
 </ul></div>
+<div class="section level3">
+<h3 id="fixes-development-version">Fixes<a class="anchor" aria-label="anchor" href="#fixes-development-version"></a></h3>
+<ul><li>Fix bug in support for environment variable <code>R_QGISPROCESS_DETECT_NEWER_QGIS</code> (<a href="https://github.com/r-spatial/qgisprocess/issues/197" class="external-link">#197</a>).</li>
+<li>Fix unit test to comply with <a href="https://rspatial.org/" class="external-link">terra</a> &gt; 1.7-65 (<a href="https://github.com/r-spatial/qgisprocess/issues/202" class="external-link">#202</a>).</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="qgisprocess-020">qgisprocess 0.2.0<a class="anchor" aria-label="anchor" href="#qgisprocess-020"></a></h2><p class="text-muted">CRAN release: 2023-12-21</p>
 <div class="section level3">
