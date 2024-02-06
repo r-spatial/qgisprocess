@@ -285,9 +285,10 @@ test_that("qgis_run_algorithm() yields a warning with a deprecated algorithm", {
     "native:raisewarning" %in% algs$algorithm[algs$deprecated],
     "'native:raisewarning' is not an available deprecated algorithm."
   )
-  local_edition(3) # if more than one warning pops up, it should be apparent from
-                   # testthat output (only the first warning is swallowed in the
-                   # third edition of testthat)
+  local_edition(3)
+  # if more than one warning pops up, it should be apparent from
+  # testthat output (only the first warning is swallowed in the
+  # third edition of testthat)
 
   suppressMessages(
     expect_warning(

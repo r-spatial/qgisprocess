@@ -82,9 +82,10 @@ test_that("Help functions & qgis_function() yield a warning with deprecated algo
       "Rewrite this test to simulate deprecated algorithms."
     )
   )
-  local_edition(3) # if more than one warning pops up, it should be apparent from
-                   # testthat output (only the first warning is swallowed in the
-                   # third edition of testthat)
+  local_edition(3)
+  # if more than one warning pops up, it should be apparent from
+  # testthat output (only the first warning is swallowed in the
+  # third edition of testthat)
 
   alg_deprecated <- sample(algs$algorithm[algs$deprecated], 1)
   alg_non_deprecated <- sample(algs$algorithm[!algs$deprecated], 1)
