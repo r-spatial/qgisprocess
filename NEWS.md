@@ -1,12 +1,18 @@
 # qgisprocess (development version)
 
-- More consistent and intuitive handling of JSON input / output user settings (#195, #196; see `?qgis_using_json_output`).
-- Fix bug in support for environment variable `R_QGISPROCESS_DETECT_NEWER_QGIS` (#197).
+## Enhancements
+
 - QGIS or third-party providers can expose deprecated algorithms that may be removed from future versions.
 `{qgisprocess}` now handles these algorithms explicitly (#198):
   - `qgis_run_algorithm()` and other functions (such as `qgis_show_help()` and `qgis_get_description()`) will warn if a deprecated algorithm is passed (issues #193, #194).
   - `qgis_search_algorithms()` now **excludes** deprecated algorithms by default; they can still be included by setting the `include_deprecated` argument to `TRUE`.
   - `qgis_algorithms()` can _optionally_ restrict its results to non-deprecated algorithms (set the `include_deprecated` argument to `FALSE`). By default they are included, just as before.
+- More consistent and intuitive handling of JSON input / output user settings (#195, #196; see `?qgis_using_json_output`).
+
+## Fixes
+
+- Fix bug in support for environment variable `R_QGISPROCESS_DETECT_NEWER_QGIS` (#197).
+- Fix unit test to comply with `{terra}` > 1.7-65 (#202).
 
 # qgisprocess 0.2.0
 
