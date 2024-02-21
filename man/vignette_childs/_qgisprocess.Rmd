@@ -90,14 +90,20 @@ This tells us that we can also use the third-party providers GDAL, GRASS and SAG
 
 ## First example
 
-To find out about the available (cached) geoalgorithms, run:
+To get the complete overview of available (cached) geoalgorithms, run:
 
 ```{r algs}
 algs <- qgis_algorithms()
 algs
 ```
 
-Since we have also installed GRASS and SAGA, nearly 1000 geoalgorithms are at our disposal.
+For a directed search, use `qgis_search_algorithms()`:
+
+```{r algs2}
+qgis_search_algorithms(algorithm = "buffer", group = "[Vv]ector")
+```
+
+Since we have also installed GRASS GIS and SAGA, over 1000 geoalgorithms are at our disposal.
 To find out about a specific geoalgorithm and a description of its arguments, use `qgis_show_help()`, e.g.:
 
 ```{r help, eval=FALSE}
