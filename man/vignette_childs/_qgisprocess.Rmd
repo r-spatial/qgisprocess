@@ -111,7 +111,7 @@ qgis_show_help("native:buffer")
 ## 
 ## The segments parameter controls the number of line segments to use to approximate a quarter circle when creating rounded offsets.
 ## 
-##...
+## ...
 ```
 
 To find out the arguments of a specific geoalgorithm, run:
@@ -164,7 +164,7 @@ mapview(buf, col.regions = "blue") +
   mapview(random_points, col.regions = "red", cex = 3)
 ```
 
-You can convert each qgis-algorithm into an R function with `qgis_function()`.
+You can convert each QGIS algorithm into an R function with `qgis_function()`.
 So using our buffer example from above, we could also run:
 
 ```{r function-creation, eval=FALSE}
@@ -240,7 +240,7 @@ r <- lapply(info[nms], \(x) as.numeric(qgis_as_terra(x))) |>
   rast()
 ```
 
-Since we have now many terrain attributes at our disposal, let us take the opportunity to add their values to points laying on top of them with the help of the SAGA algorithm `sagang:addrastervaluestopoints`.
+Since we now have many terrain attributes at our disposal, let us take the opportunity to add their values to points laying on top of them with the help of the SAGA algorithm `sagang:addrastervaluestopoints`.
 
 ```{r addrastertopoints-args}
 qgis_get_argument_specs("sagang:addrastervaluestopoints")
@@ -279,10 +279,11 @@ To verify that it worked, read in the output.
 ```{r multilayer-output}
 sf::st_as_sf(rp_tp)
 ```
+
 # Piping
 
 `qgis_process` does not lend itself naturally to piping because its first argument is the name of a geoalgorithm instead of a data object.
-`qgis_run_algorithm_p()` circumvents this by accepting a `.data` object as its first argument, and pipes this data object into the the first argument of a geoalgorithm assuming that the specified geoalgorithm needs a data input object as its first argument.
+`qgis_run_algorithm_p()` circumvents this by accepting a `.data` object as its first argument, and pipes this data object into the first argument of a geoalgorithm assuming that the specified geoalgorithm needs a data input object as its first argument.
 
 ```{r buf-pipe}
 system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") |>
