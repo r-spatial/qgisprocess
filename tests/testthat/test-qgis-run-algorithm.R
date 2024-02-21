@@ -93,10 +93,10 @@ test_that(glue("qgis_run_algorithm() works when passing a numeric vector to a ra
   skip_if(!("GRASS" %in% qgis_providers()$provider_title), "GRASS is not available")
 
   obj <- terra::rast(system.file("longlake/longlake_depth.tif", package = "qgisprocess"))
-  out <- qgis_run_algorithm("grass7:r.rescale", input = obj, to = c(0, 1))
+  out <- qgis_run_algorithm("grass:r.rescale", input = obj, to = c(0, 1))
   tmp <- qgis_as_terra(out)
   expect_identical(max(terra::values(tmp), na.rm = TRUE), 1L)
-  out2 <- qgis_run_algorithm("grass7:r.rescale", input = obj, to = "0,1")
+  out2 <- qgis_run_algorithm("grass:r.rescale", input = obj, to = "0,1")
   tmp2 <- qgis_as_terra(out2)
   expect_identical(terra::values(tmp), terra::values(tmp2))
 })
