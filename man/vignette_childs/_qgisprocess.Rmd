@@ -5,7 +5,7 @@ Here you will learn about package configuration, about basic usage illustrated b
 # Setting up the system
 
 **qgisprocess** is basically a wrapper around the standalone command line tool [`qgis_process`](https://docs.qgis.org/latest/en/docs/user_manual/processing/standalone.html).
-Therefore, you need to have installed QGIS on your system as well as third-party providers such as GRASS and SAGA to access and run all geoalgorithms provided through `qgis_process` from within R.
+Therefore, you need to have installed QGIS on your system as well as third-party providers such as GRASS GIS and SAGA to access and run all geoalgorithms provided through `qgis_process` from within R.
 
 The package is meant to support _current_ QGIS releases, i.e. both the latest and the long-term release.
 Although older QGIS releases are not officially supported, **qgisprocess** might work with QGIS versions >=3.16.
@@ -68,7 +68,7 @@ Next, let's check which plugins are at our disposal:
 qgis_plugins()
 ```
 
-Since we will use GRASS and SAGA later on, you must have GRASS and SAGA version > 7 installed on your system.
+Since we will use GRASS GIS and SAGA later on, you must have GRASS GIS and SAGA version > 7 installed on your system.
 You also need to install the third-party plugin 'SAGA Next Generation' in the QGIS GUI.
 The GRASS provider plugin is already built-in in QGIS.
 
@@ -180,7 +180,7 @@ Hence, if you prefer running QGIS with callable R functions, check it out.
 
 ## Second example
 
-As a second example, let's have a look at how to do raster processing running GRASS in the background.
+As a second example, let's have a look at how to do raster processing running GRASS GIS in the background.
 To compute various terrain attributes of a digital elevation model, we can use `grass7:r.slope.aspect`.
 
 `qgis_get_description()` (also included in `qgis_show_help()`) gives us the general description of the algorithm.
@@ -207,7 +207,7 @@ Now let us calculate the terrain attributes.
 library("terra")
 # attach digital elevation model from Mt. Mongón (Peru)
 dem <- rast(system.file("raster/dem.tif", package = "spDataLarge"))
-# if not already done, enable the grass plugin
+# if not already done, enable the GRASS GIS plugin
 # qgis_enable_plugins("grassprovider")
 info <- qgis_run_algorithm(alg = "grass7:r.slope.aspect", elevation = dem)
 ```
