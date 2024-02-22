@@ -246,7 +246,7 @@ jobs:
 
       - name: Upload check results
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.config.os }}_r-${{ matrix.config.r }}_qgis-${{ matrix.config.qgis }}_results
           path: check
