@@ -5,7 +5,7 @@ Here you will learn about package configuration, about basic usage illustrated b
 # Setting up the system
 
 **qgisprocess** is basically a wrapper around the standalone command line tool [`qgis_process`](https://docs.qgis.org/latest/en/docs/user_manual/processing/standalone.html).
-Therefore, you need to have installed QGIS on your system as well as third-party providers such as GRASS and SAGA to access and run all geoalgorithms provided through `qgis_process` from within R.
+Therefore, you need to have installed QGIS on your system as well as third-party providers such as GRASS GIS and SAGA to access and run all geoalgorithms provided through `qgis_process` from within R.
 
 The package is meant to support _current_ QGIS releases, i.e. both the latest and the long-term release.
 Although older QGIS releases are not officially supported, **qgisprocess** might work with QGIS versions >=3.16.
@@ -68,7 +68,7 @@ Next, let's check which plugins are at our disposal:
 qgis_plugins()
 ```
 
-Since we will use GRASS and SAGA later on, you must have GRASS and SAGA version > 7 installed on your system.
+Since we will use GRASS GIS and SAGA later on, you must have GRASS GIS and SAGA version > 7 installed on your system.
 You also need to install the third-party plugin 'SAGA Next Generation' in the QGIS GUI.
 The GRASS provider plugin is already built-in in QGIS.
 
@@ -90,14 +90,20 @@ This tells us that we can also use the third-party providers GDAL, GRASS and SAG
 
 ## First example
 
-To find out about the available (cached) geoalgorithms, run:
+To get the complete overview of available (cached) geoalgorithms, run:
 
 ```{r algs}
 algs <- qgis_algorithms()
 algs
 ```
 
-Since we have also installed GRASS and SAGA, nearly 1000 geoalgorithms are at our disposal.
+For a directed search, use `qgis_search_algorithms()`:
+
+```{r algs2}
+qgis_search_algorithms(algorithm = "buffer", group = "[Vv]ector")
+```
+
+Since we have also installed GRASS GIS and SAGA, over 1000 geoalgorithms are at our disposal.
 To find out about a specific geoalgorithm and a description of its arguments, use `qgis_show_help()`, e.g.:
 
 ```{r help, eval=FALSE}
@@ -111,7 +117,7 @@ qgis_show_help("native:buffer")
 ## 
 ## The segments parameter controls the number of line segments to use to approximate a quarter circle when creating rounded offsets.
 ## 
-##...
+## ...
 ```
 
 To find out the arguments of a specific geoalgorithm, run:
@@ -164,7 +170,7 @@ mapview(buf, col.regions = "blue") +
   mapview(random_points, col.regions = "red", cex = 3)
 ```
 
-You can convert each qgis-algorithm into an R function with `qgis_function()`.
+You can convert each QGIS algorithm into an R function with `qgis_function()`.
 So using our buffer example from above, we could also run:
 
 ```{r function-creation, eval=FALSE}
@@ -180,7 +186,7 @@ Hence, if you prefer running QGIS with callable R functions, check it out.
 
 ## Second example
 
-As a second example, let's have a look at how to do raster processing running GRASS in the background.
+As a second example, let's have a look at how to do raster processing running GRASS GIS in the background.
 To compute various terrain attributes of a digital elevation model, we can use `grass7:r.slope.aspect`.
 
 `qgis_get_description()` (also included in `qgis_show_help()`) gives us the general description of the algorithm.
@@ -207,7 +213,7 @@ Now let us calculate the terrain attributes.
 library("terra")
 # attach digital elevation model from Mt. Mongón (Peru)
 dem <- rast(system.file("raster/dem.tif", package = "spDataLarge"))
-# if not already done, enable the grass plugin
+# if not already done, enable the GRASS GIS plugin
 # qgis_enable_plugins("grassprovider")
 info <- qgis_run_algorithm(alg = "grass7:r.slope.aspect", elevation = dem)
 ```
@@ -240,7 +246,7 @@ r <- lapply(info[nms], \(x) as.numeric(qgis_as_terra(x))) |>
   rast()
 ```
 
-Since we have now many terrain attributes at our disposal, let us take the opportunity to add their values to points laying on top of them with the help of the SAGA algorithm `sagang:addrastervaluestopoints`.
+Since we now have many terrain attributes at our disposal, let us take the opportunity to add their values to points laying on top of them with the help of the SAGA algorithm `sagang:addrastervaluestopoints`.
 
 ```{r addrastertopoints-args}
 qgis_get_argument_specs("sagang:addrastervaluestopoints")
@@ -279,10 +285,11 @@ To verify that it worked, read in the output.
 ```{r multilayer-output}
 sf::st_as_sf(rp_tp)
 ```
+
 # Piping
 
 `qgis_process` does not lend itself naturally to piping because its first argument is the name of a geoalgorithm instead of a data object.
-`qgis_run_algorithm_p()` circumvents this by accepting a `.data` object as its first argument, and pipes this data object into the the first argument of a geoalgorithm assuming that the specified geoalgorithm needs a data input object as its first argument.
+`qgis_run_algorithm_p()` circumvents this by accepting a `.data` object as its first argument, and pipes this data object into the first argument of a geoalgorithm assuming that the specified geoalgorithm needs a data input object as its first argument.
 
 ```{r buf-pipe}
 system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") |>
