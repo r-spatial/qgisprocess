@@ -74,9 +74,11 @@ reconfigure the package, or just
 ``` r
 library(qgisprocess)
 #> Attempting to load the package cache ... Success!
-#> QGIS version: 3.34.1-Prizren
-#> Having access to 2084 algorithms from 19 QGIS processing providers.
+#> QGIS version: 3.36.0-Maidenhead
+#> Having access to 1986 algorithms from 15 QGIS processing providers.
 #> Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.
+#> >>> Run `qgis_enable_plugins()` to enable 3 disabled plugins and access
+#>     their algorithms: ViewshedAnalysis, networks, valhalla
 ```
 
 ## Functionality
@@ -132,11 +134,12 @@ result <- qgis_run_algorithm(
 #> Argument `MITER_LIMIT` is unspecified (using QGIS default value).
 #> Argument `SEPARATE_DISJOINT` is unspecified (using QGIS default value).
 #> Using `OUTPUT = qgis_tmp_vector()`
+#> Using non-preferred coordinate operation between EPSG:4267 and EPSG:4326. Using +proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=push +v_3 +step +proj=cart +ellps=clrk66 +step +proj=helmert +x=-10 +y=158 +z=187 +step +inv +proj=cart +ellps=WGS84 +step +proj=pop +v_3 +step +proj=unitconvert +xy_in=rad +xy_out=deg, preferred +proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=hgridshift +grids=ca_nrc_ntv2_0.tif +step +proj=unitconvert +xy_in=rad +xy_out=deg.
 
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpQlJBjV/file1046b3f8fd4a3/file1046b37e1f09.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmp9kZc3I/file47aa7f97cbcc/file47aa28bb3585.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
@@ -151,20 +154,19 @@ matching with regex).
 
 ``` r
 qgis_search_algorithms(algorithm = "buffer", group = "[Vv]ector")
-#> # A tibble: 11 × 5
+#> # A tibble: 10 × 5
 #>    provider provider_title    group                algorithm     algorithm_title
 #>    <chr>    <chr>             <chr>                <chr>         <chr>          
 #>  1 gdal     GDAL              Vector geoprocessing gdal:bufferv… Buffer vectors 
 #>  2 gdal     GDAL              Vector geoprocessing gdal:oneside… One side buffer
-#>  3 grass7   GRASS             Vector (v.*)         grass7:v.buf… v.buffer       
+#>  3 grass    GRASS             Vector (v.*)         grass:v.buff… v.buffer       
 #>  4 native   QGIS (native c++) Vector geometry      native:buffer Buffer         
 #>  5 native   QGIS (native c++) Vector geometry      native:buffe… Variable width…
 #>  6 native   QGIS (native c++) Vector geometry      native:multi… Multi-ring buf…
 #>  7 native   QGIS (native c++) Vector geometry      native:singl… Single sided b…
 #>  8 native   QGIS (native c++) Vector geometry      native:taper… Tapered buffers
 #>  9 native   QGIS (native c++) Vector geometry      native:wedge… Create wedge b…
-#> 10 qgis     QGIS              Vector geometry      qgis:variabl… Variable dista…
-#> 11 sagang   SAGA Next Gen     Vector general       sagang:shape… Shapes buffer
+#> 10 sagang   SAGA Next Gen     Vector general       sagang:shape… Shapes buffer
 ```
 
 You can read the help associated with an algorithm using
@@ -178,7 +180,7 @@ A full list of available algorithms is returned by `qgis_algorithms()`.
 
 ``` r
 qgis_algorithms()
-#> # A tibble: 2,084 × 24
+#> # A tibble: 1,986 × 24
 #>    provider  provider_title algorithm               algorithm_id algorithm_title
 #>    <chr>     <chr>          <chr>                   <chr>        <chr>          
 #>  1 3d        QGIS (3D)      3d:tessellate           tessellate   Tessellate     
@@ -191,7 +193,7 @@ qgis_algorithms()
 #>  8 NetworkGT NetworkGT      NetworkGT:Connect Y No… Connect Y N… Connect Y Nodes
 #>  9 NetworkGT NetworkGT      NetworkGT:Contour Grid  Contour Grid Contour Grid   
 #> 10 NetworkGT NetworkGT      NetworkGT:Define Fract… Define Frac… Define Fractur…
-#> # ℹ 2,074 more rows
+#> # ℹ 1,976 more rows
 #> # ℹ 19 more variables: provider_can_be_activated <lgl>,
 #> #   provider_is_active <lgl>, provider_long_name <chr>, provider_version <chr>,
 #> #   provider_warning <chr>, can_cancel <lgl>, deprecated <lgl>, group <chr>,

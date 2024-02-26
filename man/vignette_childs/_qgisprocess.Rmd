@@ -187,24 +187,27 @@ Hence, if you prefer running QGIS with callable R functions, check it out.
 ## Second example
 
 As a second example, let's have a look at how to do raster processing running GRASS GIS in the background.
-To compute various terrain attributes of a digital elevation model, we can use `grass7:r.slope.aspect`.
+To compute various terrain attributes of a digital elevation model, we can use `grass:r.slope.aspect`.
+
+_Note: in QGIS versions < 3.36, the processing provider was still called `grass7` (even though this provider works with GRASS GIS 8)._
+_So if you have an older QGIS version, you must name the algorithms as `grass7:r.slope.aspect` etc._
 
 `qgis_get_description()` (also included in `qgis_show_help()`) gives us the general description of the algorithm.
 
 ```{r desc}
-qgis_get_description("grass7:r.slope.aspect")
+qgis_get_description("grass:r.slope.aspect")
 ```
 
 We can find out about the arguments again with the help of `qgis_get_argument_specs()`.
 
 ```{r args}
-qgis_get_argument_specs("grass7:r.slope.aspect")
+qgis_get_argument_specs("grass:r.slope.aspect")
 ```
 
 `qgis_get_output_specs()` shows the different outputs that will be calculated:
 
 ```{r outputs}
-qgis_get_output_specs("grass7:r.slope.aspect")
+qgis_get_output_specs("grass:r.slope.aspect")
 ```
 
 Now let us calculate the terrain attributes.
@@ -215,7 +218,7 @@ library("terra")
 dem <- rast(system.file("raster/dem.tif", package = "spDataLarge"))
 # if not already done, enable the GRASS GIS plugin
 # qgis_enable_plugins("grassprovider")
-info <- qgis_run_algorithm(alg = "grass7:r.slope.aspect", elevation = dem)
+info <- qgis_run_algorithm(alg = "grass:r.slope.aspect", elevation = dem)
 ```
 
 Just printing the `info` object shows which output files have been made:
@@ -228,7 +231,7 @@ Combine these output rasters as a multi-layered `SpatRaster` object and plot it:
 
 ```{r combine1, message=FALSE}
 # just keep the names of output rasters
-nms <- qgis_get_output_specs("grass7:r.slope.aspect")$name
+nms <- qgis_get_output_specs("grass:r.slope.aspect")$name
 # read in the output rasters 
 r <- info[nms] |>
   unlist() |>
