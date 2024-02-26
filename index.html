@@ -119,9 +119,11 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/qgisprocess/">qgisprocess</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Attempting to load the package cache ... Success!</span></span>
-<span><span class="co">#&gt; QGIS version: 3.34.1-Prizren</span></span>
-<span><span class="co">#&gt; Having access to 2084 algorithms from 19 QGIS processing providers.</span></span>
-<span><span class="co">#&gt; Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.</span></span></code></pre></div>
+<span><span class="co">#&gt; QGIS version: 3.36.0-Maidenhead</span></span>
+<span><span class="co">#&gt; Having access to 1986 algorithms from 15 QGIS processing providers.</span></span>
+<span><span class="co">#&gt; Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.</span></span>
+<span><span class="co">#&gt; &gt;&gt;&gt; Run `qgis_enable_plugins()` to enable 3 disabled plugins and access</span></span>
+<span><span class="co">#&gt;     their algorithms: ViewshedAnalysis, networks, valhalla</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -152,11 +154,12 @@
 <span><span class="co">#&gt; Argument `MITER_LIMIT` is unspecified (using QGIS default value).</span></span>
 <span><span class="co">#&gt; Argument `SEPARATE_DISJOINT` is unspecified (using QGIS default value).</span></span>
 <span><span class="co">#&gt; Using `OUTPUT = qgis_tmp_vector()`</span></span>
+<span><span class="co">#&gt; Using non-preferred coordinate operation between EPSG:4267 and EPSG:4326. Using +proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=push +v_3 +step +proj=cart +ellps=clrk66 +step +proj=helmert +x=-10 +y=158 +z=187 +step +inv +proj=cart +ellps=WGS84 +step +proj=pop +v_3 +step +proj=unitconvert +xy_in=rad +xy_out=deg, preferred +proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=hgridshift +grids=ca_nrc_ntv2_0.tif +step +proj=unitconvert +xy_in=rad +xy_out=deg.</span></span>
 <span></span>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 1</span></span>
-<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpQlJBjV/file1046b3f8fd4a3/file1046b37e1f09.gpkg"</span></span>
+<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmp9kZc3I/file47aa7f97cbcc/file47aa28bb3585.gpkg"</span></span>
 <span></span>
 <span><span class="va">output_sf</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">output_sf</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -168,27 +171,26 @@
 <p>You can search for algorithms with <code><a href="reference/qgis_search_algorithms.html">qgis_search_algorithms()</a></code> (string matching with regex).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/qgis_search_algorithms.html">qgis_search_algorithms</a></span><span class="op">(</span>algorithm <span class="op">=</span> <span class="st">"buffer"</span>, group <span class="op">=</span> <span class="st">"[Vv]ector"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 11 × 5</span></span>
+<span><span class="co">#&gt; # A tibble: 10 × 5</span></span>
 <span><span class="co">#&gt;    provider provider_title    group                algorithm     algorithm_title</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;             &lt;chr&gt;                &lt;chr&gt;         &lt;chr&gt;          </span></span>
 <span><span class="co">#&gt;  1 gdal     GDAL              Vector geoprocessing gdal:bufferv… Buffer vectors </span></span>
 <span><span class="co">#&gt;  2 gdal     GDAL              Vector geoprocessing gdal:oneside… One side buffer</span></span>
-<span><span class="co">#&gt;  3 grass7   GRASS             Vector (v.*)         grass7:v.buf… v.buffer       </span></span>
+<span><span class="co">#&gt;  3 grass    GRASS             Vector (v.*)         grass:v.buff… v.buffer       </span></span>
 <span><span class="co">#&gt;  4 native   QGIS (native c++) Vector geometry      native:buffer Buffer         </span></span>
 <span><span class="co">#&gt;  5 native   QGIS (native c++) Vector geometry      native:buffe… Variable width…</span></span>
 <span><span class="co">#&gt;  6 native   QGIS (native c++) Vector geometry      native:multi… Multi-ring buf…</span></span>
 <span><span class="co">#&gt;  7 native   QGIS (native c++) Vector geometry      native:singl… Single sided b…</span></span>
 <span><span class="co">#&gt;  8 native   QGIS (native c++) Vector geometry      native:taper… Tapered buffers</span></span>
 <span><span class="co">#&gt;  9 native   QGIS (native c++) Vector geometry      native:wedge… Create wedge b…</span></span>
-<span><span class="co">#&gt; 10 qgis     QGIS              Vector geometry      qgis:variabl… Variable dista…</span></span>
-<span><span class="co">#&gt; 11 sagang   SAGA Next Gen     Vector general       sagang:shape… Shapes buffer</span></span></code></pre></div>
+<span><span class="co">#&gt; 10 sagang   SAGA Next Gen     Vector general       sagang:shape… Shapes buffer</span></span></code></pre></div>
 <p>You can read the help associated with an algorithm using <code><a href="reference/qgis_show_help.html">qgis_show_help()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/qgis_show_help.html">qgis_show_help</a></span><span class="op">(</span><span class="st">"native:buffer"</span><span class="op">)</span></span></code></pre></div>
 <p>A full list of available algorithms is returned by <code><a href="reference/qgis_algorithms.html">qgis_algorithms()</a></code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/qgis_algorithms.html">qgis_algorithms</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 2,084 × 24</span></span>
+<span><span class="co">#&gt; # A tibble: 1,986 × 24</span></span>
 <span><span class="co">#&gt;    provider  provider_title algorithm               algorithm_id algorithm_title</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;          &lt;chr&gt;                   &lt;chr&gt;        &lt;chr&gt;          </span></span>
 <span><span class="co">#&gt;  1 3d        QGIS (3D)      3d:tessellate           tessellate   Tessellate     </span></span>
@@ -201,7 +203,7 @@
 <span><span class="co">#&gt;  8 NetworkGT NetworkGT      NetworkGT:Connect Y No… Connect Y N… Connect Y Nodes</span></span>
 <span><span class="co">#&gt;  9 NetworkGT NetworkGT      NetworkGT:Contour Grid  Contour Grid Contour Grid   </span></span>
 <span><span class="co">#&gt; 10 NetworkGT NetworkGT      NetworkGT:Define Fract… Define Frac… Define Fractur…</span></span>
-<span><span class="co">#&gt; # ℹ 2,074 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 1,976 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 19 more variables: provider_can_be_activated &lt;lgl&gt;,</span></span>
 <span><span class="co">#&gt; #   provider_is_active &lt;lgl&gt;, provider_long_name &lt;chr&gt;, provider_version &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   provider_warning &lt;chr&gt;, can_cancel &lt;lgl&gt;, deprecated &lt;lgl&gt;, group &lt;chr&gt;,</span></span>
