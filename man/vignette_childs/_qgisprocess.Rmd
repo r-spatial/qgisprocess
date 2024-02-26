@@ -189,6 +189,9 @@ Hence, if you prefer running QGIS with callable R functions, check it out.
 As a second example, let's have a look at how to do raster processing running GRASS GIS in the background.
 To compute various terrain attributes of a digital elevation model, we can use `grass:r.slope.aspect`.
 
+_Note: in QGIS versions < 3.36, the processing provider was still called `grass7` (even though this provider works with GRASS GIS 8)._
+_So if you have an older QGIS version, you must name the algorithms as `grass7:r.slope.aspect` etc._
+
 `qgis_get_description()` (also included in `qgis_show_help()`) gives us the general description of the algorithm.
 
 ```{r desc}
