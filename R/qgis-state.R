@@ -396,7 +396,7 @@ readopt <- function(option_name, envvar_name) {
 
 
 
-#' Resolve a boolean option or environmental variable to TRUE, FALSE or (optionally) NA
+#' Resolve a boolean option or environment variable to TRUE, FALSE or (optionally) NA
 #'
 #' @param value A result as obtained by [readopt()].
 #' @param keep_NA Return NA if option and env var are empty?
