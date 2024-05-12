@@ -179,3 +179,28 @@ test_that("qgis_*able_plugins() works for an enabled grassprovider plugin", {
   )
   expect_true(subset(qgis_plugins(), name == "grassprovider")$enabled)
 })
+
+
+
+test_that("Internal function arg_skip_loading_plugins() works", {
+  expect_null(arg_skip_loading_plugins("grass:algorithm"))
+
+  local_mocked_bindings(
+    qgis_version = function(...) "3.34.0" # --skip-loading-plugins not supported
+  )
+
+  expect_null(arg_skip_loading_plugins("grass:algorithm"))
+  expect_null(arg_skip_loading_plugins("native:algorithm"))
+  expect_null(arg_skip_loading_plugins())
+
+  local_mocked_bindings(
+    qgis_version = function(...) "3.36.0" # --skip-loading-plugins supported
+  )
+
+  expect_null(arg_skip_loading_plugins("grass:algorithm"))
+  expect_identical(
+    arg_skip_loading_plugins("native:algorithm"),
+    "--skip-loading-plugins"
+  )
+  expect_identical(arg_skip_loading_plugins(), "--skip-loading-plugins")
+})
