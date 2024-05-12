@@ -135,6 +135,18 @@ qgis_query_plugins <- function(quiet = FALSE) {
 
 
 
+#' @keywords internal
+arg_skip_loading_plugins <- function(algorithm = NULL) {
+  if (!is.null(algorithm) && !algorithm_is_native(algorithm)) {
+    return(NULL)
+  }
+  if (package_version(qgis_version(full = FALSE)) >= "3.36.0") {
+    "--skip-loading-plugins"
+  } else NULL
+}
+
+
+
 
 #' @keywords internal
 message_disabled_plugins <- function(
