@@ -98,8 +98,9 @@ qgis_plugins <- function(
 
 #' @keywords internal
 qgis_query_plugins <- function(quiet = FALSE) {
+  arg_skip_loading <- arg_skip_loading_plugins()
   if (qgis_using_json_output()) {
-    result <- qgis_run(args = c("plugins", "--json"))
+    result <- qgis_run(args = c("plugins", "--json", arg_skip_loading))
     if (nchar(result$stderr) > 0L) {
       message(
         "\nStandard error message from 'qgis_process':\n",
@@ -112,7 +113,7 @@ qgis_query_plugins <- function(quiet = FALSE) {
     plugins$value <- unlist(plugins$value, use.names = FALSE)
     colnames(plugins) <- c("name", "enabled")
   } else {
-    result <- qgis_run("plugins")
+    result <- qgis_run(args = c("plugins", arg_skip_loading))
     if (nchar(result$stderr) > 0L) {
       message(
         "\nStandard error message from 'qgis_process':\n",

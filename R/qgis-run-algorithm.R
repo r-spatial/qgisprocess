@@ -121,6 +121,7 @@ qgis_run_algorithm <- function(algorithm, ..., PROJECT_PATH = NULL, ELLIPSOID = 
   result <- qgis_run(
     args = c(
       if (use_json_output) "--json",
+      arg_skip_loading_plugins(algorithm),
       "run",
       algorithm,
       if (use_json_input) "-" else args_str
