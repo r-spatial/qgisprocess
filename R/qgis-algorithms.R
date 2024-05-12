@@ -119,6 +119,14 @@ check_algorithm_deprecation <- function(algorithm, skip = FALSE) {
 }
 
 
+
+#' @keywords internal
+algorithm_is_native <- function(algorithm) {
+  stringr::str_match(algorithm, "^(\\w+):.*")[, 2] %in%
+    c("native", "3d", "pdal")
+}
+
+
 #' @keywords internal
 qgis_query_algorithms <- function(quiet = FALSE) {
   if (qgis_using_json_output()) {
