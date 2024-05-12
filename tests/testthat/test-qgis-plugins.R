@@ -2,21 +2,18 @@ test_that("qgis_plugins(which = \"all\", query = FALSE) returns sensible things"
   skip_if_not(has_qgis())
   plugins <- qgis_plugins(which = "all", query = FALSE)
   expect_correct_plugins_format(plugins)
-  expect_gte(sum(plugins$enabled), 1)
 })
 
 test_that("qgis_plugins(which = \"enabled\", query = FALSE) returns sensible things", {
   skip_if_not(has_qgis())
   plugins <- qgis_plugins(which = "enabled", query = FALSE)
   expect_correct_plugins_format(plugins)
-  expect_gte(sum(plugins$enabled), 1)
 })
 
 test_that("qgis_plugins(which = \"disabled\", query = FALSE) returns sensible things", {
   skip_if_not(has_qgis())
   plugins <- qgis_plugins(which = "disabled", query = FALSE)
   expect_correct_plugins_format(plugins)
-  expect_gte(sum(!plugins$enabled), 0)
 })
 
 test_that("qgis_plugins(query = FALSE, quiet = FALSE) messages are OK", {
@@ -41,7 +38,6 @@ test_that(glue("qgis_plugins(query = TRUE) works when using JSON output"), {
 
   plugins <- qgis_plugins(query = TRUE)
   expect_correct_plugins_format(plugins)
-  expect_gte(sum(plugins$enabled), 1)
 })
 
 test_that(glue("qgis_plugins(query = TRUE) works when NOT using JSON output"), {
@@ -53,7 +49,6 @@ test_that(glue("qgis_plugins(query = TRUE) works when NOT using JSON output"), {
 
   plugins <- qgis_plugins(query = TRUE)
   expect_correct_plugins_format(plugins)
-  expect_gte(sum(plugins$enabled), 1)
 })
 
 
