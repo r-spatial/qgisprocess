@@ -186,6 +186,14 @@ test_that("qgis_*able_plugins() works for an enabled grassprovider plugin", {
 
 
 
+test_that("{en,dis}able_plugin can return an error message from qgis_process", {
+  local_mocked_bindings(qgis_run = function(...) stop("Some error"))
+  expect_message(enable_plugin("p1"), "not successfully enabled.+Some error")
+  expect_message(disable_plugin("p1"), "not successfully disabled.+Some error")
+})
+
+
+
 test_that("Internal function arg_skip_loading_plugins() works", {
   expect_null(arg_skip_loading_plugins("grass:algorithm"))
 
