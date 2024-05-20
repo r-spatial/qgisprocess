@@ -142,6 +142,16 @@ Please note that the qgisprocess project is released with a [Contributor Code of
 - FOSS4G 2023: [slides](https://florisvdh.github.io/foss4g-2023-qgisprocess/) & [video](https://www.youtube.com/watch?v=Qt5DzWThWqI)
 - FOSS4G 2021: [slides](https://dewey.dunnington.ca/slides/qgisprocess2021/) & [video](https://www.youtube.com/watch?v=iA0OQ2Icn6Y&t=1912s)
 
+### In the wild
+
+(Draft)
+
+Following case studies have used the package:
+
+- \<Reference to your work\>. Source code: \<URL\>.
+
+_If you used the package in your work and would like to see it referenced here, then give a shout in issue #211 or make a pull request!_
+
 ### Further reading
 
 - A [paper](https://journal.r-project.org/archive/2017/RJ-2017-067/index.html) on the original RQGIS package published in the R Journal
