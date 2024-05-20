@@ -84,6 +84,19 @@ test_that("qgis_disable_plugins() messages are OK", {
     qgis_disable_plugins(names = "notaplugin"),
     "Ignoring unknown plugins: notaplugin"
   )
+
+  # checking that a bare qgis_disable_plugins() never disables processing
+  local_mocked_bindings(
+    qgis_plugins = function(...) {
+      tibble::tibble(
+        name = c("plugin_1", "processing"),
+        enabled = TRUE
+      )
+    },
+    qgis_run = function(...) NULL,
+    qgis_configure = function(...) NULL
+  )
+  expect_no_message(qgis_disable_plugins(), message = "\\bprocessing\\b")
 })
 
 
