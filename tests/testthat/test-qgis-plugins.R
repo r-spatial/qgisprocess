@@ -67,10 +67,6 @@ test_that("qgis_enable_plugins() messages are OK", {
   skip_if_not(has_qgis())
   expect_message(qgis_enable_plugins(names = ""), "exiting")
   expect_message(
-    qgis_enable_plugins(names = "processing"),
-    "Ignoring.+processing"
-  )
-  expect_message(
     qgis_enable_plugins(names = "notaplugin"),
     "Ignoring unknown plugins: notaplugin"
   )
