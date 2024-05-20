@@ -3,8 +3,9 @@
 - Speed up various calls to the `qgis_process` backend by automatically implementing `--skip-loading-plugins` where possible (#201).
 This benefits package startup time and the timing of `qgis_run_algorithm()`, `qgis_show_help()`, and several other functions.
 This feature needs QGIS >= 3.36.
+- Don't renew the package cache when no plugins were successfully enabled or disabled (#212).
 - Update the 'getting started' vignette (#206, #207):
-  - advise using `qgis_search_algorithms()`.
+  - advise to use `qgis_search_algorithms()`.
   - in QGIS >= 3.36 the GRASS GIS provider is called `grass` instead of `grass7`.
 
 # qgisprocess 0.3.0
