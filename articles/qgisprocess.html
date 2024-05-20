@@ -27,7 +27,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">qgisprocess</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,8 +135,9 @@ complains if it cannot find it.</p>
 <span><span class="co">#&gt; QGIS version: 3.36.3-Maidenhead</span></span>
 <span><span class="co">#&gt; Having access to 362 algorithms from 4 QGIS processing providers.</span></span>
 <span><span class="co">#&gt; Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.</span></span>
-<span><span class="co">#&gt; &gt;&gt;&gt; Run `qgis_enable_plugins()` to enable 2 disabled plugins and access</span></span>
-<span><span class="co">#&gt;     their algorithms: grassprovider, processing_saga_nextgen</span></span></code></pre></div>
+<span><span class="co">#&gt; &gt;&gt;&gt; Run `qgis_enable_plugins()` to enable 3 disabled plugins and access</span></span>
+<span><span class="co">#&gt;     their algorithms: grassprovider, processing,</span></span>
+<span><span class="co">#&gt;     processing_saga_nextgen</span></span></code></pre></div>
 <p>When loading <strong>qgisprocess</strong> for the first time, it will
 cache among others the path to <code>qgis_process</code>, the QGIS
 version and the list of known algorithms. When loading
@@ -149,23 +150,24 @@ a message telling you to do so.</p>
 <code>qgis_configure(use_cached_data = TRUE)</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/qgis_configure.html">qgis_configure</a></span><span class="op">(</span>use_cached_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Checking configuration in cache file (/home/runner/.cache/R-qgisprocess/cache-0.3.0.9000.rds)</span></span>
+<span><span class="co">#&gt; Checking configuration in cache file (/home/runner/.cache/R-qgisprocess/cache-0.3.0.9001.rds)</span></span>
 <span><span class="co">#&gt; Checking cached QGIS version with version reported by 'qgis_process' ...</span></span>
 <span><span class="co">#&gt; QGIS versions match! (3.36.3-Maidenhead)</span></span>
 <span><span class="co">#&gt; Checking cached QGIS plugins (and state) with those reported by 'qgis_process' ...</span></span>
-<span><span class="co">#&gt; QGIS plugins match! (1 processing provider plugin(s) enabled)</span></span>
+<span><span class="co">#&gt; QGIS plugins match! (0 processing provider plugin(s) enabled)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; &gt;&gt;&gt; Run `qgis_enable_plugins()` to enable 2 disabled plugins and access</span></span>
-<span><span class="co">#&gt;     their algorithms: grassprovider, processing_saga_nextgen</span></span>
+<span><span class="co">#&gt; &gt;&gt;&gt; Run `qgis_enable_plugins()` to enable 3 disabled plugins and access</span></span>
+<span><span class="co">#&gt;     their algorithms: grassprovider, processing,</span></span>
+<span><span class="co">#&gt;     processing_saga_nextgen</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Restoring configuration from '/home/runner/.cache/R-qgisprocess/cache-0.3.0.9000.rds'</span></span>
+<span><span class="co">#&gt; Restoring configuration from '/home/runner/.cache/R-qgisprocess/cache-0.3.0.9001.rds'</span></span>
 <span><span class="co">#&gt; QGIS version: 3.36.3-Maidenhead</span></span>
 <span><span class="co">#&gt; Using 'qgis_process' in the system PATH.</span></span>
 <span><span class="co">#&gt; &gt;&gt;&gt; If you need another installed QGIS instance, run `qgis_configure()`;</span></span>
 <span><span class="co">#&gt;     see `?qgis_configure` if you need to preset the path of 'qgis_process'.</span></span>
 <span><span class="co">#&gt; Using JSON for output serialization.</span></span>
 <span><span class="co">#&gt; Using JSON for input serialization.</span></span>
-<span><span class="co">#&gt; 1 out of 3 available processing provider plugins are enabled.</span></span>
+<span><span class="co">#&gt; 0 out of 3 available processing provider plugins are enabled.</span></span>
 <span><span class="co">#&gt; Having access to 362 algorithms from 4 QGIS processing providers.</span></span>
 <span><span class="co">#&gt; Use qgis_algorithms(), qgis_providers(), qgis_plugins(), qgis_path() and</span></span>
 <span><span class="co">#&gt; qgis_version() to inspect the cache environment.</span></span></code></pre></div>
@@ -209,7 +211,7 @@ takes this from the cache):</p>
 <span><span class="co">#&gt;   name                    enabled</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> grassprovider           FALSE  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> processing              TRUE   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> processing              FALSE  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> processing_saga_nextgen FALSE</span></span></code></pre></div>
 <p>Since we will use GRASS GIS and SAGA later on, you must have GRASS
 GIS and SAGA version &gt; 7 installed on your system. You also need to
@@ -359,7 +361,7 @@ separate tutorial.</p>
 <code class="sourceCode R"><span><span class="va">result</span> <span class="co"># only prints the output element(s)</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 1</span></span>
-<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb128e0634b.gpkg"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebbce7217e.gpkg"</span></span></code></pre></div>
 <p>To read in the QGIS output and visualize it, we can run:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://r-spatial.github.io/sf/" class="external-link">"sf"</a></span><span class="op">)</span></span>
@@ -452,15 +454,15 @@ have been made:</p>
 <code class="sourceCode R"><span><span class="va">info</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("grass:r.slope.aspect", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 9</span></span>
-<span><span class="co">#&gt;  $ aspect    : 'qgis_outputRaster' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb1245e9dd8.tif"</span></span>
-<span><span class="co">#&gt;  $ dx        : 'qgis_outputRaster' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb1566a96b7.tif"</span></span>
-<span><span class="co">#&gt;  $ dxx       : 'qgis_outputRaster' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb1140454fa.tif"</span></span>
-<span><span class="co">#&gt;  $ dxy       : 'qgis_outputRaster' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb11c2e01ca.tif"</span></span>
-<span><span class="co">#&gt;  $ dy        : 'qgis_outputRaster' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb120be0840.tif"</span></span>
-<span><span class="co">#&gt;  $ dyy       : 'qgis_outputRaster' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb14d2531dd.tif"</span></span>
-<span><span class="co">#&gt;  $ pcurvature: 'qgis_outputRaster' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb17c97489b.tif"</span></span>
-<span><span class="co">#&gt;  $ slope     : 'qgis_outputRaster' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb12051f736.tif"</span></span>
-<span><span class="co">#&gt;  $ tcurvature: 'qgis_outputRaster' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb171b034b8.tif"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ aspect    : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb6a272366.tif"</span></span>
+<span><span class="co">#&gt;  $ dx        : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb7afc7dd3.tif"</span></span>
+<span><span class="co">#&gt;  $ dxx       : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb68ff7b47.tif"</span></span>
+<span><span class="co">#&gt;  $ dxy       : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb4add4cc6.tif"</span></span>
+<span><span class="co">#&gt;  $ dy        : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb22151c82.tif"</span></span>
+<span><span class="co">#&gt;  $ dyy       : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb23560bb1.tif"</span></span>
+<span><span class="co">#&gt;  $ pcurvature: 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb3182bf69.tif"</span></span>
+<span><span class="co">#&gt;  $ slope     : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb78c91bb7.tif"</span></span>
+<span><span class="co">#&gt;  $ tcurvature: 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb45e24439.tif"</span></span></code></pre></div>
 <p>Combine these output rasters as a multi-layered
 <code>SpatRaster</code> object and plot it:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
@@ -529,7 +531,7 @@ therefore will also support non-JSON-input configurations (e.g. QGIS
 <span><span class="co">#&gt; z_range:       zmin: 0 zmax: 0</span></span>
 <span><span class="co">#&gt; Projected CRS: WGS 84 / UTM zone 17S</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 100 × 6</span></span></span>
-<span><span class="co">#&gt;       id  spri file2eb1245e9dd8 file2eb12051f736 file2eb171b034b8</span></span>
+<span><span class="co">#&gt;       id  spri file2ebb6a272366 file2ebb78c91bb7 file2ebb45e24439</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1     4            251.              6.80        0.000<span style="text-decoration: underline;">029</span>2</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2     4             79.7             4.60       -<span style="color: #BB0000;">0.002</span><span style="color: #BB0000; text-decoration: underline;">06</span>  </span></span>
@@ -567,7 +569,7 @@ argument.</p>
 <span><span class="co">#&gt; Using `OUTPUT = qgis_tmp_vector()`</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 1</span></span>
-<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb17cd6a796.gpkg"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb4ada514.gpkg"</span></span></code></pre></div>
 <p>If <code>.data</code> is a <code>qgis_result</code> object,
 <code><a href="../reference/qgis_run_algorithm_p.html">qgis_run_algorithm_p()</a></code> automatically tries to select an
 element named <code>OUTPUT</code>. However, if the output has another
@@ -609,10 +611,10 @@ trouble depending on the installed versions of third-party packages
 <span><span class="co">#&gt; Argument `SLOPE_WEIGHT` is unspecified (using QGIS default value).</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("sagang:sagawetnessindex", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 4</span></span>
-<span><span class="co">#&gt;  $ AREA    : 'qgis_outputRaster' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb13dd08788.sdat"</span></span>
-<span><span class="co">#&gt;  $ AREA_MOD: 'qgis_outputRaster' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb1297d171e.sdat"</span></span>
-<span><span class="co">#&gt;  $ SLOPE   : 'qgis_outputRaster' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb17717880a.sdat"</span></span>
-<span><span class="co">#&gt;  $ TWI     : 'qgis_outputRaster' chr "/tmp/RtmpsZv5Hc/file2eb14c815d2a/file2eb1367a9b9b.sdat"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ AREA    : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb3c148a9b.sdat"</span></span>
+<span><span class="co">#&gt;  $ AREA_MOD: 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb145bb6af.sdat"</span></span>
+<span><span class="co">#&gt;  $ SLOPE   : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb4c5be41d.sdat"</span></span>
+<span><span class="co">#&gt;  $ TWI     : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb1a924d5.sdat"</span></span></code></pre></div>
 <p>When piping, <code><a href="../reference/qgis_run_algorithm_p.html">qgis_run_algorithm_p()</a></code> automatically cleans
 up after you by deleting intermediate results. This avoids cluttering
 your system when running geoalgorithms on large spatial data files. To
