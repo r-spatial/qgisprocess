@@ -221,11 +221,20 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
     "{paste(names, collapse = ', ')}"
   ))
 
-  if (mode == "enable") for (p in names) enable_plugin(p, quiet = quiet)
-  if (mode == "disable") for (p in names) disable_plugin(p, quiet = quiet)
+  counter <- 0L
+  if (mode == "enable") for (p in names) {
+    counter <- enable_plugin(p, quiet = quiet) + counter
+  }
+  if (mode == "disable") for (p in names) {
+    counter <- disable_plugin(p, quiet = quiet) + counter
+  }
 
-  if (!quiet) message("\nRebuilding cache to reflect current plugin state ...\n")
-  qgis_configure(use_cached_data = FALSE, quiet = quiet)
+  if (counter > 0L) {
+    if (!quiet) {
+      message("\nRebuilding cache to reflect current plugin state ...\n")
+    }
+    qgis_configure(use_cached_data = FALSE, quiet = quiet)
+  }
 
   invisible(qgis_plugins())
 }
@@ -234,6 +243,7 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
 
 #' @keywords internal
 enable_plugin <- function(name, quiet = FALSE) {
+  error_detected <- FALSE
   tryCatch(
     {
       qgis_run(args = c("plugins", "enable", name))
@@ -244,14 +254,17 @@ enable_plugin <- function(name, quiet = FALSE) {
         "'{name}' was not successfully enabled. Error message was:\n\n{e}\n",
         ifelse("stderr" %in% names(e) && nchar(e$stderr) > 0, e$stderr, "")
       ))
+      assign("error_detected", TRUE, envir = parent.env(environment()))
     }
   )
+  if (error_detected) invisible(FALSE) else invisible(TRUE)
 }
 
 
 
 #' @keywords internal
 disable_plugin <- function(name, quiet = FALSE) {
+  error_detected <- FALSE
   tryCatch(
     {
       qgis_run(args = c("plugins", "disable", name))
@@ -262,6 +275,8 @@ disable_plugin <- function(name, quiet = FALSE) {
         "'{name}' was not successfully disabled. Error message was:\n\n{e}\n",
         ifelse("stderr" %in% names(e) && nchar(e$stderr) > 0, e$stderr, "")
       ))
+      assign("error_detected", TRUE, envir = parent.env(environment()))
     }
   )
+  if (error_detected) invisible(FALSE) else invisible(TRUE)
 }
