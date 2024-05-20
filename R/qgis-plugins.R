@@ -185,7 +185,9 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
 
   if (is.null(names)) {
     names <- qgis_plugins(which = moded_rev)$name
-    names <- names[names != "processing"]
+    if (mode == "disable") {
+      names <- names[names != "processing"]
+    }
   } else {
     assert_that(is.character(names))
     names_old <- names
@@ -200,11 +202,13 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
       "{paste(names_skip, collapse = ', ')}"
     ))
     names <- names_old[names_old %in% qgis_plugins(which = moded_rev)$name]
-    if (!quiet && "processing" %in% names) message(
+    if (!quiet && "processing" %in% names && mode == "disable") message(
       "Ignoring the 'processing' plugin, because it is always available to ",
       "'qgis_process' (not QGIS though)."
     )
-    names <- names[names != "processing"]
+    if (mode == "disable") {
+      names <- names[names != "processing"]
+    }
   }
 
   if (length(names) == 0L) {
