@@ -104,7 +104,12 @@ qgis_help_json <- function(algorithm, check_deprecation = TRUE) {
   assert_qgis_algorithm(algorithm, check_deprecation = check_deprecation)
 
   result <- qgis_run(
-    args = c("--json", "help", algorithm),
+    args = c(
+      "--json",
+      arg_skip_loading_plugins(algorithm),
+      "help",
+      algorithm
+    ),
     encoding = "UTF-8"
   )
 
@@ -127,7 +132,7 @@ qgis_help_text <- function(algorithm, check_deprecation = TRUE) {
   assert_qgis_algorithm(algorithm, check_deprecation = check_deprecation)
 
   result <- qgis_run(
-    args = c("help", algorithm)
+    args = c(arg_skip_loading_plugins(algorithm), "help", algorithm)
   )
 
   try({

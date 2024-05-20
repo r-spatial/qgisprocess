@@ -98,8 +98,9 @@ qgis_plugins <- function(
 
 #' @keywords internal
 qgis_query_plugins <- function(quiet = FALSE) {
+  arg_skip_loading <- arg_skip_loading_plugins()
   if (qgis_using_json_output()) {
-    result <- qgis_run(args = c("plugins", "--json"))
+    result <- qgis_run(args = c("plugins", "--json", arg_skip_loading))
     if (nchar(result$stderr) > 0L) {
       message(
         "\nStandard error message from 'qgis_process':\n",
@@ -112,7 +113,7 @@ qgis_query_plugins <- function(quiet = FALSE) {
     plugins$value <- unlist(plugins$value, use.names = FALSE)
     colnames(plugins) <- c("name", "enabled")
   } else {
-    result <- qgis_run("plugins")
+    result <- qgis_run(args = c("plugins", arg_skip_loading))
     if (nchar(result$stderr) > 0L) {
       message(
         "\nStandard error message from 'qgis_process':\n",
@@ -132,6 +133,18 @@ qgis_query_plugins <- function(quiet = FALSE) {
   plugins
 }
 
+
+
+
+#' @keywords internal
+arg_skip_loading_plugins <- function(algorithm = NULL) {
+  if (!is.null(algorithm) && !algorithm_is_native(algorithm)) {
+    return(NULL)
+  }
+  if (package_version(qgis_version(full = FALSE)) >= "3.36.0") {
+    "--skip-loading-plugins"
+  } else NULL
+}
 
 
 
@@ -172,7 +185,9 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
 
   if (is.null(names)) {
     names <- qgis_plugins(which = moded_rev)$name
-    names <- names[names != "processing"]
+    if (mode == "disable") {
+      names <- names[names != "processing"]
+    }
   } else {
     assert_that(is.character(names))
     names_old <- names
@@ -187,11 +202,13 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
       "{paste(names_skip, collapse = ', ')}"
     ))
     names <- names_old[names_old %in% qgis_plugins(which = moded_rev)$name]
-    if (!quiet && "processing" %in% names) message(
+    if (!quiet && "processing" %in% names && mode == "disable") message(
       "Ignoring the 'processing' plugin, because it is always available to ",
       "'qgis_process' (not QGIS though)."
     )
-    names <- names[names != "processing"]
+    if (mode == "disable") {
+      names <- names[names != "processing"]
+    }
   }
 
   if (length(names) == 0L) {

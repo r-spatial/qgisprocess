@@ -47,6 +47,14 @@ test_that("Internal function check_algorithm_deprecation() works", {
   expect_no_warning(check_algorithm_deprecation(alg_non_deprecated))
 })
 
+test_that("Internal function algorithm_is_native() works", {
+  expect_true(algorithm_is_native("native:algorithm"))
+  expect_true(algorithm_is_native("3d:algorithm"))
+  expect_true(algorithm_is_native("pdal:algorithm"))
+  expect_false(algorithm_is_native("qgis:algorithm"))
+  expect_false(algorithm_is_native("grass:algorithm"))
+})
+
 test_that("qgis_search_algorithms() works", {
   skip_if_not(has_qgis())
   expect_error(qgis_search_algorithms(), "at least one of the arguments")
