@@ -150,7 +150,7 @@ Following case studies have used the package:
 
 - \<Reference to your work\>. Source code: \<URL\>.
 
-_If you used the package in your work and would like to see it referenced here, then give a shout in issue #211 or make a pull request!_
+_If you used the package in your work and would like to see it referenced here, then give a shout in issue [#211](https://github.com/r-spatial/qgisprocess/issues/211) or make a pull request!_
 
 ### Further reading
 

@@ -142,7 +142,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpdiLK3u/file6c9074773209/file6c903f95e6bc.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmplc8DaG/file73c05163e20c/file73c047b8eb9b.gpkg"
 ```
 
 ``` r
@@ -245,8 +245,9 @@ Following case studies have used the package:
 - \<Reference to your work\>. Source code: \<URL\>.
 
 *If you used the package in your work and would like to see it
-referenced here, then give a shout in issue \#211 or make a pull
-request!*
+referenced here, then give a shout in issue
+[\#211](https://github.com/r-spatial/qgisprocess/issues/211) or make a
+pull request!*
 
 ### Further reading
 
