@@ -27,7 +27,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">qgisprocess</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,7 +150,7 @@ a message telling you to do so.</p>
 <code>qgis_configure(use_cached_data = TRUE)</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/qgis_configure.html">qgis_configure</a></span><span class="op">(</span>use_cached_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Checking configuration in cache file (/home/runner/.cache/R-qgisprocess/cache-0.3.0.9001.rds)</span></span>
+<span><span class="co">#&gt; Checking configuration in cache file (/home/runner/.cache/R-qgisprocess/cache-0.3.0.9002.rds)</span></span>
 <span><span class="co">#&gt; Checking cached QGIS version with version reported by 'qgis_process' ...</span></span>
 <span><span class="co">#&gt; QGIS versions match! (3.36.3-Maidenhead)</span></span>
 <span><span class="co">#&gt; Checking cached QGIS plugins (and state) with those reported by 'qgis_process' ...</span></span>
@@ -160,7 +160,7 @@ a message telling you to do so.</p>
 <span><span class="co">#&gt;     their algorithms: grassprovider, processing,</span></span>
 <span><span class="co">#&gt;     processing_saga_nextgen</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Restoring configuration from '/home/runner/.cache/R-qgisprocess/cache-0.3.0.9001.rds'</span></span>
+<span><span class="co">#&gt; Restoring configuration from '/home/runner/.cache/R-qgisprocess/cache-0.3.0.9002.rds'</span></span>
 <span><span class="co">#&gt; QGIS version: 3.36.3-Maidenhead</span></span>
 <span><span class="co">#&gt; Using 'qgis_process' in the system PATH.</span></span>
 <span><span class="co">#&gt; &gt;&gt;&gt; If you need another installed QGIS instance, run `qgis_configure()`;</span></span>
@@ -361,7 +361,7 @@ separate tutorial.</p>
 <code class="sourceCode R"><span><span class="va">result</span> <span class="co"># only prints the output element(s)</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 1</span></span>
-<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebbce7217e.gpkg"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0c22862404.gpkg"</span></span></code></pre></div>
 <p>To read in the QGIS output and visualize it, we can run:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://r-spatial.github.io/sf/" class="external-link">"sf"</a></span><span class="op">)</span></span>
@@ -454,15 +454,15 @@ have been made:</p>
 <code class="sourceCode R"><span><span class="va">info</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("grass:r.slope.aspect", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 9</span></span>
-<span><span class="co">#&gt;  $ aspect    : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb6a272366.tif"</span></span>
-<span><span class="co">#&gt;  $ dx        : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb7afc7dd3.tif"</span></span>
-<span><span class="co">#&gt;  $ dxx       : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb68ff7b47.tif"</span></span>
-<span><span class="co">#&gt;  $ dxy       : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb4add4cc6.tif"</span></span>
-<span><span class="co">#&gt;  $ dy        : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb22151c82.tif"</span></span>
-<span><span class="co">#&gt;  $ dyy       : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb23560bb1.tif"</span></span>
-<span><span class="co">#&gt;  $ pcurvature: 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb3182bf69.tif"</span></span>
-<span><span class="co">#&gt;  $ slope     : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb78c91bb7.tif"</span></span>
-<span><span class="co">#&gt;  $ tcurvature: 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb45e24439.tif"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ aspect    : 'qgis_outputRaster' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0c379ca71.tif"</span></span>
+<span><span class="co">#&gt;  $ dx        : 'qgis_outputRaster' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0c714171c3.tif"</span></span>
+<span><span class="co">#&gt;  $ dxx       : 'qgis_outputRaster' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0c2d6eca78.tif"</span></span>
+<span><span class="co">#&gt;  $ dxy       : 'qgis_outputRaster' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0c66c27c4f.tif"</span></span>
+<span><span class="co">#&gt;  $ dy        : 'qgis_outputRaster' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0c7f9d7ec2.tif"</span></span>
+<span><span class="co">#&gt;  $ dyy       : 'qgis_outputRaster' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0c77739e20.tif"</span></span>
+<span><span class="co">#&gt;  $ pcurvature: 'qgis_outputRaster' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0cdfecec7.tif"</span></span>
+<span><span class="co">#&gt;  $ slope     : 'qgis_outputRaster' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0c46691e41.tif"</span></span>
+<span><span class="co">#&gt;  $ tcurvature: 'qgis_outputRaster' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0c3a9dc1e1.tif"</span></span></code></pre></div>
 <p>Combine these output rasters as a multi-layered
 <code>SpatRaster</code> object and plot it:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
@@ -531,18 +531,18 @@ therefore will also support non-JSON-input configurations (e.g. QGIS
 <span><span class="co">#&gt; z_range:       zmin: 0 zmax: 0</span></span>
 <span><span class="co">#&gt; Projected CRS: WGS 84 / UTM zone 17S</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 100 × 6</span></span></span>
-<span><span class="co">#&gt;       id  spri file2ebb6a272366 file2ebb78c91bb7 file2ebb45e24439</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1     4            251.              6.80        0.000<span style="text-decoration: underline;">029</span>2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2     4             79.7             4.60       -<span style="color: #BB0000;">0.002</span><span style="color: #BB0000; text-decoration: underline;">06</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3     3            290.              6.35       -<span style="color: #BB0000;">0.001</span><span style="color: #BB0000; text-decoration: underline;">29</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4     2             88.8             7.74        0.001<span style="text-decoration: underline;">08</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5     4            341.             15.0        -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">439</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6     5            276.             16.0        -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">090</span><span style="color: #BB0000;">9</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7     6            272.              9.09       -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">245</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     8     2            300.              4.62       -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">846</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     9     3             68.9            13.3        -<span style="color: #BB0000;">0.001</span><span style="color: #BB0000; text-decoration: underline;">15</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    10     3            101.             12.6         0.001<span style="text-decoration: underline;">51</span>  </span></span>
+<span><span class="co">#&gt;       id  spri file2f0c379ca71 file2f0c46691e41 file2f0c3a9dc1e1</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1     4           251.              6.80        0.000<span style="text-decoration: underline;">029</span>2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2     4            79.7             4.60       -<span style="color: #BB0000;">0.002</span><span style="color: #BB0000; text-decoration: underline;">06</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3     3           290.              6.35       -<span style="color: #BB0000;">0.001</span><span style="color: #BB0000; text-decoration: underline;">29</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4     2            88.8             7.74        0.001<span style="text-decoration: underline;">08</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5     4           341.             15.0        -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">439</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6     5           276.             16.0        -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">090</span><span style="color: #BB0000;">9</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7     6           272.              9.09       -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">245</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     8     2           300.              4.62       -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">846</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     9     3            68.9            13.3        -<span style="color: #BB0000;">0.001</span><span style="color: #BB0000; text-decoration: underline;">15</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    10     3           101.             12.6         0.001<span style="text-decoration: underline;">51</span>  </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 90 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: geom &lt;POINT [m]&gt;</span></span></span></code></pre></div>
 </div>
@@ -569,7 +569,7 @@ argument.</p>
 <span><span class="co">#&gt; Using `OUTPUT = qgis_tmp_vector()`</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 1</span></span>
-<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb4ada514.gpkg"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0c1bd87cca.gpkg"</span></span></code></pre></div>
 <p>If <code>.data</code> is a <code>qgis_result</code> object,
 <code><a href="../reference/qgis_run_algorithm_p.html">qgis_run_algorithm_p()</a></code> automatically tries to select an
 element named <code>OUTPUT</code>. However, if the output has another
@@ -611,10 +611,10 @@ trouble depending on the installed versions of third-party packages
 <span><span class="co">#&gt; Argument `SLOPE_WEIGHT` is unspecified (using QGIS default value).</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("sagang:sagawetnessindex", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 4</span></span>
-<span><span class="co">#&gt;  $ AREA    : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb3c148a9b.sdat"</span></span>
-<span><span class="co">#&gt;  $ AREA_MOD: 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb145bb6af.sdat"</span></span>
-<span><span class="co">#&gt;  $ SLOPE   : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb4c5be41d.sdat"</span></span>
-<span><span class="co">#&gt;  $ TWI     : 'qgis_outputRaster' chr "/tmp/RtmpOom4la/file2ebb304899bf/file2ebb1a924d5.sdat"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ AREA    : 'qgis_outputRaster' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0c22697b27.sdat"</span></span>
+<span><span class="co">#&gt;  $ AREA_MOD: 'qgis_outputRaster' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0c4dfac1a5.sdat"</span></span>
+<span><span class="co">#&gt;  $ SLOPE   : 'qgis_outputRaster' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0c7c71beb5.sdat"</span></span>
+<span><span class="co">#&gt;  $ TWI     : 'qgis_outputRaster' chr "/tmp/Rtmpx9q5yh/file2f0c11cae7ca/file2f0c5915170.sdat"</span></span></code></pre></div>
 <p>When piping, <code><a href="../reference/qgis_run_algorithm_p.html">qgis_run_algorithm_p()</a></code> automatically cleans
 up after you by deleting intermediate results. This avoids cluttering
 your system when running geoalgorithms on large spatial data files. To
