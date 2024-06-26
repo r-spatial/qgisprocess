@@ -6,6 +6,7 @@
 #' 'out of the box' on QGIS.
 #'
 #' `qgis_run_algorithm()` accepts various R objects as algorithm arguments.
+#' An overview is given by `vignette("qgis_arguments")`.
 #' Examples include an R matrix or data frame for the
 #' argument type 'matrix', R colors for the argument type 'color',
 #' sf or terra (SpatVector) objects for the argument type 'vector' and
@@ -50,6 +51,8 @@
 #' preprocessing in R (including checks).
 #'
 #' @family functions to run one geoprocessing algorithm
+#'
+#' @seealso `vignette("qgis_arguments")`
 #'
 #' @param algorithm A qualified algorithm name (e.g., `"native:buffer"`) or
 #'   a path to a QGIS model file.

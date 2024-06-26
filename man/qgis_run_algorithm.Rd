@@ -40,6 +40,7 @@ for a detailed description of the algorithms provided
 }
 \details{
 \code{qgis_run_algorithm()} accepts various R objects as algorithm arguments.
+An overview is given by \code{vignette("qgis_arguments")}.
 Examples include an R matrix or data frame for the
 argument type 'matrix', R colors for the argument type 'color',
 sf or terra (SpatVector) objects for the argument type 'vector' and
@@ -95,6 +96,8 @@ qgis_run_algorithm(
 \dontshow{\}) # examplesIf}
 }
 \seealso{
+\code{vignette("qgis_arguments")}
+
 Other functions to run one geoprocessing algorithm: 
 \code{\link{qgis_run_algorithm_p}()}
 }
