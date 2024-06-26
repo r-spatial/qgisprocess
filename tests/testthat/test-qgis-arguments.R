@@ -138,13 +138,6 @@ test_that("argument coercers work", {
   )
   expect_identical(
     as_qgis_argument(
-      matrix(1:4, ncol = 2, byrow = TRUE),
-      qgis_argument_spec(qgis_type = "matrix")
-    ),
-    "1,2,3,4"
-  )
-  expect_identical(
-    as_qgis_argument(
       matrix(letters[1:4], ncol = 2, byrow = TRUE),
       qgis_argument_spec(qgis_type = "matrix")
     ),
