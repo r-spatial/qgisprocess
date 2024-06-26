@@ -20,9 +20,8 @@ An example is provided by the `DISTANCE` argument of `native:buffer`, for which 
 
 ```{r}
 qgis_get_argument_specs("native:buffer") |> 
-  subset(name == "DISTANCE") |> 
-  dplyr::select(acceptable_values) |> 
-  tidyr::unnest(cols = acceptable_values) |> 
+  subset(name == "DISTANCE", acceptable_values) |> 
+  tidyr::unnest_longer(acceptable_values) |> 
   knitr::kable()
 ```
 
