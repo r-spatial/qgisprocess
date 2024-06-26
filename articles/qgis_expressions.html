@@ -82,8 +82,8 @@
 Vanderhaeghe &amp; Jannes Muenchow</h4>
             
             <h4 data-toc-skip class="date"><div class="line-block">Last
-update: 2023-08-16<br>
-Last run: 2024-05-20</div></h4>
+update: 2024-06-26<br>
+Last run: 2024-06-26</div></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-spatial/qgisprocess/blob/HEAD/vignettes/qgis_expressions.Rmd" class="external-link"><code>vignettes/qgis_expressions.Rmd</code></a></small>
       <div class="d-none name"><code>qgis_expressions.Rmd</code></div>
@@ -121,9 +121,8 @@ override</a>’ button. An example is provided by the
 we query the acceptable values below.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/qgis_show_help.html">qgis_get_argument_specs</a></span><span class="op">(</span><span class="st">"native:buffer"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"DISTANCE"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">acceptable_values</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">acceptable_values</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"DISTANCE"</span>, <span class="va">acceptable_values</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest_longer.html" class="external-link">unnest_longer</a></span><span class="op">(</span><span class="va">acceptable_values</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup><col width="100%"></colgroup>
