@@ -4,6 +4,9 @@
 This benefits package startup time and the timing of `qgis_run_algorithm()`, `qgis_show_help()`, and several other functions.
 This feature needs QGIS >= 3.36.
 - Don't renew the package cache when no plugins were successfully enabled or disabled (#212).
+- Add new vignettes (#213):
+  - `vignette("qgis_arguments")`: passing R objects as algorithm arguments.
+  - `vignette("qgis_options")`: configuration with options or environment variables.
 - Update the 'getting started' vignette (#206, #207):
   - advise to use `qgis_search_algorithms()`.
   - in QGIS >= 3.36 the GRASS GIS provider is called `grass` instead of `grass7`.
