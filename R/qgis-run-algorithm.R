@@ -15,13 +15,6 @@
 #' `qgis_run_algorithm()` preprocesses the provided objects into the format that
 #' QGIS expects for a given argument.
 #'
-#' For data objects in R that already exist as a stored file, it is best to
-#' instead provide the file path in order to prevent a superfluous file writing
-#' step from R, as QGIS expects a file path.
-#' However terra and stars objects can contain the file path as metadata: in
-#' these cases this path is retrieved from the R object and passed to QGIS;
-#' potential pitfalls are taken care of.
-#'
 #' Providing R objects that cannot be converted to the applicable argument type
 #' will lead to an error.
 #'

@@ -48,6 +48,17 @@ QGIS argument type | Supported R object
 `sink`, `vectorDestination` | a string: filepath to a vector file format (defaults to a temporary GeoPackage if argument is missing)
 `rasterDestination` | a string: filepath to a raster file format (defaults to a temporary GeoTIFF file if argument is missing)
 
+### Note
+
+An important group of spatial QGIS argument types are those used in specifying an input layer.
+QGIS essentially needs a filepath string here.
+If a spatial R object is provided instead, `{qgisprocess}` will:
+
+- either write out the object to a temporary file and pass the filepath to QGIS,
+- or use the object's filepath metadata if present (supported by some classes of `{terra}` and `{stars}`).
+
+However if the spatial R object simply results from reading a spatial file and if its filepath is _not_ included in the object's metadata (e.g. for `sf` or `SpatVector` objects), then you will get most efficiency if you pass the original filepath directly.
+
 ## For non-spatial QGIS arguments
 
 QGIS argument types | Supported R object
