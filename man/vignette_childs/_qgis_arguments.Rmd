@@ -2,6 +2,8 @@
 library(qgisprocess)
 ```
 
+This article addresses the question how algorithm arguments in `qgis_run_algorithm()` should be formatted.
+
 When you run `qgis_show_help()` or `qgis_get_argument_specs()` for a given algorithm, you will quickly find out that QGIS has a diverse set of possible argument types.
 
 As an example, take a look at the `qgis_type` column below:
@@ -11,21 +13,25 @@ qgis_get_argument_specs("native:joinbynearest") |>
   subset(select = name:qgis_type)
 ```
 
-This article addresses the question how algorithm arguments in `qgis_run_algorithm()` should be formatted.
+# String or R object?
 
-Although you can pass a string [^string] value in the way QGIS expects it, `{qgisprocess}` makes it possible to pass familiar R objects that naturally match the QGIS argument type.
+Although you can pass a string [^string] to a QGIS argument in `qgis_run_algorithm()`, `{qgisprocess}` makes it possible to pass familiar R objects that naturally match the QGIS argument type.
 This is often easier than constructing a string in the format required by QGIS.
 
 [^string]: A string is a character vector of length 1.
 
-The tables below show which R objects can be passed to each QGIS argument type!
+The tables further below show which R objects can be passed to each QGIS argument type!
 You can find a bit more background information in issue [#13](https://github.com/r-spatial/qgisprocess/issues/13).
 
-Note that some arguments will receive a default value if they are unspecified.
+# Defaults
+
+Some arguments will receive a default value if they are unspecified.
 Defaults are provided by either `{qgisprocess}` or QGIS.
 Typical defaults by `{qgisprocess}` are temporary filepaths for (missing) output argument types `sink`, `vectorDestination`, `rasterDestination`, `fileDestination` and `folderDestination`.
 
-# Spatial QGIS arguments
+# Supported R objects
+
+## For spatial QGIS arguments
 
 QGIS argument type | Supported R object
 -- | -----
@@ -42,7 +48,7 @@ QGIS argument type | Supported R object
 `sink`, `vectorDestination` | a string: filepath to a vector file format (defaults to a temporary GeoPackage if argument is missing)
 `rasterDestination` | a string: filepath to a raster file format (defaults to a temporary GeoTIFF file if argument is missing)
 
-# Non-spatial QGIS arguments
+## For non-spatial QGIS arguments
 
 QGIS argument types | Supported R object
 -- | -----
