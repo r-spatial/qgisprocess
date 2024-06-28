@@ -24,7 +24,8 @@ are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()
 \item{PROJECT_PATH, ELLIPSOID}{Global values for QGIS project file and
 ellipsoid name for distance calculations.}
 
-\item{.raw_json_input}{The raw JSON to use as input in place of \code{...}.}
+\item{.raw_json_input}{The raw JSON to use as input in place of \code{...}.
+See \emph{Details} section.}
 
 \item{.quiet}{Use \code{FALSE} to get extra output from 'qgis_process'.
 This can be useful in debugging.}
@@ -51,6 +52,17 @@ QGIS expects for a given argument.
 
 Providing R objects that cannot be converted to the applicable argument type
 will lead to an error.
+
+Algorithm arguments can be passed as arguments of \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, but
+they can also be combined as a JSON string and fed into the \code{.raw_json_input}
+argument.
+A JSON string can be obtained from the QGIS GUI, either from the
+processing tool dialog or from the processing history dialog, by selecting
+'Copy as JSON' in the 'Advanced' dropdown menu.
+So a user can first try out a geoprocessing step in the QGIS GUI, and
+once the chosen algorithm arguments are satisfactory, copy the JSON string
+to reproduce the operation in R.
+A screenshot is available at the package homepage.
 }
 \section{Running QGIS models and Python scripts}{
 

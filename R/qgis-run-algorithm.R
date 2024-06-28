@@ -18,6 +18,17 @@
 #' Providing R objects that cannot be converted to the applicable argument type
 #' will lead to an error.
 #'
+#' Algorithm arguments can be passed as arguments of [qgis_run_algorithm()], but
+#' they can also be combined as a JSON string and fed into the `.raw_json_input`
+#' argument.
+#' A JSON string can be obtained from the QGIS GUI, either from the
+#' processing tool dialog or from the processing history dialog, by selecting
+#' 'Copy as JSON' in the 'Advanced' dropdown menu.
+#' So a user can first try out a geoprocessing step in the QGIS GUI, and
+#' once the chosen algorithm arguments are satisfactory, copy the JSON string
+#' to reproduce the operation in R.
+#' A screenshot is available at the package homepage.
+#'
 #' @section Running QGIS models and Python scripts:
 #' QGIS models and Python scripts can be added to the Processing Toolbox in the
 #' QGIS GUI, by pointing at their corresponding file.
@@ -57,6 +68,7 @@
 #' @param .quiet Use `FALSE` to get extra output from 'qgis_process'.
 #' This can be useful in debugging.
 #' @param .raw_json_input The raw JSON to use as input in place of `...`.
+#' See _Details_ section.
 #'
 #' @returns A `qgis_result` object.
 #'
