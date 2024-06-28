@@ -75,4 +75,23 @@ QGIS argument types | Supported R object
 `relief_colors` | a matrix or a data frame with three columns and with rows corresponding to intervals. The first two columns define the interval (minimum and maximum respectively) and the third column must be a colour string that `col2rgb()` understands (e.g. `"pink1"` or `"#1A664D80"`).
 `fileDestination`, `folderDestination` | a string: path to a file or directory (defaults to a temporary file or directory if argument is missing)
 
+# Passing output from a previous processing step
 
+The object returned by `qgis_run_algorithm()` is a `qgis_result`.
+It contains one or several _output elements_, shown when printing the `qgis_result` object.
+
+A single output element can be extracted with `qgis_extract_output()`, and it has one of the following classes: 
+`qgis_outputFile`,
+`qgis_outputFolder`,
+`qgis_outputLayer`,
+`qgis_outputMultilayer`,
+`qgis_outputNumber`,
+`qgis_outputRaster`,
+`qgis_outputString` or
+`qgis_outputVector`.
+
+These objects essentially represent a string.
+They can be passed directly to an appropriate argument in a next `qgis_run_algorithm()` step.
+
+Also note that the pipe-friendly function `qgis_run_algorithm_p()` (notice the `_p`) is able to accept an 'incoming' `qgis_result` object as its first argument.
+It will extract the appropriate output element on the fly.
