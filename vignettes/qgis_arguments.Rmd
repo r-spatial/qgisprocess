@@ -2,7 +2,7 @@
 title: "Passing R objects as algorithm arguments"
 author: "Floris Vanderhaeghe"
 date: |
-  | Last update: 2024-06-26
+  | Last update: 2024-06-28
   | Last run: `r Sys.Date()`
 output: rmarkdown::html_vignette
 vignette: >
