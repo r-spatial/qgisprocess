@@ -21,7 +21,7 @@ h1,h2,h3 {
 .navbar-dark input[type="search"] {
     border-color: #6c757d;
     background-color: #ffffff;
-    color: #e9ecef;
+    color: #212529;
 }
 
 .navbar-nav .nav-item>.nav-link {
