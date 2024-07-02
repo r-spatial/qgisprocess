@@ -22,7 +22,7 @@ qgis_extract_output() is an alias to qgis_extract_output_by_name()."><!-- mathja
     
     <a class="navbar-brand me-2" href="../index.html">qgisprocess</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9003</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,9 @@ qgis_extract_output() is an alias to qgis_extract_output_by_name()."><!-- mathja
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/cheatsheet_en.html">Cheat Sheet (English)</a>
     <a class="dropdown-item" href="../articles/cheatsheet_es.html">Cheat Sheet (español)</a>
+    <a class="dropdown-item" href="../articles/qgis_arguments.html">Passing R objects as algorithm arguments</a>
     <a class="dropdown-item" href="../articles/qgis_expressions.html">How to use QGIS expressions in qgisprocess?</a>
+    <a class="dropdown-item" href="../articles/qgis_options.html">Configuration with options or environment variables</a>
   </div>
 </li>
 <li class="nav-item">
@@ -160,7 +162,7 @@ to the first element that inherits a specified class.</p></dd>
 <span class="r-in"><span><span class="va">result</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmp76qUWM/file2ab967999ca3/file2ab934e80d2b.gpkg"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpnO1HgJ/file2aeb20808873/file2aeb6716711f.gpkg"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># nevertheless, more elements are included:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
@@ -171,7 +173,7 @@ to the first element that inherits a specified class.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># extract the output element 'OUTPUT':</span></span></span>
 <span class="r-in"><span><span class="fu">qgis_extract_output</span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp76qUWM/file2ab967999ca3/file2ab934e80d2b.gpkg"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpnO1HgJ/file2aeb20808873/file2aeb6716711f.gpkg"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "qgis_outputVector"</span>
 </code></pre></div>

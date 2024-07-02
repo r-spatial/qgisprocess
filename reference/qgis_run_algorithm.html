@@ -16,7 +16,7 @@ for a detailed description of the algorithms provided
     
     <a class="navbar-brand me-2" href="../index.html">qgisprocess</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9003</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,9 @@ for a detailed description of the algorithms provided
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/cheatsheet_en.html">Cheat Sheet (English)</a>
     <a class="dropdown-item" href="../articles/cheatsheet_es.html">Cheat Sheet (español)</a>
+    <a class="dropdown-item" href="../articles/qgis_arguments.html">Passing R objects as algorithm arguments</a>
     <a class="dropdown-item" href="../articles/qgis_expressions.html">How to use QGIS expressions in qgisprocess?</a>
+    <a class="dropdown-item" href="../articles/qgis_options.html">Configuration with options or environment variables</a>
   </div>
 </li>
 <li class="nav-item">
@@ -100,7 +102,8 @@ ellipsoid name for distance calculations.</p></dd>
 
 
 <dt>.raw_json_input</dt>
-<dd><p>The raw JSON to use as input in place of <code>...</code>.</p></dd>
+<dd><p>The raw JSON to use as input in place of <code>...</code>.
+See <em>Details</em> section.</p></dd>
 
 
 <dt>.quiet</dt>
@@ -117,6 +120,7 @@ This can be useful in debugging.</p></dd>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code>qgis_run_algorithm()</code> accepts various R objects as algorithm arguments.
+An overview is given by <code><a href="../articles/qgis_arguments.html">vignette("qgis_arguments")</a></code>.
 Examples include an R matrix or data frame for the
 argument type 'matrix', R colors for the argument type 'color',
 sf or terra (SpatVector) objects for the argument type 'vector' and
@@ -124,14 +128,18 @@ raster/terra/stars objects for the argument type 'raster', but there are many
 more.
 <code>qgis_run_algorithm()</code> preprocesses the provided objects into the format that
 QGIS expects for a given argument.</p>
-<p>For data objects in R that already exist as a stored file, it is best to
-instead provide the file path in order to prevent a superfluous file writing
-step from R, as QGIS expects a file path.
-However terra and stars objects can contain the file path as metadata: in
-these cases this path is retrieved from the R object and passed to QGIS;
-potential pitfalls are taken care of.</p>
 <p>Providing R objects that cannot be converted to the applicable argument type
 will lead to an error.</p>
+<p>Algorithm arguments can be passed as arguments of <code>qgis_run_algorithm()</code>, but
+they can also be combined as a JSON string and fed into the <code>.raw_json_input</code>
+argument.
+A JSON string can be obtained from the QGIS GUI, either from the
+processing tool dialog or from the processing history dialog, by selecting
+'Copy as JSON' in the 'Advanced' dropdown menu.
+So a user can first try out a geoprocessing step in the QGIS GUI, and
+once the chosen algorithm arguments are satisfactory, copy the JSON string
+to reproduce the operation in R.
+A screenshot is available at the package homepage.</p>
     </div>
     <div class="section level2">
     <h2 id="running-qgis-models-and-python-scripts">Running QGIS models and Python scripts<a class="anchor" aria-label="anchor" href="#running-qgis-models-and-python-scripts"></a></h2>
@@ -161,7 +169,8 @@ preprocessing in R (including checks).</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other functions to run one geoprocessing algorithm: 
+    <div class="dont-index"><p><code><a href="../articles/qgis_arguments.html">vignette("qgis_arguments")</a></code></p>
+<p>Other functions to run one geoprocessing algorithm: 
 <code><a href="qgis_run_algorithm_p.html">qgis_run_algorithm_p</a>()</code></p></div>
     </div>
 
@@ -181,7 +190,7 @@ preprocessing in R (including checks).</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using `OUTPUT = qgis_tmp_vector()`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmp76qUWM/file2ab967999ca3/file2ab949244eca.gpkg"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpnO1HgJ/file2aeb20808873/file2aeb95bd066.gpkg"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

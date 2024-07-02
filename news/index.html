@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">qgisprocess</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9003</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +29,9 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/cheatsheet_en.html">Cheat Sheet (English)</a>
     <a class="dropdown-item" href="../articles/cheatsheet_es.html">Cheat Sheet (español)</a>
+    <a class="dropdown-item" href="../articles/qgis_arguments.html">Passing R objects as algorithm arguments</a>
     <a class="dropdown-item" href="../articles/qgis_expressions.html">How to use QGIS expressions in qgisprocess?</a>
+    <a class="dropdown-item" href="../articles/qgis_options.html">Configuration with options or environment variables</a>
   </div>
 </li>
 <li class="active nav-item">
@@ -59,6 +61,12 @@
 <h2 class="pkg-version" data-toc-text="development version" id="qgisprocess-development-version">qgisprocess (development version)<a class="anchor" aria-label="anchor" href="#qgisprocess-development-version"></a></h2>
 <ul><li>Speed up various calls to the <code>qgis_process</code> backend by automatically implementing <code>--skip-loading-plugins</code> where possible (<a href="https://github.com/r-spatial/qgisprocess/issues/201" class="external-link">#201</a>). This benefits package startup time and the timing of <code><a href="../reference/qgis_run_algorithm.html">qgis_run_algorithm()</a></code>, <code><a href="../reference/qgis_show_help.html">qgis_show_help()</a></code>, and several other functions. This feature needs QGIS &gt;= 3.36.</li>
 <li>Don’t renew the package cache when no plugins were successfully enabled or disabled (<a href="https://github.com/r-spatial/qgisprocess/issues/212" class="external-link">#212</a>).</li>
+<li>Add new vignettes (<a href="https://github.com/r-spatial/qgisprocess/issues/213" class="external-link">#213</a>):
+<ul><li>
+<code><a href="../articles/qgis_arguments.html">vignette("qgis_arguments")</a></code>: passing R objects as algorithm arguments.</li>
+<li>
+<code><a href="../articles/qgis_options.html">vignette("qgis_options")</a></code>: configuration with options or environment variables.</li>
+</ul></li>
 <li>Update the ‘getting started’ vignette (<a href="https://github.com/r-spatial/qgisprocess/issues/206" class="external-link">#206</a>, <a href="https://github.com/r-spatial/qgisprocess/issues/207" class="external-link">#207</a>):
 <ul><li>advise to use <code><a href="../reference/qgis_search_algorithms.html">qgis_search_algorithms()</a></code>.</li>
 <li>in QGIS &gt;= 3.36 the GRASS GIS provider is called <code>grass</code> instead of <code>grass7</code>.</li>
