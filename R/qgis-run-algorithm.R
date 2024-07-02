@@ -6,6 +6,7 @@
 #' 'out of the box' on QGIS.
 #'
 #' `qgis_run_algorithm()` accepts various R objects as algorithm arguments.
+#' An overview is given by `vignette("qgis_arguments")`.
 #' Examples include an R matrix or data frame for the
 #' argument type 'matrix', R colors for the argument type 'color',
 #' sf or terra (SpatVector) objects for the argument type 'vector' and
@@ -14,15 +15,19 @@
 #' `qgis_run_algorithm()` preprocesses the provided objects into the format that
 #' QGIS expects for a given argument.
 #'
-#' For data objects in R that already exist as a stored file, it is best to
-#' instead provide the file path in order to prevent a superfluous file writing
-#' step from R, as QGIS expects a file path.
-#' However terra and stars objects can contain the file path as metadata: in
-#' these cases this path is retrieved from the R object and passed to QGIS;
-#' potential pitfalls are taken care of.
-#'
 #' Providing R objects that cannot be converted to the applicable argument type
 #' will lead to an error.
+#'
+#' Algorithm arguments can be passed as arguments of [qgis_run_algorithm()], but
+#' they can also be combined as a JSON string and fed into the `.raw_json_input`
+#' argument.
+#' A JSON string can be obtained from the QGIS GUI, either from the
+#' processing tool dialog or from the processing history dialog, by selecting
+#' 'Copy as JSON' in the 'Advanced' dropdown menu.
+#' So a user can first try out a geoprocessing step in the QGIS GUI, and
+#' once the chosen algorithm arguments are satisfactory, copy the JSON string
+#' to reproduce the operation in R.
+#' A screenshot is available at the package homepage.
 #'
 #' @section Running QGIS models and Python scripts:
 #' QGIS models and Python scripts can be added to the Processing Toolbox in the
@@ -51,6 +56,8 @@
 #'
 #' @family functions to run one geoprocessing algorithm
 #'
+#' @seealso `vignette("qgis_arguments")`
+#'
 #' @param algorithm A qualified algorithm name (e.g., `"native:buffer"`) or
 #'   a path to a QGIS model file.
 #' @param PROJECT_PATH,ELLIPSOID Global values for QGIS project file and
@@ -61,6 +68,7 @@
 #' @param .quiet Use `FALSE` to get extra output from 'qgis_process'.
 #' This can be useful in debugging.
 #' @param .raw_json_input The raw JSON to use as input in place of `...`.
+#' See _Details_ section.
 #'
 #' @returns A `qgis_result` object.
 #'

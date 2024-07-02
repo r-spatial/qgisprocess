@@ -1,0 +1,28 @@
+---
+title: "Passing R objects as algorithm arguments"
+author: "Floris Vanderhaeghe"
+date: |
+  | Last update: 2024-06-28
+  | Last run: `r Sys.Date()`
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Passing R objects as algorithm arguments}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+can_build <- qgisprocess::has_qgis()
+```
+
+```{r child=if (can_build) file.path(rprojroot::find_root(rprojroot::is_r_package), "man/vignette_childs/_qgis_arguments.Rmd")}
+```
+
+```{r eval=!can_build, echo=FALSE, results="asis"}
+cat("This vignette has been built in absence of a QGIS installation.\n\n")
+cat("Read it online at <https://r-spatial.github.io/qgisprocess/articles/qgis_arguments.html>.")
+```

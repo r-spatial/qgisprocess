@@ -24,7 +24,8 @@ are converted to strings using \code{\link[=as_qgis_argument]{as_qgis_argument()
 \item{PROJECT_PATH, ELLIPSOID}{Global values for QGIS project file and
 ellipsoid name for distance calculations.}
 
-\item{.raw_json_input}{The raw JSON to use as input in place of \code{...}.}
+\item{.raw_json_input}{The raw JSON to use as input in place of \code{...}.
+See \emph{Details} section.}
 
 \item{.quiet}{Use \code{FALSE} to get extra output from 'qgis_process'.
 This can be useful in debugging.}
@@ -40,6 +41,7 @@ for a detailed description of the algorithms provided
 }
 \details{
 \code{qgis_run_algorithm()} accepts various R objects as algorithm arguments.
+An overview is given by \code{vignette("qgis_arguments")}.
 Examples include an R matrix or data frame for the
 argument type 'matrix', R colors for the argument type 'color',
 sf or terra (SpatVector) objects for the argument type 'vector' and
@@ -48,15 +50,19 @@ more.
 \code{qgis_run_algorithm()} preprocesses the provided objects into the format that
 QGIS expects for a given argument.
 
-For data objects in R that already exist as a stored file, it is best to
-instead provide the file path in order to prevent a superfluous file writing
-step from R, as QGIS expects a file path.
-However terra and stars objects can contain the file path as metadata: in
-these cases this path is retrieved from the R object and passed to QGIS;
-potential pitfalls are taken care of.
-
 Providing R objects that cannot be converted to the applicable argument type
 will lead to an error.
+
+Algorithm arguments can be passed as arguments of \code{\link[=qgis_run_algorithm]{qgis_run_algorithm()}}, but
+they can also be combined as a JSON string and fed into the \code{.raw_json_input}
+argument.
+A JSON string can be obtained from the QGIS GUI, either from the
+processing tool dialog or from the processing history dialog, by selecting
+'Copy as JSON' in the 'Advanced' dropdown menu.
+So a user can first try out a geoprocessing step in the QGIS GUI, and
+once the chosen algorithm arguments are satisfactory, copy the JSON string
+to reproduce the operation in R.
+A screenshot is available at the package homepage.
 }
 \section{Running QGIS models and Python scripts}{
 
@@ -95,6 +101,8 @@ qgis_run_algorithm(
 \dontshow{\}) # examplesIf}
 }
 \seealso{
+\code{vignette("qgis_arguments")}
+
 Other functions to run one geoprocessing algorithm: 
 \code{\link{qgis_run_algorithm_p}()}
 }
