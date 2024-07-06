@@ -25,7 +25,7 @@ Description: Provides seamless access to the 'QGIS'
     (plugin) processing providers are supported.  Beside referring data
     sources from file, also common objects from 'sf', 'terra' and 'stars'
     are supported. The native processing algorithms are documented by QGIS.org 
-    (2023) <https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/>.
+    (2024) <https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/>.
 License: GPL (>= 3)
 URL: https://r-spatial.github.io/qgisprocess/,
     https://github.com/r-spatial/qgisprocess
