@@ -65,7 +65,7 @@ Config/checklist/keywords: R; package; QGIS
 Encoding: UTF-8
 Language: en-GB
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 SystemRequirements: 'QGIS' latest or long-term release currently supported
     according to the 'QGIS' release schedule
     (<https://www.qgis.org/en/site/getinvolved/development/roadmap.html>). Older
