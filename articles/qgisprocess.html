@@ -47,9 +47,9 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/cheatsheet_en.html">Cheat Sheet (English)</a>
     <a class="dropdown-item" href="../articles/cheatsheet_es.html">Cheat Sheet (español)</a>
+    <a class="dropdown-item" href="../articles/options.html">Configuration with options or environment variables</a>
     <a class="dropdown-item" href="../articles/qgis_arguments.html">Passing R objects as algorithm arguments</a>
     <a class="dropdown-item" href="../articles/qgis_expressions.html">How to use QGIS expressions in qgisprocess?</a>
-    <a class="dropdown-item" href="../articles/qgis_options.html">Configuration with options or environment variables</a>
   </div>
 </li>
 <li class="nav-item">
@@ -91,7 +91,7 @@
             
             <h4 data-toc-skip class="date"><div class="line-block">Last
 update: 2024-02-21<br>
-Last run: 2024-07-02</div></h4>
+Last run: 2024-07-06</div></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-spatial/qgisprocess/blob/HEAD/vignettes/qgisprocess.Rmd" class="external-link"><code>vignettes/qgisprocess.Rmd</code></a></small>
       <div class="d-none name"><code>qgisprocess.Rmd</code></div>
@@ -363,7 +363,7 @@ separate tutorial.</p>
 <code class="sourceCode R"><span><span class="va">result</span> <span class="co"># only prints the output element(s)</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 1</span></span>
-<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fca7161d7eb.gpkg"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f4d48e46b.gpkg"</span></span></code></pre></div>
 <p>To read in the QGIS output and visualize it, we can run:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://r-spatial.github.io/sf/" class="external-link">"sf"</a></span><span class="op">)</span></span>
@@ -456,15 +456,15 @@ have been made:</p>
 <code class="sourceCode R"><span><span class="va">info</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("grass:r.slope.aspect", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 9</span></span>
-<span><span class="co">#&gt;  $ aspect    : 'qgis_outputRaster' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fca9728a46.tif"</span></span>
-<span><span class="co">#&gt;  $ dx        : 'qgis_outputRaster' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fca36b34aaa.tif"</span></span>
-<span><span class="co">#&gt;  $ dxx       : 'qgis_outputRaster' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fca72dbf712.tif"</span></span>
-<span><span class="co">#&gt;  $ dxy       : 'qgis_outputRaster' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fca2b623bd5.tif"</span></span>
-<span><span class="co">#&gt;  $ dy        : 'qgis_outputRaster' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fcaa4e8040.tif"</span></span>
-<span><span class="co">#&gt;  $ dyy       : 'qgis_outputRaster' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fca57688fb9.tif"</span></span>
-<span><span class="co">#&gt;  $ pcurvature: 'qgis_outputRaster' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fca2c43526c.tif"</span></span>
-<span><span class="co">#&gt;  $ slope     : 'qgis_outputRaster' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fca5004e86d.tif"</span></span>
-<span><span class="co">#&gt;  $ tcurvature: 'qgis_outputRaster' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fca3db5a06e.tif"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ aspect    : 'qgis_outputRaster' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f664d45b.tif"</span></span>
+<span><span class="co">#&gt;  $ dx        : 'qgis_outputRaster' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f1a949fc3.tif"</span></span>
+<span><span class="co">#&gt;  $ dxx       : 'qgis_outputRaster' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f14f96ac4.tif"</span></span>
+<span><span class="co">#&gt;  $ dxy       : 'qgis_outputRaster' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f75a02f7c.tif"</span></span>
+<span><span class="co">#&gt;  $ dy        : 'qgis_outputRaster' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f1372552f.tif"</span></span>
+<span><span class="co">#&gt;  $ dyy       : 'qgis_outputRaster' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f19abe28a.tif"</span></span>
+<span><span class="co">#&gt;  $ pcurvature: 'qgis_outputRaster' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f562777d5.tif"</span></span>
+<span><span class="co">#&gt;  $ slope     : 'qgis_outputRaster' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f334e1dc6.tif"</span></span>
+<span><span class="co">#&gt;  $ tcurvature: 'qgis_outputRaster' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f46a7971f.tif"</span></span></code></pre></div>
 <p>Combine these output rasters as a multi-layered
 <code>SpatRaster</code> object and plot it:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
@@ -533,7 +533,7 @@ therefore will also support non-JSON-input configurations (e.g. QGIS
 <span><span class="co">#&gt; z_range:       zmin: 0 zmax: 0</span></span>
 <span><span class="co">#&gt; Projected CRS: WGS 84 / UTM zone 17S</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 100 × 6</span></span></span>
-<span><span class="co">#&gt;       id  spri file2fca9728a46 file2fca5004e86d file2fca3db5a06e</span></span>
+<span><span class="co">#&gt;       id  spri file2f9f664d45b file2f9f334e1dc6 file2f9f46a7971f</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1     4           251.              6.80        0.000<span style="text-decoration: underline;">029</span>2</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2     4            79.7             4.60       -<span style="color: #BB0000;">0.002</span><span style="color: #BB0000; text-decoration: underline;">06</span>  </span></span>
@@ -571,7 +571,7 @@ argument.</p>
 <span><span class="co">#&gt; Using `OUTPUT = qgis_tmp_vector()`</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 1</span></span>
-<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fca32137b31.gpkg"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f7a70ae5f.gpkg"</span></span></code></pre></div>
 <p>If <code>.data</code> is a <code>qgis_result</code> object,
 <code><a href="../reference/qgis_run_algorithm_p.html">qgis_run_algorithm_p()</a></code> automatically tries to select an
 element named <code>OUTPUT</code>. However, if the output has another
@@ -613,10 +613,10 @@ trouble depending on the installed versions of third-party packages
 <span><span class="co">#&gt; Argument `SLOPE_WEIGHT` is unspecified (using QGIS default value).</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("sagang:sagawetnessindex", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 4</span></span>
-<span><span class="co">#&gt;  $ AREA    : 'qgis_outputRaster' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fca765b6cba.sdat"</span></span>
-<span><span class="co">#&gt;  $ AREA_MOD: 'qgis_outputRaster' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fca1e92aea2.sdat"</span></span>
-<span><span class="co">#&gt;  $ SLOPE   : 'qgis_outputRaster' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fca753dceee.sdat"</span></span>
-<span><span class="co">#&gt;  $ TWI     : 'qgis_outputRaster' chr "/tmp/RtmpIafpSl/file2fca244323a0/file2fca48eb271e.sdat"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ AREA    : 'qgis_outputRaster' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f7789999d.sdat"</span></span>
+<span><span class="co">#&gt;  $ AREA_MOD: 'qgis_outputRaster' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f36606ea6.sdat"</span></span>
+<span><span class="co">#&gt;  $ SLOPE   : 'qgis_outputRaster' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f2d7cd270.sdat"</span></span>
+<span><span class="co">#&gt;  $ TWI     : 'qgis_outputRaster' chr "/tmp/RtmpfOiq3s/file2f9f12851bc1/file2f9f3f8ea533.sdat"</span></span></code></pre></div>
 <p>When piping, <code><a href="../reference/qgis_run_algorithm_p.html">qgis_run_algorithm_p()</a></code> automatically cleans
 up after you by deleting intermediate results. This avoids cluttering
 your system when running geoalgorithms on large spatial data files. To

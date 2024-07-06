@@ -43,9 +43,9 @@ options(qgisprocess.tmp_raster_ext = "..."), respectively.'><!-- mathjax --><scr
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/cheatsheet_en.html">Cheat Sheet (English)</a>
     <a class="dropdown-item" href="../articles/cheatsheet_es.html">Cheat Sheet (español)</a>
+    <a class="dropdown-item" href="../articles/options.html">Configuration with options or environment variables</a>
     <a class="dropdown-item" href="../articles/qgis_arguments.html">Passing R objects as algorithm arguments</a>
     <a class="dropdown-item" href="../articles/qgis_expressions.html">How to use QGIS expressions in qgisprocess?</a>
-    <a class="dropdown-item" href="../articles/qgis_options.html">Configuration with options or environment variables</a>
   </div>
 </li>
 <li class="nav-item">
@@ -123,13 +123,13 @@ vector and/or raster file extension using
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">qgis_tmp_base</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpnO1HgJ/file2aeb20808873"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmphu5ii8/file2ab571df9f47"</span>
 <span class="r-in"><span><span class="fu">qgis_tmp_file</span><span class="op">(</span><span class="st">".csv"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpnO1HgJ/file2aeb20808873/file2aeb62d44bd2.csv"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmphu5ii8/file2ab571df9f47/file2ab53925c20f.csv"</span>
 <span class="r-in"><span><span class="fu">qgis_tmp_vector</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpnO1HgJ/file2aeb20808873/file2aeb65f7434.gpkg"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmphu5ii8/file2ab571df9f47/file2ab52ba994e1.gpkg"</span>
 <span class="r-in"><span><span class="fu">qgis_tmp_raster</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpnO1HgJ/file2aeb20808873/file2aeb4a9d0d2f.tif"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmphu5ii8/file2ab571df9f47/file2ab544b67712.tif"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
