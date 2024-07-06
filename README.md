@@ -74,11 +74,9 @@ reconfigure the package, or just
 ``` r
 library(qgisprocess)
 #> Attempting to load the package cache ... Success!
-#> QGIS version: 3.36.3-Maidenhead
-#> Having access to 1987 algorithms from 15 QGIS processing providers.
+#> QGIS version: 3.38.0-Grenoble
+#> Having access to 2059 algorithms from 18 QGIS processing providers.
 #> Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.
-#> >>> Run `qgis_enable_plugins()` to enable 3 disabled plugins and access
-#>     their algorithms: ViewshedAnalysis, networks, valhalla
 ```
 
 ## Functionality
@@ -135,17 +133,11 @@ result <- qgis_run_algorithm(
 #> Argument `SEPARATE_DISJOINT` is unspecified (using QGIS default value).
 #> Using `OUTPUT = qgis_tmp_vector()`
 #> Using non-preferred coordinate operation between EPSG:4267 and EPSG:4326. Using +proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=push +v_3 +step +proj=cart +ellps=clrk66 +step +proj=helmert +x=-10 +y=158 +z=187 +step +inv +proj=cart +ellps=WGS84 +step +proj=pop +v_3 +step +proj=unitconvert +xy_in=rad +xy_out=deg, preferred +proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=hgridshift +grids=ca_nrc_ntv2_0.tif +step +proj=unitconvert +xy_in=rad +xy_out=deg.
-```
-
-``` r
 
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmplc8DaG/file73c05163e20c/file73c047b8eb9b.gpkg"
-```
-
-``` r
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmphNqw6p/file1d6937316438/file1d6950ffc83a.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
@@ -186,7 +178,7 @@ A full list of available algorithms is returned by `qgis_algorithms()`.
 
 ``` r
 qgis_algorithms()
-#> # A tibble: 1,987 × 24
+#> # A tibble: 2,059 × 24
 #>    provider  provider_title algorithm               algorithm_id algorithm_title
 #>    <chr>     <chr>          <chr>                   <chr>        <chr>          
 #>  1 3d        QGIS (3D)      3d:tessellate           tessellate   Tessellate     
@@ -199,7 +191,7 @@ qgis_algorithms()
 #>  8 NetworkGT NetworkGT      NetworkGT:Connect Y No… Connect Y N… Connect Y Nodes
 #>  9 NetworkGT NetworkGT      NetworkGT:Contour Grid  Contour Grid Contour Grid   
 #> 10 NetworkGT NetworkGT      NetworkGT:Define Fract… Define Frac… Define Fractur…
-#> # ℹ 1,977 more rows
+#> # ℹ 2,049 more rows
 #> # ℹ 19 more variables: provider_can_be_activated <lgl>,
 #> #   provider_is_active <lgl>, provider_long_name <chr>, provider_version <chr>,
 #> #   provider_warning <chr>, can_cancel <lgl>, deprecated <lgl>, group <chr>,
