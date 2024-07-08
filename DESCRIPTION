@@ -1,6 +1,6 @@
 Package: qgisprocess
 Title: Use 'QGIS' Processing Algorithms
-Version: 0.3.0.9003
+Version: 0.4.0
 Authors@R: c(
     person("Dewey", "Dunnington", , "dewey@fishandwhistle.net", role = "aut",
            comment = c(ORCID = "0000-0002-9415-4582", affiliation = "Voltron Data")),
@@ -25,7 +25,7 @@ Description: Provides seamless access to the 'QGIS'
     (plugin) processing providers are supported.  Beside referring data
     sources from file, also common objects from 'sf', 'terra' and 'stars'
     are supported. The native processing algorithms are documented by QGIS.org 
-    (2023) <https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/>.
+    (2024) <https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/>.
 License: GPL (>= 3)
 URL: https://r-spatial.github.io/qgisprocess/,
     https://github.com/r-spatial/qgisprocess

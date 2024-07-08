@@ -34,9 +34,9 @@ abstract: R package 'qgisprocess' provides seamless access
   toolbox using the standalone 'qgisprocess' command-line utility. Both native and
   third-party (plugin) processing providers are supported. Beside referring data sources
   from file, also common objects from 'sf', 'terra' and 'stars' are supported. The
-  native processing algorithms are documented by QGIS.org (2023)
+  native processing algorithms are documented by QGIS.org (2024)
   https://docs.qgis.org/latest/en/docs/usermanual/processing_algs/.
 identifiers:
 - type: url
   value: https://r-spatial.github.io/qgisprocess/
-version: 0.3.0
+version: 0.4.0

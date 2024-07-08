@@ -1,4 +1,4 @@
-# qgisprocess (development version)
+# qgisprocess 0.4.0
 
 ## Enhancements
 
