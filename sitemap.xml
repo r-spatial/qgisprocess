@@ -1,46 +1,132 @@
-<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
-<url><loc>https://r-spatial.github.io/qgisprocess/404.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/CODE_OF_CONDUCT.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/CONTRIBUTING.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/LICENSE.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/articles/cheatsheet_en.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/articles/cheatsheet_es.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/articles/index.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/articles/options.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/articles/qgis_arguments.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/articles/qgis_expressions.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/articles/qgisprocess.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/authors.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/index.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/news/index.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/as_qgis_argument.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/has_qgis.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/index.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_algorithms.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_argument_spec.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_as_raster.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_as_terra.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_clean_result.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_configure.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_delete_old_cachefiles.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_detect_paths.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_enable_plugins.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_extract_output.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_function.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_list_input.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_path.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_result_status.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_run.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_run_algorithm.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_run_algorithm_p.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_search_algorithms.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_show_help.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_tmp_file.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_unconfigure.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgis_using_json_input.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgisprocess-deprecated.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/qgisprocess-package.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/st_as_sf.html</loc></url>
-<url><loc>https://r-spatial.github.io/qgisprocess/reference/st_as_stars.html</loc></url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/404.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/CONTRIBUTING.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/articles/cheatsheet_en.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/articles/cheatsheet_es.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/articles/options.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/articles/qgis_arguments.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/articles/qgis_expressions.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/articles/qgisprocess.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/authors.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/index.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/as_qgis_argument.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/has_qgis.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_algorithms.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_argument_spec.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_as_raster.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_as_terra.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_clean_result.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_configure.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_delete_old_cachefiles.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_detect_paths.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_enable_plugins.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_extract_output.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_function.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_list_input.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_path.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_result_status.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_run.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_run_algorithm.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_run_algorithm_p.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_search_algorithms.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_show_help.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_tmp_file.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_unconfigure.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgis_using_json_input.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgisprocess-deprecated.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/qgisprocess-package.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/st_as_sf.html</loc>
+  </url>
+  <url>
+    <loc>https://r-spatial.github.io/qgisprocess/reference/st_as_stars.html</loc>
+  </url>
 </urlset>
-
