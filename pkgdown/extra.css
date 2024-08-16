@@ -13,12 +13,7 @@ h1,h2,h3 {
   font-weight: bold;
 }
 
-
-.navbar-dark {
-    background-color:#497d29;
-}
-
-.navbar-dark input[type="search"] {
+.nav-item input[type="search"] {
     border-color: #6c757d;
     background-color: #ffffff;
     color: #212529;
