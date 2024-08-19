@@ -1,12 +1,11 @@
 url: https://r-spatial.github.io/qgisprocess
 template:
   bootstrap: 5
+  bslib:
+    pkgdown-navbar-bg: '#497d29'
 
 navbar:
   bg: custom
-  structure:
-    right: [github, twitter, linkedin]
-
   components:
     github:
      icon: fa-github
@@ -15,26 +14,26 @@ navbar:
 
 reference:
 - title: "Discover and learn geoprocessing algorithms"
-- contents:
+  contents:
   - has_concept("topics about information on algorithms & processing providers")
 - title: "Prepare special input arguments"
-- contents:
+  contents:
   - has_concept("topics about preparing input values")
 - title: "Run geoprocessing algorithms"
-- contents:
+  contents:
   - has_concept("functions to run one geoprocessing algorithm")
   - qgis_function
 - title: "Handle processing results"
-- contents:
+  contents:
   - qgis_extract_output
   - qgis_clean_result
   - has_concept("main functions to access or manage processing results")
 - title: "Coerce processing output"
-- contents:
+  contents:
   - has_concept("topics about coercing processing output")
 - title: "Explore and manage QGIS and qgisprocess state"
-- contents:
+  contents:
   - has_concept("functions to manage and explore QGIS and qgisprocess")
 - title: "Programming and debugging"
-- contents:
+  contents:
   - has_concept("topics about programming or debugging utilities")
