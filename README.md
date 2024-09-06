@@ -74,7 +74,7 @@ reconfigure the package, or just
 ``` r
 library(qgisprocess)
 #> Attempting to load the package cache ... Success!
-#> QGIS version: 3.38.0-Grenoble
+#> QGIS version: 3.38.2-Grenoble
 #> Having access to 2059 algorithms from 18 QGIS processing providers.
 #> Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.
 ```
@@ -137,7 +137,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmphNqw6p/file1d6937316438/file1d6950ffc83a.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpLKaaqm/file7b6c2bf628b2/file7b6c44bc6b35.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
@@ -221,6 +221,8 @@ By contributing to this project, you agree to abide by its terms.
 
 ### Presentations
 
+- useR! 2024:
+  [slides](https://florisvdh.github.io/user-2024-qgisprocess)
 - FOSS4G 2023:
   [slides](https://florisvdh.github.io/foss4g-2023-qgisprocess/) &
   [video](https://www.youtube.com/watch?v=Qt5DzWThWqI)
