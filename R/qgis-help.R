@@ -109,8 +109,7 @@ qgis_help_json <- function(algorithm, check_deprecation = TRUE) {
       arg_skip_loading_plugins(algorithm),
       "help",
       algorithm
-    ),
-    encoding = "UTF-8"
+    )
   )
 
   try({

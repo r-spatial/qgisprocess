@@ -130,7 +130,7 @@ algorithm_is_native <- function(algorithm) {
 #' @keywords internal
 qgis_query_algorithms <- function(quiet = FALSE) {
   if (qgis_using_json_output()) {
-    result <- qgis_run(args = c("list", "--json"), encoding = "UTF-8")
+    result <- qgis_run(args = c("list", "--json"))
     if (nchar(result$stderr) > 0L) {
       message(
         "\nStandard error message from 'qgis_process':\n",
