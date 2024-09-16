@@ -1,5 +1,8 @@
 # qgisprocess (development version)
 
+- Don't set `encoding = "UTF-8"` in some `processx::run()` calls that used that setting.
+This adds support for `{qgisprocess}` in non-UTF-8 locales (#219).
+
 # qgisprocess 0.4.0
 
 ## Enhancements
