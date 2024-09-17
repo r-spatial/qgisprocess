@@ -88,8 +88,8 @@ jobs:
       - name: Add additional r-universe repository
         run: |
           # Add additional r-universe repository
-          echo 'options(repos = c(getOption("repos"), "https://geocompr.r-universe.dev"))' >> ~/.Rprofile
-        shell: bash
+          cat('\noptions(repos = c(getOption("repos"), "https://geocompr.r-universe.dev"))\n', file = "~/.Rprofile", append = TRUE)
+        shell: Rscript {0}
       - uses: r-hub/actions/platform-info@v1
         with:
           token: ${{ secrets.RHUB_TOKEN }}
