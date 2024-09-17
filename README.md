@@ -18,9 +18,9 @@ coverage](https://codecov.io/gh/r-spatial/qgisprocess/branch/main/graph/badge.sv
 <!-- badges: end -->
 
 The goal of **qgisprocess** is to provide an R interface to the
-geoprocessing algorithms of [QGIS](https://qgis.org/en/site/), a popular
-and open source desktop geographic information system (GIS) program. The
-package is a re-implementation of functionality provided by the archived
+geoprocessing algorithms of [QGIS](https://qgis.org), a popular and open
+source desktop geographic information system (GIS) program. The package
+is a re-implementation of functionality provided by the archived
 [RQGIS](https://cran.r-project.org/package=RQGIS) package, which was
 partially revived in the [RQGIS3](https://github.com/r-spatial/RQGIS3)
 package.
@@ -74,7 +74,7 @@ reconfigure the package, or just
 ``` r
 library(qgisprocess)
 #> Attempting to load the package cache ... Success!
-#> QGIS version: 3.38.2-Grenoble
+#> QGIS version: 3.38.3-Grenoble
 #> Having access to 2059 algorithms from 18 QGIS processing providers.
 #> Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.
 ```
@@ -137,7 +137,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpLKaaqm/file7b6c2bf628b2/file7b6c44bc6b35.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpUlpWPq/file886027bf5cff/file88601bc90fab.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
@@ -222,7 +222,7 @@ By contributing to this project, you agree to abide by its terms.
 ### Presentations
 
 - useR! 2024:
-  [slides](https://florisvdh.github.io/user-2024-qgisprocess)
+  [slides](https://florisvdh.github.io/user-2024-qgisprocess/)
 - FOSS4G 2023:
   [slides](https://florisvdh.github.io/foss4g-2023-qgisprocess/) &
   [video](https://www.youtube.com/watch?v=Qt5DzWThWqI)

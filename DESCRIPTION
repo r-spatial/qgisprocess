@@ -20,7 +20,7 @@ Authors@R: c(
            comment = "https://www.inbo.be/en/")
   )
 Description: Provides seamless access to the 'QGIS'
-    (<https://qgis.org/en/site/>) processing toolbox using the standalone
+    (<https://qgis.org>) processing toolbox using the standalone
     'qgis_process' command-line utility.  Both native and third-party
     (plugin) processing providers are supported.  Beside referring data
     sources from file, also common objects from 'sf', 'terra' and 'stars'
