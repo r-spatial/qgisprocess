@@ -52,6 +52,10 @@ jobs:
 
     steps:
       - uses: r-hub/actions/checkout@v1
+      - name: Add additional r-universe repository
+        run: |
+          # Add additional r-universe repository
+          echo 'options(repos = c(getOption("repos"), "https://geocompr.r-universe.dev"))' >> ~/.Rprofile
       - uses: r-hub/actions/platform-info@v1
         with:
           token: ${{ secrets.RHUB_TOKEN }}
@@ -81,6 +85,11 @@ jobs:
         with:
           job-config: ${{ matrix.config.job-config }}
           token: ${{ secrets.RHUB_TOKEN }}
+      - name: Add additional r-universe repository
+        run: |
+          # Add additional r-universe repository
+          echo 'options(repos = c(getOption("repos"), "https://geocompr.r-universe.dev"))' >> ~/.Rprofile
+        shell: bash
       - uses: r-hub/actions/platform-info@v1
         with:
           token: ${{ secrets.RHUB_TOKEN }}
