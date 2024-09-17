@@ -56,6 +56,11 @@ jobs:
         with:
           token: ${{ secrets.RHUB_TOKEN }}
           job-config: ${{ matrix.config.job-config }}
+      - name: Add additional r-universe repository
+        run: |
+          # Add additional r-universe repository
+          options(repos = c(getOption("repos"), "https://geocompr.r-universe.dev"))
+        shell: Rscript {0}
       - uses: r-hub/actions/setup-deps@v1
         with:
           token: ${{ secrets.RHUB_TOKEN }}
@@ -81,6 +86,7 @@ jobs:
         with:
           job-config: ${{ matrix.config.job-config }}
           token: ${{ secrets.RHUB_TOKEN }}
+          extra-repositories: https://geocompr.r-universe.dev
       - uses: r-hub/actions/platform-info@v1
         with:
           token: ${{ secrets.RHUB_TOKEN }}
