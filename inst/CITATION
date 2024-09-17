@@ -2,11 +2,11 @@ citHeader("To cite `qgisprocess` in publications please use:")
 # begin checklist entry
 bibentry(
   bibtype = "Manual",
-  title = "R package qgisprocess: use QGIS processing algorithms. Version 0.4.0",
+  title = "R package qgisprocess: use QGIS processing algorithms. Version 0.4.1",
   author = c( author = c(person(given = "Dewey", family = "Dunnington"), person(given = "Floris", family = "Vanderhaeghe"), person(given = "Jan", family = "Caha"), person(given = "Jannes", family = "Muenchow"))),
   year = 2024,
   url = "https://r-spatial.github.io/qgisprocess/",
-  textVersion = "Dunnington, Dewey; Vanderhaeghe, Floris; Caha, Jan; Muenchow, Jannes (2024). R package qgisprocess: use QGIS processing algorithms. Version 0.4.0. https://github.com/r-spatial/qgisprocess/",
+  textVersion = "Dunnington, Dewey; Vanderhaeghe, Floris; Caha, Jan; Muenchow, Jannes (2024). R package qgisprocess: use QGIS processing algorithms. Version 0.4.1. https://github.com/r-spatial/qgisprocess/",
   keywords = "R; package; QGIS",
 )
 # end checklist entry
