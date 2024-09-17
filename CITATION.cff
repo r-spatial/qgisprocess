@@ -30,7 +30,7 @@ license: GPL-3.0-or-later
 repository-code: https://github.com/r-spatial/qgisprocess/
 type: software
 abstract: R package 'qgisprocess' provides seamless access
-  to the 'QGIS' (https://qgis.org/en/site/) processing
+  to the 'QGIS' (https://qgis.org) processing
   toolbox using the standalone 'qgisprocess' command-line utility. Both native and
   third-party (plugin) processing providers are supported. Beside referring data sources
   from file, also common objects from 'sf', 'terra' and 'stars' are supported. The
