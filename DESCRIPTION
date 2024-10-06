@@ -3,19 +3,19 @@ Title: Use 'QGIS' Processing Algorithms
 Version: 0.4.0.9000
 Authors@R: c(
     person("Dewey", "Dunnington", , "dewey@fishandwhistle.net", role = "aut",
-           comment = c(ORCID = "0000-0002-9415-4582", affiliation = "Voltron Data")),
+           comment = c("https://orcid.org/0000-0002-9415-4582", "Voltron Data")),
     person("Floris", "Vanderhaeghe", , "floris.vanderhaeghe@inbo.be", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-6378-6229", affiliation = "Research Institute for Nature and Forest (INBO)")),
+           comment = c("https://orcid.org/0000-0002-6378-6229", "Research Institute for Nature and Forest (INBO)")),
     person("Jan", "Caha", , "jan.caha@outlook.com", role = "aut",
-           comment = c(ORCID = "0000-0003-0165-0606")),
+           comment = c("https://orcid.org/0000-0003-0165-0606")),
     person("Jannes", "Muenchow", , "malnamalja@gmx.de", role = "aut",
-           comment = c(ORCID = "0000-0001-7834-4717")),
+           comment = c("https://orcid.org/0000-0001-7834-4717")),
     person("Antony", "Barja", , "antony.barja8@gmail.com", role = "ctb",
-           comment = c(ORCID = "0000-0001-5921-2858")),
+           comment = c("https://orcid.org/0000-0001-5921-2858")),
     person("Robin", "Lovelace", , "rob00x@gmail.com", role = "ctb",
-           comment = c(ORCID = "0000-0001-5679-6536")),
+           comment = c("https://orcid.org/0000-0001-5679-6536")),
     person("Jakub", "Nowosad", , "nowosad.jakub@gmail.com", role = "ctb",
-           comment = c(ORCID = "0000-0002-1057-3721")),
+           comment = c("https://orcid.org/0000-0002-1057-3721")),
     person("Research Institute for Nature and Forest (INBO)", role = c("cph", "fnd"),
            comment = "https://www.inbo.be/en/")
   )
