@@ -1,16 +1,6 @@
 ## R CMD check results
 
-0 errors | 0 warnings | 3 notes
-
-* checking DESCRIPTION meta-information ... NOTE
-  
-  Author field differs from that derived from Authors@R
-
-  > I think this a false positive:
-
-    - in the source code, the DESCRIPTION only contains Authors@R, which is formatted correctly. The field went unchanged since several CRAN versions, and was not altered in this submission.
-    - 'Author' has been automatically derived  by R CMD build. (using R 4.4.1)
-    - the difference is that the names of the 'comment' elements are present in Authors@R, but not in Author (typical example: the term 'ORCID')
+0 errors | 0 warnings | 2 notes
 
 * checking CRAN incoming feasibility ... [11s] NOTE
 
