@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">qgisprocess</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,7 @@
             
             <h4 data-toc-skip class="date"><div class="line-block">Last
 update: 2024-02-21<br>
-Last run: 2024-10-06</div></h4>
+Last run: 2024-10-07</div></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-spatial/qgisprocess/blob/main/vignettes/qgisprocess.Rmd" class="external-link"><code>vignettes/qgisprocess.Rmd</code></a></small>
       <div class="d-none name"><code>qgisprocess.Rmd</code></div>
@@ -135,7 +135,7 @@ a message telling you to do so.</p>
 <code>qgis_configure(use_cached_data = TRUE)</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/qgis_configure.html">qgis_configure</a></span><span class="op">(</span>use_cached_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Checking configuration in cache file (/home/runner/.cache/R-qgisprocess/cache-0.4.0.9000.rds)</span></span>
+<span><span class="co">#&gt; Checking configuration in cache file (/home/runner/.cache/R-qgisprocess/cache-0.4.1.9000.rds)</span></span>
 <span><span class="co">#&gt; Checking cached QGIS version with version reported by 'qgis_process' ...</span></span>
 <span><span class="co">#&gt; QGIS versions match! (3.38.3-Grenoble)</span></span>
 <span><span class="co">#&gt; Checking cached QGIS plugins (and state) with those reported by 'qgis_process' ...</span></span>
@@ -145,7 +145,7 @@ a message telling you to do so.</p>
 <span><span class="co">#&gt;     their algorithms: grassprovider, processing,</span></span>
 <span><span class="co">#&gt;     processing_saga_nextgen</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Restoring configuration from '/home/runner/.cache/R-qgisprocess/cache-0.4.0.9000.rds'</span></span>
+<span><span class="co">#&gt; Restoring configuration from '/home/runner/.cache/R-qgisprocess/cache-0.4.1.9000.rds'</span></span>
 <span><span class="co">#&gt; QGIS version: 3.38.3-Grenoble</span></span>
 <span><span class="co">#&gt; Using 'qgis_process' in the system PATH.</span></span>
 <span><span class="co">#&gt; &gt;&gt;&gt; If you need another installed QGIS instance, run `qgis_configure()`;</span></span>
@@ -344,7 +344,7 @@ separate tutorial.</p>
 <span><span class="va">result</span> <span class="co"># only prints the output element(s)</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 1</span></span>
-<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file31306fd0bd13.gpkg"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301c3ed3c578.gpkg"</span></span></code></pre></div>
 <p>To read in the QGIS output and visualize it, we can run:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://r-spatial.github.io/sf/" class="external-link">"sf"</a></span><span class="op">)</span></span>
@@ -437,15 +437,15 @@ have been made:</p>
 <code class="sourceCode R"><span><span class="va">info</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("grass:r.slope.aspect", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 9</span></span>
-<span><span class="co">#&gt;  $ aspect    : 'qgis_outputRaster' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file31302f688929.tif"</span></span>
-<span><span class="co">#&gt;  $ dx        : 'qgis_outputRaster' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file31301e9ddf29.tif"</span></span>
-<span><span class="co">#&gt;  $ dxx       : 'qgis_outputRaster' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file31301fbb67aa.tif"</span></span>
-<span><span class="co">#&gt;  $ dxy       : 'qgis_outputRaster' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file31303716e0d4.tif"</span></span>
-<span><span class="co">#&gt;  $ dy        : 'qgis_outputRaster' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file313046d49df6.tif"</span></span>
-<span><span class="co">#&gt;  $ dyy       : 'qgis_outputRaster' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file31304c29884b.tif"</span></span>
-<span><span class="co">#&gt;  $ pcurvature: 'qgis_outputRaster' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file313055bdbbb2.tif"</span></span>
-<span><span class="co">#&gt;  $ slope     : 'qgis_outputRaster' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file31305933de7f.tif"</span></span>
-<span><span class="co">#&gt;  $ tcurvature: 'qgis_outputRaster' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file31302c30879b.tif"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ aspect    : 'qgis_outputRaster' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301c66cc587d.tif"</span></span>
+<span><span class="co">#&gt;  $ dx        : 'qgis_outputRaster' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301cb713f6f.tif"</span></span>
+<span><span class="co">#&gt;  $ dxx       : 'qgis_outputRaster' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301c586fa0c.tif"</span></span>
+<span><span class="co">#&gt;  $ dxy       : 'qgis_outputRaster' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301c5a9eb3e9.tif"</span></span>
+<span><span class="co">#&gt;  $ dy        : 'qgis_outputRaster' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301c4770f3a6.tif"</span></span>
+<span><span class="co">#&gt;  $ dyy       : 'qgis_outputRaster' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301c59c6c94b.tif"</span></span>
+<span><span class="co">#&gt;  $ pcurvature: 'qgis_outputRaster' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301c337543ad.tif"</span></span>
+<span><span class="co">#&gt;  $ slope     : 'qgis_outputRaster' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301c53d72e11.tif"</span></span>
+<span><span class="co">#&gt;  $ tcurvature: 'qgis_outputRaster' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301c6ebd7312.tif"</span></span></code></pre></div>
 <p>Combine these output rasters as a multi-layered
 <code>SpatRaster</code> object and plot it:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
@@ -514,7 +514,7 @@ therefore will also support non-JSON-input configurations (e.g. QGIS
 <span><span class="co">#&gt; z_range:       zmin: 0 zmax: 0</span></span>
 <span><span class="co">#&gt; Projected CRS: WGS 84 / UTM zone 17S</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 100 × 6</span></span></span>
-<span><span class="co">#&gt;       id  spri file31302f688929 file31305933de7f file31302c30879b</span></span>
+<span><span class="co">#&gt;       id  spri file301c66cc587d file301c53d72e11 file301c6ebd7312</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1     4            251.              6.80        0.000<span style="text-decoration: underline;">029</span>2</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2     4             79.7             4.60       -<span style="color: #BB0000;">0.002</span><span style="color: #BB0000; text-decoration: underline;">06</span>  </span></span>
@@ -552,7 +552,7 @@ argument.</p>
 <span><span class="co">#&gt; Using `OUTPUT = qgis_tmp_vector()`</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 1</span></span>
-<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file3130511b437d.gpkg"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301c2f774fa9.gpkg"</span></span></code></pre></div>
 <p>If <code>.data</code> is a <code>qgis_result</code> object,
 <code><a href="../reference/qgis_run_algorithm_p.html">qgis_run_algorithm_p()</a></code> automatically tries to select an
 element named <code>OUTPUT</code>. However, if the output has another
@@ -594,10 +594,10 @@ trouble depending on the installed versions of third-party packages
 <span><span class="co">#&gt; Argument `SLOPE_WEIGHT` is unspecified (using QGIS default value).</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("sagang:sagawetnessindex", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 4</span></span>
-<span><span class="co">#&gt;  $ AREA    : 'qgis_outputRaster' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file313042b7b962.sdat"</span></span>
-<span><span class="co">#&gt;  $ AREA_MOD: 'qgis_outputRaster' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file31304c8f5bf3.sdat"</span></span>
-<span><span class="co">#&gt;  $ SLOPE   : 'qgis_outputRaster' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file3130256bbf57.sdat"</span></span>
-<span><span class="co">#&gt;  $ TWI     : 'qgis_outputRaster' chr "/tmp/Rtmps6y7OH/file3130645fa49f/file313047e30e10.sdat"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ AREA    : 'qgis_outputRaster' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301c5a80adc5.sdat"</span></span>
+<span><span class="co">#&gt;  $ AREA_MOD: 'qgis_outputRaster' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301ce54213e.sdat"</span></span>
+<span><span class="co">#&gt;  $ SLOPE   : 'qgis_outputRaster' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301c77cdac34.sdat"</span></span>
+<span><span class="co">#&gt;  $ TWI     : 'qgis_outputRaster' chr "/tmp/RtmpqO0cLr/file301c2a30d394/file301c42c6668.sdat"</span></span></code></pre></div>
 <p>When piping, <code><a href="../reference/qgis_run_algorithm_p.html">qgis_run_algorithm_p()</a></code> automatically cleans
 up after you by deleting intermediate results. This avoids cluttering
 your system when running geoalgorithms on large spatial data files. To
