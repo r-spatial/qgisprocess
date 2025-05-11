@@ -59,7 +59,7 @@ Suggests:
     tidyr
 VignetteBuilder: 
     knitr
-Additional_repositories: https://geocompr.r-universe.dev
+Additional_repositories: https://nowosad.r-universe.dev
 Config/checklist/communities: inbo
 Config/checklist/keywords: R; package; QGIS
 Encoding: UTF-8
