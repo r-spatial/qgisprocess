@@ -43,7 +43,7 @@ cached value. The latter always includes deprecated algorithms if these are
 returned by 'qgis_process' (this requires the JSON output method).
 }
 \examples{
-\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis()) withAutoprint(\{ # examplesIf}
 qgis_algorithms()
 qgis_algorithms(include_deprecated = FALSE)
 qgis_providers()

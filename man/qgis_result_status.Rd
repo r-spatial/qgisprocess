@@ -33,7 +33,7 @@ the exit status of the process, standard output and standard error of
 'qgis_process', arguments passed to 'qgis_process'.
 }
 \examples{
-\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis()) withAutoprint(\{ # examplesIf}
 result <- qgis_run_algorithm(
   "native:buffer",
   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),

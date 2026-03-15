@@ -29,7 +29,7 @@ Convert a qgis_result object or one of its elements to an sf object
 The sf package must be loaded explicitly to use these methods.
 }
 \examples{
-\dontshow{if (has_qgis() && requireNamespace("sf", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis() && requireNamespace("sf", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # not running below examples in R CMD check to save time
 result <- qgis_run_algorithm(

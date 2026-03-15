@@ -32,7 +32,7 @@ qgis_get_output_specs(algorithm, ...)
 Get detailed information about one algorithm
 }
 \examples{
-\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis()) withAutoprint(\{ # examplesIf}
 qgis_get_description("native:filedownloader")
 \donttest{
 # not running below examples in R CMD check to save time

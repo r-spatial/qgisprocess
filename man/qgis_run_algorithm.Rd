@@ -92,7 +92,7 @@ preprocessing in R (including checks).
 }
 
 \examples{
-\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis()) withAutoprint(\{ # examplesIf}
 qgis_run_algorithm(
   "native:buffer",
   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),

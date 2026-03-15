@@ -32,7 +32,7 @@ A string.
 \code{qgis_version()} returns the QGIS version.
 }
 \examples{
-\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis()) withAutoprint(\{ # examplesIf}
 qgis_path()
 qgis_path(quiet = FALSE)
 qgis_version()

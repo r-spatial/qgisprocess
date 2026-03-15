@@ -40,7 +40,7 @@ accepted.
 Have a look at \code{\link[stringi:about_search_regex]{stringi::search_regex()}} to get a nice overview.
 }
 \examples{
-\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis()) withAutoprint(\{ # examplesIf}
 qgis_search_algorithms(
   algorithm = "point.*line",
   provider = "^native$"

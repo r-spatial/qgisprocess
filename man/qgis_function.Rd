@@ -28,7 +28,7 @@ This package also provides the QGIS documentation of each processing
 algorithm as corresponding R function documentation.
 }
 \examples{
-\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis()) withAutoprint(\{ # examplesIf}
 qgis_buffer <- qgis_function("native:buffer")
 qgis_buffer(
   system.file(

@@ -46,7 +46,7 @@ cleaned up. The \code{as_qgis_argument()} and \code{qgis_clean_argument()} S3
 generics provide hooks for argument values to be serialized correctly.
 }
 \examples{
-\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis()) withAutoprint(\{ # examplesIf}
 qgisprocess::as_qgis_argument(
   c("a", "b"),
   spec = list(qgis_type = "range"),
