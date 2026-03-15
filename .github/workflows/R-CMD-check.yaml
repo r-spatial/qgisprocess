@@ -92,12 +92,12 @@ jobs:
           # Add repo to install QGIS LTR (long-term release) for Ubuntu (using an often outdated GRASS release from Ubuntu repo)
           sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/qgis-archive-keyring.gpg] https://qgis.org/ubuntu-ltr `lsb_release -c -s` main" > /etc/apt/sources.list.d/qgis.list'
 
-      - name: Install QGIS, GRASS, SAGA and the SAGA NextGen plugin (Ubuntu) from preset repos
+      - name: Install QGIS, GRASS GIS, SAGA and the SAGA NextGen plugin (Ubuntu) from preset repos
         if: runner.os == 'Linux' && matrix.config.qgis != 'none'
         run: |
-          # Install QGIS, GRASS, SAGA and the SAGA NextGen plugin (Ubuntu) from preset repos
+          # Install QGIS, GRASS GIS, SAGA and the SAGA NextGen plugin (Ubuntu) from preset repos
           sudo apt-get update
-          sudo apt-get install -y qgis qgis-plugin-grass saga
+          sudo apt-get install -y qgis grass-core saga
           wget -qO ../sagang_plugin.zip https://plugins.qgis.org/plugins/processing_saga_nextgen/version/$SAGANGV/download/
           unzip -q ../sagang_plugin.zip -d ../extra_plugins
 
