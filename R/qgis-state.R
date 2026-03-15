@@ -382,7 +382,13 @@ readopt_json_output <- function() {
 
 
 
-
+#' Return the value of an option and read an environment variable as fallback
+#'
+#' @param option_name The name of the option.
+#' @param envvar_name The name of the environment variable.
+#'
+#' @noRd
+#'
 #' @keywords internal
 readopt <- function(option_name, envvar_name) {
   getOption(
