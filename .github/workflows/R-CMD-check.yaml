@@ -50,7 +50,7 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           use-public-rspm: true
-          extra-repositories: https://geocompr.r-universe.dev
+          extra-repositories: https://geocompx.r-universe.dev
 
       - name: Prepare Ubuntu for installing QGIS (common code)
         if: runner.os == 'Linux' && matrix.config.qgis != 'none'
