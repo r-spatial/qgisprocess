@@ -49,7 +49,7 @@ This makes it more convenient in a pipeline (hence '_p' in the name).
 Uses \code{\link[=qgis_function]{qgis_function()}} under the hood.
 }
 \examples{
-\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis()) withAutoprint(\{ # examplesIf}
 system.file(
   "longlake/longlake_depth.gpkg",
   package = "qgisprocess"

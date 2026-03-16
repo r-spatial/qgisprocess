@@ -19,7 +19,7 @@ Deletes any temporary files that are defined in a
 These may comprise both input and output files.
 }
 \examples{
-\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis()) withAutoprint(\{ # examplesIf}
 result <- qgis_run_algorithm(
   "native:buffer",
   INPUT = system.file("longlake/longlake_depth.gpkg", package = "qgisprocess"),

@@ -46,7 +46,7 @@ Only plugins that implement processing providers are supported.
 Installing or removing plugins is not supported.
 }
 \examples{
-\dontshow{if (has_qgis()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis()) withAutoprint(\{ # examplesIf}
 qgis_enable_plugins("name_of_plugin")
 \dontshow{\}) # examplesIf}
 }

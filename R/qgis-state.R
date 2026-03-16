@@ -382,7 +382,13 @@ readopt_json_output <- function() {
 
 
 
-
+#' Return the value of an option and read an environment variable as fallback
+#'
+#' @param option_name The name of the option.
+#' @param envvar_name The name of the environment variable.
+#'
+#' @noRd
+#'
 #' @keywords internal
 readopt <- function(option_name, envvar_name) {
   getOption(
@@ -398,7 +404,7 @@ readopt <- function(option_name, envvar_name) {
 
 #' Resolve a boolean option or environment variable to TRUE, FALSE or (optionally) NA
 #'
-#' @param value A result as obtained by [readopt()].
+#' @param value A result as obtained by `readopt()`.
 #' @param keep_NA Return NA if option and env var are empty?
 #' (i.e. `NULL` and `""` respectively).
 #' The default (`FALSE`) will return `FALSE`.

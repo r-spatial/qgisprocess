@@ -100,7 +100,7 @@ test_that(glue("qgis_run_algorithm() works when passing a numeric vector to a ra
   obj <- terra::rast(system.file("longlake/longlake_depth.tif", package = "qgisprocess"))
   out <- qgis_run_algorithm(glue("{grass_provider}:r.rescale"), input = obj, to = c(0, 1))
   tmp <- qgis_as_terra(out)
-  expect_identical(max(terra::values(tmp), na.rm = TRUE), 1L)
+  expect_identical(max(terra::values(tmp), na.rm = TRUE), 1)
   out2 <- qgis_run_algorithm(glue("{grass_provider}:r.rescale"), input = obj, to = "0,1")
   tmp2 <- qgis_as_terra(out2)
   expect_identical(terra::values(tmp), terra::values(tmp2))

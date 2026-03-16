@@ -37,7 +37,7 @@ The distinction between \code{SpatRaster} and \code{SpatVector} is based on the
 output type.
 }
 \examples{
-\dontshow{if (has_qgis() && requireNamespace("terra", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (has_qgis() && requireNamespace("terra", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # not running below examples in R CMD check to save time
 result <- qgis_run_algorithm(
