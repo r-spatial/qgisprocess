@@ -1,5 +1,7 @@
 # qgisprocess (development version)
 
+- Add support for QGIS 4.0 (#229).
+
 # qgisprocess 0.4.1
 
 ## Fix for non-UTF-8 locales

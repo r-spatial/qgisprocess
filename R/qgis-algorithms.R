@@ -142,6 +142,7 @@ qgis_query_algorithms <- function(quiet = FALSE) {
 
     providers_ptype <- tibble::tibble(
       provider_can_be_activated = logical(),
+      default_raster_file_format = character(),
       default_raster_file_extension = character(),
       default_vector_file_extension = character(),
       provider_is_active = logical(),
