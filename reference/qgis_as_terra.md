@@ -81,8 +81,8 @@ qgis_as_terra(result)
 #> resolution  : 18.27273, 15.53535  (x, y)
 #> extent      : 409939.9, 411767.1, 5083307, 5084861  (xmin, xmax, ymin, ymax)
 #> coord. ref. : NAD83 / UTM zone 20N (EPSG:26920) 
-#> source      : file2f5061f8883d.tif 
-#> name        : file2f5061f8883d 
+#> source      : file2f3b505cf0c2.tif 
+#> name        : file2f3b505cf0c2 
 
 # if you need more control, extract the needed output element first:
 output_raster <- qgis_extract_output(result, "OUTPUT")
@@ -92,8 +92,8 @@ qgis_as_terra(output_raster)
 #> resolution  : 18.27273, 15.53535  (x, y)
 #> extent      : 409939.9, 411767.1, 5083307, 5084861  (xmin, xmax, ymin, ymax)
 #> coord. ref. : NAD83 / UTM zone 20N (EPSG:26920) 
-#> source      : file2f5061f8883d.tif 
-#> name        : file2f5061f8883d 
+#> source      : file2f3b505cf0c2.tif 
+#> name        : file2f3b505cf0c2 
 
 # Same holds for coercion to SpatVector
 result2 <- qgis_run_algorithm(
@@ -114,7 +114,7 @@ qgis_as_terra(result2)
 #>  geometry    : polygons 
 #>  dimensions  : 1, 1  (geometries, attributes)
 #>  extent      : 409850.6, 411856.3, 5083216, 5084951  (xmin, xmax, ymin, ymax)
-#>  source      : file2f502c446c1f.gpkg
+#>  source      : file2f3b5569ede.gpkg
 #>  coord. ref. : NAD83 / UTM zone 20N (EPSG:26920) 
 #>  names       :     label
 #>  type        :     <chr>
@@ -125,7 +125,7 @@ qgis_as_terra(output_vector)
 #>  geometry    : polygons 
 #>  dimensions  : 1, 1  (geometries, attributes)
 #>  extent      : 409850.6, 411856.3, 5083216, 5084951  (xmin, xmax, ymin, ymax)
-#>  source      : file2f502c446c1f.gpkg
+#>  source      : file2f3b5569ede.gpkg
 #>  coord. ref. : NAD83 / UTM zone 20N (EPSG:26920) 
 #>  names       :     label
 #>  type        :     <chr>
@@ -137,7 +137,7 @@ qgis_as_terra(result2, proxy = TRUE)
 #>  geometry    : polygons 
 #>  dimensions  : 1, 1  (geometries, attributes)
 #>  extent      : 409850.6, 411856.3, 5083216, 5084951  (xmin, xmax, ymin, ymax)
-#>  source      : file2f502c446c1f.gpkg
+#>  source      : file2f3b5569ede.gpkg
 #>  coord. ref. : NAD83 / UTM zone 20N (EPSG:26920) 
 #>  names       : label
 #>  type        : <chr>

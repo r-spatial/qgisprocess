@@ -71,7 +71,7 @@ Other topics about reporting the QGIS state:
 
 ``` r
 qgis_algorithms()
-#> # A tibble: 409 × 24
+#> # A tibble: 409 × 25
 #>    provider provider_title algorithm                algorithm_id algorithm_title
 #>    <chr>    <chr>          <chr>                    <chr>        <chr>          
 #>  1 3d       QGIS (3D)      3d:tessellate            tessellate   Tessellate     
@@ -85,14 +85,14 @@ qgis_algorithms()
 #>  9 gdal     GDAL           gdal:clipvectorbyextent  clipvectorb… Clip vector by…
 #> 10 gdal     GDAL           gdal:clipvectorbypolygon clipvectorb… Clip vector by…
 #> # ℹ 399 more rows
-#> # ℹ 19 more variables: provider_can_be_activated <lgl>,
+#> # ℹ 20 more variables: provider_can_be_activated <lgl>,
 #> #   provider_is_active <lgl>, provider_long_name <chr>, provider_version <chr>,
 #> #   provider_warning <chr>, can_cancel <lgl>, deprecated <lgl>, group <chr>,
 #> #   has_known_issues <lgl>, help_url <chr>, requires_matching_crs <lgl>,
-#> #   short_description <chr>, tags <list>, default_raster_file_extension <chr>,
-#> #   default_vector_file_extension <chr>, …
+#> #   short_description <chr>, tags <list>, default_raster_file_format <chr>,
+#> #   default_raster_file_extension <chr>, default_vector_file_extension <chr>, …
 qgis_algorithms(include_deprecated = FALSE)
-#> # A tibble: 388 × 24
+#> # A tibble: 388 × 25
 #>    provider provider_title algorithm                algorithm_id algorithm_title
 #>    <chr>    <chr>          <chr>                    <chr>        <chr>          
 #>  1 3d       QGIS (3D)      3d:tessellate            tessellate   Tessellate     
@@ -106,12 +106,12 @@ qgis_algorithms(include_deprecated = FALSE)
 #>  9 gdal     GDAL           gdal:clipvectorbyextent  clipvectorb… Clip vector by…
 #> 10 gdal     GDAL           gdal:clipvectorbypolygon clipvectorb… Clip vector by…
 #> # ℹ 378 more rows
-#> # ℹ 19 more variables: provider_can_be_activated <lgl>,
+#> # ℹ 20 more variables: provider_can_be_activated <lgl>,
 #> #   provider_is_active <lgl>, provider_long_name <chr>, provider_version <chr>,
 #> #   provider_warning <chr>, can_cancel <lgl>, deprecated <lgl>, group <chr>,
 #> #   has_known_issues <lgl>, help_url <chr>, requires_matching_crs <lgl>,
-#> #   short_description <chr>, tags <list>, default_raster_file_extension <chr>,
-#> #   default_vector_file_extension <chr>, …
+#> #   short_description <chr>, tags <list>, default_raster_file_format <chr>,
+#> #   default_raster_file_extension <chr>, default_vector_file_extension <chr>, …
 qgis_providers()
 #> # A tibble: 4 × 3
 #>   provider provider_title    algorithm_count

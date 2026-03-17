@@ -64,7 +64,7 @@ qgis_version(full = FALSE)
 qgis_version(debug = TRUE)
 #> [1] "3.44.7-Solothurn"
 #> 
-#> Using qgisprocess 0.4.1.9000
+#> Using qgisprocess 0.4.1.9229
 #> 
 #> Versions reported by 'qgis_process':
 #> ------------------------------------

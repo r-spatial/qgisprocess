@@ -62,7 +62,7 @@ If you are interested in the details about this process, e.g. how
 
 ``` r
 qgis_configure(use_cached_data = TRUE)
-#> Checking configuration in cache file (/home/runner/.cache/R-qgisprocess/cache-0.4.1.9000.rds)
+#> Checking configuration in cache file (/home/runner/.cache/R-qgisprocess/cache-0.4.1.9229.rds)
 #> Checking cached QGIS version with version reported by 'qgis_process' ...
 #> QGIS versions match! (3.44.7-Solothurn)
 #> Checking cached QGIS plugins (and state) with those reported by 'qgis_process' ...
@@ -72,7 +72,7 @@ qgis_configure(use_cached_data = TRUE)
 #>     their algorithms: grassprovider, processing,
 #>     processing_saga_nextgen
 #> 
-#> Restoring configuration from '/home/runner/.cache/R-qgisprocess/cache-0.4.1.9000.rds'
+#> Restoring configuration from '/home/runner/.cache/R-qgisprocess/cache-0.4.1.9229.rds'
 #> QGIS version: 3.44.7-Solothurn
 #> Using 'qgis_process' in the system PATH.
 #> >>> If you need another installed QGIS instance, run `qgis_configure()`;
@@ -177,7 +177,7 @@ To get the complete overview of available (cached) geoalgorithms, run:
 ``` r
 algs <- qgis_algorithms()
 algs
-#> # A tibble: 1,225 × 24
+#> # A tibble: 1,225 × 25
 #>    provider provider_title algorithm                algorithm_id algorithm_title
 #>    <chr>    <chr>          <chr>                    <chr>        <chr>          
 #>  1 3d       QGIS (3D)      3d:tessellate            tessellate   Tessellate     
@@ -191,12 +191,12 @@ algs
 #>  9 gdal     GDAL           gdal:clipvectorbyextent  clipvectorb… Clip vector by…
 #> 10 gdal     GDAL           gdal:clipvectorbypolygon clipvectorb… Clip vector by…
 #> # ℹ 1,215 more rows
-#> # ℹ 19 more variables: provider_can_be_activated <lgl>,
+#> # ℹ 20 more variables: provider_can_be_activated <lgl>,
 #> #   provider_is_active <lgl>, provider_long_name <chr>, provider_version <chr>,
 #> #   provider_warning <chr>, can_cancel <lgl>, deprecated <lgl>, group <chr>,
 #> #   has_known_issues <lgl>, help_url <chr>, requires_matching_crs <lgl>,
-#> #   short_description <chr>, tags <list>, default_raster_file_extension <chr>,
-#> #   default_vector_file_extension <chr>, …
+#> #   short_description <chr>, tags <list>, default_raster_file_format <chr>,
+#> #   default_raster_file_extension <chr>, default_vector_file_extension <chr>, …
 ```
 
 For a directed search, use
@@ -309,7 +309,7 @@ names(result)
 result # only prints the output element(s)
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpNz7cwW/file3463450f138e/file34634aa2ba9.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file345453848bc6.gpkg"
 ```
 
 To read in the QGIS output and visualize it, we can run:
@@ -424,15 +424,15 @@ Just printing the `info` object shows which output files have been made:
 info
 #> <Result of `qgis_run_algorithm("grass:r.slope.aspect", ...)`>
 #> List of 9
-#>  $ aspect    : 'qgis_outputRaster' chr "/tmp/RtmpNz7cwW/file3463450f138e/file34633f33f144.tif"
-#>  $ dx        : 'qgis_outputRaster' chr "/tmp/RtmpNz7cwW/file3463450f138e/file34632848009a.tif"
-#>  $ dxx       : 'qgis_outputRaster' chr "/tmp/RtmpNz7cwW/file3463450f138e/file34633cf3d4fa.tif"
-#>  $ dxy       : 'qgis_outputRaster' chr "/tmp/RtmpNz7cwW/file3463450f138e/file3463137a1474.tif"
-#>  $ dy        : 'qgis_outputRaster' chr "/tmp/RtmpNz7cwW/file3463450f138e/file34636cfc21c3.tif"
-#>  $ dyy       : 'qgis_outputRaster' chr "/tmp/RtmpNz7cwW/file3463450f138e/file34631cb4c3b7.tif"
-#>  $ pcurvature: 'qgis_outputRaster' chr "/tmp/RtmpNz7cwW/file3463450f138e/file34636851f61a.tif"
-#>  $ slope     : 'qgis_outputRaster' chr "/tmp/RtmpNz7cwW/file3463450f138e/file346369b8a527.tif"
-#>  $ tcurvature: 'qgis_outputRaster' chr "/tmp/RtmpNz7cwW/file3463450f138e/file34635addadea.tif"
+#>  $ aspect    : 'qgis_outputRaster' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file34543390c46d.tif"
+#>  $ dx        : 'qgis_outputRaster' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file345465ddd0dc.tif"
+#>  $ dxx       : 'qgis_outputRaster' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file345431f60d18.tif"
+#>  $ dxy       : 'qgis_outputRaster' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file34546578096.tif"
+#>  $ dy        : 'qgis_outputRaster' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file345434962175.tif"
+#>  $ dyy       : 'qgis_outputRaster' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file34547e119bbe.tif"
+#>  $ pcurvature: 'qgis_outputRaster' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file3454611195af.tif"
+#>  $ slope     : 'qgis_outputRaster' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file345464472216.tif"
+#>  $ tcurvature: 'qgis_outputRaster' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file3454ea0816.tif"
 ```
 
 Combine these output rasters as a multi-layered `SpatRaster` object and
@@ -520,18 +520,18 @@ sf::st_as_sf(rp_tp)
 #> z_range:       zmin: 0 zmax: 0
 #> Projected CRS: +proj=utm +zone=17 +south +ellps=WGS84 +units=m +no_defs
 #> # A tibble: 100 × 6
-#>       id  spri file34633f33f144 file346369b8a527 file34635addadea
-#>    <int> <int>            <dbl>            <dbl>            <dbl>
-#>  1     1     4            246.              4.85        -0.000425
-#>  2     2     4            126.              4.23        -0.00246 
-#>  3     3     3            301.              8.57        -0.00111 
-#>  4     4     2             96.9             6.63         0.00100 
-#>  5     5     4            337.             14.3         -0.000145
-#>  6     6     5            245.             10.6         -0.000484
-#>  7     7     6            272.              9.47        -0.000532
-#>  8     8     2            307.              6.21        -0.000236
-#>  9     9     3             67.8            11.5         -0.00135 
-#> 10    10     3            107.             12.9          0.00134 
+#>       id  spri file34543390c46d file345464472216 file3454ea0816
+#>    <int> <int>            <dbl>            <dbl>          <dbl>
+#>  1     1     4            246.              4.85      -0.000425
+#>  2     2     4            126.              4.23      -0.00246 
+#>  3     3     3            301.              8.57      -0.00111 
+#>  4     4     2             96.9             6.63       0.00100 
+#>  5     5     4            337.             14.3       -0.000145
+#>  6     6     5            245.             10.6       -0.000484
+#>  7     7     6            272.              9.47      -0.000532
+#>  8     8     2            307.              6.21      -0.000236
+#>  9     9     3             67.8            11.5       -0.00135 
+#> 10    10     3            107.             12.9        0.00134 
 #> # ℹ 90 more rows
 #> # ℹ 1 more variable: geom <POINT [m]>
 ```
@@ -558,7 +558,7 @@ system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") |>
 #> Using `OUTPUT = qgis_tmp_vector()`
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpNz7cwW/file3463450f138e/file34633f59fc7c.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file3454534cd3ea.gpkg"
 ```
 
 If `.data` is a `qgis_result` object,
@@ -601,10 +601,10 @@ qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem,
 #> Argument `SLOPE_WEIGHT` is unspecified (using QGIS default value).
 #> <Result of `qgis_run_algorithm("sagang:sagawetnessindex", ...)`>
 #> List of 4
-#>  $ AREA    : 'qgis_outputRaster' chr "/tmp/RtmpNz7cwW/file3463450f138e/file3463ae9c09d.sdat"
-#>  $ AREA_MOD: 'qgis_outputRaster' chr "/tmp/RtmpNz7cwW/file3463450f138e/file3463388268c0.sdat"
-#>  $ SLOPE   : 'qgis_outputRaster' chr "/tmp/RtmpNz7cwW/file3463450f138e/file34637f6b17cc.sdat"
-#>  $ TWI     : 'qgis_outputRaster' chr "/tmp/RtmpNz7cwW/file3463450f138e/file346353deb583.sdat"
+#>  $ AREA    : 'qgis_outputRaster' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file34544f16b738.sdat"
+#>  $ AREA_MOD: 'qgis_outputRaster' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file34548045445.sdat"
+#>  $ SLOPE   : 'qgis_outputRaster' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file3454123a278a.sdat"
+#>  $ TWI     : 'qgis_outputRaster' chr "/tmp/RtmpTlq9F8/file34545a2d2926/file34547129ee44.sdat"
 ```
 
 When piping,
