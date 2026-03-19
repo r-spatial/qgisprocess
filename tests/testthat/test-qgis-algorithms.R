@@ -3,7 +3,11 @@ test_that("qgis_algorithms() works", {
   algs <- qgis_algorithms()
   expect_true(tibble::is_tibble(algs))
   expect_gt(nrow(algs), 200)
-  expect_gt(ncol(algs), 20)
+  if (qgis_using_json_output()) {
+    expect_gt(ncol(algs), 20)
+  } else {
+    expect_gt(ncol(algs), 4)
+  }
   expect_gte(nrow(algs), nrow(qgis_algorithms(include_deprecated = FALSE)))
   old_names <- c(
     "provider", "provider_title", "algorithm",
@@ -59,16 +63,36 @@ test_that("qgis_search_algorithms() works", {
   skip_if_not(has_qgis())
   expect_error(qgis_search_algorithms(), "at least one of the arguments")
   expect_error(qgis_search_algorithms(algorithm = 3))
-  res1 <- qgis_search_algorithms(
-    algorithm = "point.*line",
-    provider = "^native$",
-    group = "geometry"
-  )
+  if (qgis_using_json_output()) {
+    expect_no_message(
+      res1 <- qgis_search_algorithms(
+        algorithm = "point.*line",
+        provider = "^native$",
+        group = "geometry"
+      )
+    )
+  } else {
+    expect_message(
+      res1 <- qgis_search_algorithms(
+        algorithm = "point.*line",
+        provider = "^native$",
+        group = "geometry"
+      ),
+      "Ignoring"
+    )
+  }
   expect_s3_class(res1, "data.frame")
-  expect_identical(
-    colnames(res1),
-    c("provider", "provider_title", "group", "algorithm", "algorithm_title")
-  )
+  if (qgis_using_json_output()) {
+    expect_identical(
+      colnames(res1),
+      c("provider", "provider_title", "group", "algorithm", "algorithm_title")
+    )
+  } else {
+    expect_identical(
+      colnames(res1),
+      c("provider", "provider_title", "algorithm", "algorithm_title")
+    )
+  }
   expect_gt(nrow(res1), 0L)
   res2 <- qgis_search_algorithms(algorithm = "point.*line")
   expect_gt(nrow(res2), nrow(res1))
