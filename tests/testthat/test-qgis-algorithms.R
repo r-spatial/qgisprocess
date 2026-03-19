@@ -3,7 +3,11 @@ test_that("qgis_algorithms() works", {
   algs <- qgis_algorithms()
   expect_true(tibble::is_tibble(algs))
   expect_gt(nrow(algs), 200)
-  expect_gt(ncol(algs), 20)
+  if (qgis_using_json_output()) {
+    expect_gt(ncol(algs), 20)
+  } else {
+    expect_gt(ncol(algs), 4)
+  }
   expect_gte(nrow(algs), nrow(qgis_algorithms(include_deprecated = FALSE)))
   old_names <- c(
     "provider", "provider_title", "algorithm",
