@@ -19,7 +19,9 @@ qgis_search_algorithms(
 \code{provider_title} value from the output of \code{\link[=qgis_algorithms]{qgis_algorithms()}}.}
 
 \item{group}{Regular expression to match the \code{group} value
-from the output of \code{\link[=qgis_algorithms]{qgis_algorithms()}}.}
+from the output of \code{\link[=qgis_algorithms]{qgis_algorithms()}}.
+This is only supported for the JSON output method (see
+\code{\link[=qgis_using_json_output]{qgis_using_json_output()}}).}
 
 \item{include_deprecated}{Logical. Should deprecated algorithms be included?}
 }

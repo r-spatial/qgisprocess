@@ -281,6 +281,8 @@ qgis_query_algorithms <- function(quiet = FALSE) {
 #' `provider_title` value from the output of [qgis_algorithms()].
 #' @param group Regular expression to match the `group` value
 #' from the output of [qgis_algorithms()].
+#' This is only supported for the JSON output method (see
+#' [qgis_using_json_output()]).
 #' @inheritParams qgis_algorithms
 #'
 #' @returns A tibble.
@@ -311,13 +313,24 @@ qgis_search_algorithms <- function(
     nrow(result) > 0L,
     msg = "qgis_algorithms() returns an empty dataframe; no searching done."
   )
-  result <- result[, c(
-    "provider",
-    "provider_title",
-    "group",
-    "algorithm",
-    "algorithm_title"
-  )]
+  if (
+    qgis_using_json_output()
+  ) {
+    result <- result[, c(
+      "provider",
+      "provider_title",
+      "group",
+      "algorithm",
+      "algorithm_title"
+    )]
+  } else {
+    result <- result[, c(
+      "provider",
+      "provider_title",
+      "algorithm",
+      "algorithm_title"
+    )]
+  }
   if (!is.null(algorithm)) {
     assert_that(is.string(algorithm))
     result <- result[
@@ -333,8 +346,15 @@ qgis_search_algorithms <- function(
     ]
   }
   if (!is.null(group)) {
-    assert_that(is.string(group))
-    result <- result[stringr::str_detect(result$group, group), ]
+    if (qgis_using_json_output()) {
+      assert_that(is.string(group))
+      result <- result[stringr::str_detect(result$group, group), ]
+    } else {
+      message(
+        "Ignoring the `group` argument since the JSON output setting is FALSE.",
+        "\nSee `?qgis_using_json_output`."
+      )
+    }
   }
   result
 }
