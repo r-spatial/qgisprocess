@@ -92,7 +92,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmppV7Apl/file2f3b18ab887a/file2f3b63922eb6.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpTMZCFu/file2f894edd5885/file2f89225ce7d3.gpkg"
 
 # nevertheless, more elements are included:
 length(result)
@@ -103,7 +103,7 @@ names(result)
 
 # extract the output element 'OUTPUT':
 qgis_extract_output(result)
-#> [1] "/tmp/RtmppV7Apl/file2f3b18ab887a/file2f3b63922eb6.gpkg"
+#> [1] "/tmp/RtmpTMZCFu/file2f894edd5885/file2f89225ce7d3.gpkg"
 #> attr(,"class")
 #> [1] "qgis_outputVector"
 ```

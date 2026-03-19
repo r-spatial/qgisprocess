@@ -32,6 +32,8 @@ qgis_search_algorithms(
 
   Regular expression to match the `group` value from the output of
   [`qgis_algorithms()`](https://r-spatial.github.io/qgisprocess/reference/qgis_algorithms.md).
+  This is only supported for the JSON output method (see
+  [`qgis_using_json_output()`](https://r-spatial.github.io/qgisprocess/reference/qgis_using_json_input.md)).
 
 - include_deprecated:
 
