@@ -155,6 +155,6 @@ _If you used the package in your work and would like to see it referenced here, 
 
 ### Further reading
 
-- A [paper](https://journal.r-project.org/archive/2017/RJ-2017-067/index.html) on the original RQGIS package published in the R Journal
+- A [paper](https://journal.r-project.org/articles/RJ-2017-067/index.html) on the original RQGIS package published in the R Journal
 - A [discussion](https://github.com/r-spatial/discuss/issues/41) about options for running QGIS from R that led to this package
 - The [pull request](https://github.com/qgis/QGIS/pull/34617) in the QGIS repo that led to the development of the `qgis_process` command-line utility
