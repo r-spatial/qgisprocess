@@ -60,9 +60,11 @@ to reconfigure the package, or just
 ``` r
 library(qgisprocess)
 #> Attempting to load the package cache ... Success!
-#> QGIS version: 3.38.3-Grenoble
-#> Having access to 2059 algorithms from 18 QGIS processing providers.
+#> QGIS version: 3.44.7-Solothurn
+#> Having access to 2055 algorithms from 16 QGIS processing providers.
 #> Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.
+#> >>> Run `qgis_enable_plugins()` to enable 2 disabled plugins and access
+#>     their algorithms: networks, valhalla
 ```
 
 ## Functionality
@@ -124,7 +126,7 @@ result <- qgis_run_algorithm(
 result
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpUlpWPq/file886027bf5cff/file88601bc90fab.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmppnjluu/file2c5542395fd7/file2c557ee76ba2.gpkg"
 
 output_sf <- sf::st_as_sf(result)
 plot(sf::st_geometry(output_sf))
@@ -139,7 +141,7 @@ You can search for algorithms with
 (string matching with regex).
 
 ``` r
-qgis_search_algorithms(algorithm = "buffer", group = "[Vv]ector")
+qgis_search_algorithms(algorithm = "buffer", group = "[Vv]ector|[Ff]eatures")
 #> # A tibble: 10 × 5
 #>    provider provider_title    group                algorithm     algorithm_title
 #>    <chr>    <chr>             <chr>                <chr>         <chr>          
@@ -152,7 +154,7 @@ qgis_search_algorithms(algorithm = "buffer", group = "[Vv]ector")
 #>  7 native   QGIS (native c++) Vector geometry      native:singl… Single sided b…
 #>  8 native   QGIS (native c++) Vector geometry      native:taper… Tapered buffers
 #>  9 native   QGIS (native c++) Vector geometry      native:wedge… Create wedge b…
-#> 10 sagang   SAGA Next Gen     Vector general       sagang:shape… Shapes buffer
+#> 10 sagang   SAGA Next Gen     Features             sagang:featu… Features Buffer
 ```
 
 You can read the help associated with an algorithm using
@@ -167,7 +169,7 @@ A full list of available algorithms is returned by
 
 ``` r
 qgis_algorithms()
-#> # A tibble: 2,059 × 24
+#> # A tibble: 2,055 × 25
 #>    provider  provider_title algorithm               algorithm_id algorithm_title
 #>    <chr>     <chr>          <chr>                   <chr>        <chr>          
 #>  1 3d        QGIS (3D)      3d:tessellate           tessellate   Tessellate     
@@ -180,13 +182,13 @@ qgis_algorithms()
 #>  8 NetworkGT NetworkGT      NetworkGT:Connect Y No… Connect Y N… Connect Y Nodes
 #>  9 NetworkGT NetworkGT      NetworkGT:Contour Grid  Contour Grid Contour Grid   
 #> 10 NetworkGT NetworkGT      NetworkGT:Define Fract… Define Frac… Define Fractur…
-#> # ℹ 2,049 more rows
-#> # ℹ 19 more variables: provider_can_be_activated <lgl>,
+#> # ℹ 2,045 more rows
+#> # ℹ 20 more variables: provider_can_be_activated <lgl>,
 #> #   provider_is_active <lgl>, provider_long_name <chr>, provider_version <chr>,
 #> #   provider_warning <chr>, can_cancel <lgl>, deprecated <lgl>, group <chr>,
 #> #   has_known_issues <lgl>, help_url <chr>, requires_matching_crs <lgl>,
-#> #   short_description <chr>, tags <list>, default_raster_file_extension <chr>,
-#> #   default_vector_file_extension <chr>, …
+#> #   short_description <chr>, tags <list>, default_raster_file_format <chr>,
+#> #   default_raster_file_extension <chr>, default_vector_file_extension <chr>, …
 ```
 
 It may also be useful to run an algorithm in the QGIS GUI to determine
@@ -235,7 +237,7 @@ pull request!*
 ### Further reading
 
 - A
-  [paper](https://journal.r-project.org/archive/2017/RJ-2017-067/index.html)
+  [paper](https://journal.r-project.org/articles/RJ-2017-067/index.html)
   on the original RQGIS package published in the R Journal
 - A [discussion](https://github.com/r-spatial/discuss/issues/41) about
   options for running QGIS from R that led to this package

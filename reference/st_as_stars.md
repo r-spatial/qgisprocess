@@ -70,18 +70,18 @@ result <- qgis_run_algorithm(
 stars::st_as_stars(result)
 #> stars object with 2 dimensions and 1 attribute
 #> attribute(s):
-#>                             Min.   1st Qu.    Median      Mean   3rd Qu.
-#> file2f84df4ac66.tif  0.008276554 0.2864364 0.4271587 0.4269891 0.5803983
-#>                           Max. NA's
-#> file2f84df4ac66.tif  0.8075118 6475
+#>                              Min.   1st Qu.    Median      Mean   3rd Qu.
+#> file2f1c1d4a62ee.tif  0.008276554 0.2864364 0.4271587 0.4269891 0.5803983
+#>                            Max. NA's
+#> file2f1c1d4a62ee.tif  0.8075118 6475
 #> dimension(s):
 #>   from  to  offset  delta               refsys point x/y
 #> x    1 100  409940  18.27 NAD83 / UTM zone 20N FALSE [x]
 #> y    1 100 5084861 -15.54 NAD83 / UTM zone 20N FALSE [y]
 stars::st_as_stars(result, proxy = TRUE)
 #> stars_proxy object with 1 attribute in 1 file(s):
-#> $file2f84df4ac66.tif
-#> [1] "[...]/file2f84df4ac66.tif"
+#> $file2f1c1d4a62ee.tif
+#> [1] "[...]/file2f1c1d4a62ee.tif"
 #> 
 #> dimension(s):
 #>   from  to  offset  delta               refsys point x/y
@@ -93,10 +93,10 @@ output_raster <- qgis_extract_output(result, "OUTPUT")
 stars::st_as_stars(output_raster)
 #> stars object with 2 dimensions and 1 attribute
 #> attribute(s):
-#>                             Min.   1st Qu.    Median      Mean   3rd Qu.
-#> file2f84df4ac66.tif  0.008276554 0.2864364 0.4271587 0.4269891 0.5803983
-#>                           Max. NA's
-#> file2f84df4ac66.tif  0.8075118 6475
+#>                              Min.   1st Qu.    Median      Mean   3rd Qu.
+#> file2f1c1d4a62ee.tif  0.008276554 0.2864364 0.4271587 0.4269891 0.5803983
+#>                            Max. NA's
+#> file2f1c1d4a62ee.tif  0.8075118 6475
 #> dimension(s):
 #>   from  to  offset  delta               refsys point x/y
 #> x    1 100  409940  18.27 NAD83 / UTM zone 20N FALSE [x]

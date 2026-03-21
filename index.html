@@ -93,9 +93,11 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/qgisprocess/">qgisprocess</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Attempting to load the package cache ... Success!</span></span>
-<span><span class="co">#&gt; QGIS version: 3.38.3-Grenoble</span></span>
-<span><span class="co">#&gt; Having access to 2059 algorithms from 18 QGIS processing providers.</span></span>
-<span><span class="co">#&gt; Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.</span></span></code></pre></div>
+<span><span class="co">#&gt; QGIS version: 3.44.7-Solothurn</span></span>
+<span><span class="co">#&gt; Having access to 2055 algorithms from 16 QGIS processing providers.</span></span>
+<span><span class="co">#&gt; Run `qgis_configure(use_cached_data = TRUE)` to reload cache and get more details.</span></span>
+<span><span class="co">#&gt; &gt;&gt;&gt; Run `qgis_enable_plugins()` to enable 2 disabled plugins and access</span></span>
+<span><span class="co">#&gt;     their algorithms: networks, valhalla</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -131,18 +133,18 @@
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; &lt;Result of `qgis_run_algorithm("native:buffer", ...)`&gt;</span></span>
 <span><span class="co">#&gt; List of 1</span></span>
-<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpUlpWPq/file886027bf5cff/file88601bc90fab.gpkg"</span></span>
+<span><span class="co">#&gt;  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmppnjluu/file2c5542395fd7/file2c557ee76ba2.gpkg"</span></span>
 <span></span>
 <span><span class="va">output_sf</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">output_sf</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-buffer-1.png" width="60%"></p>
+<p><img src="reference/figures/README-buffer-1.png" alt="" width="60%"></p>
 </div>
 <div class="section level3">
 <h3 id="some-tips">Some tips<a class="anchor" aria-label="anchor" href="#some-tips"></a>
 </h3>
 <p>You can search for algorithms with <code><a href="reference/qgis_search_algorithms.html">qgis_search_algorithms()</a></code> (string matching with regex).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/qgis_search_algorithms.html">qgis_search_algorithms</a></span><span class="op">(</span>algorithm <span class="op">=</span> <span class="st">"buffer"</span>, group <span class="op">=</span> <span class="st">"[Vv]ector"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/qgis_search_algorithms.html">qgis_search_algorithms</a></span><span class="op">(</span>algorithm <span class="op">=</span> <span class="st">"buffer"</span>, group <span class="op">=</span> <span class="st">"[Vv]ector|[Ff]eatures"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 10 × 5</span></span>
 <span><span class="co">#&gt;    provider provider_title    group                algorithm     algorithm_title</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;             &lt;chr&gt;                &lt;chr&gt;         &lt;chr&gt;          </span></span>
@@ -155,14 +157,14 @@
 <span><span class="co">#&gt;  7 native   QGIS (native c++) Vector geometry      native:singl… Single sided b…</span></span>
 <span><span class="co">#&gt;  8 native   QGIS (native c++) Vector geometry      native:taper… Tapered buffers</span></span>
 <span><span class="co">#&gt;  9 native   QGIS (native c++) Vector geometry      native:wedge… Create wedge b…</span></span>
-<span><span class="co">#&gt; 10 sagang   SAGA Next Gen     Vector general       sagang:shape… Shapes buffer</span></span></code></pre></div>
+<span><span class="co">#&gt; 10 sagang   SAGA Next Gen     Features             sagang:featu… Features Buffer</span></span></code></pre></div>
 <p>You can read the help associated with an algorithm using <code><a href="reference/qgis_show_help.html">qgis_show_help()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/qgis_show_help.html">qgis_show_help</a></span><span class="op">(</span><span class="st">"native:buffer"</span><span class="op">)</span></span></code></pre></div>
 <p>A full list of available algorithms is returned by <code><a href="reference/qgis_algorithms.html">qgis_algorithms()</a></code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/qgis_algorithms.html">qgis_algorithms</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 2,059 × 24</span></span>
+<span><span class="co">#&gt; # A tibble: 2,055 × 25</span></span>
 <span><span class="co">#&gt;    provider  provider_title algorithm               algorithm_id algorithm_title</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;          &lt;chr&gt;                   &lt;chr&gt;        &lt;chr&gt;          </span></span>
 <span><span class="co">#&gt;  1 3d        QGIS (3D)      3d:tessellate           tessellate   Tessellate     </span></span>
@@ -175,13 +177,13 @@
 <span><span class="co">#&gt;  8 NetworkGT NetworkGT      NetworkGT:Connect Y No… Connect Y N… Connect Y Nodes</span></span>
 <span><span class="co">#&gt;  9 NetworkGT NetworkGT      NetworkGT:Contour Grid  Contour Grid Contour Grid   </span></span>
 <span><span class="co">#&gt; 10 NetworkGT NetworkGT      NetworkGT:Define Fract… Define Frac… Define Fractur…</span></span>
-<span><span class="co">#&gt; # ℹ 2,049 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 19 more variables: provider_can_be_activated &lt;lgl&gt;,</span></span>
+<span><span class="co">#&gt; # ℹ 2,045 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 20 more variables: provider_can_be_activated &lt;lgl&gt;,</span></span>
 <span><span class="co">#&gt; #   provider_is_active &lt;lgl&gt;, provider_long_name &lt;chr&gt;, provider_version &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   provider_warning &lt;chr&gt;, can_cancel &lt;lgl&gt;, deprecated &lt;lgl&gt;, group &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   has_known_issues &lt;lgl&gt;, help_url &lt;chr&gt;, requires_matching_crs &lt;lgl&gt;,</span></span>
-<span><span class="co">#&gt; #   short_description &lt;chr&gt;, tags &lt;list&gt;, default_raster_file_extension &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   default_vector_file_extension &lt;chr&gt;, …</span></span></code></pre></div>
+<span><span class="co">#&gt; #   short_description &lt;chr&gt;, tags &lt;list&gt;, default_raster_file_format &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   default_raster_file_extension &lt;chr&gt;, default_vector_file_extension &lt;chr&gt;, …</span></span></code></pre></div>
 <p>It may also be useful to run an algorithm in the QGIS GUI to determine how the various input values are translated to string processing arguments. This can be done using the ‘Advanced’ dropdown, by copying either the <code>qgis_process</code> command string or the JSON string:</p>
 <p><img src="reference/figures/copy_as_json.png"></p>
 <p>Note that the JSON string can be passed directly to <code><a href="reference/qgis_run_algorithm.html">qgis_run_algorithm()</a></code>!</p>
@@ -221,7 +223,7 @@
 <h3 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
 </h3>
 <ul>
-<li>A <a href="https://journal.r-project.org/archive/2017/RJ-2017-067/index.html" class="external-link">paper</a> on the original RQGIS package published in the R Journal</li>
+<li>A <a href="https://journal.r-project.org/articles/RJ-2017-067/index.html" class="external-link">paper</a> on the original RQGIS package published in the R Journal</li>
 <li>A <a href="https://github.com/r-spatial/discuss/issues/41" class="external-link">discussion</a> about options for running QGIS from R that led to this package</li>
 <li>The <a href="https://github.com/qgis/QGIS/pull/34617" class="external-link">pull request</a> in the QGIS repo that led to the development of the <code>qgis_process</code> command-line utility</li>
 </ul>
