@@ -95,9 +95,6 @@ qgis_function <- function(algorithm, ...) {
 }
 
 
-
-
-
 #' Run an algorithm using 'qgis_process': pipe-friendly wrapper
 #'
 #' [qgis_run_algorithm_p()] wraps [qgis_run_algorithm()], passing
@@ -139,24 +136,26 @@ qgis_function <- function(algorithm, ...) {
 #'
 #' @export
 qgis_run_algorithm_p <- function(
-    .data,
-    algorithm,
-    ...,
-    .select = "OUTPUT",
-    .clean = TRUE,
-    .quiet = TRUE) {
+  .data,
+  algorithm,
+  ...,
+  .select = "OUTPUT",
+  .clean = TRUE,
+  .quiet = TRUE
+) {
   UseMethod("qgis_run_algorithm_p")
 }
 
 #' @keywords internal
 #' @export
 qgis_run_algorithm_p.qgis_result <- function(
-    .data,
-    algorithm,
-    ...,
-    .select = "OUTPUT",
-    .clean = TRUE,
-    .quiet = TRUE) {
+  .data,
+  algorithm,
+  ...,
+  .select = "OUTPUT",
+  .clean = TRUE,
+  .quiet = TRUE
+) {
   assert_that(is.string(.select))
   withr::with_options(
     list(warning.length = 6e3),
@@ -178,12 +177,13 @@ qgis_run_algorithm_p.qgis_result <- function(
 #' @keywords internal
 #' @export
 qgis_run_algorithm_p.default <- function(
-    .data,
-    algorithm,
-    ...,
-    .select = "OUTPUT",
-    .clean = TRUE,
-    .quiet = TRUE) {
+  .data,
+  algorithm,
+  ...,
+  .select = "OUTPUT",
+  .clean = TRUE,
+  .quiet = TRUE
+) {
   fun <- qgis_function(algorithm)
   fun(.data, ..., .quiet = .quiet)
 }

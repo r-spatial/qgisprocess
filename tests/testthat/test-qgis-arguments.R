@@ -229,7 +229,6 @@ test_that("argument coercers work", {
   )
 
 
-
   output_object <- structure("/some/file/path", class = "qgis_outputVector")
   expect_identical(as_qgis_argument(output_object), "/some/file/path")
   output_object <- structure("/some/file/path", class = "qgis_outputRaster")

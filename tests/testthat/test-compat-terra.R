@@ -68,9 +68,6 @@ test_that("terra argument coercers work for SpatRaster referring to a file", {
 })
 
 
-
-
-
 test_that("terra argument coercers work for locally created SpatVector", {
   skip_if_not_installed("terra")
 
@@ -212,9 +209,6 @@ test_that("terra argument coercers work for a SpatVector referring to a layer in
 })
 
 
-
-
-
 test_that("terra argument coercers work for SpatVectorProxy", {
   skip_if_not_installed("terra")
 
@@ -306,7 +300,6 @@ test_that("terra argument coercers work for a SpatVectorProxy referring to a lay
 })
 
 
-
 test_that("terra result coercers to SpatRaster work", {
   skip_if_not_installed("terra")
 
@@ -345,9 +338,6 @@ test_that("terra result coercers to SpatRaster work", {
     "SpatRaster"
   )
 })
-
-
-
 
 
 test_that("terra result coercers to SpatVector work", {
@@ -424,9 +414,6 @@ test_that("terra result coercers to SpatVector work", {
     "SpatVector"
   )
 })
-
-
-
 
 
 test_that("terra argument coercer for SpatExtent works", {

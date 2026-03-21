@@ -382,8 +382,6 @@ qgis_configure <- function(quiet = FALSE, use_cached_data = FALSE) {
 }
 
 
-
-
 #' @keywords internal
 qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
   path <- qgis_path(query = TRUE, quiet = quiet)
@@ -471,7 +469,6 @@ qgis_reconfigure <- function(cache_data_file, quiet = FALSE) {
 }
 
 
-
 #' @keywords internal
 message_inspect_cache <- function() {
   message(
@@ -482,9 +479,6 @@ message_inspect_cache <- function() {
 }
 
 
-
-
-
 #' @keywords internal
 qgis_env <- function() {
   getOption(
@@ -492,9 +486,6 @@ qgis_env <- function() {
     list(QT_QPA_PLATFORM = "offscreen")
   )
 }
-
-
-
 
 
 #' Clean the package cache

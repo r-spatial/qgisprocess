@@ -36,9 +36,10 @@
 #' qgis_plugins(which = "disabled")
 #'
 qgis_algorithms <- function(
-    query = FALSE,
-    quiet = TRUE,
-    include_deprecated = TRUE) {
+  query = FALSE,
+  quiet = TRUE,
+  include_deprecated = TRUE
+) {
   assert_that(is.flag(query), noNA(query))
   assert_that(is.flag(quiet), noNA(quiet))
   assert_that(is.flag(include_deprecated), noNA(include_deprecated))
@@ -61,9 +62,10 @@ qgis_algorithms <- function(
 #' @rdname qgis_algorithms
 #' @export
 qgis_providers <- function(
-    query = FALSE,
-    quiet = TRUE,
-    include_deprecated = TRUE) {
+  query = FALSE,
+  quiet = TRUE,
+  include_deprecated = TRUE
+) {
   algs <- qgis_algorithms(
     query = query,
     quiet = quiet,
@@ -117,7 +119,6 @@ check_algorithm_deprecation <- function(algorithm, skip = FALSE) {
     }
   }
 }
-
 
 
 #' @keywords internal
@@ -258,7 +259,6 @@ qgis_query_algorithms <- function(quiet = FALSE) {
 }
 
 
-
 #' Search geoprocessing algorithms
 #'
 #' Searches for algorithms using a regular expression.
@@ -295,10 +295,11 @@ qgis_query_algorithms <- function(quiet = FALSE) {
 #'
 #' @export
 qgis_search_algorithms <- function(
-    algorithm = NULL,
-    provider = NULL,
-    group = NULL,
-    include_deprecated = FALSE) {
+  algorithm = NULL,
+  provider = NULL,
+  group = NULL,
+  include_deprecated = FALSE
+) {
   assert_that(
     !is.null(algorithm) || !is.null(provider) || !is.null(group),
     msg = "You must provide at least one of the arguments."

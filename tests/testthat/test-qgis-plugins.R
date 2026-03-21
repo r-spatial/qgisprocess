@@ -100,7 +100,6 @@ test_that("qgis_disable_plugins() messages are OK", {
 })
 
 
-
 test_that("qgis_enable_plugins() ignores an already enabled grassprovider plugin", {
   skip_if_not(has_qgis())
   skip_if_not(
@@ -135,9 +134,6 @@ test_that("qgis_disable_plugins() ignores an already disabled grassprovider plug
 })
 
 
-
-
-
 test_that("qgis_*able_plugins() works for a disabled grassprovider plugin", {
   skip_if_not(has_qgis())
   skip_if_not(
@@ -159,7 +155,6 @@ test_that("qgis_*able_plugins() works for a disabled grassprovider plugin", {
   )
   expect_false(subset(qgis_plugins(), name == "grassprovider")$enabled)
 })
-
 
 
 test_that("qgis_*able_plugins() works for an enabled grassprovider plugin", {
@@ -185,13 +180,11 @@ test_that("qgis_*able_plugins() works for an enabled grassprovider plugin", {
 })
 
 
-
 test_that("{en,dis}able_plugin can return an error message from qgis_process", {
   local_mocked_bindings(qgis_run = function(...) stop("Some error"))
   expect_message(enable_plugin("p1"), "not successfully enabled.+Some error")
   expect_message(disable_plugin("p1"), "not successfully disabled.+Some error")
 })
-
 
 
 test_that("Internal function arg_skip_loading_plugins() works", {

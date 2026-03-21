@@ -169,7 +169,6 @@ test_that("qgis_configure() works OK if cache conditions unmet", {
 })
 
 
-
 test_that("qgis_configure() works OK if cache condition 'use_json_output' unmet", {
   skip_if_not(has_qgis())
   skip_if_not(
@@ -258,8 +257,6 @@ test_that("qgis_configure() works OK if cache condition 'use_json_output' unmet"
   expect_true(qgis_using_json_input())
   expect_true(qgis_using_json_output())
 })
-
-
 
 
 test_that("qgis_configure() works OK with qgisprocess.detect_newer_qgis option or envvar", {
@@ -386,8 +383,6 @@ test_that("qgis_configure() works OK with qgisprocess.detect_newer_qgis option o
     message = "A newer QGIS installation seems to be"
   )
 })
-
-
 
 
 test_that("abort_query_version() works", {

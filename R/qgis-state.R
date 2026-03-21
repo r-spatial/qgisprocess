@@ -154,7 +154,6 @@ qgis_query_path <- function(quiet = FALSE) {
 }
 
 
-
 #' @rdname qgis_path
 #' @export
 qgis_version <- function(query = FALSE, quiet = TRUE, full = TRUE, debug = FALSE) {
@@ -187,7 +186,6 @@ qgis_version <- function(query = FALSE, quiet = TRUE, full = TRUE, debug = FALSE
 
   if (full) qgisprocess_cache$version else short
 }
-
 
 
 #' @keywords internal
@@ -247,8 +245,6 @@ abort_query_version <- function(lines) {
     )
   )
 }
-
-
 
 
 #' Report if JSON objects are used for input to and output from 'qgis_process'
@@ -367,19 +363,16 @@ qgis_using_json_output <- function(query = FALSE, quiet = TRUE) {
 }
 
 
-
 #' @keywords internal
 readopt_json_input <- function() {
   readopt("qgisprocess.use_json_input", "R_QGISPROCESS_USE_JSON_INPUT")
 }
 
 
-
 #' @keywords internal
 readopt_json_output <- function() {
   readopt("qgisprocess.use_json_output", "R_QGISPROCESS_USE_JSON_OUTPUT")
 }
-
 
 
 #' Return the value of an option and read an environment variable as fallback
@@ -401,7 +394,6 @@ readopt <- function(option_name, envvar_name) {
 }
 
 
-
 #' Resolve a boolean option or environment variable to TRUE, FALSE or (optionally) NA
 #'
 #' @param value A result as obtained by `readopt()`.
@@ -413,10 +405,11 @@ readopt <- function(option_name, envvar_name) {
 #'
 #' @keywords internal
 resolve_flag_opt <- function(
-    value = readopt(option_name, envvar_name),
-    option_name = NULL,
-    envvar_name = NULL,
-    keep_NA = FALSE) {
+  value = readopt(option_name, envvar_name),
+  option_name = NULL,
+  envvar_name = NULL,
+  keep_NA = FALSE
+) {
   if (missing(value)) {
     assert_that(
       !missing(option_name),
@@ -445,8 +438,6 @@ resolve_flag_opt <- function(
     identical(opt, "true") ||
     identical(opt, "TRUE")
 }
-
-
 
 
 #' Handle an explicitly set 'use_json_output'
@@ -486,11 +477,6 @@ resolve_explicit_json_output <- function(json_output_setting, qgis_version) {
 }
 
 
-
-
-
-
-
 #' @keywords internal
 json_input_set_and_acceptable <- function(qgis_version) {
   opt_json_input <- readopt_json_input()
@@ -498,8 +484,6 @@ json_input_set_and_acceptable <- function(qgis_version) {
     !is.null(qgis_version) &&
     package_version(qgis_version) >= "3.23.0"
 }
-
-
 
 
 #' JSON state debugging while developing
