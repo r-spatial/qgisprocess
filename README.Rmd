@@ -109,7 +109,7 @@ plot(sf::st_geometry(output_sf))
 You can search for algorithms with `qgis_search_algorithms()` (string matching with regex).
 
 ```{r}
-qgis_search_algorithms(algorithm = "buffer", group = "[Vv]ector")
+qgis_search_algorithms(algorithm = "buffer", group = "[Vv]ector|[Ff]eatures")
 ```
 
 You can read the help associated with an algorithm using `qgis_show_help()`.
