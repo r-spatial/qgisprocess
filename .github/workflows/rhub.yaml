@@ -55,7 +55,7 @@ jobs:
       - name: Add additional r-universe repository
         run: |
           # Add additional r-universe repository
-          echo 'options(repos = c(getOption("repos"), "https://geocompr.r-universe.dev"))' >> ~/.Rprofile
+          echo 'options(repos = c(getOption("repos"), "https://geocompx.r-universe.dev"))' >> ~/.Rprofile
       - uses: r-hub/actions/platform-info@v1
         with:
           token: ${{ secrets.RHUB_TOKEN }}
@@ -88,7 +88,7 @@ jobs:
       - name: Add additional r-universe repository
         run: |
           # Add additional r-universe repository
-          cat('\noptions(repos = c(getOption("repos"), "https://geocompr.r-universe.dev"))\n', file = "~/.Rprofile", append = TRUE)
+          cat('\noptions(repos = c(getOption("repos"), "https://geocompx.r-universe.dev"))\n', file = "~/.Rprofile", append = TRUE)
         shell: Rscript {0}
       - uses: r-hub/actions/platform-info@v1
         with:
