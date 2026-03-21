@@ -225,7 +225,6 @@ test_that(glue("qgis_run_algorithm() succeeds when it needs a QGIS project{input
 })
 
 
-
 test_that(glue("qgis_run_algorithm() succeeds when it uses an aggregates input argument{input}"), {
   skip_if_not(has_qgis())
   skip_if_not_installed("sf")

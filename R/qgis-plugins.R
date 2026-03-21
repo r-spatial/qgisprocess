@@ -57,10 +57,11 @@ qgis_disable_plugins <- function(names = NULL, quiet = FALSE) {
 #' @export
 #' @rdname qgis_algorithms
 qgis_plugins <- function(
-    which = "all",
-    query = FALSE,
-    quiet = TRUE,
-    ...) {
+  which = "all",
+  query = FALSE,
+  quiet = TRUE,
+  ...
+) {
   assert_that(which %in% c("all", "enabled", "disabled"))
   assert_that(is.flag(query), !is.na(query))
   assert_that(is.flag(quiet), !is.na(quiet))
@@ -93,7 +94,6 @@ qgis_plugins <- function(
     "disabled" = plugins[!plugins$enabled, ]
   )
 }
-
 
 
 #' @keywords internal
@@ -134,8 +134,6 @@ qgis_query_plugins <- function(quiet = FALSE) {
 }
 
 
-
-
 #' @keywords internal
 arg_skip_loading_plugins <- function(algorithm = NULL) {
   if (!is.null(algorithm) && !algorithm_is_native(algorithm)) {
@@ -147,13 +145,12 @@ arg_skip_loading_plugins <- function(algorithm = NULL) {
 }
 
 
-
-
 #' @keywords internal
 message_disabled_plugins <- function(
-    plugins,
-    prepend_newline = FALSE,
-    startup = FALSE) {
+  plugins,
+  prepend_newline = FALSE,
+  startup = FALSE
+) {
   if (!identical(sum(plugins$enabled), nrow(plugins))) {
     if (prepend_newline && !startup) message()
     n_dis <- sum(!plugins$enabled)
@@ -171,8 +168,6 @@ message_disabled_plugins <- function(
     if (!startup) message(msg) else packageStartupMessage(msg)
   }
 }
-
-
 
 
 #' @keywords internal
@@ -240,7 +235,6 @@ handle_plugins <- function(names = NULL, quiet = FALSE, mode) {
 }
 
 
-
 #' @keywords internal
 enable_plugin <- function(name, quiet = FALSE) {
   error_detected <- FALSE
@@ -259,7 +253,6 @@ enable_plugin <- function(name, quiet = FALSE) {
   )
   if (error_detected) invisible(FALSE) else invisible(TRUE)
 }
-
 
 
 #' @keywords internal

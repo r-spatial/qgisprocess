@@ -165,7 +165,6 @@ as_qgis_argument.SpatRaster <- function(x, spec = qgis_argument_spec(),
 }
 
 
-
 #' @keywords internal
 #' @export
 as_qgis_argument.SpatVector <- function(x, spec = qgis_argument_spec(),
@@ -257,7 +256,6 @@ as_qgis_argument_terra_vector <- function(x,
   terra::writeVector(x, path)
   structure(path, class = "qgis_tempfile_arg")
 }
-
 
 
 #' @keywords internal

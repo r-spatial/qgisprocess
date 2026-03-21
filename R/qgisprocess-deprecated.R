@@ -47,7 +47,6 @@ qgis_output <- function(x, which) {
 }
 
 
-
 #' @rdname qgisprocess-deprecated
 #' @export
 #' @keywords internal

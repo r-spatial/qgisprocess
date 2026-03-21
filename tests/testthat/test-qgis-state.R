@@ -51,8 +51,6 @@ test_that("qgis_query_version() works for development versions of QGIS", {
 })
 
 
-
-
 test_that("qgis_using_json_*() is determined by the QGIS version by default", {
   skip_if_not(has_qgis())
   original <- qgisprocess_cache$use_json_output
@@ -75,7 +73,6 @@ test_that("qgis_using_json_*() is determined by the QGIS version by default", {
 
   qgisprocess_cache$use_json_output <- original
 })
-
 
 
 test_that("qgis_using_json_*() can be driven by user settings", {
@@ -139,17 +136,11 @@ test_that("qgis_using_json_*() can be driven by user settings", {
 })
 
 
-
-
 test_that("Internal function debug_json() works", {
   skip_if_not(has_qgis())
   expect_no_error(debug_json())
   expect_s3_class(debug_json(), "glue")
 })
-
-
-
-
 
 
 test_that("Internal function resolve_flag_opt() works", {

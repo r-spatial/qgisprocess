@@ -80,10 +80,11 @@ as_qgis_argument <- function(x, spec = qgis_argument_spec(), use_json_input = FA
 # @param .algorithm_arguments The result of [qgis_get_argument_specs()]
 #' @keywords internal
 qgis_sanitize_arguments <- function(
-    algorithm,
-    ...,
-    .algorithm_arguments = qgis_get_argument_specs(algorithm, check_deprecation = FALSE),
-    .use_json_input = FALSE) {
+  algorithm,
+  ...,
+  .algorithm_arguments = qgis_get_argument_specs(algorithm, check_deprecation = FALSE),
+  .use_json_input = FALSE
+) {
   dots <- rlang::list2(...)
   if (length(dots) > 0 && !rlang::is_named(dots)) {
     abort("All ... arguments to `qgis_sanitize_arguments()` must be named.")

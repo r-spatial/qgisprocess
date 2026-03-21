@@ -71,11 +71,9 @@ qgis_extract_output_by_name <- function(x, name = "OUTPUT", first = TRUE) {
 }
 
 
-
 #' @rdname qgis_extract_output
 #' @export
 qgis_extract_output <- qgis_extract_output_by_name
-
 
 
 #' @keywords internal
@@ -87,7 +85,6 @@ qgis_leave_only_results <- function(x) {
   )
   x[output_names]
 }
-
 
 
 #' @rdname qgis_extract_output
@@ -146,7 +143,6 @@ qgis_error_output_does_not_exist <- function(x, which) {
 
   abort(glue("Result has no output { which }.\nAvailable outputs are { available_outputs }"))
 }
-
 
 
 #' Clean processing results
