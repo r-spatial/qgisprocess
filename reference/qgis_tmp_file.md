@@ -47,11 +47,11 @@ Other topics about programming or debugging utilities:
 
 ``` r
 qgis_tmp_base()
-#> [1] "/tmp/RtmpKUxzyG/file2f1cebcf005"
+#> [1] "/tmp/RtmpNRpHJl/file2f345349896"
 qgis_tmp_file(".csv")
-#> [1] "/tmp/RtmpKUxzyG/file2f1cebcf005/file2f1c1a06df97.csv"
+#> [1] "/tmp/RtmpNRpHJl/file2f345349896/file2f34298b9d52.csv"
 qgis_tmp_vector()
-#> [1] "/tmp/RtmpKUxzyG/file2f1cebcf005/file2f1c559ce606.gpkg"
+#> [1] "/tmp/RtmpNRpHJl/file2f345349896/file2f346e4a0f93.gpkg"
 qgis_tmp_raster()
-#> [1] "/tmp/RtmpKUxzyG/file2f1cebcf005/file2f1c25a0cf7f.tif"
+#> [1] "/tmp/RtmpNRpHJl/file2f345349896/file2f344e166bd6.tif"
 ```

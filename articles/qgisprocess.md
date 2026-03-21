@@ -308,7 +308,7 @@ names(result)
 result # only prints the output element(s)
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmp1qO5s6/file34373369df79/file343717545d8f.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file3448699a792e.gpkg"
 ```
 
 To read in the QGIS output and visualize it, we can run:
@@ -423,15 +423,15 @@ Just printing the `info` object shows which output files have been made:
 info
 #> <Result of `qgis_run_algorithm("grass:r.slope.aspect", ...)`>
 #> List of 9
-#>  $ aspect    : 'qgis_outputRaster' chr "/tmp/Rtmp1qO5s6/file34373369df79/file34377f89b423.tif"
-#>  $ dx        : 'qgis_outputRaster' chr "/tmp/Rtmp1qO5s6/file34373369df79/file3437268a8cb8.tif"
-#>  $ dxx       : 'qgis_outputRaster' chr "/tmp/Rtmp1qO5s6/file34373369df79/file343748d4f718.tif"
-#>  $ dxy       : 'qgis_outputRaster' chr "/tmp/Rtmp1qO5s6/file34373369df79/file34372f2ce4c1.tif"
-#>  $ dy        : 'qgis_outputRaster' chr "/tmp/Rtmp1qO5s6/file34373369df79/file34371a357e48.tif"
-#>  $ dyy       : 'qgis_outputRaster' chr "/tmp/Rtmp1qO5s6/file34373369df79/file343719c7290e.tif"
-#>  $ pcurvature: 'qgis_outputRaster' chr "/tmp/Rtmp1qO5s6/file34373369df79/file34372e120b9.tif"
-#>  $ slope     : 'qgis_outputRaster' chr "/tmp/Rtmp1qO5s6/file34373369df79/file34372bf3ca75.tif"
-#>  $ tcurvature: 'qgis_outputRaster' chr "/tmp/Rtmp1qO5s6/file34373369df79/file343730501743.tif"
+#>  $ aspect    : 'qgis_outputRaster' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file344857eea31d.tif"
+#>  $ dx        : 'qgis_outputRaster' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file34483c118987.tif"
+#>  $ dxx       : 'qgis_outputRaster' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file34484597722b.tif"
+#>  $ dxy       : 'qgis_outputRaster' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file34487323c259.tif"
+#>  $ dy        : 'qgis_outputRaster' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file344811e411a2.tif"
+#>  $ dyy       : 'qgis_outputRaster' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file3448df4e78e.tif"
+#>  $ pcurvature: 'qgis_outputRaster' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file344828499873.tif"
+#>  $ slope     : 'qgis_outputRaster' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file34486c4600cf.tif"
+#>  $ tcurvature: 'qgis_outputRaster' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file344856ddbac3.tif"
 ```
 
 Combine these output rasters as a multi-layered `SpatRaster` object and
@@ -519,7 +519,7 @@ sf::st_as_sf(rp_tp)
 #> z_range:       zmin: 0 zmax: 0
 #> Projected CRS: +proj=utm +zone=17 +south +ellps=WGS84 +units=m +no_defs
 #> # A tibble: 100 × 6
-#>       id  spri file34377f89b423 file34372bf3ca75 file343730501743
+#>       id  spri file344857eea31d file34486c4600cf file344856ddbac3
 #>    <int> <int>            <dbl>            <dbl>            <dbl>
 #>  1     1     4            246.              4.85        -0.000425
 #>  2     2     4            126.              4.23        -0.00246 
@@ -557,7 +557,7 @@ system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") |>
 #> Using `OUTPUT = qgis_tmp_vector()`
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmp1qO5s6/file34373369df79/file34375db8993f.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file34482aac7aad.gpkg"
 ```
 
 If `.data` is a `qgis_result` object,
@@ -600,10 +600,10 @@ qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem,
 #> Argument `SLOPE_WEIGHT` is unspecified (using QGIS default value).
 #> <Result of `qgis_run_algorithm("sagang:sagawetnessindex", ...)`>
 #> List of 4
-#>  $ AREA    : 'qgis_outputRaster' chr "/tmp/Rtmp1qO5s6/file34373369df79/file343731c049f0.sdat"
-#>  $ AREA_MOD: 'qgis_outputRaster' chr "/tmp/Rtmp1qO5s6/file34373369df79/file34375657e9e6.sdat"
-#>  $ SLOPE   : 'qgis_outputRaster' chr "/tmp/Rtmp1qO5s6/file34373369df79/file34376d27082c.sdat"
-#>  $ TWI     : 'qgis_outputRaster' chr "/tmp/Rtmp1qO5s6/file34373369df79/file34371243d997.sdat"
+#>  $ AREA    : 'qgis_outputRaster' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file3448370c7e9d.sdat"
+#>  $ AREA_MOD: 'qgis_outputRaster' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file3448481bea1b.sdat"
+#>  $ SLOPE   : 'qgis_outputRaster' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file344823c1098e.sdat"
+#>  $ TWI     : 'qgis_outputRaster' chr "/tmp/Rtmp9MDJ50/file3448664b24ec/file34487c8e22e7.sdat"
 ```
 
 When piping,
