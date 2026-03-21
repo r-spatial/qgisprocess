@@ -162,7 +162,7 @@ qgis_providers()
 #> 3 qgis     QGIS                           35
 #> 4 3d       QGIS (3D)                       1
 #> 5 native   QGIS (native c++)             316
-#> 6 sagang   SAGA Next Gen                 509
+#> 6 sagang   SAGA Next Gen                 589
 ```
 
 This tells us that we can also use the third-party providers GDAL, GRASS
@@ -177,7 +177,7 @@ To get the complete overview of available (cached) geoalgorithms, run:
 ``` r
 algs <- qgis_algorithms()
 algs
-#> # A tibble: 1,225 × 25
+#> # A tibble: 1,305 × 25
 #>    provider provider_title algorithm                algorithm_id algorithm_title
 #>    <chr>    <chr>          <chr>                    <chr>        <chr>          
 #>  1 3d       QGIS (3D)      3d:tessellate            tessellate   Tessellate     
@@ -190,7 +190,7 @@ algs
 #>  8 gdal     GDAL           gdal:cliprasterbymaskla… cliprasterb… Clip raster by…
 #>  9 gdal     GDAL           gdal:clipvectorbyextent  clipvectorb… Clip vector by…
 #> 10 gdal     GDAL           gdal:clipvectorbypolygon clipvectorb… Clip vector by…
-#> # ℹ 1,215 more rows
+#> # ℹ 1,295 more rows
 #> # ℹ 20 more variables: provider_can_be_activated <lgl>,
 #> #   provider_is_active <lgl>, provider_long_name <chr>, provider_version <chr>,
 #> #   provider_warning <chr>, can_cancel <lgl>, deprecated <lgl>, group <chr>,
@@ -204,19 +204,18 @@ For a directed search, use
 
 ``` r
 qgis_search_algorithms(algorithm = "buffer", group = "[Vv]ector")
-#> # A tibble: 10 × 5
-#>    provider provider_title    group                algorithm     algorithm_title
-#>    <chr>    <chr>             <chr>                <chr>         <chr>          
-#>  1 gdal     GDAL              Vector geoprocessing gdal:bufferv… Buffer vectors 
-#>  2 gdal     GDAL              Vector geoprocessing gdal:oneside… One side buffer
-#>  3 grass    GRASS             Vector (v.*)         grass:v.buff… v.buffer       
-#>  4 native   QGIS (native c++) Vector geometry      native:buffer Buffer         
-#>  5 native   QGIS (native c++) Vector geometry      native:buffe… Variable width…
-#>  6 native   QGIS (native c++) Vector geometry      native:multi… Multi-ring buf…
-#>  7 native   QGIS (native c++) Vector geometry      native:singl… Single sided b…
-#>  8 native   QGIS (native c++) Vector geometry      native:taper… Tapered buffers
-#>  9 native   QGIS (native c++) Vector geometry      native:wedge… Create wedge b…
-#> 10 sagang   SAGA Next Gen     Vector general       sagang:shape… Shapes buffer
+#> # A tibble: 9 × 5
+#>   provider provider_title    group                algorithm      algorithm_title
+#>   <chr>    <chr>             <chr>                <chr>          <chr>          
+#> 1 gdal     GDAL              Vector geoprocessing gdal:bufferve… Buffer vectors 
+#> 2 gdal     GDAL              Vector geoprocessing gdal:onesideb… One side buffer
+#> 3 grass    GRASS             Vector (v.*)         grass:v.buffer v.buffer       
+#> 4 native   QGIS (native c++) Vector geometry      native:buffer  Buffer         
+#> 5 native   QGIS (native c++) Vector geometry      native:buffer… Variable width…
+#> 6 native   QGIS (native c++) Vector geometry      native:multir… Multi-ring buf…
+#> 7 native   QGIS (native c++) Vector geometry      native:single… Single sided b…
+#> 8 native   QGIS (native c++) Vector geometry      native:tapere… Tapered buffers
+#> 9 native   QGIS (native c++) Vector geometry      native:wedgeb… Create wedge b…
 ```
 
 Since we have also installed GRASS GIS and SAGA, over 1000 geoalgorithms
@@ -309,7 +308,7 @@ names(result)
 result # only prints the output element(s)
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c67061656.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b9e90c24.gpkg"
 ```
 
 To read in the QGIS output and visualize it, we can run:
@@ -424,15 +423,15 @@ Just printing the `info` object shows which output files have been made:
 info
 #> <Result of `qgis_run_algorithm("grass:r.slope.aspect", ...)`>
 #> List of 9
-#>  $ aspect    : 'qgis_outputRaster' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c4ba0b736.tif"
-#>  $ dx        : 'qgis_outputRaster' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c5cc706f9.tif"
-#>  $ dxx       : 'qgis_outputRaster' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c3aa3d2e3.tif"
-#>  $ dxy       : 'qgis_outputRaster' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c5677ef68.tif"
-#>  $ dy        : 'qgis_outputRaster' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c6f9b9ca4.tif"
-#>  $ dyy       : 'qgis_outputRaster' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c311f12f3.tif"
-#>  $ pcurvature: 'qgis_outputRaster' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c895864e.tif"
-#>  $ slope     : 'qgis_outputRaster' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c3ba95514.tif"
-#>  $ tcurvature: 'qgis_outputRaster' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c7a3b7a84.tif"
+#>  $ aspect    : 'qgis_outputRaster' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b188a02f6.tif"
+#>  $ dx        : 'qgis_outputRaster' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b5aeb696e.tif"
+#>  $ dxx       : 'qgis_outputRaster' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b2c049632.tif"
+#>  $ dxy       : 'qgis_outputRaster' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b2b95ac49.tif"
+#>  $ dy        : 'qgis_outputRaster' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b7ee5fd35.tif"
+#>  $ dyy       : 'qgis_outputRaster' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b701a65e7.tif"
+#>  $ pcurvature: 'qgis_outputRaster' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b74fcf110.tif"
+#>  $ slope     : 'qgis_outputRaster' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b3a5f58eb.tif"
+#>  $ tcurvature: 'qgis_outputRaster' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b1a959f49.tif"
 ```
 
 Combine these output rasters as a multi-layered `SpatRaster` object and
@@ -520,7 +519,7 @@ sf::st_as_sf(rp_tp)
 #> z_range:       zmin: 0 zmax: 0
 #> Projected CRS: +proj=utm +zone=17 +south +ellps=WGS84 +units=m +no_defs
 #> # A tibble: 100 × 6
-#>       id  spri file349c4ba0b736 file349c3ba95514 file349c7a3b7a84
+#>       id  spri file349b188a02f6 file349b3a5f58eb file349b1a959f49
 #>    <int> <int>            <dbl>            <dbl>            <dbl>
 #>  1     1     4            246.              4.85        -0.000425
 #>  2     2     4            126.              4.23        -0.00246 
@@ -558,7 +557,7 @@ system.file("longlake/longlake_depth.gpkg", package = "qgisprocess") |>
 #> Using `OUTPUT = qgis_tmp_vector()`
 #> <Result of `qgis_run_algorithm("native:buffer", ...)`>
 #> List of 1
-#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c692ffac1.gpkg"
+#>  $ OUTPUT: 'qgis_outputVector' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b5c2d49ef.gpkg"
 ```
 
 If `.data` is a `qgis_result` object,
@@ -601,10 +600,10 @@ qgis_run_algorithm(algorithm = "sagang:sinkremoval", DEM = dem,
 #> Argument `SLOPE_WEIGHT` is unspecified (using QGIS default value).
 #> <Result of `qgis_run_algorithm("sagang:sagawetnessindex", ...)`>
 #> List of 4
-#>  $ AREA    : 'qgis_outputRaster' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c1e23a953.sdat"
-#>  $ AREA_MOD: 'qgis_outputRaster' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c4e3fa9bd.sdat"
-#>  $ SLOPE   : 'qgis_outputRaster' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c6d207848.sdat"
-#>  $ TWI     : 'qgis_outputRaster' chr "/tmp/RtmpjNHW7V/file349c6543786/file349c5cf58ac9.sdat"
+#>  $ AREA    : 'qgis_outputRaster' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b4c095c59.sdat"
+#>  $ AREA_MOD: 'qgis_outputRaster' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b278eb009.sdat"
+#>  $ SLOPE   : 'qgis_outputRaster' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b13df4eab.sdat"
+#>  $ TWI     : 'qgis_outputRaster' chr "/tmp/Rtmp4gVbO1/file349b1a3abc97/file349b689c7eab.sdat"
 ```
 
 When piping,
