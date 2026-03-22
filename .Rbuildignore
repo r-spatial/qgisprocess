@@ -25,3 +25,4 @@
 ^qgisprocess\.Rproj$
 ^CRAN-SUBMISSION$
 ^revdep$
+^codemeta\.json$
