@@ -1,5 +1,7 @@
 # qgisprocess (development version)
 
+# qgisprocess 0.4.2
+
 - Add support for QGIS 4.0 (#229).
 
 # qgisprocess 0.4.1
