@@ -34,10 +34,10 @@ Source:
 
 Dunnington, Dewey; Vanderhaeghe, Floris; Caha, Jan; Muenchow, Jannes
 (2024). R package qgisprocess: use QGIS processing algorithms. Version
-0.4.1. https://github.com/r-spatial/qgisprocess/
+0.4.2. https://github.com/r-spatial/qgisprocess/
 
     @Manual{,
-      title = {R package qgisprocess: use QGIS processing algorithms. Version 0.4.1},
+      title = {R package qgisprocess: use QGIS processing algorithms. Version 0.4.2},
       author = {Dewey Dunnington and Floris Vanderhaeghe and Jan Caha and Jannes Muenchow},
       year = {2024},
       url = {https://r-spatial.github.io/qgisprocess/},

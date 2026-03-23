@@ -2,6 +2,10 @@
 
 ## qgisprocess (development version)
 
+## qgisprocess 0.4.2
+
+CRAN release: 2026-03-22
+
 - Add support for QGIS 4.0
   ([\#229](https://github.com/r-spatial/qgisprocess/issues/229)).
 

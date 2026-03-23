@@ -83,8 +83,8 @@ qgis_as_raster(result)
 #> resolution : 18.27273, 15.53535  (x, y)
 #> extent     : 409939.9, 411767.1, 5083307, 5084861  (xmin, xmax, ymin, ymax)
 #> crs        : +proj=utm +zone=20 +datum=NAD83 +units=m +no_defs 
-#> source     : file2f34c3c33eb.tif 
-#> names      : file2f34c3c33eb 
+#> source     : file2f7b46faad02.tif 
+#> names      : file2f7b46faad02 
 #> 
 
 # if you need more control, extract the needed output element first:
@@ -95,8 +95,8 @@ qgis_as_raster(output_raster)
 #> resolution : 18.27273, 15.53535  (x, y)
 #> extent     : 409939.9, 411767.1, 5083307, 5084861  (xmin, xmax, ymin, ymax)
 #> crs        : +proj=utm +zone=20 +datum=NAD83 +units=m +no_defs 
-#> source     : file2f34c3c33eb.tif 
-#> names      : file2f34c3c33eb 
+#> source     : file2f7b46faad02.tif 
+#> names      : file2f7b46faad02 
 #> 
 # }
 ```

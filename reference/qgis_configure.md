@@ -76,7 +76,7 @@ Other topics about configuring QGIS and qgisprocess:
 # \donttest{
 # not running in R CMD check to save time
 qgis_configure(use_cached_data = TRUE)
-#> Checking configuration in cache file (/home/runner/.cache/R-qgisprocess/cache-0.4.1.9229.rds)
+#> Checking configuration in cache file (/home/runner/.cache/R-qgisprocess/cache-0.4.2.9000.rds)
 #> Checking cached QGIS version with version reported by 'qgis_process' ...
 #> QGIS versions match! (3.44.7-Solothurn)
 #> Checking cached QGIS plugins (and state) with those reported by 'qgis_process' ...
@@ -86,7 +86,7 @@ qgis_configure(use_cached_data = TRUE)
 #>     their algorithms: grassprovider, processing,
 #>     processing_saga_nextgen
 #> 
-#> Restoring configuration from '/home/runner/.cache/R-qgisprocess/cache-0.4.1.9229.rds'
+#> Restoring configuration from '/home/runner/.cache/R-qgisprocess/cache-0.4.2.9000.rds'
 #> QGIS version: 3.44.7-Solothurn
 #> Using 'qgis_process' in the system PATH.
 #> >>> If you need another installed QGIS instance, run `qgis_configure()`;
